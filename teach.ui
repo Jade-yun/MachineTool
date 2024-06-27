@@ -2080,6 +2080,28 @@ QPushButton { font-size: 16pt;font-weight:bold;font-family: 'SimSun';background:
       </item>
      </layout>
     </widget>
+    <widget class="QCheckBox" name="check">
+     <property name="geometry">
+      <rect>
+       <x>170</x>
+       <y>410</y>
+       <width>111</width>
+       <height>34</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>中文</string>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="autoExclusive">
+      <bool>true</bool>
+     </property>
+     <property name="tristate">
+      <bool>true</bool>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

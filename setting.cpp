@@ -8,6 +8,7 @@ Setting::Setting(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Setting)
 {
+    initVariables();
     ui->setupUi(this);
     setAllStyleSheet();
 
@@ -22,6 +23,8 @@ Setting::Setting(QWidget *parent) :
 Setting::~Setting()
 {
     delete ui;
+    delete movie;
+    movie = nullptr;
 }
 
 void Setting::on_btnSigSet_clicked()
@@ -41,14 +44,26 @@ void Setting::slotSettingHome()
 
 void Setting::loadAndPlayGif(const QString& path)
 {
-
-      movie = new QMovie(path, this);
-      ui->gifLabel->setMovie(movie);
-      movie->start();
+    if (movie)
+    {
+        movie->stop();
+    }
+//    movie = new QMovie(path, this);
+//    ui->gifLabel->resize(width, height);
+    movie->setFileName(path);
+    movie->setSpeed(50);
+    ui->gifLabel->setMovie(movie);
+    movie->start();
 }
 
 void Setting::setAllStyleSheet()
 {
+}
+
+// to initial all variables in this function
+void Setting::initVariables()
+{
+    movie = new QMovie(QString(":/images/gif/test.gif"));
 }
 
 void Setting::on_btnSafetySet_clicked()
@@ -89,7 +104,7 @@ void Setting::on_btnStackSet_clicked()
 
 void Setting::on_comboBoxIotSelection_currentIndexChanged(int index)
 {
-    qDebug() << "index = " << index;
+//    qDebug() << "index = " << index;
     if (index == 2)
     {
         ui->stkWidgetIPSet->setCurrentIndex(0);
@@ -125,5 +140,8 @@ void Setting::on_btnNextPage_clicked()
 
 void Setting::on_comboBox_96_currentIndexChanged(int index)
 {
-    this->loadAndPlayGif(":/images/gif/test.gif");
+    if (index == 0)
+        this->loadAndPlayGif(":/images/gif/test.gif");
+    if (index == 1)
+        this->loadAndPlayGif(":/images/gif/test1.gif");
 }

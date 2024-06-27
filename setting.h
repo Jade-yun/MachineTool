@@ -43,15 +43,16 @@ private slots:
 public slots:
     void slotSettingHome();
 
-private:
-    void loadAndPlayGif(const QString& path);
 
 private:
     Ui::Setting *ui;
 
+private:
+    void loadAndPlayGif(const QString& path);
     void setAllStyleSheet();
+    void initVariables();
 
-    QMovie *movie ;
+    QMovie *movie;
 };
 
 #endif // SETTING_H

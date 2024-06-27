@@ -96,5 +96,8 @@
         <file>images/import.png</file>
         <file>images/settingPageImages/refresh.png</file>
         <file>images/gif/test.gif</file>
+        <file>images/gif/test1.gif</file>
+        <file>images/settingPageImages/write-in.png</file>
+        <file>images/settingPageImages/read-out.png</file>
     </qresource>
 </RCC>
