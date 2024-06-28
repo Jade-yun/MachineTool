@@ -31,7 +31,14 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForLocale(codec);
 #endif
 
-
+#if 0
+    QTranslator translator;
+    if (translator.load(QLocale(), "myapp", "_", ":/translations")) {
+        app.installTranslator(&translator);
+    } else {
+        qDebug() << "Translation file not found.";
+    }
+#endif
 
     MainWindow w;
     w.show();

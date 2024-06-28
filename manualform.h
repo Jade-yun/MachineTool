@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "draggablebutton.h"
+
 namespace Ui {
 class ManualForm;
 }
@@ -16,6 +18,22 @@ public:
     ~ManualForm();
 
 private slots:
+    void on_btnNewButton_clicked();
+
+    void on_btnDeleteButton_clicked();
+
+    void on_checkBoxEditPosition_stateChanged(int arg1);
+
+    void on_btnImportPicture_clicked();
+
+private:
+    void initButtons();
+
+private:
+//    std::array<DraggableButton*, 20> buttons;
+    DraggableButton* lastClickedButton;
+    bool draggableMode;
+    QList<DraggableButton*> btns;
 
 private:
     Ui::ManualForm *ui;

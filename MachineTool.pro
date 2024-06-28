@@ -25,7 +25,8 @@ SOURCES += \
     manualform.cpp \
     monitorform.cpp \
     setting.cpp \
-    teach.cpp
+    teach.cpp \
+    draggablebutton.cpp
 
 HEADERS += \
     alarmform.h \
@@ -34,7 +35,8 @@ HEADERS += \
     manualform.h \
     monitorform.h \
     setting.h \
-    teach.h
+    teach.h \
+    draggablebutton.h
 
 FORMS += \
     alarmform.ui \

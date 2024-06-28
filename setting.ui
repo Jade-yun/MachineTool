@@ -12920,7 +12920,7 @@ border: 1px solid #000000;
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>140</x>
@@ -13097,7 +13097,7 @@ border: 1px solid #000000;
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>160</x>
@@ -13443,6 +13443,8 @@ border: 1px solid #000000;
         </item>
        </layout>
       </widget>
+      <zorder>layoutWidget</zorder>
+      <zorder>layoutWidget</zorder>
       <zorder>checkBoxBuzzer</zorder>
       <zorder>label_100</zorder>
       <zorder>label_101</zorder>
@@ -13459,25 +13461,7 @@ border: 1px solid #000000;
       <zorder>label_133</zorder>
       <zorder>btnSaveSysName</zorder>
       <zorder>btnDefaultName</zorder>
-      <zorder>lineEdit_107</zorder>
-      <zorder>lineEdit_108</zorder>
-      <zorder>label_139</zorder>
-      <zorder>label_170</zorder>
-      <zorder>lineEdit_125</zorder>
-      <zorder>label_209</zorder>
-      <zorder>label_210</zorder>
-      <zorder>lineEdit_143</zorder>
-      <zorder>lineEdit_144</zorder>
-      <zorder>lineEdit_164</zorder>
-      <zorder>label_227</zorder>
-      <zorder>lineEdit_185</zorder>
-      <zorder>label_245</zorder>
-      <zorder>checkBoxColorDefault</zorder>
       <zorder>btnSaveTime</zorder>
-      <zorder>checkBoxColorOriange</zorder>
-      <zorder>checkBoxColorYellow</zorder>
-      <zorder>checkBoxColorGreen</zorder>
-      <zorder>checkBoxBrown</zorder>
       <zorder>btnTouchCalibration</zorder>
       <zorder>btnSaveColor</zorder>
      </widget>
@@ -24669,7 +24653,7 @@ background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00bef
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>113</x>
@@ -25936,7 +25920,7 @@ QComboBox::down-arrow {
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>100</x>
@@ -26540,7 +26524,7 @@ background-color: rgb(255, 255, 255);</string>
        <property name="title">
         <string/>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>14</x>
@@ -26902,7 +26886,7 @@ QComboBox::down-arrow {
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>70</x>
@@ -30686,7 +30670,7 @@ font:bold;</string>
            </size>
           </property>
          </widget>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -31401,7 +31385,7 @@ border: 1px solid #000000;
          <property name="title">
           <string>找原点顺序</string>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>30</x>
@@ -31538,7 +31522,7 @@ QComboBox::down-arrow {
          <property name="title">
           <string>找原点顺序</string>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>10</x>
