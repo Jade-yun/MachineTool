@@ -191,7 +191,7 @@ QGroupBox::title {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>8</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <widget class="QPushButton" name="btnSigSet">
@@ -9869,7 +9869,7 @@ border: 1px solid #000000;
          <string>④</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>220</x>
@@ -9956,7 +9956,7 @@ border: 1px solid #000000;
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>220</x>
@@ -10003,8 +10003,6 @@ border: 1px solid #000000;
             <font>
              <family>SimSun</family>
              <pointsize>-1</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
             </font>
            </property>
            <property name="layoutDirection">
@@ -10042,7 +10040,7 @@ border: 1px solid #000000;
          </item>
         </layout>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>220</x>
@@ -10247,7 +10245,7 @@ border: 1px solid #000000;
          <string notr="true"/>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>220</x>
@@ -10329,7 +10327,7 @@ border: 1px solid #000000;
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>380</x>
@@ -11208,7 +11206,7 @@ border: 1px solid #000000;
          <string>编辑</string>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -13371,7 +13369,7 @@ subcontrol-origin: margin;
          </size>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -24182,7 +24180,7 @@ background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00bef
 </string>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -31864,6 +31862,18 @@ QComboBox::down-arrow {
           </item>
           <item row="2" column="1">
            <widget class="QPushButton" name="pushButton_7">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>40</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>40</height>
+             </size>
+            </property>
             <property name="text">
              <string>原点标定</string>
             </property>

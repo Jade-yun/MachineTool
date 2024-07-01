@@ -127,7 +127,7 @@ void MainWindow::setAllStyleSheet()
 void MainWindow::connectAllSignalsAndSlots()
 {
     connect(this, &MainWindow::sigSettingHome, setWidget, &Setting::slotSettingHome);
-    //emit sigSettingHome();
+
 	//ui->Btn_SetHome->setStyleSheet("QPushButton { background-color:#E7E8EB;border-style:solid;border-width:1px;border-color:#0A7C25;}");
 
     //显示时间

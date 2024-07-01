@@ -51,7 +51,7 @@ QPushButton
 
 
 }
-QPushButton:pressed
+QPushButton:pressed, QPushButton::checked
 {
     border-style:outset; /*边框风格*/
     background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
@@ -59,6 +59,7 @@ QPushButton:pressed
     border-color:#0055ff; /*边框颜色*/
     border-radius:10px; /*边框倒角*/
 }
+
 /*****************************************************/
 QCheckBox { 
 font-size: 20px;
@@ -191,7 +192,7 @@ QGroupBox::title {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="iconSize">
     <size>
@@ -992,7 +993,7 @@ QGroupBox::title {
      <property name="title">
       <string>手动</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -1214,7 +1215,7 @@ QGroupBox::title {
      <property name="title">
       <string>卡盘/吹屑</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -1775,7 +1776,7 @@ QGroupBox::title {
     <attribute name="title">
      <string>参考点</string>
     </attribute>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -1905,7 +1906,7 @@ QGroupBox::title {
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>540</x>

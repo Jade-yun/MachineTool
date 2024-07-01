@@ -7,8 +7,6 @@
 #include <QString>
 #include <QDebug>
 
-#pragma execution_character_set("utf-8")
-
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ManualForm)
@@ -31,8 +29,14 @@ void ManualForm::on_btnNewButton_clicked()
     if (btns.size() < 20)
     {
         DraggableButton* btn = new DraggableButton(ui->tabOperate);
+        // must initialize these property here, otherwise the new button is not draggable
+//        btn->setDraggable(draggableMode);
+//        btn->setCheckable(draggableMode);
+//        btn->setAutoExclusive(true);
+
         btns.append(btn);
 
+        // the position set of buttons here, this part need to be optimized.
         btn->setFixedSize(120, 40);
         QRect btnPos = QRect(QPoint(20 + 120 * (btns.size() / 8 ), 20 + 50 * (btns.size() % 8)), btn->size());
         btn->setGeometry(btnPos);
@@ -41,42 +45,46 @@ void ManualForm::on_btnNewButton_clicked()
         btn->show();
 
         // to set the slot function for every button
-//        connect(btn, &DraggableButton::clicked, this, [=]() {
-        connect(btn, &DraggableButton::clicked, this, [&, btn]() {
-            lastClickedButton = btn;
-
-            // fix me ??? this cannot work, the possible reson is event conflict.
-            btn->setCheckable(draggableMode);
-            btn->setChecked(draggableMode);
-            btn->setAutoExclusive(true);
+        // use reference capture here to insure selectedButton is modified.
+        connect(btn, &DraggableButton::clicked, this, [=](){
+            if (btn == nullptr) {
+                qDebug() << "btn is nullptr";
+                return;
+            }
+            selectedButton = btn;
+            if (selectedButton == nullptr) {
+                qDebug() << "selectedButton is nullptr";
+                return;
+            }
+            selectedButton->setChecked(draggableMode);
         });
     }
 
-    // precreate buttons in ui, and set it visibility
-//    for (int i = 0; i < 20; ++i) {
-//        if (buttons[i] && !buttons[i]->isVisible()) {
-//            buttons[i]->setVisible(true);
-//            break;
-//        }
-//    }
 }
 
 void ManualForm::on_btnDeleteButton_clicked()
 {
-    // to delete
+
     // examine if any button is clicked, delete the choosed one
-    if (lastClickedButton && btns.contains(lastClickedButton))
+    if (selectedButton && btns.contains(selectedButton))
     {
-        btns.removeOne(lastClickedButton);
-        delete lastClickedButton;
-        lastClickedButton = nullptr;
+        btns.removeOne(selectedButton);
+        delete selectedButton;
+        selectedButton = nullptr;
     }
-    // if no button is choosed, delete the last in btns
+    // if no button is selected, delete the last in btns
     else if (!btns.isEmpty())
     {
         DraggableButton* btn = btns.takeLast();
         delete btn;
     }
+//    if (btns.isEmpty() == false)
+//    {
+//        DraggableButton* btn = btns.last();
+//        selectedButton = btn;
+
+//        selectedButton->setChecked(true);
+//    }
 }
 
 
@@ -89,23 +97,22 @@ void ManualForm::on_checkBoxEditPosition_stateChanged(int arg1)
 //            buttons[i]->setDraggable(arg1);
 //        }
 //    }
+    draggableMode = arg1;
 
     for (auto btn : btns)
     {
-        btn->setDraggable(arg1);
-
-        //
-        btn->setCheckable(arg1);
-//        btn->setChecked(arg1);
-//        qDebug() << "btn is checkable:" << btn->isCheckable();
+        btn->setDraggable(draggableMode);
+        // when the button is draaggable, it's also be checkable.
+//        btn->setCheckable(draggableMode);
     }
 
 }
 
 void ManualForm::on_btnImportPicture_clicked()
 {
-//    QString imagePath = "/opt/MachineTool/bin/backgroud.png";
-    QString imagePath = "./backgroud.png";
+
+    QString imagePath = "/opt/MachineTool/bin/backgroud.png";
+//    QString imagePath = "./backgroud.png";
     QPixmap pixmap(imagePath);
 
     if (!pixmap.isNull())
@@ -123,12 +130,12 @@ void ManualForm::on_btnImportPicture_clicked()
 void ManualForm::initButtons()
 {
     draggableMode = false;
-    lastClickedButton = nullptr;
+    selectedButton = nullptr;
 
 //    // Initialize buttons and hide buttons 1-8
 //    for (int i = 0; i < 20; ++i)
 //    {
-//        buttons[i] = findChild<DraggableButton*>(QString("btn%1").arg(i + 1));
+//        buttons[i] = findChild<DraggableButton*>(QString("btn%d").arg(i + 1));
 //        if (buttons[i])
 //        {
 ////            buttons[i]->setVisible(i >= 8);

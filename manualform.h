@@ -31,7 +31,7 @@ private:
 
 private:
 //    std::array<DraggableButton*, 20> buttons;
-    DraggableButton* lastClickedButton;
+    DraggableButton* selectedButton;
     bool draggableMode;
     QList<DraggableButton*> btns;
 
