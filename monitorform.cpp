@@ -1,95 +1,66 @@
 #include "monitorform.h"
 #include "ui_monitorform.h"
 
-MonitorForm::MonitorForm(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::MonitorForm)
+MonitorForm::MonitorForm(QWidget* parent) :
+	QWidget(parent),
+	ui(new Ui::MonitorForm)
 {
-    ui->setupUi(this);
+	ui->setupUi(this);
 
-	v_lab.clear();
-	v_lab.push_back(ui->label_176);
-	v_lab.push_back(ui->label_181);
-	v_lab.push_back(ui->label_184);
-	v_lab.push_back(ui->label_175);
-	v_lab.push_back(ui->label_185);
-	v_lab.push_back(ui->label_187);
-	v_lab.push_back(ui->label_186);
-	v_lab.push_back(ui->label_189);
+	ui->stackedWidget_main->setCurrentIndex(0);
 
-	v_lab.push_back(ui->label_192);
-	v_lab.push_back(ui->label_197);
-	v_lab.push_back(ui->label_200);
-	v_lab.push_back(ui->label_191);
-	v_lab.push_back(ui->label_201);
-	v_lab.push_back(ui->label_203);
-	v_lab.push_back(ui->label_202);
-	v_lab.push_back(ui->label_205);
+	ui->stackedWidget1->setCurrentIndex(0);
+	ui->stackedWidget2->setCurrentIndex(0);
+	ui->stackedWidget3->setCurrentIndex(0);
+	ui->stackedWidget4->setCurrentIndex(0);
+	ui->stackedWidget12->setCurrentIndex(0);
 
-	v_lab.push_back(ui->label_273);
-	v_lab.push_back(ui->label_278);
-	v_lab.push_back(ui->label_281);
-	v_lab.push_back(ui->label_272);
-	v_lab.push_back(ui->label_282);
-	v_lab.push_back(ui->label_284);
-	v_lab.push_back(ui->label_283);
-	v_lab.push_back(ui->label_286);
+	ui->tabWidgetSig->setCurrentIndex(0);
+	ui->tabWidgetSig_2->setCurrentIndex(0);
+	ui->tabWidgetSig_3->setCurrentIndex(0);
 
-	v_lab.push_back(ui->label_289);
-	v_lab.push_back(ui->label_294);
-	v_lab.push_back(ui->label_297);
-	v_lab.push_back(ui->label_288);
-	v_lab.push_back(ui->label_298);
-	v_lab.push_back(ui->label_300);
-	v_lab.push_back(ui->label_299);
-	v_lab.push_back(ui->label_302);
+	
 
-
-//    for (int i = 0; i < v_lab.size(); i++)
-//    {
-
-//        setLED(v_lab[i], 3, 20);
-//    }
-    for (auto lab : v_lab)
-    {
-        setLED(lab, 3, 20);
-    }
-
-//    foreach (QLabel* var in v_lab)
-//	{
-//        setLED(var, 3, 20);
-//	}
+	//æ‰€æœ‰LEDçš„labelè®¾ç½®ä¸ºæŒ‡ç¤ºç¯
+	QList<QLabel*> labels = this->findChildren<QLabel*>();
+	for (auto label : labels)
+	{
+		if (label->text() == "LED")
+		{
+			setLED(label, 3, 30);
+		}
+	}
 }
 
 MonitorForm::~MonitorForm()
 {
-    delete ui;
+	delete ui;
 }
 
 void MonitorForm::setLED(QLabel* label, int color, int size)
 {
 	label->setText("");
-	QString min_width = QString("min-width: %1px;").arg(size);              // ×îÐ¡¿í¶È£ºsize
-	QString min_height = QString("min-height: %1px;").arg(size);            // ×îÐ¡¸ß¶È£ºsize
-	QString max_width = QString("max-width: %1px;").arg(size);              // ×îÐ¡¿í¶È£ºsize
-	QString max_height = QString("max-height: %1px;").arg(size);            // ×îÐ¡¸ß¶È£ºsize
-	// ÔÙÉèÖÃ±ß½çÐÎ×´¼°±ß¿ò
-	QString border_radius = QString("border-radius: %1px;").arg(size / 2);    // ±ß¿òÊÇÔ²½Ç£¬°ë¾¶Îªsize/2
-	QString border = QString("border:0px solid black;");                    // ±ß¿òÎª1pxºÚÉ«
-	// ×îºóÉèÖÃ±³¾°ÑÕÉ«
+	QString min_width = QString("min-width: %1px;").arg(size);              // æœ€å°å®½åº¦ï¼šsize
+	QString min_height = QString("min-height: %1px;").arg(size);            // æœ€å°é«˜åº¦ï¼šsize
+	QString max_width = QString("max-width: %1px;").arg(size);              // æœ€å°å®½åº¦ï¼šsize
+	QString max_height = QString("max-height: %1px;").arg(size);            // æœ€å°é«˜åº¦ï¼šsize
+	// å†è®¾ç½®è¾¹ç•Œå½¢çŠ¶åŠè¾¹æ¡†
+	QString border_radius = QString("border-radius: %1px;").arg(size / 2);    // è¾¹æ¡†æ˜¯åœ†è§’ï¼ŒåŠå¾„ä¸ºsize/2
+	QString border = QString("border:0px solid black;");                    // è¾¹æ¡†ä¸º1pxé»‘è‰²
+	// æœ€åŽè®¾ç½®èƒŒæ™¯é¢œè‰²
 	QString background = "background-color:";
 	switch (color) {
 	case 1:
-		// ºìÉ«
+		// çº¢è‰²
 		background += "rgb(255,0,0)";
 		break;
 	case 2:
-		// ÂÌÉ«
+		// ç»¿è‰²
 		background += "rgb(0,255,0)";
 		break;
 	case 3:
 	{
-		// ½¥±äÉ«
+		// æ¸å˜è‰²
 
 		background += QString("qlineargradient(x1: 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 black, stop : 1 gray);");
 		break;
@@ -100,4 +71,172 @@ void MonitorForm::setLED(QLabel* label, int color, int size)
 
 	const QString SheetStyle = min_width + min_height + max_width + max_height + border_radius + border + background;
 	label->setStyleSheet(SheetStyle);
+}
+
+void MonitorForm::on_btn1_cut_clicked()
+{
+	int curIndex = ui->stackedWidget1->currentIndex();
+	if (curIndex == 0)
+	{
+		ui->stackedWidget1->setCurrentIndex(2);
+		ui->lab_page1->setText("3/3");
+	}
+	else
+	{
+		ui->stackedWidget1->setCurrentIndex(curIndex - 1);
+		ui->lab_page1->setText(QString("%1/3").arg(curIndex));
+	}
+
+}
+
+void MonitorForm::on_btn1_add_clicked()
+{
+	int curIndex = ui->stackedWidget1->currentIndex();
+	if (curIndex == 2)
+	{
+		ui->stackedWidget1->setCurrentIndex(0);
+		ui->lab_page1->setText("1/3");
+	}
+	else
+	{
+		ui->stackedWidget1->setCurrentIndex(curIndex + 1);
+		ui->lab_page1->setText(QString("%1/3").arg(curIndex + 2));
+	}
+}
+
+void MonitorForm::on_btn2_cut_clicked()
+{
+	int curIndex = ui->stackedWidget2->currentIndex();
+	if (curIndex == 0)
+	{
+		ui->stackedWidget2->setCurrentIndex(1);
+		ui->lab_page2->setText("2/2");
+	}
+	else
+	{
+		ui->stackedWidget2->setCurrentIndex(curIndex - 1);
+		ui->lab_page2->setText(QString("%1/2").arg(curIndex));
+	}
+}
+
+void MonitorForm::on_btn2_add_clicked()
+{
+	int curIndex = ui->stackedWidget2->currentIndex();
+	if (curIndex == 1)
+	{
+		ui->stackedWidget2->setCurrentIndex(0);
+		ui->lab_page2->setText("1/2");
+	}
+	else
+	{
+		ui->stackedWidget2->setCurrentIndex(curIndex + 1);
+		ui->lab_page2->setText(QString("%1/2").arg(curIndex + 2));
+	}
+}
+
+void MonitorForm::on_btn3_cut_clicked()
+{
+	int curIndex = ui->stackedWidget3->currentIndex();
+	if (curIndex == 0)
+	{
+		ui->stackedWidget3->setCurrentIndex(2);
+		ui->lab_page3->setText("3/3");
+	}
+	else
+	{
+		ui->stackedWidget3->setCurrentIndex(curIndex - 1);
+		ui->lab_page3->setText(QString("%1/3").arg(curIndex));
+	}
+}
+
+void MonitorForm::on_btn3_add_clicked()
+{
+	int curIndex = ui->stackedWidget3->currentIndex();
+	if (curIndex == 2)
+	{
+		ui->stackedWidget3->setCurrentIndex(0);
+		ui->lab_page3->setText("1/3");
+	}
+	else
+	{
+		ui->stackedWidget3->setCurrentIndex(curIndex + 1);
+		ui->lab_page3->setText(QString("%1/3").arg(curIndex + 2));
+	}
+}
+
+void MonitorForm::on_btn4_cut_clicked()
+{
+	int curIndex = ui->stackedWidget4->currentIndex();
+	if (curIndex == 0)
+	{
+		ui->stackedWidget4->setCurrentIndex(1);
+		ui->lab_page4->setText("2/2");
+	}
+	else
+	{
+		ui->stackedWidget4->setCurrentIndex(curIndex - 1);
+		ui->lab_page4->setText(QString("%1/2").arg(curIndex));
+	}
+}
+
+void MonitorForm::on_btn4_add_clicked()
+{
+	int curIndex = ui->stackedWidget4->currentIndex();
+	if (curIndex == 1)
+	{
+		ui->stackedWidget4->setCurrentIndex(0);
+		ui->lab_page4->setText("1/2");
+	}
+	else
+	{
+		ui->stackedWidget4->setCurrentIndex(curIndex + 1);
+		ui->lab_page4->setText(QString("%1/2").arg(curIndex + 2));
+	}
+}
+
+void MonitorForm::on_btn12_cut_clicked()
+{
+	int curIndex = ui->stackedWidget12->currentIndex();
+	if (curIndex == 0)
+	{
+		ui->stackedWidget12->setCurrentIndex(1);
+		ui->lab_page12->setText("2/2");
+	}
+	else
+	{
+		ui->stackedWidget12->setCurrentIndex(curIndex - 1);
+		ui->lab_page12->setText(QString("%1/2").arg(curIndex));
+	}
+}
+
+void MonitorForm::on_btn12_add_clicked()
+{
+	int curIndex = ui->stackedWidget12->currentIndex();
+	if (curIndex == 1)
+	{
+		ui->stackedWidget12->setCurrentIndex(0);
+		ui->lab_page12->setText("1/2");
+	}
+	else
+	{
+		ui->stackedWidget12->setCurrentIndex(curIndex + 1);
+		ui->lab_page12->setText(QString("%1/2").arg(curIndex + 2));
+	}
+}
+
+void MonitorForm::on_btnMerge_Expand_clicked()
+{
+	int curIndex = ui->stackedWidget_main->currentIndex();
+	if (curIndex == 0)
+	{
+        ui->btnMerge_Expand->setIcon(QIcon(":/images/monitorImages/monitor_merge.png"));
+        ui->btnMerge_Expand->setIconSize(QSize(35, 35));
+		ui->stackedWidget_main->setCurrentIndex(1);
+	}
+	else
+	{
+        ui->btnMerge_Expand->setIcon(QIcon(":/images/monitorImages/monitor_expand.png"));
+        ui->btnMerge_Expand->setIconSize(QSize(35, 35));
+		ui->stackedWidget_main->setCurrentIndex(0);
+	}
 }

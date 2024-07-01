@@ -99,5 +99,13 @@
         <file>images/gif/test1.gif</file>
         <file>images/settingPageImages/write-in.png</file>
         <file>images/settingPageImages/read-out.png</file>
+        <file>images/monitorImages/mon_up.png</file>
+        <file>images/monitorImages/mon_stop.png</file>
+        <file>images/monitorImages/mon_start.png</file>
+        <file>images/monitorImages/mon_reset.png</file>
+        <file>images/monitorImages/mon_origin.png</file>
+        <file>images/monitorImages/monitor_merge.png</file>
+        <file>images/monitorImages/monitor_expand.png</file>
+        <file>images/monitorImages/mon_down.png</file>
     </qresource>
 </RCC>

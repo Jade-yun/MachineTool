@@ -17,14 +17,6 @@ ManualForm::ManualForm(QWidget *parent) :
 
     initButtons();
 
-//    QToolButton* button = new QToolButton(ui->tabWidgetSig);
-//    button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-//    button->setIcon(QIcon("./images/enter.png"));
-//    button->setText("进入堆叠");
-//    button->setStyleSheet("QToolButton { width: 100px; height: 45px; font-size: 20px;font-weight:bold;font-family: 'SimSun';background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #fafafa, stop: 0.4 #f4f4f4,stop: 0.5 #e7e7e7, stop: 1.0 #fafafa)}");
-//    ui->tabWidgetSig->setCornerWidget(button, Qt::TopRightCorner);
-
-
 }
 
 ManualForm::~ManualForm()
@@ -49,8 +41,14 @@ void ManualForm::on_btnNewButton_clicked()
         btn->show();
 
         // to set the slot function for every button
-        connect(btn, &DraggableButton::clicked, this, [=]() {
+//        connect(btn, &DraggableButton::clicked, this, [=]() {
+        connect(btn, &DraggableButton::clicked, this, [&, btn]() {
             lastClickedButton = btn;
+
+            // fix me ??? this cannot work, the possible reson is event conflict.
+            btn->setCheckable(draggableMode);
+            btn->setChecked(draggableMode);
+            btn->setAutoExclusive(true);
         });
     }
 
@@ -65,20 +63,20 @@ void ManualForm::on_btnNewButton_clicked()
 
 void ManualForm::on_btnDeleteButton_clicked()
 {
-//    // to delete
-//    // examine if any button is clicked, delete the choosed one
-//    if (lastClickedButton && btns.contains(lastClickedButton))
-//    {
-//        btns.removeOne(lastClickedButton);
-//        delete lastClickedButton;
-//        lastClickedButton = nullptr;
-//    }
-//    // if no button is choosed, delete the last in btns
-//    else if (!btns.isEmpty())
-//    {
-//        DraggableButton* btn = btns.takeLast();
-//        delete btn;
-//    }
+    // to delete
+    // examine if any button is clicked, delete the choosed one
+    if (lastClickedButton && btns.contains(lastClickedButton))
+    {
+        btns.removeOne(lastClickedButton);
+        delete lastClickedButton;
+        lastClickedButton = nullptr;
+    }
+    // if no button is choosed, delete the last in btns
+    else if (!btns.isEmpty())
+    {
+        DraggableButton* btn = btns.takeLast();
+        delete btn;
+    }
 }
 
 
@@ -95,6 +93,11 @@ void ManualForm::on_checkBoxEditPosition_stateChanged(int arg1)
     for (auto btn : btns)
     {
         btn->setDraggable(arg1);
+
+        //
+        btn->setCheckable(arg1);
+//        btn->setChecked(arg1);
+//        qDebug() << "btn is checkable:" << btn->isCheckable();
     }
 
 }

@@ -2,6 +2,13 @@
 #define SETTING_H
 
 #include <QWidget>
+#include "QLabel"
+#include "QLineEdit"
+#include "QComboBox"
+#include "QPushButton"
+#include "QTableWidgetItem"
+
+
 
 namespace Ui {
 class Setting;
@@ -43,13 +50,25 @@ private slots:
 public slots:
     void slotSettingHome();
 
+public slots:
+    void onComboBoxIndexChanged(int index);
+    void onPushButtonChanged(int index);
+    void onPushButtonHeadChanged(int index);
+    void onPushButtonGeneralClicked(int index);
+private:
+    void setAllStyleSheet();
+    QPushButton* tb_1_btn[9];
+    QPushButton* tb_1_btnHead[3];
+    QComboBox* tb_1_comboBox[3];
+    QLineEdit* tb_1_lineEdit[3][9];
+    QPushButton* tb_general_btn;
+
 
 private:
     Ui::Setting *ui;
 
 private:
     void loadAndPlayGif(const QString& path);
-    void setAllStyleSheet();
     void initVariables();
 
     QMovie *movie;

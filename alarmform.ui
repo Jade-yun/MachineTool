@@ -16,12 +16,25 @@
   <property name="styleSheet">
    <string notr="true">QLabel { 
 	font-family: 'SimSun';
-	font-size: 22px; 
+	font-size: 20px; 
 }
+
+
 QWidget{ 
 	font-family: 'SimSun';
-	font-size: 22px; 
+	font-size: 20px; 
 }
+
+/*******************************************************/
+QCheckBox::indicator {
+        background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #FFFFFF, stop: 1 #C0C0C0); 
+    }
+QCheckBox::indicator:checked {
+background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #F8F8FF, stop: 1 #1E90FF); 
+        image: url(:/images/check_mark1.png);
+        border-image: none;
+    }
+
 /************************************************/
 QPushButton
 {
@@ -32,8 +45,7 @@ QPushButton
     border-radius:10px; /*边框倒角*/
 
 	font-family: DejaVuSansMono;
-	font-size: 22px; 
-	font-weight:bold;
+	font-weight:normal;
 	font-family: 'SimSun';
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
 
@@ -49,8 +61,8 @@ QPushButton:pressed
 }
 /*****************************************************/
 QCheckBox { 
-font-size: 22px;
-font-weight:bold;
+font-size: 20px;
+font-weight:normal;
 font-family: 'SimSun';
 }
 QCheckBox::indicator{
@@ -58,6 +70,31 @@ width: 25px;
 height: 25px;
 border: 1px solid black; 
 background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
+}
+
+/*****************************************************************/
+QComboBox::!editable {
+                      border: 2px solid #808A87; /* 边框宽度和颜色 */
+                       }
+QComboBox::drop-down {
+    subcontrol-origin: padding-right;
+    subcontrol-position: top right;
+    width: 20px; /* 下拉箭头宽度 */
+    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
+    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
+    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
+}
+QComboBox::down-arrow {
+    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
+}
+
+QComboBox QAbstractItemView::item:hover{ 
+  background-color:#409CE1;
+  color:rgb(252, 233, 79);
+}
+QComboBox QAbstractItemView::item:selected{
+  background-color:#909CE1;
+  color:rgb(252, 200, 140);
 }
 /**************************************************/
 QTabWidget::tab-bar{
@@ -120,7 +157,20 @@ background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00bef
 
 QTabWidget::pane {
     border: 1px solid #000000; /* 设置边框样式和颜色 */
-}</string>
+}
+
+/******************************************************/
+QGroupBox {
+	border: 1px solid black;
+	border-radius:5px;
+	margin-top:10px; 
+}
+QGroupBox::title { 
+	subcontrol-origin: margin;
+	left: 10px;
+	bottom: 5px;
+}
+</string>
   </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
@@ -162,7 +212,7 @@ QTabWidget::pane {
        <x>0</x>
        <y>0</y>
        <width>1021</width>
-       <height>483</height>
+       <height>451</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -370,8 +420,8 @@ QHeaderView::section           // 标题头 每个单独的标题区域
     <widget class="QPushButton" name="btnDelete_25">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>484</y>
+       <x>10</x>
+       <y>470</y>
        <width>151</width>
        <height>48</height>
       </rect>
@@ -397,29 +447,13 @@ QHeaderView::section           // 标题头 每个单独的标题区域
      <property name="font">
       <font>
        <family>SimSun</family>
-       <pointsize>16</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
+       <pointsize>-1</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-    background-color:#F0F4FD;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:10px; /*边框倒角*/
-}
-QPushButton:pressed
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    border-radius:10px; /*边框倒角*/
-}
-QPushButton { font-size: 16pt;font-weight:bold;font-family: 'SimSun';background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9)}</string>
+      <string notr="true"/>
      </property>
      <property name="text">
       <string>合并显示</string>

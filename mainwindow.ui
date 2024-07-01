@@ -749,132 +749,6 @@ QLabel {
     <property name="title">
      <string/>
     </property>
-    <widget class="QLabel" name="label_16">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>10</y>
-       <width>60</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="locale">
-      <locale language="Chinese" country="China"/>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="text">
-      <string>速度：</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>160</x>
-       <y>40</y>
-       <width>60</width>
-       <height>30</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="locale">
-      <locale language="Chinese" country="China"/>
-     </property>
-     <property name="text">
-      <string>转速：</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labDateTime">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>0</y>
-       <width>131</width>
-       <height>35</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>2024/06/01 00:00:00</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labSpeed">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>10</y>
-       <width>59</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <property name="text">
-      <string>00.0%</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labRotateSpeed">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>40</y>
-       <width>86</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>0000rpm</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labDateTime_2">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>40</y>
-       <width>111</width>
-       <height>35</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>2024/06/01 00:00:00</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="btn_switch">
      <property name="geometry">
       <rect>
@@ -905,6 +779,183 @@ QLabel {
        <height>80</height>
       </size>
      </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>33</x>
+       <y>0</y>
+       <width>291</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labDateTime">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>130</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>DejaVuSansMono</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>2024/06/01 00:00:00</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_16">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>DejaVuSansMono</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="locale">
+         <locale language="Chinese" country="China"/>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="text">
+         <string>速度：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="labSpeed">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>DejaVuSansMono</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="text">
+         <string>00.0%</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labDateTime_2">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>130</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>DejaVuSansMono</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>2024/06/01 00:00:00</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label">
+        <property name="minimumSize">
+         <size>
+          <width>60</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>60</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>DejaVuSansMono</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="locale">
+         <locale language="Chinese" country="China"/>
+        </property>
+        <property name="text">
+         <string>转速：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="labRotateSpeed">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>90</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>DejaVuSansMono</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>0000rpm</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -937,15 +988,14 @@ background-color: transparent;
      </property>
      <property name="font">
       <font>
-       <family>黑体</family>
-       <pointsize>20</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
+       <family>DejaVuSansMono</family>
+       <pointsize>-1</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">font: 20pt &quot;黑体&quot;;</string>
+      <string notr="true"/>
      </property>
      <property name="locale">
       <locale language="Chinese" country="China"/>

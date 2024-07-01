@@ -28,7 +28,6 @@ void DraggableButton::mouseMoveEvent(QMouseEvent *event)
 //            move(mapToParent(event->pos() - startPos));
 //        }
 //    }
-//    QPushButton::mouseMoveEvent(event);
 
 
     if (isDraggable && (event->buttons() & Qt::LeftButton))
@@ -59,6 +58,8 @@ void DraggableButton::mouseMoveEvent(QMouseEvent *event)
             newPos.setY(parentRect.height() - buttonRect.height());
         }
 
-        move(newPos);
+        this->move(newPos);
     }
+    //
+    QPushButton::mouseMoveEvent(event);
 }
