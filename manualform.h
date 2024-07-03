@@ -19,21 +19,26 @@ public:
 
 private slots:
     void on_btnNewButton_clicked();
+    void on_btnNewButtonReference_clicked();
 
     void on_btnDeleteButton_clicked();
+    void on_btnDeleteButtonReference_clicked();
 
-    void on_checkBoxEditPosition_stateChanged(int arg1);
-
+    void on_checkBoxEditPos_stateChanged(int arg1);
+    void on_checkBoxEditPosReference_stateChanged(int arg1);
     void on_btnImportPicture_clicked();
+    void on_btnImportPictureReference_clicked();
+
+
 
 private:
     void initButtons();
 
 private:
-//    std::array<DraggableButton*, 20> buttons;
-    DraggableButton* selectedButton;
-    bool draggableMode;
+    DraggableButton* selectedButton[2];
+    bool draggable[2];
     QList<DraggableButton*> btns;
+    QList<DraggableButton*> referenceBtns;
 
 private:
     Ui::ManualForm *ui;

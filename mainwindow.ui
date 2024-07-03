@@ -28,21 +28,106 @@
     <height>768</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel { 
-	font-family: DejaVuSansMono;
+   <string notr="true">QMainWindow{
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+}
+/*
+QWidget#centralwidget{
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
+	background-color: rgb(255, 255, 255);
+}
+*/
+QStackedWidget#stkWidget{
+	background-color: rgb(255, 255, 255);
+}
+
+QLabel { 
+	font-family: 'SimSun';
 	font-size: 22px; 
 }
-QPushButton { 
-	font-family: DejaVuSansMono;
+QLabel#labProgramName { 
+	font-family: 'SimSun';
+	font:bold;
+	font-size: 30px; 
+}
+QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed{ 
+
+	color:yellow;
+}
+
+QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
+
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+	border:none;
+}
+
+/************************************************/
+QPushButton
+{
+	font-family: 'SimSun';
 	font-size: 22px; 
-}</string>
+	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
+
+    border-style:solid; /*边框风格*/
+    border-width:1px;/*边框宽度*/
+    border-color:#7A77AC; /*边框颜色*/
+    border-radius:5px; /*边框倒角*/
+}
+QPushButton:pressed
+{
+    border-style:outset; /*边框风格*/
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+    border-width:1px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:5px; /*边框倒角*/
+}
+
+QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
+	font-family: 'SimSun';
+	font-size: 22px; 
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+    border-color:#0055ff; /*边框颜色*/
+	border-style:outset; /*边框风格*/
+    border-width:1px;/*边框宽度*/
+
+    border-style:solid; /*边框风格*/
+    border-width:1px;/*边框宽度*/
+    border-color:#7A77AC; /*边框颜色*/
+    border-radius:5px; /*边框倒角*/
+}
+QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:checked#Btn_TeachHome,QPushButton:checked#Btn_AlarmHome,QPushButton::checked#Btn_ManualHome
+{
+    background-color:#E7E8EB;
+    border-style:solid; 
+    border-width:1px;
+    border-color:#0A7C25; 
+}
+
+/*
+QPushButton:pressed#Btn_SetHome,QPushButton:pressed#Btn_MonitorHome,QPushButton:pressed#Btn_AlarmHome,QPushButton:pressed#Btn_AlarmHome,QPushButton::pressed#Btn_ManualHome,
+{
+    background-color:#E7E8EB;
+    border-style:solid; 
+    border-width:1px;
+    border-color:#0A7C25; 
+}
+*/</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGroupBox" name="groupBox">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <widget class="QGroupBox" name="groupBoxHomeBottom">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -62,12 +147,6 @@ QPushButton {
       <width>768</width>
       <height>0</height>
      </size>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton {
-	font: 30px;
-	
-}</string>
     </property>
     <widget class="QPushButton" name="Btn_SetHome">
      <property name="enabled">
@@ -95,28 +174,9 @@ QPushButton {
      </property>
      <property name="font">
       <font>
-       <family>DejaVuSansMono</family>
+       <family>SimSun</family>
        <pointsize>-1</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
       </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-}
-QPushButton:pressed,QPushButton::checked
-{
-    background-color:#E7E8EB;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0A7C25; /*边框颜色*/
-}</string>
      </property>
      <property name="text">
       <string>设置</string>
@@ -164,29 +224,9 @@ QPushButton:pressed,QPushButton::checked
      </property>
      <property name="font">
       <font>
-       <family>DejaVuSansMono</family>
+       <family>SimSun</family>
        <pointsize>-1</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
       </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    
-}
-QPushButton:pressed,QPushButton::checked
-{
-    background-color:#E7E8EB;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0A7C25; /*边框颜色*/
-}</string>
      </property>
      <property name="text">
       <string>监视</string>
@@ -231,29 +271,9 @@ QPushButton:pressed,QPushButton::checked
      </property>
      <property name="font">
       <font>
-       <family>DejaVuSansMono</family>
+       <family>SimSun</family>
        <pointsize>-1</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
       </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    
-}
-QPushButton:pressed,QPushButton::checked
-{
-    background-color:#E7E8EB;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0A7C25; /*边框颜色*/
-}</string>
      </property>
      <property name="text">
       <string>报警/日志</string>
@@ -301,29 +321,9 @@ QPushButton:pressed,QPushButton::checked
      </property>
      <property name="font">
       <font>
-       <family>DejaVuSansMono</family>
+       <family>SimSun</family>
        <pointsize>-1</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
       </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    
-}
-QPushButton:pressed,QPushButton::checked
-{
-    background-color:#E7E8EB;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0A7C25; /*边框颜色*/
-}</string>
      </property>
      <property name="text">
       <string>教导</string>
@@ -371,30 +371,9 @@ QPushButton:pressed,QPushButton::checked
      </property>
      <property name="font">
       <font>
-       <family>DejaVuSansMono</family>
+       <family>SimSun</family>
        <pointsize>-1</pointsize>
-       <weight>50</weight>
-       <italic>false</italic>
-       <bold>false</bold>
       </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton
-{
-	border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-	font-size:30px;
-    
-}
-QPushButton:pressed,QPushButton::checked
-{
-    background-color:#E7E8EB;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0A7C25; /*边框颜色*/
-}</string>
      </property>
      <property name="text">
       <string>手动页面</string>
@@ -432,8 +411,17 @@ QPushButton:pressed,QPushButton::checked
       <verstretch>0</verstretch>
      </sizepolicy>
     </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    <property name="minimumSize">
+     <size>
+      <width>1024</width>
+      <height>581</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>1024</width>
+      <height>581</height>
+     </size>
     </property>
     <property name="frameShape">
      <enum>QFrame::Box</enum>
@@ -445,7 +433,7 @@ QPushButton:pressed,QPushButton::checked
      <number>-1</number>
     </property>
    </widget>
-   <widget class="QGroupBox" name="groupBox_XYZOUV">
+   <widget class="QGroupBox" name="groupBoxXYZOUV">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -466,267 +454,341 @@ QPushButton:pressed,QPushButton::checked
       <height>40</height>
      </size>
     </property>
-    <property name="styleSheet">
-     <string notr="true">QGroupBox{
-	background-color: transparent;
-	border:0px
-}
-QLabel { 
-	font-family: DejaVuSansMono;
-	font-size: 22px; 
-}</string>
-    </property>
     <property name="title">
      <string/>
     </property>
-    <widget class="QLabel" name="label_13">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>90</x>
-       <y>10</y>
-       <width>41</width>
-       <height>21</height>
+       <y>0</y>
+       <width>788</width>
+       <height>41</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>X1:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labX1">
-     <property name="geometry">
-      <rect>
-       <x>130</x>
-       <y>10</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>555</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_14">
-     <property name="geometry">
-      <rect>
-       <x>230</x>
-       <y>10</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Z1:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labX1_2">
-     <property name="geometry">
-      <rect>
-       <x>270</x>
-       <y>10</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>555</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_15">
-     <property name="geometry">
-      <rect>
-       <x>370</x>
-       <y>10</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Y1:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labX1_3">
-     <property name="geometry">
-      <rect>
-       <x>410</x>
-       <y>10</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>555</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_17">
-     <property name="geometry">
-      <rect>
-       <x>500</x>
-       <y>10</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>C:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labX1_4">
-     <property name="geometry">
-      <rect>
-       <x>820</x>
-       <y>10</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>555</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_18">
-     <property name="geometry">
-      <rect>
-       <x>640</x>
-       <y>10</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Z2:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labX1_5">
-     <property name="geometry">
-      <rect>
-       <x>680</x>
-       <y>10</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>555</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="labX1_6">
-     <property name="geometry">
-      <rect>
-       <x>540</x>
-       <y>10</y>
-       <width>81</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>555</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_19">
-     <property name="geometry">
-      <rect>
-       <x>780</x>
-       <y>10</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <family>DejaVuSansMono</family>
-       <pointsize>-1</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Y2:</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label_13">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>X1:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labX1">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>555</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_14">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Z1:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labX1_2">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>555</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_15">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Y1:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labX1_3">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>555</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_17">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>C:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labX1_6">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>555</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_18">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Z2:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labX1_5">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>555</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_19">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Y2:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labX1_4">
+        <property name="minimumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>555</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="groupBoxHomeTopLeft">
     <property name="geometry">
      <rect>
       <x>1</x>
@@ -734,17 +796,6 @@ QLabel {
       <width>321</width>
       <height>81</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QGroupBox {
-
-border:1px solid rgb(53, 153, 252);
-background-color: transparent;
-}
-QLabel { 
-	font-family: DejaVuSansMono;
-	font-size: 20px; 
-}</string>
     </property>
     <property name="title">
      <string/>
@@ -780,33 +831,36 @@ QLabel {
       </size>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>33</x>
        <y>0</y>
-       <width>291</width>
+       <width>294</width>
        <height>81</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
+      <property name="spacing">
+       <number>1</number>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="labDateTime">
         <property name="minimumSize">
          <size>
-          <width>130</width>
+          <width>110</width>
           <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
+          <width>110</width>
           <height>35</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <family>DejaVuSansMono</family>
+          <family>SimSun</family>
           <pointsize>-1</pointsize>
          </font>
         </property>
@@ -831,7 +885,7 @@ QLabel {
         </property>
         <property name="font">
          <font>
-          <family>DejaVuSansMono</family>
+          <family>SimSun</family>
           <pointsize>-1</pointsize>
          </font>
         </property>
@@ -853,19 +907,19 @@ QLabel {
        <widget class="QLabel" name="labSpeed">
         <property name="minimumSize">
          <size>
-          <width>60</width>
+          <width>100</width>
           <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>60</width>
+          <width>100</width>
           <height>35</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <family>DejaVuSansMono</family>
+          <family>SimSun</family>
           <pointsize>-1</pointsize>
          </font>
         </property>
@@ -881,24 +935,24 @@ QLabel {
        <widget class="QLabel" name="labDateTime_2">
         <property name="minimumSize">
          <size>
-          <width>130</width>
+          <width>110</width>
           <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>130</width>
+          <width>110</width>
           <height>35</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <family>DejaVuSansMono</family>
+          <family>SimSun</family>
           <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>2024/06/01 00:00:00</string>
+         <string>00:00:00</string>
         </property>
        </widget>
       </item>
@@ -918,7 +972,7 @@ QLabel {
         </property>
         <property name="font">
          <font>
-          <family>DejaVuSansMono</family>
+          <family>SimSun</family>
           <pointsize>-1</pointsize>
          </font>
         </property>
@@ -934,19 +988,19 @@ QLabel {
        <widget class="QLabel" name="labRotateSpeed">
         <property name="minimumSize">
          <size>
-          <width>90</width>
+          <width>100</width>
           <height>35</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>90</width>
+          <width>100</width>
           <height>35</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <family>DejaVuSansMono</family>
+          <family>SimSun</family>
           <pointsize>-1</pointsize>
          </font>
         </property>
@@ -958,7 +1012,7 @@ QLabel {
      </layout>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="groupBoxHomeTopMid">
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -966,13 +1020,6 @@ QLabel {
       <width>341</width>
       <height>81</height>
      </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QGroupBox {
-
-border:1px solid rgb(53, 153, 252);
-background-color: transparent;
-}</string>
     </property>
     <property name="title">
      <string/>
@@ -988,14 +1035,12 @@ background-color: transparent;
      </property>
      <property name="font">
       <font>
-       <family>DejaVuSansMono</family>
+       <family>SimSun</family>
        <pointsize>-1</pointsize>
        <weight>75</weight>
+       <italic>false</italic>
        <bold>true</bold>
       </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
      </property>
      <property name="locale">
       <locale language="Chinese" country="China"/>
@@ -1008,7 +1053,7 @@ background-color: transparent;
      </property>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="groupBoxHomeTopRight">
     <property name="geometry">
      <rect>
       <x>680</x>
@@ -1017,31 +1062,10 @@ background-color: transparent;
       <height>81</height>
      </rect>
     </property>
-    <property name="styleSheet">
-     <string notr="true">QGroupBox {
-
-border:1px solid rgb(53, 153, 252);
-
-
-}
-   QPushButton
-{
-    border-width:0px;/*边框宽度*/
-    background-color:transparent; /*边框颜色*/
-    
-}
-QPushButton:pressed,QPushButton::checked
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:0px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-}</string>
-    </property>
     <property name="title">
      <string/>
     </property>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="btnHelp">
      <property name="geometry">
       <rect>
        <x>5</x>
@@ -1093,7 +1117,7 @@ QPushButton:pressed,QPushButton::checked
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="btnRollerSelect">
+    <widget class="QPushButton" name="btnAlarm">
      <property name="geometry">
       <rect>
        <x>90</x>
@@ -1119,7 +1143,7 @@ QPushButton:pressed,QPushButton::checked
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_7">
+    <widget class="QPushButton" name="btnRoller">
      <property name="geometry">
       <rect>
        <x>175</x>
@@ -1146,11 +1170,11 @@ QPushButton:pressed,QPushButton::checked
      </property>
     </widget>
    </widget>
-   <zorder>groupBox</zorder>
-   <zorder>groupBox_XYZOUV</zorder>
-   <zorder>groupBox</zorder>
-   <zorder>groupBox_2</zorder>
-   <zorder>groupBox_3</zorder>
+   <zorder>groupBoxHomeBottom</zorder>
+   <zorder>groupBoxXYZOUV</zorder>
+   <zorder>groupBoxHomeTopLeft</zorder>
+   <zorder>groupBoxHomeTopMid</zorder>
+   <zorder>groupBoxHomeTopRight</zorder>
    <zorder>stkWidget</zorder>
   </widget>
  </widget>

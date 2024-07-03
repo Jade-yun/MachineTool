@@ -11,7 +11,6 @@
         <file>images/stackset.png</file>
         <file>images/systemset.png</file>
         <file>images/sigset.png</file>
-        <file>images/set.png</file>
         <file>images/manual.png</file>
         <file>images/teach.png</file>
         <file>images/monitoring.png</file>
@@ -107,5 +106,6 @@
         <file>images/monitorImages/monitor_merge.png</file>
         <file>images/monitorImages/monitor_expand.png</file>
         <file>images/monitorImages/mon_down.png</file>
+        <file>images/autoPageImages/edit.png</file>
     </qresource>
 </RCC>

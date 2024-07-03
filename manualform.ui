@@ -16,13 +16,13 @@
   <property name="styleSheet">
    <string notr="true">QLabel { 
 	font-family: 'SimSun';
-	font-size: 20px; 
+	font-size: 22px; 
 }
 
 
 QWidget{ 
 	font-family: 'SimSun';
-	font-size: 20px; 
+	font-size: 22px; 
 }
 
 /*******************************************************/
@@ -67,8 +67,8 @@ font-weight:normal;
 font-family: 'SimSun';
 }
 QCheckBox::indicator{
-width: 25px;
-height: 25px;
+width: 30px;
+height: 30px;
 border: 1px solid black; 
 background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
 }
@@ -173,7 +173,7 @@ QGroupBox::title {
 }
 </string>
   </property>
-  <widget class="QTabWidget" name="tabWidgetSig">
+  <widget class="QTabWidget" name="tabWidgetManualPage">
    <property name="geometry">
     <rect>
      <x>5</x>
@@ -192,7 +192,7 @@ QGroupBox::title {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -227,7 +227,7 @@ QGroupBox::title {
        <number>1</number>
       </property>
       <item>
-       <widget class="QCheckBox" name="checkBoxEditPosition">
+       <widget class="QCheckBox" name="checkBoxEditPos">
         <property name="minimumSize">
          <size>
           <width>130</width>
@@ -948,21 +948,21 @@ QGroupBox::title {
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>40</y>
+        <y>50</y>
         <width>240</width>
-        <height>27</height>
+        <height>40</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
         <width>240</width>
-        <height>27</height>
+        <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>240</width>
-        <height>27</height>
+        <height>40</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -1051,6 +1051,18 @@ QGroupBox::title {
        </item>
        <item row="0" column="0" colspan="2">
         <widget class="QCheckBox" name="checkBox_2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
          <property name="styleSheet">
           <string notr="true"/>
          </property>
@@ -1790,7 +1802,7 @@ QGroupBox::title {
        <number>1</number>
       </property>
       <item>
-       <widget class="QCheckBox" name="checkBoxEditPosition_2">
+       <widget class="QCheckBox" name="checkBoxEditPosReference">
         <property name="minimumSize">
          <size>
           <width>130</width>
@@ -1815,7 +1827,7 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnImportPicture_3">
+       <widget class="QPushButton" name="btnImportPictureReference">
         <property name="minimumSize">
          <size>
           <width>150</width>
@@ -1845,7 +1857,7 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnNewButton_2">
+       <widget class="QPushButton" name="btnNewButtonReference">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -1875,7 +1887,7 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnDeleteButton_2">
+       <widget class="QPushButton" name="btnDeleteButtonReference">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -1920,7 +1932,7 @@ QGroupBox::title {
        <number>0</number>
       </property>
       <item>
-       <widget class="QPushButton" name="btnEditButton_3">
+       <widget class="QPushButton" name="btnRefresh">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -1950,7 +1962,7 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnEditButton_2">
+       <widget class="QPushButton" name="btnEditReference">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -1980,7 +1992,7 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnSaveOperateInstruction_2">
+       <widget class="QPushButton" name="btnSaveReference">
         <property name="minimumSize">
          <size>
           <width>100</width>
@@ -2020,7 +2032,7 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnImportPicture_4">
+       <widget class="QPushButton" name="btnMovetoReference">
         <property name="minimumSize">
          <size>
           <width>150</width>
@@ -2053,7 +2065,7 @@ QGroupBox::title {
     </widget>
    </widget>
   </widget>
-  <widget class="QPushButton" name="btnImportPicture_2">
+  <widget class="QPushButton" name="btnIntoStack">
    <property name="geometry">
     <rect>
      <x>870</x>

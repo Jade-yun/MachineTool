@@ -15,6 +15,14 @@ public:
     explicit AutoForm(QWidget *parent = nullptr);
     ~AutoForm();
 
+private slots:
+    void on_btnNext_clicked();
+
+    void on_btnLast_clicked();
+
+
+private:
+    void updateLabelState(int index);
 private:
     Ui::AutoForm *ui;
 

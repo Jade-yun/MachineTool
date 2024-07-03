@@ -5,6 +5,8 @@
 #include <QDateTime>
 #include <QFile>
 
+#include <QLabel>
+
 #pragma execution_character_set("utf-8")
 
 
@@ -14,11 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+//    setAllStyleSheet();
 
-    setWindowTitle(QString());
-    //this->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+//    setWindowTitle(QString());
+//    this->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+    this->setFixedSize(1024, 768);
 
-    setAllStyleSheet();
 
     setWidget = new Setting(this);
     ui->stkWidget->insertWidget(0, setWidget);
@@ -73,6 +76,20 @@ void MainWindow::on_Btn_ManualHome_clicked()
         ui->stkWidget->setCurrentWidget(autoWidget);
     }
 
+//    QLabel* label = new QLabel(ui->centralwidget);
+
+//    label->setFixedSize(1024, 768);
+
+//    QString imagePath = "./backgroud.png";
+//    QPixmap pixmap(imagePath);
+//    if (!pixmap.isNull())
+//    {
+//        qDebug() << "cannot find images";
+//        label->setPixmap(pixmap);
+//        label->setScaledContents(true);
+//        label->show();
+//    }
+
 }
 
 void MainWindow::on_Btn_SetHome_clicked()
@@ -104,15 +121,6 @@ void MainWindow::on_Btn_AlarmHome_clicked()
 
 void MainWindow::setAllStyleSheet()
 {
-//    this->setStyleSheet("QLabel {\
-//                        font-size: 25px; \
-//                    }\
-//                    QPushButton{ \
-//                        font: 25px;\
-//                    }\
-//                    QTabBar::tab{\
-//                        font:25px;\
-//                    }");
 
 	this->setStyleSheet("QMainWindow { background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea)}");
 	ui->labDateTime->setStyleSheet("color: yellow;");
