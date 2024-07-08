@@ -2,6 +2,7 @@
 #define MANUALFORM_H
 
 #include <QWidget>
+#include <QTableWidget>
 
 #include "draggablebutton.h"
 
@@ -30,15 +31,18 @@ private slots:
     void on_btnImportPictureReference_clicked();
 
 
-
 private:
-    void initButtons();
+    void initVar();
+    void addPointToTable(const QPushButton* button);
 
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];
     QList<DraggableButton*> btns;
     QList<DraggableButton*> referenceBtns;
+
+    QTableWidget* tableReference;
+    int buttonCount;
 
 private:
     Ui::ManualForm *ui;

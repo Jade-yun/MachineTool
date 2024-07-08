@@ -21,6 +21,10 @@ private slots:
     void on_btnLast_clicked();
 
 
+    void on_btnEdit_pressed();
+
+    void on_btnMergeExpand_pressed();
+
 private:
     void updateLabelState(int index);
 private:

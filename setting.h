@@ -41,11 +41,11 @@ private slots:
 
     void on_comboBoxIotSelection_currentIndexChanged(int index);
 
-    void on_btnLastPage_clicked();
-
-    void on_btnNextPage_clicked();
-
     void on_comboBox_96_currentIndexChanged(int index);
+
+private:
+
+    void pageSwitchInit();
 
 public slots:
     void slotSettingHome();

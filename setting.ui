@@ -165,6 +165,8 @@ QTabWidget::pane {
     border: 1px solid #000000; /* 设置边框样式和颜色 */
 }
 
+
+
 </string>
   </property>
   <widget class="QStackedWidget" name="stackedWidget">
@@ -186,10 +188,10 @@ QTabWidget::pane {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>8</number>
+    <number>7</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>170</x>
@@ -800,7 +802,7 @@ QPushButton:pressed
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>5</number>
      </property>
      <property name="iconSize">
       <size>
@@ -11755,10 +11757,7 @@ border: 1px solid #000000;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-
-
-</string>
+        <string notr="true"/>
        </property>
        <property name="title">
         <string/>
@@ -24327,7 +24326,7 @@ background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00bef
 </string>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>4</number>
      </property>
      <property name="iconSize">
       <size>
@@ -28570,7 +28569,7 @@ QComboBox::down-arrow {
       <attribute name="title">
        <string>伺服参数</string>
       </attribute>
-      <widget class="QPushButton" name="btnLastPage_2">
+      <widget class="QPushButton" name="btnLastPageServoPara">
        <property name="geometry">
         <rect>
          <x>840</x>
@@ -28604,7 +28603,7 @@ QComboBox::down-arrow {
         </size>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnNextPage_2">
+      <widget class="QPushButton" name="btnNextPageServoPara">
        <property name="geometry">
         <rect>
          <x>920</x>
@@ -28648,7 +28647,7 @@ QComboBox::down-arrow {
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page0_2">
         <widget class="QGroupBox" name="groupBox_13">
@@ -29950,341 +29949,311 @@ border: 1px solid #000000;
          <property name="title">
           <string>任意参数</string>
          </property>
-         <widget class="QLabel" name="label_248">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
-            <x>310</x>
+            <x>10</x>
             <y>30</y>
-            <width>81</width>
-            <height>40</height>
+            <width>992</width>
+            <height>42</height>
            </rect>
           </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>参数(h)</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEdit_47">
-          <property name="geometry">
-           <rect>
-            <x>20</x>
-            <y>30</y>
-            <width>280</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>280</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>280</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>无对应参数名称</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEdit_53">
-          <property name="geometry">
-           <rect>
-            <x>380</x>
-            <y>30</y>
-            <width>81</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0000</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEdit_54">
-          <property name="geometry">
-           <rect>
-            <x>470</x>
-            <y>30</y>
-            <width>60</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>60</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>00</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_250">
-          <property name="geometry">
-           <rect>
-            <x>545</x>
-            <y>30</y>
-            <width>51</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>长度</string>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEdit_58">
-          <property name="geometry">
-           <rect>
-            <x>590</x>
-            <y>30</y>
-            <width>60</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>60</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>60</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>00</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QLineEdit" name="lineEdit_62">
-          <property name="geometry">
-           <rect>
-            <x>690</x>
-            <y>30</y>
-            <width>110</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>110</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0000</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="btnLastPage_24">
-          <property name="geometry">
-           <rect>
-            <x>910</x>
-            <y>30</y>
-            <width>90</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>90</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>90</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>写/WD</string>
-          </property>
-          <property name="icon">
-           <iconset resource="images.qrc">
-            <normaloff>:/images/settingPageImages/write-in.png</normaloff>:/images/settingPageImages/write-in.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>20</width>
-            <height>32</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QPushButton" name="btnLastPage_25">
-          <property name="geometry">
-           <rect>
-            <x>810</x>
-            <y>30</y>
-            <width>90</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>90</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>90</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-            <weight>50</weight>
-            <bold>false</bold>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>读/RD</string>
-          </property>
-          <property name="icon">
-           <iconset resource="images.qrc">
-            <normaloff>:/images/settingPageImages/read-out.png</normaloff>:/images/settingPageImages/read-out.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_251">
-          <property name="geometry">
-           <rect>
-            <x>460</x>
-            <y>30</y>
-            <width>16</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">font-size:25px;
+          <layout class="QHBoxLayout" name="horizontalLayout_19">
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_47">
+             <property name="minimumSize">
+              <size>
+               <width>280</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>280</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>无对应参数名称</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_248">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string>参数(h)</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_53">
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>0000</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_251">
+             <property name="minimumSize">
+              <size>
+               <width>10</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>10</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font-size:25px;
 font:bold;</string>
-          </property>
-          <property name="text">
-           <string>-</string>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_252">
-          <property name="geometry">
-           <rect>
-            <x>665</x>
-            <y>30</y>
-            <width>20</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>值</string>
-          </property>
+             </property>
+             <property name="text">
+              <string>-</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_54">
+             <property name="minimumSize">
+              <size>
+               <width>60</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>60</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>00</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_250">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>50</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string>长度</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_58">
+             <property name="minimumSize">
+              <size>
+               <width>60</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>60</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>00</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_252">
+             <property name="minimumSize">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::RightToLeft</enum>
+             </property>
+             <property name="text">
+              <string>值</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEdit_62">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>100</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>0000</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnLastPage_25">
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>读/RD</string>
+             </property>
+             <property name="icon">
+              <iconset resource="images.qrc">
+               <normaloff>:/images/settingPageImages/read-out.png</normaloff>:/images/settingPageImages/read-out.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnLastPage_24">
+             <property name="minimumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>90</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>写/WD</string>
+             </property>
+             <property name="icon">
+              <iconset resource="images.qrc">
+               <normaloff>:/images/settingPageImages/write-in.png</normaloff>:/images/settingPageImages/write-in.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>32</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </widget>
@@ -31202,7 +31171,7 @@ QComboBox::down-arrow {
         <string>页码:</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_4">
+      <widget class="QLabel" name="labelPageNum">
        <property name="geometry">
         <rect>
          <x>80</x>
@@ -33335,7 +33304,7 @@ QComboBox::down-arrow {
         </widget>
        </widget>
       </widget>
-      <widget class="QPushButton" name="btnLastPage">
+      <widget class="QPushButton" name="btnLastPageOrigin">
        <property name="geometry">
         <rect>
          <x>700</x>
@@ -33369,7 +33338,7 @@ QComboBox::down-arrow {
         </size>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnNextPage">
+      <widget class="QPushButton" name="btnNextPageOrigin">
        <property name="geometry">
         <rect>
          <x>780</x>

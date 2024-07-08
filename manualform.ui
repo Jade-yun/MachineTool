@@ -14,90 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel { 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
-
-
-QWidget{ 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
-
-/*******************************************************/
-QCheckBox::indicator {
-        background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #FFFFFF, stop: 1 #C0C0C0); 
-    }
-QCheckBox::indicator:checked {
-background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #F8F8FF, stop: 1 #1E90FF); 
-        image: url(:/images/check_mark1.png);
-        border-image: none;
-    }
-
-/************************************************/
-QPushButton
-{
-    background-color:#F0F4FD;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:10px; /*边框倒角*/
-
-	font-family: DejaVuSansMono;
-	font-weight:normal;
-	font-family: 'SimSun';
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-
-
-}
-QPushButton:pressed, QPushButton::checked
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    border-radius:10px; /*边框倒角*/
-}
-
-/*****************************************************/
-QCheckBox { 
-font-size: 20px;
-font-weight:normal;
-font-family: 'SimSun';
-}
-QCheckBox::indicator{
-width: 30px;
-height: 30px;
-border: 1px solid black; 
-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-}
-
-/*****************************************************************/
-QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-QComboBox QAbstractItemView::item:hover{ 
-  background-color:#409CE1;
-  color:rgb(252, 233, 79);
-}
-QComboBox QAbstractItemView::item:selected{
-  background-color:#409CE1;
-  color:rgb(252, 233, 79);
-}
-/**************************************************/
+   <string notr="true">/**************************************************/
 QTabWidget::tab-bar{
         alignment:left;
 }
@@ -121,18 +38,14 @@ QTabBar::tab:!selected {
   QTabWidget::pane { /* The tab widget frame */
       border-top: 2px solid #C2C7CB;
   }
-
   QTabWidget::tab-bar {
       left: 5px; /* move to the right by 5px */
   }
 
   /* Style the tab using the tab sub-control. Note that
       it reads QTabBar _not_ QTabWidget */
-  QTabBar::tab {
-      /*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                  stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
-                                  stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);*/
-background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea);
+ QTabBar::tab {
+	background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea);
       border: 2px solid #C4C4C3;
       border-bottom-color: #C2C7CB; /* same as the pane color */
       border-top-left-radius: 4px;
@@ -158,20 +71,7 @@ background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00bef
 
 QTabWidget::pane {
     border: 1px solid #000000; /* 设置边框样式和颜色 */
-}
-
-/******************************************************/
-QGroupBox {
-	border: 1px solid black;
-	border-radius:5px;
-	margin-top:10px; 
-}
-QGroupBox::title { 
-	subcontrol-origin: margin;
-	left: 10px;
-	bottom: 5px;
-}
-</string>
+}</string>
   </property>
   <widget class="QTabWidget" name="tabWidgetManualPage">
    <property name="geometry">
@@ -185,7 +85,6 @@ QGroupBox::title {
    <property name="font">
     <font>
      <family>SimSun</family>
-     <pointsize>-1</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -268,7 +167,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -298,7 +196,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -328,7 +225,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -338,6 +234,35 @@ QGroupBox::title {
         </property>
         <property name="text">
          <string>删除</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnEditButton">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>100</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>编辑</string>
         </property>
        </widget>
       </item>
@@ -361,36 +286,6 @@ QGroupBox::title {
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnEditButton">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>SimSun</family>
-          <pointsize>-1</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>编辑</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="btnSaveOperateInstruction">
         <property name="minimumSize">
          <size>
@@ -407,7 +302,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -500,7 +394,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -540,7 +433,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="frameShadow">
@@ -555,7 +447,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="lineEdit_3">
+        <widget class="QLineEdit" name="editPositionSub">
          <property name="minimumSize">
           <size>
            <width>118</width>
@@ -571,7 +463,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_2">
+        <widget class="QLineEdit" name="editPositionAdd">
          <property name="minimumSize">
           <size>
            <width>118</width>
@@ -603,7 +495,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="frameShadow">
@@ -618,7 +509,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit">
+        <widget class="QLineEdit" name="editAxisActionSpeed">
          <property name="minimumSize">
           <size>
            <width>118</width>
@@ -650,7 +541,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="layoutDirection">
@@ -684,12 +574,56 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="styleSheet">
           <string notr="true"/>
          </property>
+         <item>
+          <property name="text">
+           <string>禁止</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Z1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Z2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>C</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>B</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>A</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item row="3" column="0">
@@ -715,7 +649,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -755,7 +688,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="layoutDirection">
@@ -789,7 +721,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="layoutDirection">
@@ -824,7 +755,7 @@ QGroupBox::title {
      <property name="title">
       <string>调机</string>
      </property>
-     <widget class="QPushButton" name="btnDelete_6">
+     <widget class="QPushButton" name="btnAdjustFunc">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -854,7 +785,6 @@ QGroupBox::title {
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
         <weight>50</weight>
         <bold>false</bold>
        </font>
@@ -876,7 +806,7 @@ QGroupBox::title {
        </size>
       </property>
      </widget>
-     <widget class="QPushButton" name="btnDelete_7">
+     <widget class="QPushButton" name="btnManualInteTorque">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -906,7 +836,6 @@ QGroupBox::title {
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
         <weight>50</weight>
         <bold>false</bold>
        </font>
@@ -944,7 +873,7 @@ QGroupBox::title {
      <property name="title">
       <string>手动</string>
      </property>
-     <widget class="QCheckBox" name="checkBox">
+     <widget class="QCheckBox" name="chbZAxisDesend">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -991,7 +920,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="title">
-      <string>手动</string>
+      <string>机床控制</string>
      </property>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
@@ -1004,7 +933,7 @@ QGroupBox::title {
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="2" column="0">
-        <widget class="QPushButton" name="btnDelete_10">
+        <widget class="QPushButton" name="btnControlRotate1Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1026,7 +955,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1035,7 +963,7 @@ QGroupBox::title {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>吹气1断</string>
+          <string>控制旋转1断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1050,7 +978,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="0" column="0" colspan="2">
-        <widget class="QCheckBox" name="checkBox_2">
+        <widget class="QCheckBox" name="chbMachineControl">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -1072,7 +1000,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="btnDelete_12">
+        <widget class="QPushButton" name="btnStartProcess1Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1094,7 +1022,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1103,7 +1030,7 @@ QGroupBox::title {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>卡盘1松开</string>
+          <string>启动加工1断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1118,7 +1045,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="btnDelete_11">
+        <widget class="QPushButton" name="btnAutoGate1Close">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1140,7 +1067,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1149,7 +1075,7 @@ QGroupBox::title {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>卡盘1松开</string>
+          <string>自动门1关</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1164,7 +1090,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QPushButton" name="btnDelete_13">
+        <widget class="QPushButton" name="btnMainAxisLocate1Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1186,7 +1112,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1195,7 +1120,7 @@ QGroupBox::title {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>吹气1断</string>
+          <string>主轴定位1断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1238,7 +1163,7 @@ QGroupBox::title {
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="btnDelete_8">
+        <widget class="QPushButton" name="btnChuck1Loosen">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1260,7 +1185,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1284,7 +1208,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnDelete_9">
+        <widget class="QPushButton" name="btnBlow1Loosen">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1306,7 +1230,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1345,7 +1268,7 @@ QGroupBox::title {
       <string notr="true"/>
      </property>
      <property name="title">
-      <string>手动</string>
+      <string>卡爪</string>
      </property>
      <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
@@ -1358,7 +1281,7 @@ QGroupBox::title {
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="1">
-        <widget class="QPushButton" name="btnDelete_21">
+        <widget class="QPushButton" name="btnFinishedProduct1Loosen">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1380,7 +1303,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1404,7 +1326,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QPushButton" name="btnDelete_20">
+        <widget class="QPushButton" name="btnClaw1Reverse">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1426,7 +1348,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1450,7 +1371,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QPushButton" name="btnDelete_22">
+        <widget class="QPushButton" name="btnRawMaterial1Loosen">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1472,7 +1393,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1503,25 +1423,278 @@ QGroupBox::title {
     <attribute name="title">
      <string>预留</string>
     </attribute>
-    <widget class="QGroupBox" name="groupBox_7">
+    <widget class="QGroupBox" name="groupBox_8">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>430</x>
        <y>70</y>
-       <width>271</width>
-       <height>201</height>
+       <width>371</width>
+       <height>281</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>
      <property name="title">
-      <string>组一</string>
+      <string>组二</string>
      </property>
-     <widget class="QPushButton" name="btnDelete_33">
+     <widget class="QWidget" name="layoutWidget_5">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>10</x>
+        <y>40</y>
+        <width>351</width>
+        <height>149</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="btnReserveY24Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y24断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="btnReserveY21Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y21断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="btnReserveY20Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y20断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="btnReserveY25Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y25断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="btnReserveY23Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y23断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_9">
+     <property name="geometry">
+      <rect>
+       <x>810</x>
+       <y>70</y>
+       <width>191</width>
+       <height>281</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string>组三</string>
+     </property>
+     <widget class="QPushButton" name="btnReserveYM4Break">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
         <y>40</y>
         <width>170</width>
         <height>45</height>
@@ -1548,7 +1721,6 @@ QGroupBox::title {
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
         <weight>50</weight>
         <bold>false</bold>
        </font>
@@ -1557,7 +1729,7 @@ QGroupBox::title {
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>预留Y13断</string>
+       <string>预留YM4断</string>
       </property>
       <property name="icon">
        <iconset>
@@ -1571,33 +1743,33 @@ QGroupBox::title {
       </property>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_8">
+    <widget class="QGroupBox" name="groupBox_10">
      <property name="geometry">
       <rect>
-       <x>320</x>
-       <y>70</y>
+       <x>40</x>
+       <y>60</y>
        <width>371</width>
-       <height>201</height>
+       <height>291</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>
      <property name="title">
-      <string>组二</string>
+      <string>组一</string>
      </property>
-     <widget class="QWidget" name="layoutWidget_5">
+     <widget class="QWidget" name="layoutWidget_7">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>40</y>
         <width>351</width>
-        <height>101</height>
+        <height>200</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="1">
-        <widget class="QPushButton" name="btnDelete_30">
+      <layout class="QGridLayout" name="gridLayout_8">
+       <item row="2" column="0">
+        <widget class="QPushButton" name="btnReserveY12Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1619,7 +1791,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1628,53 +1799,7 @@ QGroupBox::title {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>预留Y24断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="btnDelete_31">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <pointsize>-1</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y23断</string>
+          <string>预留Y12断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1689,7 +1814,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QPushButton" name="btnDelete_32">
+        <widget class="QPushButton" name="btnReserveY10Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1711,7 +1836,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1720,7 +1844,7 @@ QGroupBox::title {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>预留Y21断</string>
+          <string>预留Y10断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1735,7 +1859,7 @@ QGroupBox::title {
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="btnDelete_34">
+        <widget class="QPushButton" name="btnReserveY15Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1757,7 +1881,6 @@ QGroupBox::title {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
            <weight>50</weight>
            <bold>false</bold>
           </font>
@@ -1766,7 +1889,142 @@ QGroupBox::title {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>预留Y25断</string>
+          <string>预留Y15断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="btnReserveY14Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y14断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="btnReserveY11Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y11断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="btnReserveY13Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>预留Y13断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1843,7 +2101,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -1873,7 +2130,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -1903,7 +2159,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -1948,7 +2203,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -1978,7 +2232,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -2008,7 +2261,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -2048,7 +2300,6 @@ QGroupBox::title {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>50</weight>
           <bold>false</bold>
          </font>
@@ -2062,6 +2313,64 @@ QGroupBox::title {
        </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QFrame" name="frameRerencePoint">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>-1</y>
+       <width>761</width>
+       <height>471</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>760</x>
+       <y>30</y>
+       <width>70</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>70</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>70</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="text">
+      <string> 名称：</string>
+     </property>
+    </widget>
+    <widget class="QTextBrowser" name="referencePointName">
+     <property name="geometry">
+      <rect>
+       <x>830</x>
+       <y>20</y>
+       <width>171</width>
+       <height>70</height>
+      </rect>
+     </property>
+     <property name="html">
+      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'SimSun'; font-size:22px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
     </widget>
    </widget>
   </widget>
@@ -2089,7 +2398,6 @@ QGroupBox::title {
    <property name="font">
     <font>
      <family>SimSun</family>
-     <pointsize>-1</pointsize>
      <weight>50</weight>
      <bold>false</bold>
     </font>

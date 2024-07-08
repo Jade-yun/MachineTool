@@ -14,12 +14,14 @@ Setting::Setting(QWidget *parent) :
     ui->setupUi(this);
     setAllStyleSheet();
 
-    ui->checkBoxPoiskie->setDisabled(true);
-    ui->checkBoxRussian->setDisabled(true);
-    ui->checkBoxTradChinese->setDisabled(true);
-    ui->checkBoxSpain->setDisabled(true);
-    ui->checkBoxSpecial->setDisabled(true);
-    ui->checkBoxVietnam->setDisabled(true);
+//    ui->checkBoxPoiskie->setDisabled(true);
+//    ui->checkBoxRussian->setDisabled(true);
+//    ui->checkBoxTradChinese->setDisabled(true);
+//    ui->checkBoxSpain->setDisabled(true);
+//    ui->checkBoxSpecial->setDisabled(true);
+//    ui->checkBoxVietnam->setDisabled(true);
+
+    pageSwitchInit();
 
 #if TEST
     /////////////////////////
@@ -153,15 +155,7 @@ void Setting::on_comboBoxIotSelection_currentIndexChanged(int index)
     }
 }
 
-void Setting::on_btnLastPage_clicked()
-{
-    ui->stkWidgetOriginSet->setCurrentWidget(ui->page0);
-}
 
-void Setting::on_btnNextPage_clicked()
-{
-    ui->stkWidgetOriginSet->setCurrentWidget(ui->page1);
-}
 
 void Setting::on_comboBox_96_currentIndexChanged(int index)
 {
@@ -171,6 +165,27 @@ void Setting::on_comboBox_96_currentIndexChanged(int index)
         this->loadAndPlayGif(":/images/gif/test1.gif");
 }
 
+void Setting::pageSwitchInit()
+{
+    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() - 1 + ui->stkWidgetOriginSet->count())
+                                                 % ui->stkWidgetOriginSet->count());
+    });
+    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() + 1 + ui->stkWidgetOriginSet->count())
+                                                 % ui->stkWidgetOriginSet->count());
+    });
+    connect(ui->btnLastPageServoPara, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() - 1 + ui->stkWidgetServoPara->count())
+                                                 % ui->stkWidgetServoPara->count());
+        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+    });
+    connect(ui->btnNextPageServoPara, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() + 1 + ui->stkWidgetServoPara->count())
+                                                 % ui->stkWidgetServoPara->count());
+        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+    });
+}
 
 #if TEST
 ///////////////////////////////////////////////////////////////////////
@@ -286,3 +301,4 @@ void Setting::setAllStyleSheet()
 }
 
 #endif
+

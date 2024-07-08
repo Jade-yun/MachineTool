@@ -10,6 +10,9 @@ AutoForm::AutoForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    // 初始化关闭 framGlobalSpeed
+    ui->frameGlobalSpeed->close();
+
     // 创建菜单并添加菜单项
     QMenu* menu = new QMenu(this);
 
@@ -56,14 +59,14 @@ AutoForm::AutoForm(QWidget *parent) :
 
     // set btn slot
     connect(ui->btnSpeedAdd, &QPushButton::clicked, [=](){
-        int value = ui->progressBarGlobalSpeed->value();
+        int value = ui->proBarGlobalSpeed->value();
         if (value < 100 && value > 0)
-            ui->progressBarGlobalSpeed->setValue(++value);
+            ui->proBarGlobalSpeed->setValue(++value);
     });
     connect(ui->btnSpeedSub, &QPushButton::clicked, [=](){
-        int value = ui->progressBarGlobalSpeed->value();
+        int value = ui->proBarGlobalSpeed->value();
         if (value < 100 && value > 0)
-            ui->progressBarGlobalSpeed->setValue(--value);
+            ui->proBarGlobalSpeed->setValue(--value);
     });
 
 }
@@ -101,3 +104,37 @@ void AutoForm::updateLabelState(int index)
     }
 }
 
+
+void AutoForm::on_btnEdit_pressed()
+{
+    if (ui->btnEdit->isChecked())
+    {
+
+//        if (isEdit)
+            ui->stkWgtOuter->setCurrentIndex(1);
+    }
+    else
+    {
+        ui->stkWgtOuter->setCurrentIndex(0);
+    }
+
+}
+
+void AutoForm::on_btnMergeExpand_pressed()
+{
+    if (ui->btnMergeExpand->isChecked())
+    {
+        ui->frameTable->show();
+        ui->frameGlobalSpeed->show();
+
+        qDebug() << " show ...";
+    }
+    else
+    {
+        ui->frameTable->show();
+        ui->frameGlobalSpeed->close();
+
+        qDebug() << " hide ...";
+
+    }
+}

@@ -350,7 +350,7 @@ QTabWidget::pane {
 </string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
