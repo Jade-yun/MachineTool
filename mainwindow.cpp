@@ -5,28 +5,31 @@
 #include <QDateTime>
 #include <QFile>
 
-#include <QLabel>
-
 #pragma execution_character_set("utf-8")
 
 
 int flag = 0;
+int teachFlag = 0;
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    setWindowTitle(QString());
+    //this->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+
 //    setAllStyleSheet();
 
-//    setWindowTitle(QString());
-//    this->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
-    this->setFixedSize(1024, 768);
-
-
     setWidget = new Setting(this);
-    ui->stkWidget->insertWidget(0, setWidget);
+    ui->stkWidget->addWidget(setWidget);
     teachWidget = new Teach(this);
-    ui->stkWidget->insertWidget(1, teachWidget);
+    ui->stkWidget->addWidget(teachWidget);
+
+	teachManageWidget = new TeachManage(this);
+    ui->stkWidget->addWidget(teachManageWidget);
+
     autoWidget = new AutoForm(this);
     ui->stkWidget->addWidget(autoWidget);
     alarmWidget = new AlarmForm(this);
@@ -36,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent)
     manualWidget = new ManualForm(this);
     ui->stkWidget->addWidget(manualWidget);
 
+    
+
 
     connectAllSignalsAndSlots();
 
@@ -44,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent)
     // This does not seem to be working, perhaps the styles are conflicting???
     // try to implement this method in every windows, use this->setStyleSheet() instead
     this->setStyleFromFile(":/styleSheets/style.qss");
+
+
     
 }
 
@@ -76,20 +83,6 @@ void MainWindow::on_Btn_ManualHome_clicked()
         ui->stkWidget->setCurrentWidget(autoWidget);
     }
 
-//    QLabel* label = new QLabel(ui->centralwidget);
-
-//    label->setFixedSize(1024, 768);
-
-//    QString imagePath = "./backgroud.png";
-//    QPixmap pixmap(imagePath);
-//    if (!pixmap.isNull())
-//    {
-//        qDebug() << "cannot find images";
-//        label->setPixmap(pixmap);
-//        label->setScaledContents(true);
-//        label->show();
-//    }
-
 }
 
 void MainWindow::on_Btn_SetHome_clicked()
@@ -109,7 +102,16 @@ void MainWindow::on_Btn_MonitorHome_clicked()
 void MainWindow::on_Btn_TeachHome_clicked()
 {
 //    ui->stkWidget->setCurrentIndex(1);
-    ui->stkWidget->setCurrentWidget(teachWidget);
+    if (teachFlag == 0)
+    {
+        teachFlag = 1;
+        ui->stkWidget->setCurrentWidget(teachWidget);
+    }
+    else
+    {
+        ui->stkWidget->setCurrentWidget(teachManageWidget);
+        teachFlag = 0;
+    }
 }
 
 void MainWindow::on_Btn_AlarmHome_clicked()
@@ -119,23 +121,10 @@ void MainWindow::on_Btn_AlarmHome_clicked()
     ui->stkWidget->setCurrentWidget(alarmWidget);
 }
 
-void MainWindow::setAllStyleSheet()
-{
-
-	this->setStyleSheet("QMainWindow { background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea)}");
-	ui->labDateTime->setStyleSheet("color: yellow;");
-
-	ui->labDateTime_2->setStyleSheet("color: yellow;");
-
-	ui->labSpeed->setStyleSheet("color: yellow;");
-
-	ui->labRotateSpeed->setStyleSheet("color: yellow;");
-}
-
 void MainWindow::connectAllSignalsAndSlots()
 {
     connect(this, &MainWindow::sigSettingHome, setWidget, &Setting::slotSettingHome);
-
+    //emit sigSettingHome();
 	//ui->Btn_SetHome->setStyleSheet("QPushButton { background-color:#E7E8EB;border-style:solid;border-width:1px;border-color:#0A7C25;}");
 
     //显示时间

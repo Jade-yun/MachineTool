@@ -188,7 +188,7 @@ QTabWidget::pane {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>7</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <widget class="QWidget" name="layoutWidget">
@@ -11763,6 +11763,9 @@ border: 1px solid #000000;
         <string/>
        </property>
        <widget class="QCheckBox" name="checkBoxSpecial">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -11794,6 +11797,9 @@ border: 1px solid #000000;
         </property>
        </widget>
        <widget class="QCheckBox" name="checkBoxPoiskie">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>370</x>
@@ -11856,6 +11862,9 @@ border: 1px solid #000000;
         </property>
        </widget>
        <widget class="QCheckBox" name="checkBoxTradChinese">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>540</x>
@@ -11915,6 +11924,9 @@ border: 1px solid #000000;
         </property>
        </widget>
        <widget class="QCheckBox" name="checkBoxRussian">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>540</x>
@@ -11946,6 +11958,9 @@ border: 1px solid #000000;
         </property>
        </widget>
        <widget class="QCheckBox" name="checkBoxVietnam">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>190</x>
@@ -12005,6 +12020,9 @@ border: 1px solid #000000;
         </property>
        </widget>
        <widget class="QCheckBox" name="checkBoxSpain">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>

@@ -9,6 +9,7 @@
 #include "alarmform.h"
 #include "monitorform.h"
 #include "manualform.h"
+#include "teachmanage.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -43,12 +44,12 @@ private:
     AlarmForm *alarmWidget;
     MonitorForm *monitorWidget;
     ManualForm *manualWidget;
+    TeachManage* teachManageWidget;
 
 private:
     Ui::MainWindow *ui;
 
 private:
-    void setAllStyleSheet();
     void connectAllSignalsAndSlots();
 
     void setStyleFromFile(const QString &styleSheet);

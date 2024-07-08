@@ -34,7 +34,8 @@ SOURCES += \
     monitorform.cpp \
     setting.cpp \
     teach.cpp \
-    draggablebutton.cpp
+    draggablebutton.cpp \
+    teachmanage.cpp
 
 HEADERS += \
     alarmform.h \
@@ -44,7 +45,8 @@ HEADERS += \
     monitorform.h \
     setting.h \
     teach.h \
-    draggablebutton.h
+    draggablebutton.h \
+    teachmanage.h
 
 FORMS += \
     alarmform.ui \
@@ -53,7 +55,9 @@ FORMS += \
     manualform.ui \
     monitorform.ui \
     setting.ui \
-    teach.ui
+    teach.ui \
+    teachmanage.ui
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
