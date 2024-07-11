@@ -20,8 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     setWindowTitle(QString());
     //this->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
 
-//    setAllStyleSheet();
-
     setWidget = new Setting(this);
     ui->stkWidget->addWidget(setWidget);
     teachWidget = new Teach(this);
@@ -38,9 +36,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->stkWidget->addWidget(monitorWidget);
     manualWidget = new ManualForm(this);
     ui->stkWidget->addWidget(manualWidget);
-
-    
-
 
     connectAllSignalsAndSlots();
 

@@ -40,6 +40,7 @@
   <property name="styleSheet">
    <string notr="true">QMainWindow{
     background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+	/*border-image:url(/opt/MachineTool/images/bgTest.png);*/
 }
 /*
 QWidget#centralwidget{
@@ -111,7 +112,14 @@ QPushButton:pressed
     border-color:#0055ff; /*边框颜色*/
     border-radius:5px; /*边框倒角*/
 }
-
+QPushButton:checked
+{
+    border-style:outset; /*边框风格*/
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+    border-width:1px;/*边框宽度*/
+    border-color:#0055ff; /*边框颜色*/
+    border-radius:5px; /*边框倒角*/
+}
 QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
 	font-family: 'SimSun';
 	font-size: 22px; 

@@ -91,7 +91,7 @@ QTabWidget::pane {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>4</number>
    </property>
    <property name="iconSize">
     <size>
@@ -105,9 +105,6 @@ QTabWidget::pane {
    <widget class="QWidget" name="tabOperate">
     <property name="enabled">
      <bool>true</bool>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
     </property>
     <attribute name="title">
      <string>操作指引</string>
@@ -1432,9 +1429,6 @@ QTabWidget::pane {
        <height>281</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
      <property name="title">
       <string>组二</string>
      </property>
@@ -1685,9 +1679,6 @@ QTabWidget::pane {
        <height>281</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
      <property name="title">
       <string>组三</string>
      </property>
@@ -1751,9 +1742,6 @@ QTabWidget::pane {
        <width>371</width>
        <height>291</height>
       </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
      </property>
      <property name="title">
       <string>组一</string>
@@ -2401,9 +2389,6 @@ p, li { white-space: pre-wrap; }
      <weight>50</weight>
      <bold>false</bold>
     </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
    </property>
    <property name="text">
     <string>进入堆叠</string>

@@ -27,10 +27,10 @@ Teach::Teach(QWidget* parent) :
 	generalBtn[2] = ui->btn_General_3;
 	generalBtn[3] = ui->btn_General_4;
 
-	generalStr[0] = QStringLiteral("轴");
-	generalStr[1] = QStringLiteral("卡爪");
-	generalStr[2] = QStringLiteral("检测");
-	generalStr[3] = QStringLiteral("机床");
+    generalStr[0] = QStringLiteral("轴");
+    generalStr[1] = QStringLiteral("卡爪");
+    generalStr[2] = QStringLiteral("检测");
+    generalStr[3] = QStringLiteral("机床");
 
 	generalIconPath[0] = ":/images/teach_img/axis.png";
 	generalIconPath[1] = ":/images/teach_img/claw.png";

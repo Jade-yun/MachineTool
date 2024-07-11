@@ -6,6 +6,13 @@
 
 #include "draggablebutton.h"
 
+struct ReferencePoint
+{
+    int index;
+    QString name;
+    DraggableButton* button;
+};
+
 namespace Ui {
 class ManualForm;
 }
@@ -34,12 +41,16 @@ private slots:
 private:
     void initVar();
     void addPointToTable(const QPushButton* button);
+    void removePointFromTable();
+    void tableReferenceSigAndSlot();
 
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];
     QList<DraggableButton*> btns;
     QList<DraggableButton*> referenceBtns;
+
+    QList<ReferencePoint> referencePoints;
 
     QTableWidget* tableReference;
     int buttonCount;

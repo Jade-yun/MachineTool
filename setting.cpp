@@ -12,6 +12,7 @@ Setting::Setting(QWidget *parent) :
 {
     initVariables();
     ui->setupUi(this);
+
     setAllStyleSheet();
 
 //    ui->checkBoxPoiskie->setDisabled(true);

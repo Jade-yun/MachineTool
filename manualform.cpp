@@ -18,7 +18,7 @@ ManualForm::ManualForm(QWidget *parent) :
     initVar();
 
 
-    tableReference = new QTableWidget(this);
+    tableReference = new QTableWidget(5, 5, ui->frameRerencePoint);
 
 //    tableReference->resize(0, 0);
     tableReference->setVisible(referenceBtns.size());
@@ -31,20 +31,15 @@ ManualForm::ManualForm(QWidget *parent) :
     tableReference->verticalHeader()->setVisible(false); // Hide vertical header
     tableReference->horizontalHeader()->setVisible(false); // Hide horizontal header
 
-//    // Set fixed column widths
-//    for (int i = 0; i < tableReference->columnCount(); ++i) {
-//        if (i % 2 == 0) {
-//            tableReference->setColumnWidth(i, 20); // Index column width
-//        } else {
-//            tableReference->setColumnWidth(i, 120); // Button name column width
-//        }
-//    }
+    tableReference->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);//隐藏滚动条
+    tableReference->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Disable automatic column resizing
 //    tableReference->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     for (int i = 0; i < tableReference->columnCount(); ++i) {
-        tableReference->setColumnWidth(i, (i % 2 == 0) ? 2 : 120); // Alternate between 20 and 120 width
+        tableReference->setColumnWidth(i, (i % 2 == 0) ? 20 : 120); // Alternate between 20 and 120 width
     }
+    tableReferenceSigAndSlot();
 
 }
 
@@ -99,9 +94,9 @@ void ManualForm::on_btnNewButtonReference_clicked()
     {
         DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
         // must initialize these property here, otherwise the new button is not draggable
-        //        btn->setDraggable(draggable[1]);
-        //        btn->setCheckable(draggable[1]);
-        //        btn->setAutoExclusive(true);
+                btn->setDraggable(draggable[1]);
+                btn->setCheckable(true);
+                btn->setAutoExclusive(true);
 
         referenceBtns.append(btn);
 
@@ -127,10 +122,18 @@ void ManualForm::on_btnNewButtonReference_clicked()
                 qDebug() << "selectedButton[1] is nullptr";
                 return;
             }
-            selectedButton[1]->setChecked(draggable[1]);
+            selectedButton[1]->setChecked(true);
+
+            // to press the corresponding item in referenceTable
+            int index = referenceBtns.indexOf(btn);
+            int row = index / 4;
+            int col = (index % 4) * 2;
+            // Select the corresponding item in the table
+            tableReference->setCurrentCell(row, col + 1);
         });
 
         addPointToTable(btn);
+//        tableReferenceSigAndSlot();
     }
 
 }
@@ -183,89 +186,7 @@ void ManualForm::on_btnDeleteButtonReference_clicked()
 
     //        selectedButton[1]->setChecked(true);
     //    }
-
-    int indexToDelete = referenceBtns.size();
-    // Update the table if we have deleted an item
-
-//    if (indexToDelete > 0)
-//    {
-//        int row = indexToDelete / 4;
-//        int col = (indexToDelete % 4) * 2;
-
-//        // Remove the specific items
-//        delete tableReference->takeItem(row, col);
-//        delete tableReference->takeItem(row, col + 1);
-
-//        // Shift remaining items up
-//        for (int i = indexToDelete + 1; i < referenceBtns.size() + 1; ++i)
-//        {
-//            int srcRow = i / 4;
-//            int srcCol = (i % 4) * 2;
-//            int destRow = (i - 1) / 4;
-//            int destCol = ((i - 1) % 4) * 2;
-
-//            tableReference->setItem(destRow, destCol, tableReference->takeItem(srcRow, srcCol));
-//            tableReference->setItem(destRow, destCol + 1, tableReference->takeItem(srcRow, srcCol + 1));
-//        }
-
-//        // Remove the last row if it's empty
-//        int lastRow = (referenceBtns.size()) / 4;
-//        if (lastRow < tableReference->rowCount())
-//        {
-//            bool isRowEmpty = true;
-//            for (int i = 0; i < tableReference->columnCount(); ++i)
-//            {
-//                if (tableReference->item(lastRow, i) != nullptr)
-//                {
-//                    isRowEmpty = false;
-//                    break;
-//                }
-//            }
-//            if (isRowEmpty)
-//            {
-//                tableReference->removeRow(lastRow);
-//            }
-//        }
-//    }
-
-
-    if (indexToDelete != -1)
-    {
-        int row = indexToDelete / 4;
-        int col = (indexToDelete % 4) * 2;
-
-        delete tableReference->takeItem(row, col);
-        delete tableReference->takeItem(row, col + 1);
-
-        for (int i = indexToDelete + 1; i < referenceBtns.size() + 1; ++i)
-        {
-            int srcRow = i / 4;
-            int srcCol = (i % 4) * 2;
-            int destRow = (i - 1) / 4;
-            int destCol = ((i - 1) % 4) * 2;
-
-            tableReference->setItem(destRow, destCol, tableReference->takeItem(srcRow, srcCol));
-            tableReference->setItem(destRow, destCol + 1, tableReference->takeItem(srcRow, srcCol + 1));
-        }
-
-        int lastRow = (referenceBtns.size()) / 4;
-        if (lastRow < tableReference->rowCount())
-        {
-            bool isRowEmpty = true;
-            for (int i = 0; i < tableReference->columnCount(); ++i)
-            {
-                if (tableReference->item(lastRow, i) != nullptr)
-                {
-                    isRowEmpty = false;
-                    break;
-                }
-            }
-            if (isRowEmpty)
-            {
-                tableReference->removeRow(lastRow);
-            }
-        }
-    }
+    removePointFromTable();
 }
 
 
@@ -295,8 +216,6 @@ void ManualForm::on_checkBoxEditPosReference_stateChanged(int arg1)
     for (auto btn : referenceBtns)
     {
         btn->setDraggable(draggable[1]);
-        // when the button is draaggable, it's also be checkable.
-        //        btn->setCheckable(draggable[1]);
     }
 }
 
@@ -361,6 +280,115 @@ void ManualForm::addPointToTable(const QPushButton *button)
 
 //    tableReference->adjustSize();
 
+}
+
+void ManualForm::removePointFromTable()
+{
+    QTableWidgetItem* item = tableReference->currentItem();
+    if (!item)
+        return;
+
+    int row = item->row();
+    int col = item->column();
+    tableReference->removeCellWidget(row, col);
+//    tableReference->removeCellWidget(row, col - 1);
+
+    delete item;
+    delete tableReference->takeItem(row, col - 1);
+
+    int indexToDelete = referenceBtns.size();
+    // Update the table if we have deleted an item
+
+//    if (indexToDelete > 0)
+//    {
+//        // Shift remaining items up
+//        for (int i = indexToDelete + 1; i < referenceBtns.size() + 1; ++i)
+//        {
+//            int srcRow = i / 4;
+//            int srcCol = (i % 4) * 2;
+//            int destRow = (i - 1) / 4;
+//            int destCol = ((i - 1) % 4) * 2;
+
+//            tableReference->setItem(destRow, destCol, tableReference->takeItem(srcRow, srcCol));
+//            tableReference->setItem(destRow, destCol + 1, tableReference->takeItem(srcRow, srcCol + 1));
+//        }
+
+//        // Remove the last row if it's empty
+//        int lastRow = (referenceBtns.size()) / 4;
+//        if (lastRow < tableReference->rowCount())
+//        {
+//            bool isRowEmpty = true;
+//            for (int i = 0; i < tableReference->columnCount(); ++i)
+//            {
+//                if (tableReference->item(lastRow, i) != nullptr)
+//                {
+//                    isRowEmpty = false;
+//                    break;
+//                }
+//            }
+//            if (isRowEmpty)
+//            {
+//                tableReference->removeRow(lastRow);
+//            }
+//        }
+//    }
+
+
+//    if (indexToDelete != -1)
+//    {
+//        int row = indexToDelete / 4;
+//        int col = (indexToDelete % 4) * 2;
+
+//        delete tableReference->takeItem(row, col);
+//        delete tableReference->takeItem(row, col + 1);
+
+//        for (int i = indexToDelete + 1; i < referenceBtns.size() + 1; ++i)
+//        {
+//            int srcRow = i / 4;
+//            int srcCol = (i % 4) * 2;
+//            int destRow = (i - 1) / 4;
+//            int destCol = ((i - 1) % 4) * 2;
+
+//            tableReference->setItem(destRow, destCol, tableReference->takeItem(srcRow, srcCol));
+//            tableReference->setItem(destRow, destCol + 1, tableReference->takeItem(srcRow, srcCol + 1));
+//        }
+
+//        int lastRow = (referenceBtns.size()) / 4;
+//        if (lastRow < tableReference->rowCount())
+//        {
+//            bool isRowEmpty = true;
+//            for (int i = 0; i < tableReference->columnCount(); ++i)
+//            {
+//                if (tableReference->item(lastRow, i) != nullptr)
+//                {
+//                    isRowEmpty = false;
+//                    break;
+//                }
+//            }
+//            if (isRowEmpty)
+//            {
+//                tableReference->removeRow(lastRow);
+//            }
+//        }
+//    }
+
+}
+
+void ManualForm::tableReferenceSigAndSlot()
+{
+    connect(tableReference, &QTableWidget::itemPressed, this, [=](QTableWidgetItem *item){
+            int row = item->row();
+            int col = item->column();
+//            qDebug() << "Item pressed at row" << row << "column" << col;
+            int index = 4 * row + col / 2;
+            if ( 0 < index < referenceBtns.size())
+            {
+//                qDebug() << "index = " << index;
+                selectedButton[1] = referenceBtns.at(index);
+                selectedButton[1]->setChecked(true);
+//                qDebug() << "seleted button is checked:" << selectedButton[1]->isChecked();
+            }
+        });
 }
 
 void ManualForm::initVar()

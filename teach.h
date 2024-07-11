@@ -49,7 +49,7 @@ private:
 	QPushButton* generalBtn[4];
 	QString generalStr[4];
 	QString generalIconPath[4];
-	QStringList generalStrList;			//Ê¹ÓÃÄÄ¼¸¸ö
+	QStringList generalStrList;			//ä½¿ç”¨å“ªå‡ ä¸ª
 	QStringList generalIconPathList;
 
 private:
