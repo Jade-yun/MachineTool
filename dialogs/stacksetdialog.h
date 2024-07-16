@@ -15,6 +15,11 @@ public:
     explicit StackSetDialog(QWidget *parent = nullptr);
     ~StackSetDialog();
 
+private slots:
+    void on_btnOK_clicked();
+
+    void on_btnCancel_clicked();
+
 private:
     void changeEnable();
 

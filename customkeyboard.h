@@ -15,9 +15,9 @@ class KeyboardWindow : public QDialog
 private:
     QLineEdit* textInput;
     AeaQt::Keyboard* keyboard;
-    QLineEdit* editObj;
+    QObject* editObj;
 public:
-    void setCurrentEdit(QLineEdit* edit);
+    void setCurrentEditObj(QObject* edit);
     void clearText();
 
 public:
@@ -40,10 +40,10 @@ class NumberKeyboardWindow : public QDialog
     Q_OBJECT
 private:
     QLineEdit* textInput;
-    AeaQt::Keyboard* keyboard;
-    QLine* editObj;
+    AeaQt::NumberKeyboard* keyboard;
+    QObject* editObj;
 public:
-    void setCurrentEdit(QLineEdit* edit);
+    void setCurrentEditObj(QObject* edit);
     void clearText();
 
 public:

@@ -45,11 +45,17 @@ NumberKeyboard::NumberKeyboard(QWidget *parent) : AbstractKeyboard(parent)
             {{Qt::Key_Backspace, "", QIcon(s_backspace_icon)}},
     };
 
+//    const QList<Modes> modeListBar2 = {
+//            {{Qt::Key_4, "4"}},
+//            {{Qt::Key_5, "5"}},
+//            {{Qt::Key_6, "6"}},
+//            {{Qt::Key_Escape, "", QIcon(s_pack_up_icon)}},
+//    };
     const QList<Modes> modeListBar2 = {
-            {{Qt::Key_4, "4"}},
-            {{Qt::Key_5, "5"}},
-            {{Qt::Key_6, "6"}},
-            {{Qt::Key_Escape, "", QIcon(s_pack_up_icon)}},
+        {{Qt::Key_4, "4"}},
+        {{Qt::Key_5, "5"}},
+        {{Qt::Key_6, "6"}},
+        {{Qt::Key_Enter, "", QIcon(s_pack_up_icon)}},
     };
 
     const QList<Modes> modeListBar3 = {

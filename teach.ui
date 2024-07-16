@@ -939,7 +939,7 @@ QHeaderView::section           // 标题头 每个单独的标题区域
       </size>
      </property>
      <property name="currentIndex">
-      <number>8</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">
@@ -1390,7 +1390,7 @@ QHeaderView::section           // 标题头 每个单独的标题区域
        <property name="title">
         <string>信号</string>
        </property>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>25</x>
@@ -1884,7 +1884,7 @@ QHeaderView::section           // 标题头 每个单独的标题区域
         </layout>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -1976,7 +1976,7 @@ QHeaderView::section           // 标题头 每个单独的标题区域
          <property name="title">
           <string>提前</string>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -2211,7 +2211,7 @@ border: 1px solid #000000;
           </layout>
          </widget>
         </widget>
-        <widget class="QWidget" name="">
+        <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
            <x>10</x>
@@ -2452,7 +2452,7 @@ border: 1px solid #000000;
        </widget>
        <widget class="QWidget" name="page_25"/>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>40</x>
@@ -3487,7 +3487,7 @@ border: 1px solid #000000;
         <string>0.00</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>50</x>

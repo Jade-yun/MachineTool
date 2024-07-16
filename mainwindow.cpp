@@ -5,6 +5,8 @@
 #include <QDateTime>
 #include <QFile>
 
+#include <QMessageBox>
+
 #pragma execution_character_set("utf-8")
 
 
@@ -52,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent)
     keyboard = new KeyboardWindow(this);
 
     QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
+//    qDebug() << "number of QLineEdit" << lineEdits.size();
     for (auto edit : lineEdits)
     {
         edit->installEventFilter(this);
@@ -200,10 +203,10 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 
 void MainWindow::callKeyboard(QObject *watched)
 {
-    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
+//    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
     {
         keyboard->clearText();
-        keyboard->setCurrentEdit(edit);
+        keyboard->setCurrentEditObj(watched);
         keyboard->show();
         keyboard->raise();
         keyboard->activateWindow();
@@ -213,6 +216,9 @@ void MainWindow::callKeyboard(QObject *watched)
 
 void MainWindow::on_btnHelp_clicked()
 {
+
+    QMessageBox::information(this, "tips", "this is test",
+                              QMessageBox::Yes | QMessageBox::No, QMessageBox::NoButton);
 
 }
 

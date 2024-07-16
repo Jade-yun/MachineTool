@@ -399,9 +399,30 @@ void ChineseWidget::onItemClicked(QListWidgetItem *item)
 void ChineseWidget::addOneItem(const QString &text)
 {
     QListWidgetItem *item = new QListWidgetItem(text, this);
+
+//    QFont font;
+////    font.setPointSize(18);
+//    font.setPixelSize(22);
+////    font.setBold(true);
+//    font.setWeight(50);
+//    item->setFont(font);
+
+//    /* 设置文字居中 */
+//    item->setTextAlignment(Qt::AlignCenter);
+//    bool isChinese = QRegExp("^[\u4E00-\u9FA5]+").indexIn(text.left(1)) != -1;
+
+//    int width = font.pointSize();
+//    if (isChinese)
+//    {
+//           width += text.count()*font.pointSize()*3;
+////        width += text.count()*font.pointSize()*1.5;
+//     }
+//    else
+//        width += text.count()*font.pointSize()*2/3;
+
+
     QFont font;
-    font.setPointSize(18);
-    font.setBold(true);
+    font.setPixelSize(22);
     font.setWeight(50);
     item->setFont(font);
 
@@ -409,14 +430,13 @@ void ChineseWidget::addOneItem(const QString &text)
     item->setTextAlignment(Qt::AlignCenter);
     bool isChinese = QRegExp("^[\u4E00-\u9FA5]+").indexIn(text.left(1)) != -1;
 
-    int width = font.pointSize();
+    int width = font.pixelSize();
     if (isChinese)
     {
-           width += text.count()*font.pointSize()*3;
-//        width += text.count()*font.pointSize()*1.5;
-     }
+        width += text.count()*font.pixelSize()*2;
+    }
     else
-        width += text.count()*font.pointSize()*2/3;
+        width += text.count()*font.pixelSize()*2/3;
 
     item->setSizeHint(QSize(width, 50));
     addItem(item);

@@ -18,9 +18,10 @@ ManualForm::ManualForm(QWidget *parent) :
     ui->setupUi(this);
 
     initVar();
+
     // set tab to be invisible
 //    ui->tabAxisAction->setVisible(false);
-    ui->tabWidgetManualPage->removeTab(1);
+//    ui->tabWidgetManualPage->removeTab(1);
 
     tableReference = new QTableWidget(5, 5, ui->frameRerencePoint);
 

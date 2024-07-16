@@ -6,7 +6,13 @@ StackSetDialog::StackSetDialog(QWidget *parent) :
     ui(new Ui::StackSetDialog)
 {
     ui->setupUi(this);
-    //    init();
+
+    // all dialogs are invisible defualt
+    this->hide();
+    setAcceptDrops(true);
+    setModal(true);
+    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+
     changeEnable();
     for (int i = 1; i <= 11; i++)
     {
@@ -50,4 +56,15 @@ void StackSetDialog::changeEnable()
             edit->setEnabled(chbox->isChecked());
         }
     }
+}
+
+void StackSetDialog::on_btnOK_clicked()
+{
+    this->hide();
+    // to save the parameters...
+}
+
+void StackSetDialog::on_btnCancel_clicked()
+{
+    this->hide();
 }
