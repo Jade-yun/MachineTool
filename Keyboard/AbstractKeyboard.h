@@ -32,7 +32,7 @@ public slots:
 
     void onKeyPressed(int key, QString value)
     {
-        qDebug() << "key: " << key << "Value: " << value;
+//        qDebug() << "key: " << key << "Value: " << value;
         QWidget *receiver = QApplication::focusWidget();
         if (!receiver)
             return;

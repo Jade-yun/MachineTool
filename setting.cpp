@@ -5,6 +5,7 @@
 #include <QtDebug>
 
 #define TEST 1
+//#define TESTKEYBOARD 1
 
 Setting::Setting(QWidget *parent) :
     QWidget(parent),
@@ -24,6 +25,20 @@ Setting::Setting(QWidget *parent) :
 
     pageSwitchInit();
 
+#if TESTKEYBOARD
+    keyboard = new KeyboardWindow(this);
+    lineEdits = findChildren<QLineEdit*>();
+//    qDebug() << "size of QLineEdit = " << lineEdits.size();
+    for (QLineEdit* edit : findChildren<QLineEdit*>())
+    {
+        connect(edit, &QLineEdit::selectionChanged, this, [=](){
+//            keyboard->clearText();
+            showKeyboard(edit);
+//            qDebug() << "edit->text():" << edit->text();
+//            edit->update();
+        });
+    }
+#endif
 #if TEST
     /////////////////////////
     for (int i = 0; i < 3; i++)
@@ -56,6 +71,10 @@ Setting::~Setting()
     delete ui;
     delete movie;
     movie = nullptr;
+#if TESTKEYBOARD
+    delete keyboard;
+    keyboard = nullptr;
+#endif
 }
 
 void Setting::on_btnSigSet_clicked()
@@ -93,6 +112,37 @@ void Setting::initVariables()
 {
     movie = new QMovie(QString(":/images/gif/test.gif"));
 }
+
+#if TESTKEYBOARD
+//void Setting::showKeyboard()
+//{
+//    QLineEdit* edit = qobject_cast<QLineEdit*>(sender()); // Get the sender QLineEdit
+
+//    if (edit) {
+//        keyboard->editObj = edit; // Set the current QLineEdit in the keyboard window
+////        keyboard->exec();
+//        keyboard->show();
+//        keyboard->raise();
+//        keyboard->activateWindow();
+//        qDebug() << "eidt->text():" << edit->text();
+//    }
+//}
+void Setting::showKeyboard(QLineEdit* edit)
+{
+    if (edit) {
+        keyboard->setCurrentEdit(edit); // Set the current QLineEdit in the keyboard window
+//        keyboard->exec();
+        keyboard->show();
+        keyboard->raise();
+        keyboard->activateWindow();
+    }
+}
+
+void Setting::keyPressEvent(QKeyEvent *event)
+{
+
+}
+#endif
 
 void Setting::on_btnSafetySet_clicked()
 {
@@ -180,11 +230,13 @@ void Setting::pageSwitchInit()
         ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() - 1 + ui->stkWidgetServoPara->count())
                                                  % ui->stkWidgetServoPara->count());
         ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+//        ui->grboxAxisSelect->show();
     });
     connect(ui->btnNextPageServoPara, &QPushButton::clicked, this, [=](){
         ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() + 1 + ui->stkWidgetServoPara->count())
                                                  % ui->stkWidgetServoPara->count());
         ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+//        ui->grboxAxisSelect->show();
     });
 }
 

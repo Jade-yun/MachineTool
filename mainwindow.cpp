@@ -8,6 +8,7 @@
 #pragma execution_character_set("utf-8")
 
 
+
 int flag = 0;
 int teachFlag = 0;
 
@@ -18,7 +19,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     setWindowTitle(QString());
-    //this->setWindowFlags(Qt::Dialog | Qt::FramelessWindowHint);
+//    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+//    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
     setWidget = new Setting(this);
     ui->stkWidget->addWidget(setWidget);
@@ -45,6 +47,15 @@ MainWindow::MainWindow(QWidget *parent)
     // try to implement this method in every windows, use this->setStyleSheet() instead
     this->setStyleFromFile(":/styleSheets/style.qss");
 
+//    ui->labDateTime->keyPressEvent();
+
+    keyboard = new KeyboardWindow(this);
+
+    QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
+    for (auto edit : lineEdits)
+    {
+        edit->installEventFilter(this);
+    }
 
     
 }
@@ -118,6 +129,14 @@ void MainWindow::on_Btn_AlarmHome_clicked()
 
 void MainWindow::connectAllSignalsAndSlots()
 {
+    ui->wgtHelp->hide();
+    connect(ui->btnHelp, &QPushButton::clicked, this, [=](){
+        ui->wgtHelp->show();
+    });
+    connect(ui->btnSoftKey, &QPushButton::clicked, this, [=](){
+        ui->wgtHelp->hide();
+    });
+
     connect(this, &MainWindow::sigSettingHome, setWidget, &Setting::slotSettingHome);
     //emit sigSettingHome();
 	//ui->Btn_SetHome->setStyleSheet("QPushButton { background-color:#E7E8EB;border-style:solid;border-width:1px;border-color:#0A7C25;}");
@@ -154,8 +173,76 @@ void MainWindow::setStyleFromFile(const QString &styleSheet)
 
 }
 
-void MainWindow::paintEvent(QPaintEvent *event)
+// ultimize the event mechanism in Qt to call virtual keyboard
+bool MainWindow::eventFilter(QObject *watched, QEvent *event)
+{
+//    if (watched is in QEdit)
+    if (event->type() == QEvent::MouseButtonPress)
+    {
+//        qDebug() << "edit MouseButtonPress";
+        callKeyboard(watched);
+        return false;
+    }
+    // standard event processing
+//    return QObject::eventFilter(watched, event);
+    return QWidget::eventFilter(watched,event);
+}
+
+//void MainWindow::keyPressEvent(QKeyEvent *event)
+//{
+//    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+//    {
+//        // 保存键盘的内容到触发键盘控件
+//        qDebug() << "TeachManage::keyPressEvent(QKeyEvent *event)";
+
+//    }
+//}
+
+void MainWindow::callKeyboard(QObject *watched)
+{
+    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
+    {
+        keyboard->clearText();
+        keyboard->setCurrentEdit(edit);
+        keyboard->show();
+        keyboard->raise();
+        keyboard->activateWindow();
+    }
+}
+
+
+void MainWindow::on_btnHelp_clicked()
 {
 
+}
 
+ClickableLabel::ClickableLabel(QWidget *parent)
+    : QLabel(parent)
+{
+    // constructor...
+
+}
+
+ClickableLabel::~ClickableLabel()
+{
+    // destructor...
+}
+
+//void ClickableLabel::focusInEvent(QFocusEvent *event)
+//{
+//    if (event->FocusIn)
+//        qDebug() << "focusInEvent";
+//    QLabel::focusInEvent(event);
+//}
+
+void ClickableLabel::keyPressEvent(QKeyEvent *event)
+{
+
+    emit clicked();
+    QLabel::keyPressEvent(event);
+}
+
+void ClickableLabel::onClicked()
+{
+    qDebug() << "keyPressEvent";
 }

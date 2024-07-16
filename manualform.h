@@ -51,6 +51,7 @@ private:
     QList<DraggableButton*> referenceBtns;
 
     QList<ReferencePoint> referencePoints;
+    int buttonIndex;
 
     QTableWidget* tableReference;
     int buttonCount;

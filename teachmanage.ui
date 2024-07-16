@@ -794,6 +794,9 @@ QHeaderView::section           // 标题头 每个单独的标题区域
         <height>40</height>
        </size>
       </property>
+      <property name="focusPolicy">
+       <enum>Qt::ClickFocus</enum>
+      </property>
       <property name="styleSheet">
        <string notr="true">QLineEdit {
 border-radius: 5px;
@@ -805,6 +808,9 @@ border: 1px solid #000000;
       </property>
       <property name="text">
        <string/>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Normal</enum>
       </property>
      </widget>
     </item>

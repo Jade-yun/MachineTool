@@ -199,7 +199,7 @@ QTabWidget::pane {
    <property name="title">
     <string>手轮刻度</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>12</x>
@@ -329,7 +329,7 @@ QTabWidget::pane {
    <property name="title">
     <string>手轮轴选择</string>
    </property>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>

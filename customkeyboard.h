@@ -15,17 +15,24 @@ class KeyboardWindow : public QDialog
 private:
     QLineEdit* textInput;
     AeaQt::Keyboard* keyboard;
-
+    QLineEdit* editObj;
+public:
+    void setCurrentEdit(QLineEdit* edit);
+    void clearText();
 
 public:
     KeyboardWindow(QWidget* parent = nullptr);
     ~KeyboardWindow();
 
 private slots:
-    void processInput();
+    void onKeyEnterPressed();
 
 signals:
     void sendData(const QString& data);
+
+    // QWidget interface
+protected:
+//    void closeEvent(QCloseEvent *event) override;
 };
 
 class NumberKeyboardWindow : public QDialog
@@ -34,13 +41,16 @@ class NumberKeyboardWindow : public QDialog
 private:
     QLineEdit* textInput;
     AeaQt::Keyboard* keyboard;
-
+    QLine* editObj;
+public:
+    void setCurrentEdit(QLineEdit* edit);
+    void clearText();
 
 public:
     NumberKeyboardWindow(QWidget* parent = nullptr);
     ~NumberKeyboardWindow();
-
-//    QVariant getValue() const;
+private slots:
+    void onKeyEnterPressed();
 };
 
 

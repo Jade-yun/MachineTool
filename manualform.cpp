@@ -9,6 +9,8 @@
 #include <QString>
 #include <QDebug>
 
+
+#define Test 0
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ManualForm)
@@ -16,7 +18,9 @@ ManualForm::ManualForm(QWidget *parent) :
     ui->setupUi(this);
 
     initVar();
-
+    // set tab to be invisible
+//    ui->tabAxisAction->setVisible(false);
+    ui->tabWidgetManualPage->removeTab(1);
 
     tableReference = new QTableWidget(5, 5, ui->frameRerencePoint);
 
@@ -85,11 +89,11 @@ void ManualForm::on_btnNewButton_clicked()
             selectedButton[0]->setChecked(draggable[0]);
         });
     }
-
 }
 
 void ManualForm::on_btnNewButtonReference_clicked()
 {
+#if Test
     if (referenceBtns.size() < 40)
     {
         DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
@@ -131,11 +135,66 @@ void ManualForm::on_btnNewButtonReference_clicked()
             // Select the corresponding item in the table
             tableReference->setCurrentCell(row, col + 1);
         });
-
         addPointToTable(btn);
-//        tableReferenceSigAndSlot();
+    }
+#else
+
+    if (referencePoints.size() < 40)
+    {
+
+        DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
+        // must initialize these property here, otherwise the new button is not draggable
+        btn->setDraggable(draggable[1]);
+        btn->setCheckable(true);
+        btn->setAutoExclusive(true);
+        btn->setFixedSize(40, 40);
+        // set stylesheet
+        btn->setStyleSheet("QPushButton{ border-style:solid; border-width:1px; border-radius:20px;}");
+
+        ReferencePoint point;
+        point.index = referencePoints.size() + 1;
+        point.name = QString(tr("参考点%1").arg(point.index));
+        point.button = btn;
+        referencePoints.append(point);
+
+        // the position set of buttons here, this part need to be optimized.
+        QRect btnPos = QRect(QPoint(20 + 40 * ((referencePoints.size()-1) / 7 ), 150 + 45 * ((referencePoints.size()-1) % 7)), btn->size());
+        btn->setGeometry(btnPos);
+        const QString btnName = tr((QString::number(referencePoints.size())).toUtf8().constData());
+        btn->setText(btnName);
+        btn->show();
+
+        // to set the slot function for every button
+        // use reference capture here to insure selectedButton is modified.
+        connect(btn, &DraggableButton::clicked, this, [=](){
+            if (btn == nullptr) {
+                qDebug() << "btn is nullptr";
+                return;
+            }
+            selectedButton[1] = btn;
+            if (selectedButton[1] == nullptr) {
+                qDebug() << "selectedButton[1] is nullptr";
+                return;
+            }
+            selectedButton[1]->setChecked(true);
+
+            // how to get responding index of seletedButton in referencePoints
+
+            for (int i = 0; i < referencePoints.size(); ++i) {
+                if (referencePoints[i].button == btn) {
+                    buttonIndex = i;
+                    break;
+                }
+            }
+            if (buttonIndex != -1) {
+                qDebug() << "Button index in referencePoints:" << buttonIndex;
+            } else {
+                qDebug() << "Button not found in referencePoints";
+            }
+        });
     }
 
+#endif
 }
 
 void ManualForm::on_btnDeleteButton_clicked()
@@ -166,6 +225,7 @@ void ManualForm::on_btnDeleteButton_clicked()
 void ManualForm::on_btnDeleteButtonReference_clicked()
 {
 
+# if Test
     // examine if any button is clicked, delete the choosed one
     if (selectedButton[1] && referenceBtns.contains(selectedButton[1]))
     {
@@ -186,7 +246,36 @@ void ManualForm::on_btnDeleteButtonReference_clicked()
 
     //        selectedButton[1]->setChecked(true);
     //    }
+
     removePointFromTable();
+#else
+    // examine if any button is clicked, delete the choosed one
+    if (selectedButton[1] && buttonIndex != -1)
+    {
+//        referencePoints.removeOne(selectedButton[1]);
+       referencePoints.removeAt(buttonIndex);
+        delete selectedButton[1];
+        selectedButton[1] = nullptr;
+    }
+    // if no button is selected, delete the last in btns
+//    else if (!referencePoints.isEmpty())
+//    {
+//        ReferencePoint point = referencePoints.takeLast();
+//        delete point.button;
+//        point.button = nullptr;
+//    }
+    else if (referencePoints.isEmpty())
+    {
+        ReferencePoint point = referencePoints.last();
+        selectedButton[1] = point.button;
+
+        selectedButton[1]->setChecked(true);
+    }
+
+
+#endif
+
+
 }
 
 
@@ -213,9 +302,13 @@ void ManualForm::on_checkBoxEditPosReference_stateChanged(int arg1)
 {
     draggable[1] = arg1;
 
-    for (auto btn : referenceBtns)
+//    for (auto btn : referenceBtns)
+//    {
+//        btn->setDraggable(draggable[1]);
+//    }
+    for(auto point : referencePoints)
     {
-        btn->setDraggable(draggable[1]);
+        point.button->setDraggable(draggable[1]);
     }
 }
 
@@ -286,7 +379,7 @@ void ManualForm::removePointFromTable()
 {
     QTableWidgetItem* item = tableReference->currentItem();
     if (!item)
-        return;
+         return;
 
     int row = item->row();
     int col = item->column();

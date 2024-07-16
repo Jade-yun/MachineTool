@@ -179,7 +179,7 @@ QTabWidget::pane {
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabValveOutput">
     <attribute name="title">
@@ -484,7 +484,7 @@ QTabWidget::pane {
      <property name="title">
       <string>主板输出</string>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>0</x>

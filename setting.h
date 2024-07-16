@@ -7,8 +7,12 @@
 #include "QComboBox"
 #include "QPushButton"
 #include "QTableWidgetItem"
+//#include <QList>
+
+#include "customkeyboard.h"
 
 
+#define TESTKEYBOARD 0
 
 namespace Ui {
 class Setting;
@@ -70,8 +74,20 @@ private:
 private:
     void loadAndPlayGif(const QString& path);
     void initVariables();
+#if TESTKEYBOARD
+//    void showKeyboard();
+    void showKeyboard(QLineEdit* edit);
+    // QWidget interface
+    KeyboardWindow* keyboard;
+    QList<QLineEdit*> lineEdits;
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 
+#endif
+
+private:
     QMovie *movie;
+
 };
 
 #endif // SETTING_H

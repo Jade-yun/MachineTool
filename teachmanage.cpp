@@ -2,15 +2,34 @@
 #include "ui_teachmanage.h"
 //#include "KeyboardGlobal.h"
 
+
 TeachManage::TeachManage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeachManage)
 {
     ui->setupUi(this);
 //    GlobalInit();
-//    ui->lineEdit_OriginalFileName->installEventFilter(this);
 
-    ui->textEdit->installEventFilter(this);
+#if TESTKEYBOARD
+    keyboard = new KeyboardWindow(this);
+    QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
+    for (auto edit : lineEdits)
+    {
+        edit->installEventFilter(this);
+    }
+#endif
+
+//    ui->lineEdit_OriginalFileName->installEventFilter(this);
+    ui->lineEdit_NowFileName->setFocusPolicy(Qt::ClickFocus);
+
+//    ui->textEdit->installEventFilter(this);
+//    findChildren<QLineEdit*>()
+//    connect(ui->textEdit, &QTextEdit::selectionChanged, this, [=](){
+//        KeyboardWindow* keyboard = new KeyboardWindow(this);
+////        connect(keyboard, &KeyboardWindow::sendData, ui->textEdit, &QTextEdit::setText, Qt::UniqueConnection);
+//        keyboard->exec();
+//        delete keyboard;
+//    });
 
     ui->btn_USB->setCheckable(true);
     isBtn_USB_Checked = false;
@@ -83,16 +102,75 @@ void TeachManage::on_btn_Import_clicked()
 
 }
 
-//bool TeachManage::eventFilter(QObject *watched, QEvent *event)
-//{
-//    if (event->type()==QEvent::FocusIn)
-//    {
-//        PlatformInputContextBase->FocusIn(watched);
-//    }
-//    else if (event->type()==QEvent::FocusOut)
-//    {
-//        PlatformInputContextBase->FocusOut(watched);
-//    }
 
-//    return QWidget::eventFilter(watched,event);
-//}
+#if TESTKEYBOARD
+// ultimize the event mechanism in Qt to call virtual keyboard
+bool TeachManage::eventFilter(QObject *watched, QEvent *event)
+{
+//    if (watched is in QEdit)
+//    if (event->type()==QEvent::FocusIn)
+//    if(event->type() == QFocusEvent::FocusIn)
+//    {
+//        // to call
+
+//        qDebug() << "edit was clicked";
+//        return false;
+//    }
+//    else if (event->type()== QEvent::FocusOut)
+//    {
+//        // to close
+////        PlatformInputContextBase->FocusOut(watched);
+
+//    }
+    if (event->type() == QEvent::MouseButtonPress)
+    {
+        qDebug() << "edit MouseButtonPress";
+//        callKeyboard(watched);
+//        return false;
+        if (QLineEdit *edit = qobject_cast<QLineEdit*>(watched))
+        {
+            callKeyboard(watched);
+            return true;
+        }
+    }
+    // standard event processing
+//    return QObject::eventFilter(watched, event);
+    return QWidget::eventFilter(watched,event);
+
+
+//    if (obj == textEdit) {
+//        if (event->type() == QEvent::KeyPress) {
+//            QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+//            qDebug() << "Ate key press" << keyEvent->key();
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    } else {
+//        // pass the event on to the parent class
+//        return QMainWindow::eventFilter(obj, event);
+    //    }
+}
+
+void TeachManage::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        // 保存键盘的内容到触发键盘控件
+        qDebug() << "TeachManage::keyPressEvent(QKeyEvent *event)";
+
+    }
+}
+
+void TeachManage::callKeyboard(QObject *watched)
+{
+    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
+    {
+        keyboard->setCurrentEdit(edit);
+        keyboard->show();
+        keyboard->raise();
+        keyboard->activateWindow();
+    }
+}
+
+#endif

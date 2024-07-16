@@ -12,28 +12,44 @@
 //                            }                              \
 //                            ";
 
+void KeyboardWindow::setCurrentEdit(QLineEdit *edit)
+{
+    if (edit)
+    {
+        editObj = edit;
+    }
+}
+
+void KeyboardWindow::clearText()
+{
+    textInput->clear();
+}
+
 KeyboardWindow::KeyboardWindow(QWidget* parent)
     : QDialog(parent)
 {
-    textInput = new QLineEdit(this);
+    editObj = nullptr;
     keyboard = new AeaQt::Keyboard(this);
+    textInput = new QLineEdit(keyboard);
 
-    setWindowTitle(tr("键盘"));
-    setFixedSize(850, 370);
+//    setWindowTitle(tr("键盘"));
+//    setFixedSize(850, 370);
+    setFixedSize(850, 430);
+    setAcceptDrops(true);
+    this->setModal(true);
+    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+//    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
 
     textInput->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 //    textInput->setStyleSheet(qss);
-//    textInput->setGeometry(QRect(0, 5, 850, 60));
-//    keyboard->setGeometry(QRect(0, 65, 850, 300));
-
 
     QVBoxLayout *v = new QVBoxLayout();
     v->addWidget(textInput, 1);
     v->addWidget(keyboard, 5);
     this->setLayout(v);
 
-    connect(keyboard, &AeaQt::Keyboard::keyEnterPressed, this, &KeyboardWindow::processInput);
+    connect(keyboard, &AeaQt::Keyboard::keyEnterPressed, this, &KeyboardWindow::onKeyEnterPressed);
 
 }
 
@@ -50,21 +66,28 @@ KeyboardWindow::~KeyboardWindow()
 //    return textInput->text();
 //}
 
-void KeyboardWindow::processInput()
+void KeyboardWindow::onKeyEnterPressed()
 {
-//    getText();
-    emit sendData(textInput->text());
-    qDebug() << "process Input" ;
+    if (editObj)
+    {
+        editObj->setText(textInput->text());
+    }
+//    qDebug() << "editObj->text():" << editObj->text();
+//    emit sendData(textInput->text());
+
+    close();
 }
 
-
 NumberKeyboardWindow::NumberKeyboardWindow(QWidget *parent)
+    : QDialog(parent)
 {
+    editObj = nullptr;
     textInput = new QLineEdit(this);
     keyboard = new AeaQt::Keyboard(this);
 
     setWindowTitle(tr("数字键盘"));
     setFixedSize(850, 370);
+    this->setModal(true);
 
 
     textInput->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -73,11 +96,35 @@ NumberKeyboardWindow::NumberKeyboardWindow(QWidget *parent)
     v->addWidget(textInput, 1);
     v->addWidget(keyboard, 5);
     this->setLayout(v);
+
+
+    connect(keyboard, &AeaQt::Keyboard::keyEnterPressed, this, &NumberKeyboardWindow::onKeyEnterPressed);
 }
 
 NumberKeyboardWindow::~NumberKeyboardWindow()
 {
 
+}
+
+
+void NumberKeyboardWindow::setCurrentEdit(QLineEdit *edit)
+{
+    if (edit)
+    {
+        editObj = edit;
+    }
+}
+
+void NumberKeyboardWindow::clearText()
+{
+    textInput->clear();
+}
+void NumberKeyboardWindow::onKeyEnterPressed()
+{
+    if (editObj)
+    {
+        editObj->setText(textInput->text());
+    }
 }
 
 //QVariant NumberKeyboardWindow::getValue() const

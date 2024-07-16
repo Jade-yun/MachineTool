@@ -11,7 +11,7 @@
 #include "manualform.h"
 #include "teachmanage.h"
 
-
+#include "customkeyboard.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -49,15 +49,40 @@ private:
 private:
     Ui::MainWindow *ui;
 
+    KeyboardWindow* keyboard;
+
 private:
     void connectAllSignalsAndSlots();
 
     void setStyleFromFile(const QString &styleSheet);
+
+    void callKeyboard(QObject *watched);
 private slots:
-
-
-    // ultimize this interface to realize multi-language
-protected:
-    void paintEvent(QPaintEvent *event);
+    void on_btnHelp_clicked();
+public slots:
+    bool eventFilter(QObject *,QEvent *) override;
 };
+
+
+class ClickableLabel :public QLabel
+{
+    Q_OBJECT
+public:
+    ClickableLabel(QWidget *parent = nullptr);
+    ~ClickableLabel();
+
+    // QWidget interface
+protected:
+//    void focusInEvent(QFocusEvent *event) override;
+
+    void keyPressEvent(QKeyEvent *event) override;
+
+signals:
+    void clicked();
+
+private slots:
+    void onClicked();
+
+};
+
 #endif // MAINWINDOW_H

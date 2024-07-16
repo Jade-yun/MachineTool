@@ -39,7 +39,8 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+ background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
+
 	/*border-image:url(/opt/MachineTool/images/bgTest.png);*/
 }
 /*
@@ -86,10 +87,11 @@ QGroupBox::title {
 
 QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
 
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
 	border-radius:0px;
 	margin-top:0px; 
 	border:none;
+
 }
 
 /************************************************/
@@ -1245,6 +1247,62 @@ QComboBox QAbstractItemView::item:selected{
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="wgtHelp" native="true">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>80</y>
+      <width>341</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QWidget#wgtHelp{
+	background-color: rgb(255, 255, 255);
+	border:1px solid grey;
+}</string>
+    </property>
+    <widget class="QPushButton" name="btnSoftKey">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>20</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnHandBook">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>20</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btnCaculator">
+     <property name="geometry">
+      <rect>
+       <x>230</x>
+       <y>20</y>
+       <width>71</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </widget>
+   <zorder>wgtHelp</zorder>
    <zorder>groupBoxHomeBottom</zorder>
    <zorder>groupBoxXYZOUV</zorder>
    <zorder>groupBoxHomeTopLeft</zorder>

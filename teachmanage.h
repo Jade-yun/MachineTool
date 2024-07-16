@@ -2,6 +2,10 @@
 #define TEACHMANAGE_H
 
 #include <QWidget>
+#include "customkeyboard.h"
+
+#define TESTKEYBOARD 0
+
 
 namespace Ui {
 class TeachManage;
@@ -32,11 +36,21 @@ public slots:
     void on_btn_Export_clicked();
     void on_btn_Import_clicked();
 
-public slots:
-//    bool eventFilter(QObject *,QEvent *);
+
+private:
+    void callKeyboard(QObject *watched);
 private:
     bool isBtn_USB_Checked;
 
+#if TESTKEYBOARD
+    KeyboardWindow* keyboard;
+
+public slots:
+    bool eventFilter(QObject *,QEvent *) override;
+
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
+#endif
 };
 
 #endif // TEACHMANAGE_H
