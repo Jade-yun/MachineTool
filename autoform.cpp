@@ -118,6 +118,10 @@ AutoForm::AutoForm(QWidget *parent) :
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(20);
     });
+//    connect(ui->btn20percent, &QPushButton::toggled, [=](bool checked){
+//        if (ui->btnAdjustSpeed->isChecked())
+//            ui->proBarGlobalSpeed->setValue(20);
+//    });
     connect(ui->btn40percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(40);
@@ -136,8 +140,8 @@ AutoForm::AutoForm(QWidget *parent) :
     });
 /**********************************************************************/
 
-    connect(ui->btnMergeExpand, &QPushButton::pressed, this, [=](){
-        if (ui->btnMergeExpand->isChecked())
+    connect(ui->btnMergeExpand, &QPushButton::toggled, this, [=](bool checked){
+        if (checked)
         {
             ui->frameTable->show();
             ui->frameGlobalSpeed->show();

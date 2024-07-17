@@ -10,7 +10,7 @@ struct ReferencePoint
 {
     int index;
     QString name;
-    DraggableButton* button;
+    DraggableButton* button;          
 };
 
 namespace Ui {
@@ -40,8 +40,8 @@ private slots:
 
 private:
     void initVar();
-    void addPointToTable(const QPushButton* button);
-    void removePointFromTable();
+    void addPointsToTable();
+//    void removePointFromTable();
     void tableReferenceSigAndSlot();
 
 private:
@@ -51,7 +51,7 @@ private:
     QList<DraggableButton*> referenceBtns;
 
     QList<ReferencePoint> referencePoints;
-    int buttonIndex;
+    int currentIndex;
 
     QTableWidget* tableReference;
     int buttonCount;

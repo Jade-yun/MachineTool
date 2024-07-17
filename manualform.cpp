@@ -26,7 +26,12 @@ ManualForm::ManualForm(QWidget *parent) :
     tableReference = new QTableWidget(5, 5, ui->frameRerencePoint);
 
 //    tableReference->resize(0, 0);
-    tableReference->setVisible(referenceBtns.size());
+    // Set table to be uneditable
+    tableReference->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    // Set table to be unselectable
+//    tableReference->setSelectionMode(QAbstractItemView::NoSelection);
+    // Initialize table to be invisible
+    tableReference->setVisible(referencePoints.size());
 
     tableReference->setMaximumHeight(41 * 3);
     tableReference->setMinimumWidth(140 * 4);
@@ -36,13 +41,16 @@ ManualForm::ManualForm(QWidget *parent) :
     tableReference->verticalHeader()->setVisible(false); // Hide vertical header
     tableReference->horizontalHeader()->setVisible(false); // Hide horizontal header
 
-    tableReference->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);//隐藏滚动条
+
+    tableReference->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);// Hide scroll bar
     tableReference->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Disable automatic column resizing
 //    tableReference->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    // must set minimum size for horizontalHeader, otherwise setColumnWidth can not work
+    tableReference->horizontalHeader()->setMinimumSectionSize(30);
     for (int i = 0; i < tableReference->columnCount(); ++i) {
-        tableReference->setColumnWidth(i, (i % 2 == 0) ? 20 : 120); // Alternate between 20 and 120 width
+        tableReference->setColumnWidth(i, (i % 2 == 0) ? 30 : 120); // Alternate between 20 and 120 width
     }
     tableReferenceSigAndSlot();
 
@@ -156,7 +164,19 @@ void ManualForm::on_btnNewButtonReference_clicked()
         point.index = referencePoints.size() + 1;
         point.name = QString(tr("参考点%1").arg(point.index));
         point.button = btn;
-        referencePoints.append(point);
+
+        if (selectedButton[1])
+        {
+            referencePoints.insert(currentIndex, point);
+//            for (int i = currentIndex + 1; i < referencePoints.size() + 1; i++)
+//            {
+//                referencePoints.at(i).index++;
+//            }
+        }
+        else
+        {
+            referencePoints.append(point);
+        }
 
         // the position set of buttons here, this part need to be optimized.
         QRect btnPos = QRect(QPoint(20 + 40 * ((referencePoints.size()-1) / 7 ), 150 + 45 * ((referencePoints.size()-1) % 7)), btn->size());
@@ -180,19 +200,29 @@ void ManualForm::on_btnNewButtonReference_clicked()
             selectedButton[1]->setChecked(true);
 
             // how to get responding index of seletedButton in referencePoints
-
+            // need to update currentIndex in tableselected slot
             for (int i = 0; i < referencePoints.size(); ++i) {
                 if (referencePoints[i].button == btn) {
-                    buttonIndex = i;
+                    currentIndex = i;
                     break;
                 }
             }
-            if (buttonIndex != -1) {
-                qDebug() << "Button index in referencePoints:" << buttonIndex;
+            if (currentIndex != -1) {
+                qDebug() << "Button index in referencePoints:" << currentIndex;
             } else {
                 qDebug() << "Button not found in referencePoints";
             }
+
+
+            // to press the corresponding item in referenceTable
+            int row = currentIndex / 4;
+            int col = (currentIndex % 4) * 2;
+            // Select the corresponding item in the table
+            tableReference->setCurrentCell(row, col + 1);
         });
+
+        addPointsToTable();
+        tableReference->setVisible(referencePoints.size());
     }
 
 #endif
@@ -250,30 +280,42 @@ void ManualForm::on_btnDeleteButtonReference_clicked()
 
     removePointFromTable();
 #else
+
+    for (int i = 0; i < referencePoints.size(); ++i) {
+        if (referencePoints[i].button == selectedButton[1]) {
+            currentIndex = i;
+            break;
+        }
+    }
+    if (currentIndex != -1) {
+        qDebug() << "Button index in referencePoints:" << currentIndex;
+    } else {
+        qDebug() << "Button not found in referencePoints";
+    }
+
     // examine if any button is clicked, delete the choosed one
-    if (selectedButton[1] && buttonIndex != -1)
+    if (selectedButton[1] && currentIndex > 0) // currentIndex > 0 condition is essiensial
     {
 //        referencePoints.removeOne(selectedButton[1]);
-       referencePoints.removeAt(buttonIndex);
+       referencePoints.removeAt(currentIndex);
         delete selectedButton[1];
-        selectedButton[1] = nullptr;
     }
     // if no button is selected, delete the last in btns
-//    else if (!referencePoints.isEmpty())
-//    {
-//        ReferencePoint point = referencePoints.takeLast();
-//        delete point.button;
-//        point.button = nullptr;
-//    }
-    else if (referencePoints.isEmpty())
+    else if (!referencePoints.isEmpty())
     {
-        ReferencePoint point = referencePoints.last();
-        selectedButton[1] = point.button;
-
-        selectedButton[1]->setChecked(true);
+        ReferencePoint point = referencePoints.takeLast();
+        delete (point.button);
     }
 
+    if (!referencePoints.isEmpty())
+    {
+        selectedButton[1] = referencePoints.last().button;
+        selectedButton[1]->setChecked(true);
 
+        tableReference->clear();
+        addPointsToTable();
+        tableReference->setVisible(referencePoints.size());
+    }
 #endif
 
 
@@ -337,8 +379,10 @@ void ManualForm::on_btnImportPictureReference_clicked()
 
 }
 
-void ManualForm::addPointToTable(const QPushButton *button)
+void ManualForm::addPointsToTable()
 {
+#if Test
+
     int row = (referenceBtns.size() - 1) / 4;
     int col = ((referenceBtns.size() - 1)% 4) * 2;
 
@@ -373,9 +417,23 @@ void ManualForm::addPointToTable(const QPushButton *button)
     tableReference->setItem(row, col + 1, buttonItem);
 
 //    tableReference->adjustSize();
-
+#else
+    for (auto point : referencePoints)
+    {
+        int row = (point.index - 1) / 4;
+        int col = ((point.index - 1) % 4) * 2;
+        QTableWidgetItem *indexItem = new QTableWidgetItem(QString::number(point.index));
+        indexItem->setFlags(indexItem->flags() & ~Qt::ItemIsEnabled);
+//        indexItem->setCheckState(Qt::Unchecked);
+        tableReference->setItem(row, col, indexItem);
+        QTableWidgetItem * nameItem = new QTableWidgetItem(point.name);
+        nameItem->setFlags(nameItem->flags() | Qt::ItemIsSelectable | Qt::ItemIsEditable);
+        tableReference->setItem(row, col + 1, nameItem);
+    }
+#endif
 }
 
+#if 0
 void ManualForm::removePointFromTable()
 {
     QTableWidgetItem* item = tableReference->currentItem();
@@ -468,6 +526,7 @@ void ManualForm::removePointFromTable()
 
 }
 
+#endif
 void ManualForm::tableReferenceSigAndSlot()
 {
     connect(tableReference, &QTableWidget::itemPressed, this, [=](QTableWidgetItem *item){
@@ -475,10 +534,10 @@ void ManualForm::tableReferenceSigAndSlot()
             int col = item->column();
 //            qDebug() << "Item pressed at row" << row << "column" << col;
             int index = 4 * row + col / 2;
-            if ( 0 < index < referenceBtns.size())
+            if ( 0 < index < referencePoints.size())
             {
 //                qDebug() << "index = " << index;
-                selectedButton[1] = referenceBtns.at(index);
+                selectedButton[1] = referencePoints.at(index).button;
                 selectedButton[1]->setChecked(true);
 //                qDebug() << "seleted button is checked:" << selectedButton[1]->isChecked();
             }

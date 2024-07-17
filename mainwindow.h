@@ -69,19 +69,24 @@ class ClickableLabel :public QLabel
     Q_OBJECT
 public:
     ClickableLabel(QWidget *parent = nullptr);
+    ClickableLabel(const QString& text, QWidget *parent = nullptr);
     ~ClickableLabel();
 
-    // QWidget interface
-protected:
-//    void focusInEvent(QFocusEvent *event) override;
 
-    void keyPressEvent(QKeyEvent *event) override;
+public:
+    bool isChecked() const;
+    void setChecked(bool _checked);
 
 signals:
+    void toggled(bool checked);
     void clicked();
 
-private slots:
-    void onClicked();
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
+
+private:
+    bool checked;
+
 
 };
 

@@ -33,6 +33,10 @@ signals:
     // QWidget interface
 protected:
 //    void closeEvent(QCloseEvent *event) override;
+
+    // QWidget interface
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 class NumberKeyboardWindow : public QDialog

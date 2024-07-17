@@ -12,8 +12,6 @@
 #include "customkeyboard.h"
 
 
-#define TESTKEYBOARD 0
-
 namespace Ui {
 class Setting;
 }
@@ -27,23 +25,6 @@ public:
     ~Setting();
 
 private slots:
-    void on_btnSigSet_clicked();
-
-    void on_btnSafetySet_clicked();
-
-    void on_btnProductSet_clicked();
-
-    void on_btnSystemSet_clicked();
-
-    void on_btnServoSpeed_clicked();
-
-    void on_btnServoSafePoint_clicked();
-
-    void on_btnMachinePara_clicked();
-
-    void on_btnStackSet_clicked();
-
-    void on_comboBoxIotSelection_currentIndexChanged(int index);
 
     void on_comboBox_96_currentIndexChanged(int index);
 
@@ -74,16 +55,6 @@ private:
 private:
     void loadAndPlayGif(const QString& path);
     void initVariables();
-#if TESTKEYBOARD
-//    void showKeyboard();
-    void showKeyboard(QLineEdit* edit);
-    // QWidget interface
-    KeyboardWindow* keyboard;
-    QList<QLineEdit*> lineEdits;
-protected:
-    void keyPressEvent(QKeyEvent *event) override;
-
-#endif
 
 private:
     QMovie *movie;

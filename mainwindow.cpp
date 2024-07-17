@@ -20,6 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(ui->labProgramName, &ClickableLabel::toggled, this, [=](bool checked){
+            qDebug() << "Label toggled, checked:" << checked;
+    });
+
     setWindowTitle(QString());
 //    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
@@ -47,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent)
     // fix me ???
     // This does not seem to be working, perhaps the styles are conflicting???
     // try to implement this method in every windows, use this->setStyleSheet() instead
-    this->setStyleFromFile(":/styleSheets/style.qss");
+//    this->setStyleFromFile(":/styleSheets/style.qss");
 
 //    ui->labDateTime->keyPressEvent();
 
@@ -132,6 +136,8 @@ void MainWindow::on_Btn_AlarmHome_clicked()
 
 void MainWindow::connectAllSignalsAndSlots()
 {
+
+
     ui->wgtHelp->hide();
     connect(ui->btnHelp, &QPushButton::clicked, this, [=](){
         ui->wgtHelp->show();
@@ -141,8 +147,6 @@ void MainWindow::connectAllSignalsAndSlots()
     });
 
     connect(this, &MainWindow::sigSettingHome, setWidget, &Setting::slotSettingHome);
-    //emit sigSettingHome();
-	//ui->Btn_SetHome->setStyleSheet("QPushButton { background-color:#E7E8EB;border-style:solid;border-width:1px;border-color:#0A7C25;}");
 
     //显示时间
     QTimer* timer = new QTimer(this);
@@ -179,12 +183,15 @@ void MainWindow::setStyleFromFile(const QString &styleSheet)
 // ultimize the event mechanism in Qt to call virtual keyboard
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
-//    if (watched is in QEdit)
-    if (event->type() == QEvent::MouseButtonPress)
+    QLineEdit* numberEdit = qobject_cast<QLineEdit*>(watched);
+    if (numberEdit && numberEdit->isEnabled())
     {
-//        qDebug() << "edit MouseButtonPress";
-        callKeyboard(watched);
-        return false;
+        if (event->type() == QEvent::MouseButtonPress)
+        {
+    //        qDebug() << "edit MouseButtonPress";
+            callKeyboard(numberEdit);
+            return false;
+        }
     }
     // standard event processing
 //    return QObject::eventFilter(watched, event);
@@ -217,15 +224,21 @@ void MainWindow::callKeyboard(QObject *watched)
 void MainWindow::on_btnHelp_clicked()
 {
 
-    QMessageBox::information(this, "tips", "this is test",
-                              QMessageBox::Yes | QMessageBox::No, QMessageBox::NoButton);
+//    QMessageBox::information(this, "tips", "this is test",
+//                              QMessageBox::Yes | QMessageBox::No, QMessageBox::NoButton);
 
 }
 
 ClickableLabel::ClickableLabel(QWidget *parent)
-    : QLabel(parent)
+    : QLabel(parent), checked(false)
 {
     // constructor...
+
+}
+
+ClickableLabel::ClickableLabel(const QString &text, QWidget *parent)
+    : QLabel(text, parent), checked(false)
+{
 
 }
 
@@ -234,21 +247,25 @@ ClickableLabel::~ClickableLabel()
     // destructor...
 }
 
-//void ClickableLabel::focusInEvent(QFocusEvent *event)
-//{
-//    if (event->FocusIn)
-//        qDebug() << "focusInEvent";
-//    QLabel::focusInEvent(event);
-//}
-
-void ClickableLabel::keyPressEvent(QKeyEvent *event)
+bool ClickableLabel::isChecked() const
 {
-
-    emit clicked();
-    QLabel::keyPressEvent(event);
+    return checked;
 }
 
-void ClickableLabel::onClicked()
+void ClickableLabel::setChecked(bool _checked)
 {
-    qDebug() << "keyPressEvent";
+    checked = _checked;
 }
+
+void ClickableLabel::mousePressEvent(QMouseEvent *event)
+{
+
+    if (event->button() == Qt::LeftButton)
+    {
+        checked = !checked;
+        emit toggled(checked);
+        emit clicked();
+    }
+
+}
+

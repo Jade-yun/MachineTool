@@ -5,6 +5,9 @@
 #Email: 2088201923@qq.com
 **********************************************************/
 
+
+#define FONTPROBLEM 1
+
 #include "Keyboard.h"
 #include "KeyButton.h"
 #include <QVBoxLayout>
@@ -400,32 +403,30 @@ void ChineseWidget::addOneItem(const QString &text)
 {
     QListWidgetItem *item = new QListWidgetItem(text, this);
 
-//    QFont font;
-////    font.setPointSize(18);
-//    font.setPixelSize(22);
-////    font.setBold(true);
-//    font.setWeight(50);
-//    item->setFont(font);
-
-//    /* 设置文字居中 */
-//    item->setTextAlignment(Qt::AlignCenter);
-//    bool isChinese = QRegExp("^[\u4E00-\u9FA5]+").indexIn(text.left(1)) != -1;
-
-//    int width = font.pointSize();
-//    if (isChinese)
-//    {
-//           width += text.count()*font.pointSize()*3;
-////        width += text.count()*font.pointSize()*1.5;
-//     }
-//    else
-//        width += text.count()*font.pointSize()*2/3;
-
-
+#if FONTPROBLEM
     QFont font;
-    font.setPixelSize(22);
+    font.setPointSize(18);
+    font.setBold(true);
     font.setWeight(50);
     item->setFont(font);
 
+    /* 设置文字居中 */
+    item->setTextAlignment(Qt::AlignCenter);
+    bool isChinese = QRegExp("^[\u4E00-\u9FA5]+").indexIn(text.left(1)) != -1;
+
+    int width = font.pointSize();
+    if (isChinese)
+    {
+           width += text.count()*font.pointSize()*3;
+     }
+    else
+        width += text.count()*font.pointSize()*2/3;
+#elif
+    QFont font;
+    font.setPixelSize(25);
+    font.setBold(true);
+    font.setWeight(50);
+    item->setFont(font);
     /* 设置文字居中 */
     item->setTextAlignment(Qt::AlignCenter);
     bool isChinese = QRegExp("^[\u4E00-\u9FA5]+").indexIn(text.left(1)) != -1;
@@ -437,6 +438,8 @@ void ChineseWidget::addOneItem(const QString &text)
     }
     else
         width += text.count()*font.pixelSize()*2/3;
+
+#endif
 
     item->setSizeHint(QSize(width, 50));
     addItem(item);

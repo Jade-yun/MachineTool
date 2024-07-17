@@ -25,20 +25,6 @@ Setting::Setting(QWidget *parent) :
 
     pageSwitchInit();
 
-#if TESTKEYBOARD
-    keyboard = new KeyboardWindow(this);
-    lineEdits = findChildren<QLineEdit*>();
-//    qDebug() << "size of QLineEdit = " << lineEdits.size();
-    for (QLineEdit* edit : findChildren<QLineEdit*>())
-    {
-        connect(edit, &QLineEdit::selectionChanged, this, [=](){
-//            keyboard->clearText();
-            showKeyboard(edit);
-//            qDebug() << "edit->text():" << edit->text();
-//            edit->update();
-        });
-    }
-#endif
 #if TEST
     /////////////////////////
     for (int i = 0; i < 3; i++)
@@ -71,18 +57,6 @@ Setting::~Setting()
     delete ui;
     delete movie;
     movie = nullptr;
-#if TESTKEYBOARD
-    delete keyboard;
-    keyboard = nullptr;
-#endif
-}
-
-void Setting::on_btnSigSet_clicked()
-{
-    // jump to signal set page
-    ui->stackedWidget->setCurrentIndex(1);
-    ui->stackedWidget->setCurrentWidget(ui->pageSignal);
-    //    qDebug() << "jump to signal set page";
 }
 
 void Setting::slotSettingHome()
@@ -113,75 +87,80 @@ void Setting::initVariables()
     movie = new QMovie(QString(":/images/gif/test.gif"));
 }
 
-#if TESTKEYBOARD
-//void Setting::showKeyboard()
-//{
-//    QLineEdit* edit = qobject_cast<QLineEdit*>(sender()); // Get the sender QLineEdit
 
-//    if (edit) {
-//        keyboard->editObj = edit; // Set the current QLineEdit in the keyboard window
-////        keyboard->exec();
-//        keyboard->show();
-//        keyboard->raise();
-//        keyboard->activateWindow();
-//        qDebug() << "eidt->text():" << edit->text();
-//    }
-//}
-void Setting::showKeyboard(QLineEdit* edit)
+
+void Setting::on_comboBox_96_currentIndexChanged(int index)
 {
-    if (edit) {
-        keyboard->setCurrentEdit(edit); // Set the current QLineEdit in the keyboard window
-//        keyboard->exec();
-        keyboard->show();
-        keyboard->raise();
-        keyboard->activateWindow();
-    }
+    if (index == 0)
+        this->loadAndPlayGif(":/images/gif/test.gif");
+    if (index == 1)
+        this->loadAndPlayGif(":/images/gif/test1.gif");
 }
 
-void Setting::keyPressEvent(QKeyEvent *event)
+void Setting::pageSwitchInit()
 {
+    /******************************************************************************/
+    connect(ui->btnSigSet, &QPushButton::clicked, this, [=](){
+        // jump to signal set page
+        ui->stackedWidget->setCurrentWidget(ui->pageSignal);
+    });
+    connect(ui->btnSafetySet, &QPushButton::clicked, this, [=](){
+        ui->stackedWidget->setCurrentWidget(ui->pageSafety);
+    });
+    connect(ui->btnProductSet, &QPushButton::clicked, this, [=](){
+        ui->stackedWidget->setCurrentWidget(ui->pageProduct);
+    });
+    connect(ui->btnSystemSet, &QPushButton::clicked, this, [=](){
+       ui->stackedWidget->setCurrentWidget(ui->pageSystem);
+    });
+    connect(ui->btnServoSpeed, &QPushButton::clicked, this, [=](){
 
-}
-#endif
+        ui->stackedWidget->setCurrentWidget(ui->pageServoSpeed);
+    });
+    connect(ui->btnServoSafePoint, &QPushButton::clicked, this, [=](){
+        ui->stackedWidget->setCurrentWidget(ui->pageServoSafePoint);
+    });
+    connect(ui->btnMachinePara, &QPushButton::clicked, this, [=](){
+        ui->stackedWidget->setCurrentWidget(ui->pageMachinePara);
+    });
+    connect(ui->btnStackSet, &QPushButton::clicked, this, [=](){
+        ui->stackedWidget->setCurrentWidget(ui->pageStack);
+    });
+     /******************************************************************************/
+    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() - 1 + ui->stkWidgetOriginSet->count())
+                                                 % ui->stkWidgetOriginSet->count());
+    });
+    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() + 1 + ui->stkWidgetOriginSet->count())
+                                                 % ui->stkWidgetOriginSet->count());
+    });
+    connect(ui->btnLastAdvance, &QPushButton::clicked, this, [=](){
+        ui->stkWgtAdvance->setCurrentIndex((ui->stkWgtAdvance->currentIndex() - 1 + ui->stkWgtAdvance->count())
+                                                 % ui->stkWgtAdvance->count());
+        ui->labPageNumAdvance->setText(QString("%1/2").arg(ui->stkWgtAdvance->currentIndex() + 1));
+    });
+    connect(ui->btnNextAdvance, &QPushButton::clicked, this, [=](){
+        ui->stkWgtAdvance->setCurrentIndex((ui->stkWgtAdvance->currentIndex() + 1 + ui->stkWgtAdvance->count())
+                                                 % ui->stkWgtAdvance->count());
+        ui->labPageNumAdvance->setText(QString("%1/2").arg(ui->stkWgtAdvance->currentIndex() + 1));
+    });
+    connect(ui->btnLastPageServoPara, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() - 1 + ui->stkWidgetServoPara->count())
+                                                 % ui->stkWidgetServoPara->count());
+        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+//        ui->grboxAxisSelect->show();
+    });
+    connect(ui->btnNextPageServoPara, &QPushButton::clicked, this, [=](){
+        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() + 1 + ui->stkWidgetServoPara->count())
+                                                 % ui->stkWidgetServoPara->count());
+        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+//        ui->grboxAxisSelect->show();
+    });
 
-void Setting::on_btnSafetySet_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pageSafety);
-}
 
-void Setting::on_btnProductSet_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pageProduct);
-}
-
-void Setting::on_btnSystemSet_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pageSystem);
-}
-
-void Setting::on_btnServoSpeed_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pageServoSpeed);
-}
-
-void Setting::on_btnServoSafePoint_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pageServoSafePoint);
-}
-
-void Setting::on_btnMachinePara_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pageMachinePara);
-
-}
-
-void Setting::on_btnStackSet_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->pageStack);
-}
-
-void Setting::on_comboBoxIotSelection_currentIndexChanged(int index)
-{
+  /***************************************System setting part**********************************************************/
+    connect(ui->coboxIOTSelection, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index){
     //    qDebug() << "index = " << index;
     if (index == 2)
     {
@@ -196,48 +175,29 @@ void Setting::on_comboBoxIotSelection_currentIndexChanged(int index)
         ui->stkWidgetIPSet->setEnabled(true);
         ui->widgetIotDebug->setEnabled(true);
     }
-    if (index == 0)
-    {
-        ui->stkWidgetIPSet->setCurrentIndex(0);
-    }
-    else if (index == 1)
-    {
-        ui->stkWidgetIPSet->setCurrentIndex(1);
-    }
-}
+    ui->stkWidgetIPSet->setCurrentIndex(index);
+//    if (index == 0)
+//    {
+//        ui->stkWidgetIPSet->setCurrentIndex(0);
+//    }
+//    else if (index == 1)
+//    {
+//        ui->stkWidgetIPSet->setCurrentIndex(1);
+//    }
+    });
+/***************************************Product setting part**********************************************************/
+
+    connect(ui->btnEditProcuctionBatch, &QPushButton::clicked, this, [=](){
+        ui->editProcuctionBatch->setEnabled(true);
+    });
+    connect(ui->btnSaveProcuctionBatch, &QPushButton::clicked, this, [=](){
+        ui->editProcuctionBatch->setEnabled(false);
+        // to do ...
+        // save parameter
+
+    });
 
 
-
-void Setting::on_comboBox_96_currentIndexChanged(int index)
-{
-    if (index == 0)
-        this->loadAndPlayGif(":/images/gif/test.gif");
-    if (index == 1)
-        this->loadAndPlayGif(":/images/gif/test1.gif");
-}
-
-void Setting::pageSwitchInit()
-{
-    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() - 1 + ui->stkWidgetOriginSet->count())
-                                                 % ui->stkWidgetOriginSet->count());
-    });
-    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() + 1 + ui->stkWidgetOriginSet->count())
-                                                 % ui->stkWidgetOriginSet->count());
-    });
-    connect(ui->btnLastPageServoPara, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() - 1 + ui->stkWidgetServoPara->count())
-                                                 % ui->stkWidgetServoPara->count());
-        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
-//        ui->grboxAxisSelect->show();
-    });
-    connect(ui->btnNextPageServoPara, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() + 1 + ui->stkWidgetServoPara->count())
-                                                 % ui->stkWidgetServoPara->count());
-        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
-//        ui->grboxAxisSelect->show();
-    });
 }
 
 #if TEST
@@ -354,4 +314,6 @@ void Setting::setAllStyleSheet()
 }
 
 #endif
+
+
 

@@ -1101,7 +1101,7 @@ QComboBox QAbstractItemView::item:selected{
     <property name="title">
      <string/>
     </property>
-    <widget class="QLabel" name="labProgramName">
+    <widget class="ClickableLabel" name="labProgramName">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1311,6 +1311,13 @@ QComboBox QAbstractItemView::item:selected{
    <zorder>stkWidget</zorder>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>mainwindow.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="images.qrc"/>
  </resources>

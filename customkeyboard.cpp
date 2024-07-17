@@ -88,6 +88,16 @@ void KeyboardWindow::onKeyEnterPressed()
     close();
 }
 
+void KeyboardWindow::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    {
+        // 保存键盘的内容到触发键盘控件
+//        qDebug() << "KeyboardWindow::keyPressEvent(QKeyEvent *event)";
+
+    }
+}
+
 NumberKeyboardWindow::NumberKeyboardWindow(QWidget *parent)
     : QDialog(parent)
 {
