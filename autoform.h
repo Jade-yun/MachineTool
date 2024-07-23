@@ -24,6 +24,8 @@ private slots:
 
     void on_btnAimedProduct_clicked();
 
+    void on_btnEdit_toggled(bool checked);
+
 private:
     void updateLabelState(int index);
 private:

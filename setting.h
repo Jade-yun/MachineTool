@@ -28,6 +28,8 @@ private slots:
 
     void on_comboBox_96_currentIndexChanged(int index);
 
+    void on_coboxSafeArea2_activated(int index);
+
 private:
 
     void pageSwitchInit();

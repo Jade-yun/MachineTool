@@ -100,12 +100,12 @@ AutoForm::AutoForm(QWidget *parent) :
 
 /**********************************************************************/
     // these slots are used to adjust global speed
-    connect(ui->btnSpeedAdd, &QPushButton::clicked, [=](){
+    connect(ui->btnGlobalSpeedAdd, &QPushButton::clicked, [=](){
         int value = ui->proBarGlobalSpeed->value();
         if (value < 100 && value > 0 && ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(++value);
     });
-    connect(ui->btnSpeedSub, &QPushButton::clicked, [=](){
+    connect(ui->btnGlobalSpeedSub, &QPushButton::clicked, [=](){
         int value = ui->proBarGlobalSpeed->value();
         if (value < 100 && value > 0 && ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(--value);
@@ -225,5 +225,11 @@ void AutoForm::on_btnAimedProduct_clicked()
 {
     // call keyboard for labAimedProd
     callNumKeyBoard(qobject_cast<QLabel*>(ui->labAimedProd));
+
+}
+
+void AutoForm::on_btnEdit_toggled(bool checked)
+{
+//    if (checked)s
 
 }

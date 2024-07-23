@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="eidtPasswd">
    <property name="geometry">
     <rect>
      <x>100</x>
@@ -95,7 +95,7 @@
     <string>确定</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -106,7 +106,7 @@
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QCheckBox" name="checkBox">
+     <widget class="QCheckBox" name="chboxOperator">
       <property name="minimumSize">
        <size>
         <width>140</width>
@@ -125,7 +125,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_2">
+     <widget class="QCheckBox" name="chboxAdmin">
       <property name="minimumSize">
        <size>
         <width>140</width>
@@ -144,7 +144,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="checkBox_3">
+     <widget class="QCheckBox" name="chboxAdvance">
       <property name="minimumSize">
        <size>
         <width>140</width>

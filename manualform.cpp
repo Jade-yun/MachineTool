@@ -9,7 +9,7 @@
 #include <QDebug>
 
 
-#define Test 0
+
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ManualForm)
@@ -169,7 +169,7 @@ void ManualForm::on_btnNewButtonReference_clicked()
         {
             point.index = referencePoints.size();
         }
-        qDebug() << "point.index = " << point.index;
+//        qDebug() << "point.index = " << point.index;
         point.name = tr("参考点%1").arg(point.index + 1);
         point.button = btn;
 
@@ -203,7 +203,7 @@ void ManualForm::on_btnNewButtonReference_clicked()
             }
             selectedButton[1]->setChecked(true);
 
-            // how to get responding index of seletedButton in referencePoints
+            // get responding index of seletedButton in referencePoints
             // need to update currentIndex in tableselected slot
             for (int i = 0; i < referencePoints.size(); ++i) {
                 if (referencePoints[i].button == btn) {
@@ -225,7 +225,8 @@ void ManualForm::on_btnNewButtonReference_clicked()
             tableReference->setCurrentCell(row, col + 1);
         });
 
-
+        // update the index for all the reference points when a new point was added to referencePoints,
+        // actually it works just for these points after currentIndex.
         for (int i = 0; i < referencePoints.size(); i++)
         {
             referencePoints[i].index = i;
@@ -294,12 +295,13 @@ void ManualForm::on_btnDeleteButtonReference_clicked()
     // clear the table at first
     tableReference->clear();
 
-    for (int i = 0; i < referencePoints.size(); ++i) {
-        if (referencePoints[i].button == selectedButton[1]) {
-            currentIndex = i;
-            break;
-        }
-    }
+//    for (int i = 0; i < referencePoints.size(); ++i) {
+//        if (referencePoints[i].button == selectedButton[1]) {
+//            currentIndex = i;
+//            break;
+//        }
+//    }
+    currentIndex = getIndex(selectedButton[1]);
     if (currentIndex != -1) {
         qDebug() << "Button index in referencePoints:" << currentIndex;
     } else {
@@ -332,6 +334,8 @@ void ManualForm::on_btnDeleteButtonReference_clicked()
 
         selectedButton[1] = referencePoints.last().button;
         selectedButton[1]->setChecked(true);
+        // emit signal to update currentIndex and selete corresponding item in the table
+        // need to be optimized here, cause meaningless self assignment operations will be performed
         emit selectedButton[1]->clicked();
     }
 #endif
@@ -559,7 +563,18 @@ void ManualForm::tableReferenceSigAndSlot()
                 selectedButton[1]->setChecked(true);
 //                qDebug() << "seleted button is checked:" << selectedButton[1]->isChecked();
             }
-        });
+    });
+}
+
+int ManualForm::getIndex(const DraggableButton *button) const
+{
+    for (int i = 0; i < referencePoints.size(); ++i)
+    {
+        if (referencePoints[i].button == button)
+        {
+            return i;
+        }
+    }
 }
 
 void ManualForm::initVar()

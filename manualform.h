@@ -6,11 +6,12 @@
 
 #include "draggablebutton.h"
 
+#define Test 0
 struct ReferencePoint
 {
     int index;
     QString name;
-    DraggableButton* button;          
+    DraggableButton* button;
 };
 
 namespace Ui {
@@ -44,17 +45,20 @@ private:
 //    void removePointFromTable();
     void tableReferenceSigAndSlot();
 
+    int getIndex(const DraggableButton* button) const;
+
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];
     QList<DraggableButton*> btns;
+    #if Test
     QList<DraggableButton*> referenceBtns;
-
+#endif
     QList<ReferencePoint> referencePoints;
     int currentIndex;
 
     QTableWidget* tableReference;
-    int buttonCount;
+
 
 private:
     Ui::ManualForm *ui;

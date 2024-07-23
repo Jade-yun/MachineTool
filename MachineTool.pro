@@ -43,7 +43,8 @@ SOURCES += \
     dialogs/stacksetdialog.cpp \
     dialogs/logindialog.cpp \
     dialogs/handwheeldialog.cpp \
-    dialogs/keydefinedialog.cpp
+    dialogs/keydefinedialog.cpp \
+    dialogs/clearvardialog.cpp
 
 HEADERS += \
     alarmform.h \
@@ -59,7 +60,8 @@ HEADERS += \
     dialogs/stacksetdialog.h \
     dialogs/logindialog.h \
     dialogs/handwheeldialog.h \
-    dialogs/keydefinedialog.h
+    dialogs/keydefinedialog.h \
+    dialogs/clearvardialog.h
 
 FORMS += \
     alarmform.ui \
@@ -74,7 +76,11 @@ FORMS += \
     dialogs/stacksetdialog.ui \
     dialogs/logindialog.ui \
     dialogs/handwheeldialog.ui \
-    dialogs/keydefinedialog.ui
+    dialogs/keydefinedialog.ui \
+    dialogs/referencepointdialog.ui \
+    dialogs/autocorrectposdialog.ui \
+    dialogs/signaldialog.ui \
+    dialogs/clearvardialog.ui
 
 SOURCES +=  \
     Keyboard/KeyButton.cpp \

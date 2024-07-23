@@ -142,6 +142,32 @@ QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:
     border-width:1px;
     border-color:#0A7C25; 
 }
+/**************************************************************/
+
+QPushButton#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
+{
+	font-family: 'SimSun';
+	font-size: 22px; 
+    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
+    border-color:#0055ff; /*边框颜色*/
+	border-style:outset; /*边框风格*/
+    border-width:1px;/*边框宽度*/
+
+    border-style:solid; /*边框风格*/
+    border-width:1px;/*边框宽度*/
+    border-color:#7A77AC; /*边框颜色*/
+    border-radius:5px; /*边框倒角*/
+}
+QPushButton:checked#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
+{
+    background-color:#E7E8EB;;
+    border-style:solid; 
+    border-width:1px;
+    border-color:#0A7C25; 
+}
+
+
+
 
 /*
 QPushButton:pressed#Btn_SetHome,QPushButton:pressed#Btn_MonitorHome,QPushButton:pressed#Btn_AlarmHome,QPushButton:pressed#Btn_AlarmHome,QPushButton::pressed#Btn_ManualHome,

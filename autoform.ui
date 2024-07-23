@@ -410,7 +410,7 @@ QScrollBar::handle:vertical:hover
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_5">
     <widget class="QPushButton" name="btnClear">
@@ -591,7 +591,7 @@ QScrollBar::handle:vertical:hover
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnSpeedSub">
+       <widget class="QPushButton" name="btnGlobalSpeedSub">
         <property name="minimumSize">
          <size>
           <width>75</width>
@@ -647,7 +647,7 @@ QScrollBar::handle:vertical:hover
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnSpeedAdd">
+       <widget class="QPushButton" name="btnGlobalSpeedAdd">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -748,7 +748,7 @@ QScrollBar::handle:vertical:hover
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="page1AutoState">
       <widget class="QPushButton" name="btnMergeExpand">
@@ -895,7 +895,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="labAutoOperate">
+         <widget class="QLabel" name="labAutoOperateTime">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1375,7 +1375,7 @@ QPushButton:pressed
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="2" column="1">
-         <widget class="QLabel" name="label_23">
+         <widget class="QLabel" name="labSubProg2StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1397,7 +1397,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLabel" name="label_21">
+         <widget class="QLabel" name="labSubProg1StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1457,7 +1457,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLabel" name="label_25">
+         <widget class="QLabel" name="labSubProg3StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1479,7 +1479,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="label_19">
+         <widget class="QLabel" name="labMainProgStepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1501,7 +1501,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLabel" name="label_30">
+         <widget class="QLabel" name="labSubProg4StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1599,7 +1599,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="7" column="1">
-         <widget class="QLabel" name="label_33">
+         <widget class="QLabel" name="labSubProg7StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1640,7 +1640,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLabel" name="label_31">
+         <widget class="QLabel" name="labSubProg5StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1662,7 +1662,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QLabel" name="label_32">
+         <widget class="QLabel" name="labSubProg6StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1722,7 +1722,7 @@ QPushButton:pressed
          </widget>
         </item>
         <item row="8" column="1">
-         <widget class="QLabel" name="label_35">
+         <widget class="QLabel" name="labSubProg8StepNum">
           <property name="minimumSize">
            <size>
             <width>120</width>
@@ -1748,7 +1748,7 @@ QPushButton:pressed
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="pageEdit_5">
+   <widget class="QWidget" name="pageEdit">
     <widget class="QPushButton" name="btnSaveOperateInstruction_5">
      <property name="geometry">
       <rect>
@@ -1954,7 +1954,7 @@ QPushButton:pressed
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="pageCannotEdit_5">
+   <widget class="QWidget" name="pageCannotEdit">
     <widget class="QLabel" name="label_229">
      <property name="geometry">
       <rect>

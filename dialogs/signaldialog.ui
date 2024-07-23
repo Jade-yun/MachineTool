@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>646</width>
+    <height>464</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>410</y>
+     <width>100</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnOK">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>410</y>
+     <width>100</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>621</width>
+     <height>381</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tabInputSig">
+    <attribute name="title">
+     <string>输入信号</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_12">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>591</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>主板</string>
+     </property>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>1</x>
+        <y>40</y>
+        <width>571</width>
+        <height>88</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox_12">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBox_5">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>X10</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X11</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X12</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X13</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X14</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X15</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X16</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X17</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="checkBox_13">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QComboBox" name="comboBox_6">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>X20</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X21</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X22</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X23</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X24</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X25</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X26</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X27</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="0" column="4">
+        <widget class="QCheckBox" name="checkBox_14">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QComboBox" name="comboBox_7">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>O1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>O2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>O3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>O4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>O5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>O6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>O7</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="checkBox_18">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox_11">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>X30</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X31</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X32</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X33</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X34</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X35</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X36</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X37</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QCheckBox" name="checkBox_19">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QComboBox" name="comboBox_12">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>YM1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM5</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabOutputSig">
+    <attribute name="title">
+     <string>输出信号</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_13">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>581</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>主板</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>40</y>
+        <width>541</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_7">
+       <item>
+        <widget class="QCheckBox" name="checkBox_15">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_8">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Y10</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y11</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y12</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y13</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y14</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y15</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y16</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y17</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_16">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_9">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Y20</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y21</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y22</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y23</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y24</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y25</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y26</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y27</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_17">
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_10">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>YM1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM5</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
