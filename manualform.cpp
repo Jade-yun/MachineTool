@@ -8,8 +8,6 @@
 #include <QString>
 #include <QDebug>
 
-
-
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ManualForm)
@@ -455,100 +453,6 @@ void ManualForm::addPointsToTable()
 #endif
 }
 
-#if 0
-void ManualForm::removePointFromTable()
-{
-    QTableWidgetItem* item = tableReference->currentItem();
-    if (!item)
-         return;
-
-    int row = item->row();
-    int col = item->column();
-    tableReference->removeCellWidget(row, col);
-//    tableReference->removeCellWidget(row, col - 1);
-
-    delete item;
-    delete tableReference->takeItem(row, col - 1);
-
-    int indexToDelete = referenceBtns.size();
-    // Update the table if we have deleted an item
-
-//    if (indexToDelete > 0)
-//    {
-//        // Shift remaining items up
-//        for (int i = indexToDelete + 1; i < referenceBtns.size() + 1; ++i)
-//        {
-//            int srcRow = i / 4;
-//            int srcCol = (i % 4) * 2;
-//            int destRow = (i - 1) / 4;
-//            int destCol = ((i - 1) % 4) * 2;
-
-//            tableReference->setItem(destRow, destCol, tableReference->takeItem(srcRow, srcCol));
-//            tableReference->setItem(destRow, destCol + 1, tableReference->takeItem(srcRow, srcCol + 1));
-//        }
-
-//        // Remove the last row if it's empty
-//        int lastRow = (referenceBtns.size()) / 4;
-//        if (lastRow < tableReference->rowCount())
-//        {
-//            bool isRowEmpty = true;
-//            for (int i = 0; i < tableReference->columnCount(); ++i)
-//            {
-//                if (tableReference->item(lastRow, i) != nullptr)
-//                {
-//                    isRowEmpty = false;
-//                    break;
-//                }
-//            }
-//            if (isRowEmpty)
-//            {
-//                tableReference->removeRow(lastRow);
-//            }
-//        }
-//    }
-
-
-//    if (indexToDelete != -1)
-//    {
-//        int row = indexToDelete / 4;
-//        int col = (indexToDelete % 4) * 2;
-
-//        delete tableReference->takeItem(row, col);
-//        delete tableReference->takeItem(row, col + 1);
-
-//        for (int i = indexToDelete + 1; i < referenceBtns.size() + 1; ++i)
-//        {
-//            int srcRow = i / 4;
-//            int srcCol = (i % 4) * 2;
-//            int destRow = (i - 1) / 4;
-//            int destCol = ((i - 1) % 4) * 2;
-
-//            tableReference->setItem(destRow, destCol, tableReference->takeItem(srcRow, srcCol));
-//            tableReference->setItem(destRow, destCol + 1, tableReference->takeItem(srcRow, srcCol + 1));
-//        }
-
-//        int lastRow = (referenceBtns.size()) / 4;
-//        if (lastRow < tableReference->rowCount())
-//        {
-//            bool isRowEmpty = true;
-//            for (int i = 0; i < tableReference->columnCount(); ++i)
-//            {
-//                if (tableReference->item(lastRow, i) != nullptr)
-//                {
-//                    isRowEmpty = false;
-//                    break;
-//                }
-//            }
-//            if (isRowEmpty)
-//            {
-//                tableReference->removeRow(lastRow);
-//            }
-//        }
-//    }
-
-}
-
-#endif
 void ManualForm::tableReferenceSigAndSlot()
 {
     connect(tableReference, &QTableWidget::itemPressed, this, [=](QTableWidgetItem *item){
@@ -575,7 +479,173 @@ int ManualForm::getIndex(const DraggableButton *button) const
             return i;
         }
     }
+    return -1;
 }
+
+#ifdef SAVEPOINT_VERSION_1
+void ManualForm::saveState(QWidget *parent, const QString &settingsFile)
+{
+    QSettings settings(settingsFile, QSettings::IniFormat);
+//    settings.clear();
+    settings.beginGroup("Widgets");
+
+    const QList<QWidget *> widgets = parent->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
+    for (QWidget *widget : widgets) {
+        QString key = widget->objectName();
+        settings.beginGroup(key);
+
+        settings.setValue("geometry", widget->geometry());
+        settings.setValue("stylesheet", widget->styleSheet());
+
+        if (QPushButton *button = qobject_cast<QPushButton *>(widget)) {
+            settings.setValue("type", "QPushButton");
+            settings.setValue("text", button->text());
+        } else if (QTableWidget *tableWidget = qobject_cast<QTableWidget *>(widget)) {
+            settings.setValue("type", "QTableWidget");
+//            settings.setValue("item", tableWidget->i);
+            // Save additional QTableWidget properties as needed
+        }
+        else if (QLineEdit *lineEdit = qobject_cast<QLineEdit *>(widget)) {
+            settings.setValue("type", "QLineEdit");
+            settings.setValue("text", lineEdit->text());
+        } else if (QCheckBox *checkBox = qobject_cast<QCheckBox *>(widget)) {
+            settings.setValue("type", "QCheckBox");
+            settings.setValue("checked", checkBox->isChecked());
+        }
+
+        settings.endGroup();
+    }
+    settings.endGroup();
+}
+
+void ManualForm::restoreState(QWidget *parent, const QString &settingsFile)
+{
+
+    QSettings settings(settingsFile, QSettings::IniFormat);
+    settings.beginGroup("Widgets");
+
+    const QStringList keys = settings.childGroups();
+    for (const QString &key : keys) {
+        settings.beginGroup(key);
+
+        QString type = settings.value("type").toString();
+        QWidget *widget = parent->findChild<QWidget *>(key);
+
+        if (!widget) {
+            if (type == "QLineEdit") {
+                widget = new QLineEdit(parent);
+            } else if (type == "QCheckBox") {
+                widget = new QCheckBox(parent);
+            } else if (type == "QPushButton") {
+                widget = new QPushButton(parent);
+            } else if (type == "QTableWidget") {
+                widget = new QTableWidget(parent);
+                // Restore additional QTableWidget properties as needed
+            }
+            widget->setObjectName(key);
+        }
+
+        widget->setGeometry(settings.value("geometry").toRect());
+        widget->setStyleSheet(settings.value("stylesheet").toString());
+
+        if (QLineEdit *lineEdit = qobject_cast<QLineEdit *>(widget)) {
+            lineEdit->setText(settings.value("text").toString());
+        } else if (QCheckBox *checkBox = qobject_cast<QCheckBox *>(widget)) {
+            checkBox->setChecked(settings.value("checked").toBool());
+        } else if (QPushButton *button = qobject_cast<QPushButton *>(widget)) {
+            button->setText(settings.value("text").toString());
+        }
+
+        widget->show();
+        settings.endGroup();
+    }
+    settings.endGroup();
+}
+#else
+void ManualForm::saveStateHelper(QSettings &settings, QWidget *widget)
+{
+    settings.beginGroup(widget->objectName());
+
+    settings.setValue("geometry", widget->geometry());
+    settings.setValue("stylesheet", widget->styleSheet());
+
+    if (QLineEdit *lineEdit = qobject_cast<QLineEdit *>(widget)) {
+        settings.setValue("type", "QLineEdit");
+        settings.setValue("text", lineEdit->text());
+    } else if (QCheckBox *checkBox = qobject_cast<QCheckBox *>(widget)) {
+        settings.setValue("type", "QCheckBox");
+        settings.setValue("checked", checkBox->isChecked());
+    } else if (QPushButton *button = qobject_cast<QPushButton *>(widget)) {
+        settings.setValue("type", "QPushButton");
+        settings.setValue("text", button->text());
+    } else if (QTableWidget *tableWidget = qobject_cast<QTableWidget *>(widget)) {
+        settings.setValue("type", "QTableWidget");
+        // Save additional QTableWidget properties as needed
+    }
+
+    const QList<QWidget *> children = widget->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
+    for (QWidget *child : children) {
+        saveStateHelper(settings, child);
+    }
+
+    settings.endGroup();
+}
+
+
+void saveState(QWidget *parent, const QString &settingsFile) {
+    QSettings settings(settingsFile, QSettings::IniFormat);
+    settings.clear();
+    settings.beginGroup("Widgets");
+    saveStateHelper(settings, parent);
+    settings.endGroup();
+}
+
+
+void ManualForm::restoreStateHelper(QSettings &settings, QWidget *parent, const QString &group)
+{
+    settings.beginGroup(group);
+
+    QWidget *widget = nullptr;
+    QString type = settings.value("type").toString();
+
+    if (type == "QLineEdit") {
+        widget = new QLineEdit(parent);
+        static_cast<QLineEdit *>(widget)->setText(settings.value("text").toString());
+    } else if (type == "QCheckBox") {
+        widget = new QCheckBox(parent);
+        static_cast<QCheckBox *>(widget)->setChecked(settings.value("checked").toBool());
+    } else if (type == "QPushButton") {
+        widget = new QPushButton(parent);
+        static_cast<QPushButton *>(widget)->setText(settings.value("text").toString());
+    } else if (type == "QTableWidget") {
+        widget = new QTableWidget(parent);
+        // Restore additional QTableWidget properties as needed
+    } else {
+        widget = new QWidget(parent);
+    }
+
+    widget->setObjectName(group);
+    widget->setGeometry(settings.value("geometry").toRect());
+    widget->setStyleSheet(settings.value("stylesheet").toString());
+
+    const QStringList childGroups = settings.childGroups();
+    for (const QString &childGroup : childGroups) {
+        restoreStateHelper(settings, widget, childGroup);
+    }
+
+
+    settings.endGroup();
+}
+
+void restoreState(QWidget *parent, const QString &settingsFile)
+{
+    QSettings settings(settingsFile, QSettings::IniFormat);
+    settings.beginGroup("Widgets");
+    restoreStateHelper(settings, parent, parent->objectName());
+    settings.endGroup();
+}
+
+#endif
 
 void ManualForm::initVar()
 {

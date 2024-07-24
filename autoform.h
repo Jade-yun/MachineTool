@@ -35,7 +35,7 @@ private:
 private:
     StackSetDialog* stackSet;
 
-    NumberKeyboardWindow* keyboard;
+//    NumKeyboard* keyboard;
 
     void callNumKeyBoard(QObject* obj);
 };

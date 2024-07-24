@@ -7,22 +7,36 @@
 #include <QDialog>
 #include <QLineEdit>
 #include <QFontDatabase>
+#include <QMutex>
 
-
-class KeyboardWindow : public QDialog
+#define USE_INSTANCE 1
+class FullKeyboard : public QDialog
 {
     Q_OBJECT
 private:
     QLineEdit* textInput;
     AeaQt::Keyboard* keyboard;
     QObject* editObj;
+#if USE_INSTANCE
+    static FullKeyboard* _instance;
+    static QMutex mutex;
+
+public:
+    static FullKeyboard* instance(QWidget* parent = nullptr);
+private:
+//    FullKeyboard(QWidget* parent = nullptr);
+#else
+
+
+#endif
+public:
+    FullKeyboard(QWidget* parent = nullptr);
 public:
     void setCurrentEditObj(QObject* edit);
     void clearText();
 
 public:
-    KeyboardWindow(QWidget* parent = nullptr);
-    ~KeyboardWindow();
+    ~FullKeyboard();
 
 private slots:
     void onKeyEnterPressed();
@@ -39,22 +53,35 @@ protected:
     void keyPressEvent(QKeyEvent *event) override;
 };
 
-class NumberKeyboardWindow : public QDialog
+class NumKeyboard : public QDialog
 {
     Q_OBJECT
 private:
     QLineEdit* textInput;
     AeaQt::NumberKeyboard* keyboard;
     QObject* editObj;
+#if USE_INSTANCE
+    static NumKeyboard* _instance;
+    static QMutex mutex;
+
+public:
+    static NumKeyboard* instance(QWidget* parent = nullptr);
+//private:
+//    NumKeyboard(QWidget* parent = nullptr);
+#else
+
+
+#endif
+public:
+    NumKeyboard(QWidget* parent = nullptr);
 public:
     void setCurrentEditObj(QObject* edit);
     void clearText();
 
 public:
-    NumberKeyboardWindow(QWidget* parent = nullptr);
-    ~NumberKeyboardWindow();
-private slots:
-    void onKeyEnterPressed();
+    ~NumKeyboard();
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 

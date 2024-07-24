@@ -15,7 +15,7 @@ AutoForm::AutoForm(QWidget *parent) :
 
     stackSet = new StackSetDialog(this);
 
-    keyboard = new NumberKeyboardWindow(this);
+//    keyboard = new NumKeyboard(this);
 
 
     // 初始化关闭 framGlobalSpeed
@@ -195,13 +195,29 @@ void AutoForm::callNumKeyBoard(QObject* obj)
 {
     if (obj)
     {
+        NumKeyboard* keyboard = NumKeyboard::instance();
+
         keyboard->clearText();
         keyboard->setCurrentEditObj(obj);
-        keyboard->show();
+        keyboard->setModal(true);
+        if (keyboard->isHidden())
+        {
+            keyboard->show();
+        }
         keyboard->raise();
         keyboard->activateWindow();
-    }
 
+//        NumKeyboard::instance()->clearText();
+//        NumKeyboard::instance()->setCurrentEditObj(obj);
+//        NumKeyboard::instance()->setModal(false);
+//        if (NumKeyboard::instance()->isHidden())
+//        {
+//            NumKeyboard::instance()->show();
+//        }
+////        NumKeyboard::instance()->setModal(true);
+//        NumKeyboard::instance()->raise();
+//        NumKeyboard::instance()->activateWindow();
+    }
 }
 
 

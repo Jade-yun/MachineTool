@@ -31,7 +31,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>7</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <widget class="QWidget" name="layoutWidget">
@@ -22526,7 +22526,7 @@ border: 1px solid #000000;
        <x>5</x>
        <y>0</y>
        <width>1014</width>
-       <height>561</height>
+       <height>581</height>
       </rect>
      </property>
      <property name="minimumSize">
@@ -22544,7 +22544,7 @@ border: 1px solid #000000;
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>
@@ -22559,76 +22559,26 @@ border: 1px solid #000000;
       <attribute name="title">
        <string>堆叠1组</string>
       </attribute>
-      <widget class="QComboBox" name="comboBox_95">
+      <widget class="QLabel" name="label_118">
        <property name="geometry">
         <rect>
-         <x>550</x>
-         <y>11</y>
-         <width>111</width>
-         <height>32</height>
+         <x>450</x>
+         <y>5</y>
+         <width>101</width>
+         <height>40</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>32</height>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>200</width>
-         <height>32</height>
+         <width>16777215</width>
+         <height>40</height>
         </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
- 
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-
-</string>
-       </property>
-       <item>
-        <property name="text">
-         <string>全部</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>良品</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>堆叠1组</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QLabel" name="label_118">
-       <property name="geometry">
-        <rect>
-         <x>450</x>
-         <y>11</y>
-         <width>101</width>
-         <height>30</height>
-        </rect>
        </property>
        <property name="text">
         <string>计数方式</string>
@@ -22698,21 +22648,21 @@ QGroupBox::title { subcontrol-origin: margin;
         <property name="geometry">
          <rect>
           <x>130</x>
-          <y>100</y>
+          <y>90</y>
           <width>115</width>
-          <height>32</height>
+          <height>40</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
           <width>0</width>
-          <height>32</height>
+          <height>40</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>200</width>
-          <height>32</height>
+          <height>40</height>
          </size>
         </property>
         <property name="font">
@@ -22760,10 +22710,22 @@ QComboBox::down-arrow {
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>100</y>
+          <y>90</y>
           <width>111</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="text">
          <string>方向</string>
@@ -22773,10 +22735,22 @@ QComboBox::down-arrow {
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>50</y>
+          <y>40</y>
           <width>111</width>
-          <height>30</height>
+          <height>40</height>
          </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="text">
          <string>间距(mm)</string>
@@ -22786,10 +22760,22 @@ QComboBox::down-arrow {
         <property name="geometry">
          <rect>
           <x>130</x>
-          <y>50</y>
+          <y>40</y>
           <width>115</width>
-          <height>32</height>
+          <height>40</height>
          </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>40</height>
+         </size>
         </property>
         <property name="styleSheet">
          <string notr="true">QLineEdit {
@@ -22806,10 +22792,22 @@ border: 1px solid #000000;
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>10</y>
+         <y>5</y>
          <width>51</width>
-         <height>30</height>
+         <height>40</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>40</height>
+        </size>
        </property>
        <property name="text">
         <string>顺序</string>
@@ -22819,21 +22817,21 @@ border: 1px solid #000000;
        <property name="geometry">
         <rect>
          <x>70</x>
-         <y>10</y>
+         <y>5</y>
          <width>151</width>
-         <height>32</height>
+         <height>40</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>32</height>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>200</width>
-         <height>32</height>
+         <height>40</height>
         </size>
        </property>
        <property name="font">
@@ -22886,21 +22884,21 @@ QComboBox::down-arrow {
        <property name="geometry">
         <rect>
          <x>830</x>
-         <y>10</y>
+         <y>5</y>
          <width>151</width>
-         <height>32</height>
+         <height>40</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>32</height>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>200</width>
-         <height>32</height>
+         <height>40</height>
         </size>
        </property>
        <property name="font">
@@ -22943,10 +22941,22 @@ QComboBox::down-arrow {
        <property name="geometry">
         <rect>
          <x>710</x>
-         <y>10</y>
+         <y>5</y>
          <width>121</width>
-         <height>30</height>
+         <height>40</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>40</height>
+        </size>
        </property>
        <property name="text">
         <string>堆叠完停止</string>
@@ -23143,7 +23153,143 @@ QComboBox::down-arrow {
        <column/>
        <column/>
       </widget>
-      <zorder>comboBox_95</zorder>
+      <widget class="QComboBox" name="comboBox_95">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>5</y>
+         <width>111</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QComboBox::!editable {
+                      border: 2px solid #808A87; /* 边框宽度和颜色 */
+                       }
+QComboBox::drop-down {
+    subcontrol-origin: padding-right;
+    subcontrol-position: top right;
+    width: 20px; /* 下拉箭头宽度 */
+    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
+    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
+    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
+}
+ 
+QComboBox::down-arrow {
+    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
+}
+
+
+</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>全部</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>良品</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠1组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠2组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠3组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠4组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠5组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠6组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠7组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>堆叠8组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步1组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步2组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步3组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步4组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步5组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步6组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步7组</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>同步8组</string>
+        </property>
+       </item>
+      </widget>
       <zorder>label_118</zorder>
       <zorder>groupBox_36</zorder>
       <zorder>label_147</zorder>
@@ -23153,6 +23299,7 @@ QComboBox::down-arrow {
       <zorder>gifLabel</zorder>
       <zorder>comboBox_96</zorder>
       <zorder>tableWidget_stack</zorder>
+      <zorder>comboBox_95</zorder>
      </widget>
      <widget class="QWidget" name="tabSetInterlock_10">
       <attribute name="title">

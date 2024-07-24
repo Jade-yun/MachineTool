@@ -49,14 +49,14 @@ private:
 private:
     Ui::MainWindow *ui;
 
-    KeyboardWindow* keyboard;
+//    FullKeyboard* keyboard;
 
 private:
     void connectAllSignalsAndSlots();
 
     void setStyleFromFile(const QString &styleSheet);
 
-    void callKeyboard(QObject *watched);
+    void callFullKeyboard(QObject *watched);
 private slots:
     void on_btnHelp_clicked();
 public slots:

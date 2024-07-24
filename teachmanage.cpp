@@ -11,7 +11,7 @@ TeachManage::TeachManage(QWidget *parent) :
 //    GlobalInit();
 
 #if TESTKEYBOARD
-    keyboard = new KeyboardWindow(this);
+    keyboard = new FullKeyboard(this);
     QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
     for (auto edit : lineEdits)
     {
@@ -21,15 +21,6 @@ TeachManage::TeachManage(QWidget *parent) :
 
 //    ui->lineEdit_OriginalFileName->installEventFilter(this);
     ui->lineEdit_NowFileName->setFocusPolicy(Qt::ClickFocus);
-
-//    ui->textEdit->installEventFilter(this);
-//    findChildren<QLineEdit*>()
-//    connect(ui->textEdit, &QTextEdit::selectionChanged, this, [=](){
-//        KeyboardWindow* keyboard = new KeyboardWindow(this);
-////        connect(keyboard, &KeyboardWindow::sendData, ui->textEdit, &QTextEdit::setText, Qt::UniqueConnection);
-//        keyboard->exec();
-//        delete keyboard;
-//    });
 
     ui->btn_USB->setCheckable(true);
     isBtn_USB_Checked = false;

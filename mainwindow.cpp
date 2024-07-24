@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent)
 //    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
+    FullKeyboard::instance(this);
+    NumKeyboard::instance(this);
+
     setWidget = new Setting(this);
     ui->stkWidget->addWidget(setWidget);
     teachWidget = new Teach(this);
@@ -54,8 +57,6 @@ MainWindow::MainWindow(QWidget *parent)
 //    this->setStyleFromFile(":/styleSheets/style.qss");
 
 //    ui->labDateTime->keyPressEvent();
-
-    keyboard = new KeyboardWindow(this);
 
     QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
 //    qDebug() << "number of QLineEdit" << lineEdits.size();
@@ -189,7 +190,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
         if (event->type() == QEvent::MouseButtonPress)
         {
     //        qDebug() << "edit MouseButtonPress";
-            callKeyboard(numberEdit);
+            callFullKeyboard(numberEdit);
             return false;
         }
     }
@@ -208,10 +209,11 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 //    }
 //}
 
-void MainWindow::callKeyboard(QObject *watched)
+void MainWindow::callFullKeyboard(QObject *watched)
 {
 //    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
     {
+        FullKeyboard* keyboard = FullKeyboard::instance();
         keyboard->clearText();
         keyboard->setCurrentEditObj(watched);
         keyboard->show();

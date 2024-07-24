@@ -43,7 +43,7 @@ private:
     bool isBtn_USB_Checked;
 
 #if TESTKEYBOARD
-    KeyboardWindow* keyboard;
+    FullKeyboard* keyboard;
 
 public slots:
     bool eventFilter(QObject *,QEvent *) override;

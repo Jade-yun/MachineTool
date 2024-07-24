@@ -15,7 +15,24 @@
 //                            }                              \
 //                            ";
 
-void KeyboardWindow::setCurrentEditObj(QObject *edit)
+#if USE_INSTANCE
+FullKeyboard* FullKeyboard::instance(QWidget* parent)
+{
+    if (_instance == nullptr)
+    {
+        QMutexLocker locker(&mutex);
+        if (_instance == nullptr)
+            _instance = new FullKeyboard(parent);
+    }
+    return _instance;
+
+}
+FullKeyboard* FullKeyboard::_instance = nullptr;
+QMutex FullKeyboard::mutex;
+
+#endif
+
+void FullKeyboard::setCurrentEditObj(QObject *edit)
 {
     if (editObj != edit)
     {
@@ -23,12 +40,12 @@ void KeyboardWindow::setCurrentEditObj(QObject *edit)
     }
 }
 
-void KeyboardWindow::clearText()
+void FullKeyboard::clearText()
 {
     textInput->clear();
 }
 
-KeyboardWindow::KeyboardWindow(QWidget* parent)
+FullKeyboard::FullKeyboard(QWidget* parent)
     : QDialog(parent)
 {
     editObj = nullptr;
@@ -51,24 +68,24 @@ KeyboardWindow::KeyboardWindow(QWidget* parent)
     v->addWidget(keyboard, 5);
     this->setLayout(v);
 
-    connect(keyboard, &AeaQt::Keyboard::keyEnterPressed, this, &KeyboardWindow::onKeyEnterPressed);
+//    connect(keyboard, &AeaQt::Keyboard::keyEnterPressed, this, &FullKeyboard::onKeyEnterPressed);
 
 }
 
-KeyboardWindow::~KeyboardWindow()
+FullKeyboard::~FullKeyboard()
 {
-    delete keyboard;
-    keyboard = nullptr;
-    delete textInput;
-    textInput = nullptr;
+//    delete keyboard;
+//    keyboard = nullptr;
+//    delete textInput;
+//    textInput = nullptr;
 }
 
-//QString KeyboardWindow::getText() const
+//QString FullKeyboard::getText() const
 //{
 //    return textInput->text();
 //}
 
-void KeyboardWindow::onKeyEnterPressed()
+void FullKeyboard::onKeyEnterPressed()
 {
     QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
     QTextEdit* textEdit = qobject_cast<QTextEdit*>(editObj);
@@ -85,20 +102,35 @@ void KeyboardWindow::onKeyEnterPressed()
     {
         label->setText(textInput->text());
     }
-    close();
+    hide();
 }
 
-void KeyboardWindow::keyPressEvent(QKeyEvent *event)
+void FullKeyboard::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
         // 保存键盘的内容到触发键盘控件
-//        qDebug() << "KeyboardWindow::keyPressEvent(QKeyEvent *event)";
-
+//        qDebug() << "FullKeyboard::keyPressEvent(QKeyEvent *event)";
+        QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
+        QTextEdit* textEdit = qobject_cast<QTextEdit*>(editObj);
+        QLabel* label = qobject_cast<QLabel*>(editObj);
+        if (lineEdit)
+        {
+            lineEdit->setText(textInput->text());
+        }
+        else if (textEdit)
+        {
+            textEdit->setText(textInput->text());
+        }
+        else if(label)
+        {
+            label->setText(textInput->text());
+        }
+        hide();
     }
 }
 
-NumberKeyboardWindow::NumberKeyboardWindow(QWidget *parent)
+NumKeyboard::NumKeyboard(QWidget *parent)
     : QDialog(parent)
 {
     editObj = nullptr;
@@ -107,7 +139,7 @@ NumberKeyboardWindow::NumberKeyboardWindow(QWidget *parent)
 
 
     setFixedSize(450, 370);
-    this->setModal(true);
+//    this->setModal(false);
     setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
     textInput->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
@@ -117,11 +149,9 @@ NumberKeyboardWindow::NumberKeyboardWindow(QWidget *parent)
     v->addWidget(keyboard, 5);
     this->setLayout(v);
 
-
-    connect(keyboard, &AeaQt::NumberKeyboard::keyEnterPressed, this, &NumberKeyboardWindow::onKeyEnterPressed);
 }
 
-NumberKeyboardWindow::~NumberKeyboardWindow()
+NumKeyboard::~NumKeyboard()
 {
     delete keyboard;
     keyboard = nullptr;
@@ -129,8 +159,25 @@ NumberKeyboardWindow::~NumberKeyboardWindow()
     textInput = nullptr;
 }
 
+#if USE_INSTANCE
+NumKeyboard* NumKeyboard::instance(QWidget* parent)
+{
+//    static NumKeyboard _instance(parent);
+//    return &_instance;
+    if (_instance == nullptr)
+    {
+        QMutexLocker locker(&mutex);
+        if (_instance == nullptr)
+            _instance = new NumKeyboard(parent);
+    }
+    return _instance;
+}
+NumKeyboard* NumKeyboard::_instance = nullptr;
+QMutex NumKeyboard::mutex;
+#endif
 
-void NumberKeyboardWindow::setCurrentEditObj(QObject *edit)
+
+void NumKeyboard::setCurrentEditObj(QObject *edit)
 {
     if (editObj != edit)
     {
@@ -138,22 +185,26 @@ void NumberKeyboardWindow::setCurrentEditObj(QObject *edit)
     }
 }
 
-void NumberKeyboardWindow::clearText()
+void NumKeyboard::clearText()
 {
     textInput->clear();
 }
-void NumberKeyboardWindow::onKeyEnterPressed()
+
+void NumKeyboard::keyPressEvent(QKeyEvent *event)
 {
-    QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
-    QLabel* label = qobject_cast<QLabel*>(editObj);
-    if (lineEdit)
+    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
-        lineEdit->setText(textInput->text());
+        QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
+        QLabel* label = qobject_cast<QLabel*>(editObj);
+        if (lineEdit)
+        {
+            lineEdit->setText(textInput->text());
+        }
+        else if(label)
+        {
+            label->setText(textInput->text());
+        }
+        hide();
     }
-    else if(label)
-    {
-        label->setText(textInput->text());
-    }
-    close();
 }
 
