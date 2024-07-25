@@ -43,14 +43,14 @@ public slots:
         QApplication::sendEvent(receiver, &keyPress);
         QApplication::sendEvent(receiver, &keyRelease);
 
-        // this is added by myself
-        if (key == Qt::Key_Enter || key == Qt::Key_Return)
-            emit keyEnterPressed();
+//        // this is added by myself
+//        if (key == Qt::Key_Enter || key == Qt::Key_Return)
+//            emit keyEnterPressed();
     }
 
 signals:
     void keyPressed(int key, QString value);
-    void keyEnterPressed();
+//    void keyEnterPressed();
 
 private:
     QString m_name;

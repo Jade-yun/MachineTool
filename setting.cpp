@@ -11,8 +11,8 @@ Setting::Setting(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Setting)
 {
-    initVariables();
     ui->setupUi(this);
+    initVariables();
 
     setAllStyleSheet();
 
@@ -199,185 +199,124 @@ void Setting::pageSwitchInit()
 
     /******************************Servo Safe Point************************************************************/
     // 安全区1
-    connect(ui->btnArm1SafeArea1, &QPushButton::toggled, [=](bool checked){
-       if (checked)
-       {
-           ui->stkWgtSafeArea1->setCurrentWidget(ui->pageArm1);
-       }
-    });
-    connect(ui->btnArm2SafeArea1, &QPushButton::toggled, [=](bool checked){
-       if (checked)
-       {
-           ui->stkWgtSafeArea1->setCurrentWidget(ui->pageArm2);
-       }
-    });
     // 是否使用安全区
+#if 0
     connect(ui->coboxSafeArea1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        for (QGroupBox* grbox : ui->stkWgtSafeArea1->findChildren<QGroupBox*>())
+        for (QGroupBox* grbox : ui->tabSafeArea1->findChildren<QGroupBox*>())
         {
             grbox->setEnabled(index);
         }
     });
     // X轴  0: 无 1: X1
-    connect(ui->coboxAxisXSA1Arm1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
+    connect(ui->coboxAxisXSA1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
 
-        ui->labAxisXSelectSA1Arm1->setText(text);
+        ui->labAxisXSelectSA1->setText(text);
 //        qDebug() << "text: " << text;
         if (text == "无")
-            ui->labAxisCSelectSA1Arm1->setText(text);
+            ui->labAxisCSelectSA1->setText(text);
         else
-            ui->labAxisCSelectSA1Arm1->setText(tr("C1C2"));
+            ui->labAxisCSelectSA1->setText(tr("C1C2"));
     });
-    connect(ui->coboxAxisXSA1Arm1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisXSelectSA1Arm1->setEnabled(index);
-        ui->labAxisCSelectSA1Arm1->setEnabled(index);
-        ui->editMachineA1AxisXSA1Arm1->setEnabled(index);
-        ui->editMachineA2AxisXSA1Arm1->setEnabled(index);
-        ui->editStockBinB1AxisXSA1Arm1->setEnabled(index);
-        ui->editStockBinB2AxisXSA1Arm1->setEnabled(index);
+    connect(ui->coboxAxisXSA1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        ui->labAxisXSelectSA1->setEnabled(index);
+        ui->labAxisCSelectSA1->setEnabled(index);
+        ui->editMachineA1AxisXSA1->setEnabled(index);
+        ui->editMachineA2AxisXSA1->setEnabled(index);
+        ui->editStockBinB1AxisXSA1->setEnabled(index);
+        ui->editStockBinB2AxisXSA1->setEnabled(index);
     });
     // Y轴 0: 无 1: Y1 2: Y2
-    connect(ui->coboxAxisYSA1Arm1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisYSelectSA1Arm1->setEnabled(index);
-        ui->editMachineA1AxisYSA1Arm1->setEnabled(index);
-        ui->editMachineA2AxisYSA1Arm1->setEnabled(index);
-        ui->editStockBinB1AxisYSA1Arm1->setEnabled(index);
-        ui->editStockBinB2AxisYSA1Arm1->setEnabled(index);
+    connect(ui->coboxAxisYSA1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        ui->labAxisYSelectSA1->setEnabled(index);
+        ui->editMachineA1AxisYSA1->setEnabled(index);
+        ui->editMachineA2AxisYSA1->setEnabled(index);
+        ui->editStockBinB1AxisYSA1->setEnabled(index);
+        ui->editStockBinB2AxisYSA1->setEnabled(index);
     });
-    connect(ui->coboxAxisYSA1Arm1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-        ui->labAxisYSelectSA1Arm1->setText(text);
+    connect(ui->coboxAxisYSA1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
+        ui->labAxisYSelectSA1->setText(text);
     });
     // 0: 不选择 1: Z1 2: Z2
-    connect(ui->coboxAxisZSA1Arm1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->grboxZAxisMachineParaSA1Arm1->setEnabled(index);
-        ui->grboxZAxisStockBinParaSA1Arm1->setEnabled(index);
+    connect(ui->coboxAxisZSA1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        ui->grboxZAxisMachineParaSA1->setEnabled(index);
+        ui->grboxZAxisStockBinParaSA1->setEnabled(index);
     });
-    // X轴  0: 无 1: X1
-    connect(ui->coboxAxisXSA1Arm2, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
+#endif
 
-        ui->labAxisXSelectSA1Arm2->setText(text);
-//        qDebug() << "text: " << text;
-        if (text == "无")
-            ui->labAxisCSelectSA1Arm2->setText(text);
-        else
-            ui->labAxisCSelectSA1Arm2->setText(tr("C1C2"));
-    });
-    connect(ui->coboxAxisXSA1Arm2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisXSelectSA1Arm2->setEnabled(index);
-        ui->labAxisCSelectSA1Arm2->setEnabled(index);
-        ui->editMachineA1AxisXSA1Arm2->setEnabled(index);
-        ui->editMachineA2AxisXSA1Arm2->setEnabled(index);
-        ui->editStockBinB1AxisXSA1Arm2->setEnabled(index);
-        ui->editStockBinB2AxisXSA1Arm2->setEnabled(index);
-    });
-    // Y轴 0: 无 1: Y1 2: Y2
-    connect(ui->coboxAxisYSA1Arm2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisYSelectSA1Arm2->setEnabled(index);
-        ui->editMachineA1AxisYSA1Arm2->setEnabled(index);
-        ui->editMachineA2AxisYSA1Arm2->setEnabled(index);
-        ui->editStockBinB1AxisYSA1Arm2->setEnabled(index);
-        ui->editStockBinB2AxisYSA1Arm2->setEnabled(index);
-    });
-    connect(ui->coboxAxisYSA1Arm2, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-        ui->labAxisYSelectSA1Arm2->setText(text);
-    });
-    // 0: 不选择 1: Z1 2: Z2
-    connect(ui->coboxAxisZSA1Arm2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->grboxZAxisMachineParaSA1Arm2->setEnabled(index);
-        ui->grboxZAxisStockBinParaSA1Arm2->setEnabled(index);
-    });
+    // Helper function to connect QComboBox index changes to QGroupBox enabling
+    auto connectComboBoxToGroupBoxes = [&](QComboBox* comboBox, QWidget* tab) {
+        connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+            for (QGroupBox* grbox : tab->findChildren<QGroupBox*>()) {
+                grbox->setEnabled(index);
+            }
+        });
+    };
+
+    // Helper function to connect QComboBox index changes to QLabel and QLineEdit enabling
+    auto connectAxisX = [&](QComboBox* comboBox, QLabel* labelX, QLabel* labelC, QLineEdit* edit1,
+            QLineEdit* edit2, QLineEdit* edit3, QLineEdit* edit4, QLineEdit* editC1, QLineEdit* editC2)
+    {
+        connect(comboBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
+            labelX->setText(text);
+            labelC->setText(text == "无" ? text : tr("C1C2"));
+        });
+        connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+//            labelX->setEnabled(index);
+//            labelC->setEnabled(index);
+            edit1->setEnabled(index);
+            edit2->setEnabled(index);
+            edit3->setEnabled(index);
+            edit4->setEnabled(index);
+            editC1->setEnabled(index);
+            editC2->setEnabled(index);
+        });
+    };
+
+    // Helper function to connect QComboBox index changes to QLabel and QLineEdit enabling
+    auto connectAxisY = [&](QComboBox* comboBox, QLabel* labelY, QLineEdit* edit1, QLineEdit* edit2,
+            QLineEdit* edit3, QLineEdit* edit4)
+    {
+        connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+//            labelY->setEnabled(index);
+            edit1->setEnabled(index);
+            edit2->setEnabled(index);
+            edit3->setEnabled(index);
+            edit4->setEnabled(index);
+        });
+        connect(comboBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
+            labelY->setText(text);
+        });
+    };
+
+    // Helper function to connect QComboBox index changes to QGroupBox enabling
+    auto connectAxisZ = [&](QComboBox* comboBox, QGroupBox* groupBox1, QGroupBox* groupBox2) {
+        connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+            groupBox1->setEnabled(index);
+            groupBox2->setEnabled(index);
+        });
+    };
+
+    // 安全区1
+    connectComboBoxToGroupBoxes(ui->coboxSafeArea1, ui->tabSafeArea1);
+    connectAxisX(ui->coboxAxisXSA1, ui->labAxisXSelectSA1, ui->labAxisCSelectSA1,
+                 ui->editMachineA1AxisXSA1, ui->editMachineA2AxisXSA1,
+                 ui->editStockBinB1AxisXSA1, ui->editStockBinB2AxisXSA1,
+                 ui->editMachineA1AxisCSA1, ui->editMachineA2AxisCSA1);
+    connectAxisY(ui->coboxAxisYSA1, ui->labAxisYSelectSA1,
+                 ui->editMachineA1AxisYSA1, ui->editMachineA2AxisYSA1,
+                 ui->editStockBinB1AxisYSA1, ui->editStockBinB2AxisYSA1);
+    connectAxisZ(ui->coboxAxisZSA1, ui->grboxZAxisMachineParaSA1, ui->grboxZAxisStockBinParaSA1);
 
     // 安全区2
-    connect(ui->btnArm1SafeArea2, &QPushButton::toggled, [=](bool checked){
-       if (checked)
-       {
-           ui->stkWgtSafeArea2->setCurrentIndex(0);
-       }
-    });
-    connect(ui->btnArm2SafeArea2, &QPushButton::toggled, [=](bool checked){
-       if (checked)
-       {
-           ui->stkWgtSafeArea2->setCurrentIndex(1);
-       }
-    });
-    // 是否使用安全区
-    connect(ui->coboxSafeArea2, QOverload<int>::of(&QComboBox::activated), [=](int index){
-        for (QGroupBox* grbox : ui->stkWgtSafeArea2->findChildren<QGroupBox*>())
-        {
-            grbox->setEnabled(index);
-        }
-    });
-    // X轴  0: 无 1: X1
-    connect(ui->coboxAxisXSA2Arm1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-
-        ui->labAxisXSelectSA2Arm1->setText(text);
-//        qDebug() << "text: " << text;
-        if (text == "无")
-            ui->labAxisCSelectSA2Arm1->setText(text);
-        else
-            ui->labAxisCSelectSA2Arm1->setText(tr("C1C2"));
-    });
-    connect(ui->coboxAxisXSA2Arm1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisXSelectSA2Arm1->setEnabled(index);
-        ui->labAxisCSelectSA2Arm1->setEnabled(index);
-        ui->editMachineA1AxisXSA2Arm1->setEnabled(index);
-        ui->editMachineA2AxisXSA2Arm1->setEnabled(index);
-        ui->editStockBinB1AxisXSA2Arm1->setEnabled(index);
-        ui->editStockBinB2AxisXSA2Arm1->setEnabled(index);
-    });
-    // Y轴 0: 无 1: Y1 2: Y2
-    connect(ui->coboxAxisYSA2Arm1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisYSelectSA2Arm1->setEnabled(index);
-        ui->editMachineA1AxisYSA2Arm1->setEnabled(index);
-        ui->editMachineA2AxisYSA2Arm1->setEnabled(index);
-        ui->editStockBinB1AxisYSA2Arm1->setEnabled(index);
-        ui->editStockBinB2AxisYSA2Arm1->setEnabled(index);
-    });
-    connect(ui->coboxAxisYSA2Arm1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-        ui->labAxisYSelectSA2Arm1->setText(text);
-    });
-    // 0: 不选择 1: Z1 2: Z2
-    connect(ui->coboxAxisZSA2Arm1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->grboxZAxisMachineParaSA2Arm1->setEnabled(index);
-        ui->grboxZAxisStockBinParaSA2Arm1->setEnabled(index);
-    });
-    // X轴  0: 无 1: X1
-    connect(ui->coboxAxisXSA2Arm2, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-
-        ui->labAxisXSelectSA2Arm2->setText(text);
-//        qDebug() << "text: " << text;
-        if (text == "无")
-            ui->labAxisCSelectSA2Arm2->setText(text);
-        else
-            ui->labAxisCSelectSA2Arm2->setText(tr("C1C2"));
-    });
-    connect(ui->coboxAxisXSA2Arm2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisXSelectSA2Arm2->setEnabled(index);
-        ui->labAxisCSelectSA2Arm2->setEnabled(index);
-        ui->editMachineA1AxisXSA2Arm2->setEnabled(index);
-        ui->editMachineA2AxisXSA2Arm2->setEnabled(index);
-        ui->editStockBinB1AxisXSA2Arm2->setEnabled(index);
-        ui->editStockBinB2AxisXSA2Arm2->setEnabled(index);
-    });
-    // Y轴 0: 无 1: Y1 2: Y2
-    connect(ui->coboxAxisYSA2Arm2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisYSelectSA2Arm2->setEnabled(index);
-        ui->editMachineA1AxisYSA2Arm2->setEnabled(index);
-        ui->editMachineA2AxisYSA2Arm2->setEnabled(index);
-        ui->editStockBinB1AxisYSA2Arm2->setEnabled(index);
-        ui->editStockBinB2AxisYSA2Arm2->setEnabled(index);
-    });
-    connect(ui->coboxAxisYSA2Arm2, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-        ui->labAxisYSelectSA2Arm2->setText(text);
-    });
-    // 0: 不选择 1: Z1 2: Z2
-    connect(ui->coboxAxisZSA2Arm2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->grboxZAxisMachineParaSA2Arm2->setEnabled(index);
-        ui->grboxZAxisStockBinParaSA2Arm2->setEnabled(index);
-    });
-
-
-
+    connectComboBoxToGroupBoxes(ui->coboxSafeArea1_2, ui->tabSafeArea2);
+    connectAxisX(ui->coboxAxisXSA1_2, ui->labAxisXSelectSA1_2, ui->labAxisCSelectSA1_2,
+                 ui->editMachineA1AxisXSA1_2, ui->editMachineA2AxisXSA1_2,
+                 ui->editStockBinB1AxisXSA1_2, ui->editStockBinB2AxisXSA1_2,
+                 ui->editMachineA1AxisCSA1_2, ui->editMachineA2AxisCSA1_2);
+    connectAxisY(ui->coboxAxisYSA1_2, ui->labAxisYSelectSA1_2,
+                 ui->editMachineA1AxisYSA1_2, ui->editMachineA2AxisYSA1_2,
+                 ui->editStockBinB1AxisYSA1_2, ui->editStockBinB2AxisYSA1_2);
+    connectAxisZ(ui->coboxAxisZSA1_2, ui->grboxZAxisMachineParaSA1_2, ui->grboxZAxisStockBinParaSA1_2);
 
 }
 
@@ -492,14 +431,28 @@ void Setting::setAllStyleSheet()
         }
     }
 
+    ui->tableStack->setCornerButtonEnabled(true);
+    ui->tableStack->setStyleSheet("QTableCornerButton::section { border-right: 1px solid black; }");
+//    ui->tableStack->horizontalHeader()->setHighlightSections(false);
+//    ui->tableStack->horizontalHeader()->setStretchLastSection(true);
+    StackPara stackPara(ui->tableStack);
+    for (int i = 0; i < 3; i++)
+    {
+        connect(stackPara.axisSelect[i], QOverload<int>::of(&QComboBox::currentIndexChanged), [=]() {
+            qDebug() << "axis " << i << ": " << stackPara.axisSelect[i]->currentText();
+            ui->tableStack->horizontalHeaderItem(i)->setText(stackPara.axisSelect[i]->currentText());
+        });
+    }
+//    stackPara.show();
+    ui->tableStack->show();
+
+
+
 }
+
+
+
 
 #endif
 
 
-
-
-void Setting::on_coboxSafeArea2_activated(int index)
-{
-
-}

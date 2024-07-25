@@ -1,17 +1,11 @@
-#ifndef SETTING_H
-#define SETTING_H
+﻿#ifndef STACKEDIT_H
+#define STACKEDIT_H
 
 #include <QWidget>
-#include "QLabel"
-#include "QLineEdit"
-#include "QComboBox"
-#include "QPushButton"
-#include "QTableWidgetItem"
-//#include <QList>
-
-#include "customkeyboard.h"
-
-
+#include <QPointer>
+#include <QComboBox>
+#include <QLineEdit>
+#include <QTableWidgetItem>
 
 struct StackPara /*: public QObject*/
 {
@@ -93,52 +87,29 @@ public:
 };
 
 namespace Ui {
-class Setting;
+class StackEdit;
 }
 
-class Setting : public QWidget
+class StackEdit : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Setting(QWidget *parent = nullptr);
-    ~Setting();
+    explicit StackEdit(QWidget *parent = nullptr);
+    ~StackEdit();
 
-private slots:
-
-    void on_comboBox_96_currentIndexChanged(int index);
-
-private:
-
-    void pageSwitchInit();
-
-public slots:
-    void slotSettingHome();
-
-public slots:
-    void onComboBoxIndexChanged(int index);
-    void onPushButtonChanged(int index);
-    void onPushButtonHeadChanged(int index);
-    void onPushButtonGeneralClicked(int index);
-private:
-    void setAllStyleSheet();
-    QPushButton* tb_1_btn[9];
-    QPushButton* tb_1_btnHead[3];
-    QComboBox* tb_1_comboBox[3];
-    QLineEdit* tb_1_lineEdit[3][9];
-    QPushButton* tb_general_btn;
+signals:
+    void moveButtonPos(bool para);
 
 
 private:
-    Ui::Setting *ui;
+    Ui::StackEdit *ui;
 
-private:
-    void loadAndPlayGif(const QString& path);
-    void initVariables();
-
-private:
-    QMovie *movie;
-
+    // QWidget interface
+protected:
+    void closeEvent(QCloseEvent *event) override;
 };
 
-#endif // SETTING_H
+#endif // STACKEDIT_H
+
+extern QPointer<StackEdit> stack[8];
