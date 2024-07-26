@@ -2,7 +2,9 @@
 #include "ui_setting.h"
 
 #include <QMovie>
-#include <QtDebug>
+#include <QDebug>
+
+#include "stackedit.h"
 
 #define TEST 1
 //#define TESTKEYBOARD 1
@@ -24,6 +26,13 @@ Setting::Setting(QWidget *parent) :
 //    ui->checkBoxVietnam->setDisabled(true);
 
     pageSwitchInit();
+
+    stack[1] = new StackEdit(ui->tabWidgetStack->widget(1));
+    stack[2] = new StackEdit(ui->tabWidgetStack->widget(2));
+    connect(ui->coboxStackWay, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        stack[1]->switchStackWay(index);
+        stack[2]->switchStackWay(index);
+    });
 
 #if TEST
     /////////////////////////
@@ -430,21 +439,6 @@ void Setting::setAllStyleSheet()
             tb_1_lineEdit[i - 1][j - 2]->setStyleSheet("border-radius: 5px;border: 1px solid #000000;");
         }
     }
-
-    ui->tableStack->setCornerButtonEnabled(true);
-    ui->tableStack->setStyleSheet("QTableCornerButton::section { border-right: 1px solid black; }");
-//    ui->tableStack->horizontalHeader()->setHighlightSections(false);
-//    ui->tableStack->horizontalHeader()->setStretchLastSection(true);
-    StackPara stackPara(ui->tableStack);
-    for (int i = 0; i < 3; i++)
-    {
-        connect(stackPara.axisSelect[i], QOverload<int>::of(&QComboBox::currentIndexChanged), [=]() {
-            qDebug() << "axis " << i << ": " << stackPara.axisSelect[i]->currentText();
-            ui->tableStack->horizontalHeaderItem(i)->setText(stackPara.axisSelect[i]->currentText());
-        });
-    }
-//    stackPara.show();
-    ui->tableStack->show();
 
 
 
