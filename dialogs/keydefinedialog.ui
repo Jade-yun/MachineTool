@@ -14,160 +14,7 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel { 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
-
-QWidget{ 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
-
-/************************************************/
-QPushButton
-{
-    background-color:#F0F4FD;
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:10px; /*边框倒角*/
-/*
-	font-family: DejaVuSansMono;
-*/
-	font-weight:normal;
-	font-family: 'SimSun';
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-}
-QPushButton:pressed
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    border-radius:10px; /*边框倒角*/
-}
-
-/******************************************************/
-QGroupBox {
-	border: 1px solid black;
-	border-radius:5px;
-	margin-top:10px; 
-}
-QGroupBox::title { 
-	subcontrol-origin: margin;
-	left: 10px;
-	bottom: 5px;
-}
-/*****************************************************/
-QCheckBox { 
-/*
-	font-size: 20px;
-	font-weight:normal;
-	font-family: 'SimSun';
-*/
-}
-QCheckBox::indicator{
-	width: 30px;
-	height: 30px;
-	border: 1px solid black; 
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-}
-
-QCheckBox::indicator:checked {
-background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #F8F8FF, stop: 1 #1E90FF); 
-        image: url(:/images/check_mark.png);
-        border-image: none;
-    }
-
-/*****************************************************************/
-QComboBox::!editable {
-	border: 2px solid #808A87; /* 边框宽度和颜色 */
-}
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-QComboBox QAbstractItemView::item:hover{ 
-  background-color:#409CE1;
-  color:rgb(252, 233, 79);
-}
-QComboBox QAbstractItemView::item:selected{
-  background-color:#909CE1;
-  color:rgb(252, 200, 140);
-}
-/**************************************************/
-QTabWidget::tab-bar{
-        alignment:left;
-}
-QTabBar::tab{
-	background:rgb(160, 160, 160);
-	width:100px;
-	height:40px;
-}
-/*
-QTabBar::tab:hover{
-	background:rgb(255, 255, 255, 100);
-}
-*/
-QTabBar::tab:selected {
-      border-color: #9B9B9B;
-      border-bottom-color: #C2C7CB; /* same as pane color */
-  }
-QTabBar::tab:!selected {
-      margin-top: 2px; /* make non-selected tabs look smaller */
-  }
-  QTabWidget::pane { /* The tab widget frame */
-      border-top: 2px solid #C2C7CB;
-  }
-
-  QTabWidget::tab-bar {
-      left: 5px; /* move to the right by 5px */
-  }
-
-  /* Style the tab using the tab sub-control. Note that
-      it reads QTabBar _not_ QTabWidget */
-  QTabBar::tab {
-
-	background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea);
-      border: 2px solid #C4C4C3;
-      border-bottom-color: #C2C7CB; /* same as the pane color */
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      min-width: 8ex;
-      padding: 2px;
-  }
-
-  QTabBar::tab:selected, QTabBar::tab:hover {
-      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                  stop: 0 #fafafa, stop: 0.4 #f4f4f4,
-                                  stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
-  }
-
-  QTabBar::tab:selected {
-      border-color: #9B9B9B;
-      border-bottom-color: #C2C7CB; /* same as pane color */
-  }
-
-  QTabBar::tab:!selected {
-      margin-top: 2px; /* make non-selected tabs look smaller */
-  }
-
-QTabWidget::pane {
-    border: 1px solid #000000; /* 设置边框样式和颜色 */
-}
-
-
-
-</string>
+   <string notr="true"/>
   </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
@@ -189,7 +36,7 @@ QTabWidget::pane {
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>120</y>
+       <y>130</y>
        <width>581</width>
        <height>181</height>
       </rect>
@@ -424,6 +271,12 @@ QTabWidget::pane {
          <property name="text">
           <string>通</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -442,6 +295,9 @@ QTabWidget::pane {
          </property>
          <property name="text">
           <string>断</string>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -462,6 +318,9 @@ QTabWidget::pane {
          <property name="text">
           <string>翻转</string>
          </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
       </layout>
@@ -476,7 +335,7 @@ QTabWidget::pane {
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>140</y>
+       <y>130</y>
        <width>581</width>
        <height>141</height>
       </rect>
@@ -484,18 +343,30 @@ QTabWidget::pane {
      <property name="title">
       <string>主板输出</string>
      </property>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>40</y>
-        <width>541</width>
+        <x>30</x>
+        <y>50</y>
+        <width>401</width>
         <height>42</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <item>
-        <widget class="QCheckBox" name="checkBox_12">
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QCheckBox" name="checkBox_15">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
          <property name="layoutDirection">
           <enum>Qt::RightToLeft</enum>
          </property>
@@ -504,8 +375,8 @@ QTabWidget::pane {
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QComboBox" name="comboBox_5">
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBox_9">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -518,6 +389,51 @@ QTabWidget::pane {
            <height>40</height>
           </size>
          </property>
+         <item>
+          <property name="text">
+           <string>Y1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y9</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Y10</string>
@@ -558,32 +474,16 @@ QTabWidget::pane {
            <string>Y17</string>
           </property>
          </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_13">
-         <property name="layoutDirection">
-          <enum>Qt::RightToLeft</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="comboBox_6">
-         <property name="minimumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
+         <item>
+          <property name="text">
+           <string>Y18</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y19</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Y20</string>
@@ -609,25 +509,22 @@ QTabWidget::pane {
            <string>Y24</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>Y25</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Y26</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Y27</string>
-          </property>
-         </item>
         </widget>
        </item>
-       <item>
-        <widget class="QCheckBox" name="checkBox_14">
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="checkBox_18">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
          <property name="layoutDirection">
           <enum>Qt::RightToLeft</enum>
          </property>
@@ -636,8 +533,8 @@ QTabWidget::pane {
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QComboBox" name="comboBox_7">
+       <item row="0" column="3">
+        <widget class="QComboBox" name="comboBox_10">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -673,6 +570,61 @@ QTabWidget::pane {
          <item>
           <property name="text">
            <string>YM5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM9</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM10</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM11</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM12</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM13</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM14</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM15</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>YM16</string>
           </property>
          </item>
         </widget>
@@ -719,6 +671,12 @@ QTabWidget::pane {
          <property name="text">
           <string>通</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -738,6 +696,9 @@ QTabWidget::pane {
          <property name="text">
           <string>断</string>
          </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -756,6 +717,9 @@ QTabWidget::pane {
          </property>
          <property name="text">
           <string>翻转</string>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -782,7 +746,7 @@ QTabWidget::pane {
      <widget class="QWidget" name="layoutWidget_11">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>20</x>
         <y>40</y>
         <width>371</width>
         <height>42</height>

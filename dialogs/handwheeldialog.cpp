@@ -6,6 +6,10 @@ HandWheelDialog::HandWheelDialog(QWidget *parent) :
     ui(new Ui::HandWheelDialog)
 {
     ui->setupUi(this);
+
+    connect(ui->btnOK, &QPushButton::clicked, [=](){
+       this->close();
+    });
 }
 
 HandWheelDialog::~HandWheelDialog()

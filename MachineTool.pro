@@ -46,6 +46,7 @@ SOURCES += \
     dialogs/keydefinedialog.cpp \
     dialogs/clearvardialog.cpp \
     dialogs/stackedit.cpp \
+    dialogs/sigdefinedialog.cpp
 
 HEADERS += \
     alarmform.h \
@@ -63,7 +64,8 @@ HEADERS += \
     dialogs/handwheeldialog.h \
     dialogs/keydefinedialog.h \
     dialogs/clearvardialog.h \
-    dialogs/stackedit.h
+    dialogs/stackedit.h \
+    dialogs/sigdefinedialog.h
 
 FORMS += \
     alarmform.ui \
@@ -81,11 +83,11 @@ FORMS += \
     dialogs/keydefinedialog.ui \
     dialogs/referencepointdialog.ui \
     dialogs/autocorrectposdialog.ui \
-    dialogs/signaldialog.ui \
     dialogs/clearvardialog.ui \
     dialogs/autocorrectposdialog.ui \
     dialogs/stacksetdialog.ui \
-    dialogs/stackedit.ui
+    dialogs/stackedit.ui \
+    dialogs/sigdefinedialog.ui
 
 SOURCES +=  \
     Keyboard/KeyButton.cpp \

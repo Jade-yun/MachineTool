@@ -16,13 +16,13 @@
   <property name="styleSheet">
    <string notr="true">QLabel { 
 	font-family: 'SimSun';
-	font-size: 20px; 
+	font-size: 22px; 
 }
 
 
 QWidget{ 
 	font-family: 'SimSun';
-	font-size: 20px; 
+	font-size: 22px; 
 }
 
 /*******************************************************/
@@ -61,7 +61,7 @@ QPushButton:pressed
 }
 /*****************************************************/
 QCheckBox { 
-font-size: 20px;
+font-size: 22px;
 font-weight:normal;
 font-family: 'SimSun';
 }

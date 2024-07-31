@@ -13,73 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QComboBox" name="coboxStackOrder">
-   <property name="geometry">
-    <rect>
-     <x>75</x>
-     <y>5</y>
-     <width>150</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>150</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>150</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>SimSun</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
- 
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-
-</string>
-   </property>
-   <item>
-    <property name="text">
-     <string>Y1-X1-Z1</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>X1-Y1-Z1</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Z1-Y1-X1</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>Z1-X1-Y1</string>
-    </property>
-   </item>
-  </widget>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QGroupBox" name="grboxAxisZPara">
    <property name="geometry">
     <rect>
@@ -105,15 +41,6 @@ QComboBox::down-arrow {
     <font>
      <family>SimSun</family>
     </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QGroupBox { border: 1px solid black;
-border-radius:5px;
-margin-top:10px; }
-QGroupBox::title { subcontrol-origin: margin;
-	left: 10px;
-	bottom: 5px;
-}</string>
    </property>
    <property name="title">
     <string>Z轴参数</string>
@@ -178,26 +105,6 @@ QGroupBox::title { subcontrol-origin: margin;
       <family>SimSun</family>
      </font>
     </property>
-    <property name="styleSheet">
-     <string notr="true">QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
- 
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-
-</string>
-    </property>
     <item>
      <property name="text">
       <string>从小到大</string>
@@ -255,12 +162,6 @@ QComboBox::down-arrow {
       <height>40</height>
      </size>
     </property>
-    <property name="styleSheet">
-     <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-    </property>
     <property name="text">
      <string>0.00</string>
     </property>
@@ -291,275 +192,6 @@ border: 1px solid #000000;
     </property>
    </widget>
   </widget>
-  <widget class="QLabel" name="labOrder">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>5</y>
-     <width>51</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>顺序</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="coboxStopAfterStack">
-   <property name="geometry">
-    <rect>
-     <x>830</x>
-     <y>5</y>
-     <width>110</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>110</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>110</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>SimSun</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
- 
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-
-</string>
-   </property>
-   <item>
-    <property name="text">
-     <string>不使用</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>使用</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QLabel" name="label_165">
-   <property name="geometry">
-    <rect>
-     <x>705</x>
-     <y>5</y>
-     <width>121</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>堆叠完停止</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="labCounWay">
-   <property name="geometry">
-    <rect>
-     <x>375</x>
-     <y>5</y>
-     <width>101</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>0</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="text">
-    <string>计数方式</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="coboxCountWay">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>5</y>
-     <width>150</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>150</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>150</width>
-     <height>40</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <family>SimSun</family>
-    </font>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
- 
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-
-</string>
-   </property>
-   <item>
-    <property name="text">
-     <string>全部</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>良品</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠1组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠2组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠3组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠4组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠5组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠6组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠7组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>堆叠8组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步1组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步2组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步3组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步4组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步5组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步6组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步7组</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>同步8组</string>
-    </property>
-   </item>
-  </widget>
   <widget class="QLabel" name="labGif">
    <property name="geometry">
     <rect>
@@ -585,220 +217,13 @@ QComboBox::down-arrow {
      <x>305</x>
      <y>50</y>
      <width>710</width>
-     <height>460</height>
+     <height>410</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page">
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>400</y>
-       <width>701</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="hLayoutBottomBtn">
-      <property name="topMargin">
-       <number>6</number>
-      </property>
-      <property name="bottomMargin">
-       <number>1</number>
-      </property>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Maximum</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>250</width>
-          <height>37</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnFresh">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>SimSun</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>刷新</string>
-        </property>
-        <property name="icon">
-         <iconset resource="../images.qrc">
-          <normaloff>:/images/settingPageImages/refresh.png</normaloff>:/images/settingPageImages/refresh.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>25</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnMoveToStack">
-        <property name="minimumSize">
-         <size>
-          <width>170</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>170</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>SimSun</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>移至堆叠点</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>25</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnMoveToFollow">
-        <property name="minimumSize">
-         <size>
-          <width>170</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>170</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>SimSun</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>移至跟随点</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>25</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnOK">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>SimSun</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>OK</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>25</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btnCancel">
-        <property name="minimumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>100</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <family>SimSun</family>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Cancel</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>25</width>
-          <height>25</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QTableWidget" name="tableStack">
      <property name="geometry">
       <rect>
@@ -820,13 +245,13 @@ QComboBox::down-arrow {
     </widget>
    </widget>
    <widget class="QWidget" name="pageNormalStack">
-    <widget class="QFrame" name="frameNormalStack">
+    <widget class="QFrame" name="chbox">
      <property name="geometry">
       <rect>
        <x>0</x>
        <y>0</y>
        <width>700</width>
-       <height>455</height>
+       <height>401</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -835,13 +260,13 @@ QComboBox::down-arrow {
      <property name="frameShadow">
       <enum>QFrame::Raised</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
         <width>667</width>
-        <height>374</height>
+        <height>381</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
@@ -849,9 +274,358 @@ QComboBox::down-arrow {
         <number>40</number>
        </property>
        <property name="verticalSpacing">
-        <number>15</number>
+        <number>6</number>
        </property>
-       <item row="1" column="0">
+       <item row="7" column="0">
+        <widget class="QLabel" name="labIntervalDis_10">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>方向</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="editGap_11">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="editGap_14">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLineEdit" name="editGap_16">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="3">
+        <widget class="QLineEdit" name="editGap_18">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QComboBox" name="comboBox">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>从小到大</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>从大到小</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labIntervalDis_6">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>间距(mm)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="editGap_8">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QLineEdit" name="editIntervalDis2">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="editStart1">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3">
+        <widget class="QLineEdit" name="editGap_10">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QLineEdit" name="editGap_12">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="editIntervalDis1">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="editGap_9">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLineEdit" name="editStart2">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="editStart0">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="3">
+        <widget class="QLineEdit" name="editGap_13">
+         <property name="minimumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>140</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labIntervalDis_9">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>偏移</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
         <widget class="QLabel" name="labIntervalDis_2">
          <property name="minimumSize">
           <size>
@@ -918,7 +692,7 @@ QComboBox::down-arrow {
          </item>
         </layout>
        </item>
-       <item row="3" column="0">
+       <item row="4" column="0">
         <widget class="QLabel" name="labIntervalDis_7">
          <property name="minimumSize">
           <size>
@@ -1033,7 +807,7 @@ QComboBox::down-arrow {
          </item>
         </layout>
        </item>
-       <item row="4" column="0">
+       <item row="5" column="0">
         <widget class="QLabel" name="labIntervalDis_8">
          <property name="minimumSize">
           <size>
@@ -1052,7 +826,7 @@ QComboBox::down-arrow {
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
+       <item row="3" column="1">
         <widget class="QLineEdit" name="editIntervalDis0">
          <property name="minimumSize">
           <size>
@@ -1066,19 +840,13 @@ QComboBox::down-arrow {
            <height>40</height>
           </size>
          </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
          <property name="text">
           <string>0.00</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="labIntervalDis_6">
+       <item row="1" column="0">
+        <widget class="QLabel" name="labIntervalDis_3">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -1092,400 +860,12 @@ border: 1px solid #000000;
           </size>
          </property>
          <property name="text">
-          <string>间距(mm)</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="editGap_8">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="3">
-        <widget class="QLineEdit" name="editIntervalDis2">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLineEdit" name="editStart1">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="3">
-        <widget class="QLineEdit" name="editGap_10">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QLineEdit" name="editGap_12">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLineEdit" name="editIntervalDis1">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QLineEdit" name="editGap_9">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QLineEdit" name="editStart2">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
+          <string>起始(mm)</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="editStart0">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="3">
-        <widget class="QLineEdit" name="editGap_13">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="labIntervalDis_9">
-         <property name="minimumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>偏移</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="labIntervalDis_10">
-         <property name="minimumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="text">
-          <string>方向</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="1">
-        <widget class="QLineEdit" name="editGap_11">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="1">
-        <widget class="QLineEdit" name="editGap_14">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
-        <widget class="QLineEdit" name="editGap_16">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="3">
-        <widget class="QLineEdit" name="editGap_18">
-         <property name="minimumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>140</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QLineEdit {
-border-radius: 5px;
-border: 1px solid #000000;
-}</string>
-         </property>
-         <property name="text">
-          <string>0.00</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="comboBox_4">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -1498,9 +878,71 @@ border: 1px solid #000000;
            <height>40</height>
           </size>
          </property>
+         <item>
+          <property name="text">
+           <string>X1轴</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>X2轴</string>
+          </property>
+         </item>
         </widget>
        </item>
-       <item row="6" column="2">
+       <item row="1" column="2">
+        <widget class="QComboBox" name="comboBox_5">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Y1轴</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y2轴</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QComboBox" name="comboBox_6">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>Z1轴</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Z2轴</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="7" column="2">
         <widget class="QComboBox" name="comboBox_2">
          <property name="minimumSize">
           <size>
@@ -1514,9 +956,19 @@ border: 1px solid #000000;
            <height>40</height>
           </size>
          </property>
+         <item>
+          <property name="text">
+           <string>从小到大</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>从大到小</string>
+          </property>
+         </item>
         </widget>
        </item>
-       <item row="6" column="3">
+       <item row="7" column="3">
         <widget class="QComboBox" name="comboBox_3">
          <property name="minimumSize">
           <size>
@@ -1530,12 +982,550 @@ border: 1px solid #000000;
            <height>40</height>
           </size>
          </property>
+         <item>
+          <property name="text">
+           <string>从小到大</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>从大到小</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>
      </widget>
     </widget>
    </widget>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>450</y>
+     <width>821</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="hLayoutBottomBtn">
+    <property name="spacing">
+     <number>10</number>
+    </property>
+    <property name="topMargin">
+     <number>6</number>
+    </property>
+    <property name="bottomMargin">
+     <number>1</number>
+    </property>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Expanding</enum>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnFresh">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>刷新</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../images.qrc">
+        <normaloff>:/images/settingPageImages/refresh.png</normaloff>:/images/settingPageImages/refresh.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnMoveToStack">
+      <property name="minimumSize">
+       <size>
+        <width>170</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>170</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>移至堆叠点</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnMoveToFollow">
+      <property name="minimumSize">
+       <size>
+        <width>170</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>170</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>移至跟随点</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnOK">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>OK</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnCancel">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>25</width>
+        <height>25</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>5</y>
+     <width>991</width>
+     <height>42</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <property name="spacing">
+     <number>6</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="labOrder">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>顺序</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="coboxStackOrder">
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>Y1-X1-Z1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>X1-Y1-Z1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Z1-Y1-X1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Z1-X1-Y1</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="labCounWay">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>计数方式</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="coboxCountWay">
+      <property name="minimumSize">
+       <size>
+        <width>130</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>130</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>全部</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>良品</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠1组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠2组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠3组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠4组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠5组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠6组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠7组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠8组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步1组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步2组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步3组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步4组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步5组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步6组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步7组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>同步8组</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="label_165">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>堆叠完停止</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="coboxStopAfterStack">
+      <property name="minimumSize">
+       <size>
+        <width>110</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>110</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>不使用</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>使用</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="labOrder_2">
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>50</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>留空</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QComboBox" name="coboxStopAfterStack_2">
+      <property name="minimumSize">
+       <size>
+        <width>110</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>110</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>SimSun</family>
+       </font>
+      </property>
+      <item>
+       <property name="text">
+        <string>不使用</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>使用</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="checkBoxTriAxisUnion">
+      <property name="text">
+       <string>三轴联动</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources>

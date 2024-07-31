@@ -82,11 +82,17 @@ void StackEdit::switchStackWay(int mode)
     {
         ui->stkWgtStackWay->setCurrentIndex(0);
         ui->grboxAxisZPara->show();
+        ui->btnFresh->show();
+        ui->btnMoveToStack->show();
+        ui->btnMoveToFollow->show();
     }
     else if (mode == 2)
     {
         ui->stkWgtStackWay->setCurrentIndex(1);
         ui->grboxAxisZPara->hide();
+        ui->btnFresh->hide();
+        ui->btnMoveToStack->hide();
+        ui->btnMoveToFollow->hide();
     }
 }
 
@@ -117,6 +123,24 @@ StackEdit::StackEdit(QWidget *parent) :
     ui->btnCancel->setVisible(false);
 
     ui->coboxStackOrder->setCurrentIndex(1);
+
+    connect(ui->btnOK, &QPushButton::clicked, [=](){
+       QDialog* dialog = qobject_cast<QDialog*>(this->parent());
+       if (dialog)
+       {
+//           qDebug() << "close parent dialog";
+           dialog->close();
+       }
+//       else
+//            qDebug() << "parent widget is not a dialog";
+    });
+    connect(ui->btnCancel, &QPushButton::clicked, [=](){
+        QDialog* dialog = qobject_cast<QDialog*>(this->parent());
+        if (dialog)
+        {
+            dialog->close();
+        }
+    });
 
 }
 

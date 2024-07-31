@@ -2,11 +2,12 @@
 #include "ui_setting.h"
 
 #include <QMovie>
+#include <QPair>
 #include <QDebug>
 
 #include "stackedit.h"
 
-#define TEST 1
+#define TEST 0
 //#define TESTKEYBOARD 1
 
 Setting::Setting(QWidget *parent) :
@@ -15,8 +16,6 @@ Setting::Setting(QWidget *parent) :
 {
     ui->setupUi(this);
     initVariables();
-
-    setAllStyleSheet();
 
 //    ui->checkBoxPoiskie->setDisabled(true);
 //    ui->checkBoxRussian->setDisabled(true);
@@ -27,13 +26,17 @@ Setting::Setting(QWidget *parent) :
 
     pageSwitchInit();
 
-    stack[1] = new StackEdit(ui->tabWidgetStack->widget(1));
-    stack[2] = new StackEdit(ui->tabWidgetStack->widget(2));
-    connect(ui->coboxStackWay, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        stack[1]->switchStackWay(index);
-        stack[2]->switchStackWay(index);
-    });
+    for (int i = 0; i < 8; i++)
+    {
+        stack[i] = new StackEdit(ui->tabWidgetStack->widget(i));
+    }
 
+    connect(ui->coboxStackWay, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        for (int i = 0; i < 8; i++)
+        {
+            stack[i]->switchStackWay(index);
+        }
+    });
 #if TEST
     /////////////////////////
     for (int i = 0; i < 3; i++)
@@ -64,8 +67,6 @@ Setting::Setting(QWidget *parent) :
 Setting::~Setting()
 {
     delete ui;
-    delete movie;
-    movie = nullptr;
 }
 
 void Setting::slotSettingHome()
@@ -75,36 +76,13 @@ void Setting::slotSettingHome()
     //    qDebug() << "slotSettingHome";
 }
 
-void Setting::loadAndPlayGif(const QString& path)
-{
-    if (movie)
-    {
-        movie->stop();
-    }
-    //    movie = new QMovie(path, this);
-    //    ui->gifLabel->resize(width, height);
-    movie->setFileName(path);
-    movie->setSpeed(50);
-    ui->gifLabel->setMovie(movie);
-    movie->start();
-}
-
 
 // to initial all variables in this function
 void Setting::initVariables()
 {
-    movie = new QMovie(QString(":/images/gif/test.gif"));
+//    movie = new QMovie(QString(":/images/gif/test.gif"));
 }
 
-
-
-void Setting::on_comboBox_96_currentIndexChanged(int index)
-{
-    if (index == 0)
-        this->loadAndPlayGif(":/images/gif/test.gif");
-    if (index == 1)
-        this->loadAndPlayGif(":/images/gif/test1.gif");
-}
 
 void Setting::pageSwitchInit()
 {
@@ -168,6 +146,45 @@ void Setting::pageSwitchInit()
     });
 
 
+    /***************************************信号设置************************************************/
+    // 互锁设置逻辑
+    auto setCheckBoxesState = [&](const QVector<QCheckBox*>& checkBoxes, bool enabled){
+        for (auto checkBox : checkBoxes)
+        {
+            checkBox->setEnabled(enabled);
+            if (!enabled)
+            {
+                checkBox->setChecked(false);
+            }
+        }
+    };
+    auto setupCheckBoxGroup = [&](QCheckBox* masterCheckBox, const QVector<QCheckBox*>& checkBoxes){
+        connect(masterCheckBox, QOverload<int>::of(&QCheckBox::stateChanged), [=](int state){
+            setCheckBoxesState(checkBoxes, state == Qt::Checked);
+        });
+    };
+
+    // 6+6组 依次为： 原料1夹紧 成品1夹紧 卡爪1正转 自动门1开 卡盘1夹紧 预留1
+    QVector<QPair<QCheckBox*, QVector<QCheckBox*>>> checkBoxGroups = {
+        {ui->chbox0InterlockGroup0, {ui->chbox1InterlockGroup0, ui->chbox2InterlockGroup0, ui->chbox3InterlockGroup0}},
+        {ui->chbox0InterlockGroup1, {ui->chbox1InterlockGroup1, ui->chbox2InterlockGroup1, ui->chbox3InterlockGroup1}},
+        {ui->chbox0InterlockGroup2, {ui->chbox1InterlockGroup2, ui->chbox2InterlockGroup2, ui->chbox3InterlockGroup2}},
+        {ui->chbox0InterlockGroup3, {ui->chbox1InterlockGroup3, ui->chbox2InterlockGroup3, ui->chbox3InterlockGroup3}},
+        {ui->chbox0InterlockGroup4, {ui->chbox1InterlockGroup4, ui->chbox2InterlockGroup4, ui->chbox3InterlockGroup4}},
+        {ui->chbox0InterlockGroup5, {ui->chbox1InterlockGroup5, ui->chbox2InterlockGroup5, ui->chbox3InterlockGroup5}},
+        {ui->chbox0InterlockGroup6, {ui->chbox1InterlockGroup6, ui->chbox2InterlockGroup6, ui->chbox3InterlockGroup6}},
+        {ui->chbox0InterlockGroup7, {ui->chbox1InterlockGroup7, ui->chbox2InterlockGroup7, ui->chbox3InterlockGroup7}},
+        {ui->chbox0InterlockGroup8, {ui->chbox1InterlockGroup8, ui->chbox2InterlockGroup8, ui->chbox3InterlockGroup8}},
+        {ui->chbox0InterlockGroup9, {ui->chbox1InterlockGroup9, ui->chbox2InterlockGroup9, ui->chbox3InterlockGroup9}},
+        {ui->chbox0InterlockGroup10, {ui->chbox1InterlockGroup10, ui->chbox2InterlockGroup10, ui->chbox3InterlockGroup10}},
+        {ui->chbox0InterlockGroup11, {ui->chbox1InterlockGroup11, ui->chbox2InterlockGroup11, ui->chbox3InterlockGroup11}}
+    };
+
+    for (const auto& group : checkBoxGroups) {
+        setupCheckBoxGroup(group.first, group.second);
+    }
+
+
   /***************************************System setting part**********************************************************/
     connect(ui->coboxIOTSelection, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index){
     //    qDebug() << "index = " << index;
@@ -185,14 +202,6 @@ void Setting::pageSwitchInit()
         ui->widgetIotDebug->setEnabled(true);
     }
     ui->stkWidgetIPSet->setCurrentIndex(index);
-//    if (index == 0)
-//    {
-//        ui->stkWidgetIPSet->setCurrentIndex(0);
-//    }
-//    else if (index == 1)
-//    {
-//        ui->stkWidgetIPSet->setCurrentIndex(1);
-//    }
     });
 /***************************************Product setting part**********************************************************/
 
@@ -207,57 +216,17 @@ void Setting::pageSwitchInit()
     });
 
     /******************************Servo Safe Point************************************************************/
-    // 安全区1
     // 是否使用安全区
-#if 0
-    connect(ui->coboxSafeArea1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        for (QGroupBox* grbox : ui->tabSafeArea1->findChildren<QGroupBox*>())
-        {
-            grbox->setEnabled(index);
-        }
-    });
-    // X轴  0: 无 1: X1
-    connect(ui->coboxAxisXSA1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-
-        ui->labAxisXSelectSA1->setText(text);
-//        qDebug() << "text: " << text;
-        if (text == "无")
-            ui->labAxisCSelectSA1->setText(text);
-        else
-            ui->labAxisCSelectSA1->setText(tr("C1C2"));
-    });
-    connect(ui->coboxAxisXSA1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisXSelectSA1->setEnabled(index);
-        ui->labAxisCSelectSA1->setEnabled(index);
-        ui->editMachineA1AxisXSA1->setEnabled(index);
-        ui->editMachineA2AxisXSA1->setEnabled(index);
-        ui->editStockBinB1AxisXSA1->setEnabled(index);
-        ui->editStockBinB2AxisXSA1->setEnabled(index);
-    });
-    // Y轴 0: 无 1: Y1 2: Y2
-    connect(ui->coboxAxisYSA1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->labAxisYSelectSA1->setEnabled(index);
-        ui->editMachineA1AxisYSA1->setEnabled(index);
-        ui->editMachineA2AxisYSA1->setEnabled(index);
-        ui->editStockBinB1AxisYSA1->setEnabled(index);
-        ui->editStockBinB2AxisYSA1->setEnabled(index);
-    });
-    connect(ui->coboxAxisYSA1, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-        ui->labAxisYSelectSA1->setText(text);
-    });
-    // 0: 不选择 1: Z1 2: Z2
-    connect(ui->coboxAxisZSA1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-        ui->grboxZAxisMachineParaSA1->setEnabled(index);
-        ui->grboxZAxisStockBinParaSA1->setEnabled(index);
-    });
-#endif
-
-    // Helper function to connect QComboBox index changes to QGroupBox enabling
-    auto connectComboBoxToGroupBoxes = [&](QComboBox* comboBox, QWidget* tab) {
+    auto connectComboBoxToGroupBoxes = [&](QComboBox* comboBox, QGroupBox* grbox1, QGroupBox* grbox2,
+            QGroupBox* grbox3, QGroupBox* grbox4, bool enabled)
+    {
         connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-            for (QGroupBox* grbox : tab->findChildren<QGroupBox*>()) {
-                grbox->setEnabled(index);
-            }
+
+            grbox1->setEnabled(index);
+            grbox2->setEnabled(index);
+
+            grbox3->setEnabled(index & enabled);
+            grbox4->setEnabled(index & enabled);
         });
     };
 
@@ -265,13 +234,14 @@ void Setting::pageSwitchInit()
     auto connectAxisX = [&](QComboBox* comboBox, QLabel* labelX, QLabel* labelC, QLineEdit* edit1,
             QLineEdit* edit2, QLineEdit* edit3, QLineEdit* edit4, QLineEdit* editC1, QLineEdit* editC2)
     {
-        connect(comboBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-            labelX->setText(text);
-            labelC->setText(text == "无" ? text : tr("C1C2"));
-        });
         connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-//            labelX->setEnabled(index);
-//            labelC->setEnabled(index);
+
+            QString text = comboBox->currentText();
+            labelX->setText(text);
+            labelC->setText(text == "无" || text == "None" ? text : tr("C1C2"));
+
+            labelX->setEnabled(index);
+            labelC->setEnabled(index);
             edit1->setEnabled(index);
             edit2->setEnabled(index);
             edit3->setEnabled(index);
@@ -286,19 +256,18 @@ void Setting::pageSwitchInit()
             QLineEdit* edit3, QLineEdit* edit4)
     {
         connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
-//            labelY->setEnabled(index);
+            labelY->setEnabled(index);
             edit1->setEnabled(index);
             edit2->setEnabled(index);
             edit3->setEnabled(index);
             edit4->setEnabled(index);
-        });
-        connect(comboBox, QOverload<const QString&>::of(&QComboBox::currentIndexChanged), [=](const QString& text){
-            labelY->setText(text);
+            labelY->setText(comboBox->currentText());
         });
     };
 
     // Helper function to connect QComboBox index changes to QGroupBox enabling
-    auto connectAxisZ = [&](QComboBox* comboBox, QGroupBox* groupBox1, QGroupBox* groupBox2) {
+    auto connectAxisZ = [&](QComboBox* comboBox, QGroupBox* groupBox1, QGroupBox* groupBox2)
+    {
         connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
             groupBox1->setEnabled(index);
             groupBox2->setEnabled(index);
@@ -306,7 +275,9 @@ void Setting::pageSwitchInit()
     };
 
     // 安全区1
-    connectComboBoxToGroupBoxes(ui->coboxSafeArea1, ui->tabSafeArea1);
+    connectComboBoxToGroupBoxes(ui->coboxSafeArea1, ui->grboxAxisCombineSA1Arm2, ui->grboxXYParaSA1,
+                                ui->grboxZAxisMachineParaSA1, ui->grboxZAxisStockBinParaSA1,
+                                ui->coboxAxisZSA1->currentIndex() != 0);
     connectAxisX(ui->coboxAxisXSA1, ui->labAxisXSelectSA1, ui->labAxisCSelectSA1,
                  ui->editMachineA1AxisXSA1, ui->editMachineA2AxisXSA1,
                  ui->editStockBinB1AxisXSA1, ui->editStockBinB2AxisXSA1,
@@ -317,7 +288,9 @@ void Setting::pageSwitchInit()
     connectAxisZ(ui->coboxAxisZSA1, ui->grboxZAxisMachineParaSA1, ui->grboxZAxisStockBinParaSA1);
 
     // 安全区2
-    connectComboBoxToGroupBoxes(ui->coboxSafeArea1_2, ui->tabSafeArea2);
+    connectComboBoxToGroupBoxes(ui->coboxSafeArea1_2, ui->grboxAxisCombineSA1Arm2_2, ui->grboxXYParaSA1_2,
+                                ui->grboxZAxisMachineParaSA1_2, ui->grboxZAxisStockBinParaSA1_2,
+                                ui->coboxAxisZSA1_2->currentIndex() == 0);
     connectAxisX(ui->coboxAxisXSA1_2, ui->labAxisXSelectSA1_2, ui->labAxisCSelectSA1_2,
                  ui->editMachineA1AxisXSA1_2, ui->editMachineA2AxisXSA1_2,
                  ui->editStockBinB1AxisXSA1_2, ui->editStockBinB2AxisXSA1_2,
@@ -326,6 +299,56 @@ void Setting::pageSwitchInit()
                  ui->editMachineA1AxisYSA1_2, ui->editMachineA2AxisYSA1_2,
                  ui->editStockBinB1AxisYSA1_2, ui->editStockBinB2AxisYSA1_2);
     connectAxisZ(ui->coboxAxisZSA1_2, ui->grboxZAxisMachineParaSA1_2, ui->grboxZAxisStockBinParaSA1_2);
+
+    // 安全区3
+    connectComboBoxToGroupBoxes(ui->coboxSafeArea1_3, ui->grboxAxisCombineSA1Arm2_3, ui->grboxXYParaSA1_3,
+                                ui->grboxZAxisMachineParaSA1_3, ui->grboxZAxisStockBinParaSA1_3,
+                                ui->coboxAxisZSA1_3->currentIndex() == 0);
+    connectAxisX(ui->coboxAxisXSA1_3, ui->labAxisXSelectSA1_3, ui->labAxisCSelectSA1_3,
+                 ui->editMachineA1AxisXSA1_3, ui->editMachineA2AxisXSA1_3,
+                 ui->editStockBinB1AxisXSA1_3, ui->editStockBinB2AxisXSA1_3,
+                 ui->editMachineA1AxisCSA1_3, ui->editMachineA2AxisCSA1_3);
+    connectAxisY(ui->coboxAxisYSA1_3, ui->labAxisYSelectSA1_3,
+                 ui->editMachineA1AxisYSA1_3, ui->editMachineA2AxisYSA1_3,
+                 ui->editStockBinB1AxisYSA1_3, ui->editStockBinB2AxisYSA1_3);
+    connectAxisZ(ui->coboxAxisZSA1_3, ui->grboxZAxisMachineParaSA1_3, ui->grboxZAxisStockBinParaSA1_3);
+
+    // 安全区4
+    connectComboBoxToGroupBoxes(ui->coboxSafeArea1_4, ui->grboxAxisCombineSA1Arm2_4, ui->grboxXYParaSA1_4,
+                                ui->grboxZAxisMachineParaSA1_4, ui->grboxZAxisStockBinParaSA1_4,
+                                ui->coboxAxisZSA1_4->currentIndex() == 0);
+    connectAxisX(ui->coboxAxisXSA1_4, ui->labAxisXSelectSA1_4, ui->labAxisCSelectSA1_4,
+                 ui->editMachineA1AxisXSA1_4, ui->editMachineA2AxisXSA1_4,
+                 ui->editStockBinB1AxisXSA1_4, ui->editStockBinB2AxisXSA1_4,
+                 ui->editMachineA1AxisCSA1_4, ui->editMachineA2AxisCSA1_4);
+    connectAxisY(ui->coboxAxisYSA1_4, ui->labAxisYSelectSA1_4,
+                 ui->editMachineA1AxisYSA1_4, ui->editMachineA2AxisYSA1_4,
+                 ui->editStockBinB1AxisYSA1_4, ui->editStockBinB2AxisYSA1_4);
+    connectAxisZ(ui->coboxAxisZSA1_4, ui->grboxZAxisMachineParaSA1_4, ui->grboxZAxisStockBinParaSA1_4);
+
+    /******************************Stack Setting************************************************************/
+    // 按组堆叠
+    connect(ui->coboxGroupStack, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        ui->coboxLayerStack->setEnabled(!index);
+        ui->coboxRowStack->setEnabled(!index);
+    });
+    // 按行堆叠
+    connect(ui->coboxRowStack, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        ui->coboxLayerStack->setEnabled(!index);
+        ui->coboxGroupStack->setEnabled(!index);
+    });
+    // 按层堆叠
+    connect(ui->coboxLayerStack, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        ui->coboxRowStack->setEnabled(!index);
+        ui->coboxGroupStack->setEnabled(!index);
+    });
+    // 旋转料仓类型
+    connect(ui->coboxSiloType, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        ui->labRotateSiloFinHint->setVisible(index);
+        ui->coboxRotateSiloFinHint->setVisible(index);
+        ui->labRotateSiloPlaceNum->setVisible(index);
+        ui->editRotateSiloPlaceNum->setVisible(index);
+    });
 
 }
 
@@ -387,6 +410,7 @@ void Setting::onPushButtonGeneralClicked(int index)
     }
 }
 
+#if 0
 void Setting::setAllStyleSheet()
 {
     tb_general_btn = new QPushButton();
@@ -444,9 +468,10 @@ void Setting::setAllStyleSheet()
 
 }
 
-
+#endif
 
 
 #endif
+
 
 

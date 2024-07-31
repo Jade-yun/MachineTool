@@ -57,8 +57,8 @@ FullKeyboard::FullKeyboard(QWidget* parent)
     setFixedSize(850, 430);
     setAcceptDrops(true);
     this->setModal(true);
-    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
-
+//    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+    this->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
 
     textInput->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 //    textInput->setStyleSheet(qss);
@@ -67,7 +67,6 @@ FullKeyboard::FullKeyboard(QWidget* parent)
     v->addWidget(textInput, 1);
     v->addWidget(keyboard, 5);
     this->setLayout(v);
-
 //    connect(keyboard, &AeaQt::Keyboard::keyEnterPressed, this, &FullKeyboard::onKeyEnterPressed);
 
 }
@@ -140,7 +139,9 @@ NumKeyboard::NumKeyboard(QWidget *parent)
 
     setFixedSize(450, 370);
 //    this->setModal(false);
-    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+//    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+//    this->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+    this->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::CustomizeWindowHint);
 
     textInput->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 

@@ -6,6 +6,9 @@
 #include <QFile>
 
 #include <QMessageBox>
+#include "stackedit.h"
+#include "keydefinedialog.h"
+#include "sigdefinedialog.h"
 
 #pragma execution_character_set("utf-8")
 
@@ -24,9 +27,42 @@ MainWindow::MainWindow(QWidget *parent)
             qDebug() << "Label toggled, checked:" << checked;
     });
 
-    setWindowTitle(QString());
+//    setWindowTitle(QString());
 //    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
+
+    for (auto dlg : findChildren<QDialog*>())
+    {
+        dlg->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+    }
+
+    connect(ui->btnAdmin, &QPushButton::clicked, [=](){
+
+        QDialog *dialog = new QDialog(this);
+
+        dialog->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+//        for (auto dlg : findChildren<QDialog*>())
+//        {
+//            dlg->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
+//        }
+
+        auto p = qobject_cast<QWidget*>(stack[1]->parent());
+        QPointer<StackEdit> tempStack = stack[1];
+        tempStack->setParent(dialog);
+        emit tempStack->showOKandCancelButton(true);
+        dialog->exec();
+        // fixed me???
+        // why is this essential??? in case that stack1 to be a dangling pointer
+        if (p)
+        {
+            stack[1]->setParent(p);
+            emit tempStack->showOKandCancelButton(false);
+            stack[1]->show();
+        }
+        else
+            stack[1]->setParent(nullptr);
+
+    });
 
     FullKeyboard::instance(this);
     NumKeyboard::instance(this);
@@ -66,6 +102,11 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     
+    handWheel = new HandWheelDialog(this);
+    connect(ui->btnHandWheel, &QPushButton::clicked, handWheel, [=](){
+        handWheel->exec();
+    });
+
 }
 
 MainWindow::~MainWindow()
@@ -184,8 +225,16 @@ void MainWindow::setStyleFromFile(const QString &styleSheet)
 // ultimize the event mechanism in Qt to call virtual keyboard
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
-    QLineEdit* numberEdit = qobject_cast<QLineEdit*>(watched);
-    if (numberEdit && numberEdit->isEnabled())
+//    QLineEdit* numberEdit = qobject_cast<QLineEdit*>(watched);
+    QLineEdit* numberEdit = dynamic_cast<QLineEdit*>(watched);
+
+    KeyEdit* keyEdit = qobject_cast<KeyEdit*>(watched);
+    SigLEDEdit* sigEdit = qobject_cast<SigLEDEdit*>(watched);
+    if (keyEdit || sigEdit)
+    {
+        return QWidget::eventFilter(watched, event);
+    }
+    else if (numberEdit && numberEdit->isEnabled())
     {
         if (event->type() == QEvent::MouseButtonPress)
         {

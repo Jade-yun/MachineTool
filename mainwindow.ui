@@ -1262,7 +1262,7 @@ QComboBox QAbstractItemView::item:selected{
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="btnRoller">
+    <widget class="QPushButton" name="btnHandWheel">
      <property name="geometry">
       <rect>
        <x>175</x>
@@ -1344,13 +1344,13 @@ QComboBox QAbstractItemView::item:selected{
      </property>
     </widget>
    </widget>
+   <zorder>stkWidget</zorder>
    <zorder>wgtHelp</zorder>
    <zorder>groupBoxHomeBottom</zorder>
    <zorder>groupBoxXYZOUV</zorder>
    <zorder>groupBoxHomeTopLeft</zorder>
    <zorder>groupBoxHomeTopMid</zorder>
    <zorder>groupBoxHomeTopRight</zorder>
-   <zorder>stkWidget</zorder>
   </widget>
  </widget>
  <customwidgets>

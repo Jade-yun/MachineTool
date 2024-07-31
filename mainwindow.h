@@ -12,6 +12,8 @@
 #include "teachmanage.h"
 
 #include "customkeyboard.h"
+#include "handwheeldialog.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -46,6 +48,9 @@ private:
     ManualForm *manualWidget;
     TeachManage* teachManageWidget;
 
+// dialogs
+public:
+    HandWheelDialog *handWheel;
 private:
     Ui::MainWindow *ui;
 
