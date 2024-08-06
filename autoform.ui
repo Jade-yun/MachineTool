@@ -410,7 +410,7 @@ QScrollBar::handle:vertical:hover
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page_5">
     <widget class="QPushButton" name="btnClear">

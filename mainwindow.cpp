@@ -23,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    FullKeyboard::instance(this);
+//    NumKeyboard::instance(this);
+
     connect(ui->labProgramName, &ClickableLabel::toggled, this, [=](bool checked){
             qDebug() << "Label toggled, checked:" << checked;
     });
@@ -64,9 +67,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     });
 
-    FullKeyboard::instance(this);
-    NumKeyboard::instance(this);
-
     setWidget = new Setting(this);
     ui->stkWidget->addWidget(setWidget);
     teachWidget = new Teach(this);
@@ -94,12 +94,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 //    ui->labDateTime->keyPressEvent();
 
-    QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
-//    qDebug() << "number of QLineEdit" << lineEdits.size();
-    for (auto edit : lineEdits)
-    {
-        edit->installEventFilter(this);
-    }
+//    QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
+////    qDebug() << "number of QLineEdit" << lineEdits.size();
+//    for (auto edit : lineEdits)
+//    {
+//        edit->installEventFilter(this);
+//    }
 
     
     handWheel = new HandWheelDialog(this);

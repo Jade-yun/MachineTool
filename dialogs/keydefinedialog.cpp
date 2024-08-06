@@ -9,18 +9,78 @@ KeyDefineDialog::KeyDefineDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    connect(ui->btnOK, &QPushButton::clicked, [=](){
-        this->close();
-    });
-    connect(ui->btnCancel, &QPushButton::clicked, [=](){
-        this->close();
-    });
+    connect(ui->btnOK, &QPushButton::clicked, this, &KeyDefineDialog::accept);
+    connect(ui->btnCancel, &QPushButton::clicked, this, &KeyDefineDialog::reject);
 }
 
 KeyDefineDialog::~KeyDefineDialog()
 {
     delete ui;
 }
+
+QString KeyDefineDialog::getValveOutStatus() const
+{
+    if (ui->chboxValveOutStatus0->isChecked()) return ui->chboxValveOutStatus0->text();
+    if (ui->chboxValveOutStatus1->isChecked()) return ui->chboxValveOutStatus1->text();
+    if (ui->chboxValveOutStatus2->isChecked()) return ui->chboxValveOutStatus2->text();
+    return QString();
+}
+
+QString KeyDefineDialog::getValveOutput() const
+{
+    if (ui->chboxValveAction0->isChecked())
+        return ui->coboxValveAction0->currentText() + QString(" ") + getValveOutStatus();
+    if (ui->chboxValveAction1->isChecked())
+        return ui->coboxValveAction1->currentText() + QString(" ") + getValveOutStatus();
+    if (ui->chboxValveAction2->isChecked())
+        return ui->coboxValveAction2->currentText() + QString(" ") + getValveOutStatus();
+    return QString("0");
+}
+
+QString KeyDefineDialog::getReserveOutStatus() const
+{
+    if (ui->chboxReserveOutStatus0->isChecked()) return ui->chboxReserveOutStatus0->text();
+    if (ui->chboxReserveOutStatus1->isChecked()) return ui->chboxReserveOutStatus1->text();
+    if (ui->chboxReserveOutStatus2->isChecked()) return ui->chboxReserveOutStatus2->text();
+    return QString();
+}
+
+QString KeyDefineDialog::getMainBoardOut() const
+{
+    if (ui->chboxMainBoardOutput0->isChecked())
+        return ui->coboxMainBoardOutput0->currentText() + QString(" ") + getReserveOutStatus();
+    if (ui->chboxMainBoardOutput1->isChecked())
+        return ui->coboxMainBoardOutput1->currentText() + QString(" ") + getReserveOutStatus();
+    return QString("0");
+}
+
+QString KeyDefineDialog::getAxisMoveDirect() const
+{
+    QString text = ui->coboxAxisSelect->currentText();
+    if (ui->chboxAxisDirect0->isChecked()) return text + QString(" ") + ui->chboxAxisDirect0->text();
+    if (ui->chboxAxisDirect0->isChecked()) return text + QString(" ") + ui->chboxAxisDirect1->text();;
+    return text;
+}
+
+QString KeyDefineDialog::getKeyDefine() const
+{
+    QString text;
+    switch (ui->tabWidget->currentIndex()) {
+    case 0:
+        text = getValveOutput();
+        return text;
+    case 1:
+        text = getMainBoardOut();
+        return text;
+    case 2:
+        text = getAxisMoveDirect();
+        return text;
+    default:
+        break;
+    }
+    return text;
+}
+
 
 
 #if USE_LINEEDIT
@@ -36,7 +96,13 @@ void KeyEdit::mousePressEvent(QMouseEvent *event)
     QLineEdit::mousePressEvent(event);
 //    qDebug() << "KeyEdit is clicked ";
     KeyDefineDialog dialog(this);
-    dialog.exec();
+    if (dialog.exec() == QDialog::Accepted)
+    {
+
+        QString res = dialog.getKeyDefine();
+        this->setText(res);
+
+    }
 }
 
 #else

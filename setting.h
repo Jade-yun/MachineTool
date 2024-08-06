@@ -10,6 +10,7 @@
 //#include <QList>
 
 #include "customkeyboard.h"
+#include "method/iniconfig.h"
 
 namespace Ui {
 class Setting;
@@ -26,30 +27,18 @@ public:
 private:
 
     void pageSwitchInit();
+    void machineParaLogic();
 
 public slots:
     void slotSettingHome();
-
-#if 0
-//public slots:
-//    void onComboBoxIndexChanged(int index);
-//    void onPushButtonChanged(int index);
-//    void onPushButtonHeadChanged(int index);
-//    void onPushButtonGeneralClicked(int index);
-private:
-//    void setAllStyleSheet();
-//    QPushButton* tb_1_btn[9];
-//    QPushButton* tb_1_btnHead[3];
-//    QComboBox* tb_1_comboBox[3];
-//    QLineEdit* tb_1_lineEdit[3][9];
-//    QPushButton* tb_general_btn;
-#endif
 
 private:
     Ui::Setting *ui;
 
 private:
     void initVariables();
+    void readFromConfigFile();
+    void writeToConfigFile();
 
 };
 

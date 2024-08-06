@@ -195,29 +195,15 @@ void AutoForm::callNumKeyBoard(QObject* obj)
 {
     if (obj)
     {
-        NumKeyboard* keyboard = NumKeyboard::instance();
+        NumKeyboard temp(this);
+        NumKeyboard* keyboard = &temp;
 
         keyboard->clearText();
         keyboard->setCurrentEditObj(obj);
-        keyboard->setModal(true);
-        if (keyboard->isHidden())
-        {
-            keyboard->show();
-        }
-        keyboard->raise();
-        keyboard->activateWindow();
-
-//        NumKeyboard::instance()->clearText();
-//        NumKeyboard::instance()->setCurrentEditObj(obj);
-//        NumKeyboard::instance()->setModal(false);
-//        if (NumKeyboard::instance()->isHidden())
-//        {
-//            NumKeyboard::instance()->show();
-//        }
-////        NumKeyboard::instance()->setModal(true);
-//        NumKeyboard::instance()->raise();
-//        NumKeyboard::instance()->activateWindow();
+        keyboard->exec();
     }
+
+
 }
 
 

@@ -34,6 +34,7 @@ public:
 public:
     void setCurrentEditObj(QObject* edit);
     void clearText();
+    void setText(const QString& text);
 
 public:
     ~FullKeyboard();
@@ -60,12 +61,13 @@ private:
     QLineEdit* textInput;
     AeaQt::NumberKeyboard* keyboard;
     QObject* editObj;
+    QValidator* validator;
 #if USE_INSTANCE
-    static NumKeyboard* _instance;
-    static QMutex mutex;
+//    static NumKeyboard* _instance;
+//    static QMutex mutex;
 
-public:
-    static NumKeyboard* instance(QWidget* parent = nullptr);
+//public:
+//    static NumKeyboard* instance(QWidget* parent = nullptr);
 //private:
 //    NumKeyboard(QWidget* parent = nullptr);
 #else

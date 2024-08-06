@@ -26,7 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # ensure this contains all dirPath you need, otherwise the latter will override former
-INCLUDEPATH = Keyboard dialogs
+INCLUDEPATH = Keyboard dialogs method
 
 SOURCES += \
     alarmform.cpp \
@@ -46,7 +46,10 @@ SOURCES += \
     dialogs/keydefinedialog.cpp \
     dialogs/clearvardialog.cpp \
     dialogs/stackedit.cpp \
-    dialogs/sigdefinedialog.cpp
+    dialogs/sigdefinedialog.cpp \
+#    method/cmd.cpp \
+#    method/iniconfig.cpp
+    customedit.cpp
 
 HEADERS += \
     alarmform.h \
@@ -65,7 +68,10 @@ HEADERS += \
     dialogs/keydefinedialog.h \
     dialogs/clearvardialog.h \
     dialogs/stackedit.h \
-    dialogs/sigdefinedialog.h
+    dialogs/sigdefinedialog.h \
+#    method/iniconfig.h \
+#    method/cmd.h
+    customedit.h
 
 FORMS += \
     alarmform.ui \
@@ -84,8 +90,6 @@ FORMS += \
     dialogs/referencepointdialog.ui \
     dialogs/autocorrectposdialog.ui \
     dialogs/clearvardialog.ui \
-    dialogs/autocorrectposdialog.ui \
-    dialogs/stacksetdialog.ui \
     dialogs/stackedit.ui \
     dialogs/sigdefinedialog.ui
 

@@ -1,4 +1,5 @@
 #include "customkeyboard.h"
+#include "customedit.h"
 
 #include <QTextEdit>
 #include <QLabel>
@@ -43,6 +44,11 @@ void FullKeyboard::setCurrentEditObj(QObject *edit)
 void FullKeyboard::clearText()
 {
     textInput->clear();
+}
+
+void FullKeyboard::setText(const QString &text)
+{
+    textInput->setText(text);
 }
 
 FullKeyboard::FullKeyboard(QWidget* parent)
@@ -135,6 +141,7 @@ NumKeyboard::NumKeyboard(QWidget *parent)
     editObj = nullptr;
     textInput = new QLineEdit(this);
     keyboard = new AeaQt::NumberKeyboard(this);
+    validator = nullptr;
 
 
     setFixedSize(450, 370);
@@ -144,6 +151,9 @@ NumKeyboard::NumKeyboard(QWidget *parent)
     this->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint | Qt::CustomizeWindowHint);
 
     textInput->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+
+//    QIntValidator valid = QIntValidator(INT_MIN, INT_MAX,this);
+//    textInput->setValidator(&valid);
 
     QVBoxLayout *v = new QVBoxLayout;
     v->addWidget(textInput, 1);
@@ -158,23 +168,25 @@ NumKeyboard::~NumKeyboard()
     keyboard = nullptr;
     delete textInput;
     textInput = nullptr;
+    delete validator;
+    validator = nullptr;
 }
 
 #if USE_INSTANCE
-NumKeyboard* NumKeyboard::instance(QWidget* parent)
-{
-//    static NumKeyboard _instance(parent);
-//    return &_instance;
-    if (_instance == nullptr)
-    {
-        QMutexLocker locker(&mutex);
-        if (_instance == nullptr)
-            _instance = new NumKeyboard(parent);
-    }
-    return _instance;
-}
-NumKeyboard* NumKeyboard::_instance = nullptr;
-QMutex NumKeyboard::mutex;
+//NumKeyboard* NumKeyboard::instance(QWidget* parent)
+//{
+////    static NumKeyboard _instance(parent);
+////    return &_instance;
+//    if (_instance == nullptr)
+//    {
+//        QMutexLocker locker(&mutex);
+//        if (_instance == nullptr)
+//            _instance = new NumKeyboard(parent);
+//    }
+//    return _instance;
+//}
+//NumKeyboard* NumKeyboard::_instance = nullptr;
+//QMutex NumKeyboard::mutex;
 #endif
 
 
@@ -183,6 +195,33 @@ void NumKeyboard::setCurrentEditObj(QObject *edit)
     if (editObj != edit)
     {
         editObj = edit;
+        delete validator;
+
+        NumberEdit* numberEdit = qobject_cast<NumberEdit*>(editObj);
+        if (numberEdit)
+        {
+
+            int decimalPlaces = numberEdit->getDecimalPlaces();
+            QVariant minValue = numberEdit->getMinValue();
+            QVariant maxValue = numberEdit->getMaxValue();
+
+            if (decimalPlaces == 0)
+            {
+                validator = new QIntValidator(minValue.toInt(), maxValue.toInt(), this);
+            }
+            else
+            {
+                validator = new QDoubleValidator(minValue.toDouble(), maxValue.toDouble(), decimalPlaces, this);
+                static_cast<QDoubleValidator*>(validator)->setNotation(QDoubleValidator::StandardNotation);
+            }
+
+            textInput->setValidator(validator);
+        }
+//        else
+//        {
+//            validator = new QIntValidator(INT_MIN, INT_MAX, this);
+//            textInput->setValidator(validator);
+//        }
     }
 }
 

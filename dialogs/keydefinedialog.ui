@@ -32,7 +32,7 @@
     <attribute name="title">
      <string>阀输出</string>
     </attribute>
-    <widget class="QGroupBox" name="groupBox_10">
+    <widget class="QGroupBox" name="grboxValveAction">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -55,7 +55,7 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBox_6">
+        <widget class="QCheckBox" name="chboxValveAction0">
          <property name="minimumSize">
           <size>
            <width>150</width>
@@ -71,10 +71,13 @@
          <property name="text">
           <string>卡爪</string>
          </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="coboxValveAction0">
          <property name="minimumSize">
           <size>
            <width>200</width>
@@ -130,7 +133,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QCheckBox" name="checkBox_9">
+        <widget class="QCheckBox" name="chboxValveAction1">
          <property name="minimumSize">
           <size>
            <width>150</width>
@@ -146,10 +149,13 @@
          <property name="text">
           <string>机床控制</string>
          </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBox_2">
+        <widget class="QComboBox" name="coboxValveAction1">
          <property name="minimumSize">
           <size>
            <width>200</width>
@@ -175,7 +181,7 @@
         </widget>
        </item>
        <item row="2" column="0">
-        <widget class="QCheckBox" name="checkBox_8">
+        <widget class="QCheckBox" name="chboxValveAction2">
          <property name="minimumSize">
           <size>
            <width>150</width>
@@ -194,7 +200,7 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QComboBox" name="comboBox_4">
+        <widget class="QComboBox" name="coboxValveAction2">
          <property name="minimumSize">
           <size>
            <width>200</width>
@@ -232,7 +238,7 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_9">
+    <widget class="QGroupBox" name="grboxOutputStatus">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -255,7 +261,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <widget class="QCheckBox" name="checkBox_3">
+        <widget class="QCheckBox" name="chboxValveOutStatus0">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -280,7 +286,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_4">
+        <widget class="QCheckBox" name="chboxValveOutStatus1">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -302,7 +308,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_5">
+        <widget class="QCheckBox" name="chboxValveOutStatus2">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -331,7 +337,7 @@
     <attribute name="title">
      <string>预留</string>
     </attribute>
-    <widget class="QGroupBox" name="groupBox_12">
+    <widget class="QGroupBox" name="grboxMainBoardOutput">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -343,10 +349,10 @@
      <property name="title">
       <string>主板输出</string>
      </property>
-     <widget class="QWidget" name="layoutWidget_2">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>10</x>
         <y>50</y>
         <width>401</width>
         <height>42</height>
@@ -354,7 +360,7 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBox_15">
+        <widget class="QCheckBox" name="chboxMainBoardOutput0">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -373,10 +379,13 @@
          <property name="text">
           <string/>
          </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_9">
+        <widget class="QComboBox" name="coboxMainBoardOutput0">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -512,7 +521,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QCheckBox" name="checkBox_18">
+        <widget class="QCheckBox" name="chboxMainBoardOutput1">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -531,10 +540,13 @@
          <property name="text">
           <string/>
          </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item row="0" column="3">
-        <widget class="QComboBox" name="comboBox_10">
+        <widget class="QComboBox" name="coboxMainBoardOutput1">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -549,82 +561,82 @@
          </property>
          <item>
           <property name="text">
-           <string>YM1</string>
+           <string>EY1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM2</string>
+           <string>EY2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM3</string>
+           <string>EY3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM4</string>
+           <string>EY4</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM5</string>
+           <string>EY5</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM6</string>
+           <string>EY6</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM7</string>
+           <string>EY7</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM8</string>
+           <string>EY8</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM9</string>
+           <string>EY9</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM10</string>
+           <string>EY10</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM11</string>
+           <string>EY11</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM12</string>
+           <string>EY12</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM13</string>
+           <string>EY13</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM14</string>
+           <string>EY14</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM15</string>
+           <string>EY15</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM16</string>
+           <string>EY16</string>
           </property>
          </item>
         </widget>
@@ -632,7 +644,7 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QGroupBox" name="groupBox_11">
+    <widget class="QGroupBox" name="grboxReserveOutStatus">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -655,7 +667,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QCheckBox" name="checkBox_7">
+        <widget class="QCheckBox" name="chboxReserveOutStatus0">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -680,7 +692,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_10">
+        <widget class="QCheckBox" name="chboxReserveOutStatus1">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -702,7 +714,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_11">
+        <widget class="QCheckBox" name="chboxReserveOutStatus2">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -731,7 +743,7 @@
     <attribute name="title">
      <string>伺服</string>
     </attribute>
-    <widget class="QGroupBox" name="groupBox_13">
+    <widget class="QGroupBox" name="grAxisMoveDirect">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -754,7 +766,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
-        <widget class="QComboBox" name="comboBox_8">
+        <widget class="QComboBox" name="coboxAxisSelect">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -810,7 +822,10 @@
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_16">
+        <widget class="QCheckBox" name="chboxAxisDirect0">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="maximumSize">
           <size>
            <width>110</width>
@@ -823,10 +838,16 @@
          <property name="text">
           <string>正向</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="checkBox_17">
+        <widget class="QCheckBox" name="chboxAxisDirect1">
          <property name="maximumSize">
           <size>
            <width>110</width>
@@ -838,6 +859,9 @@
          </property>
          <property name="text">
           <string>反向</string>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

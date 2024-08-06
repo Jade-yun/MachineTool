@@ -79,7 +79,7 @@
      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QComboBox" name="coboxDirection">
+   <widget class="QComboBox" name="coboxStackDirect">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -221,7 +221,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page">
     <widget class="QTableWidget" name="tableStack">
@@ -277,7 +277,7 @@
         <number>6</number>
        </property>
        <item row="7" column="0">
-        <widget class="QLabel" name="labIntervalDis_10">
+        <widget class="QLabel" name="labStackDirect">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -296,7 +296,7 @@
         </widget>
        </item>
        <item row="5" column="1">
-        <widget class="QLineEdit" name="editGap_11">
+        <widget class="NumberEdit" name="editStackNum0">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -315,7 +315,7 @@
         </widget>
        </item>
        <item row="6" column="1">
-        <widget class="QLineEdit" name="editGap_14">
+        <widget class="NumberEdit" name="editOffset0">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -334,7 +334,7 @@
         </widget>
        </item>
        <item row="6" column="2">
-        <widget class="QLineEdit" name="editGap_16">
+        <widget class="NumberEdit" name="editOffset1">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -353,7 +353,7 @@
         </widget>
        </item>
        <item row="6" column="3">
-        <widget class="QLineEdit" name="editGap_18">
+        <widget class="NumberEdit" name="editOffset2">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -372,7 +372,7 @@
         </widget>
        </item>
        <item row="7" column="1">
-        <widget class="QComboBox" name="comboBox">
+        <widget class="QComboBox" name="coboxStackDirect0">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -417,7 +417,7 @@
         </widget>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="editGap_8">
+        <widget class="NumberEdit" name="editStackSpeed0">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -436,7 +436,7 @@
         </widget>
        </item>
        <item row="3" column="3">
-        <widget class="QLineEdit" name="editIntervalDis2">
+        <widget class="NumberEdit" name="editIntervalDis2">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -455,7 +455,7 @@
         </widget>
        </item>
        <item row="2" column="2">
-        <widget class="QLineEdit" name="editStart1">
+        <widget class="NumberEdit" name="editStart1">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -474,7 +474,7 @@
         </widget>
        </item>
        <item row="4" column="3">
-        <widget class="QLineEdit" name="editGap_10">
+        <widget class="NumberEdit" name="editStackSpeed2">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -493,7 +493,7 @@
         </widget>
        </item>
        <item row="5" column="2">
-        <widget class="QLineEdit" name="editGap_12">
+        <widget class="NumberEdit" name="editStackNum1">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -512,7 +512,7 @@
         </widget>
        </item>
        <item row="3" column="2">
-        <widget class="QLineEdit" name="editIntervalDis1">
+        <widget class="NumberEdit" name="editIntervalDis1">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -531,7 +531,7 @@
         </widget>
        </item>
        <item row="4" column="2">
-        <widget class="QLineEdit" name="editGap_9">
+        <widget class="NumberEdit" name="editStackSpeed1">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -550,7 +550,7 @@
         </widget>
        </item>
        <item row="2" column="3">
-        <widget class="QLineEdit" name="editStart2">
+        <widget class="NumberEdit" name="editStart2">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -569,7 +569,7 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="editStart0">
+        <widget class="NumberEdit" name="editStart0">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -588,7 +588,7 @@
         </widget>
        </item>
        <item row="5" column="3">
-        <widget class="QLineEdit" name="editGap_13">
+        <widget class="NumberEdit" name="editStackNum2">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -607,7 +607,7 @@
         </widget>
        </item>
        <item row="6" column="0">
-        <widget class="QLabel" name="labIntervalDis_9">
+        <widget class="QLabel" name="labOffsetDistance">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -650,7 +650,7 @@
           <enum>QLayout::SetFixedSize</enum>
          </property>
          <item>
-          <widget class="QLabel" name="labAxisZ">
+          <widget class="QLabel" name="labAxis2">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -672,7 +672,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="btnFresh2">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -687,6 +687,16 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../images.qrc">
+             <normaloff>:/images/settingPageImages/refresh.png</normaloff>:/images/settingPageImages/refresh.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -717,7 +727,7 @@
           <enum>QLayout::SetFixedSize</enum>
          </property>
          <item>
-          <widget class="QLabel" name="labAxisY">
+          <widget class="QLabel" name="labAxis1">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -739,7 +749,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="btnFresh1">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -755,6 +765,16 @@
            <property name="text">
             <string/>
            </property>
+           <property name="icon">
+            <iconset resource="../images.qrc">
+             <normaloff>:/images/settingPageImages/refresh.png</normaloff>:/images/settingPageImages/refresh.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
           </widget>
          </item>
         </layout>
@@ -765,7 +785,7 @@
           <enum>QLayout::SetMaximumSize</enum>
          </property>
          <item>
-          <widget class="QLabel" name="labAxisX">
+          <widget class="QLabel" name="labAxis0">
            <property name="minimumSize">
             <size>
              <width>40</width>
@@ -787,7 +807,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton">
+          <widget class="QPushButton" name="btnFresh0">
            <property name="minimumSize">
             <size>
              <width>60</width>
@@ -803,12 +823,22 @@
            <property name="text">
             <string/>
            </property>
+           <property name="icon">
+            <iconset resource="../images.qrc">
+             <normaloff>:/images/settingPageImages/refresh.png</normaloff>:/images/settingPageImages/refresh.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>25</width>
+             <height>25</height>
+            </size>
+           </property>
           </widget>
          </item>
         </layout>
        </item>
        <item row="5" column="0">
-        <widget class="QLabel" name="labIntervalDis_8">
+        <widget class="QLabel" name="labStackNum">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -827,7 +857,7 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QLineEdit" name="editIntervalDis0">
+        <widget class="NumberEdit" name="editIntervalDis0">
          <property name="minimumSize">
           <size>
            <width>140</width>
@@ -846,7 +876,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="labIntervalDis_3">
+        <widget class="QLabel" name="labAxisSelect">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -860,12 +890,12 @@
           </size>
          </property>
          <property name="text">
-          <string>起始(mm)</string>
+          <string>轴选择</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="comboBox_4">
+        <widget class="QComboBox" name="coboxAxisSelect0">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -891,7 +921,7 @@
         </widget>
        </item>
        <item row="1" column="2">
-        <widget class="QComboBox" name="comboBox_5">
+        <widget class="QComboBox" name="coboxAxisSelect1">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -917,7 +947,7 @@
         </widget>
        </item>
        <item row="1" column="3">
-        <widget class="QComboBox" name="comboBox_6">
+        <widget class="QComboBox" name="coboxAxisSelect2">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -943,7 +973,7 @@
         </widget>
        </item>
        <item row="7" column="2">
-        <widget class="QComboBox" name="comboBox_2">
+        <widget class="QComboBox" name="coboxStackDirect1">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -969,7 +999,7 @@
         </widget>
        </item>
        <item row="7" column="3">
-        <widget class="QComboBox" name="comboBox_3">
+        <widget class="QComboBox" name="coboxStackDirect2">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -1025,6 +1055,12 @@
       </property>
       <property name="sizeType">
        <enum>QSizePolicy::Expanding</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
       </property>
      </spacer>
     </item>
@@ -1203,7 +1239,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -1242,13 +1278,13 @@
      <widget class="QComboBox" name="coboxStackOrder">
       <property name="minimumSize">
        <size>
-        <width>150</width>
+        <width>140</width>
         <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>150</width>
+        <width>140</width>
         <height>40</height>
        </size>
       </property>
@@ -1322,92 +1358,17 @@
       </property>
       <item>
        <property name="text">
-        <string>全部</string>
+        <string>不使用</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>良品</string>
+        <string>程序结束</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>堆叠1组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>堆叠2组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>堆叠3组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>堆叠4组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>堆叠5组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>堆叠6组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>堆叠7组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>堆叠8组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步1组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步2组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步3组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步4组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步5组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步6组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步7组</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>同步8组</string>
+        <string>命令结束</string>
        </property>
       </item>
      </widget>
@@ -1528,6 +1489,13 @@
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NumberEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">customedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../images.qrc"/>
  </resources>

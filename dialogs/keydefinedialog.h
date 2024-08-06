@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QLineEdit>
 #include <QLabel>
+#include <QString>
 
 #define USE_LINEEDIT 1
 
@@ -18,9 +19,17 @@ class KeyDefineDialog : public QDialog
 public:
     explicit KeyDefineDialog(QWidget *parent = nullptr);
     ~KeyDefineDialog();
+private:
+    QString getValveOutStatus() const;
+    QString getValveOutput() const;
+    QString getReserveOutStatus() const;
+    QString getMainBoardOut() const;
+    QString getAxisMoveDirect() const;
+public:
+    QString getKeyDefine() const;
 
 private:
-    Ui::KeyDefineDialog *ui;
+    Ui::KeyDefineDialog *ui;   
 };
 
 //class KeyEdit : public QLineEdit

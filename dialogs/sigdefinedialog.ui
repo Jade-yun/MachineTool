@@ -49,7 +49,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabInputSig">
     <attribute name="title">
@@ -77,171 +77,8 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="2">
-        <widget class="QCheckBox" name="checkBox_13">
-         <property name="minimumSize">
-          <size>
-           <width>50</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>50</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="layoutDirection">
-          <enum>Qt::RightToLeft</enum>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QComboBox" name="comboBox_12">
-         <property name="minimumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>110</width>
-           <height>40</height>
-          </size>
-         </property>
-         <item>
-          <property name="text">
-           <string>XM1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM2</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM3</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM4</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM5</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM6</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM7</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM8</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM9</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM10</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM11</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM11</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM12</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM13</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM14</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM15</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM16</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM17</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM18</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM19</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM20</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM21</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM22</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM23</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>XM24</string>
-          </property>
-         </item>
-        </widget>
-       </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_5">
+        <widget class="QComboBox" name="coboxMainBoardIn0">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -437,7 +274,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBox_12">
+        <widget class="QCheckBox" name="chboxMainBoardIn0">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -456,6 +293,164 @@
          <property name="text">
           <string/>
          </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QCheckBox" name="chboxMainBoardIn1">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QComboBox" name="coboxMainBoardIn1">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>EX1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX8</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX9</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX10</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX11</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX12</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX13</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX14</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX15</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX16</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX17</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX18</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX19</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX20</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX21</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX22</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX23</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EX24</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>
@@ -489,7 +484,7 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
-        <widget class="QCheckBox" name="checkBox_15">
+        <widget class="QCheckBox" name="chboxMainBoardOut0">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -511,7 +506,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QComboBox" name="comboBox_8">
+        <widget class="QComboBox" name="coboxMainBoardOut0">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -647,7 +642,7 @@
         </widget>
        </item>
        <item row="0" column="2">
-        <widget class="QCheckBox" name="checkBox_17">
+        <widget class="QCheckBox" name="chboxMainBoardOut1">
          <property name="minimumSize">
           <size>
            <width>50</width>
@@ -669,7 +664,7 @@
         </widget>
        </item>
        <item row="0" column="3">
-        <widget class="QComboBox" name="comboBox_10">
+        <widget class="QComboBox" name="coboxMainBoardOut1">
          <property name="minimumSize">
           <size>
            <width>110</width>
@@ -684,82 +679,82 @@
          </property>
          <item>
           <property name="text">
-           <string>YM1</string>
+           <string>EY1</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM2</string>
+           <string>EY2</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM3</string>
+           <string>EY3</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM4</string>
+           <string>EY4</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM5</string>
+           <string>EY5</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM6</string>
+           <string>EY6</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM7</string>
+           <string>EY7</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM8</string>
+           <string>EY8</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM9</string>
+           <string>EY9</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM10</string>
+           <string>EY10</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM11</string>
+           <string>EY11</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM12</string>
+           <string>EY12</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM13</string>
+           <string>EY13</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM14</string>
+           <string>EY14</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM15</string>
+           <string>EY15</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>YM16</string>
+           <string>EY16</string>
           </property>
          </item>
         </widget>

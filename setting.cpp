@@ -17,14 +17,9 @@ Setting::Setting(QWidget *parent) :
     ui->setupUi(this);
     initVariables();
 
-//    ui->checkBoxPoiskie->setDisabled(true);
-//    ui->checkBoxRussian->setDisabled(true);
-//    ui->checkBoxTradChinese->setDisabled(true);
-//    ui->checkBoxSpain->setDisabled(true);
-//    ui->checkBoxSpecial->setDisabled(true);
-//    ui->checkBoxVietnam->setDisabled(true);
 
     pageSwitchInit();
+    machineParaLogic();
 
     for (int i = 0; i < 8; i++)
     {
@@ -37,30 +32,6 @@ Setting::Setting(QWidget *parent) :
             stack[i]->switchStackWay(index);
         }
     });
-#if TEST
-    /////////////////////////
-    for (int i = 0; i < 3; i++)
-    {
-        connect(tb_1_comboBox[i], QOverload<int>::of(&QComboBox::activated), this, [&, i]() {
-            onComboBoxIndexChanged(i); });
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        connect(tb_1_btnHead[i], &QPushButton::clicked, this, [=]() {onPushButtonHeadChanged(i); });
-    }
-    for (int i = 0; i < 9; i++)
-    {
-        connect(tb_1_btn[i], &QPushButton::clicked, this, [=]() {onPushButtonChanged(i); });
-    }
-    connect(tb_general_btn, &QPushButton::clicked, this, &Setting::onPushButtonGeneralClicked);
-    connect(tb_general_btn, &QPushButton::clicked, this, [](){
-
-    });
-
-
-
-#endif
-
 
 }
 
@@ -80,7 +51,19 @@ void Setting::slotSettingHome()
 // to initial all variables in this function
 void Setting::initVariables()
 {
-//    movie = new QMovie(QString(":/images/gif/test.gif"));
+    //    movie = new QMovie(QString(":/images/gif/test.gif"));
+}
+
+void Setting::readFromConfigFile()
+{
+    // 信号设置
+}
+
+void Setting::writeToConfigFile()
+{
+
+//    setOutPortType(m_OutPortType[0]);
+//    setOutPortType(m_OutPortType[OUT_PORT_TYPE_NUM]);
 }
 
 
@@ -102,7 +85,7 @@ void Setting::pageSwitchInit()
     });
     connect(ui->btnServoSpeed, &QPushButton::clicked, this, [=](){
 
-        ui->stackedWidget->setCurrentWidget(ui->pageServoSpeed);
+        ui->stackedWidget->setCurrentWidget(ui->pageServoPara);
     });
     connect(ui->btnServoSafePoint, &QPushButton::clicked, this, [=](){
         ui->stackedWidget->setCurrentWidget(ui->pageServoSafePoint);
@@ -114,14 +97,6 @@ void Setting::pageSwitchInit()
         ui->stackedWidget->setCurrentWidget(ui->pageStack);
     });
      /******************************************************************************/
-    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() - 1 + ui->stkWidgetOriginSet->count())
-                                                 % ui->stkWidgetOriginSet->count());
-    });
-    connect(ui->btnNextPageOrigin, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetOriginSet->setCurrentIndex((ui->stkWidgetOriginSet->currentIndex() + 1 + ui->stkWidgetOriginSet->count())
-                                                 % ui->stkWidgetOriginSet->count());
-    });
     connect(ui->btnLastAdvance, &QPushButton::clicked, this, [=](){
         ui->stkWgtAdvance->setCurrentIndex((ui->stkWgtAdvance->currentIndex() - 1 + ui->stkWgtAdvance->count())
                                                  % ui->stkWgtAdvance->count());
@@ -132,18 +107,18 @@ void Setting::pageSwitchInit()
                                                  % ui->stkWgtAdvance->count());
         ui->labPageNumAdvance->setText(QString("%1/2").arg(ui->stkWgtAdvance->currentIndex() + 1));
     });
-    connect(ui->btnLastPageServoPara, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() - 1 + ui->stkWidgetServoPara->count())
-                                                 % ui->stkWidgetServoPara->count());
-        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
-//        ui->grboxAxisSelect->show();
-    });
-    connect(ui->btnNextPageServoPara, &QPushButton::clicked, this, [=](){
-        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() + 1 + ui->stkWidgetServoPara->count())
-                                                 % ui->stkWidgetServoPara->count());
-        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
-//        ui->grboxAxisSelect->show();
-    });
+//    connect(ui->btnLastPageServoPara, &QPushButton::clicked, this, [=](){
+//        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() - 1 + ui->stkWidgetServoPara->count())
+//                                                 % ui->stkWidgetServoPara->count());
+//        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+////        ui->grboxAxisSelect->show();
+//    });
+//    connect(ui->btnNextPageServoPara, &QPushButton::clicked, this, [=](){
+//        ui->stkWidgetServoPara->setCurrentIndex((ui->stkWidgetServoPara->currentIndex() + 1 + ui->stkWidgetServoPara->count())
+//                                                 % ui->stkWidgetServoPara->count());
+//        ui->labelPageNum->setText(QString("%1/2").arg(ui->stkWidgetServoPara->currentIndex() + 1));
+////        ui->grboxAxisSelect->show();
+//    });
 
 
     /***************************************信号设置************************************************/
@@ -352,126 +327,225 @@ void Setting::pageSwitchInit()
 
 }
 
-#if TEST
-///////////////////////////////////////////////////////////////////////
-void Setting::onComboBoxIndexChanged(int index)
+void Setting::machineParaLogic()
 {
-    QString selectedText = tb_1_comboBox[index]->currentText();
-    tb_1_btnHead[index]->setText(selectedText);
+    ui->labCLimitPos->setVisible(false);
+    ui->coboxLimitPosC->setVisible(false);
+    ui->coboxLimitNegC->setVisible(false);
+
+    ui->labALimitPos->setVisible(false);
+    ui->coboxLimitPosA->setVisible(false);
+    ui->coboxLimitNegA->setVisible(false);
+
+    ui->labBLimitPos->setVisible(false);
+    ui->coboxLimitPosB->setVisible(false);
+    ui->coboxLimitNegB->setVisible(false);
+
+
+    auto setupAxisTypeConnections = [&](QComboBox* comboBox, const QList<QWidget*>& widgets) {
+        connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [widgets](int state) {
+            bool visible = (state == 1);
+            for (QWidget* widget : widgets)
+            {
+                widget->setVisible(visible);
+            }
+        });
+    };
+
+    setupAxisTypeConnections(ui->coboxAxisTypeX1, {
+                                 ui->labX1AxisPara,
+                                 ui->editAxisMinPosX1,
+                                 ui->editAxisMaxPosX1,
+                                 ui->editCirclePulseNumX1,
+                                 ui->editCircleDistanceX1,
+                                 ui->coboxCoordDirectX1,
+
+                                 ui->labX1AxisSpeed,
+                                 ui->editAccTimeX1,
+                                 ui->editDecTimeX1,
+                                 ui->editAccAccX1,
+                                 ui->editDecDecX1,
+                                 ui->editMaxSpeedX1,
+
+                                 ui->labX1Origin,
+                                 ui->coboxOriginTypeX1,
+                                 ui->editFindOriginSpeedX1,
+                                 ui->editLeaveOriginSpeedX1,
+                                 ui->editOriginOffsetX1,
+                                 ui->coboxBackOriginDirectX1,
+                                 ui->coboxBackOriginOrderX1
+                             });
+
+    setupAxisTypeConnections(ui->coboxAxisTypeY1, {
+                                 ui->labY1AxisPara,
+                                 ui->editAxisMinPosY1,
+                                 ui->editAxisMaxPosY1,
+                                 ui->editCirclePulseNumY1,
+                                 ui->editCircleDistanceY1,
+                                 ui->coboxCoordDirectY1,
+
+                                 ui->labY1AxisSpeed,
+                                 ui->editAccTimeY1,
+                                 ui->editDecTimeY1,
+                                 ui->editAccAccY1,
+                                 ui->editDecDecY1,
+                                 ui->editMaxSpeedY1,
+
+                                 ui->labY1Origin,
+                                 ui->coboxOriginTypeY1,
+                                 ui->editFindOriginSpeedY1,
+                                 ui->editLeaveOriginSpeedY1,
+                                 ui->editOriginOffsetY1,
+                                 ui->coboxBackOriginDirectY1,
+                                 ui->coboxBackOriginOrderY1
+                             });
+
+    setupAxisTypeConnections(ui->coboxAxisTypeZ1, {
+                                 ui->labZ1AxisPara,
+                                 ui->editAxisMinPosZ1,
+                                 ui->editAxisMaxPosZ1,
+                                 ui->editCirclePulseNumZ1,
+                                 ui->editCircleDistanceZ1,
+                                 ui->coboxCoordDirectZ1,
+
+                                 ui->labZ1AxisSpeed,
+                                 ui->editAccTimeZ1,
+                                 ui->editDecTimeZ1,
+                                 ui->editAccAccZ1,
+                                 ui->editDecDecZ1,
+                                 ui->editMaxSpeedZ1,
+
+                                 ui->labZ1Origin,
+                                 ui->coboxOriginTypeZ1,
+                                 ui->editFindOriginSpeedZ1,
+                                 ui->editLeaveOriginSpeedZ1,
+                                 ui->editOriginOffsetZ1,
+                                 ui->coboxBackOriginDirectZ1,
+                                 ui->coboxBackOriginOrderZ1
+                             });
+
+    setupAxisTypeConnections(ui->coboxAxisTypeC, {
+                                 ui->labCAxisPara,
+                                 ui->editAxisMinPosC,
+                                 ui->editAxisMaxPosC,
+                                 ui->editCirclePulseNumC,
+                                 ui->editCircleDistanceC,
+                                 ui->coboxCoordDirectC,
+
+                                 ui->labCAxisSpeed,
+                                 ui->editAccTimeC,
+                                 ui->editDecTimeC,
+                                 ui->editAccAccC,
+                                 ui->editDecDecC,
+                                 ui->editMaxSpeedC,
+
+                                 ui->labCOrigin,
+                                 ui->coboxOriginTypeC,
+                                 ui->editFindOriginSpeedC,
+                                 ui->editLeaveOriginSpeedC,
+                                 ui->editOriginOffsetC,
+                                 ui->coboxBackOriginDirectC,
+                                 ui->coboxBackOriginOrderC
+                             });
+
+    setupAxisTypeConnections(ui->coboxAxisTypeA, {
+                                 ui->labAAxisPara,
+                                 ui->editAxisMinPosA,
+                                 ui->editAxisMaxPosA,
+                                 ui->editCirclePulseNumA,
+                                 ui->editCircleDistanceA,
+                                 ui->coboxCoordDirectA,
+
+                                 ui->labAAxisSpeed,
+                                 ui->editAccTimeA,
+                                 ui->editDecTimeA,
+                                 ui->editAccAccA,
+                                 ui->editDecDecA,
+                                 ui->editMaxSpeedA,
+
+                                 ui->labAOrigin,
+                                 ui->coboxOriginTypeA,
+                                 ui->editFindOriginSpeedA,
+                                 ui->editLeaveOriginSpeedA,
+                                 ui->editOriginOffsetA,
+                                 ui->coboxBackOriginDirectA,
+                                 ui->coboxBackOriginOrderA
+                             });
+
+    setupAxisTypeConnections(ui->coboxAxisTypeB, {
+                                 ui->labBAxisPara,
+                                 ui->editAxisMinPosB,
+                                 ui->editAxisMaxPosB,
+                                 ui->editCirclePulseNumB,
+                                 ui->editCircleDistanceB,
+                                 ui->coboxCoordDirectB,
+
+                                 ui->labBAxisSpeed,
+                                 ui->editAccTimeB,
+                                 ui->editDecTimeB,
+                                 ui->editAccAccB,
+                                 ui->editDecDecB,
+                                 ui->editMaxSpeedB,
+
+                                 ui->labBOrigin,
+                                 ui->coboxOriginTypeB,
+                                 ui->editFindOriginSpeedB,
+                                 ui->editLeaveOriginSpeedB,
+                                 ui->editOriginOffsetB,
+                                 ui->coboxBackOriginDirectB,
+                                 ui->coboxBackOriginOrderB
+                             });
+
+    setupAxisTypeConnections(ui->coboxAxisTypeY2, {
+                                 ui->labY2AxisPara,
+                                 ui->editAxisMinPosY2,
+                                 ui->editAxisMaxPosY2,
+                                 ui->editCirclePulseNumY2,
+                                 ui->editCircleDistanceY2,
+                                 ui->coboxCoordDirectY2,
+
+                                 ui->labY2AxisSpeed,
+                                 ui->editAccTimeY2,
+                                 ui->editDecTimeY2,
+                                 ui->editAccAccY2,
+                                 ui->editDecDecY2,
+                                 ui->editMaxSpeedY2,
+
+                                 ui->labY2Origin,
+                                 ui->coboxOriginTypeY2,
+                                 ui->editFindOriginSpeedY2,
+                                 ui->editLeaveOriginSpeedY2,
+                                 ui->editOriginOffsetY2,
+                                 ui->coboxBackOriginDirectY2,
+                                 ui->coboxBackOriginOrderY2
+                             });
+
+    setupAxisTypeConnections(ui->coboxAxisTypeZ2, {
+                                 ui->labZ2AxisPara,
+                                 ui->editAxisMinPosZ2,
+                                 ui->editAxisMaxPosZ2,
+                                 ui->editCirclePulseNumZ2,
+                                 ui->editCircleDistanceZ2,
+                                 ui->coboxCoordDirectZ2,
+
+                                 ui->labZ2AxisSpeed,
+                                 ui->editAccTimeZ2,
+                                 ui->editDecTimeZ2,
+                                 ui->editAccAccZ2,
+                                 ui->editDecDecZ2,
+                                 ui->editMaxSpeedZ2,
+
+                                 ui->labZ2Origin,
+                                 ui->coboxOriginTypeZ2,
+                                 ui->editFindOriginSpeedZ2,
+                                 ui->editLeaveOriginSpeedZ2,
+                                 ui->editOriginOffsetZ2,
+                                 ui->coboxBackOriginDirectZ2,
+                                 ui->coboxBackOriginOrderZ2
+                             });
 }
 
-void Setting::onPushButtonChanged(int index)
-{
-    for (int i = 0; i < 9; i++)
-    {
-        if (i == index)
-        {
-            tb_1_btn[i]->setChecked(true);
-        }
-        else
-        {
-            tb_1_btn[i]->setChecked(false);
-        }
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        tb_1_btnHead[i]->setChecked(true);
-    }
-}
 
-void Setting::onPushButtonHeadChanged(int index)
-{
-    for (int i = 0; i < 3; i++)
-    {
-        if (i == index)
-        {
-            tb_1_btnHead[i]->setChecked(true);
-        }
-        else
-        {
-            tb_1_btnHead[i]->setChecked(false);
-        }
-    }
-    for (int i = 0; i < 9; i++)
-    {
-        tb_1_btn[i]->setChecked(true);
-    }
-}
-
-void Setting::onPushButtonGeneralClicked(int index)
-{
-    for (int i = 0; i < 9; i++)
-    {
-        tb_1_btn[i]->setChecked(true);
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        tb_1_btnHead[i]->setChecked(true);
-    }
-}
-
-#if 0
-void Setting::setAllStyleSheet()
-{
-    tb_general_btn = new QPushButton();
-    tb_general_btn->setStyleSheet("QPushButton{background-color: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,stop: 0 #DCDCDC, stop: 0.7 #F8F8FF,stop : 1 #F5F5F5); }");
-    ui->tableWidget_stack->setCellWidget(0, 0, tb_general_btn);
-    for (int i = 1; i < 4; i++)
-    {
-        tb_1_btnHead[i - 1] = new QPushButton();
-        tb_1_btnHead[i - 1]->setCheckable(true);
-        QString strStyleSheet = QString("QPushButton{text-align : center;background-color: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,stop: 0 #DCDCDC, stop: 0.7 #F8F8FF,stop : 1 #F5F5F5); }QPushButton::checked{ background-color: #1E90FF;font: bold; }");
-        //
-        tb_1_btnHead[i - 1]->setStyleSheet(strStyleSheet);
-        ui->tableWidget_stack->setCellWidget(0, i, tb_1_btnHead[i - 1]);
-    }
-    QStringList labelStr = { "轴选择","速度","点数","A-起点","B-X方向终点","C-Y方向终点","D点坐标","放料速度","放料起始点" };
-    for (int i = 1; i < 10; i++)
-    {
-        tb_1_btn[i - 1] = new QPushButton(labelStr[i - 1]);
-        tb_1_btn[i - 1]->setCheckable(true);
-        QString strStyleSheet = QString("QPushButton{text-align : left;background-color: qlineargradient(x1: 0, y1: 1, x2: 0, y2: 0,stop: 0 #DCDCDC, stop: 0.7 #F8F8FF,stop : 1 #F5F5F5); }QPushButton::checked{ background-color: #1E90FF;font: bold; }");
-        //
-        tb_1_btn[i - 1]->setStyleSheet(strStyleSheet);
-        ui->tableWidget_stack->setCellWidget(i, 0, tb_1_btn[i - 1]);
-    }
-
-    for (int i = 1; i < 4; i++)
-    {
-        tb_1_comboBox[i - 1] = new QComboBox();
-        QString axis;
-        if (i == 1)
-            axis = "X";
-        else if (i == 2)
-            axis = "Y";
-        else
-            axis = "Z";
-        tb_1_comboBox[i - 1]->addItem(QString("%1").arg(axis) + "1轴");
-        tb_1_comboBox[i - 1]->addItem(QString("%1").arg(axis) + "2轴");
-        ui->tableWidget_stack->setCellWidget(1, i, tb_1_comboBox[i - 1]);
-        tb_1_btnHead[i - 1]->setText(tb_1_comboBox[i - 1]->currentText());
-        tb_1_comboBox[i - 1]->setStyleSheet("QComboBox::!editable{border: 2px solid #808A87;}QComboBox::drop-down{subcontrol-origin: padding-right;subcontrol-position: top right;width: 20px;border-left-width: 2px;border-left-color: gray; border-left-style: solid; }QComboBox::down-arrow{image: url(:/images/arrow_down_normal.png); }");
-    }
-
-    for (int i = 1; i < 4; i++)
-    {
-        for (int j = 2; j < 10; j++)
-        {
-            tb_1_lineEdit[i - 1][j - 2] = new QLineEdit();
-            ui->tableWidget_stack->setCellWidget(j, i, tb_1_lineEdit[i - 1][j - 2]);
-
-            tb_1_lineEdit[i - 1][j - 2]->setStyleSheet("border-radius: 5px;border: 1px solid #000000;");
-        }
-    }
-
-
-
-}
-
-#endif
-
-
-#endif
 
 
 

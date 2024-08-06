@@ -17,6 +17,12 @@ public:
     ~SigDefineDialog();
 
 private:
+    QString getMainBoardInSig() const;
+    QString getMainBoardOutSig() const;
+public:
+    QString getSigDefine() const;
+
+private:
     Ui::SigDefineDialog *ui;
 };
 
