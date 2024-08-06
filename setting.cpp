@@ -356,13 +356,13 @@ void Setting::machineParaLogic()
     ui->coboxLimitPosC->setVisible(false);
     ui->coboxLimitNegC->setVisible(false);
 
-    ui->labALimitPos->setVisible(false);
-    ui->coboxLimitPosA->setVisible(false);
-    ui->coboxLimitNegA->setVisible(false);
+//    ui->labALimitPos->setVisible(false);
+//    ui->coboxLimitPosA->setVisible(false);
+//    ui->coboxLimitNegA->setVisible(false);
 
-    ui->labBLimitPos->setVisible(false);
-    ui->coboxLimitPosB->setVisible(false);
-    ui->coboxLimitNegB->setVisible(false);
+//    ui->labBLimitPos->setVisible(false);
+//    ui->coboxLimitPosB->setVisible(false);
+//    ui->coboxLimitNegB->setVisible(false);
 
 
     auto setupAxisTypeConnections = [&](QComboBox* comboBox, const QList<QWidget*>& widgets) {
@@ -471,53 +471,53 @@ void Setting::machineParaLogic()
                                  ui->coboxBackOriginOrderC
                              });
 
-    setupAxisTypeConnections(ui->coboxAxisTypeA, {
-                                 ui->labAAxisPara,
-                                 ui->editAxisMinPosA,
-                                 ui->editAxisMaxPosA,
-                                 ui->editCirclePulseNumA,
-                                 ui->editCircleDistanceA,
-                                 ui->coboxCoordDirectA,
+//    setupAxisTypeConnections(ui->coboxAxisTypeA, {
+//                                 ui->labAAxisPara,
+//                                 ui->editAxisMinPosA,
+//                                 ui->editAxisMaxPosA,
+//                                 ui->editCirclePulseNumA,
+//                                 ui->editCircleDistanceA,
+//                                 ui->coboxCoordDirectA,
 
-                                 ui->labAAxisSpeed,
-                                 ui->editAccTimeA,
-                                 ui->editDecTimeA,
-                                 ui->editAccAccA,
-                                 ui->editDecDecA,
-                                 ui->editMaxSpeedA,
+//                                 ui->labAAxisSpeed,
+//                                 ui->editAccTimeA,
+//                                 ui->editDecTimeA,
+//                                 ui->editAccAccA,
+//                                 ui->editDecDecA,
+//                                 ui->editMaxSpeedA,
 
-                                 ui->labAOrigin,
-                                 ui->coboxOriginTypeA,
-                                 ui->editFindOriginSpeedA,
-                                 ui->editLeaveOriginSpeedA,
-                                 ui->editOriginOffsetA,
-                                 ui->coboxBackOriginDirectA,
-                                 ui->coboxBackOriginOrderA
-                             });
+//                                 ui->labAOrigin,
+//                                 ui->coboxOriginTypeA,
+//                                 ui->editFindOriginSpeedA,
+//                                 ui->editLeaveOriginSpeedA,
+//                                 ui->editOriginOffsetA,
+//                                 ui->coboxBackOriginDirectA,
+//                                 ui->coboxBackOriginOrderA
+//                             });
 
-    setupAxisTypeConnections(ui->coboxAxisTypeB, {
-                                 ui->labBAxisPara,
-                                 ui->editAxisMinPosB,
-                                 ui->editAxisMaxPosB,
-                                 ui->editCirclePulseNumB,
-                                 ui->editCircleDistanceB,
-                                 ui->coboxCoordDirectB,
+//    setupAxisTypeConnections(ui->coboxAxisTypeB, {
+//                                 ui->labBAxisPara,
+//                                 ui->editAxisMinPosB,
+//                                 ui->editAxisMaxPosB,
+//                                 ui->editCirclePulseNumB,
+//                                 ui->editCircleDistanceB,
+//                                 ui->coboxCoordDirectB,
 
-                                 ui->labBAxisSpeed,
-                                 ui->editAccTimeB,
-                                 ui->editDecTimeB,
-                                 ui->editAccAccB,
-                                 ui->editDecDecB,
-                                 ui->editMaxSpeedB,
+//                                 ui->labBAxisSpeed,
+//                                 ui->editAccTimeB,
+//                                 ui->editDecTimeB,
+//                                 ui->editAccAccB,
+//                                 ui->editDecDecB,
+//                                 ui->editMaxSpeedB,
 
-                                 ui->labBOrigin,
-                                 ui->coboxOriginTypeB,
-                                 ui->editFindOriginSpeedB,
-                                 ui->editLeaveOriginSpeedB,
-                                 ui->editOriginOffsetB,
-                                 ui->coboxBackOriginDirectB,
-                                 ui->coboxBackOriginOrderB
-                             });
+//                                 ui->labBOrigin,
+//                                 ui->coboxOriginTypeB,
+//                                 ui->editFindOriginSpeedB,
+//                                 ui->editLeaveOriginSpeedB,
+//                                 ui->editOriginOffsetB,
+//                                 ui->coboxBackOriginDirectB,
+//                                 ui->coboxBackOriginOrderB
+//                             });
 
     setupAxisTypeConnections(ui->coboxAxisTypeY2, {
                                  ui->labY2AxisPara,

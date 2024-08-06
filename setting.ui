@@ -25074,7 +25074,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>6</number>
+      <number>8</number>
      </property>
      <property name="iconSize">
       <size>
@@ -25831,7 +25831,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -25885,7 +25885,10 @@ QComboBox::down-arrow {
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_49">
-        <item row="8" column="5">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item row="6" column="5">
          <widget class="QComboBox" name="coboxCoordDirectZ2">
           <property name="minimumSize">
            <size>
@@ -25999,45 +26002,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="6" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
+        <item row="5" column="1">
          <widget class="NumberEdit" name="editAxisMinPosY2">
           <property name="minimumSize">
            <size>
@@ -26132,25 +26097,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="5" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="2">
          <widget class="NumberEdit" name="editAxisMaxPosX1">
           <property name="minimumSize">
@@ -26227,7 +26173,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="4">
+        <item row="5" column="4">
          <widget class="NumberEdit" name="editCircleDistanceY2">
           <property name="minimumSize">
            <size>
@@ -26303,65 +26249,8 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumY2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
         <item row="5" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceB">
+         <widget class="NumberEdit" name="editCirclePulseNumY2">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -26398,46 +26287,8 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="6" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
         <item row="4" column="2">
          <widget class="NumberEdit" name="editAxisMaxPosC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosA">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -26474,7 +26325,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="2">
+        <item row="5" column="2">
          <widget class="NumberEdit" name="editAxisMaxPosY2">
           <property name="minimumSize">
            <size>
@@ -26622,70 +26473,6 @@ QComboBox::down-arrow {
          </widget>
         </item>
         <item row="5" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="6" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="7" column="5">
          <widget class="QComboBox" name="coboxCoordDirectY2">
           <property name="minimumSize">
            <size>
@@ -26755,25 +26542,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="labAAxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>A轴</string>
-          </property>
-         </widget>
-        </item>
         <item row="4" column="0">
          <widget class="QLabel" name="labCAxisPara">
           <property name="minimumSize">
@@ -26793,7 +26561,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="labY2AxisPara">
           <property name="minimumSize">
            <size>
@@ -26828,25 +26596,6 @@ QComboBox::down-arrow {
           </property>
           <property name="text">
            <string>Z1轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="labBAxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>B轴</string>
           </property>
          </widget>
         </item>
@@ -26916,7 +26665,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="9" column="2">
+        <item row="7" column="2">
          <spacer name="verticalSpacer_2">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -26929,7 +26678,7 @@ QComboBox::down-arrow {
           </property>
          </spacer>
         </item>
-        <item row="9" column="3">
+        <item row="7" column="3">
          <spacer name="verticalSpacer_4">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -26942,7 +26691,7 @@ QComboBox::down-arrow {
           </property>
          </spacer>
         </item>
-        <item row="8" column="4">
+        <item row="6" column="4">
          <widget class="NumberEdit" name="editCircleDistanceZ2">
           <property name="minimumSize">
            <size>
@@ -26961,7 +26710,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="6" column="1">
          <widget class="NumberEdit" name="editAxisMinPosZ2">
           <property name="minimumSize">
            <size>
@@ -26980,7 +26729,26 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="2">
+        <item row="6" column="0">
+         <widget class="QLabel" name="labZ2AxisPara">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Z2轴</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="2">
          <widget class="NumberEdit" name="editAxisMaxPosZ2">
           <property name="minimumSize">
            <size>
@@ -26999,7 +26767,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="3">
+        <item row="6" column="3">
          <widget class="NumberEdit" name="editCirclePulseNumZ2">
           <property name="minimumSize">
            <size>
@@ -27015,25 +26783,6 @@ QComboBox::down-arrow {
           </property>
           <property name="text">
            <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
-         <widget class="QLabel" name="labZ2AxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Z2轴</string>
           </property>
          </widget>
         </item>
@@ -27083,8 +26832,11 @@ QComboBox::down-arrow {
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_64">
-        <item row="3" column="3">
-         <widget class="NumberEdit" name="editAccAccZ1">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item row="6" column="4">
+         <widget class="NumberEdit" name="editDecDecZ2">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -27102,8 +26854,8 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="4">
-         <widget class="NumberEdit" name="editDecDecZ2">
+        <item row="3" column="3">
+         <widget class="NumberEdit" name="editAccAccZ1">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -27140,63 +26892,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="6" column="3">
-         <widget class="NumberEdit" name="editAccAccB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="labBAxisSpeed">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>B轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="labAAxisSpeed">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>A轴</string>
-          </property>
-         </widget>
-        </item>
         <item row="2" column="4">
          <widget class="NumberEdit" name="editDecDecY1">
           <property name="minimumSize">
@@ -27216,7 +26911,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="labY2AxisSpeed">
           <property name="minimumSize">
            <size>
@@ -27276,25 +26971,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="5" column="3">
-         <widget class="NumberEdit" name="editAccAccA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="3">
          <widget class="QLabel" name="labAccAcc">
           <property name="minimumSize">
@@ -27336,7 +27012,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="4">
+        <item row="5" column="4">
          <widget class="NumberEdit" name="editDecDecY2">
           <property name="minimumSize">
            <size>
@@ -27374,7 +27050,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="3">
+        <item row="5" column="3">
          <widget class="NumberEdit" name="editAccAccY2">
           <property name="minimumSize">
            <size>
@@ -27393,7 +27069,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="labZ2AxisSpeed">
           <property name="minimumSize">
            <size>
@@ -27488,25 +27164,6 @@ QComboBox::down-arrow {
           </property>
           <property name="text">
            <string>20.00</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="NumberEdit" name="editDecDecB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
           </property>
          </widget>
         </item>
@@ -27608,25 +27265,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="6" column="2">
-         <widget class="NumberEdit" name="editDecTimeB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="2">
          <widget class="NumberEdit" name="editDecTimeX1">
           <property name="minimumSize">
@@ -27687,7 +27325,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="3">
+        <item row="6" column="3">
          <widget class="NumberEdit" name="editAccAccZ2">
           <property name="minimumSize">
            <size>
@@ -27744,26 +27382,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="5" column="2">
-         <widget class="NumberEdit" name="editDecTimeA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
+        <item row="5" column="1">
          <widget class="NumberEdit" name="editAccTimeY2">
           <property name="minimumSize">
            <size>
@@ -27782,7 +27401,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="6" column="1">
          <widget class="NumberEdit" name="editAccTimeZ2">
           <property name="minimumSize">
            <size>
@@ -27839,25 +27458,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="5" column="1">
-         <widget class="NumberEdit" name="editAccTimeA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="1">
          <widget class="NumberEdit" name="editAccTimeZ1">
           <property name="minimumSize">
@@ -27877,26 +27477,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="5" column="4">
-         <widget class="NumberEdit" name="editDecDecA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="2">
+        <item row="6" column="2">
          <widget class="NumberEdit" name="editDecTimeZ2">
           <property name="minimumSize">
            <size>
@@ -27934,26 +27515,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="NumberEdit" name="editAccTimeB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>20.00</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2">
+        <item row="5" column="2">
          <widget class="NumberEdit" name="editDecTimeY2">
           <property name="minimumSize">
            <size>
@@ -28010,7 +27572,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="5">
+        <item row="5" column="5">
          <widget class="NumberEdit" name="editMaxSpeedY2">
           <property name="minimumSize">
            <size>
@@ -28048,7 +27610,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="5">
+        <item row="6" column="5">
          <widget class="NumberEdit" name="editMaxSpeedZ2">
           <property name="minimumSize">
            <size>
@@ -28067,45 +27629,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="6" column="5">
-         <widget class="NumberEdit" name="editMaxSpeedB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="5">
-         <widget class="NumberEdit" name="editMaxSpeedA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>0.5</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="3">
+        <item row="7" column="3">
          <spacer name="verticalSpacer_3">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -28135,6 +27659,9 @@ QComboBox::down-arrow {
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_14">
+        <property name="spacing">
+         <number>2</number>
+        </property>
         <item row="4" column="0">
          <widget class="QLabel" name="labCLimitPos">
           <property name="minimumSize">
@@ -28152,43 +27679,6 @@ QComboBox::down-arrow {
           <property name="text">
            <string>C轴</string>
           </property>
-         </widget>
-        </item>
-        <item row="6" column="2">
-         <widget class="QComboBox" name="coboxLimitNegB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>不使用</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>正向</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>反向</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item row="4" column="1">
@@ -28265,7 +27755,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="labZ2LimitPos">
           <property name="minimumSize">
            <size>
@@ -28365,7 +27855,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="labY2LimitPos">
           <property name="minimumSize">
            <size>
@@ -28478,7 +27968,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="1">
+        <item row="5" column="1">
          <widget class="QComboBox" name="coboxLimitPosY2">
           <property name="minimumSize">
            <size>
@@ -28515,7 +28005,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="6" column="1">
          <widget class="QComboBox" name="coboxLimitPosZ2">
           <property name="minimumSize">
            <size>
@@ -28663,7 +28153,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="7" column="2">
+        <item row="5" column="2">
          <widget class="QComboBox" name="coboxLimitNegY2">
           <property name="minimumSize">
            <size>
@@ -28700,7 +28190,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="8" column="2">
+        <item row="6" column="2">
          <widget class="QComboBox" name="coboxLimitNegZ2">
           <property name="minimumSize">
            <size>
@@ -28774,156 +28264,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="labBLimitPos">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>B轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QComboBox" name="coboxLimitPosB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>不使用</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>正向</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>反向</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QComboBox" name="coboxLimitPosA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>不使用</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>正向</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>反向</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="QComboBox" name="coboxLimitNegA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>不使用</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>正向</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>反向</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="labALimitPos">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>A轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="9" column="1">
+        <item row="7" column="1">
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -29106,7 +28447,7 @@ QComboBox::down-arrow {
          </widget>
         </item>
         <item row="4" column="0">
-         <widget class="QLabel" name="labBStruture">
+         <widget class="QLabel" name="labCStruture">
           <property name="minimumSize">
            <size>
             <width>0</width>
@@ -29120,7 +28461,7 @@ QComboBox::down-arrow {
            </size>
           </property>
           <property name="text">
-           <string>B轴</string>
+           <string>C轴</string>
           </property>
          </widget>
         </item>
@@ -29303,7 +28644,7 @@ QComboBox::down-arrow {
          </widget>
         </item>
         <item row="4" column="2">
-         <widget class="QComboBox" name="coboxAxisMoveModeB">
+         <widget class="QComboBox" name="coboxAxisMoveModeC">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -29473,7 +28814,7 @@ QComboBox::down-arrow {
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QComboBox" name="coboxAxisTypeB">
+         <widget class="QComboBox" name="coboxAxisTypeC">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -29598,218 +28939,6 @@ QComboBox::down-arrow {
         </item>
        </layout>
       </widget>
-      <widget class="QComboBox" name="coboxAxisMoveModeA">
-       <property name="geometry">
-        <rect>
-         <x>760</x>
-         <y>260</y>
-         <width>140</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>140</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <item>
-        <property name="text">
-         <string>绝对位移</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>相对位移</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QComboBox" name="coboxAxisMoveModeC">
-       <property name="geometry">
-        <rect>
-         <x>760</x>
-         <y>214</y>
-         <width>140</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>140</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <item>
-        <property name="text">
-         <string>绝对位移</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>相对位移</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QComboBox" name="coboxAxisTypeA">
-       <property name="geometry">
-        <rect>
-         <x>614</x>
-         <y>260</y>
-         <width>140</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>140</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <item>
-        <property name="text">
-         <string>无</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>伺服</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>气阀</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QLabel" name="labCStruture">
-       <property name="geometry">
-        <rect>
-         <x>558</x>
-         <y>214</y>
-         <width>50</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>C轴</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="labAStruture">
-       <property name="geometry">
-        <rect>
-         <x>558</x>
-         <y>260</y>
-         <width>50</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>A轴</string>
-       </property>
-      </widget>
-      <widget class="QComboBox" name="coboxAxisTypeC">
-       <property name="geometry">
-        <rect>
-         <x>614</x>
-         <y>214</y>
-         <width>140</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>140</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <item>
-        <property name="text">
-         <string>无</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>伺服</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>气阀</string>
-        </property>
-       </item>
-      </widget>
      </widget>
      <widget class="QWidget" name="tab_4">
       <attribute name="title">
@@ -29854,39 +28983,10 @@ QComboBox::down-arrow {
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_18">
-        <item row="4" column="5">
-         <widget class="QComboBox" name="coboxBackOriginDirectC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正向</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>反向</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="7" column="3">
+        <property name="spacing">
+         <number>2</number>
+        </property>
+        <item row="5" column="3">
          <widget class="NumberEdit" name="editLeaveOriginSpeedY2">
           <property name="minimumSize">
            <size>
@@ -29942,7 +29042,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="8" column="4">
+        <item row="6" column="4">
          <widget class="NumberEdit" name="editOriginOffsetZ2">
           <property name="minimumSize">
            <size>
@@ -29961,44 +29061,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
-         <widget class="QComboBox" name="coboxOriginTypeC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>无原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>长原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>短原点</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="8" column="5">
+        <item row="6" column="5">
          <widget class="QComboBox" name="coboxBackOriginDirectZ2">
           <property name="minimumSize">
            <size>
@@ -30030,7 +29093,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="7" column="1">
+        <item row="5" column="1">
          <widget class="QComboBox" name="coboxOriginTypeY2">
           <property name="minimumSize">
            <size>
@@ -30067,25 +29130,6 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="5" column="3">
-         <widget class="NumberEdit" name="editLeaveOriginSpeedA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="4">
          <widget class="QLabel" name="labOriginOffset">
           <property name="minimumSize">
@@ -30110,25 +29154,6 @@ QComboBox::down-arrow {
         </item>
         <item row="2" column="3">
          <widget class="NumberEdit" name="editLeaveOriginSpeedY1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="NumberEdit" name="editOriginOffsetB">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -30210,7 +29235,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="6" column="0">
          <widget class="QLabel" name="labZ2Origin">
           <property name="minimumSize">
            <size>
@@ -30251,7 +29276,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="5">
+        <item row="5" column="5">
          <widget class="QComboBox" name="coboxBackOriginDirectY2">
           <property name="minimumSize">
            <size>
@@ -30380,7 +29405,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="labY2Origin">
           <property name="minimumSize">
            <size>
@@ -30397,43 +29422,6 @@ QComboBox::down-arrow {
           <property name="text">
            <string>Y2轴</string>
           </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="QComboBox" name="coboxOriginTypeA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>无原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>长原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>短原点</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item row="0" column="5">
@@ -30458,7 +29446,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="2">
+        <item row="5" column="2">
          <widget class="NumberEdit" name="editFindOriginSpeedY2">
           <property name="minimumSize">
            <size>
@@ -30477,96 +29465,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="labBOrigin">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>B轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="labCOrigin">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>C轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="4">
-         <widget class="NumberEdit" name="editOriginOffsetC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="5">
-         <widget class="QComboBox" name="coboxBackOriginDirectA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正向</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>反向</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="8" column="1">
+        <item row="6" column="1">
          <widget class="QComboBox" name="coboxOriginTypeZ2">
           <property name="minimumSize">
            <size>
@@ -30659,38 +29558,6 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="6" column="5">
-         <widget class="QComboBox" name="coboxBackOriginDirectB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正向</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>反向</string>
-           </property>
-          </item>
-         </widget>
-        </item>
         <item row="0" column="3">
          <widget class="QLabel" name="labLeaveOriginSpeed">
           <property name="minimumSize">
@@ -30732,25 +29599,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="labAOrigin">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>A轴</string>
-          </property>
-         </widget>
-        </item>
         <item row="3" column="5">
          <widget class="QComboBox" name="coboxBackOriginDirectZ1">
           <property name="minimumSize">
@@ -30783,121 +29631,8 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="5" column="4">
-         <widget class="NumberEdit" name="editOriginOffsetA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="QComboBox" name="coboxOriginTypeB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>无原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>长原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>短原点</string>
-           </property>
-          </item>
-         </widget>
-        </item>
         <item row="3" column="3">
          <widget class="NumberEdit" name="editLeaveOriginSpeedZ1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="2">
-         <widget class="NumberEdit" name="editFindOriginSpeedB">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="NumberEdit" name="editFindOriginSpeedA">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="NumberEdit" name="editFindOriginSpeedC">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -30972,25 +29707,6 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="4" column="3">
-         <widget class="NumberEdit" name="editLeaveOriginSpeedC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="2">
          <widget class="NumberEdit" name="editFindOriginSpeedX1">
           <property name="minimumSize">
@@ -31029,7 +29745,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="2">
+        <item row="6" column="2">
          <widget class="NumberEdit" name="editFindOriginSpeedZ2">
           <property name="minimumSize">
            <size>
@@ -31048,7 +29764,7 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="7" column="4">
+        <item row="5" column="4">
          <widget class="NumberEdit" name="editOriginOffsetY2">
           <property name="minimumSize">
            <size>
@@ -31067,27 +29783,8 @@ QComboBox::down-arrow {
           </property>
          </widget>
         </item>
-        <item row="8" column="3">
-         <widget class="NumberEdit" name="editLeaveOriginSpeedZ2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
         <item row="6" column="3">
-         <widget class="NumberEdit" name="editLeaveOriginSpeedB">
+         <widget class="NumberEdit" name="editLeaveOriginSpeedZ2">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -31203,7 +29900,7 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="9" column="3">
+        <item row="7" column="3">
          <spacer name="verticalSpacer_6">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -31330,6 +30027,158 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
+        <item row="5" column="6">
+         <widget class="QComboBox" name="coboxBackOriginOrderY2">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>SimSun</family>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <item>
+           <property name="text">
+            <string>不回原点</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>6</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="6" column="6">
+         <widget class="QComboBox" name="coboxBackOriginOrderZ2">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <family>SimSun</family>
+            <pointsize>-1</pointsize>
+           </font>
+          </property>
+          <item>
+           <property name="text">
+            <string>不回原点</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>6</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="labCOrigin">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>C轴</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="NumberEdit" name="editFindOriginSpeedC">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
         <item row="4" column="6">
          <widget class="QComboBox" name="coboxBackOriginOrderC">
           <property name="minimumSize">
@@ -31387,8 +30236,46 @@ QComboBox::down-arrow {
           </item>
          </widget>
         </item>
-        <item row="5" column="6">
-         <widget class="QComboBox" name="coboxBackOriginOrderA">
+        <item row="4" column="3">
+         <widget class="NumberEdit" name="editLeaveOriginSpeedC">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="4">
+         <widget class="NumberEdit" name="editOriginOffsetC">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="5">
+         <widget class="QComboBox" name="coboxBackOriginDirectC">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -31409,43 +30296,18 @@ QComboBox::down-arrow {
           </property>
           <item>
            <property name="text">
-            <string>不回原点</string>
+            <string>正向</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
+            <string>反向</string>
            </property>
           </item>
          </widget>
         </item>
-        <item row="6" column="6">
-         <widget class="QComboBox" name="coboxBackOriginOrderB">
+        <item row="4" column="1">
+         <widget class="QComboBox" name="coboxOriginTypeC">
           <property name="minimumSize">
            <size>
             <width>140</width>
@@ -31466,151 +30328,17 @@ QComboBox::down-arrow {
           </property>
           <item>
            <property name="text">
-            <string>不回原点</string>
+            <string>无原点</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>1</string>
+            <string>长原点</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="7" column="6">
-         <widget class="QComboBox" name="coboxBackOriginOrderY2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>不回原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="8" column="6">
-         <widget class="QComboBox" name="coboxBackOriginOrderZ2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>不回原点</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
+            <string>短原点</string>
            </property>
           </item>
          </widget>
