@@ -133,6 +133,8 @@ void FullKeyboard::keyPressEvent(QKeyEvent *event)
         }
         hide();
     }
+    else
+        QWidget::keyPressEvent(event);
 }
 
 NumKeyboard::NumKeyboard(QWidget *parent)
@@ -197,13 +199,15 @@ void NumKeyboard::setCurrentEditObj(QObject *edit)
         editObj = edit;
         delete validator;
 
+        QVariant minValue = INT_MIN;
+        QVariant maxValue = INT_MAX;
         NumberEdit* numberEdit = qobject_cast<NumberEdit*>(editObj);
         if (numberEdit)
         {
 
             int decimalPlaces = numberEdit->getDecimalPlaces();
-            QVariant minValue = numberEdit->getMinValue();
-            QVariant maxValue = numberEdit->getMaxValue();
+            minValue = numberEdit->getMinValue();
+            maxValue = numberEdit->getMaxValue();
 
             if (decimalPlaces == 0)
             {
@@ -217,11 +221,6 @@ void NumKeyboard::setCurrentEditObj(QObject *edit)
 
             textInput->setValidator(validator);
         }
-//        else
-//        {
-//            validator = new QIntValidator(INT_MIN, INT_MAX, this);
-//            textInput->setValidator(validator);
-//        }
     }
 }
 
@@ -232,19 +231,44 @@ void NumKeyboard::clearText()
 
 void NumKeyboard::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
+    const int key = event->key();
+
+    if (key == Qt::Key_Enter || key == Qt::Key_Return)
     {
-        QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
-        QLabel* label = qobject_cast<QLabel*>(editObj);
-        if (lineEdit)
+        QString inputText = textInput->text();
+
+        if (editObj->setProperty("text", inputText))
         {
-            lineEdit->setText(textInput->text());
+            close();
         }
-        else if(label)
-        {
-            label->setText(textInput->text());
-        }
-        hide();
+//        else
+//        {
+//            QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
+//            QLabel* label = qobject_cast<QLabel*>(editObj);
+//            if (lineEdit)
+//            {
+//                lineEdit->setText(inputText);
+//                close();
+//            }
+//            else if (label)
+//            {
+//                label->setText(inputText);
+//                close();
+//            }
+//        }
+    }
+    else if (key == Qt::Key_Escape)
+    {
+        this->close();
+    }
+    else if (key == Qt::Key_Clear)
+    {
+        this->clearText();
+    }
+    else
+    {
+        QWidget::keyPressEvent(event);
     }
 }
+
 

@@ -7,7 +7,6 @@
 
 #include "draggablebutton.h"
 
-#define Test 0
 #define SAVEPOINT_VERSION_1
 struct ReferencePoint
 {
@@ -55,10 +54,8 @@ public:
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];
-    QList<DraggableButton*> btns;
-#if Test
-    QList<DraggableButton*> referenceBtns;
-#endif
+    QList<DraggableButton*> guidBtns;
+
     QList<ReferencePoint> referencePoints;
     int currentIndex;
 

@@ -33,6 +33,29 @@ Setting::Setting(QWidget *parent) :
         }
     });
 
+    for (NumberEdit* edit : ui->tabWidgetProduct->findChildren<NumberEdit*>())
+    {
+        edit->setDecimalPlaces(1); // 精度0.1
+    }
+    // 用户设置
+    for (NumberEdit* edit : ui->tabUserSet->findChildren<NumberEdit*>())
+    {
+        edit->setDecimalPlaces(0);
+    }
+
+    // 伺服安全点所有编辑框精度0.01
+    auto page = ui->stackedWidget->widget(6);
+    if (page->objectName() == "pageServoSafePoint")
+    {
+        for (NumberEdit* edit : page->findChildren<NumberEdit*>())
+        {
+            edit->setDecimalPlaces(2);
+        }
+    }
+    else
+        qDebug() << "can not find pageServoSafePoint";
+
+
 }
 
 Setting::~Setting()

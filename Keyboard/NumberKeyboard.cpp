@@ -55,21 +55,21 @@ NumberKeyboard::NumberKeyboard(QWidget *parent) : AbstractKeyboard(parent)
         {{Qt::Key_4, "4"}},
         {{Qt::Key_5, "5"}},
         {{Qt::Key_6, "6"}},
-        {{Qt::Key_Enter, "", QIcon(s_pack_up_icon)}},
+        {{Qt::Key_Enter, "", QIcon(QString(":/Image/enter.png"))}},
     };
 
     const QList<Modes> modeListBar3 = {
             {{Qt::Key_7, "7"}},
             {{Qt::Key_8, "8"}},
             {{Qt::Key_9, "9"}},
-            {{Qt::Key_Minus, ","}},
+            {{Qt::Key_Escape, "", QIcon(s_pack_up_icon)}},
     };
 
     const QList<Modes> modeListBar4 = {
-            {{Qt::Key_unknown, "."}},
+            {{Qt::Key_Minus, "-"}},
             {{Qt::Key_0, "0"}},
-            {{Qt::Key_Space, " ", QIcon(s_space_icon)}},
-            {{Qt::Key_unknown, ":"}},
+            {{Qt::Key_Period, "."}},
+            {{Qt::Key_Clear, "",QIcon(QString(":/Image/CE.png"))}},
     };
 
     createLayout(modeListBar1);

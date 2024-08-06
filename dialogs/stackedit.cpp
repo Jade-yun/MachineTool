@@ -17,7 +17,7 @@ void StackEdit::initStackPara(QTableWidget* tableWidget)
         axisSelect[i] = new QComboBox(this);
         switch (i) {
             case 0:
-                axisSelect[i]->addItems({ QObject::tr("X1轴"), QObject::tr("X2轴") });
+                axisSelect[i]->addItems({ QObject::tr("X1轴")/*, QObject::tr("X2轴")*/ });
                 break;
             case 1:
                 axisSelect[i]->addItems({ QObject::tr("Y1轴"), QObject::tr("Y2轴") });

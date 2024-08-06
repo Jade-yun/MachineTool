@@ -10,9 +10,6 @@
 #include "keydefinedialog.h"
 #include "sigdefinedialog.h"
 
-#pragma execution_character_set("utf-8")
-
-
 
 int flag = 0;
 int teachFlag = 0;
@@ -34,10 +31,10 @@ MainWindow::MainWindow(QWidget *parent)
 //    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
-    for (auto dlg : findChildren<QDialog*>())
-    {
-        dlg->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-    }
+//    for (auto dlg : findChildren<QDialog*>())
+//    {
+//        dlg->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+//    }
 
     connect(ui->btnAdmin, &QPushButton::clicked, [=](){
 
@@ -94,12 +91,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 //    ui->labDateTime->keyPressEvent();
 
-//    QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
-////    qDebug() << "number of QLineEdit" << lineEdits.size();
-//    for (auto edit : lineEdits)
-//    {
-//        edit->installEventFilter(this);
-//    }
+    QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>("editSystemName");
+//    qDebug() << "number of QLineEdit" << lineEdits.size();
+    for (auto edit : lineEdits)
+    {
+        edit->installEventFilter(this);
+    }
 
     
     handWheel = new HandWheelDialog(this);
@@ -260,10 +257,10 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 
 void MainWindow::callFullKeyboard(QObject *watched)
 {
-//    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
+    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
     {
         FullKeyboard* keyboard = FullKeyboard::instance();
-        keyboard->clearText();
+        keyboard->setText(edit->text());
         keyboard->setCurrentEditObj(watched);
         keyboard->show();
         keyboard->raise();

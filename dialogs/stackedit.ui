@@ -913,11 +913,6 @@
            <string>X1轴</string>
           </property>
          </item>
-         <item>
-          <property name="text">
-           <string>X2轴</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="1" column="2">

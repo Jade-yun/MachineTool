@@ -91,7 +91,7 @@ QTabWidget::pane {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -122,6 +122,19 @@ QTabWidget::pane {
       <property name="spacing">
        <number>1</number>
       </property>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item>
        <widget class="QCheckBox" name="checkBoxEditPos">
         <property name="minimumSize">
@@ -264,7 +277,7 @@ QTabWidget::pane {
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_4">
+       <widget class="KeyEdit" name="editGuideKeyDef">
         <property name="minimumSize">
          <size>
           <width>230</width>
@@ -2395,6 +2408,13 @@ p, li { white-space: pre-wrap; }
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>KeyEdit</class>
+   <extends>QLineEdit</extends>
+   <header>keydefinedialog.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="images.qrc"/>
  </resources>
