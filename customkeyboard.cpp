@@ -245,25 +245,20 @@ void NumKeyboard::keyPressEvent(QKeyEvent *event)
     {
         QString inputText = textInput->text();
 
-        if (editObj->setProperty("text", inputText))
+        NumberEdit* numberEdit = qobject_cast<NumberEdit*>(editObj);
+        if (numberEdit)
         {
-            close();
+            inputText = numberEdit->formatInput(inputText);
+            numberEdit->setText(inputText);
         }
-//        else
-//        {
-//            QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
-//            QLabel* label = qobject_cast<QLabel*>(editObj);
-//            if (lineEdit)
-//            {
-//                lineEdit->setText(inputText);
-//                close();
-//            }
-//            else if (label)
-//            {
-//                label->setText(inputText);
-//                close();
-//            }
-//        }
+        else
+        {
+            if (editObj->setProperty("text", inputText))
+            {
+                close();
+            }
+        }
+        close();
     }
     else if (key == Qt::Key_Escape)
     {

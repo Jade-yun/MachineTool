@@ -35,6 +35,30 @@ QVariant NumberEdit::getMaxValue() const
     return this->property("maxValue");
 }
 
+QString NumberEdit::formatInput(const QString& inputText) const
+{
+    QString formattedText = inputText;
+    int decimalPlaces = getDecimalPlaces();
+
+    if (decimalPlaces > 0)
+    {
+        if (!formattedText.contains('.'))
+        {
+            formattedText += '.';
+            formattedText += QString(decimalPlaces, '0');
+        }
+        else
+        {
+            int currentDecimalPlaces = formattedText.split('.')[1].length();
+            if (currentDecimalPlaces < decimalPlaces)
+            {
+                formattedText += QString(decimalPlaces - currentDecimalPlaces, '0');
+            }
+        }
+    }
+    return formattedText;
+}
+
 void NumberEdit::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
