@@ -219,7 +219,7 @@ QComboBox QAbstractItemView::item:selected{
     </font>
    </property>
    <property name="currentIndex">
-    <number>8</number>
+    <number>6</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <widget class="QWidget" name="layoutWidget">
@@ -18896,7 +18896,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>

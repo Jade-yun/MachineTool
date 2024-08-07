@@ -197,7 +197,11 @@ void NumKeyboard::setCurrentEditObj(QObject *edit)
     if (editObj != edit)
     {
         editObj = edit;
-        delete validator;
+        if (!validator)
+        {
+            delete validator;
+            validator = nullptr;
+        }
 
         QVariant minValue = INT_MIN;
         QVariant maxValue = INT_MAX;
@@ -211,12 +215,16 @@ void NumKeyboard::setCurrentEditObj(QObject *edit)
 
             if (decimalPlaces == 0)
             {
-                validator = new QIntValidator(minValue.toInt(), maxValue.toInt(), this);
+                validator = new QIntValidator(this);
+//                validator = new QIntValidator(minValue.toInt(), maxValue.toInt(), this);
             }
             else
             {
-                validator = new QDoubleValidator(minValue.toDouble(), maxValue.toDouble(), decimalPlaces, this);
+                validator = new QDoubleValidator(this);
                 static_cast<QDoubleValidator*>(validator)->setNotation(QDoubleValidator::StandardNotation);
+                static_cast<QDoubleValidator*>(validator)->setDecimals(decimalPlaces);
+//                validator = new QDoubleValidator(minValue.toDouble(), maxValue.toDouble(), decimalPlaces, this);
+//                static_cast<QDoubleValidator*>(validator)->setNotation(QDoubleValidator::StandardNotation);
             }
 
             textInput->setValidator(validator);

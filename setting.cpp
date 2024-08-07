@@ -44,17 +44,16 @@ Setting::Setting(QWidget *parent) :
     }
 
     // 伺服安全点所有编辑框精度0.01
-    auto page = ui->stackedWidget->widget(6);
-    if (page->objectName() == "pageServoSafePoint")
+    for (int i = 0; i < ui->tabWgtServoSafePoint->count(); i++)
     {
-        for (NumberEdit* edit : page->findChildren<NumberEdit*>())
+
+        auto edits = ui->tabWgtServoSafePoint->widget(i)->findChildren<NumberEdit*>();
+//        qDebug() << "number of NumberEdit: " << edits->
+        for (NumberEdit* edit : edits)
         {
             edit->setDecimalPlaces(2);
         }
     }
-    else
-        qDebug() << "can not find pageServoSafePoint";
-
 
 }
 
