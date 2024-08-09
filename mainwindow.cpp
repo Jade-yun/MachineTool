@@ -187,6 +187,12 @@ void MainWindow::connectAllSignalsAndSlots()
 
     connect(this, &MainWindow::sigSettingHome, setWidget, &Setting::slotSettingHome);
 
+    connect(manualWidget, &ManualForm::sigShowStackPage, [=](){
+
+        ui->stkWidget->setCurrentWidget(setWidget);
+        setWidget->ShowStackPage();
+    });
+
     //显示时间
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {

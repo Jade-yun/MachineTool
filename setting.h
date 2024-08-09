@@ -31,6 +31,7 @@ private:
 
 public slots:
     void slotSettingHome();
+    void ShowStackPage();
 
 private:
     Ui::Setting *ui;

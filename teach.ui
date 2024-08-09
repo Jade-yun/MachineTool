@@ -816,7 +816,7 @@ QHeaderView::section           // 标题头 每个单独的标题区域
        <string>保存</string>
       </property>
       <property name="icon">
-       <iconset resource="images.qrc">
+       <iconset>
         <normaloff>:/images/teach_img/save.png</normaloff>:/images/teach_img/save.png</iconset>
       </property>
       <property name="iconSize">
@@ -897,7 +897,7 @@ QHeaderView::section           // 标题头 每个单独的标题区域
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="iconSize">
     <size>
@@ -939,7 +939,7 @@ QHeaderView::section           // 标题头 每个单独的标题区域
       </size>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>7</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">

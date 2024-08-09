@@ -8,6 +8,10 @@
 #include <QString>
 #include <QDebug>
 
+#include "customkeyboard.h"
+
+#define	REFERENCE_TOTAL_NUM	40
+
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ManualForm)
@@ -20,9 +24,302 @@ ManualForm::ManualForm(QWidget *parent) :
 //    ui->tabAxisAction->setVisible(false);
 //    ui->tabWidgetManualPage->removeTab(1);
 
-    tableReference = new QTableWidget(5, 5, ui->frameRerencePoint);
+    tableReferenceInit();
+    pageInit();
 
-//    tableReference->resize(0, 0);
+
+    connect(ui->btnIntoStack, &QPushButton::clicked, this , [=](){
+        emit sigShowStackPage();
+    });
+    /*********************************操作指引逻辑********************************************/
+    connect(ui->editGuideKeyDef, &KeyEdit::saveKeyDef, this, [=](){
+        // save the KeyDef setting in coresponding guidePoints
+        if (selectedButton[0] && guidePoints.contains(selectedButton[0]))
+        {
+            guidePoints[selectedButton[0]].keyDefStr = ui->editGuideKeyDef->text();
+            // save the corresponding parameters in struct GuidePara
+
+        }
+    });
+    connect(ui->btnHideGuide, &QPushButton::toggled, this, [=](bool checked){
+
+        ui->checkBoxEditPosGuide->setVisible(checked);
+        ui->btnImportPicture->setVisible(checked);
+        ui->btnNewButton->setVisible(checked);
+        ui->btnDeleteButton->setVisible(checked);
+    });
+    connect(ui->btnHideReference, &QPushButton::toggled, this, [=](bool checked){
+
+        ui->checkBoxEditPosReference->setVisible(checked);
+        ui->btnImportPictureReference->setVisible(checked);
+        ui->btnNewButtonReference->setVisible(checked);
+        ui->btnDeleteButtonReference->setVisible(checked);
+    });
+}
+
+ManualForm::~ManualForm()
+{
+    delete ui;
+    qDeleteAll(guidePoints.keys());
+//    qDeleteAll(referencePoints);
+}
+
+void ManualForm::on_btnNewButton_clicked()
+{
+    if (guidePoints.size() < 20)
+    {
+        DraggableButton* btn = new DraggableButton(ui->tabOperate);
+        btn->setDraggable(draggable[0]);
+        btn->setCheckable(draggable[0]);
+        btn->setAutoExclusive(true);
+
+        btn->setFixedSize(120, 40);
+        QRect btnPos = QRect(QPoint(20 + 120 * (guidePoints.size() / 8), 20 + 50 * (guidePoints.size() % 8)), btn->size());
+        btn->setGeometry(btnPos);
+        QString btnName = tr((QString("按钮") + QString::number(guidePoints.size() + 1)).toUtf8().constData());
+        btn->setText(btnName);
+        btn->show();
+
+        // Create GuidePara for the new button
+        GuidePara newGuidePara;
+        newGuidePara.guideName = btnName;
+        newGuidePara.keyDefStr = "0";
+
+        // Insert into QHash
+        guidePoints.insert(btn, newGuidePara);
+
+        // Connect button click signal
+        connect(btn, &DraggableButton::pressed, this, [=]() {
+            selectedButton[0] = btn;
+            selectedButton[0]->setChecked(draggable[0]);
+
+            // Set the guide info in the UI as needed
+            if (guidePoints.contains(selectedButton[0])) {
+                GuidePara para = guidePoints.value(selectedButton[0]);
+                // update correspongding keyDef name in UI，
+                 ui->editGuideKeyDef->setText(para.keyDefStr);
+            }
+        });
+    }
+}
+
+void ManualForm::on_btnDeleteButton_clicked()
+{
+    if (selectedButton[0] && guidePoints.contains(selectedButton[0]))
+    {
+        // Remove the button and corresponding GuidePara
+        guidePoints.remove(selectedButton[0]);
+        delete selectedButton[0];
+        selectedButton[0] = nullptr;
+    }
+    else if (!guidePoints.isEmpty())
+    {
+        // Remove the first button in the QHash
+        DraggableButton* btn = guidePoints.keys().first();
+        guidePoints.remove(btn);
+        delete btn;
+    }
+}
+
+void ManualForm::on_checkBoxEditPosGuide_stateChanged(int arg1)
+{
+    // Update draggable state
+    draggable[0] = arg1;
+
+    // Iterate over all buttons in guidePoints
+    for (auto btn : guidePoints.keys())
+    {
+        btn->setDraggable(draggable[0]);
+        // Optionally, set the buttons to be checkable as well
+        btn->setCheckable(draggable[0]);
+    }
+}
+
+void ManualForm::on_btnNewButtonReference_clicked()
+{
+    if (referencePoints.size() < REFERENCE_TOTAL_NUM)
+    {
+        DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
+        btn->setCheckable(true);
+        btn->setAutoExclusive(true);
+        btn->setDraggable(draggable[1]);
+        btn->setFixedSize(40, 40);
+        btn->setStyleSheet("QPushButton{ border-style:solid; border-width:1px; border-radius:20px;}");
+
+        int newIndex = getNextAvailableIndex();
+        if (newIndex == 0)
+        {
+            return;
+        }
+        QString btnName = QString("参考点%1").arg(newIndex);
+
+        ReferPointPara point = {newIndex, btnName, btn};
+        referencePoints.append(point);
+        if (selectedButton[1] == nullptr)
+        {
+           btn->setChecked(true);
+           selectedButton[1] = btn;
+        }
+        int posIndex = newIndex - 1;
+        QRect btnPos = QRect(QPoint(10 + 42 * (posIndex / 7), 130 + 42 * (posIndex % 7)), btn->size());
+        btn->setGeometry(btnPos);
+        btn->setText(QString::number(point.index));
+        btn->show();
+
+        connect(btn, &DraggableButton::pressed, this, [=]() {
+            selectedButton[1] = btn;
+
+            int index = 0;
+            auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+                return point.button == selectedButton[1];
+            });
+            if (it != referencePoints.end())
+            {
+                ui->textReferPointName->setText(it->name);
+                index = it->index;
+            }
+            for (int row = 0; row < tableReference->rowCount(); ++row)
+            {
+                for (int col = 0; col < tableReference->columnCount(); ++col)
+                {
+                    QTableWidgetItem *indexItem = tableReference->item(row, col);
+                    if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index)
+                    {
+//                        qDebug() << "Found item with armedIndex:" << index
+//                                 << " at row:" << row
+//                                 << " col:" << col;
+                        tableReference->setCurrentCell(row, col + 1);
+//                        tableReference->itemPressed(tableReference->itemAt(row, col + 1));
+                        return ;
+                    }
+                }
+            }
+        });
+
+        updateReferPointsTable();
+    }
+}
+
+void ManualForm::on_btnDeleteButtonReference_clicked()
+{
+#if 0
+    if (selectedButton[1] && referencePoints.contains(selectedButton[1]))
+    {
+        DraggableButton* btn = selectedButton[1];
+        referencePoints.remove(btn);
+        delete btn;
+        selectedButton[1] = nullptr;
+    }
+    else if (!referencePoints.isEmpty())
+    {
+        DraggableButton* btn = referencePoints.keys().first();
+        referencePoints.remove(btn);
+        delete btn;
+    }
+
+    updateReferPointsTable();
+    tableReference->setVisible(!referencePoints.isEmpty());
+#endif
+    if (selectedButton[1])
+    {
+        // 找到与 selectedButton[1] 关联的 ReferPointPara
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+
+        if (it != referencePoints.end())
+        {
+            delete it->button;
+            referencePoints.erase(it);
+            selectedButton[1] = nullptr;
+        }
+    }
+    if (!referencePoints.isEmpty())
+    {
+        selectedButton[1] = referencePoints.last().button;
+        selectedButton[1]->setChecked(true);
+    }
+    updateReferPointsTable();
+}
+
+void ManualForm::updateReferPointsTable()
+{
+    tableReference->clearContents();
+    tableReference->setRowCount(referencePoints.count() / 4 + 1);
+
+    QList<ReferPointPara> sortedPoints = referencePoints;
+    std::sort(sortedPoints.begin(), sortedPoints.end(), [](const ReferPointPara &a, const ReferPointPara &b) {
+        return a.index < b.index;
+    });
+
+    int num = 0;
+    for (const auto &point : sortedPoints)
+    {
+        int row = num / 4;
+        int col = (num % 4) * 2;
+        num++;
+
+        QTableWidgetItem *indexItem = new QTableWidgetItem(QString::number(point.index));
+        indexItem->setFlags(indexItem->flags() & ~Qt::ItemIsEnabled);
+        indexItem->setForeground(QBrush(Qt::black));
+        tableReference->setItem(row, col, indexItem);
+
+        QTableWidgetItem *nameItem = new QTableWidgetItem(point.name);
+        tableReference->setItem(row, col + 1, nameItem);
+    }
+
+    for (int row = 0; row < tableReference->rowCount(); ++row)
+    {
+        for (int col = 0; col < tableReference->columnCount(); ++col)
+        {
+            if (!tableReference->item(row, col))
+            {
+                QTableWidgetItem *emptyItem = new QTableWidgetItem("");
+                emptyItem->setFlags(emptyItem->flags() & ~(Qt::ItemIsSelectable | Qt::ItemIsEnabled));
+                tableReference->setItem(row, col, emptyItem);
+            }
+        }
+    }
+
+    tableReference->setVisible(!referencePoints.isEmpty());
+    // 选中当前checked button 对应的item
+    if (selectedButton[1] == nullptr) return;
+
+    int index = selectedButton[1]->text().toInt();
+    for (int row = 0; row < tableReference->rowCount(); ++row)
+    {
+        for (int col = 0; col < tableReference->columnCount(); ++col)
+        {
+            QTableWidgetItem *indexItem = tableReference->item(row, col);
+            if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index)
+            {
+                tableReference->setCurrentCell(row, col + 1);
+                break;
+            }
+        }
+    }
+}
+
+void ManualForm::on_checkBoxEditPosReference_stateChanged(int arg1)
+{
+    draggable[1] = arg1;
+
+//    for(DraggableButton* btn : referencePoints.keys() )
+//    {
+//        btn->setDraggable(draggable[1]);
+//    }
+
+    for (auto point : referencePoints)
+    {
+        point.button->setDraggable(draggable[1]);
+    }
+}
+
+
+void ManualForm::tableReferenceInit()
+{
+    tableReference = new QTableWidget(ui->frameRerencePoint);
+
     // Set table to be uneditable
     tableReference->setEditTriggers(QAbstractItemView::NoEditTriggers);
     // Set table to be unselectable
@@ -30,8 +327,7 @@ ManualForm::ManualForm(QWidget *parent) :
     // Initialize table to be invisible
     tableReference->setVisible(referencePoints.size());
 
-    tableReference->setMaximumHeight(30 * 4);
-//    tableReference->setMinimumWidth(10 * 4);
+    tableReference->setMaximumHeight(40 * 3);
     tableReference->setMinimumWidth(760);
 
     tableReference->setColumnCount(8); // 4 pairs of index and button name
@@ -46,509 +342,86 @@ ManualForm::ManualForm(QWidget *parent) :
 //    tableReference->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     // must set minimum section size for horizontalHeader, otherwise setColumnWidth can not work
     tableReference->horizontalHeader()->setMinimumSectionSize(30);
+    tableReference->verticalHeader()->setDefaultSectionSize(40);
     for (int i = 0; i < tableReference->columnCount(); ++i) {
         tableReference->setColumnWidth(i, (i % 2 == 0) ? 40 : 140); // Alternate between 40 and 140 width
     }
-    tableReferenceSigAndSlot();
 
-
-    /*********************************操作指引逻辑********************************************/
-    connect(ui->editGuideKeyDef, &KeyEdit::textEdited, this, [=](QString text){
-        // save the KeyDef setting in coresponding guidePoints
-        qDebug() << "ui->editGuideKeyDef: " << text;
-//        guidPoints.keyDef = text;
-
-    });
-
-}
-
-ManualForm::~ManualForm()
-{
-    delete ui;
-}
-
-void ManualForm::on_btnNewButton_clicked()
-{
-
-    // to new button
-    if (guidBtns.size() < 20)
-    {
-        DraggableButton* btn = new DraggableButton(ui->tabOperate);
-//        // must initialize these property here, otherwise the new button is not draggable
-//        btn->setDraggable(draggable[0]);
-//        btn->setCheckable(draggable[0]);
-//        btn->setAutoExclusive(true);
-
-        guidBtns.append(btn);
-
-        // the position set of buttons here, this part need to be optimized.
-        btn->setFixedSize(120, 40);
-        QRect btnPos = QRect(QPoint(20 + 120 * ((guidBtns.size() - 1) / 8 ), 20 + 50 * ((guidBtns.size() - 1) % 8)), btn->size());
-        btn->setGeometry(btnPos);
-        const QString btnName = tr((QString("按钮") + QString::number(guidBtns.size())).toUtf8().constData());
-        btn->setText(btnName);
-        btn->show();
-
-        // to set the slot function for every button
-        // use reference capture here to insure selectedButton is modified.
-        connect(btn, &DraggableButton::clicked, this, [=](){
-            if (btn == nullptr) {
-                qDebug() << "btn is nullptr";
-                return;
-            }
-            selectedButton[0] = btn;
-            if (selectedButton[0] == nullptr) {
-                qDebug() << "selectedButton[0] is nullptr";
-                return;
-            }
-            selectedButton[0]->setChecked(draggable[0]);
-
-            //
-//            ui->editGuideKeyDef->setText(guidePoints.keyDef);
-
+    connect(tableReference, &QTableWidget::itemPressed, this, [=](QTableWidgetItem *item) {
+        int row = item->row();
+        int col = item->column();
+        int index = row * 4 + col / 2 + 1;
+//        qDebug() << "row: " << row
+//                 << ",col: " << col << "\n"
+//                 << "index: " << index;
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point){
+            return point.index == index;
         });
-    }
-}
-
-void ManualForm::on_btnNewButtonReference_clicked()
-{
-
-    if (referencePoints.size() < 40)
-    {
-
-        DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
-        // must initialize these property here, otherwise the new button is not draggable
-        btn->setDraggable(draggable[1]);
-        btn->setCheckable(true);
-        btn->setAutoExclusive(true);
-        btn->setFixedSize(40, 40);
-        // set stylesheet
-        btn->setStyleSheet("QPushButton{ border-style:solid; border-width:1px; border-radius:20px;}");
-
-        ReferencePoint point;
-
-        if (currentIndex != -1)
+        if (it != referencePoints.end())
         {
-            point.index = ++currentIndex;
-        }
-        else
-        {
-            point.index = referencePoints.size();
-        }
-//        qDebug() << "point.index = " << point.index;
-        point.name = tr("参考点%1").arg(point.index + 1);
-        point.button = btn;
-
-        if (selectedButton[1])
-        {
-            referencePoints.insert(currentIndex, point);
-        }
-        else
-        {
-            referencePoints.append(point);
-        }
-
-        // the position set of buttons here, this part need to be optimized.
-        QRect btnPos = QRect(QPoint(20 + 40 * ((referencePoints.size()-1) / 7 ), 150 + 45 * ((referencePoints.size()-1) % 7)), btn->size());
-        btn->setGeometry(btnPos);
-        const QString btnName = tr((QString::number(referencePoints.size())).toUtf8().constData());
-        btn->setText(btnName);
-        btn->show();
-
-        // to set the slot function for every button
-        // use reference capture here to insure selectedButton is modified.
-        connect(btn, &DraggableButton::clicked, this, [=](){
-            if (btn == nullptr) {
-                qDebug() << "btn is nullptr";
-                return;
-            }
+            DraggableButton* btn =  it->button;
+            btn->setChecked(true);
             selectedButton[1] = btn;
-            if (selectedButton[1] == nullptr) {
-                qDebug() << "selectedButton[1] is nullptr";
-                return;
-            }
-            selectedButton[1]->setChecked(true);
-
-            // get responding index of seletedButton in referencePoints
-            // need to update currentIndex in tableselected slot
-            for (int i = 0; i < referencePoints.size(); ++i) {
-                if (referencePoints[i].button == btn) {
-                    currentIndex = i;
-                    break;
-                }
-            }
-            if (currentIndex != -1) {
-                qDebug() << "Button index in referencePoints:" << currentIndex;
-            } else {
-                qDebug() << "Button not found in referencePoints";
-            }
-
-
-            // to press the corresponding item in referenceTable
-            int row = currentIndex / 4;
-            int col = (currentIndex % 4) * 2;
-            // Select the corresponding item in the table
-            tableReference->setCurrentCell(row, col + 1);
-        });
-
-        // update the index for all the reference points when a new point was added to referencePoints,
-        // actually it works just for these points after currentIndex.
-        for (int i = 0; i < referencePoints.size(); i++)
-        {
-            referencePoints[i].index = i;
-
+            QString name = it->name;
+            ui->textReferPointName->setText(name);
         }
-        addPointsToTable();
-        tableReference->setVisible(referencePoints.size());
-    }
-
-}
-
-void ManualForm::on_btnDeleteButton_clicked()
-{
-
-    // examine if any button is clicked, delete the choosed one
-    if (selectedButton[0] && guidBtns.contains(selectedButton[0]))
-    {
-        guidBtns.removeOne(selectedButton[0]);
-        delete selectedButton[0];
-        selectedButton[0] = nullptr;
-    }
-    // if no button is selected, delete the last in guidBtns
-    else if (!guidBtns.isEmpty())
-    {
-        DraggableButton* btn = guidBtns.takeLast();
-        delete btn;
-    }
-    //    if (guidBtns.isEmpty() == false)
-    //    {
-    //        DraggableButton* btn = guidBtns.last();
-    //        selectedButton[0] = btn;
-
-    //        selectedButton[0]->setChecked(true);
-    //    }
-}
-
-void ManualForm::on_btnDeleteButtonReference_clicked()
-{
-
-    // clear the table at first
-    tableReference->clear();
-
-//    for (int i = 0; i < referencePoints.size(); ++i) {
-//        if (referencePoints[i].button == selectedButton[1]) {
-//            currentIndex = i;
-//            break;
-//        }
-//    }
-    currentIndex = getIndex(selectedButton[1]);
-    if (currentIndex != -1) {
-        qDebug() << "Button index in referencePoints:" << currentIndex;
-    } else {
-        qDebug() << "Button not found in referencePoints";
-    }
-
-    // examine if any button is clicked, delete the choosed one
-    if (selectedButton[1] && currentIndex > 0 && currentIndex < referencePoints.size()+1) // currentIndex > 0 condition is essiensial
-    {
-//        referencePoints.removeOne(selectedButton[1]);
-       referencePoints.removeAt(currentIndex);
-        delete selectedButton[1];
-    }
-    // if no button is selected, delete the last one
-    else if (!referencePoints.isEmpty())
-    {
-        ReferencePoint point = referencePoints.takeLast();
-        delete (point.button);
-    }
-
-    if (!referencePoints.isEmpty())
-    {       
-        for (int i = 0; i < referencePoints.size(); i++)
-        {
-            referencePoints[i].index = i;
-
-        }
-        addPointsToTable();
-        tableReference->setVisible(referencePoints.size());
-
-        selectedButton[1] = referencePoints.last().button;
-        selectedButton[1]->setChecked(true);
-        // emit signal to update currentIndex and selete corresponding item in the table
-        // need to be optimized here, cause meaningless self assignment operations will be performed
-        emit selectedButton[1]->clicked();
-    }
-
-
-}
-
-
-void ManualForm::on_checkBoxEditPos_stateChanged(int arg1)
-{
-    //    for (int i = 0; i < 20; ++i)
-    //    {
-    //        if (buttons[i])
-    //        {
-    //            buttons[i]->setDraggable(arg1);
-    //        }
-    //    }
-    draggable[0] = arg1;
-
-    for (auto btn : guidBtns)
-    {
-        btn->setDraggable(draggable[0]);
-        // when the button is draaggable, it's also be checkable.
-        //        btn->setCheckable(draggable[0]);
-    }
-
-}
-void ManualForm::on_checkBoxEditPosReference_stateChanged(int arg1)
-{
-    draggable[1] = arg1;
-
-//    for (auto btn : referenceBtns)
-//    {
-//        btn->setDraggable(draggable[1]);
-//    }
-    for(auto point : referencePoints)
-    {
-        point.button->setDraggable(draggable[1]);
-    }
-}
-
-void ManualForm::on_btnImportPicture_clicked()
-{
-
-    //    QString imagePath = "/opt/MachineTool/bin/backgroud.png";
-    QString imagePath = "./backgroud.png";
-    QPixmap pixmap(imagePath);
-
-    if (!pixmap.isNull())
-    {
-        ui->labelBackgroud->setPixmap(pixmap);
-        ui->labelBackgroud->setScaledContents(true);
-        ui->labelBackgroud->show();
-    }
-    else
-    {
-        qDebug() << "Failed to load image: " << imagePath;
-    }
-}
-
-void ManualForm::on_btnImportPictureReference_clicked()
-{
-
-}
-
-void ManualForm::addPointsToTable()
-{
-    for (auto point : referencePoints)
-    {
-        int row = point.index / 4;
-        int col = (point.index % 4) * 2;
-        QTableWidgetItem *indexItem = new QTableWidgetItem(QString::number(point.index + 1));
-        indexItem->setFlags(indexItem->flags() & ~Qt::ItemIsEnabled);
-//        indexItem->setCheckState(Qt::Unchecked);
-        tableReference->setItem(row, col, indexItem);
-        QTableWidgetItem * nameItem = new QTableWidgetItem(point.name);
-        nameItem->setFlags(nameItem->flags() | Qt::ItemIsSelectable | Qt::ItemIsEditable);
-        tableReference->setItem(row, col + 1, nameItem);
-    }
-}
-
-void ManualForm::tableReferenceSigAndSlot()
-{
-    connect(tableReference, &QTableWidget::itemPressed, this, [=](QTableWidgetItem *item){
-            int row = item->row();
-            int col = item->column();
-//            qDebug() << "Item pressed at row" << row << "column" << col;
-            int index = 4 * row + col / 2;
-            if (index > 0 && index < referencePoints.size())
-            {
-//                qDebug() << "index = " << index;
-                selectedButton[1] = referencePoints.at(index).button;
-                selectedButton[1]->setChecked(true);
-//                qDebug() << "seleted button is checked:" << selectedButton[1]->isChecked();
-            }
     });
+
 }
 
-int ManualForm::getIndex(const DraggableButton *button) const
+void ManualForm::pageInit()
 {
-    for (int i = 0; i < referencePoints.size(); ++i)
+    ui->checkBoxEditPosGuide->setVisible(false);
+    ui->btnImportPicture->setVisible(false);
+    ui->btnNewButton->setVisible(false);
+    ui->btnDeleteButton->setVisible(false);
+
+    ui->checkBoxEditPosReference->setVisible(false);
+    ui->btnImportPictureReference->setVisible(false);
+    ui->btnNewButtonReference->setVisible(false);
+    ui->btnDeleteButtonReference->setVisible(false);
+}
+
+int ManualForm::getNextAvailableIndex()
+{
+    QSet<int> usedIndices;
+    for (const auto &point : referencePoints)
     {
-        if (referencePoints[i].button == button)
+        usedIndices.insert(point.index);
+    }
+    for (int i = 1; i <= REFERENCE_TOTAL_NUM; ++i)
+    {
+        if (!usedIndices.contains(i))
         {
             return i;
         }
     }
-    return -1;
+    return 0;
 }
 
-#ifdef SAVEPOINT_VERSION_1
-void ManualForm::saveState(QWidget *parent, const QString &settingsFile)
+void ManualForm::on_btnEditReference_clicked()
 {
-    QSettings settings(settingsFile, QSettings::IniFormat);
-//    settings.clear();
-    settings.beginGroup("Widgets");
+    if (selectedButton[1])
+    {
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
 
-    const QList<QWidget *> widgets = parent->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
-    for (QWidget *widget : widgets) {
-        QString key = widget->objectName();
-        settings.beginGroup(key);
+        if (it != referencePoints.end())
+        {
+            // 实例化并配置 FullKeyboard 对话框
+            FullKeyboard *keyboard = FullKeyboard::instance();
+            keyboard->setText(it->name);
+            keyboard->setCurrentEditObj(ui->textReferPointName);
 
-        settings.setValue("geometry", widget->geometry());
-        settings.setValue("stylesheet", widget->styleSheet());
-
-        if (QPushButton *button = qobject_cast<QPushButton *>(widget)) {
-            settings.setValue("type", "QPushButton");
-            settings.setValue("text", button->text());
-        } else if (QTableWidget *tableWidget = qobject_cast<QTableWidget *>(widget)) {
-            settings.setValue("type", "QTableWidget");
-//            settings.setValue("item", tableWidget->i);
-            // Save additional QTableWidget properties as needed
-        }
-        else if (QLineEdit *lineEdit = qobject_cast<QLineEdit *>(widget)) {
-            settings.setValue("type", "QLineEdit");
-            settings.setValue("text", lineEdit->text());
-        } else if (QCheckBox *checkBox = qobject_cast<QCheckBox *>(widget)) {
-            settings.setValue("type", "QCheckBox");
-            settings.setValue("checked", checkBox->isChecked());
-        }
-
-        settings.endGroup();
-    }
-    settings.endGroup();
-}
-
-void ManualForm::restoreState(QWidget *parent, const QString &settingsFile)
-{
-
-    QSettings settings(settingsFile, QSettings::IniFormat);
-    settings.beginGroup("Widgets");
-
-    const QStringList keys = settings.childGroups();
-    for (const QString &key : keys) {
-        settings.beginGroup(key);
-
-        QString type = settings.value("type").toString();
-        QWidget *widget = parent->findChild<QWidget *>(key);
-
-        if (!widget) {
-            if (type == "QLineEdit") {
-                widget = new QLineEdit(parent);
-            } else if (type == "QCheckBox") {
-                widget = new QCheckBox(parent);
-            } else if (type == "QPushButton") {
-                widget = new QPushButton(parent);
-            } else if (type == "QTableWidget") {
-                widget = new QTableWidget(parent);
-                // Restore additional QTableWidget properties as needed
+            if (keyboard->exec() == QDialog::Accepted)
+            {
+                it->name = ui->textReferPointName->toPlainText();
+                updateReferPointsTable();
             }
-            widget->setObjectName(key);
         }
-
-        widget->setGeometry(settings.value("geometry").toRect());
-        widget->setStyleSheet(settings.value("stylesheet").toString());
-
-        if (QLineEdit *lineEdit = qobject_cast<QLineEdit *>(widget)) {
-            lineEdit->setText(settings.value("text").toString());
-        } else if (QCheckBox *checkBox = qobject_cast<QCheckBox *>(widget)) {
-            checkBox->setChecked(settings.value("checked").toBool());
-        } else if (QPushButton *button = qobject_cast<QPushButton *>(widget)) {
-            button->setText(settings.value("text").toString());
-        }
-
-        widget->show();
-        settings.endGroup();
     }
-    settings.endGroup();
 }
-#else
-void ManualForm::saveStateHelper(QSettings &settings, QWidget *widget)
-{
-    settings.beginGroup(widget->objectName());
-
-    settings.setValue("geometry", widget->geometry());
-    settings.setValue("stylesheet", widget->styleSheet());
-
-    if (QLineEdit *lineEdit = qobject_cast<QLineEdit *>(widget)) {
-        settings.setValue("type", "QLineEdit");
-        settings.setValue("text", lineEdit->text());
-    } else if (QCheckBox *checkBox = qobject_cast<QCheckBox *>(widget)) {
-        settings.setValue("type", "QCheckBox");
-        settings.setValue("checked", checkBox->isChecked());
-    } else if (QPushButton *button = qobject_cast<QPushButton *>(widget)) {
-        settings.setValue("type", "QPushButton");
-        settings.setValue("text", button->text());
-    } else if (QTableWidget *tableWidget = qobject_cast<QTableWidget *>(widget)) {
-        settings.setValue("type", "QTableWidget");
-        // Save additional QTableWidget properties as needed
-    }
-
-    const QList<QWidget *> children = widget->findChildren<QWidget *>(QString(), Qt::FindDirectChildrenOnly);
-    for (QWidget *child : children) {
-        saveStateHelper(settings, child);
-    }
-
-    settings.endGroup();
-}
-
-
-void saveState(QWidget *parent, const QString &settingsFile) {
-    QSettings settings(settingsFile, QSettings::IniFormat);
-    settings.clear();
-    settings.beginGroup("Widgets");
-    saveStateHelper(settings, parent);
-    settings.endGroup();
-}
-
-
-void ManualForm::restoreStateHelper(QSettings &settings, QWidget *parent, const QString &group)
-{
-    settings.beginGroup(group);
-
-    QWidget *widget = nullptr;
-    QString type = settings.value("type").toString();
-
-    if (type == "QLineEdit") {
-        widget = new QLineEdit(parent);
-        static_cast<QLineEdit *>(widget)->setText(settings.value("text").toString());
-    } else if (type == "QCheckBox") {
-        widget = new QCheckBox(parent);
-        static_cast<QCheckBox *>(widget)->setChecked(settings.value("checked").toBool());
-    } else if (type == "QPushButton") {
-        widget = new QPushButton(parent);
-        static_cast<QPushButton *>(widget)->setText(settings.value("text").toString());
-    } else if (type == "QTableWidget") {
-        widget = new QTableWidget(parent);
-        // Restore additional QTableWidget properties as needed
-    } else {
-        widget = new QWidget(parent);
-    }
-
-    widget->setObjectName(group);
-    widget->setGeometry(settings.value("geometry").toRect());
-    widget->setStyleSheet(settings.value("stylesheet").toString());
-
-    const QStringList childGroups = settings.childGroups();
-    for (const QString &childGroup : childGroups) {
-        restoreStateHelper(settings, widget, childGroup);
-    }
-
-
-    settings.endGroup();
-}
-
-void restoreState(QWidget *parent, const QString &settingsFile)
-{
-    QSettings settings(settingsFile, QSettings::IniFormat);
-    settings.beginGroup("Widgets");
-    restoreStateHelper(settings, parent, parent->objectName());
-    settings.endGroup();
-}
-
-#endif
 
 void ManualForm::initVar()
 {
@@ -556,17 +429,26 @@ void ManualForm::initVar()
     draggable[1] = false;
     selectedButton[0] = nullptr;
     selectedButton[1] = nullptr;
-
-    currentIndex = -1;
-    //    // Initialize buttons and hide buttons 1-8
-    //    for (int i = 0; i < 20; ++i)
-    //    {
-    //        buttons[i] = findChild<DraggableButton*>(QString("btn%d").arg(i + 1));
-    //        if (buttons[i])
-    //        {
-    ////            buttons[i]->setVisible(i >= 8);
-    //            buttons[i]->setVisible(false);
-    //        }
-    //    }
 }
 
+void ManualForm::on_btnEditGuideName_clicked()
+{
+    if (selectedButton[0] == nullptr) return;
+
+    QString guidName = selectedButton[0]->text();
+
+    FullKeyboard *keyboard = FullKeyboard::instance();
+    keyboard->setText(guidName);
+    keyboard->setCurrentEditObj(nullptr);
+
+    connect(keyboard, &FullKeyboard::enterPressed, this, &ManualForm::onChangeGuideName, Qt::UniqueConnection);
+
+    keyboard->exec();
+}
+
+void ManualForm::onChangeGuideName(const QString& newText)
+{
+    if (selectedButton[0] != nullptr) {
+        selectedButton[0]->setText(newText);
+    }
+}

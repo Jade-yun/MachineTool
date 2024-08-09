@@ -69,6 +69,11 @@ void Setting::slotSettingHome()
     //    qDebug() << "slotSettingHome";
 }
 
+void Setting::ShowStackPage()
+{
+    ui->stackedWidget->setCurrentWidget(ui->pageStack);
+}
+
 
 // to initial all variables in this function
 void Setting::initVariables()

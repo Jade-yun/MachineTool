@@ -141,7 +141,7 @@
      <string>方向</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="editIntervalDis">
+   <widget class="NumberEdit" name="editIntervalDis">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -1237,7 +1237,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>5</y>
      <width>991</width>
      <height>42</height>
@@ -1488,7 +1488,7 @@
   <customwidget>
    <class>NumberEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">customedit.h</header>
+   <header>customedit.h</header>
   </customwidget>
  </customwidgets>
  <resources>

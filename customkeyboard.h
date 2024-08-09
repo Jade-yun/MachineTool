@@ -35,15 +35,13 @@ public:
     void setCurrentEditObj(QObject* edit);
     void clearText();
     void setText(const QString& text);
+    QString getInputText() const;
 
 public:
     ~FullKeyboard();
 
-private slots:
-    void onKeyEnterPressed();
-
 signals:
-    void sendData(const QString& data);
+    void enterPressed(const QString& data);
 
     // QWidget interface
 protected:

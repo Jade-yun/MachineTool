@@ -4,15 +4,25 @@
 #include <QWidget>
 #include <QTableWidget>
 #include <QSettings>
+#include <QHash>
 
 #include "draggablebutton.h"
 
 #define SAVEPOINT_VERSION_1
-struct ReferencePoint
+
+struct GuidePara {
+    QString guideName;
+    QString keyDefStr;
+//    D_KeyFuncStruct keyFuncDef;
+};
+
+struct ReferPointPara
 {
-    int index;
+    int index; // 唯一标识按钮的索引
     QString name;
-    DraggableButton* button;
+    DraggableButton* button; // 直接绑定按钮对象
+
+   // add other parameter...
 };
 
 namespace Ui {
@@ -27,40 +37,42 @@ public:
     explicit ManualForm(QWidget *parent = nullptr);
     ~ManualForm();
 
+signals:
+    void sigShowStackPage();
+
 private slots:
     void on_btnNewButton_clicked();
-    void on_btnNewButtonReference_clicked();
-
     void on_btnDeleteButton_clicked();
-    void on_btnDeleteButtonReference_clicked();
+    void on_checkBoxEditPosGuide_stateChanged(int arg1);
+//    void on_btnImportPicture_clicked();
+    void on_btnEditReference_clicked();
 
-    void on_checkBoxEditPos_stateChanged(int arg1);
+    void on_btnNewButtonReference_clicked();
+    void on_btnDeleteButtonReference_clicked();
     void on_checkBoxEditPosReference_stateChanged(int arg1);
-    void on_btnImportPicture_clicked();
-    void on_btnImportPictureReference_clicked();
+//    void on_btnImportPictureReference_clicked();
+    void on_btnEditGuideName_clicked();
+    void onChangeGuideName(const QString& newText);
 
 private:
     void initVar();
-    void addPointsToTable();
-    void tableReferenceSigAndSlot();
+    void updateReferPointsTable();
+    void tableReferenceInit();
+    void pageInit();
+    int getNextAvailableIndex();
 
-    int getIndex(const DraggableButton* button) const;
+//    int getIndex(const DraggableButton* button) const;
 
-public:
-    void saveState(QWidget *parent, const QString &settingsFile);
-    void restoreState(QWidget *parent, const QString &settingsFile);
-    void saveStateHelper(QSettings &settings, QWidget *widget);
-    void restoreStateHelper(QSettings &settings, QWidget *parent, const QString &group);
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];
-    QList<DraggableButton*> guidBtns;
 
-    QList<ReferencePoint> referencePoints;
-    int currentIndex;
+//    QHash<DraggableButton*, ReferPointInfo> referencePoints;
+    QList<ReferPointPara> referencePoints;
 
     QTableWidget* tableReference;
 
+    QHash<DraggableButton*, GuidePara> guidePoints;
 
 private:
     Ui::ManualForm *ui;

@@ -226,7 +226,10 @@ QComboBox QAbstractItemView::item:selected{
   color:rgb(252, 233, 79);
 }
 /****************************************************************************/
-</string>
+QLineEdit {
+
+	padding-left: 6px;
+}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">

@@ -17,6 +17,9 @@ public:
     QVariant getMinValue() const;
     QVariant getMaxValue() const;
 
+    QString formatInput(const QString& inputText) const;
+
+
 protected:
     void mouseReleaseEvent(QMouseEvent *event) override;
 };

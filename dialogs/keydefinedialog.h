@@ -54,6 +54,9 @@ public:
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
+
+signals:
+    void saveKeyDef();
 };
 #else
 class KeyEdit : public QLabel

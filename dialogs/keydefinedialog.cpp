@@ -47,10 +47,17 @@ QString KeyDefineDialog::getReserveOutStatus() const
 
 QString KeyDefineDialog::getMainBoardOut() const
 {
-    if (ui->chboxMainBoardOutput0->isChecked())
-        return ui->coboxMainBoardOutput0->currentText() + QString(" ") + getReserveOutStatus();
-    if (ui->chboxMainBoardOutput1->isChecked())
-        return ui->coboxMainBoardOutput1->currentText() + QString(" ") + getReserveOutStatus();
+    if (ui->chboxMainBoardOut0->isChecked())
+        return ui->coboxMainBoardOut0->currentText() + QString(" ") + getReserveOutStatus();
+    if (ui->chboxMainBoardOut1->isChecked())
+        return ui->coboxMainBoardOut1->currentText() + QString(" ") + getReserveOutStatus();
+    if (ui->chboxMainBoardOut2->isChecked())
+        return ui->coboxMainBoardOut2->currentText() + QString(" ") + getReserveOutStatus();
+
+    if (ui->chboxMainBoardOutExtend0->isChecked())
+        return ui->coboxMainBoardOutExtend0->currentText() + QString(" ") + getReserveOutStatus();
+    if (ui->chboxMainBoardOutExtend1->isChecked())
+        return ui->coboxMainBoardOutExtend1->currentText() + QString(" ") + getReserveOutStatus();
     return QString("0");
 }
 
@@ -101,7 +108,7 @@ void KeyEdit::mousePressEvent(QMouseEvent *event)
 
         QString res = dialog.getKeyDefine();
         this->setText(res);
-
+        emit saveKeyDef();
     }
 }
 

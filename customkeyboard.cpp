@@ -51,6 +51,11 @@ void FullKeyboard::setText(const QString &text)
     textInput->setText(text);
 }
 
+QString FullKeyboard::getInputText() const
+{
+    return textInput->text();
+}
+
 FullKeyboard::FullKeyboard(QWidget* parent)
     : QDialog(parent)
 {
@@ -85,37 +90,19 @@ FullKeyboard::~FullKeyboard()
 //    textInput = nullptr;
 }
 
-//QString FullKeyboard::getText() const
-//{
-//    return textInput->text();
-//}
-
-void FullKeyboard::onKeyEnterPressed()
-{
-    QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
-    QTextEdit* textEdit = qobject_cast<QTextEdit*>(editObj);
-    QLabel* label = qobject_cast<QLabel*>(editObj);
-    if (lineEdit)
-    {
-        lineEdit->setText(textInput->text());
-    }
-    else if (textEdit)
-    {
-        textEdit->setText(textInput->text());
-    }
-    else if(label)
-    {
-        label->setText(textInput->text());
-    }
-    hide();
-}
-
 void FullKeyboard::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
         // 保存键盘的内容到触发键盘控件
 //        qDebug() << "FullKeyboard::keyPressEvent(QKeyEvent *event)";
+//        if (editObj)
+//        {
+//            QString inputText = textInput->text();
+//            editObj->setProperty("text", inputText);
+//        }
+        emit enterPressed(textInput->text());
+
         QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
         QTextEdit* textEdit = qobject_cast<QTextEdit*>(editObj);
         QLabel* label = qobject_cast<QLabel*>(editObj);
@@ -131,7 +118,7 @@ void FullKeyboard::keyPressEvent(QKeyEvent *event)
         {
             label->setText(textInput->text());
         }
-        hide();
+        accept();
     }
     else
         QWidget::keyPressEvent(event);
@@ -244,6 +231,8 @@ void NumKeyboard::keyPressEvent(QKeyEvent *event)
     if (key == Qt::Key_Enter || key == Qt::Key_Return)
     {
         QString inputText = textInput->text();
+        if (inputText.isEmpty())
+            inputText = "0";
 
         NumberEdit* numberEdit = qobject_cast<NumberEdit*>(editObj);
         if (numberEdit)
