@@ -1,0 +1,155 @@
+﻿#include "port_setting.h"
+
+QStringList outputTypeList;                        //输出类型
+QStringList outportInterlockList;                        //互锁类型
+QStringList outputRelevancyList;                     //预留关联
+QStringList outputReleteOutList;                    //预留出类型
+QStringList seniorFuncList;                         //高级功能
+
+QStringList portDefine_signalName;                      //端口自定义——信号
+QStringList portDefine_langList[LAN_NUM];                         //端口自定义——语言包
+
+QStringList nameDefine_langList[LAN_NUM];                         //名称自定义——语言包
+
+QStringList NameDefine_CHSList;
+
+void getCmdIni()
+{
+    outputTypeList=getIniValues(1,"OutPortType");
+    outportInterlockList=getIniValues(1,"OutportInterlock");
+    outputRelevancyList=getIniValues(1,"OutputRelevancy");
+    outputReleteOutList=getIniValues(1,"OutputReleteOut");
+    seniorFuncList=getIniValues(1,"SeniorFunc");
+    NameDefine_CHSList=getIniValues(1,"NameDefine_CHS");
+
+    //输出类型
+    for(int i=0;i<OUT_PORT_TYPE_NUM;i++)
+    {
+        m_OutPortType[i][0]=outputTypeList[i].toUInt();
+    }
+    //互锁设置
+    uint8_t index=0;
+    for(int i=0;i<OUT_INTERLOCK_NUM;i++)
+    {
+        m_OutportInterlock[i][0]=outportInterlockList[index++].toUInt();
+        m_OutportInterlock[i][1]=outportInterlockList[index++].toUInt();
+        m_OutportInterlock[i][2]=outportInterlockList[index++].toUInt();
+        m_OutportInterlock[i][3]=outportInterlockList[index++].toUInt();
+    }
+    //预留关联
+    index=0;
+    for(int i=0;i<OUT_PORT_RELEVANCY_NUM;i++)
+    {
+        m_OutportRelevancy[i][0]=outputRelevancyList[index++].toUInt();
+        m_OutportRelevancy[i][1]=outputRelevancyList[index++].toUInt();
+    }
+    //预留出类型
+    index=0;
+    for(int i=0;i<OUT_PORT_RELEOUT_NUM;i++)
+    {
+        m_OutportReleteOut[i][0]=outputReleteOutList[index++].toUInt();
+    }
+    //高级功能对应的端口号的定义
+    index=0;
+    m_SeniorFuncPort.knifeOrigin1CheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.knifeOrigin2CheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.chuckOriginCheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.stackSaveIn1CheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.stackSaveIn2CheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.stackSaveOutCheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.alarmIn1CheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.alarmIn2CheckPort=seniorFuncList[index++].toUInt();
+
+    m_SeniorFuncPort.emergencyStopCheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.pauseStopCheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.pressureCheckPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.remoteAutoPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.remoteStopPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.bottomOilLimitPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.oilerSwtPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.lubPumpPort=seniorFuncList[index++].toUInt();
+
+    m_SeniorFuncPort.processSave1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.processSave2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.emergencySnapMotorEnablePort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.emergencyStopOutPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.autoLightPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.alarmLightPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.alarmBuzzerPort=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.pauseLightPort=seniorFuncList[index++].toUInt();
+
+    m_SeniorFuncPort.processFinish1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.processFinish2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.locateFinish1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.locateFinish2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.startFinish1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.startFinish2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res1[0]=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res1[1]=seniorFuncList[index++].toUInt();
+
+    m_SeniorFuncPort.mainAxisRotate1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.mainAxisRotate2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.mainAxisLocate1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.mainAxisLocate2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.biowAir1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.biowAir2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res2[0]=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res2[1]=seniorFuncList[index++].toUInt();
+
+    m_SeniorFuncPort.manualChuckIn1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.manualChuckIn2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.autoDoorCot1Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.autoDoorCot2Port=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res3[0]=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res3[1]=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res3[2]=seniorFuncList[index++].toUInt();
+    m_SeniorFuncPort.res3[3]=seniorFuncList[index++].toUInt();
+
+#if 0//有问题，需调试
+    //端口自定义——信号
+    QStringList portDefineList={"PortDefine_Signal_Inport_X","PortDefine_Signal_Inport_XM","PortDefine_Signal_Outport_Y","PortDefine_Signal_Outport_YM"};
+    QStringList getStrTemp=getIniValues(1,portDefineList[0]);
+    for(int i=0;i<INPUT_NUM;i++)
+    {
+        portDefine_signalName[i]=getStrTemp[i];
+    }
+    getStrTemp=getIniValues(1,portDefineList[1]);
+    for(int i=0;i<INPUT_E_NUM;i++)
+    {
+        portDefine_signalName[i+INPUT_NUM]=getStrTemp[i];
+    }
+    getStrTemp=getIniValues(1,portDefineList[2]);
+    for(int i=0;i<OUTPUT_NUM;i++)
+    {
+        portDefine_signalName[i+INPUT_NUM+INPUT_E_NUM]=getStrTemp[i];
+    }
+    getStrTemp=getIniValues(1,portDefineList[3]);
+    for(int i=0;i<OUTPUT_E_NUM;i++)
+    {
+        portDefine_signalName[i+INPUT_NUM+INPUT_E_NUM+OUTPUT_NUM]=getStrTemp[i];
+    }
+    //端口自定义——语言包
+    QStringList lanList={"CHS","ENG","POLSKIE","RUSSIAN","SPAIN","VIETNAM","KOREAN","CHS_TRADI","SPECIAL"};
+    for(int j=0;j<LAN_NUM;j++)
+    {
+        portDefine_langList[j].clear();
+        QStringList getStrTemp=getIniValues(1, QString("%1_%2").arg(portDefineList[0]).arg(lanList[j]));
+        portDefine_langList[j].append(getStrTemp);
+        getStrTemp=getIniValues(1,QString("%1_%2").arg(portDefineList[1]).arg(lanList[j]));
+        portDefine_langList[j].append(getStrTemp);
+        getStrTemp=getIniValues(1,QString("%1_%2").arg(portDefineList[2]).arg(lanList[j]));
+        portDefine_langList[j].append(getStrTemp);
+        getStrTemp=getIniValues(1,QString("%1_%2").arg(portDefineList[3]).arg(lanList[j]));
+        portDefine_langList[j].append(getStrTemp);
+    }
+    //名称自定义——语言包
+    for(int j=0;j<LAN_NUM;j++)
+    {
+        nameDefine_langList[j].clear();
+        QStringList getStrTemp=getIniValues(1, QString("%1_%2").arg("NameDefine").arg(lanList[j]));
+        nameDefine_langList[j].append(getStrTemp);
+    }
+#endif
+}
+
+

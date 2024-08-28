@@ -1,0 +1,27 @@
+﻿#ifndef PORT_SETTING_H
+#define PORT_SETTING_H
+
+#include <QString>
+#include "iniconfig.h"
+#include "cmd.h"
+
+#define LAN_NUM             9                       //语言包个数
+
+extern QStringList outputTypeList;                        //输出类型
+extern QStringList outportInterlockList;                        //互锁类型
+extern QStringList outputRelevancyList;                     //预留关联
+extern QStringList outputReleteOutList;                    //预留出类型
+extern QStringList seniorFuncList;                    //高级功能
+
+extern QStringList portDefine_signalName;                      //端口自定义——信号
+extern QStringList portDefine_langList[LAN_NUM];                         //端口自定义——语言包
+
+extern QStringList nameDefine_langList[LAN_NUM];                         //名称自定义——语言包
+
+extern QStringList NameDefine_CHSList;
+
+extern void getCmdIni();                                       //读取配置文件中所有的端口
+
+
+
+#endif // PORT_SETTING_H
