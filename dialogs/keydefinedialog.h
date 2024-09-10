@@ -19,31 +19,32 @@ class KeyDefineDialog : public QDialog
 public:
     explicit KeyDefineDialog(QWidget *parent = nullptr);
     ~KeyDefineDialog();
-private:
-    QString getValveOutStatus() const;
-    QString getValveOutput() const;
-    QString getReserveOutStatus() const;
-    QString getMainBoardOut() const;
-    QString getAxisMoveDirect() const;
-public:
-    QString getKeyDefine() const;
 
+    struct KeyFunc{
+        uint8_t keyType;
+        uint8_t portNum;
+        uint8_t funcStatus;
+    };
 private:
     Ui::KeyDefineDialog *ui;   
+private:
+    KeyFunc m_KeyFunc;
+private:
+    QString getValveOutStatusStr() const;
+    QString getValveOutputStr() const;
+    QString getReserveOutStatusStr() const;
+    QString getMainBoardOutStr() const;
+    QString getAxisMoveDirectStr() const;
+
+    int getValveOutputStatus() const;
+    int getValveOutputPort() const;
+    int getReserveOutStatus() const;
+    int getMainBoardOutPort() const;
+public:
+    QString getKeyDefineStr() const;
+    KeyFunc getKeyFuncDefine();
+
 };
-
-//class KeyEdit : public QLineEdit
-//{
-//    Q_OBJECT
-
-//public:
-//    explicit KeyEdit(QWidget *parent = nullptr);
-
-//protected:
-//    void mousePressEvent(QMouseEvent *event) override;
-//};
-
-#if USE_LINEEDIT
 
 class KeyEdit : public QLineEdit
 {
@@ -53,22 +54,21 @@ public:
     explicit KeyEdit(QWidget *parent = nullptr);
 
 protected:
-    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 signals:
     void saveKeyDef();
-};
-#else
-class KeyEdit : public QLabel
-{
-    Q_OBJECT
 
 public:
-    explicit KeyEdit(QWidget *parent = nullptr);
+    uint8_t getKeyType() const;
+    uint8_t getPortNum() const;
+    uint8_t getKeyFuncStatus() const;
+    void setKeyFunc(uint8_t keyType, uint8_t portNum, uint8_t funcStatus);
 
-protected:
-    void mousePressEvent(QMouseEvent *event) override;
+private:
+    uint8_t keyType;    // 按键功能类型，0输出 1输入 2轴
+    int8_t portNum;    // 端口对应编号，输出类型时1-40，输入类型时1-60，轴类型时1-6
+    uint8_t funcStatus;     // 功能状态，输出类型时0断 1通 2翻转 轴类型时0正向 1反向
 };
-#endif
 
 #endif // KEYDEFINEDIALOG_H

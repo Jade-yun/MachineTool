@@ -17,6 +17,8 @@ Teach::Teach(QWidget* parent) :
 {
 	ui->setupUi(this);
 
+    ui->editVarTypeSet->installEventFilter(this);
+
 	QTabBar* bar = ui->tabWidget_Teach->tabBar();
 	connect(bar, &QTabBar::tabBarClicked, [&](int index) {
 		if (index == 1)
@@ -80,32 +82,7 @@ Teach::Teach(QWidget* parent) :
         }
     });
 
-
-    // 逻辑&变量 代表每一条指令的checkbox 插入时遍历以下checkbox
-    QButtonGroup* chboxsLogicVar = new QButtonGroup(this);
-    chboxsLogicVar->addButton(ui->chboxIfCondition1, 0);
-    chboxsLogicVar->addButton(ui->chboxElseCondition1, 1);
-    chboxsLogicVar->addButton(ui->chboxEndIf, 2);
-    chboxsLogicVar->addButton(ui->chboxLoopStart, 3);
-    chboxsLogicVar->addButton(ui->chboxLoopEnd, 4);
-    chboxsLogicVar->addButton(ui->chboxVarSelectVarPreOp, 5);
-    chboxsLogicVar->addButton(ui->chboxAxisSelectVarPreOp, 6);
-    chboxsLogicVar->addButton(ui->chboxStackSelectVarPreOp, 7);
-    chboxsLogicVar->addButton(ui->chboxRealProdNumPreOp, 8);
-    chboxsLogicVar->addButton(ui->chboxTimerStart, 8);
-    chboxsLogicVar->addButton(ui->chboxTimerStop, 9);
-    chboxsLogicVar->addButton(ui->chboxTimerClear, 10);
-    chboxsLogicVar->setExclusive(true);
-
-    // 初始未选中变量任何chbox时，隐藏堆叠计数
-    ui->chboxConstantVarOp->show();
-    ui->chboxVariableVarOp->show();
-    ui->chboxAxisVarOp->show();
-    ui->chboxProdNumVarOp->show();
-    ui->chboxStackCntVarOp->hide();
-
-    ui->chboxConstantVarOp->setChecked(true);
-
+    init();
     pageInit();
     connect(ui->btnModify, &QPushButton::pressed, this, [=](){
         // 根据当前选中的程序切换到相应的编辑页面
@@ -503,7 +480,7 @@ void Teach::setGeneralBtnEvent(QString btnName)
 	case 3:
 		on_btn_General_MachineTool_clicked();
 		break;
-	}
+    }
 }
 
 //教导界面-删除按钮处理函数
@@ -1727,6 +1704,21 @@ void Teach::pageInit()
         }
     });
 
+    // 高级设置逻辑与变量 变量类型显示
+    connect(ui->coboxVarSelectVarPreOp, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+        QStringList typeTexts{tr("整数"), tr("一位小数"), tr("两位小数")};
+        if (index < VAR_TOTAL_NUM)
+        {
+            int typeIndex = m_VariableType[index];
+//            qDebug() << "m_VariableType["<< index << "] = " << m_VariableType[index];
+            ui->editVarTypeSet->setText(typeTexts[typeIndex]);
+
+            int decimal = m_VariableType[index];
+            ui->editConstantVarPostOp->setDecimalPlaces(decimal);
+        }
+    });
+    emit ui->coboxVarSelectVarPreOp->currentIndexChanged(ui->coboxVarSelectVarPreOp->currentIndex());
+
 }
 
 void Teach::on_chboxReturnStepNum_stateChanged(int arg1)
@@ -1737,4 +1729,52 @@ void Teach::on_chboxReturnStepNum_stateChanged(int arg1)
 void Teach::on_btnAlarmLight_toggled(bool checked)
 {
     qDebug() << "btnAlarmLigh: " << checked;
+}
+
+bool Teach::eventFilter(QObject *watched, QEvent *event)
+{
+    if (watched == ui->editVarTypeSet && event->type() == QEvent::MouseButtonRelease)
+    {
+        varTypeDialog->open();
+        return false;
+    }
+    return QObject::eventFilter(watched, event);
+}
+
+void Teach::init()
+{
+    varTypeDialog = new VarTypeDialog(this);
+
+    // 逻辑&变量 代表每一条指令的checkbox 插入时遍历以下checkbox
+    QButtonGroup* chboxsLogicVar = new QButtonGroup(this);
+    chboxsLogicVar->addButton(ui->chboxIfCondition1, 0);
+    chboxsLogicVar->addButton(ui->chboxElseCondition1, 1);
+    chboxsLogicVar->addButton(ui->chboxEndIf, 2);
+    chboxsLogicVar->addButton(ui->chboxLoopStart, 3);
+    chboxsLogicVar->addButton(ui->chboxLoopEnd, 4);
+    chboxsLogicVar->addButton(ui->chboxVarSelectVarPreOp, 5);
+    chboxsLogicVar->addButton(ui->chboxAxisSelectVarPreOp, 6);
+    chboxsLogicVar->addButton(ui->chboxStackSelectVarPreOp, 7);
+    chboxsLogicVar->addButton(ui->chboxRealProdNumPreOp, 8);
+    chboxsLogicVar->addButton(ui->chboxTimerStart, 8);
+    chboxsLogicVar->addButton(ui->chboxTimerStop, 9);
+    chboxsLogicVar->addButton(ui->chboxTimerClear, 10);
+    chboxsLogicVar->setExclusive(true);
+
+    // 初始未选中变量任何chbox时，隐藏堆叠计数
+    ui->chboxConstantVarOp->show();
+    ui->chboxVariableVarOp->show();
+    ui->chboxAxisVarOp->show();
+    ui->chboxProdNumVarOp->show();
+    ui->chboxStackCntVarOp->hide();
+
+    ui->chboxConstantVarOp->setChecked(true);
+
+}
+
+
+
+void Teach::on_btnModify_clicked()
+{
+
 }

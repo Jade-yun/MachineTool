@@ -8,9 +8,6 @@
 #include <QString>
 #include <QDebug>
 
-
-#define	REFERENCE_TOTAL_NUM	40
-
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::ManualForm)
@@ -137,100 +134,14 @@ void ManualForm::on_btnNewButtonReference_clicked()
 {
     if (referencePoints.size() < REFERENCE_TOTAL_NUM)
     {
-        DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
-        btn->setCheckable(true);
-        btn->setAutoExclusive(true);
-        btn->setDraggable(draggable[1]);
-        btn->setFixedSize(40, 40);
-        btn->setStyleSheet("QPushButton{ border-style:solid; border-width:1px; border-radius:20px;}");
-
-        int newIndex = getNextAvailableIndex();
-        if (newIndex == 0)
-        {
-            return;
-        }
-        QString btnName = QString("参考点%1").arg(newIndex);
-        int posIndex = newIndex - 1;
-        QPoint btnPos = QPoint(10 + 42 * (posIndex / 7), 130 + 42 * (posIndex % 7));
-
-        ReferPointPara point = {newIndex, btnName, btn, btnPos};
-        referencePoints.append(point);
-
-        if (selectedButton[1] == nullptr)
-        {
-           btn->setChecked(true);
-           selectedButton[1] = btn;
-        }
-        btn->setGeometry(QRect(btnPos, btn->size()));
-        btn->setText(QString::number(point.index));
-        btn->show();
-
-        // this is used to update point geometry pos in ui
-        connect(btn, &DraggableButton::released, this, [=](){
-            auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
-                return point.button == btn;
-            });
-            if (it != referencePoints.end())
-            {
-                it->pointPos = btn->pos();
-            }
-        });
-
-        connect(btn, &DraggableButton::pressed, this, [=]() {
-            selectedButton[1] = btn;
-
-            int index = 0;
-            auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
-                return point.button == selectedButton[1];
-            });
-            if (it != referencePoints.end())
-            {
-                ui->textReferPointName->setText(it->name);
-                index = it->index;
-            }
-            for (int row = 0; row < tableReference->rowCount(); ++row)
-            {
-                for (int col = 0; col < tableReference->columnCount(); ++col)
-                {
-                    QTableWidgetItem *indexItem = tableReference->item(row, col);
-                    if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index)
-                    {
-//                        qDebug() << "Found item with armedIndex:" << index
-//                                 << " at row:" << row
-//                                 << " col:" << col;
-                        tableReference->setCurrentCell(row, col + 1);
-//                        tableReference->itemPressed(tableReference->itemAt(row, col + 1));
-                        return ;
-                    }
-                }
-            }
-        });
-
+        addReferencePoint();
         updateReferPointsTable();
     }
 }
 
 void ManualForm::on_btnDeleteButtonReference_clicked()
 {
-    if (selectedButton[1])
-    {
-        // 找到与 selectedButton[1] 关联的 ReferPointPara
-        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
-            return point.button == selectedButton[1];
-        });
-
-        if (it != referencePoints.end())
-        {
-            delete it->button;
-            referencePoints.erase(it);
-            selectedButton[1] = nullptr;
-        }
-    }
-    if (!referencePoints.isEmpty())
-    {
-        selectedButton[1] = referencePoints.last().button;
-        selectedButton[1]->setChecked(true);
-    }
+    removeReferencePoint();
     updateReferPointsTable();
 }
 
@@ -313,9 +224,11 @@ void ManualForm::tableReferenceInit()
 //    tableReference->setSelectionMode(QAbstractItemView::NoSelection);
     // Initialize table to be invisible
     tableReference->setVisible(referencePoints.size());
+    tableReference->setFrameShape(QFrame::NoFrame);
+    tableReference->setFrameShadow(QFrame::Raised);
 
     tableReference->setMaximumHeight(40 * 3);
-    tableReference->setMinimumWidth(760);
+    tableReference->setFixedWidth(760);
 
     tableReference->setColumnCount(8); // 4 pairs of index and button name
     tableReference->verticalHeader()->setVisible(false); // Hide vertical header
@@ -367,6 +280,8 @@ void ManualForm::pageInit()
     ui->btnImportPictureReference->setVisible(false);
     ui->btnNewButtonReference->setVisible(false);
     ui->btnDeleteButtonReference->setVisible(false);
+
+    ui->btnOK->hide();
 }
 
 int ManualForm::getNextAvailableIndex()
@@ -391,6 +306,101 @@ const QList<ReferPointPara> &ManualForm::getRerferPoints() const
     return referencePoints;
 }
 
+void ManualForm::addReferencePoint()
+{
+    DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
+    btn->setCheckable(true);
+    btn->setAutoExclusive(true);
+    btn->setDraggable(draggable[1]);
+    btn->setFixedSize(40, 40);
+    btn->setStyleSheet("QPushButton{ border-style:solid; outline:none; border-width:1px; border-radius:20px;}");
+
+    int newIndex = getNextAvailableIndex();
+    if (newIndex == 0)
+    {
+        return;
+    }
+    QString referName = QString("参考点%1").arg(newIndex);
+    int posIndex = newIndex - 1;
+    QPoint btnPos = QPoint(10 + 42 * (posIndex / 7), 120 + 42 * (posIndex % 7));
+
+    ReferPointPara point = {newIndex, referName, btn, btnPos};
+    referencePoints.append(point);
+
+    if (selectedButton[1] == nullptr)
+    {
+       btn->setChecked(true);
+       selectedButton[1] = btn;
+    }
+    btn->setGeometry(QRect(btnPos, btn->size()));
+    btn->setText(QString::number(point.index));
+    btn->show();
+
+    // this is used to update point geometry pos in ui
+    connect(btn, &DraggableButton::released, this, [=](){
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == btn;
+        });
+        if (it != referencePoints.end())
+        {
+            it->pointPos = btn->pos();
+        }
+    });
+
+    connect(btn, &DraggableButton::pressed, this, [=]() {
+        selectedButton[1] = btn;
+
+        int index = 0;
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+        if (it != referencePoints.end())
+        {
+            ui->textReferPointName->setText(it->name);
+            index = it->index;
+        }
+        for (int row = 0; row < tableReference->rowCount(); ++row)
+        {
+            for (int col = 0; col < tableReference->columnCount(); ++col)
+            {
+                QTableWidgetItem *indexItem = tableReference->item(row, col);
+                if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index)
+                {
+//                        qDebug() << "Found item with armedIndex:" << index
+//                                 << " at row:" << row
+//                                 << " col:" << col;
+                    tableReference->setCurrentCell(row, col + 1);
+//                        tableReference->itemPressed(tableReference->itemAt(row, col + 1));
+                    return ;
+                }
+            }
+        }
+    });
+}
+
+void ManualForm::removeReferencePoint()
+{
+    if (selectedButton[1])
+    {
+        // 找到与 selectedButton[1] 关联的 ReferPointPara
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+
+        if (it != referencePoints.end())
+        {
+            delete it->button;
+            referencePoints.erase(it);
+            selectedButton[1] = nullptr;
+        }
+    }
+    if (!referencePoints.isEmpty())
+    {
+        selectedButton[1] = referencePoints.last().button;
+        selectedButton[1]->setChecked(true);
+    }
+}
+
 void ManualForm::on_btnEditReference_clicked()
 {
     if (selectedButton[1])
@@ -401,17 +411,11 @@ void ManualForm::on_btnEditReference_clicked()
 
         if (it != referencePoints.end())
         {
-            // 实例化并配置 FullKeyboard 对话框
-//            FullKeyboard temp(this);
+
             FullKeyboard *keyboard = FullKeyboard::instance();
             keyboard->setText(it->name);
             keyboard->setCurrentEditObj(ui->textReferPointName);
-
-            if (keyboard->exec() == QDialog::Accepted)
-            {
-                it->name = ui->textReferPointName->toPlainText();
-                updateReferPointsTable();
-            }
+            keyboard->open();
         }
     }
 }
@@ -432,17 +436,62 @@ void ManualForm::on_btnEditGuideName_clicked()
 
     FullKeyboard *keyboard = FullKeyboard::instance();
     keyboard->setText(guidName);
-    keyboard->setCurrentEditObj(nullptr);
+    keyboard->setCurrentEditObj(selectedButton[0]);
 
-    connect(keyboard, &FullKeyboard::enterPressed, this, &ManualForm::onChangeGuideName, Qt::UniqueConnection);
-
-    keyboard->exec();
-//    keyboard->show();
+    keyboard->open();
 }
 
 void ManualForm::onChangeGuideName(const QString& newText)
 {
     if (selectedButton[0] != nullptr) {
         selectedButton[0]->setText(newText);
+    }
+}
+
+void ManualForm::on_btnSaveReference_clicked()
+{
+    if (selectedButton[1])
+    {
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+
+        if (it != referencePoints.end())
+        {
+            it->name = ui->textReferPointName->toPlainText();
+            QPoint pointPos = selectedButton[1]->geometry().topLeft();
+            it->pointPos = pointPos;
+
+            updateReferPointsTable();
+        }
+    }
+
+    for (int i = 0; i < REFERENCE_TOTAL_NUM; i++)
+    {
+        if (i < referencePoints.size())
+        {
+            m_RefPoint[i].refFlag = true;
+            m_RefPoint[i].index = referencePoints.at(i).index;
+            m_RefPoint[i].refName = referencePoints.at(i).name;
+            m_RefPoint[i].pointPos = referencePoints.at(i).pointPos;
+
+//            int index = referencePoints.at(i).index - 1;
+//            m_RefPoint[index].refFlag = true;
+//            m_RefPoint[index].refName = referencePoints.at(i).name;
+//            m_RefPoint[index].pointPos = referencePoints.at(i).pointPos;
+
+            // to save other information, such current axis pos
+    //        for (int j = 0; j < AXIS_TOTAL_NUM; j++)
+    //        {
+    //            m_RefPoint[i].pos[j] =
+    //        }
+        }
+        else
+        {
+            m_RefPoint[i].refFlag = false;
+        }
+//        qDebug() << "m_RefPoint[" << i <<"].refFlag = " << m_RefPoint[i].refFlag;
+//        qDebug() << "m_RefPoint[" << i <<"].refName = " << m_RefPoint[i].refName;
+//        qDebug() << "m_RefPoint[" << i <<"].pointPos = " << m_RefPoint[i].pointPos;
     }
 }

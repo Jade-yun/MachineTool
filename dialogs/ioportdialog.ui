@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="pageIn">
     <widget class="QTabWidget" name="tabWgtMainBoardIn">
@@ -1025,6 +1025,67 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="4">
+          <widget class="QCheckBox" name="chboxMainBoardOutExtend2">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QComboBox" name="coboxMainBoardOutExtend2">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>EY17</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY18</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY19</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY20</string>
+            </property>
+           </item>
+          </widget>
+         </item>
         </layout>
        </widget>
       </widget>
@@ -1036,9 +1097,9 @@
    <property name="geometry">
     <rect>
      <x>540</x>
-     <y>390</y>
+     <y>400</y>
      <width>100</width>
-     <height>40</height>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -1049,9 +1110,9 @@
    <property name="geometry">
     <rect>
      <x>420</x>
-     <y>390</y>
+     <y>400</y>
      <width>100</width>
-     <height>40</height>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">

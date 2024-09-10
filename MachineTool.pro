@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -63,7 +63,9 @@ SOURCES += \
     dialogs/referpointdialog.cpp \
     dialogs/ifprogramdialog.cpp \
     dialogs/ioportdialog.cpp \
-    statebutton.cpp
+    statebutton.cpp \
+    referencewidget.cpp \
+    dialogs/vartypedialog.cpp
 
 HEADERS += \
     Prompt_Dialog_page/prompt_com.h \
@@ -94,7 +96,9 @@ HEADERS += \
     dialogs/referpointdialog.h \
     dialogs/ifprogramdialog.h \
     dialogs/ioportdialog.h \
-    statebutton.h
+    statebutton.h \
+    referencewidget.h \
+    dialogs/vartypedialog.h
 
 FORMS += \
     Prompt_Dialog_page/prompt_dialog_page.ui \
@@ -120,7 +124,8 @@ FORMS += \
     dialogs/errortipdialog.ui \
     dialogs/referpointdialog.ui \
     dialogs/ifprogramdialog.ui \
-    dialogs/ioportdialog.ui
+    dialogs/ioportdialog.ui \
+    dialogs/vartypedialog.ui
 
 
 # Default rules for deployment.
@@ -133,5 +138,9 @@ RESOURCES += \
     stylesheets.qrc
 
 DISTFILES += \
-    Keyboard/keyboard.pri
+    Keyboard/keyboard.pri \
+    images/gif/XYZ.gif \
+    images/gif/YXZ.gif \
+    images/gif/ZXY.gif \
+    images/gif/ZYX.gif
 

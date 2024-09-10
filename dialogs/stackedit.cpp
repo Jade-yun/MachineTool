@@ -195,6 +195,7 @@ StackEdit::StackEdit(QWidget *parent) :
     ui->btnOK->setVisible(false);
     ui->btnCancel->setVisible(false);
     ui->coboxStackOrder->setCurrentIndex(1);
+    ui->coboxStackOrder->setCurrentIndex(0);
 
     ui->stkWgtStackWay->setCurrentIndex(0);
 
@@ -248,7 +249,8 @@ void StackEdit::loadAndPlayGif(const QString& path)
     //    movie = new QMovie(path, this);
     //    ui->gifLabel->resize(width, height);
     movie->setFileName(path);
-    movie->setSpeed(50);
+    movie->setSpeed(100);
+    movie->setScaledSize(ui->labGif->size());
     ui->labGif->setMovie(movie);
     movie->start();
 }
@@ -415,11 +417,19 @@ void StackEdit::on_coboxStackOrder_currentIndexChanged(int index)
     switch (index) {
     case 0:
 
-    loadAndPlayGif(":/images/gif/test.gif");
+    loadAndPlayGif(":/images/gif/YXZ.gif");
         break;
     case 1:
 
-    loadAndPlayGif(":/images/gif/test1.gif");
+    loadAndPlayGif(":/images/gif/XYZ.gif");
+        break;
+    case 2:
+
+    loadAndPlayGif(":/images/gif/ZYX.gif");
+        break;
+    case 3:
+
+    loadAndPlayGif(":/images/gif/ZXY.gif");
         break;
     default:
         break;

@@ -1,4 +1,4 @@
-﻿#ifndef PROGRAM_SAVE_H
+#ifndef PROGRAM_SAVE_H
 #define PROGRAM_SAVE_H
 #include "QString"
 
@@ -15,8 +15,6 @@ extern QString lineFeed;                               //换行符
 
 extern QString m_ProgramPath;                   //存放程序文件的文件夹
 
-
-extern QStringList P_List[9];                              //记录当前操作程序9个进程程序指令行数
 extern QStringList fileSectionList;                        //程序保存节点
 extern QStringList programInfoList;                        //程序信息
 extern QStringList referencePointList;                     //每个参考点表示

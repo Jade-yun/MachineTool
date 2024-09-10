@@ -10,9 +10,6 @@
     <height>581</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Form</string>
-  </property>
   <property name="styleSheet">
    <string notr="true">QMainWindow{
  background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
@@ -145,15 +142,57 @@ QPushButton:checked#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
 
 
 
-/*
-QPushButton:pressed#Btn_SetHome,QPushButton:pressed#Btn_MonitorHome,QPushButton:pressed#Btn_AlarmHome,QPushButton:pressed#Btn_AlarmHome,QPushButton::pressed#Btn_ManualHome,
-{
-    background-color:#E7E8EB;
-    border-style:solid; 
-    border-width:1px;
-    border-color:#0A7C25; 
+/**********************************************************/
+QTabBar::tab{
+	background:rgb(160, 160, 160);
+	min-width:110px;
+	height:40px;
 }
-*/
+QTabBar::tab:selected {
+      border-color: #9B9B9B;
+      border-bottom-color: #C2C7CB; /* same as pane color */
+  }
+QTabBar::tab:!selected {
+      margin-top: 2px; /* make non-selected tabs look smaller */
+  }
+  QTabWidget::pane { /* The tab widget frame */
+      border-top: 2px solid #C2C7CB;
+  }
+
+  QTabWidget::tab-bar {
+      alignment:left;
+      left: 5px; /* move to the right by 5px */
+  }
+
+  /* Style the tab using the tab sub-control. Note that
+      it reads QTabBar _not_ QTabWidget */
+  QTabBar::tab {
+	background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea);
+      border: 2px solid #C4C4C3;
+      border-bottom-color: #C2C7CB; /* same as the pane color */
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      padding: 2px;
+  }
+
+  QTabBar::tab:selected, QTabBar::tab:hover {
+      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                  stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                  stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+  }
+
+  QTabBar::tab:selected {
+      border-color: #9B9B9B;
+      border-bottom-color: #C2C7CB; /* same as pane color */
+  }
+
+  QTabBar::tab:!selected {
+      margin-top: 2px; /* make non-selected tabs look smaller */
+  }
+
+QTabWidget::pane {
+    border: 1px solid #000000; /* 设置边框样式和颜色 */
+}
 
 
 /*******************************************************/
@@ -162,8 +201,8 @@ font-weight:normal;
 font-family: 'SimSun';
 }
 QCheckBox::indicator{
-width: 30px;
-height: 30px;
+width: 35px;
+height: 35px;
 border: 1px solid black; 
 background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
 }
@@ -174,29 +213,49 @@ background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #F8F8F
     }
 
 /*****************************************************************/
-QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
+QComboBox {
+    border: 2px solid #808A87; /* 边框宽度和颜色 */
+}
+
 QComboBox::drop-down {
     subcontrol-origin: padding-right;
     subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
     border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
     border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
     border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
 }
+
 QComboBox::down-arrow {
     image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
 }
 
-QComboBox QAbstractItemView::item:hover{ 
-  background-color:#409CE1;
-  color:rgb(252, 233, 79);
+QComboBox QAbstractItemView::item:hover { 
+    background-color: #409CE1;
+    color: rgb(252, 233, 79);
 }
-QComboBox QAbstractItemView::item:selected{
-  background-color:#409CE1;
-  color:rgb(252, 233, 79);
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: #409CE1;
+    color: rgb(252, 233, 79);
 }
+
+/* 添加每个 item 的高度设置 */
+QComboBox QAbstractItemView::item {
+    min-height: 40px; /* 设置每个 item 的最小高度 */
+    color: black; /* 设置默认文本颜色 */
+    background-color: white; /* 设置默认背景颜色 */
+}
+
+QComboBox:editable QLineEdit {
+    color: black; /* 设置可编辑状态下的文本颜色 */
+    background: white; /* 设置可编辑状态下的背景颜色 */
+}
+
+QComboBox:!editable, QComboBox:editable:on {
+    color: black; /* 设置非编辑状态下的文本颜色 */
+    background: white; /* 设置非编辑状态下的背景颜色 */
+}
+
 /****************************************************************************/
 QLineEdit {
 
@@ -209,20 +268,8 @@ QLineEdit {
      <x>0</x>
      <y>1</y>
      <width>600</width>
-     <height>538</height>
+     <height>525</height>
     </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>600</width>
-     <height>538</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>600</width>
-     <height>538</height>
-    </size>
    </property>
    <property name="font">
     <font>
@@ -269,14 +316,14 @@ QLineEdit {
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>false</bool>
    </attribute>
-   <attribute name="horizontalHeaderMinimumSectionSize">
-    <number>50</number>
-   </attribute>
    <attribute name="horizontalHeaderDefaultSectionSize">
     <number>100</number>
    </attribute>
    <attribute name="horizontalHeaderHighlightSections">
     <bool>false</bool>
+   </attribute>
+   <attribute name="horizontalHeaderMinimumSectionSize">
+    <number>50</number>
    </attribute>
    <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
     <bool>false</bool>
@@ -290,14 +337,14 @@ QLineEdit {
    <attribute name="verticalHeaderCascadingSectionResizes">
     <bool>false</bool>
    </attribute>
-   <attribute name="verticalHeaderMinimumSectionSize">
-    <number>20</number>
-   </attribute>
    <attribute name="verticalHeaderDefaultSectionSize">
     <number>50</number>
    </attribute>
    <attribute name="verticalHeaderHighlightSections">
     <bool>true</bool>
+   </attribute>
+   <attribute name="verticalHeaderMinimumSectionSize">
+    <number>20</number>
    </attribute>
    <attribute name="verticalHeaderShowSortIndicator" stdset="0">
     <bool>false</bool>
@@ -370,14 +417,23 @@ QLineEdit {
    <property name="geometry">
     <rect>
      <x>0</x>
-     <y>540</y>
+     <y>530</y>
      <width>1021</width>
-     <height>41</height>
+     <height>51</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <property name="spacing">
-     <number>3</number>
+     <number>1</number>
+    </property>
+    <property name="leftMargin">
+     <number>5</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
     </property>
     <item>
      <widget class="QPushButton" name="btnDelete">
@@ -389,14 +445,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -430,14 +486,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -471,14 +527,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -512,14 +568,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -553,14 +609,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -594,14 +650,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -638,14 +694,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -679,14 +735,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -720,14 +776,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -761,14 +817,14 @@ QLineEdit {
       </property>
       <property name="minimumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>99</width>
-        <height>39</height>
+        <width>100</width>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -798,9 +854,9 @@ QLineEdit {
    <property name="geometry">
     <rect>
      <x>600</x>
-     <y>2</y>
+     <y>6</y>
      <width>421</width>
-     <height>531</height>
+     <height>521</height>
     </rect>
    </property>
    <property name="font">
@@ -813,7 +869,7 @@ QLineEdit {
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -855,25 +911,20 @@ QLineEdit {
       </size>
      </property>
      <property name="currentIndex">
-      <number>17</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>10</y>
+         <y>20</y>
          <width>400</width>
-         <height>460</height>
+         <height>451</height>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QGroupBox {
-			border: 1px solid black; 
-			font-size: 16px;
-			font-weight:bold;
-			font-family: 'SimSun';
-			}</string>
+        <string notr="true"/>
        </property>
        <property name="title">
         <string>子程序选择</string>
@@ -1498,7 +1549,7 @@ QLineEdit {
         </item>
        </layout>
       </widget>
-      <widget class="QLineEdit" name="editReferPoint">
+      <widget class="RefPointEdit" name="editReferPoint">
        <property name="geometry">
         <rect>
          <x>116</x>
@@ -1526,7 +1577,7 @@ QLineEdit {
         </size>
        </property>
        <property name="text">
-        <string>参考点</string>
+        <string/>
        </property>
       </widget>
       <widget class="QLabel" name="lab_General_Position_90">
@@ -7372,7 +7423,7 @@ QLineEdit {
        <x>0</x>
        <y>0</y>
        <width>421</width>
-       <height>481</height>
+       <height>471</height>
       </rect>
      </property>
      <property name="currentIndex">
@@ -7772,7 +7823,7 @@ QLineEdit {
          <bool>false</bool>
         </property>
        </widget>
-       <widget class="QTextEdit" name="txt_label">
+       <widget class="QTextEdit" name="textEditLabel">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -7821,7 +7872,7 @@ QLineEdit {
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>20</y>
+         <y>10</y>
          <width>401</width>
          <height>451</height>
         </rect>
@@ -7845,7 +7896,7 @@ QLineEdit {
         </font>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -7865,8 +7916,8 @@ QLineEdit {
           <rect>
            <x>11</x>
            <y>11</y>
-           <width>95</width>
-           <height>34</height>
+           <width>111</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -7896,9 +7947,9 @@ QLineEdit {
          <property name="geometry">
           <rect>
            <x>11</x>
-           <y>190</y>
-           <width>83</width>
-           <height>34</height>
+           <y>183</y>
+           <width>91</width>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -7917,7 +7968,7 @@ QLineEdit {
            <x>11</x>
            <y>250</y>
            <width>127</width>
-           <height>34</height>
+           <height>40</height>
           </rect>
          </property>
          <property name="text">
@@ -8052,7 +8103,7 @@ QLineEdit {
           <rect>
            <x>10</x>
            <y>10</y>
-           <width>285</width>
+           <width>290</width>
            <height>91</height>
           </rect>
          </property>
@@ -8328,13 +8379,13 @@ QLineEdit {
             <widget class="QCheckBox" name="chboxAxisVarOp">
              <property name="minimumSize">
               <size>
-               <width>85</width>
+               <width>75</width>
                <height>40</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>16777215</width>
+               <width>75</width>
                <height>40</height>
               </size>
              </property>
@@ -8677,48 +8728,10 @@ QLineEdit {
           <bool>false</bool>
          </property>
         </widget>
-        <widget class="QComboBox" name="coboxOperatorVarPreOp">
-         <property name="geometry">
-          <rect>
-           <x>290</x>
-           <y>11</y>
-           <width>100</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>100</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>100</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <pointsize>-1</pointsize>
-          </font>
-         </property>
-         <item>
-          <property name="text">
-           <string>整数</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>小数</string>
-          </property>
-         </item>
-        </widget>
         <widget class="QLabel" name="label_9">
          <property name="geometry">
           <rect>
-           <x>240</x>
+           <x>220</x>
            <y>10</y>
            <width>51</width>
            <height>40</height>
@@ -8974,6 +8987,16 @@ QLineEdit {
            <string>Y1轴</string>
           </property>
          </item>
+        </widget>
+        <widget class="QLineEdit" name="editVarTypeSet">
+         <property name="geometry">
+          <rect>
+           <x>279</x>
+           <y>10</y>
+           <width>111</width>
+           <height>40</height>
+          </rect>
+         </property>
         </widget>
        </widget>
        <widget class="QWidget" name="tab_timer">
@@ -10837,7 +10860,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">
@@ -11557,7 +11580,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <rect>
             <x>20</x>
             <y>30</y>
-            <width>296</width>
+            <width>301</width>
             <height>134</height>
            </rect>
           </property>
@@ -14811,7 +14834,7 @@ font: 20pt ;</string>
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>380</y>
+         <y>370</y>
          <width>401</width>
          <height>91</height>
         </rect>
@@ -14991,6 +15014,11 @@ font: 20pt ;</string>
    <class>NumberEdit</class>
    <extends>QLineEdit</extends>
    <header>customedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>RefPointEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">referpointdialog.h</header>
   </customwidget>
  </customwidgets>
  <resources>

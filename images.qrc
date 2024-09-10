@@ -93,8 +93,6 @@
         <file>images/export.png</file>
         <file>images/import.png</file>
         <file>images/settingPageImages/refresh.png</file>
-        <file>images/gif/test.gif</file>
-        <file>images/gif/test1.gif</file>
         <file>images/settingPageImages/write-in.png</file>
         <file>images/settingPageImages/read-out.png</file>
         <file>images/monitorImages/mon_up.png</file>
@@ -112,5 +110,13 @@
         <file>images/teachManageImages/lock-blue.png</file>
         <file>images/state_red.png</file>
         <file>images/state_green.png</file>
+        <file>images/gif/XYZ.gif</file>
+        <file>images/gif/YXZ.gif</file>
+        <file>images/gif/ZXY.gif</file>
+        <file>images/gif/ZYX.gif</file>
+        <file>images/settingPageImages/safe_area_XYZ.png</file>
+        <file>images/settingPageImages/safe_area_XZ.png</file>
+        <file>images/settingPageImages/claw_safe.png</file>
+        <file>images/settingPageImages/online_safe.png</file>
     </qresource>
 </RCC>

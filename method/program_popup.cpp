@@ -1,3 +1,3 @@
-﻿#include "program_popup.h"
+#include "program_popup.h"
 
 

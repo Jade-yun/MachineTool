@@ -16,10 +16,22 @@ extern QString MachineOutJoint(P_ProOrderStruct OIS);
 extern QString StackResetZeroJoint(P_ProOrderStruct OIS);
 extern QString StackMoveJoint(P_ProOrderStruct OIS);
 extern QString StackFollowJoint(P_ProOrderStruct OIS);
-
+extern QString ReserveOutJoint(P_ProOrderStruct OIS);
 extern QString ProEndJoint(P_ProOrderStruct OIS);
 extern QString JointRunOrderNum(P_ProOrderStruct OIS);
-
+extern QString WaitInMachineJoint(P_ProOrderStruct OIS);
+extern QString WaitInClawJoint(P_ProOrderStruct OIS);
+extern QString WaitInReserveJoint(P_ProOrderStruct OIS);
+extern QString OtherDelayJoint(P_ProOrderStruct OIS);
+extern QString OtherAlarmCustJoint(P_ProOrderStruct OIS);
+extern QString OtherCycStopJoint(P_ProOrderStruct OIS);
+extern QString OtherAlarmLampJoint(P_ProOrderStruct OIS);
+extern QString OtherAlarmSoundJoint(P_ProOrderStruct OIS);
+extern QString SunProJoint(P_ProOrderStruct OIS);
+extern QString AxisStopJoint(P_ProOrderStruct OIS);
+extern QString TorqueGardJoint(P_ProOrderStruct OIS);
+extern QString OffsetAxisJoint(P_ProOrderStruct OIS);
+extern QString SearchAxisJoint(P_ProOrderStruct OIS);
 extern QStringList axisMoveOrderjointList;                         //轴动作命令
 extern QStringList clawActionOrderjointList;                         //卡爪动作命令
 extern QStringList clawCheckOrderjointList;                         //信号检测-卡爪检测命令
@@ -34,8 +46,12 @@ extern QStringList waitInMachineOrderjointList;                         //信号
 extern QStringList waitInClawOrderjointList;                         //信号等待-等待卡爪命令
 extern QStringList waitInReserveOrderjointList;                         //信号等待-等待预留命令
 extern QStringList otherAlarmCustOrderjointList;                         //其他-报警自定义命令
+extern QStringList otherDelayOrderjointList;                            //其他-延时动作指令
 extern QStringList otherCycStopOrderjointList;                         //其他-周期停止命令
 extern QStringList labelOrderjointList;                         //标签命令
+extern QStringList OtherAlarmLampOrderjointList;                         //其他-报警灯命令
+extern QStringList OtherAlarmSoundOrderjointList;                         //其他-报警声命令
+
 
 extern QStringList logicIfOrderjointList;                         //逻辑&变量-如果-如果命令
 extern QStringList logicWhileStartOrderjointList;                         //逻辑&变量-循环开始命令

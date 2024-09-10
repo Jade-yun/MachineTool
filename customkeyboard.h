@@ -27,7 +27,6 @@ private:
 //    FullKeyboard(QWidget* parent = nullptr);
 #else
 
-
 #endif
 public:
     FullKeyboard(QWidget* parent = nullptr);
@@ -49,7 +48,7 @@ protected:
 
     // QWidget interface
 protected:
-    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
 };
 
 class NumKeyboard : public QDialog
@@ -60,25 +59,12 @@ private:
     AeaQt::NumberKeyboard* keyboard;
     QObject* editObj;
     QValidator* validator;
-#if USE_INSTANCE
-//    static NumKeyboard* _instance;
-//    static QMutex mutex;
-
-//public:
-//    static NumKeyboard* instance(QWidget* parent = nullptr);
-//private:
-//    NumKeyboard(QWidget* parent = nullptr);
-#else
-
-
-#endif
 public:
     NumKeyboard(QWidget* parent = nullptr);
 public:
     void setCurrentEditObj(QObject* edit);
     void clearText();
-signals:
-    void enterPressed();
+
 public:
     ~NumKeyboard();
 protected:

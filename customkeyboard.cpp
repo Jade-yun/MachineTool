@@ -31,7 +31,10 @@ FullKeyboard* FullKeyboard::instance(QWidget* parent)
 FullKeyboard* FullKeyboard::_instance = nullptr;
 QMutex FullKeyboard::mutex;
 
+#else
+
 #endif
+
 
 void FullKeyboard::setCurrentEditObj(QObject *edit)
 {
@@ -60,16 +63,19 @@ FullKeyboard::FullKeyboard(QWidget* parent)
     : QDialog(parent)
 {
     editObj = nullptr;
+
     keyboard = new AeaQt::Keyboard(this);
+
     textInput = new QLineEdit(keyboard);
+
 
 //    setWindowTitle(tr("键盘"));
     setFixedSize(850, 430);
 //    setAcceptDrops(true);
-//    this->setModal(true);
     setWindowModality(Qt::WindowModal);
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
-    this->setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+//    this->setWindowFlags(Qt::Dialog | Qt::WindowCloseButtonHint | Qt::WindowStaysOnTopHint);
+
 
     textInput->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 //    textInput->setStyleSheet(qss);
@@ -78,30 +84,26 @@ FullKeyboard::FullKeyboard(QWidget* parent)
     v->addWidget(textInput, 1);
     v->addWidget(keyboard, 5);
     this->setLayout(v);
-//    connect(keyboard, &AeaQt::Keyboard::keyEnterPressed, this, &FullKeyboard::onKeyEnterPressed);
 
 }
 
 FullKeyboard::~FullKeyboard()
 {
-    delete keyboard;
-    keyboard = nullptr;
-    delete textInput;
-    textInput = nullptr;
 }
 
-void FullKeyboard::keyPressEvent(QKeyEvent *event)
+#if 1
+void FullKeyboard::keyReleaseEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Enter || event->key() == Qt::Key_Return)
     {
         // 保存键盘的内容到触发键盘控件
-//        qDebug() << "FullKeyboard::keyPressEvent(QKeyEvent *event)";
-//        if (editObj)
-//        {
-//            QString inputText = textInput->text();
-//            editObj->setProperty("text", inputText);
-//        }
-        emit enterPressed(textInput->text());
+        QString inputText = textInput->text();
+        if (editObj)
+        {
+            if (editObj->setProperty("text", inputText)){
+                hide();
+            }
+        }
 
         QLineEdit* lineEdit = qobject_cast<QLineEdit*>(editObj);
         QTextEdit* textEdit = qobject_cast<QTextEdit*>(editObj);
@@ -118,12 +120,16 @@ void FullKeyboard::keyPressEvent(QKeyEvent *event)
         {
             label->setText(textInput->text());
         }
-        accept();
+        hide();
     }
-    else
-        QWidget::keyPressEvent(event);
+    emit enterPressed(textInput->text());
+//    QWidget::keyReleaseEvent(event);
+//    if (parentWidget())
+//    {
+//        QCoreApplication::sendEvent(parentWidget(), event);
+//    }
 }
-
+#endif
 NumKeyboard::NumKeyboard(QWidget *parent)
     : QDialog(parent)
 {
@@ -152,31 +158,12 @@ NumKeyboard::NumKeyboard(QWidget *parent)
 
 NumKeyboard::~NumKeyboard()
 {
-    delete keyboard;
-    keyboard = nullptr;
-    delete textInput;
-    textInput = nullptr;
-    delete validator;
-    validator = nullptr;
+    if (validator)
+    {
+        delete validator;
+        validator = nullptr;
+    }
 }
-
-#if USE_INSTANCE
-//NumKeyboard* NumKeyboard::instance(QWidget* parent)
-//{
-////    static NumKeyboard _instance(parent);
-////    return &_instance;
-//    if (_instance == nullptr)
-//    {
-//        QMutexLocker locker(&mutex);
-//        if (_instance == nullptr)
-//            _instance = new NumKeyboard(parent);
-//    }
-//    return _instance;
-//}
-//NumKeyboard* NumKeyboard::_instance = nullptr;
-//QMutex NumKeyboard::mutex;
-#endif
-
 
 void NumKeyboard::setCurrentEditObj(QObject *edit)
 {
@@ -262,6 +249,7 @@ void NumKeyboard::keyPressEvent(QKeyEvent *event)
     {
         QWidget::keyPressEvent(event);
     }
+
 }
 
 

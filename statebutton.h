@@ -16,11 +16,15 @@ private slots:
 
 public:
     void setObjectText(const QString& text);
-
+    void setStateTexts(const QStringList& texts);
+    void setStateTexts(const QString &connectedText, const QString &disconnectedText);
+    bool getState() const;
 
 private:
     bool connected;  // 记录按钮的连接状态
     QString objectText;
+    QString connectedText;
+    QString disconnectedText;
 
     void updateState();
 };

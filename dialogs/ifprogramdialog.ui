@@ -13,13 +13,16 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QPushButton" name="btnOK">
    <property name="geometry">
     <rect>
      <x>630</x>
-     <y>530</y>
+     <y>520</y>
      <width>110</width>
-     <height>40</height>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -30,9 +33,9 @@
    <property name="geometry">
     <rect>
      <x>770</x>
-     <y>530</y>
+     <y>520</y>
      <width>110</width>
-     <height>40</height>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -61,7 +64,7 @@
        <x>10</x>
        <y>10</y>
        <width>761</width>
-       <height>451</height>
+       <height>441</height>
       </rect>
      </property>
      <property name="currentIndex">
@@ -75,7 +78,7 @@
        <property name="geometry">
         <rect>
          <x>5</x>
-         <y>20</y>
+         <y>10</y>
          <width>741</width>
          <height>181</height>
         </rect>
@@ -88,11 +91,14 @@
          <rect>
           <x>30</x>
           <y>30</y>
-          <width>552</width>
+          <width>556</width>
           <height>134</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout">
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
          <item row="0" column="0">
           <widget class="QCheckBox" name="chboxMainBoardIn0">
            <property name="minimumSize">
@@ -479,7 +485,7 @@
           </widget>
          </item>
          <item row="1" column="4">
-          <widget class="StateButton" name="btnBoardInExtend0">
+          <widget class="StateButton" name="btnMainBoardInExtend0">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -599,7 +605,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="StateButton" name="btnBoardInExtend1">
+          <widget class="StateButton" name="btnMainBoardInExtend1">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -700,7 +706,7 @@
        <property name="geometry">
         <rect>
          <x>5</x>
-         <y>230</y>
+         <y>200</y>
          <width>741</width>
          <height>181</height>
         </rect>
@@ -713,11 +719,14 @@
          <rect>
           <x>30</x>
           <y>30</y>
-          <width>552</width>
+          <width>556</width>
           <height>134</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_2">
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
          <item row="0" column="0">
           <widget class="QCheckBox" name="chboxMainBoardOut0">
            <property name="minimumSize">
@@ -1044,7 +1053,7 @@
           </widget>
          </item>
          <item row="1" column="4">
-          <widget class="StateButton" name="btnBoardOutExtend0">
+          <widget class="StateButton" name="btnMainBoardOutExtend0">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -1144,7 +1153,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="StateButton" name="btnBoardOutExtend1">
+          <widget class="StateButton" name="btnMainBoardOutExtend1">
            <property name="minimumSize">
             <size>
              <width>100</width>
@@ -1234,7 +1243,7 @@
        <x>10</x>
        <y>10</y>
        <width>861</width>
-       <height>451</height>
+       <height>441</height>
       </rect>
      </property>
      <property name="title">
@@ -1305,9 +1314,9 @@
      <widget class="QCheckBox" name="chboxVariableVar">
       <property name="geometry">
        <rect>
-        <x>541</x>
-        <y>41</y>
-        <width>80</width>
+        <x>570</x>
+        <y>42</y>
+        <width>100</width>
         <height>40</height>
        </rect>
       </property>
@@ -1324,9 +1333,9 @@
      <widget class="QCheckBox" name="chboxRealProd">
       <property name="geometry">
        <rect>
-        <x>627</x>
-        <y>41</y>
-        <width>171</width>
+        <x>680</x>
+        <y>42</y>
+        <width>151</width>
         <height>40</height>
        </rect>
       </property>
@@ -1343,9 +1352,9 @@
      <widget class="QCheckBox" name="chboxConstantStack">
       <property name="geometry">
        <rect>
-        <x>455</x>
-        <y>133</y>
-        <width>80</width>
+        <x>456</x>
+        <y>134</y>
+        <width>100</width>
         <height>40</height>
        </rect>
       </property>
@@ -1408,9 +1417,9 @@
      <widget class="QCheckBox" name="chboxConstantRealProd">
       <property name="geometry">
        <rect>
-        <x>455</x>
-        <y>87</y>
-        <width>80</width>
+        <x>456</x>
+        <y>88</y>
+        <width>100</width>
         <height>40</height>
        </rect>
       </property>
@@ -1489,9 +1498,9 @@
      <widget class="QCheckBox" name="chboxConstantVar">
       <property name="geometry">
        <rect>
-        <x>455</x>
-        <y>41</y>
-        <width>80</width>
+        <x>456</x>
+        <y>42</y>
+        <width>100</width>
         <height>40</height>
        </rect>
       </property>
@@ -1524,7 +1533,7 @@
        <string/>
       </property>
      </widget>
-     <widget class="QComboBox" name="coboxVarOperator_3">
+     <widget class="QComboBox" name="coboxVarOperand3">
       <property name="geometry">
        <rect>
         <x>223</x>
@@ -1576,7 +1585,7 @@
        </property>
       </item>
      </widget>
-     <widget class="QComboBox" name="coboxVarOperator_2">
+     <widget class="QComboBox" name="coboxVarOperand2">
       <property name="geometry">
        <rect>
         <x>223</x>
@@ -1650,9 +1659,9 @@
      <widget class="QCheckBox" name="chboxStack">
       <property name="geometry">
        <rect>
-        <x>541</x>
-        <y>133</y>
-        <width>80</width>
+        <x>570</x>
+        <y>134</y>
+        <width>100</width>
         <height>40</height>
        </rect>
       </property>
@@ -1666,7 +1675,7 @@
        <string>堆叠</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="coboxVarOperator_4">
+     <widget class="QComboBox" name="coboxVarOperand4">
       <property name="geometry">
        <rect>
         <x>223</x>
@@ -1698,7 +1707,7 @@
        </property>
       </item>
      </widget>
-     <widget class="QComboBox" name="coboxVarOperator">
+     <widget class="QComboBox" name="coboxVarOperand1">
       <property name="geometry">
        <rect>
         <x>223</x>
@@ -1753,9 +1762,9 @@
      <widget class="QCheckBox" name="chboxVariableRealProd">
       <property name="geometry">
        <rect>
-        <x>541</x>
-        <y>87</y>
-        <width>80</width>
+        <x>570</x>
+        <y>88</y>
+        <width>100</width>
         <height>40</height>
        </rect>
       </property>
@@ -2154,7 +2163,7 @@
        <x>10</x>
        <y>10</y>
        <width>861</width>
-       <height>451</height>
+       <height>441</height>
       </rect>
      </property>
      <property name="title">
@@ -2185,7 +2194,7 @@
      <widget class="QCheckBox" name="chboxAxis">
       <property name="geometry">
        <rect>
-        <x>580</x>
+        <x>590</x>
         <y>60</y>
         <width>100</width>
         <height>40</height>
@@ -2207,7 +2216,7 @@
      <widget class="QCheckBox" name="chboxVariablePos">
       <property name="geometry">
        <rect>
-        <x>470</x>
+        <x>480</x>
         <y>60</y>
         <width>100</width>
         <height>40</height>
@@ -2507,7 +2516,7 @@
        <x>10</x>
        <y>10</y>
        <width>861</width>
-       <height>451</height>
+       <height>441</height>
       </rect>
      </property>
      <property name="title">

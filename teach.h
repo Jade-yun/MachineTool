@@ -6,6 +6,8 @@
 #include "./Prompt_Dialog_page/prompt_yes_no_dialog_page.h"
 #include "ui_prompt_yes_no_dialog_page.h"
 
+#include "vartypedialog.h"
+
 extern uint16_t Pro_CurOpera_Line;								//当前选中行
 
 namespace Ui {
@@ -22,6 +24,7 @@ public:
 
 private:
     Ui::Teach *ui;
+    VarTypeDialog* varTypeDialog; // 变量类型弹窗
 
 public slots:
     void on_btn_Tags_clicked();
@@ -180,7 +183,11 @@ private slots:
     void on_Follow_Stack_group_4_clicked();
 
     void on_Stack_reset_clicked();
+
+    void on_btnModify_clicked();
+
 private:
+    void init();
     void pageInit();
 
 private:
@@ -193,6 +200,9 @@ private:
 private:
 	void setGeneralBtnEvent(QString btnName);
 
+    // QObject interface
+public:
+    bool eventFilter(QObject *watched, QEvent *event) override;
 };
 
 #endif // TEACH_H

@@ -9,6 +9,7 @@
 #include "draggablebutton.h"
 #include "customkeyboard.h"
 #include "cmd.h"
+#include "referencewidget.h"
 
 #define SAVEPOINT_VERSION_1
 
@@ -18,19 +19,15 @@ struct GuidePara {
 //    D_KeyFuncStruct keyFuncDef;
 };
 
-struct ReferPointPara
-{
-    int index; // 唯一标识按钮的索引
-    QString name; // 按钮text
-    DraggableButton* button; // 直接绑定按钮对象
+//struct ReferPointPara
+//{
+//    int index; // 唯一标识按钮的索引 从 1 开始
+//    QString name; // 参考点名字
+//    DraggableButton* button; // 直接绑定按钮对象
 
-    QPoint pointPos; // 参考点在ui上的位置
+//    QPoint pointPos; // 参考点在ui上的位置
 
-   // add other parameter...
-//    uint8_t  refFlag;							//参考点有效性，0无效 1有效
-//    uint8_t  ret[1];
-//    int32_t pos[AXIS_TOTAL_NUM]; // 每个轴的位置
-};
+//};
 
 namespace Ui {
 class ManualForm;
@@ -61,6 +58,8 @@ private slots:
     void on_checkBoxEditPosReference_stateChanged(int arg1);
 //    void on_btnImportPictureReference_clicked();
 
+    void on_btnSaveReference_clicked();
+
 private:
     void initVar();
     void updateReferPointsTable();
@@ -71,6 +70,9 @@ private:
 public:
     const QList<ReferPointPara>& getRerferPoints() const;
 
+    void addReferencePoint();
+    void removeReferencePoint();
+
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];
@@ -80,7 +82,6 @@ private:
     QTableWidget* tableReference;
 
     QHash<DraggableButton*, GuidePara> guidePoints;
-
 private:
     Ui::ManualForm *ui;
 };

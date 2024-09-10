@@ -46,62 +46,69 @@ QVariant NumberEdit::getMaxValue() const
 
 QString NumberEdit::formatInput(const QString& inputText) const
 {
-    QString formattedText = inputText;
+    QString formattedText = inputText.trimmed();
     int decimalPlaces = getDecimalPlaces();
-
-    int nonZeroIndex = 0;
+    bool isNegative = formattedText.startsWith('-');
     bool hasDecimalPoint = formattedText.contains('.');
 
+    // 去掉负号，稍后再加回来
+    if (isNegative) {
+        formattedText = formattedText.mid(1);
+    }
+
+    // 处理前导零和小数点
     if (hasDecimalPoint) {
         int dotIndex = formattedText.indexOf('.');
-        if (dotIndex == 1 && formattedText[0] == '0') {
-            nonZeroIndex = 1;
-        } else {
-            while (nonZeroIndex < formattedText.length() &&
-                   (formattedText[nonZeroIndex] == '0' || formattedText[nonZeroIndex] == '.')) {
-                if (formattedText[nonZeroIndex] == '.')
-                    break;
-                nonZeroIndex++;
-            }
-        }
-    } else {
-        while (nonZeroIndex < formattedText.length() &&
-               (formattedText[nonZeroIndex] == '0')) {
-            nonZeroIndex++;
-        }
-    }
 
-    if (nonZeroIndex > 0) {
-        formattedText.remove(0, nonZeroIndex);
-        if (formattedText.isEmpty() || formattedText[0] == '.') {
+        // 确保以小数点开头的数（如 .85）正确处理为 0.85
+        if (dotIndex == 0) {
             formattedText.prepend('0');
         }
+
+        // 移除前导零，但保留单个'0'在小数点前
+        int nonZeroIndex = 0;
+        while (nonZeroIndex < dotIndex && formattedText[nonZeroIndex] == '0') {
+            nonZeroIndex++;
+        }
+        formattedText.remove(0, nonZeroIndex);
+
+        // 如果小数点前面没有数字，补充'0'
+        if (formattedText[0] == '.') {
+            formattedText.prepend('0');
+        }
+    } else {
+        // 对于没有小数点的数，移除所有前导零
+        formattedText = formattedText.trimmed().remove(QRegularExpression("^0+"));
+        if (formattedText.isEmpty()) {
+            formattedText = "0";
+        }
     }
 
-    if (decimalPlaces > 0)
-    {
-        if (!formattedText.contains('.'))
-        {
-            formattedText += '.';
-            formattedText += QString(decimalPlaces, '0');
-        }
-        else
-        {
-            int currentDecimalPlaces = formattedText.split('.')[1].length();
-            if (currentDecimalPlaces < decimalPlaces)
-            {
+    // 处理小数位数
+    if (decimalPlaces > 0) {
+        if (!formattedText.contains('.')) {
+            formattedText += '.' + QString(decimalPlaces, '0');
+        } else {
+            int currentDecimalPlaces = formattedText.length() - formattedText.indexOf('.') - 1;
+            if (currentDecimalPlaces < decimalPlaces) {
                 formattedText += QString(decimalPlaces - currentDecimalPlaces, '0');
             }
+            else if (currentDecimalPlaces > decimalPlaces) {
+                formattedText = formattedText.left(formattedText.indexOf('.') + decimalPlaces + 1);
+            }
         }
+    } else if (decimalPlaces == 0 && hasDecimalPoint) {
+        formattedText = formattedText.left(formattedText.indexOf('.'));
     }
-    else if (decimalPlaces == 0)
-    {
-        if (formattedText.contains('.'))
-        {
-            int dotIndex = formattedText.indexOf('.');
-            formattedText = formattedText.left(dotIndex);
-        }
+
+    // 检查格式化后的文本是否为零
+    bool isZero = (formattedText == "0" || formattedText == QString("0.").append(QString(decimalPlaces, '0')));
+
+    // 如果原始输入是负数，且结果不是零值，添加负号
+    if (isNegative && !isZero) {
+        formattedText.prepend('-');
     }
+
     return formattedText;
 }
 

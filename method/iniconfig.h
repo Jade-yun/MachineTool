@@ -1,4 +1,4 @@
-﻿#ifndef INICONFIG_H
+#ifndef INICONFIG_H
 #define INICONFIG_H
 #include "QString"
 #include "QSettings"
@@ -28,13 +28,8 @@ void   setValue(QString prefix, QString key, int32_t value);
 extern uint8_t* getOutPortType(uint8_t* defaultV);
 extern void setOutPortType(uint8_t* value);
 //互锁设置
-extern uint8_t** getOutportInterlock(uint8_t** defaultV);
-extern void setOutportInterlock(uint8_t** value);
-//端口自定义
-extern D_PortDefineStruct* getPortDefine(const QStringList &defaultV);
-extern void setPortDefine(D_PortDefineStruct* value);
-extern D_NameDefineStruct* getNameDefine(const QStringList &defaultV);
-extern void setNameDefine(D_NameDefineStruct* value);
+extern uint8_t* getOutportInterlock(uint8_t* defaultV);
+extern void setOutportInterlock(uint8_t* value);
 
 //预留关联
 extern uint8_t* getOutportRelevancy(uint8_t* defaultV);

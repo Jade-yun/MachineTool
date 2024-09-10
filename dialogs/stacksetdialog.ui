@@ -230,19 +230,19 @@
      <x>660</x>
      <y>340</y>
      <width>100</width>
-     <height>40</height>
+     <height>45</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>100</width>
-     <height>40</height>
+     <height>45</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>100</width>
-     <height>40</height>
+     <height>45</height>
     </size>
    </property>
    <property name="font">
@@ -271,19 +271,19 @@
      <x>770</x>
      <y>340</y>
      <width>100</width>
-     <height>40</height>
+     <height>45</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
      <width>100</width>
-     <height>40</height>
+     <height>45</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
      <width>100</width>
-     <height>40</height>
+     <height>45</height>
     </size>
    </property>
    <property name="font">
@@ -1267,7 +1267,7 @@
   <customwidget>
    <class>NumberEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">customedit.h</header>
+   <header>customedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

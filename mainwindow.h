@@ -51,9 +51,9 @@ private:
     ManualForm *manualWidget;
     TeachManage* teachManageWidget;
 
-private:
     ErrorTipDialog* dlgErrorTip;
-
+public:
+    static MainWindow* pMainWindow;
 // dialogs
 public:
     HandWheelDialog *handWheel;
@@ -67,15 +67,13 @@ private:
     void connectAllSignalsAndSlots();
 
     void setStyleFromFile(const QString &styleSheet);
-
+public:
     void callFullKeyboard(QObject *watched);
-    void callNumberKeyboard(QObject *watched);
 private slots:
     void on_btnHelp_clicked();
 public slots:
     bool eventFilter(QObject *,QEvent *) override;
 };
-
 
 class ClickableLabel :public QLabel
 {

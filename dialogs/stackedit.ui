@@ -1030,7 +1030,7 @@
      <x>180</x>
      <y>450</y>
      <width>821</width>
-     <height>51</height>
+     <height>52</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="hLayoutBottomBtn">
@@ -1038,10 +1038,10 @@
      <number>10</number>
     </property>
     <property name="topMargin">
-     <number>6</number>
+     <number>0</number>
     </property>
     <property name="bottomMargin">
-     <number>1</number>
+     <number>0</number>
     </property>
     <item>
      <spacer name="horizontalSpacer">
@@ -1064,13 +1064,13 @@
       <property name="minimumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1103,13 +1103,13 @@
       <property name="minimumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1138,13 +1138,13 @@
       <property name="minimumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1173,13 +1173,13 @@
       <property name="minimumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1205,13 +1205,13 @@
       <property name="minimumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1239,7 +1239,7 @@
     <rect>
      <x>0</x>
      <y>5</y>
-     <width>991</width>
+     <width>1011</width>
      <height>42</height>
     </rect>
    </property>
@@ -1273,13 +1273,13 @@
      <widget class="QComboBox" name="coboxStackOrder">
       <property name="minimumSize">
        <size>
-        <width>140</width>
+        <width>120</width>
         <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>140</width>
+        <width>120</width>
         <height>40</height>
        </size>
       </property>
@@ -1320,7 +1320,7 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>16777215</width>
+        <width>130</width>
         <height>40</height>
        </size>
       </property>
@@ -1394,13 +1394,13 @@
      <widget class="QComboBox" name="coboxStopAfterStack">
       <property name="minimumSize">
        <size>
-        <width>110</width>
+        <width>120</width>
         <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>110</width>
+        <width>120</width>
         <height>40</height>
        </size>
       </property>
@@ -1447,13 +1447,13 @@
      <widget class="QComboBox" name="coboxLeaveBlank">
       <property name="minimumSize">
        <size>
-        <width>110</width>
+        <width>130</width>
         <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>110</width>
+        <width>130</width>
         <height>40</height>
        </size>
       </property>

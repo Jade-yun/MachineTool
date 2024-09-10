@@ -17,9 +17,25 @@ AutoForm::AutoForm(QWidget *parent) :
     // init some members;
 
     stackSet = new StackSetDialog(this);
-    dialogReferPoint = nullptr;
-    tabReferPoint = nullptr;
 
+#if RERFERENCE_DIALOG_TEST
+    tabReferPoint = nullptr;
+    dialogReferPoint = new QDialog(this);
+    dialogReferPoint->setModal(true);
+    //        dialogReferPoint->setWindowModality(Qt::WindowModal);
+    //        setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
+    dialogReferPoint->setLayout(new QVBoxLayout(dialogReferPoint));
+    dialogReferPoint->setFixedSize(1024, 541);
+
+    okButton = new QPushButton("确定", dialogReferPoint);
+    okButton->resize(100, 45); // 设置按钮大小
+    cancelButton = new QPushButton("取消", dialogReferPoint);
+    cancelButton->resize(100, 45); // 设置按钮大小
+//    cancelButton->move(okButton->x() - cancelButton->width() - 10, okButton->y()); // 设置按钮位置
+
+    connect(okButton, &QPushButton::clicked, dialogReferPoint, &QDialog::accept);
+    connect(cancelButton, &QPushButton::clicked, dialogReferPoint, &QDialog::reject);
+#endif
 //    keyboard = new NumKeyboard(this);
 
 
@@ -97,6 +113,17 @@ AutoForm::AutoForm(QWidget *parent) :
     menu->addAction(action6);
 
     ui->btnOperate->setMenu(menu);
+
+    referEditDialog = new ReferenceWidget(this);
+    referEditDialog->setWindowTitle(tr("参考点编辑"));
+    referEditDialog->setWindowModality(Qt::ApplicationModal);
+
+    QWidget* parentWidget = this->parentWidget();
+    QRect parentGeometry;
+    parentGeometry = parentWidget->geometry();
+    int x = parentGeometry.x() + (parentGeometry.width() - referEditDialog->width()) / 2;
+    int y = parentGeometry.y() + (parentGeometry.height() - referEditDialog->height()) / 2;
+    referEditDialog->move(x, y);
 
 /**********************************************************************/
     // 连接菜单项的点击事件
@@ -220,7 +247,6 @@ AutoForm::AutoForm(QWidget *parent) :
 AutoForm::~AutoForm()
 {
     delete ui;
-    delete dialogReferPoint;
 }
 
 
@@ -259,8 +285,6 @@ void AutoForm::callNumKeyBoard(QObject* obj)
         keyboard->setCurrentEditObj(obj);
         keyboard->exec();
     }
-
-
 }
 
 
@@ -292,6 +316,7 @@ void AutoForm::on_btnEdit_toggled(bool checked)
 
 void AutoForm::showReferPointDialog()
 {
+#if RERFERENCE_DIALOG_TEST
     ManualForm* keyboardParent = this->parent()->findChild<ManualForm*>();
     if (!keyboardParent)
         qDebug() << "参考点编辑 ";
@@ -308,32 +333,13 @@ void AutoForm::showReferPointDialog()
     int originalIndex = 4;
     referPointPage = tabReferPoint->widget(originalIndex);
 
-    if (!dialogReferPoint)
-    {
-        dialogReferPoint = new QDialog(this);
-        dialogReferPoint->setModal(false);
-//        dialogReferPoint->setWindowModality(Qt::WindowModal);
-//        setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowCloseButtonHint);
-        dialogReferPoint->setLayout(new QVBoxLayout(dialogReferPoint));
-        dialogReferPoint->resize(1024, 541);
+    connect(dialogReferPoint, &QDialog::finished, this, [=](int result) {
+        if (referPointPage && tabReferPoint)
+        {
+            tabReferPoint->insertTab(originalIndex, referPointPage, tr("参考点"));
+        }
 
-        connect(dialogReferPoint, &QDialog::finished, this, [=](int result) {
-            if (referPointPage && tabReferPoint)
-            {
-                tabReferPoint->insertTab(originalIndex, referPointPage, tr("参考点"));
-            }
-
-//            if (keyboardParent)
-//            {
-//                keyboardParent->setKeyboardParent(keyboardParent);
-//            }
-//            if (result == QDialog::Accepted)
-//            {
-
-//            }
-
-        }, Qt::UniqueConnection);
-    }
+    }, Qt::UniqueConnection);
 
     if (referPointPage)
     {
@@ -341,12 +347,16 @@ void AutoForm::showReferPointDialog()
         dialogReferPoint->layout()->addWidget(referPointPage);
         referPointPage->show();
     }
-//    if (keyboardParent){
-
-//        keyboardParent->setKeyboardParent(dialogReferPoint);
-//    }
 
 //    dialogReferPoint->setWindowModality(Qt::WindowModal);
-    dialogReferPoint->show();
+
+    okButton->move(dialogReferPoint->width() - okButton->width() - 20, dialogReferPoint->height() - okButton->height() - 15);
+    cancelButton->move(okButton->x() - cancelButton->width() - 10, okButton->y());
+    okButton->raise();
+    cancelButton->raise();
+
+#endif
+
+    referEditDialog->show();
 
 }

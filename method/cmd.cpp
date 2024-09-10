@@ -5,11 +5,23 @@ cmd::cmd()
 
 }
 
-uint8_t CurPro_Num = 0;                                                                    //当前选中进程号
+P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM] = {0};                                 //教导界面轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
+P_ClawActionStruct Temp_ClawActionStruct[3] = {0};                                          //教导界面卡爪动作结构体
+P_MachineOutStruct Temp_MachineOutStruct[6] = {0};                                          //教导界面机床输出控制
+P_ReserveOutStruct Temp_ReserveOutStruct = {0};                                             //教导界面预留输出调用
+P_WaitInMachineStruct Temp_WaitInMachineStruct = {0};                                       //教导界面机床等待指令
+P_WaitInClawStruct Temp_WaitInClawStruct = {0};                                           //教导界面等待卡爪指令
+P_WaitInReserveStruct Temp_WaitInReserveStruct = {0};                                     //教导界面等待预留指令
+P_OtherAlarmCustStruct Temp_OtherAlarmCustStruct = {0};                                   //教导界面其他-报警自定义指令
+P_OtherAlarmLampStruct Temp_OtherAlarmLampStruct = {0};                                   //教导界面其他-报警灯指令
+P_OtherAlarmSoundStruct Temp_OtherAlarmSoundStruct = {0};                                   //教导界面其他-报警声指令
+P_OtherCycStopStruct Temp_OtherCycStopCustStruct = {0};                                     //教导界面其他-周期停止
+P_SunProStruct Temp_SunProStruct = {0};                                                     //教导界面高级-子程序
+P_AxisStopStruct Temp_AxisStopStruct = {0};                                                 //教导界面高级-伺服停止
+P_TorqueGardStruct Temp_TorqueGardStruct = {0};                                             //教导界面高级-扭矩保护命令
+P_OffsetAxisStruct Temp_OffsetAxisStruct = {0};                                             //教导界面高级-轴偏移命令
+P_SearchAxisMoveStruct Temp_SearchAxisMoveStruct = {0};                                     //教导界面高级-搜索指令
 
-P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM] = {0};                                 //轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
-P_ClawActionStruct Temp_ClawActionStruct[3] = {0};                                          //卡爪动作结构体
-P_MachineOutStruct Temp_MachineOutStruct[6] = {0};                                          //机床输出控制
 uint8_t m_OutPortType[OUT_PORT_TYPE_NUM][2] = {0};												//输出类型
 
 uint8_t m_OutportInterlock[OUT_INTERLOCK_NUM][4] = {0};								//互锁设置
@@ -50,6 +62,8 @@ int32_t m_AxisCurPos[AXIS_TOTAL_NUM] = {0};														//轴当前位置
 uint8_t  m_AxisCurDir[AXIS_TOTAL_NUM] = {0};														//轴当前运动方向
 uint8_t  m_AxisMoveFlag[AXIS_TOTAL_NUM] = {0};													//轴运动标志 0结束运动 1运动中
 uint8_t  m_AxisMovePauseReq[AXIS_TOTAL_NUM] = {0};											//轴运动暂停请求
+uint16_t m_AxisCurSpeed = 0;                                                                //当前转速（上传的是最大转速的电机的转速）
+uint16_t m_AxisCurTorque = 0;                                                               //当前扭矩（上传的是最大转速的电机的扭矩）
 
 uint8_t m_RobotRunSta = 0;																							//机器运行状态
 uint8_t m_RobotWorkMode = 0;																						//机器工作模式
@@ -63,12 +77,14 @@ P_RefStruct m_RefPoint[REFERENCE_TOTAL_NUM] = {0};								//参考点
 
 uint8_t m_OperateProNum = 0;																						//操作的程序编号
 P_ProOrderStruct m_OperateProOrder[PRO_LINE_MAIN] = {0};					//操作的程序
-uint16_t m_OperateProOrderListNum = {0};																//操作的程序行数
+uint16_t m_OperateProOrderListNum = 0;																//操作的程序行数
+uint16_t m_CurrentSelectProOrderList = 0;																//当前选中行号
 
 P_ProInfoStruct m_ProRunInfo = {0};																//运行信息--当前行号
 D_RunInfoStruct m_RunInfo = {0};																	//运行信息
 D_RunParStruct m_RunPar = {0};																		//运行参数
-uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM] = {0};											//当前每个堆叠组的堆叠计数
+uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM] = {0};
+uint8_t m_VariableType[VAR_TOTAL_NUM] = {0};
 uint32_t m_VariableCurValue[VAR_TOTAL_NUM] = {0};											//当前每个变量的变量值
 uint32_t m_TimeCurValue[TIME_TOTAL_NUM] = {0};													//当前每个定时器的计数值
 
@@ -79,8 +95,12 @@ QList<D_ProgramNameAndPathStruct> m_ProgramNameAndPath;                  //所�
 D_ProgramNameAndPathStruct m_CurrentProgramNameAndPath;                  //当前选中的文件信息
 uint16_t m_FileNameNum = 0;                                                  //程序文件个数
 
-D_PortDefineStruct m_PortDefine[DEFINE_PORT_NUM];                         //端口自定义
-D_NameDefineStruct m_NameDefine[DEFINE_NAME_NUM];                        //名称自定义
+D_NameDefineStruct m_NameDefine[DEFINE_NAME_NUM]={0};                        //名称自定义
+
+D_PortDefineStruct m_Port_X_EX[INPUT_TOTAL_NUM]={0};                                  //输入自定义
+D_PortDefineStruct m_Port_Y_EY[OUTPUT_TOTAL_NUM]={0};                                  //输出自定义
+
+Usart *g_Usart = NULL;
 
 //释放内存
 void VOS_FREE(void **pData)
@@ -161,6 +181,12 @@ uint16_t g_GetProOrderDataLen(P_ProOrderStruct *pro)
             break;
         case C_OTHER_DELAY://其他-延时
             len = sizeof(P_OtherDelayStruct);
+            break;
+        case C_OTHER_ALARM_LAMP://其他-报警灯
+            len = sizeof(P_OtherAlarmLampStruct);
+            break;
+        case C_OTHER_ALARM_SOUND://其他-报警声
+            len = sizeof(P_OtherAlarmSoundStruct);
             break;
         case C_OTHER_ALARM_CUST://其他-报警自定义
             len = sizeof(P_OtherAlarmCustStruct);
@@ -393,8 +419,8 @@ void g_ProOrderSwap(P_ProOrderStruct *proOrder_Old, P_ProOrderStruct *proOrder_N
     proOrder_Old->delay = proOrder.delay;
     proOrder_Old->pData = proOrder.pData;
 
-    g_FreeProOrder(&proOrder);
-//    proOrder.pData = NULL;
+//    g_FreeProOrder(&proOrder);
+    proOrder.pData = NULL;
 }
 
 //插入程序命令----外部调用
@@ -433,7 +459,7 @@ uint8_t g_InsertProOrder(uint8_t* data)
         return 5;
     }
 
-    if(proListNum > m_ProInfo.proNum[proNum])
+    if(proListNum > m_OperateProOrderListNum)
     {//插入位置异常
         return 6;
     }
@@ -456,14 +482,14 @@ uint8_t g_InsertProOrder(uint8_t* data)
     }
 
 
-    if(m_ProInfo.proNum[m_OperateProNum] >= PRO_LINE_MAIN)
+    if(m_OperateProOrderListNum >= PRO_LINE_MAIN)
     {//主程序行数已经最大，不能再插入
         g_FreeProOrder(&proOrder);
         return 9;
     }
 
 
-    for(i=m_ProInfo.proNum[m_OperateProNum]; i>=proOrder.list; i--)
+    for(i=m_OperateProOrderListNum; i>=proOrder.list; i--)
     {//将插入位置后面的程序向后移动一行
         if(m_OperateProOrder[i-1].list >= 0 && m_OperateProOrder[i-1].runOrderNum >= 0)
         {//有效程序才向后移动
@@ -475,15 +501,15 @@ uint8_t g_InsertProOrder(uint8_t* data)
     }
 
     g_ProOrderDataCopy(&m_OperateProOrder[proOrder.list-1], &proOrder);//将待插入的命令数据拷贝到待插入的行
-    m_ProInfo.proNum[m_OperateProNum]++;
+    m_OperateProOrderListNum++;
     //情况一，在组合行前面插入一行，组合行序号加1
     //情况2，在组合行中间插入一行，插入行序号与组合行一致
     //情况3，在组合行最后一行插入一行，插入行序号与组合行一致
     if(m_OperateProOrder[proOrder.list-2].runOrderNum == m_OperateProOrder[proOrder.list-1].runOrderNum)
     {
-        for(i>=proOrder.list;i<m_ProInfo.proNum[m_OperateProNum];i++)
+        for(i=proOrder.list;i<m_OperateProOrderListNum;i++)
         {
-            m_OperateProOrder[proOrder.list].runOrderNum--;
+            m_OperateProOrder[i].runOrderNum--;
         }
     }
     g_FreeProOrder(&proOrder);				//释放临时变量中的命令指针
@@ -500,7 +526,7 @@ uint8_t g_DeleteProOrder(uint8_t proNum, uint16_t list)
     {
         return 1;
     }
-    else if(list > m_OperateProOrderListNum || list == 0)
+    else if(list > m_OperateProOrderListNum)
     {//子程序的程序行号或命令序号异常，即行号异常
         return 2;
     }
@@ -510,26 +536,32 @@ uint8_t g_DeleteProOrder(uint8_t proNum, uint16_t list)
         return 3;
     }
 
-    if(m_OperateProOrderListNum == 0)
-    {//程序行数为空，无法删除
+    if(m_OperateProOrderListNum == 0 || m_OperateProOrder[list].cmd == 200)
+    {//程序行数为空或者是结束指令，无法删除
         return 4;
     }
 
+
     for(i=list; i<m_OperateProOrderListNum; i++)
     {//将删除程序后面的程序前移动一行
-        if(m_OperateProOrder[i].list > 0 && m_OperateProOrder[i].runOrderNum > 0)
+        if(m_OperateProOrder[i].list >= 0 && m_OperateProOrder[i].runOrderNum >= 0)
         {//有效程序才向前移动
-            g_ProOrderSwap(&m_OperateProOrder[i-1], &m_OperateProOrder[i]);	//交换命令数据
-            g_FreeProOrder(&m_OperateProOrder[i]);												//释放被删除的命令数据指针
+            g_ProOrderSwap(&m_OperateProOrder[i], &m_OperateProOrder[i+1]);	//交换命令数据
+            g_FreeProOrder(&m_OperateProOrder[i+1]);	//释放交换的命令数据指针
+            m_OperateProOrder[i].list--;//删除后的行号处理
+            m_OperateProOrder[i].runOrderNum--; //删除后的序号处理
         }
         else
         {//后面都是无效程序，结束处理
             break;
         }
     }
-
-    m_OperateProOrderListNum--;				//删除一行命令完成后，程序行数减1
-
+    m_OperateProOrder[m_OperateProOrderListNum-1].cmd = 0;
+    m_OperateProOrder[m_OperateProOrderListNum-1].list = 0;
+    m_OperateProOrder[m_OperateProOrderListNum-1].delay = 0;
+    m_OperateProOrder[m_OperateProOrderListNum-1].noteFlag = 0;
+    m_OperateProOrder[m_OperateProOrderListNum-1].runOrderNum = 0;
+    m_OperateProOrderListNum--;
     return 0;
 }
 
@@ -572,6 +604,11 @@ uint8_t g_ProOrderCombination(uint8_t proNum, uint16_t proListNum, uint16_t type
     if(proListNum == 0 || proListNum > m_OperateProOrderListNum)
     {//当前行号比上移行数还要小，异常
         return 1;
+    }
+
+    if(m_OperateProOrder[proListNum - 1].cmd == 200)
+    {//结束指令不能组合
+        return 2;
     }
 
     if(type == 0)
@@ -640,6 +677,11 @@ uint8_t g_ProOrderDecompose(uint8_t proNum, uint16_t proListNum)
         return 1;
     }
 
+    if(m_OperateProOrder[proListNum - 1].cmd == 200)
+    {//结束指令不能分解
+        return 2;
+    }
+
     if(proListNum > 1)
     {//当前行号大于1
         if(m_OperateProOrder[proListNum - 1].runOrderNum == m_OperateProOrder[proListNum - 2].runOrderNum)
@@ -657,7 +699,7 @@ uint8_t g_ProOrderDecompose(uint8_t proNum, uint16_t proListNum)
             }
         }
         else if(m_OperateProOrder[proListNum - 1].runOrderNum == m_OperateProOrder[proListNum].runOrderNum)
-        {//如果当前行跟上一行的执行顺序一样
+        {//如果当前行跟下一行的执行顺序一样
             for(i=proListNum; i<m_OperateProOrderListNum; i++)
             {//当前行后面的命令行
                 if(m_OperateProOrder[i].list > 0 && m_OperateProOrder[i].runOrderNum > 0)
@@ -704,8 +746,6 @@ uint8_t g_ProOrderDecompose(uint8_t proNum, uint16_t proListNum)
 uint8_t g_ProOrderUpMove(uint8_t proNum, uint16_t proListNum, uint16_t len)
 {
     uint16_t i = 0;
-    P_ProOrderStruct proOrder;
-    P_ProOrderStruct *p_proOrder;
 
     if(len == 0 || proListNum == 0)
     {
@@ -715,26 +755,23 @@ uint8_t g_ProOrderUpMove(uint8_t proNum, uint16_t proListNum, uint16_t len)
     {//当前行号比上移行数还要小，异常
         return 1;
     }
-
-    //获取待处理的程序
-    p_proOrder = &m_OperateProOrder[proListNum - 1];
-    g_ProOrderDataCopy(&proOrder, p_proOrder);						//当前行的信息拷贝给中间变量
-    g_FreeProOrder(p_proOrder);														//释放需要移动的原有命令数据指针
+    else if(m_OperateProOrder[proListNum-1].cmd == 200)
+    {//上移行的是结束指令，不进行上移
+        return 1;
+    }
 
     for(i=proListNum-1; i>=proListNum-len; i--)
     {//将当前行之前的程序向后移动一行
         if(m_OperateProOrder[i-1].list > 0 && m_OperateProOrder[i-1].runOrderNum > 0)
         {//有效程序才向后移动
             g_ProOrderSwap(&m_OperateProOrder[i], &m_OperateProOrder[i-1]);	//交换命令数据
-            g_FreeProOrder(&m_OperateProOrder[i-1]);													//释放被交换的命令数据指针
+            m_OperateProOrder[i].runOrderNum++;
+            m_OperateProOrder[i-1].runOrderNum--;
+            m_OperateProOrder[i].list++;
+            m_OperateProOrder[i-1].list--;
+            m_CurrentSelectProOrderList--;
         }
     }
-
-    g_ProOrderSwap(&m_OperateProOrder[proListNum-len-1], &proOrder);
-
-    p_proOrder->pData = NULL;												//中间指针必须指向NULL，否则函数返回时会把程序命令数据给释放
-    p_proOrder = NULL;
-    g_FreeProOrder(&proOrder);											//释放中间变量的命令数据指针
 
     return 0;
 }
@@ -743,8 +780,6 @@ uint8_t g_ProOrderUpMove(uint8_t proNum, uint16_t proListNum, uint16_t len)
 uint8_t g_ProOrderDownMove(uint8_t proNum, uint16_t proListNum, uint16_t len)
 {
     uint16_t i = 0;
-    P_ProOrderStruct proOrder;
-    P_ProOrderStruct *p_proOrder;
 
     if(len == 0 || proListNum == 0)
     {
@@ -754,27 +789,23 @@ uint8_t g_ProOrderDownMove(uint8_t proNum, uint16_t proListNum, uint16_t len)
     {//当前行号下移后超过行数，异常
         return 1;
     }
-
-    //获取待处理的程序
-    p_proOrder = &m_OperateProOrder[proListNum - 1];
-    g_ProOrderDataCopy(&proOrder, p_proOrder);						//当前行的信息拷贝给中间变量
-    g_FreeProOrder(p_proOrder);														//释放需要移动的原有命令数据指针
-
+    else if(m_OperateProOrder[proListNum].cmd == 200)
+    {//下移行的下一行是结束指令，不进行下移
+        return 1;
+    }
 
     for(i=proListNum; i<proListNum+len; i++)
     {//将当前行之前的程序向后移动一行
         if(m_OperateProOrder[i].list > 0 && m_OperateProOrder[i].runOrderNum > 0)
         {//有效程序才向后移动
             g_ProOrderSwap(&m_OperateProOrder[i-1], &m_OperateProOrder[i]);	//交换命令数据
-            g_FreeProOrder(&m_OperateProOrder[i]);												//释放被交换的命令数据指针
+            m_OperateProOrder[i].runOrderNum++;
+            m_OperateProOrder[i-1].runOrderNum--;
+            m_OperateProOrder[i].list++;
+            m_OperateProOrder[i-1].list--;
+            m_CurrentSelectProOrderList++;
         }
     }
-
-    g_ProOrderSwap(&m_OperateProOrder[proListNum+len], &proOrder);
-
-    p_proOrder->pData = NULL;												//中间指针必须指向NULL，否则函数返回时会把程序命令数据给释放
-    p_proOrder = NULL;
-    g_FreeProOrder(&proOrder);											//释放中间变量的命令数据指针
 
     return 0;
 }
@@ -786,6 +817,11 @@ uint8_t g_ProOrderShield(uint8_t proNum, uint16_t proListNum, uint16_t type)
     if(proListNum == 0 || proListNum > m_OperateProOrderListNum)
     {//当前行号异常
         return 1;
+    }
+
+    if(m_OperateProOrder[proListNum - 1].cmd == 200)
+    {//结束指令不能屏蔽
+        return 2;
     }
 
     //获取待处理的程序
@@ -920,7 +956,7 @@ uint8_t g_ReadProOrderData(uint8_t proNum, uint16_t proListNum, uint8_t *data, u
     {//程序编号异常
         return 2;
     }
-    else if(proListNum > m_ProInfo.proNum[proNum])
+    else if(proListNum > m_OperateProOrderListNum)
     {
         return 3;
     }
@@ -928,7 +964,7 @@ uint8_t g_ReadProOrderData(uint8_t proNum, uint16_t proListNum, uint8_t *data, u
     //获取待处理的程序
     proOrder = &m_ProOrder[proNum][proListNum - 1];
 
-    if(proOrder->list != proListNum || proOrder->runOrderNum == 0 || proOrder->runOrderNum > m_ProInfo.proNum[proNum])
+    if(proOrder->list != proListNum || proOrder->runOrderNum == 0 || proOrder->runOrderNum > m_OperateProOrderListNum)
     {//命令行号异常
         return 4;
     }

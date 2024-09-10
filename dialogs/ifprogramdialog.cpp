@@ -6,6 +6,8 @@ IfProgramDialog::IfProgramDialog(QWidget *parent) :
     ui(new Ui::IfProgramDialog)
 {
     ui->setupUi(this);
+
+
     chboxsSigMb = new QButtonGroup(this);
     for (auto chbox : ui->tabMainBoard->findChildren<QCheckBox*>())
     {
@@ -153,4 +155,166 @@ void IfProgramDialog::on_chboxAxis_clicked()
     ui->labPosUnit->hide();
     ui->coboxPosVarSelectPostOp->hide();
     ui->coboxPosPostOpAxisSelect->show();
+}
+
+QString IfProgramDialog::getMainBoardSig() const
+{
+    QCheckBox* checkBoxes[] = {
+        ui->chboxMainBoardIn0,
+        ui->chboxMainBoardIn1,
+        ui->chboxMainBoardIn2,
+        ui->chboxMainBoardInExtend0,
+        ui->chboxMainBoardInExtend1,
+        ui->chboxMainBoardOut0,
+        ui->chboxMainBoardOut1,
+        ui->chboxMainBoardOut2,
+        ui->chboxMainBoardOutExtend0,
+        ui->chboxMainBoardOutExtend1
+    };
+    QComboBox* comboBoxes[] = {
+        ui->coboxMainBoardIn0,
+        ui->coboxMainBoardIn1,
+        ui->coboxMainBoardIn2,
+        ui->coboxMainBoardInExtend0,
+        ui->coboxMainBoardInExtend1,
+        ui->coboxMainBoardOut0,
+        ui->coboxMainBoardOut1,
+        ui->coboxMainBoardOut2,
+        ui->coboxMainBoardOutExtend0,
+        ui->coboxMainBoardOutExtend1
+    };
+
+    StateButton* buttons[] = {
+        ui->btnMainBoardIn0,
+        ui->btnMainBoardIn1,
+        ui->btnMainBoardIn2,
+        ui->btnMainBoardInExtend0,
+        ui->btnMainBoardInExtend1,
+        ui->btnMainBoardOut0,
+        ui->btnMainBoardOut1,
+        ui->btnMainBoardOut2,
+        ui->btnMainBoardOutExtend0,
+        ui->btnMainBoardOutExtend1
+    };
+
+    const int count = sizeof(checkBoxes) / sizeof(QCheckBox*); // Number of elements in arrays
+
+    for (int i = 0; i < count; ++i)
+    {
+        if (checkBoxes[i]->isChecked())
+        {
+            return comboBoxes[i]->currentText() + buttons[i]->text();
+        }
+    }
+
+    return QString(); // Default return if no checkbox is checked
+}
+
+QString IfProgramDialog::getVarOperateExpression() const
+{
+    if (ui->chbox1Var->isChecked())
+    {
+        QString expression = ui->coboxVarSelectPreOp->currentText() + ui->coboxVarOperand1->currentText();
+        if (ui->chboxConstantVar->isChecked())
+        {
+            expression += ui->editVarPostOp->text();
+        }
+        else if (ui->chboxVariableVar->isChecked())
+        {
+            expression += ui->coboxVarSelectPostOp1->currentText();
+        }
+        else {
+            expression += ui->coboxVarRealProductNumPostOp->currentText();
+        }
+        return expression;
+    }
+    if (ui->chbox2Var->isChecked())
+    {
+        QString expression = ui->coboxVarRealProductNumPreOp->currentText() + ui->coboxVarOperand2->currentText();
+        if (ui->chboxConstantRealProd->isChecked())
+        {
+            expression += ui->editRealProdNumPostOp->text();
+        }
+        else
+        {
+            expression += ui->coboxVarSelectPostOp2->currentText();
+        }
+        return expression;
+    }
+    if (ui->chbox3Var->isChecked())
+    {
+        QString expression = ui->coboxVarStackPreOp1->currentText() + ui->coboxVarOperand3->currentText();
+        if (ui->chboxConstantStack->isChecked())
+        {
+            expression += ui->editStackPostOp->text();
+        }
+        else
+        {
+            expression += ui->coboxVarStackPostOp->currentText();
+        }
+        return expression;
+    }
+    if (ui->chbox4Var->isChecked())
+    {
+        QString expression = ui->coboxVarStackPreOp2->currentText() + ui->coboxVarOperand4->currentText();
+        expression += ui->coboxVarFinisStack->currentText();
+        return expression;
+    }
+
+    return QString();
+}
+
+QString IfProgramDialog::getPosExpression() const
+{
+    QString expression = ui->coboxPosPreOpAxisSelect->currentText() + ui->coboxOperandPos->currentText();
+    if (ui->chboxConstantPos->isChecked())
+    {
+        QString postOpText = ui->editPosPostOp->text() + "mm";
+        expression += postOpText;
+    }
+    else if (ui->chboxVariablePos->isChecked())
+    {
+        expression += ui->coboxPosVarSelectPostOp->currentText();
+    }
+    else
+    {
+        expression += ui->coboxPosPostOpAxisSelect->currentText();
+    }
+
+    return expression;
+}
+
+QString IfProgramDialog::getTimerExpression() const
+{
+    QString expression = ui->coboxTimerPreOp->currentText() + ui->coboxTimerOperand->currentText();
+    if (ui->chboxConstantTimer->isChecked())
+    {
+        QString postOpText = ui->editTimerPostOp->text() + "s";
+        expression += postOpText;
+    }
+    else {
+        expression += ui->coboxTimerPostOp->currentText();
+    }
+    return expression;
+}
+
+QString IfProgramDialog::getConditionExpression() const
+{
+    if (ui->tabWidget->currentIndex() == 0)
+    {
+        return getMainBoardSig();
+    }
+    else if (ui->tabWidget->currentIndex() == 1)
+    {
+        return getVarOperateExpression();
+    }
+    else if (ui->tabWidget->currentIndex() == 2)
+    {
+        return getPosExpression();
+    }
+    else
+    {
+        return getTimerExpression();
+    }
+
 }

@@ -2,6 +2,7 @@
 #define CMD_H
 #include "qstring.h"
 #include <QList>
+#include "usart.h"
 
 class cmd
 {
@@ -20,8 +21,8 @@ public:
 #define Y1_AXIS												1			//Y1轴
 #define Z1_AXIS												2			//Z1轴
 #define C_AXIS												3			//C轴
-#define Y2_AXIS												4			//Y2轴
-#define Z2_AXIS												5			//Z2轴
+#define Y2_AXIS												4			//A/Y2轴
+#define Z2_AXIS												5			//B/Z2轴
 
 //轴运动方向
 #define AXIS_DIR_NEG									0		//负向运动
@@ -75,7 +76,7 @@ public:
 #define SAVE_Z_AXIS										2			//安全区Z轴
 
 
-#define DEFINE_PORT_NUM       (INPUT_TOTAL_NUM+OUTPUT_TOTAL_NUM)    //端口自定义
+
 #define DEFINE_NAME_NUM                                 50          //名称自定义个数
 
 //枚举--机械手工作模式
@@ -88,21 +89,24 @@ enum WorkMode
 
 /***********************程序相关变量定义*******************************/
 //命令--cmd
-#define C_AXIS_MOVE							1			//轴动作
-#define C_CLAW_ACTION						2			//卡爪动作
-#define C_CLAW_CHECK						3			//信号检测-卡爪检测
+#define C_AXIS_MOVE                     1			//轴动作
+#define C_CLAW_ACTION                   2			//卡爪动作
+#define C_CLAW_CHECK                    3			//信号检测-卡爪检测
 #define C_RESERVE_CHECK					4			//信号检测-预留检测
-#define C_MACHINE_OUT						6			//机床-输出动作
-#define C_STACK_RESET_ZERO			7			//堆叠-堆叠清零
-#define C_STACK_MOVE						8			//堆叠-堆叠组运动
+#define C_MACHINE_OUT                   6			//机床-输出动作
+#define C_STACK_RESET_ZERO              7			//堆叠-堆叠清零
+#define C_STACK_MOVE                    8			//堆叠-堆叠组运动
 #define C_STACK_FOLLOW					9			//堆叠-放料跟随运动
-#define C_RESERVE_OUT						10		//预留输出
+#define C_RESERVE_OUT                   10		//预留输出
 #define C_WAIT_IN_MACHINE				11		//信号等待-等待机床
 #define C_WAIT_IN_CLAW					12		//信号等待-等待卡爪
 #define C_WAIT_IN_RESERVE				13		//信号等待-等待预留
-#define C_OTHER_DELAY						14		//其他-延时
-#define C_OTHER_ALARM_CUST			15		//其他-报警自定义
+#define C_OTHER_DELAY                   14		//其他-延时
+#define C_OTHER_ALARM_CUST              15		//其他-报警自定义
 #define C_OTHER_CYC_STOP				16		//其他-周期停止
+#define C_OTHER_ALARM_LAMP              17		//其他-报警灯
+#define C_OTHER_ALARM_SOUND				18		//其他-报警声
+
 #define C_LABEL									30		//标签
 #define C_LOGIC_IF							31		//逻辑&变量-如果-如果
 #define C_LOGIC_ELSE						32		//逻辑&变量-如果-否则
@@ -152,6 +156,10 @@ typedef struct
     uint8_t  refFlag;							//参考点有效性，0无效 1有效
     uint8_t  ret[1];
     int32_t pos[AXIS_TOTAL_NUM];	//参考点位置，精度0.01mm
+
+    int index; // 标识参考点的指数 参考点3 index = 3;
+    QString refName;
+    QPoint pointPos; // 参考点在ui上的topleft 位置
 }P_RefStruct;
 /**************************通信时所有命令的数据部分必须严格按照数据结构的顺序，包括预留字节*************************/
 /*轴动作命令结构体*/
@@ -254,7 +262,7 @@ typedef struct
 {//4Byte
     int16_t backListNum;				//返回步号，-999~999，指增量值
     uint8_t  inportNum;					//输入端口号，1-60
-    uint8_t  inportSta;					//输入状态，0无信号 1有信号
+    uint8_t  inportSta;					//输入状态，0无信号 1有信号 （默认为1）
     uint8_t  type;								//跳转类型，0返回步号，1返回标签
     uint8_t	label;							//返回标签号，0无标签，1-99标签号
     uint8_t  ret[2];
@@ -264,8 +272,8 @@ typedef struct
 typedef struct
 {//4Byte
     int16_t backListNum;				//返回步号，-999~999，指增量值
-    uint8_t  outportNum;					//输出端口号，1-40
-    uint8_t  inportSta;					//输入状态，0无信号 1有信号
+    uint8_t  inportNum;					//输出端口号，1-40
+    uint8_t  inportSta;					//输入状态，0-off 1-on 2-位置修正
     uint8_t  type;								//跳转类型，0返回步号，1返回标签
     uint8_t	label;							//返回标签号，0无标签，1-99标签号
     uint8_t  ret[2];
@@ -276,7 +284,7 @@ typedef struct
 {//4Byte
     int16_t backListNum;				//返回步号，-999~999，指增量值
     uint8_t  inportNum;					//输入端口号，1-60
-    uint8_t  inportSta;					//输入状态，0无信号 1有信号
+    uint8_t  inportSta;					//输入状态，0-off 1-on 2-up 3-down 4-jump
     uint8_t  type;								//跳转类型，0返回步号，1返回标签
     uint8_t	label;							//返回标签号，0无标签，1-99标签号
     uint8_t  ret[2];
@@ -295,6 +303,20 @@ typedef struct
     uint8_t  type;									//故障类型，1紧急报警 2急停报警 3普通报警 4提示报警 5提示
     uint8_t  ret[1];
 }P_OtherAlarmCustStruct;
+
+/*其他-报警灯命令结构体*/
+typedef struct
+{//4Byte
+    uint8_t  type;									//0-关，1-开
+    uint8_t  ret[2];
+}P_OtherAlarmLampStruct;
+
+/*其他-报警声命令结构体*/
+typedef struct
+{//4Byte
+    uint8_t  type;									//0-关，1-开
+    uint8_t  ret[2];
+}P_OtherAlarmSoundStruct;
 
 /*其他-周期停止命令结构体*/
 typedef struct
@@ -461,6 +483,20 @@ typedef struct
 extern P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM];                              //轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
 extern P_ClawActionStruct Temp_ClawActionStruct[3];
 extern P_MachineOutStruct Temp_MachineOutStruct[6];                                          //机床输出控制
+extern P_ReserveOutStruct Temp_ReserveOutStruct;                                             //教导界面预留输出调用
+extern P_WaitInMachineStruct Temp_WaitInMachineStruct;                                       //教导界面机床等待指令
+extern P_WaitInClawStruct Temp_WaitInClawStruct;                                           //教导界面等待卡爪指令
+extern P_WaitInReserveStruct Temp_WaitInReserveStruct;                                     //教导界面等待预留指令
+extern P_OtherAlarmCustStruct Temp_OtherAlarmCustStruct;                                   //教导界面其他-报警自定义指令
+extern P_OtherAlarmLampStruct Temp_OtherAlarmLampStruct;                                   //教导界面其他-报警灯指令
+extern P_OtherAlarmSoundStruct Temp_OtherAlarmSoundStruct;                                   //教导界面其他-报警声指令
+extern P_OtherCycStopStruct Temp_OtherCycStopCustStruct;                                     //教导界面其他-周期停止
+extern P_SunProStruct Temp_SunProStruct;                                                     //教导界面高级-子程序
+extern P_AxisStopStruct Temp_AxisStopStruct;                                                 //教导界面高级-伺服停止
+extern P_TorqueGardStruct Temp_TorqueGardStruct;                                             //教导界面高级-扭矩保护命令
+extern P_OffsetAxisStruct Temp_OffsetAxisStruct;                                             //教导界面高级-轴偏移命令
+extern P_SearchAxisMoveStruct Temp_SearchAxisMoveStruct;                                     //教导界面高级-搜索指令
+
 /*********************************参数结构体定义********************************/
 /**********信号设置**********/
 extern uint8_t m_OutPortType[OUT_PORT_TYPE_NUM][2];								//字节1为输出端口号：0不使用 1-40输出口编号
@@ -858,6 +894,8 @@ extern int32_t m_AxisCurPos[AXIS_TOTAL_NUM];							//轴当前位置
 extern uint8_t  m_AxisCurDir[AXIS_TOTAL_NUM];							//轴当前运动方向
 extern uint8_t  m_AxisMoveFlag[AXIS_TOTAL_NUM];						//轴运动标志 0结束运动 1运动中
 extern uint8_t  m_AxisMovePauseReq[AXIS_TOTAL_NUM];				//轴运动暂停请求 0无请求 1暂停请求
+extern uint16_t m_AxisCurSpeed;                                 //当前转速（上传的是最大转速的电机的转速）
+extern uint16_t m_AxisCurTorque;                                //当前扭矩（上传的是最大转速的电机的扭矩）
 
 //机器运行状态宏定义
 #define MAC_STA_STOP_INVALID									0				//停止-无效状态(未回原)
@@ -896,11 +934,13 @@ extern P_RefStruct m_RefPoint[REFERENCE_TOTAL_NUM];								//参考点
 extern uint8_t m_OperateProNum;																				//操作的程序编号
 extern P_ProOrderStruct m_OperateProOrder[PRO_LINE_MAIN];					//操作的程序
 extern uint16_t m_OperateProOrderListNum;															//操作的程序行数
+extern uint16_t m_CurrentSelectProOrderList;																//当前选中行号
 
 extern P_ProInfoStruct m_ProRunInfo;									//运行信息--当前行号
 extern D_RunInfoStruct m_RunInfo;											//运行信息
 extern D_RunParStruct m_RunPar;												//运行参数
 extern uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM];				//当前每个堆叠组的堆叠计数
+extern uint8_t m_VariableType[VAR_TOTAL_NUM];                       //当前每个变量的类型 0 整形 1 一位小数 2 两位小数
 extern uint32_t m_VariableCurValue[VAR_TOTAL_NUM];					//当前每个变量的变量值
 extern uint32_t m_TimeCurValue[TIME_TOTAL_NUM];						//当前每个定时器的计数值
 
@@ -953,12 +993,17 @@ typedef struct
 /*端口自定义*/
 typedef struct
 {
+    QString     definePort;             //默认端口
+    QString     defineName;             //默认名称
     QString     modifyName;             //修改名称
     QString 	modifyPort;				//修改端口
+    uint8_t     portNum;                //实际端口号
+    bool        isReserve;                    //是否是预留端口
 }D_PortDefineStruct;
 /*名称自定义*/
 typedef struct
 {
+    QString     defineName;             //默认名称
     QString     modifyName;             //修改名称
 }D_NameDefineStruct;
 
@@ -970,7 +1015,12 @@ extern QList<D_ProgramNameAndPathStruct> m_ProgramNameAndPath;                  
 extern D_ProgramNameAndPathStruct m_CurrentProgramNameAndPath;                  //当前选中的文件信息
 extern uint16_t m_FileNameNum;                                                  //程序文件个数
 
-extern D_PortDefineStruct m_PortDefine[DEFINE_PORT_NUM];                         //端口自定义
 extern D_NameDefineStruct m_NameDefine[DEFINE_NAME_NUM];                        //名称自定义
+extern D_PortDefineStruct m_Port_X[INPUT_TOTAL_NUM];                                  //输入自定义
+extern D_PortDefineStruct m_Port_Y[OUTPUT_TOTAL_NUM];                                  //输出自定义
+
+class  Usart;
+//串口通信
+extern Usart *g_Usart;
 
 #endif // CMD_H

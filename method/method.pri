@@ -1,15 +1,21 @@
-
-SOURCES += \
-    $$PWD/Orderjoint.cpp \
-    method/program_popup.cpp \
-    method/port_setting.cpp \
-    method/program_save.cpp \
-    method/iniconfig.cpp \
-    method/cmd.cpp
+DISTFILES += \
+    $$PWD/method.pri
 
 HEADERS += \
-    method/program_popup.h \
-    method/port_setting.h \
-    method/program_save.h \
-    method/iniconfig.h \
-    method/cmd.h
+    $$PWD/cmd.h \
+    $$PWD/iniconfig.h \
+    $$PWD/Orderjoint.h \
+    $$PWD/port_setting.h \
+    $$PWD/program_popup.h \
+    $$PWD/program_save.h \
+    $$PWD/usart.h
+
+SOURCES += \
+    $$PWD/cmd.cpp \
+    $$PWD/iniconfig.cpp \
+    $$PWD/Orderjoint.cpp \
+    $$PWD/port_setting.cpp \
+    $$PWD/program_popup.cpp \
+    $$PWD/program_save.cpp \
+    $$PWD/usart.cpp
+

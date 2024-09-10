@@ -4,6 +4,7 @@
 #include <QTimer>
 #include <QDateTime>
 #include <QFile>
+#include <QTextEdit>
 
 #include <QMessageBox>
 #include "stackedit.h"
@@ -13,10 +14,13 @@
 #include "Orderjoint.h"
 #include "program_save.h"
 #include "port_setting.h"
-#include <iostream>
+
+#include "ifprogramdialog.h"
 
 int flag = 0;
 int teachFlag = 0;
+
+MainWindow* MainWindow::pMainWindow = nullptr;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,8 +28,26 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setWidget = new Setting(this);
+    ui->stkWidget->addWidget(setWidget);
+    teachWidget = new Teach(this);
+    ui->stkWidget->addWidget(teachWidget);
+
+    teachManageWidget = new TeachManage(this);
+    ui->stkWidget->addWidget(teachManageWidget);
+
+    autoWidget = new AutoForm(this);
+    ui->stkWidget->addWidget(autoWidget);
+    alarmWidget = new AlarmForm(this);
+    ui->stkWidget->addWidget(alarmWidget);
+    monitorWidget = new MonitorForm(this);
+    ui->stkWidget->addWidget(monitorWidget);
+    manualWidget = new ManualForm(this);
+    ui->stkWidget->addWidget(manualWidget);
+
+    pMainWindow = this;
+
     FullKeyboard::instance(this)->hide();
-//    NumKeyboard::instance(this);
 
     dlgErrorTip = new ErrorTipDialog(this);
 
@@ -47,10 +69,6 @@ MainWindow::MainWindow(QWidget *parent)
         QDialog *dialog = new QDialog(this);
 
         dialog->setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
-//        for (auto dlg : findChildren<QDialog*>())
-//        {
-//            dlg->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint);
-//        }
 
         auto p = qobject_cast<QWidget*>(stack[1]->parent());
         QPointer<StackEdit> tempStack = stack[1];
@@ -70,23 +88,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     });
 
-    setWidget = new Setting(this);
-    ui->stkWidget->addWidget(setWidget);
-    teachWidget = new Teach(this);
-    ui->stkWidget->addWidget(teachWidget);
-
-	teachManageWidget = new TeachManage(this);
-    ui->stkWidget->addWidget(teachManageWidget);
-
-    autoWidget = new AutoForm(this);
-    ui->stkWidget->addWidget(autoWidget);
-    alarmWidget = new AlarmForm(this);
-    ui->stkWidget->addWidget(alarmWidget);
-    monitorWidget = new MonitorForm(this);
-    ui->stkWidget->addWidget(monitorWidget);
-    manualWidget = new ManualForm(this);
-    ui->stkWidget->addWidget(manualWidget);
-
     connectAllSignalsAndSlots();
 
     // set the style for whole app
@@ -101,8 +102,13 @@ MainWindow::MainWindow(QWidget *parent)
 //    qDebug() << "number of QLineEdit" << lineEdits.size();
     for (auto edit : lineEdits)
     {
-        if (edit->objectName() == "editSystemName" || edit->objectName() == "lineEdit_NowFileName")
-            edit->installEventFilter(this);
+        edit->installEventFilter(this);
+    }
+
+    QList<QTextEdit*> textEdits = findChildren<QTextEdit*>();
+    for (auto textEdit : textEdits)
+    {
+        textEdit->installEventFilter(this);
     }
 
     
@@ -126,7 +132,11 @@ MainWindow::MainWindow(QWidget *parent)
 //        ReferPointDialog dlg(this);
 //        dlg.updateUI(manualWidget->getRerferPoints());
 //        dlg.exec();
-        qDebug() << "************** ";
+//        QDialog dialog(this);
+//        QPushButton btn(&dialog);
+//        connect(btn, &QPushButton::clicked, keyboard, &QDialog::open);
+//        dialog.exec();
+//        qDebug() << "************** ";
     });
 
     for (NumberEdit* edit : findChildren<NumberEdit*>())
@@ -137,12 +147,19 @@ MainWindow::MainWindow(QWidget *parent)
     getOrderjoinIni();
     getCmdIni1();
     getCmdIni();
+
+    g_Usart = new Usart();
+    if (g_Usart->openSerialPort())
+    {
+        qDebug() << "can not open serialport ";
+    }
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete dlgErrorTip;
+    delete g_Usart;
 }
 
 
@@ -276,44 +293,47 @@ void MainWindow::setStyleFromFile(const QString &styleSheet)
 // ultimize the event mechanism in Qt to call virtual keyboard
 bool MainWindow::eventFilter(QObject *watched, QEvent *event)
 {
-//    QLineEdit* numberEdit = qobject_cast<QLineEdit*>(watched);
-    QLineEdit* edit = qobject_cast<QLineEdit*>(watched);
+    QSet<QString> editsForKeyboard = {"editSystemName", "lineEdit_NowFileName"};
+    QSet<QString> editsIfCondition = {"editIfVar1Set", "editIfVar2Set"};
 
-//    KeyEdit* keyEdit = qobject_cast<KeyEdit*>(watched);
-//    SigLEDEdit* sigEdit = qobject_cast<SigLEDEdit*>(watched);
-//    if (keyEdit || sigEdit)
-//    {
-//        return QWidget::eventFilter(watched, event);
-//    }
-    if (edit && edit->isEnabled())
-    {
-        if (event->type() == QEvent::MouseButtonPress)
-        {
-    //        qDebug() << "edit MouseButtonPress";
-            callFullKeyboard(edit);
-            return false;
+    // Handle line edits that require the full keyboard
+    if (editsForKeyboard.contains(watched->objectName())) {
+        QLineEdit* edit = qobject_cast<QLineEdit*>(watched);
+        if (edit && edit->isEnabled() && event->type() == QEvent::MouseButtonRelease) {
+            callFullKeyboard(watched);
         }
+        return false;
     }
+
+    // Handle line edits for if condition dialogs
+    if (editsIfCondition.contains(watched->objectName())) {
+        QLineEdit* editIf = qobject_cast<QLineEdit*>(watched);
+        if (editIf && editIf->isEnabled() && event->type() == QEvent::MouseButtonRelease) {
+            IfProgramDialog dlg(this);
+            if (dlg.exec() == QDialog::Accepted) {
+                QString expression = dlg.getConditionExpression();
+
+                editIf->setText(expression);
+            }
+        }
+        return false;
+    }
+
     // standard event processing
-    return QWidget::eventFilter(watched,event);
+    return QWidget::eventFilter(watched, event);
 }
 
 void MainWindow::callFullKeyboard(QObject *watched)
 {
-    if (QLineEdit* edit = qobject_cast<QLineEdit*>(watched))
-    {
-        FullKeyboard* keyboard = FullKeyboard::instance(this);
-        keyboard->setText(edit->text());
-        keyboard->setCurrentEditObj(watched);
-        keyboard->show();
-        keyboard->raise();
-        keyboard->activateWindow();
-//        keyboard->exec();
-    }
-}
-
-void MainWindow::callNumberKeyboard(QObject *watched)
-{
+    QString originText = watched->property("text").toString();
+    FullKeyboard* keyboard = FullKeyboard::instance();
+    keyboard->setText(originText);
+    keyboard->setCurrentEditObj(watched);
+    //        keyboard->show();
+    //        keyboard->raise();
+    //        keyboard->activateWindow();
+    keyboard->open();
+    keyboard->raise();
 
 }
 

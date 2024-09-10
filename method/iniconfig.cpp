@@ -1,8 +1,8 @@
-﻿#include "iniconfig.h"
+#include "iniconfig.h"
 #include <QCoreApplication>
 
 //配置文件相对路径
-QString m_configFileNamePath="";
+QString m_configFileNamePath="/root/Ini_Para.txt";
 
 /*************************************************************************
 **	输入参数：prefix:节点 key:键 defaultV:默认值
@@ -137,65 +137,21 @@ void setOutPortType(uint8_t *value)
     }
 }
 //互锁设置
-uint8_t** getOutportInterlock(uint8_t **defaultV)
+uint8_t* getOutportInterlock(uint8_t *defaultV)
 {
-    uint8_t** arr=defaultV;
-    for(int i=0;i<OUT_INTERLOCK_NUM;i++)
+    uint8_t* arr=defaultV;
+    for(int i=0;i<OUT_INTERLOCK_NUM*4;i++)
     {
-        for(int j=0;j<4;j++)
-        {
-            arr[i][j]=getValue("OutportInterlock",QString("V%1_%2").arg(i).arg(j),defaultV[i][j]);
-        }
+        arr[i] = getValue("OutportInterlock",QString("V%1").arg(i),defaultV[i]);
     }
     return arr;
 }
 
-void setOutportInterlock(uint8_t value[][4])
+void setOutportInterlock(uint8_t *value)
 {
-    for(int i=0;i<OUT_INTERLOCK_NUM;i++)
+    for(int i=0;i<OUT_INTERLOCK_NUM*4;i++)
     {
-        for(int j=0;j<4;j++)
-        {
-            setValue("OutportInterlock",QString("V%1_%2").arg(i).arg(j),value[i][j]);
-        }
-    }
-}
-//端口自定义
-D_PortDefineStruct* getPortDefine(const QStringList &defaultV)
-{
-    D_PortDefineStruct* arr={0};
-    for(int i=0;i<DEFINE_PORT_NUM;i++)
-    {
-        arr[i].modifyName=getValue("PortDefine",QString("modifyName_%1").arg(i),defaultV[i]);
-        arr[i].modifyPort=getValue("PortDefine",QString("modifyPort_%1").arg(i),"0");
-    }
-    return arr;
-}
-
-void setPortDefine(D_PortDefineStruct* value)
-{
-    for(int i=0;i<DEFINE_PORT_NUM;i++)
-    {
-        setValue("PortDefine",QString("modifyName_%1").arg(i),value[i].modifyName);
-        setValue("PortDefine",QString("modifyPort_%1").arg(i),value[i].modifyPort);
-    }
-}
-//名称自定义
-D_NameDefineStruct* getNameDefine(const QStringList &defaultV)
-{
-    D_NameDefineStruct* arr={0};
-    for(int i=0;i<DEFINE_NAME_NUM;i++)
-    {
-        arr[i].modifyName=getValue("NameDefine",QString("modifyName_%1").arg(i),defaultV[i]);
-    }
-    return arr;
-}
-
-void setPortDefine(D_NameDefineStruct* value)
-{
-    for(int i=0;i<DEFINE_NAME_NUM;i++)
-    {
-        setValue("NameDefine",QString("modifyName_%1").arg(i),value[i].modifyName);
+        setValue("OutportInterlock",QString("V%1").arg(i),value[i]);
     }
 }
 //预留关联
@@ -941,9 +897,14 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value)
 
 
 /*****************命令相关参数保存*****************/
-QString m_configCmdPath = "/home/donuts/QtProject/MachineTool-0827/configFiles/Cmd_Description.txt";
-QString m_configPortSettingPath = "/home/donuts/QtProject/MachineTool-0827/configFiles/Port_Setting.txt";
-QString m_configOrderjinitPath = "/home/donuts/QtProject/MachineTool-0827/configFiles/Pro_Teach.txt";
+QString m_configCmdPath = "/root/Cmd_Description.txt";
+QString m_configPortSettingPath = "/root/Port_Setting.txt";
+QString m_configOrderjinitPath = "/root/Pro_Teach.txt";
+
+QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //输入输出、名称定义（3）
+
+QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //输入输出、名称定义配置文件（99）
+
 QStringList getIniValues(uint8_t type, QString node)
 {
     QStringList valueList;
@@ -958,6 +919,12 @@ QStringList getIniValues(uint8_t type, QString node)
         break;
     case 2:
         configPathTemp=m_configOrderjinitPath;
+        break;
+    case 3:
+        configPathTemp=m_configPortXYNamePath;
+        break;
+    case 99:
+        configPathTemp=m_configPortXYNameIniPath;
         break;
     default:
         return valueList;

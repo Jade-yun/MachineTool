@@ -2,7 +2,8 @@
 
 StateButton::StateButton(QWidget *parent)
     : QPushButton(parent),
-      connected(true), objectText("")
+      connected(true), objectText(tr("")),
+      connectedText(tr("通")),disconnectedText(tr("断"))
 {
     updateState();
 
@@ -23,14 +24,31 @@ void StateButton::setObjectText(const QString& text)
     objectText = text;
 }
 
+void StateButton::setStateTexts(const QStringList &texts)
+{
+    connectedText = texts[0];
+    disconnectedText = texts[1];
+}
+
+void StateButton::setStateTexts(const QString &connectedText, const QString &disconnectedText)
+{
+    this->connectedText = connectedText;
+    this->disconnectedText = disconnectedText;
+}
+
+bool StateButton::getState() const
+{
+    return connected;
+}
+
 void StateButton::updateState()
 {
     if (connected) {
         setIcon(QIcon(":/images/state_green.png"));
-        setText(objectText + tr("通"));
+        setText(objectText + connectedText);
     } else {
         setIcon(QIcon(":/images/state_red.png"));
-        setText(objectText + tr("断"));
+        setText(objectText + disconnectedText);
     }
     setIconSize(QSize(20, 20));
 }

@@ -767,6 +767,67 @@
          </item>
         </widget>
        </item>
+       <item row="1" column="5">
+        <widget class="QComboBox" name="coboxMainBoardOutExtend2">
+         <property name="minimumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>EY17</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EY18</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EY19</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>EY20</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QCheckBox" name="chboxMainBoardOutExtend2">
+         <property name="minimumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>50</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::RightToLeft</enum>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </widget>
@@ -912,22 +973,12 @@
          </item>
          <item>
           <property name="text">
-           <string>Z1轴</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
            <string>Y1轴</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>Z2轴</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Y2轴</string>
+           <string>Z1轴</string>
           </property>
          </item>
          <item>
@@ -937,12 +988,12 @@
          </item>
          <item>
           <property name="text">
-           <string>B轴</string>
+           <string>A/Y2轴</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>A轴</string>
+           <string>B/Z2轴</string>
           </property>
          </item>
         </widget>
@@ -1002,7 +1053,7 @@
      <x>410</x>
      <y>410</y>
      <width>100</width>
-     <height>40</height>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -1015,7 +1066,7 @@
      <x>530</x>
      <y>410</y>
      <width>100</width>
-     <height>40</height>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">

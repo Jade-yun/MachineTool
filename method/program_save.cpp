@@ -1,4 +1,4 @@
-﻿#include "program_save.h"
+#include "program_save.h"
 
 QString m_ProgramPath="/Program";
 
@@ -6,8 +6,6 @@ QString m_ProgramPath="/Program";
 QString signalSpace = " ";
 QString doubleSpace = "  ";
 QString lineFeed = "\n";
-
-QStringList P_List[9];
 
 QStringList fileSectionList;                        //程序保存节点
 QStringList programInfoList;                        //程序信息
@@ -383,7 +381,7 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
                 break;
             case C_WAIT_IN_CLAW:
                 out << signalSpace << QString(waitInClawCmdList[0]).arg(QString::number(((P_WaitInClawStruct*)m_ProOrder[i][j].pData)->backListNum));
-                out << signalSpace << QString(waitInClawCmdList[1]).arg(QString::number(((P_WaitInClawStruct*)m_ProOrder[i][j].pData)->outportNum));
+                out << signalSpace << QString(waitInClawCmdList[1]).arg(QString::number(((P_WaitInClawStruct*)m_ProOrder[i][j].pData)->inportNum));
                 out << signalSpace << QString(waitInClawCmdList[2]).arg(QString::number(((P_WaitInClawStruct*)m_ProOrder[i][j].pData)->inportSta));
                 out << signalSpace << QString(waitInClawCmdList[3]).arg(QString::number(((P_WaitInClawStruct*)m_ProOrder[i][j].pData)->type));
                 out << signalSpace << QString(waitInClawCmdList[4]).arg(QString::number(((P_WaitInClawStruct*)m_ProOrder[i][j].pData)->label));
@@ -531,8 +529,7 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
             out << lineFeed;
 
         }
-
-
+        out << lineFeed;
     }
     file.close();
 
@@ -558,7 +555,7 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
     QTextStream in(&file);
     QStringList programInfoList;
     QStringList refList;
-//    QStringList P_List[9];
+    QStringList P_List[9];
 
     int intFlag=0;              //设置一个标志位，区分当前读到什么程序了
     while(!in.atEnd())
@@ -696,565 +693,561 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
             index++;
             m_ProOrder[i][j].delay=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
             index++;
-            if(tempList.count()>5)
+
+            switch (m_ProOrder[i][j].cmd)
             {
-                //非基本指令
-                switch (m_ProOrder[i][j].cmd)
+            case C_AXIS_MOVE:
+                P_AxisMoveStruct temp_C_AXIS_MOVE;
+                temp_C_AXIS_MOVE.pos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_AXIS_MOVE.advEndDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_AXIS_MOVE.advCSpeedDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_AXIS_MOVE.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_AXIS_MOVE.speed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_AXIS_MOVE.advEndFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_AXIS_MOVE.advCSpeedFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_AXIS_MOVE.advCSpeedSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_AXIS_MOVE.referPointNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
                 {
-                case C_AXIS_MOVE:
-                    P_AxisMoveStruct temp_C_AXIS_MOVE;
-                    temp_C_AXIS_MOVE.pos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                    index++;
-                    temp_C_AXIS_MOVE.advEndDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                    index++;
-                    temp_C_AXIS_MOVE.advCSpeedDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                    index++;
-                    temp_C_AXIS_MOVE.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_AXIS_MOVE.speed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_AXIS_MOVE.advEndFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_AXIS_MOVE.advCSpeedFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_AXIS_MOVE.advCSpeedSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_AXIS_MOVE.referPointNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_AXIS_MOVE.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_AxisMoveStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_AXIS_MOVE,sizeof(P_AxisMoveStruct));
-                    break;
-
-                case C_CLAW_ACTION:
-                    P_ClawActionStruct temp_C_CLAW_ACTION;
-                    temp_C_CLAW_ACTION.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_CLAW_ACTION.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_CLAW_ACTION.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ClawActionStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_CLAW_ACTION,sizeof(P_ClawActionStruct));
-                    break;
-                case C_CLAW_CHECK:
-                    P_ClawCheckStruct temp_C_CLAW_CHECK;
-                    temp_C_CLAW_CHECK.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_CLAW_CHECK.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_CLAW_CHECK.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ClawCheckStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_CLAW_CHECK,sizeof(P_ClawCheckStruct));
-                    break;
-
-                case C_RESERVE_CHECK:
-                    P_ReserveCheckStruct temp_C_RESERVE_CHECK;
-                    temp_C_RESERVE_CHECK.inportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_RESERVE_CHECK.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_RESERVE_CHECK.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ReserveCheckStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_RESERVE_CHECK,sizeof(P_ReserveCheckStruct));
-                    break;
-                case C_MACHINE_OUT:
-                    P_MachineOutStruct temp_C_MACHINE_OUT;
-                    temp_C_MACHINE_OUT.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_MACHINE_OUT.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_MACHINE_OUT.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_MachineOutStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_MACHINE_OUT,sizeof(P_MachineOutStruct));
-                    break;
-                case C_STACK_RESET_ZERO:
-                    P_StackResetZeroStruct temp_C_STACK_RESET_ZERO;
-                    temp_C_STACK_RESET_ZERO.number=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_STACK_RESET_ZERO.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_STACK_RESET_ZERO.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_StackResetZeroStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_STACK_RESET_ZERO,sizeof(P_StackResetZeroStruct));
-                    break;
-                case C_STACK_MOVE:
-                    P_StackMoveStruct temp_C_STACK_MOVE;
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_MOVE.advEndDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                        index++;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_MOVE.advCSpeedDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                        index++;
-                    }
-                    temp_C_STACK_MOVE.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    for(int m=0;m<3;m++)
-                    {
-                        temp_C_STACK_MOVE.ret1[m]=0;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_MOVE.advEndFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_STACK_MOVE.ret2[m]=0;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_MOVE.advCSpeedFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_STACK_MOVE.ret3[m]=0;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_MOVE.advCSpeedSpeed[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_STACK_MOVE.ret4[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_StackMoveStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_STACK_MOVE,sizeof(P_StackMoveStruct));
-                    break;
-                case C_STACK_FOLLOW:
-                    P_StackFollowStruct temp_C_STACK_FOLLOW;
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_FOLLOW.advEndDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                        index++;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_FOLLOW.advCSpeedDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                        index++;
-                    }
-                    temp_C_STACK_FOLLOW.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    for(int m=0;m<3;m++)
-                    {
-                        temp_C_STACK_FOLLOW.ret1[m]=0;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_FOLLOW.advEndFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_STACK_FOLLOW.ret2[m]=0;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_FOLLOW.advCSpeedFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_STACK_FOLLOW.ret3[m]=0;
-                    }
-                    for(int m=0;m<STACK_AXIS_NUM;m++)
-                    {
-                        temp_C_STACK_FOLLOW.advCSpeedSpeed[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_STACK_FOLLOW.ret4[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_StackFollowStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_STACK_FOLLOW,sizeof(P_StackFollowStruct));
-                    break;
-                case C_RESERVE_OUT:
-                    P_ReserveOutStruct temp_C_RESERVE_OUT;
-                    temp_C_RESERVE_OUT.interval=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_RESERVE_OUT.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_RESERVE_OUT.function=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_RESERVE_OUT.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<3;m++)
-                    {
-                        temp_C_RESERVE_OUT.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ReserveOutStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_RESERVE_OUT,sizeof(P_ReserveOutStruct));
-
-                    break;
-                case C_WAIT_IN_MACHINE:
-                    P_WaitInMachineStruct temp_C_WAIT_IN_MACHINE;
-                    temp_C_WAIT_IN_MACHINE.backListNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_MACHINE.inportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_MACHINE.inportSta=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_MACHINE.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_MACHINE.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_WAIT_IN_MACHINE.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_WaitInMachineStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_WAIT_IN_MACHINE,sizeof(P_WaitInMachineStruct));
-                    break;
-                case C_WAIT_IN_CLAW:
-                    P_WaitInClawStruct temp_C_WAIT_IN_CLAW;
-                    temp_C_WAIT_IN_CLAW.backListNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_CLAW.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_CLAW.inportSta=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_CLAW.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_CLAW.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_WAIT_IN_CLAW.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_WaitInClawStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_WAIT_IN_CLAW,sizeof(P_WaitInClawStruct));
-                    break;
-                case C_WAIT_IN_RESERVE:
-                    P_WaitInReserveStruct temp_C_WAIT_IN_RESERVE;
-                    temp_C_WAIT_IN_RESERVE.backListNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_RESERVE.inportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_RESERVE.inportSta=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_RESERVE.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_WAIT_IN_RESERVE.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_WAIT_IN_RESERVE.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_WaitInReserveStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_WAIT_IN_RESERVE,sizeof(P_WaitInReserveStruct));
-                    break;
-                case C_OTHER_DELAY:
-                    P_OtherDelayStruct temp_C_OTHER_DELAY;
-                    for(int m=0;m<4;m++)
-                    {
-                        temp_C_OTHER_DELAY.res[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherDelayStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_DELAY,sizeof(P_OtherDelayStruct));
-                    break;
-                case C_OTHER_ALARM_CUST:
-                    P_OtherAlarmCustStruct temp_C_OTHER_ALARM_CUST;
-                    temp_C_OTHER_ALARM_CUST.alarmNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_OTHER_ALARM_CUST.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<3;m++)
-                    {
-                        temp_C_OTHER_ALARM_CUST.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherAlarmCustStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_ALARM_CUST,sizeof(P_OtherAlarmCustStruct));
-                    break;
-                case C_OTHER_CYC_STOP:
-                    P_OtherCycStopStruct temp_C_OTHER_CYC_STOP;
-                    temp_C_OTHER_CYC_STOP.cycleNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_OTHER_CYC_STOP.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherCycStopStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_CYC_STOP,sizeof(P_OtherCycStopStruct));
-                    break;
-                case C_LABEL:
-                    P_LabelStruct temp_C_LABEL;
-                    temp_C_LABEL.labelNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_LABEL.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LabelStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LABEL,sizeof(P_LabelStruct));
-                    break;
-                case C_LOGIC_IF:
-                    P_LogicIfStruct temp_C_LOGIC_IF;
-                    for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
-                    {
-                        temp_C_LOGIC_IF.sufferCmpValue[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                        index++;
-                    }
-                    for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
-                    {
-                        temp_C_LOGIC_IF.reqSelectFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
-                    {
-                        temp_C_LOGIC_IF.cmpType[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
-                    {
-                        temp_C_LOGIC_IF.inportNum[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
-                    {
-                        temp_C_LOGIC_IF.inportType[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
-                    {
-                        temp_C_LOGIC_IF.cmpMode[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
-                    {
-                        temp_C_LOGIC_IF.sufferCmpType[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicIfStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_IF,sizeof(P_LogicIfStruct));
-                    break;
-                case C_LOGIC_ELSE:
-                    P_LogicElseStruct temp_C_LOGIC_ELSE;
-                    for(int m=0;m<4;m++)
-                    {
-                        temp_C_LOGIC_ELSE.res[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicElseStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_ELSE,sizeof(P_LogicElseStruct));
-                    break;
-                case C_LOGIC_END:
-                    P_LogicEndStruct temp_C_LOGIC_END;
-                    for(int m=0;m<4;m++)
-                    {
-                        temp_C_LOGIC_END.res[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicEndStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_END,sizeof(P_LogicEndStruct));
-                    break;
-                case C_LOGIC_WHILE_START:
-                    P_LogicWhileStartStruct temp_C_LOGIC_WHILE_START;
-                    temp_C_LOGIC_WHILE_START.cycNum=(uint32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicWhileStartStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_WHILE_START,sizeof(P_LogicWhileStartStruct));
-                    break;
-                case C_LOGIC_WHILE_END:
-                    P_LogicWhileEndStruct temp_C_LOGIC_WHILE_END;
-                    for(int m=0;m<4;m++)
-                    {
-                        temp_C_LOGIC_WHILE_END.res[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicWhileEndStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_WHILE_END,sizeof(P_LogicWhileEndStruct));
-                    break;
-                case C_LOGIC_VAR:
-                    P_LogicVarStruct temp_C_LOGIC_VAR;
-                    temp_C_LOGIC_VAR.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_VAR.varNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_VAR.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_VAR.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_LOGIC_VAR.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicVarStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_VAR,sizeof(P_LogicVarStruct));
-                    break;
-                case C_LOGIC_AXIS:
-                    P_LogicAxisStruct temp_C_LOGIC_AXIS;
-                    temp_C_LOGIC_AXIS.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_AXIS.axisNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_AXIS.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_AXIS.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_LOGIC_AXIS.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicAxisStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_AXIS,sizeof(P_LogicAxisStruct));
-                    break;
-                case C_LOGIC_STACK:
-                    P_LogicStackStruct temp_C_LOGIC_STACK;
-                    temp_C_LOGIC_STACK.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_STACK.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_STACK.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_STACK.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_LOGIC_STACK.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicStackStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_STACK,sizeof(P_LogicStackStruct));
-                    break;
-                case C_LOGIC_PRODUCT:
-                    P_LogicCurProductNumStruct temp_C_LOGIC_PRODUCT;
-                    temp_C_LOGIC_PRODUCT.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_PRODUCT.productNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_PRODUCT.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_PRODUCT.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<1;m++)
-                    {
-                        temp_C_LOGIC_PRODUCT.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicCurProductNumStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_PRODUCT,sizeof(P_LogicCurProductNumStruct));
-                    break;
-                case C_LOGIC_TIME:
-                    P_LogicTimeStruct temp_C_LOGIC_TIME;
-                    temp_C_LOGIC_TIME.timeNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_LOGIC_TIME.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_LOGIC_TIME.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicTimeStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_TIME,sizeof(P_LogicTimeStruct));
-                    break;
-                case C_SEARCH_STOP:
-                    P_SearchStopStruct temp_C_SEARCH_STOP;
-                    for(int m=0;m<4;m++)
-                    {
-                        temp_C_SEARCH_STOP.res[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_SearchStopStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_SEARCH_STOP,sizeof(P_SearchStopStruct));
-                    break;
-                case C_SEARCH_AXIS_MOVE:
-                    P_SearchAxisMoveStruct temp_C_SEARCH_AXIS_MOVE;
-                    temp_C_SEARCH_AXIS_MOVE.maxPos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                    index++;
-                    temp_C_SEARCH_AXIS_MOVE.advCDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                    index++;
-                    temp_C_SEARCH_AXIS_MOVE.offsetDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                    index++;
-                    temp_C_SEARCH_AXIS_MOVE.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_SEARCH_AXIS_MOVE.posStoreFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_SEARCH_AXIS_MOVE.reachPosAlarmFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_SEARCH_AXIS_MOVE.runSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_SEARCH_AXIS_MOVE.advCSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    for(int m=0;m<3;m++)
-                    {
-                        temp_C_SEARCH_AXIS_MOVE.ret[m]=0;
-                    }
-                    for(int m=0;m<SEARCH_INPORT_TOTAL_NUM;m++)
-                    {
-                        temp_C_SEARCH_AXIS_MOVE.inportNum[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    for(int m=0;m<SEARCH_INPORT_TOTAL_NUM;m++)
-                    {
-                        temp_C_SEARCH_AXIS_MOVE.inporttype[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                        index++;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_SearchAxisMoveStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_SEARCH_AXIS_MOVE,sizeof(P_SearchAxisMoveStruct));
-                    break;
-                case C_OFFSET_AXIS:
-                    P_OffsetAxisStruct temp_C_OFFSET_AXIS;
-                    temp_C_OFFSET_AXIS.offsetPos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
-                    index++;
-                    temp_C_OFFSET_AXIS.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_OFFSET_AXIS.speed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_OFFSET_AXIS.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OffsetAxisStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_OFFSET_AXIS,sizeof(P_OffsetAxisStruct));
-                    break;
-                case C_TORQUE_GARD:
-                    P_TorqueGardStruct temp_C_TORQUE_GARD;
-                    temp_C_TORQUE_GARD.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_TORQUE_GARD.torqueValue=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_TORQUE_GARD.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_TorqueGardStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_TORQUE_GARD,sizeof(P_TorqueGardStruct));
-                    break;
-                case C_AXIS_STOP:
-                    P_AxisStopStruct temp_C_AXIS_STOP;
-                    temp_C_AXIS_STOP.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<3;m++)
-                    {
-                        temp_C_AXIS_STOP.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_AxisStopStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_AXIS_STOP,sizeof(P_AxisStopStruct));
-                    break;
-                case C_SUN_PRO:
-                    P_SunProStruct temp_C_SUN_PRO;
-                    temp_C_SUN_PRO.sunProNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    index++;
-                    temp_C_SUN_PRO.oprMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                    for(int m=0;m<2;m++)
-                    {
-                        temp_C_SUN_PRO.ret[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_SunProStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_SUN_PRO,sizeof(P_SunProStruct));
-                    break;
-                case C_PRO_END:
-                    P_ProEndStruct temp_C_PRO_END;
-                    for(int m=0;m<4;m++)
-                    {
-                        temp_C_PRO_END.res[m]=0;
-                    }
-                    m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ProEndStruct));
-                    memcpy(m_ProOrder[i][j].pData,&temp_C_PRO_END,sizeof(P_ProEndStruct));
-                    break;
-                default:
-                    break;
-
+                    temp_C_AXIS_MOVE.ret[m]=0;
                 }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_AxisMoveStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_AXIS_MOVE,sizeof(P_AxisMoveStruct));
+                break;
+
+            case C_CLAW_ACTION:
+                P_ClawActionStruct temp_C_CLAW_ACTION;
+                temp_C_CLAW_ACTION.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_CLAW_ACTION.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_CLAW_ACTION.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ClawActionStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_CLAW_ACTION,sizeof(P_ClawActionStruct));
+                break;
+            case C_CLAW_CHECK:
+                P_ClawCheckStruct temp_C_CLAW_CHECK;
+                temp_C_CLAW_CHECK.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_CLAW_CHECK.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_CLAW_CHECK.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ClawCheckStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_CLAW_CHECK,sizeof(P_ClawCheckStruct));
+                break;
+
+            case C_RESERVE_CHECK:
+                P_ReserveCheckStruct temp_C_RESERVE_CHECK;
+                temp_C_RESERVE_CHECK.inportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_RESERVE_CHECK.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_RESERVE_CHECK.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ReserveCheckStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_RESERVE_CHECK,sizeof(P_ReserveCheckStruct));
+                break;
+            case C_MACHINE_OUT:
+                P_MachineOutStruct temp_C_MACHINE_OUT;
+                temp_C_MACHINE_OUT.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_MACHINE_OUT.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_MACHINE_OUT.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_MachineOutStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_MACHINE_OUT,sizeof(P_MachineOutStruct));
+                break;
+            case C_STACK_RESET_ZERO:
+                P_StackResetZeroStruct temp_C_STACK_RESET_ZERO;
+                temp_C_STACK_RESET_ZERO.number=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_STACK_RESET_ZERO.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_STACK_RESET_ZERO.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_StackResetZeroStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_STACK_RESET_ZERO,sizeof(P_StackResetZeroStruct));
+                break;
+            case C_STACK_MOVE:
+                P_StackMoveStruct temp_C_STACK_MOVE;
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_MOVE.advEndDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                    index++;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_MOVE.advCSpeedDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                    index++;
+                }
+                temp_C_STACK_MOVE.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                for(int m=0;m<3;m++)
+                {
+                    temp_C_STACK_MOVE.ret1[m]=0;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_MOVE.advEndFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_STACK_MOVE.ret2[m]=0;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_MOVE.advCSpeedFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_STACK_MOVE.ret3[m]=0;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_MOVE.advCSpeedSpeed[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_STACK_MOVE.ret4[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_StackMoveStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_STACK_MOVE,sizeof(P_StackMoveStruct));
+                break;
+            case C_STACK_FOLLOW:
+                P_StackFollowStruct temp_C_STACK_FOLLOW;
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_FOLLOW.advEndDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                    index++;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_FOLLOW.advCSpeedDis[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                    index++;
+                }
+                temp_C_STACK_FOLLOW.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                for(int m=0;m<3;m++)
+                {
+                    temp_C_STACK_FOLLOW.ret1[m]=0;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_FOLLOW.advEndFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_STACK_FOLLOW.ret2[m]=0;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_FOLLOW.advCSpeedFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_STACK_FOLLOW.ret3[m]=0;
+                }
+                for(int m=0;m<STACK_AXIS_NUM;m++)
+                {
+                    temp_C_STACK_FOLLOW.advCSpeedSpeed[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_STACK_FOLLOW.ret4[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_StackFollowStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_STACK_FOLLOW,sizeof(P_StackFollowStruct));
+                break;
+            case C_RESERVE_OUT:
+                P_ReserveOutStruct temp_C_RESERVE_OUT;
+                temp_C_RESERVE_OUT.interval=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_RESERVE_OUT.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_RESERVE_OUT.function=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_RESERVE_OUT.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<3;m++)
+                {
+                    temp_C_RESERVE_OUT.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ReserveOutStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_RESERVE_OUT,sizeof(P_ReserveOutStruct));
+
+                break;
+            case C_WAIT_IN_MACHINE:
+                P_WaitInMachineStruct temp_C_WAIT_IN_MACHINE;
+                temp_C_WAIT_IN_MACHINE.backListNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_MACHINE.inportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_MACHINE.inportSta=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_MACHINE.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_MACHINE.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_WAIT_IN_MACHINE.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_WaitInMachineStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_WAIT_IN_MACHINE,sizeof(P_WaitInMachineStruct));
+                break;
+            case C_WAIT_IN_CLAW:
+                P_WaitInClawStruct temp_C_WAIT_IN_CLAW;
+                temp_C_WAIT_IN_CLAW.backListNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_CLAW.inportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_CLAW.inportSta=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_CLAW.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_CLAW.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_WAIT_IN_CLAW.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_WaitInClawStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_WAIT_IN_CLAW,sizeof(P_WaitInClawStruct));
+                break;
+            case C_WAIT_IN_RESERVE:
+                P_WaitInReserveStruct temp_C_WAIT_IN_RESERVE;
+                temp_C_WAIT_IN_RESERVE.backListNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_RESERVE.inportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_RESERVE.inportSta=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_RESERVE.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_WAIT_IN_RESERVE.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_WAIT_IN_RESERVE.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_WaitInReserveStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_WAIT_IN_RESERVE,sizeof(P_WaitInReserveStruct));
+                break;
+            case C_OTHER_DELAY:
+                P_OtherDelayStruct temp_C_OTHER_DELAY;
+                for(int m=0;m<4;m++)
+                {
+                    temp_C_OTHER_DELAY.res[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherDelayStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_DELAY,sizeof(P_OtherDelayStruct));
+                break;
+            case C_OTHER_ALARM_CUST:
+                P_OtherAlarmCustStruct temp_C_OTHER_ALARM_CUST;
+                temp_C_OTHER_ALARM_CUST.alarmNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_OTHER_ALARM_CUST.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<3;m++)
+                {
+                    temp_C_OTHER_ALARM_CUST.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherAlarmCustStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_ALARM_CUST,sizeof(P_OtherAlarmCustStruct));
+                break;
+            case C_OTHER_CYC_STOP:
+                P_OtherCycStopStruct temp_C_OTHER_CYC_STOP;
+                temp_C_OTHER_CYC_STOP.cycleNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_OTHER_CYC_STOP.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherCycStopStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_CYC_STOP,sizeof(P_OtherCycStopStruct));
+                break;
+            case C_LABEL:
+                P_LabelStruct temp_C_LABEL;
+                temp_C_LABEL.labelNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_LABEL.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LabelStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LABEL,sizeof(P_LabelStruct));
+                break;
+            case C_LOGIC_IF:
+                P_LogicIfStruct temp_C_LOGIC_IF;
+                for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
+                {
+                    temp_C_LOGIC_IF.sufferCmpValue[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                    index++;
+                }
+                for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
+                {
+                    temp_C_LOGIC_IF.reqSelectFlag[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
+                {
+                    temp_C_LOGIC_IF.cmpType[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
+                {
+                    temp_C_LOGIC_IF.inportNum[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
+                {
+                    temp_C_LOGIC_IF.inportType[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
+                {
+                    temp_C_LOGIC_IF.cmpMode[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
+                {
+                    temp_C_LOGIC_IF.sufferCmpType[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicIfStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_IF,sizeof(P_LogicIfStruct));
+                break;
+            case C_LOGIC_ELSE:
+                P_LogicElseStruct temp_C_LOGIC_ELSE;
+                for(int m=0;m<4;m++)
+                {
+                    temp_C_LOGIC_ELSE.res[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicElseStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_ELSE,sizeof(P_LogicElseStruct));
+                break;
+            case C_LOGIC_END:
+                P_LogicEndStruct temp_C_LOGIC_END;
+                for(int m=0;m<4;m++)
+                {
+                    temp_C_LOGIC_END.res[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicEndStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_END,sizeof(P_LogicEndStruct));
+                break;
+            case C_LOGIC_WHILE_START:
+                P_LogicWhileStartStruct temp_C_LOGIC_WHILE_START;
+                temp_C_LOGIC_WHILE_START.cycNum=(uint32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicWhileStartStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_WHILE_START,sizeof(P_LogicWhileStartStruct));
+                break;
+            case C_LOGIC_WHILE_END:
+                P_LogicWhileEndStruct temp_C_LOGIC_WHILE_END;
+                for(int m=0;m<4;m++)
+                {
+                    temp_C_LOGIC_WHILE_END.res[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicWhileEndStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_WHILE_END,sizeof(P_LogicWhileEndStruct));
+                break;
+            case C_LOGIC_VAR:
+                P_LogicVarStruct temp_C_LOGIC_VAR;
+                temp_C_LOGIC_VAR.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_VAR.varNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_VAR.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_VAR.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_LOGIC_VAR.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicVarStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_VAR,sizeof(P_LogicVarStruct));
+                break;
+            case C_LOGIC_AXIS:
+                P_LogicAxisStruct temp_C_LOGIC_AXIS;
+                temp_C_LOGIC_AXIS.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_AXIS.axisNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_AXIS.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_AXIS.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_LOGIC_AXIS.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicAxisStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_AXIS,sizeof(P_LogicAxisStruct));
+                break;
+            case C_LOGIC_STACK:
+                P_LogicStackStruct temp_C_LOGIC_STACK;
+                temp_C_LOGIC_STACK.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_STACK.stackNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_STACK.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_STACK.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_LOGIC_STACK.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicStackStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_STACK,sizeof(P_LogicStackStruct));
+                break;
+            case C_LOGIC_PRODUCT:
+                P_LogicCurProductNumStruct temp_C_LOGIC_PRODUCT;
+                temp_C_LOGIC_PRODUCT.sufferOperValue=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_PRODUCT.productNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_PRODUCT.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_PRODUCT.sufferOperType=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<1;m++)
+                {
+                    temp_C_LOGIC_PRODUCT.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicCurProductNumStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_PRODUCT,sizeof(P_LogicCurProductNumStruct));
+                break;
+            case C_LOGIC_TIME:
+                P_LogicTimeStruct temp_C_LOGIC_TIME;
+                temp_C_LOGIC_TIME.timeNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_LOGIC_TIME.operMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_LOGIC_TIME.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_LogicTimeStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_LOGIC_TIME,sizeof(P_LogicTimeStruct));
+                break;
+            case C_SEARCH_STOP:
+                P_SearchStopStruct temp_C_SEARCH_STOP;
+                for(int m=0;m<4;m++)
+                {
+                    temp_C_SEARCH_STOP.res[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_SearchStopStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_SEARCH_STOP,sizeof(P_SearchStopStruct));
+                break;
+            case C_SEARCH_AXIS_MOVE:
+                P_SearchAxisMoveStruct temp_C_SEARCH_AXIS_MOVE;
+                temp_C_SEARCH_AXIS_MOVE.maxPos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.advCDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.offsetDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.posStoreFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.reachPosAlarmFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.runSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.advCSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                for(int m=0;m<3;m++)
+                {
+                    temp_C_SEARCH_AXIS_MOVE.ret[m]=0;
+                }
+                for(int m=0;m<SEARCH_INPORT_TOTAL_NUM;m++)
+                {
+                    temp_C_SEARCH_AXIS_MOVE.inportNum[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                for(int m=0;m<SEARCH_INPORT_TOTAL_NUM;m++)
+                {
+                    temp_C_SEARCH_AXIS_MOVE.inporttype[m]=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                    index++;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_SearchAxisMoveStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_SEARCH_AXIS_MOVE,sizeof(P_SearchAxisMoveStruct));
+                break;
+            case C_OFFSET_AXIS:
+                P_OffsetAxisStruct temp_C_OFFSET_AXIS;
+                temp_C_OFFSET_AXIS.offsetPos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_OFFSET_AXIS.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_OFFSET_AXIS.speed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_OFFSET_AXIS.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OffsetAxisStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_OFFSET_AXIS,sizeof(P_OffsetAxisStruct));
+                break;
+            case C_TORQUE_GARD:
+                P_TorqueGardStruct temp_C_TORQUE_GARD;
+                temp_C_TORQUE_GARD.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_TORQUE_GARD.torqueValue=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_TORQUE_GARD.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_TorqueGardStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_TORQUE_GARD,sizeof(P_TorqueGardStruct));
+                break;
+            case C_AXIS_STOP:
+                P_AxisStopStruct temp_C_AXIS_STOP;
+                temp_C_AXIS_STOP.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<3;m++)
+                {
+                    temp_C_AXIS_STOP.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_AxisStopStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_AXIS_STOP,sizeof(P_AxisStopStruct));
+                break;
+            case C_SUN_PRO:
+                P_SunProStruct temp_C_SUN_PRO;
+                temp_C_SUN_PRO.sunProNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_SUN_PRO.oprMode=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_SUN_PRO.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_SunProStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_SUN_PRO,sizeof(P_SunProStruct));
+                break;
+            case C_PRO_END:
+                P_ProEndStruct temp_C_PRO_END;
+                for(int m=0;m<4;m++)
+                {
+                    temp_C_PRO_END.res[m]=0xff;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_ProEndStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_PRO_END,sizeof(P_ProEndStruct));
+                break;
+            default:
+                break;
+
             }
         }
     }
-
 
     return true;
 }

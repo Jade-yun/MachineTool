@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QButtonGroup>
+#include "customkeyboard.h"
 
 namespace Ui {
 class IfProgramDialog;
@@ -41,11 +42,20 @@ private slots:
 
     void on_chboxAxis_clicked();
 
+public:
+    QString getMainBoardSig() const;
+    QString getVarOperateExpression() const;
+    QString getPosExpression() const;
+    QString getTimerExpression() const;
+
+    QString getConditionExpression() const;
+
 private:
     Ui::IfProgramDialog *ui;
 
 private:
     QButtonGroup* chboxsSigMb;
 };
+
 
 #endif // IFPROGRAMDIALOG_H

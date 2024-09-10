@@ -93,19 +93,19 @@ void RefPointEdit::mouseReleaseEvent(QMouseEvent *event)
 {
     QLineEdit::mouseReleaseEvent(event);
 
-    ReferPointDialog dlg;
+    ReferPointDialog dlg(this);
     QWidget *topLevelWidget = this;
     while (topLevelWidget->parentWidget() != nullptr) {
         topLevelWidget = topLevelWidget->parentWidget();
     }
-    auto manualWidget = qobject_cast<ManualForm*>(topLevelWidget->findChild<ManualForm*>("manualWidget"));
-    if (manualWidget)
-    {
+    auto manualWidget = qobject_cast<ManualForm*>(topLevelWidget->findChild<ManualForm*>());
+//    if (manualWidget)
+//    {
         dlg.updateUI(manualWidget->getRerferPoints());
         if (dlg.exec() == QDialog::Accepted)
         {
             QString refPointName =  dlg.getSelectedRefPoint();
             this->setText(refPointName);
         }
-    }
+//    }
 }

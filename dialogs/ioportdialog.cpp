@@ -42,6 +42,66 @@ QString IOPortDialog::getIOOnlineOut() const
     return QString();
 }
 
+unsigned int IOPortDialog::getInputPort() const
+{
+    if (ui->chboxMainBoardIn0->isChecked())
+    {
+        int index = ui->coboxMainBoardIn0->currentIndex();
+        return index + 1;
+    }
+    if (ui->chboxMainBoardIn1->isChecked())
+    {
+       int index = ui->coboxMainBoardIn1->currentIndex();
+       return index + 12 * 1 + 1;
+    }
+    if (ui->chboxMainBoardIn2->isChecked())
+    {
+        int index =  ui->coboxMainBoardIn2->currentIndex();
+        return index + 12 * 2 + 1;
+    }
+    if (ui->chboxMainBoardInExtend0->isChecked())
+    {
+        int index  = ui->coboxMainBoardInExtend0->currentIndex();
+        return index + 12 * 3 + 1;
+    }
+    if (ui->chboxMainBoardInExtend1->isChecked())
+    {
+        int index  = ui->coboxMainBoardInExtend1->currentIndex();
+        return index + 12 * 4 + 1;
+    }
+    return 0;
+}
+
+unsigned int IOPortDialog::getOutputPort() const
+{
+    if (ui->chboxMainBoardOut0->isChecked()) {
+        int index  = ui->coboxMainBoardOut0->currentIndex();
+        return index + 1;
+    }
+    if (ui->chboxMainBoardOut1->isChecked()) {
+        int index = ui->coboxMainBoardOut1->currentIndex();
+        return index + 8*1 + 1;
+    }
+    if (ui->chboxMainBoardOut2->isChecked()) {
+
+        int index = ui->coboxMainBoardOut2->currentIndex();
+        return index + 8*2 + 1;
+    }
+    if (ui->chboxMainBoardOutExtend0->isChecked()) {
+        int index = ui->coboxMainBoardOutExtend0->currentIndex();
+        return index + 8*3 + 1;
+    }
+    if (ui->chboxMainBoardOutExtend1->isChecked()) {
+        int index = ui->coboxMainBoardOutExtend1->currentIndex();
+        return index + 8*4 + 1;
+    }
+    if (ui->chboxMainBoardOutExtend2->isChecked()) {
+        int index = ui->coboxMainBoardOutExtend2->currentIndex();
+        return index + 8*5 + 1;
+    }
+    return 0;
+}
+
 QString IOPortDialog::getMainBoardIn() const
 {
     if (ui->chboxMainBoardIn0->isChecked()) return ui->coboxMainBoardIn0->currentText();
@@ -49,7 +109,7 @@ QString IOPortDialog::getMainBoardIn() const
     if (ui->chboxMainBoardIn2->isChecked()) return ui->coboxMainBoardIn2->currentText();
     if (ui->chboxMainBoardInExtend0->isChecked()) return ui->coboxMainBoardInExtend0->currentText();
     if (ui->chboxMainBoardInExtend1->isChecked()) return ui->coboxMainBoardInExtend1->currentText();
-    return QString("NULL");
+    return QString("null");
 }
 
 QString IOPortDialog::getMainBoardOut() const
@@ -59,40 +119,56 @@ QString IOPortDialog::getMainBoardOut() const
     if (ui->chboxMainBoardOut2->isChecked()) return ui->coboxMainBoardOut2->currentText();
     if (ui->chboxMainBoardOutExtend0->isChecked()) return ui->coboxMainBoardOutExtend0->currentText();
     if (ui->chboxMainBoardOutExtend1->isChecked()) return ui->coboxMainBoardOutExtend1->currentText();
-    return QString("NULL");
+    if (ui->chboxMainBoardOutExtend2->isChecked()) return ui->coboxMainBoardOutExtend2->currentText();
+    return QString("null");
 }
 
 
 IOOnlineInEdit::IOOnlineInEdit(QWidget *parent)
-    : QLineEdit(parent)
+    : QLineEdit(parent),
+      port(0)
 {
 
 }
 
-void IOOnlineInEdit::mousePressEvent(QMouseEvent *event)
+uint8_t IOOnlineInEdit::getCurrentPort() const
 {
-    QLineEdit::mousePressEvent(event);
+    return port;
+
+}
+
+void IOOnlineInEdit::mouseReleaseEvent(QMouseEvent *event)
+{
+    QLineEdit::mouseReleaseEvent(event);
     IOPortDialog dialog(this, IOPortMode::IN);
     if (dialog.exec() == QDialog::Accepted)
     {
         QString text = dialog.getIOOnlineIn();
+        port = static_cast<uint8_t>(dialog.getInputPort());
         this->setText(text);
     }
 }
 
 IOOnlineOutEdit::IOOnlineOutEdit(QWidget *parent)
-    : QLineEdit(parent)
+    : QLineEdit(parent),
+      port(0)
 {
 
 }
 
-void IOOnlineOutEdit::mousePressEvent(QMouseEvent *event)
+uint8_t IOOnlineOutEdit::getCurrentPort() const
 {
-    QLineEdit::mousePressEvent(event);
+    return port;
+}
+
+void IOOnlineOutEdit::mouseReleaseEvent(QMouseEvent *event)
+{
+    QLineEdit::mouseReleaseEvent(event);
     IOPortDialog dialog(this, IOPortMode::OUT);
     if (dialog.exec() == QDialog::Accepted)
     {
         QString text = dialog.getIOOnlineOut();
+        port = static_cast<uint8_t>(dialog.getOutputPort());
         this->setText(text);
     }
 }

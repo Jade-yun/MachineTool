@@ -38,7 +38,11 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow{
+   <string notr="true">
+/*去除所有控件的虚线框*/
+*{outline:none;}
+
+QMainWindow{
  background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
 
 	/*border-image:url(/opt/MachineTool/images/bgTest.png);*/
@@ -169,15 +173,61 @@ QPushButton:checked#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
 
 
 
-/*
-QPushButton:pressed#Btn_SetHome,QPushButton:pressed#Btn_MonitorHome,QPushButton:pressed#Btn_AlarmHome,QPushButton:pressed#Btn_AlarmHome,QPushButton::pressed#Btn_ManualHome,
-{
-    background-color:#E7E8EB;
-    border-style:solid; 
-    border-width:1px;
-    border-color:#0A7C25; 
+/**********************************************************/
+QTabBar::tab{
+	background:rgb(160, 160, 160);
+	min-width:110px;
+	height:40px;
 }
-*/
+QTabBar::tab:selected {
+      border-color: #9B9B9B;
+      border-bottom-color: #C2C7CB; /* same as pane color */
+  }
+QTabBar::tab:!selected {
+      margin-top: 2px; /* make non-selected tabs look smaller */
+  }
+  QTabWidget::pane { /* The tab widget frame */
+      border-top: 2px solid #C2C7CB;
+  }
+
+  QTabWidget::tab-bar {
+      min-width: 40px;
+      alignment:left;
+      left: 5px; /* move to the right by 5px */
+  }
+
+  /* Style the tab using the tab sub-control. Note that
+      it reads QTabBar _not_ QTabWidget */
+  QTabBar::tab {
+      /*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                  stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,
+                                  stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);*/
+background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea);
+      border: 2px solid #C4C4C3;
+      border-bottom-color: #C2C7CB; /* same as the pane color */
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      padding: 2px;
+  }
+
+  QTabBar::tab:selected, QTabBar::tab:hover {
+      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                  stop: 0 #fafafa, stop: 0.4 #f4f4f4,
+                                  stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+  }
+
+  QTabBar::tab:selected {
+      border-color: #9B9B9B;
+      border-bottom-color: #C2C7CB; /* same as pane color */
+  }
+
+  QTabBar::tab:!selected {
+      margin-top: 2px; /* make non-selected tabs look smaller */
+  }
+
+QTabWidget::pane {
+    border: 1px solid #000000; /* 设置边框样式和颜色 */
+}
 
 
 /*******************************************************/
@@ -186,8 +236,8 @@ font-weight:normal;
 font-family: 'SimSun';
 }
 QCheckBox::indicator{
-width: 30px;
-height: 30px;
+width: 35px;
+height: 35px;
 border: 1px solid black; 
 background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
 }
@@ -198,29 +248,51 @@ background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #F8F8F
     }
 
 /*****************************************************************/
-QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
+QComboBox {
+    border: 2px solid #808A87; /* 边框宽度和颜色 */
+}
+
 QComboBox::drop-down {
     subcontrol-origin: padding-right;
     subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
+
     border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
     border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
     border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
 }
+
 QComboBox::down-arrow {
     image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
 }
+/*
+QComboBox QAbstractItemView::item:hover { 
+    background-color: #409CE1;
+    color: rgb(252, 233, 79);
+}
 
-QComboBox QAbstractItemView::item:hover{ 
-  background-color:#409CE1;
-  color:rgb(252, 233, 79);
+QComboBox QAbstractItemView::item:selected {
+    background-color: #409CE1;
+    color: rgb(252, 233, 79);
 }
-QComboBox QAbstractItemView::item:selected{
-  background-color:#409CE1;
-  color:rgb(252, 233, 79);
+*/
+
+/* 添加每个 item 的高度设置 */
+QComboBox QAbstractItemView::item {
+    min-height: 40px; /* 设置每个 item 的最小高度 */
+    color: black; /* 设置默认文本颜色 */
+    background-color: white; /* 设置默认背景颜色 */
 }
+
+QComboBox:editable QLineEdit {
+    color: black; /* 设置可编辑状态下的文本颜色 */
+    background: white; /* 设置可编辑状态下的背景颜色 */
+}
+
+QComboBox:!editable, QComboBox:editable:on {
+    color: black; /* 设置非编辑状态下的文本颜色 */
+    background: white; /* 设置非编辑状态下的背景颜色 */
+}
+
 /****************************************************************************/
 QLineEdit {
 
