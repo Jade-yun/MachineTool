@@ -30589,7 +30589,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -30633,919 +30633,853 @@ QComboBox::down-arrow {
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="layoutWidget">
+      <widget class="QTableWidget" name="tableWgtAxisPara">
        <property name="geometry">
         <rect>
          <x>50</x>
-         <y>20</y>
-         <width>782</width>
-         <height>462</height>
+         <y>21</y>
+         <width>781</width>
+         <height>461</height>
         </rect>
        </property>
-       <layout class="QGridLayout" name="gridLayout_49">
-        <property name="spacing">
-         <number>2</number>
-        </property>
-        <item row="6" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectZ2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLabel" name="labAxisMinPos">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>最小坐标</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <widget class="QLabel" name="labAxisMaxPos">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>最大坐标</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectX1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="2" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectY1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="3" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectZ1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="4" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="5" column="5">
-         <widget class="QComboBox" name="coboxCoordDirectY2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>SimSun</family>
-            <pointsize>-1</pointsize>
-           </font>
-          </property>
-          <item>
-           <property name="text">
-            <string>正</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>负</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="labX1AxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>X1轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="labY1AxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Y1轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="labCAxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>C轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="labY2AxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Y2轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLabel" name="labZ1AxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Z1轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="3">
-         <widget class="QLabel" name="labCirclePulseNum">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>单圈脉冲数</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="4">
-         <widget class="QLabel" name="labCircleDistance">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>单圈距离</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="5">
-         <widget class="QLabel" name="labCoordDirect">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>坐标方向</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="2">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="7" column="3">
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="labZ2AxisPara">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Z2轴</string>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceY2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosY1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumY1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceY1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumX1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosZ1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceZ1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosX1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumY2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosY1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceX1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumZ2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosY2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="4">
-         <widget class="NumberEdit" name="editCircleDistanceZ2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumC">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="5" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosY2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="NumberEdit" name="editCirclePulseNumZ1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosZ2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosX1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="2">
-         <widget class="NumberEdit" name="editAxisMaxPosZ2">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="NumberEdit" name="editAxisMinPosZ1">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>140</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>141</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>41</number>
+       </attribute>
       </widget>
+      <widget class="NumberEdit" name="editCircleDistanceZ2">
+       <property name="geometry">
+        <rect>
+         <x>549</x>
+         <y>273</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMinPosZ2">
+       <property name="geometry">
+        <rect>
+         <x>123</x>
+         <y>273</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="coboxCoordDirectZ1">
+       <property name="geometry">
+        <rect>
+         <x>691</x>
+         <y>147</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>正</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>负</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="NumberEdit" name="editCirclePulseNumC">
+       <property name="geometry">
+        <rect>
+         <x>407</x>
+         <y>189</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMinPosY2">
+       <property name="geometry">
+        <rect>
+         <x>123</x>
+         <y>231</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMinPosZ1">
+       <property name="geometry">
+        <rect>
+         <x>123</x>
+         <y>147</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCirclePulseNumX1">
+       <property name="geometry">
+        <rect>
+         <x>407</x>
+         <y>63</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCircleDistanceX1">
+       <property name="geometry">
+        <rect>
+         <x>549</x>
+         <y>63</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCirclePulseNumY2">
+       <property name="geometry">
+        <rect>
+         <x>407</x>
+         <y>231</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCirclePulseNumZ1">
+       <property name="geometry">
+        <rect>
+         <x>407</x>
+         <y>147</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCircleDistanceY2">
+       <property name="geometry">
+        <rect>
+         <x>549</x>
+         <y>231</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCircleDistanceZ1">
+       <property name="geometry">
+        <rect>
+         <x>549</x>
+         <y>147</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMaxPosY1">
+       <property name="geometry">
+        <rect>
+         <x>265</x>
+         <y>105</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMaxPosC">
+       <property name="geometry">
+        <rect>
+         <x>265</x>
+         <y>189</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="coboxCoordDirectY1">
+       <property name="geometry">
+        <rect>
+         <x>691</x>
+         <y>105</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>正</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>负</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMaxPosZ2">
+       <property name="geometry">
+        <rect>
+         <x>265</x>
+         <y>273</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCirclePulseNumZ2">
+       <property name="geometry">
+        <rect>
+         <x>407</x>
+         <y>273</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="coboxCoordDirectZ2">
+       <property name="geometry">
+        <rect>
+         <x>691</x>
+         <y>273</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>正</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>负</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMaxPosZ1">
+       <property name="geometry">
+        <rect>
+         <x>265</x>
+         <y>147</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMaxPosY2">
+       <property name="geometry">
+        <rect>
+         <x>265</x>
+         <y>231</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="coboxCoordDirectX1">
+       <property name="geometry">
+        <rect>
+         <x>691</x>
+         <y>63</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>正</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>负</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMinPosC">
+       <property name="geometry">
+        <rect>
+         <x>123</x>
+         <y>189</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="coboxCoordDirectY2">
+       <property name="geometry">
+        <rect>
+         <x>691</x>
+         <y>231</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>正</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>负</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="coboxCoordDirectC">
+       <property name="geometry">
+        <rect>
+         <x>691</x>
+         <y>189</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <item>
+        <property name="text">
+         <string>正</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>负</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="NumberEdit" name="editCirclePulseNumY1">
+       <property name="geometry">
+        <rect>
+         <x>407</x>
+         <y>105</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCircleDistanceC">
+       <property name="geometry">
+        <rect>
+         <x>549</x>
+         <y>189</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMinPosY1">
+       <property name="geometry">
+        <rect>
+         <x>123</x>
+         <y>105</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMaxPosX1">
+       <property name="geometry">
+        <rect>
+         <x>265</x>
+         <y>63</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editAxisMinPosX1">
+       <property name="geometry">
+        <rect>
+         <x>123</x>
+         <y>63</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="NumberEdit" name="editCircleDistanceY1">
+       <property name="geometry">
+        <rect>
+         <x>549</x>
+         <y>105</y>
+         <width>140</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>140</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <zorder>tableWgtAxisPara</zorder>
+      <zorder>btnSaveOriginPointSet_4</zorder>
+      <zorder>layoutWidget</zorder>
      </widget>
      <widget class="QWidget" name="tabAxisSpeed">
       <attribute name="title">
