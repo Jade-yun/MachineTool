@@ -573,33 +573,52 @@ void Setting::machineParaLogic()
     {tr("最小坐标"), tr("最大坐标"), tr("单圈脉冲数"), tr("单圈距离"),tr("坐标方向")});
     ui->tableWgtAxisPara->setVerticalHeaderLabels(
     {tr("X1轴"), tr("Y1轴"), tr("Z1轴"), tr("C轴"), tr("Y2轴"), tr("Z2轴")});
-    auto addToTable = [&](int row, QList<QWidget*> widgets) {
+    auto addToTable = [&](QTableWidget* tableWgt, int row, const QList<QWidget*> &widgets) {
         int i = 0;
         for (QWidget* widget : widgets)
         {
-            ui->tableWgtAxisPara->setCellWidget(row, i++, widget);
+            tableWgt->setCellWidget(row, i++, widget);
 
         }
     };
 
-    addToTable(0, { ui->editAxisMinPosX1, ui->editAxisMaxPosX1,ui->editCirclePulseNumX1,
-                 ui->editCircleDistanceX1,ui->coboxCoordDirectX1});
-    addToTable(1, { ui->editAxisMinPosY1, ui->editAxisMaxPosY1,ui->editCirclePulseNumY1,
-                 ui->editCircleDistanceY1,ui->coboxCoordDirectY1});
-    addToTable(2, { ui->editAxisMinPosZ1, ui->editAxisMaxPosZ1,ui->editCirclePulseNumZ1,
-                 ui->editCircleDistanceZ1,ui->coboxCoordDirectZ1});
-    addToTable(3, { ui->editAxisMinPosC, ui->editAxisMaxPosC,ui->editCirclePulseNumC,
-                 ui->editCircleDistanceC,ui->coboxCoordDirectC});
-    addToTable(4, { ui->editAxisMinPosY2, ui->editAxisMaxPosY2,ui->editCirclePulseNumY2,
-                 ui->editCircleDistanceY2,ui->coboxCoordDirectY2});
-    addToTable(5, { ui->editAxisMinPosZ2, ui->editAxisMaxPosZ2,ui->editCirclePulseNumZ2,
-                 ui->editCircleDistanceZ2,ui->coboxCoordDirectZ2});
+    addToTable(ui->tableWgtAxisPara, 0, {
+                   ui->editAxisMinPosX1, ui->editAxisMaxPosX1,ui->editCirclePulseNumX1,
+                   ui->editCircleDistanceX1,ui->coboxCoordDirectX1});
+    addToTable(ui->tableWgtAxisPara, 1, {
+                   ui->editAxisMinPosY1, ui->editAxisMaxPosY1,ui->editCirclePulseNumY1,
+                   ui->editCircleDistanceY1,ui->coboxCoordDirectY1});
+    addToTable(ui->tableWgtAxisPara, 2, {
+                   ui->editAxisMinPosZ1, ui->editAxisMaxPosZ1,ui->editCirclePulseNumZ1,
+                   ui->editCircleDistanceZ1,ui->coboxCoordDirectZ1});
+    addToTable(ui->tableWgtAxisPara, 3, {
+                   ui->editAxisMinPosC, ui->editAxisMaxPosC,ui->editCirclePulseNumC,
+                   ui->editCircleDistanceC,ui->coboxCoordDirectC});
+    addToTable(ui->tableWgtAxisPara, 4, {
+                   ui->editAxisMinPosY2, ui->editAxisMaxPosY2,ui->editCirclePulseNumY2,
+                   ui->editCircleDistanceY2,ui->coboxCoordDirectY2});
+    addToTable(ui->tableWgtAxisPara, 5, {
+                   ui->editAxisMinPosZ2, ui->editAxisMaxPosZ2,ui->editCirclePulseNumZ2,
+                   ui->editCircleDistanceZ2,ui->coboxCoordDirectZ2});
 
     connect(ui->coboxAxisTypeX1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
         bool visible = (state != 1);
         ui->tableWgtAxisPara->setRowHidden(0, visible);
 
     });
+
+    ui->tableWgtAxisSpeed->setColumnCount(5);
+    ui->tableWgtAxisSpeed->setRowCount(6);
+    ui->tableWgtAxisSpeed->setHorizontalHeaderLabels(
+    {tr("加速时间(s)"), tr("减速时间(s)"), tr("加加速"), tr("减减速"),tr("最大速度")});
+    ui->tableWgtAxisSpeed->setVerticalHeaderLabels(
+    {tr("X1轴"), tr("Y1轴"), tr("Z1轴"), tr("C轴"), tr("Y2轴"), tr("Z2轴")});
+
+//    addToTable(ui->tableWgtAxisSpeed, 0, {
+
+
+//               });
+
     auto setupAxisTypeConnections = [&](QComboBox* comboBox, const QList<QWidget*>& widgets) {
         connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [widgets](int state) {
             bool visible = (state == 1);
@@ -611,7 +630,7 @@ void Setting::machineParaLogic()
     };
 
     setupAxisTypeConnections(ui->coboxAxisTypeX1, {
-                                 ui->labX1AxisPara,
+//                                 ui->labX1AxisPara,
                                  ui->editAxisMinPosX1,
                                  ui->editAxisMaxPosX1,
                                  ui->editCirclePulseNumX1,
@@ -635,7 +654,7 @@ void Setting::machineParaLogic()
                              });
 
     setupAxisTypeConnections(ui->coboxAxisTypeY1, {
-                                 ui->labY1AxisPara,
+//                                 ui->labY1AxisPara,
                                  ui->editAxisMinPosY1,
                                  ui->editAxisMaxPosY1,
                                  ui->editCirclePulseNumY1,
@@ -659,7 +678,7 @@ void Setting::machineParaLogic()
                              });
 
     setupAxisTypeConnections(ui->coboxAxisTypeZ1, {
-                                 ui->labZ1AxisPara,
+//                                 ui->labZ1AxisPara,
                                  ui->editAxisMinPosZ1,
                                  ui->editAxisMaxPosZ1,
                                  ui->editCirclePulseNumZ1,
@@ -683,7 +702,7 @@ void Setting::machineParaLogic()
                              });
 
     setupAxisTypeConnections(ui->coboxAxisTypeC, {
-                                 ui->labCAxisPara,
+//                                 ui->labCAxisPara,
                                  ui->editAxisMinPosC,
                                  ui->editAxisMaxPosC,
                                  ui->editCirclePulseNumC,
@@ -707,14 +726,14 @@ void Setting::machineParaLogic()
                              });
 
     setupAxisTypeConnections(ui->coboxAxisTypeY2, {
-                                 ui->labY2AxisPara,
+//                                 ui->labY2AxisPara,
                                  ui->editAxisMinPosY2,
                                  ui->editAxisMaxPosY2,
                                  ui->editCirclePulseNumY2,
                                  ui->editCircleDistanceY2,
                                  ui->coboxCoordDirectY2,
 
-                                 ui->labY2AxisSpeed,
+//                                 ui->labY2AxisSpeed,
                                  ui->editAccTimeY2,
                                  ui->editDecTimeY2,
                                  ui->editAccAccY2,
@@ -731,14 +750,14 @@ void Setting::machineParaLogic()
                              });
 
     setupAxisTypeConnections(ui->coboxAxisTypeZ2, {
-                                 ui->labZ2AxisPara,
+//                                 ui->labZ2AxisPara,
                                  ui->editAxisMinPosZ2,
                                  ui->editAxisMaxPosZ2,
                                  ui->editCirclePulseNumZ2,
                                  ui->editCircleDistanceZ2,
                                  ui->coboxCoordDirectZ2,
 
-                                 ui->labZ2AxisSpeed,
+//                                 ui->labZ2AxisSpeed,
                                  ui->editAccTimeZ2,
                                  ui->editDecTimeZ2,
                                  ui->editAccAccZ2,
