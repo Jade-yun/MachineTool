@@ -601,12 +601,6 @@ void Setting::machineParaLogic()
                    ui->editAxisMinPosZ2, ui->editAxisMaxPosZ2,ui->editCirclePulseNumZ2,
                    ui->editCircleDistanceZ2,ui->coboxCoordDirectZ2});
 
-    connect(ui->coboxAxisTypeX1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
-        bool visible = (state != 1);
-        ui->tableWgtAxisPara->setRowHidden(0, visible);
-
-    });
-
     ui->tableWgtAxisSpeed->setColumnCount(5);
     ui->tableWgtAxisSpeed->setRowCount(6);
     ui->tableWgtAxisSpeed->setHorizontalHeaderLabels(
@@ -614,10 +608,80 @@ void Setting::machineParaLogic()
     ui->tableWgtAxisSpeed->setVerticalHeaderLabels(
     {tr("X1轴"), tr("Y1轴"), tr("Z1轴"), tr("C轴"), tr("Y2轴"), tr("Z2轴")});
 
-//    addToTable(ui->tableWgtAxisSpeed, 0, {
+    addToTable(ui->tableWgtAxisSpeed, 0, {
+                   ui->editAccTimeX1,
+                   ui->editDecTimeX1,
+                   ui->editAccAccX1,
+                   ui->editDecDecX1,
+                   ui->editMaxSpeedX1,
+               });
+    addToTable(ui->tableWgtAxisSpeed, 1, {
+                   ui->editAccTimeY1,
+                   ui->editDecTimeY1,
+                   ui->editAccAccY1,
+                   ui->editDecDecY1,
+                   ui->editMaxSpeedY1,
+               });
+    addToTable(ui->tableWgtAxisSpeed, 2, {
+                   ui->editAccTimeZ1,
+                   ui->editDecTimeZ1,
+                   ui->editAccAccZ1,
+                   ui->editDecDecZ1,
+                   ui->editMaxSpeedZ1,
+               });
+    addToTable(ui->tableWgtAxisSpeed, 3, {
+                   ui->editAccTimeC,
+                   ui->editDecTimeC,
+                   ui->editAccAccC,
+                   ui->editDecDecC,
+                   ui->editMaxSpeedC,
+               });
+    addToTable(ui->tableWgtAxisSpeed, 4, {
+                   ui->editAccTimeY2,
+                   ui->editDecTimeY2,
+                   ui->editAccAccY2,
+                   ui->editDecDecY2,
+                   ui->editMaxSpeedY2,
+               });
+    addToTable(ui->tableWgtAxisSpeed, 5, {
+                   ui->editAccTimeZ2,
+                   ui->editDecTimeZ2,
+                   ui->editAccAccZ2,
+                   ui->editDecDecZ2,
+                   ui->editMaxSpeedZ2,
+               });
 
+    connect(ui->coboxAxisTypeX1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
+        bool visible = (state != 1);
+        ui->tableWgtAxisPara->setRowHidden(0, visible);
+        ui->tableWgtAxisSpeed->setRowHidden(0, visible);
+    });
+    connect(ui->coboxAxisTypeY1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
+        bool visible = (state != 1);
+        ui->tableWgtAxisPara->setRowHidden(1, visible);
+        ui->tableWgtAxisSpeed->setRowHidden(1, visible);
+    });
+    connect(ui->coboxAxisTypeZ1, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
+        bool visible = (state != 1);
+        ui->tableWgtAxisPara->setRowHidden(2, visible);
+        ui->tableWgtAxisSpeed->setRowHidden(2, visible);
+    });
+    connect(ui->coboxAxisTypeC, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
+        bool visible = (state != 1);
+        ui->tableWgtAxisPara->setRowHidden(3, visible);
+        ui->tableWgtAxisSpeed->setRowHidden(3, visible);
+    });
+    connect(ui->coboxAxisTypeY2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
+        bool visible = (state != 1);
+        ui->tableWgtAxisPara->setRowHidden(4, visible);
+        ui->tableWgtAxisSpeed->setRowHidden(4, visible);
+    });
 
-//               });
+    connect(ui->coboxAxisTypeZ2, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int state) {
+        bool visible = (state != 1);
+        ui->tableWgtAxisPara->setRowHidden(5, visible);
+        ui->tableWgtAxisSpeed->setRowHidden(5, visible);
+    });
 
     auto setupAxisTypeConnections = [&](QComboBox* comboBox, const QList<QWidget*>& widgets) {
         connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [widgets](int state) {
