@@ -1,0 +1,776 @@
+#include "upgradedialog.h"
+#include "ui_upgradedialog.h"
+#include "mainwindow.h"
+#include <QMessageBox>
+#include <QStorageInfo>
+#include <QInputDialog>
+#include <QCryptographicHash>
+#include <QProcess>
+#include "program_save.h"
+
+#define COPYS "-副本"
+#define DECOLLATOR '/'
+#define ARROWS ">"
+#define DOT '.'
+#define HINTMESSAGE(Test) \
+    QMessageBox::information(&QWidget(), "", Test)
+
+
+upgradedialog::upgradedialog(const uint8_t &upgradetype, QWidget *parent) :
+    BaseWindow(parent),UpgradeType(upgradetype),
+    ui(new Ui::upgradedialog)
+{
+    ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose,true);
+    ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
+    connect(ui->upgradeno, &QPushButton::clicked,this,[=](){this->close();});
+    connect(ui->cancel_button,&QPushButton::clicked,this,[=](){this->close();});
+    connect(ui->upgreadok,&QPushButton::clicked,this,&upgradedialog::upgreadok_handle);
+    dlgErrorTip = new ErrorTipDialog(this);
+    dlgErrorTip->move(this->geometry().center()-dlgErrorTip->rect().center());
+    dlgErrorTip->close();
+    upgradelabel_handle(UpgradeType);
+
+    //新建和重命名按钮暂时隐藏,当前汉字键盘不知道怎么调用
+    ui->new_button->hide();
+    ui->Rename_button->hide();
+}
+
+upgradedialog::~upgradedialog()
+{
+    delete ui;
+}
+
+int upgradedialog::showTip(const QString &message,TipMode mode)
+{
+    dlgErrorTip->setMode(mode);
+    dlgErrorTip->setMessage(message);
+    return dlgErrorTip->exec();
+}
+void upgradedialog::upgreadok_handle()
+{
+    QRegularExpression devicePattern("^/dev/sd[a-z]+[0-9]*$");
+    QString TargetPath = "";
+    foreach (storage, QStorageInfo::mountedVolumes()) {
+        if (storage.isValid() && storage.isReady() && !storage.isRoot()) {
+            if (devicePattern.match(storage.device()).hasMatch()) {
+                TargetPath = storage.rootPath()+ui->upgrade_SearchName->text();
+                break;
+            }
+        }
+    }
+    switch (sure_handle_type) {
+    case HANDHELD:
+    {
+        if(!UpFilePath.isEmpty())
+        {//如果存在默认升级文件
+            Upgrade_Progress_send(5);
+            QThread *UpdataThread = new QThread();
+            connect(UpdataThread,&QThread::started,this,&upgradedialog::Updata_handle);
+            this->hide();
+            emit updataWidgetShowSignal();
+            UpdataThread->start();
+        }
+        break;
+    }
+    case MAINBOARD:
+    {
+        break;
+    }
+    case IOBOARD:
+    {
+        break;
+    }
+    case SERVO:
+    {
+        break;
+    }
+    case SYSTEM_DATA_COPY:
+    {
+        int reply = showTip("请确认: [手持器]---->[U盘]");
+        if(reply == QDialog::Accepted)
+        {
+            this->hide();
+            emit updataWidgetShowSignal();
+            Upgrade_Progress_send(10);
+            if(ui->teach_checkbox->isChecked())
+            {//如果选择的是示教文件
+
+                copyPath(m_ProgramPath,TargetPath);
+            }
+            else if(ui->SysDate_checkbox->isChecked())
+            {
+                copyPath("/root",TargetPath);
+            }
+            else if(ui->Cust_checkbox->isChecked())
+            {
+
+            }
+            else if(ui->All_checkbox->isChecked())
+            {
+                copyPath(m_ProgramPath,TargetPath);
+                copyPath("/root",TargetPath);
+            }
+            emit ImplementFinishSignal();
+        }
+        break;
+    }
+    case COPY_DATA_REST:
+    {
+        int reply = showTip("请确认: [U盘]---->[手持器]");
+        if(reply == QDialog::Accepted)
+        {
+            if(hasDuplicateFileNames(TargetPath,m_ProgramPath))
+            {//if存在同名文件
+                int reply = showTip("存在相同文件,请确认是否覆盖?确认(覆盖同名文件);取消(不恢复同名文件)");
+                if(reply == QDialog::Accepted)
+                {
+                    Cover_SameNameFile = true;
+                }
+                else if(reply == QDialog::Rejected)
+                {
+                    Cover_SameNameFile = false;
+                }
+            }
+            this->hide();
+            Upgrade_Progress_send(20);
+            if(ui->teach_checkbox->isChecked())
+            {//如果选择的是示教文件
+                copyPath(TargetPath,m_ProgramPath);
+            }
+            else if(ui->SysDate_checkbox->isChecked())
+            {
+                copyPath(TargetPath,"/root");
+            }
+            else if(ui->Cust_checkbox->isChecked())
+            {
+
+            }
+            else if(ui->All_checkbox->isChecked())
+            {
+                copyPath(TargetPath,m_ProgramPath);
+                copyPath(TargetPath,"/root");
+            }
+            emit ImplementFinishSignal();
+        }
+        break;
+    }
+    default:
+        break;
+    }
+}
+void upgradedialog::upgradelabel_handle(uint8_t Up_type)
+{
+    QRegularExpression devicePattern("^/dev/sd[a-z]+[0-9]*$");
+    QString TargetPath = "";
+    foreach (storage, QStorageInfo::mountedVolumes()) {
+        if (storage.isValid() && storage.isReady() && !storage.isRoot()) {
+            if (devicePattern.match(storage.device()).hasMatch()) {
+                TargetPath = storage.rootPath()+ui->upgrade_SearchName->text();
+                break;
+            }
+        }
+    }
+
+    switch (Up_type) {
+    case HANDHELD:
+    {
+        ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
+        ui->upgrade_label->setText("是否现在进行手持器升级？");
+        ui->Data_select->hide();
+        sure_handle_type = HANDHELD;
+        UpFilePath = findFileAndGetDirectory(storage.rootPath(),"MachineTool");
+        ui->upgrade_SearchName->setText(UpFilePath);
+        break;
+    }
+    case MAINBOARD:
+    {
+        ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
+        ui->upgrade_label->setText("是否现在进行主板升级？");
+        ui->Data_select->hide();
+        sure_handle_type = MAINBOARD;
+        break;
+    }
+    case IOBOARD:
+    {
+        ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
+        ui->upgrade_label->setText("当前系统无IO板"); 
+        ui->Data_select->hide();
+        sure_handle_type = IOBOARD;
+        break;
+    }
+    case SERVO:
+    {
+        ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
+        ui->upgrade_label->setText("当前系统不支持伺服升级");
+        ui->Data_select->hide();
+        sure_handle_type = SERVO;
+        break;
+    }
+    case SYSTEM_DATA_COPY:
+    {
+        ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
+        ui->upgrade_label->setText("是否备份设置文件U盘?");
+        ui->Data_select->show();
+        ui->All_checkbox->setChecked(true);//默认选中全部参数
+        ui->upgrade_SearchName->setText("/HMI/");
+        sure_handle_type = SYSTEM_DATA_COPY;
+        break;
+    }
+    case COPY_DATA_REST:
+    {
+        ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
+        ui->upgrade_label->setText("是否从U盘恢复设置文件?");
+        ui->Data_select->show();
+        ui->All_checkbox->setChecked(true);//默认选中全部参数
+        ui->upgrade_SearchName->setText("/HMI/");
+        sure_handle_type = COPY_DATA_REST;
+    }
+    case RESTSETTING:
+    {
+        ui->upgradeWidget->setCurrentWidget(ui->upgradepage3);
+        ui->ressetting_label->setText("输入恢复密码,按确认按键,将恢复出场设置,并重启系统!");
+        ui->Reserve_teach_checkbox->setChecked(true);
+        ui->Reserve_Other_checkbox->setChecked(true);
+        ui->ResSettInput_password->setDecimalPlaces(0);
+        ui->ResSettInput_password->setText("");
+    }
+    default:
+        break;
+    }
+}
+
+void upgradedialog::on_Key_File_hand_select_clicked()
+{//浏览按键处理
+    ui->upgradeWidget->setCurrentWidget(ui->upgradepage2);
+    FileSystemModel = new QFileSystemModel(this);
+    ui->file_listView->setModel(FileSystemModel);
+    ui->file_listView->setResizeMode(QListView::Fixed);
+    ui->file_listView->setViewMode(QListView::ListMode);
+    ui->file_listView->setSpacing(1);
+    QRegularExpression devicePattern("^/dev/sd[a-z]+[0-9]*$");
+    foreach (storage, QStorageInfo::mountedVolumes()) {
+        if (storage.isValid() && storage.isReady() && !storage.isRoot()) {
+            if (devicePattern.match(storage.device()).hasMatch()) {
+                // 设置文件系统模型的根路径为 U 盘的挂载点
+                FileSystemModel->setRootPath(storage.rootPath());
+                ui->file_listView->setRootIndex(FileSystemModel->index(storage.rootPath()));
+                break; // 假设只有一个 U 盘，找到后即退出循环
+            }
+        }
+    }
+    ui->current_select_file->setText(storage.rootPath());
+}
+
+void upgradedialog::on_file_listView_doubleClicked(const QModelIndex &index)
+{//双击目录进入下一级目录中
+    if (FileSystemModel->isDir(index))
+    {
+        ui->file_listView->setRootIndex(index);
+        updatePath(index);
+    }
+}
+//更新当前目录信息
+void upgradedialog::updatePath(const QModelIndex &index)
+{
+    QString currentPath = FileSystemModel->filePath(index);
+    ui->file_listView->setRootIndex(index);
+    ui->current_select_file->setText(currentPath);
+}
+//返回上一级目录按钮
+void upgradedialog::on_toolButton_clicked()
+{
+    QModelIndex currentIndex = ui->file_listView->rootIndex();
+    QModelIndex parentIndex = FileSystemModel->parent(currentIndex);
+    QString currentIndexStr = "/run/media/"+FileSystemModel->data(currentIndex).toString();
+    if (parentIndex.isValid() && currentIndexStr != storage.rootPath())
+    {//只允许查看U盘根目录往下的文件
+        ui->file_listView->setRootIndex(parentIndex);
+        updatePath(parentIndex);
+    }
+}
+
+//仅升级文件复选框
+void upgradedialog::on_checkBox_stateChanged(int arg1)
+{
+//    if(arg1 == 0)
+//    {//未被选中
+//        proxyModel->setFilterRegExp(""); // 清除过滤器
+//    }
+//    else if(arg1 == 2)
+//    {//选中
+//        proxyModel->setFilterRegExp("(?!.*\\..*$).*$|\\.\\.?$|\\.$");
+//    }
+//    ui->file_listView->setRootIndex(proxyModel->mapFromSource(FileSystemModel->index(FileSystemModel->rootPath())));
+}
+//复制文件或文件夹
+void upgradedialog::copyFileOrFolder()
+{
+    QModelIndexList indexes = ui->file_listView->selectionModel()->selectedIndexes();
+    listOfFilesToCopy.clear();
+    for (QModelIndex index : indexes)
+    {
+        QString filePath = FileSystemModel->filePath(index);
+        listOfFilesToCopy.append(filePath);
+    }
+    ui->file_listView->clearSelection();//清列表选中状态
+}
+//粘贴
+void upgradedialog::pasteFileOrFolder()
+{
+    if (listOfFilesToCopy.size() > 0)
+    {
+        QString destDir = FileSystemModel->filePath(ui->file_listView->rootIndex());
+        for (QString filePath : listOfFilesToCopy)
+        {
+            QFileInfo fileInfo(filePath);
+            QString destPath = QString();                                                               // 目标全称
+            QString fileName = fileInfo.fileName();                                                     // 文件名
+            QString filedir = fileInfo.path();                                                          // 源路径
+            QString destinationPath = QDir(destDir).filePath(fileName);                                 // 目标全称
+            bool isCovered = false;                                                                     // 是否覆盖
+            destPath = generateUniqueFileName(destDir, fileInfo.completeBaseName(), fileInfo.suffix()); // 目标拼接
+            if (filedir != destDir)                                                                     // 当前路径相同时复制不做提示，直接加上副本
+            {
+                if (QFile::exists(destinationPath))
+                {
+                    QMessageBox::StandardButton btn = QMessageBox::question(this, tr("Confirm Overwrite"),
+                                                                            tr("以下文件已存在:\n%1\n是否覆盖他们?").arg(destinationPath),
+                                                                            QMessageBox::Yes | QMessageBox::No);
+                    if (btn == QMessageBox::Yes)
+                    {
+                        isCovered = true;
+                        destPath = destinationPath;
+                    }
+                    else
+                    {
+                        isCovered = false;
+                    }
+                }
+                else
+                {
+                    destPath = destinationPath;
+                }
+            }
+
+            if (filedir == destDir && cutOperation) // 路径相同时剪切不做处理
+            {
+                continue;
+            }
+
+            if (fileInfo.isDir())
+            {
+                // 要复制目录内容，需要递归地复制所有文件和子目录
+                copyPath(filePath, destPath);
+                //暂时不支持复制文件夹
+            }
+            else
+            {
+                // 若路径不存在则创建不存在的文件,不然无法复制粘贴成功
+                QDir path(destDir);
+                if (path.exists())
+                {
+                    QFile file(filePath);
+                    if (isCovered)
+                    {
+                        file.remove(destPath);
+                    }
+                    file.copy(filePath, destPath);
+                }
+                else
+                {
+                    path.mkdir(destDir);
+                    QFile file(filePath);
+                    file.copy(filePath, destPath);
+                }
+            }
+
+            if (cutOperation) // 剪切后删除以前的内容
+            {
+                QFileInfo fileInfo(filePath);
+                if (fileInfo.isDir())
+                {
+                    QDir dir(filePath);
+                    if (dir.exists())
+                    {
+                        dir.removeRecursively();
+                    }
+                }
+                else
+                {
+                    QFile file(filePath);
+                    file.remove();
+                }
+            }
+        }
+
+        if (cutOperation)
+        {
+            listOfFilesToCopy.clear();
+            cutOperation = false;
+        }
+        ui->file_listView->clearSelection();
+    }
+
+}
+/*************************************************************************
+**  函数名：  generateUniqueFileName(const QString &directory, const QString &baseName, const QString &extension)
+**	输入参数：directory 目的文件路径 baseName 文件名 extension 文件后缀
+**	输出参数：
+**	函数功能：检测是否有同名
+**  作者：    wukui
+**  开发日期：2024/10/28
+**************************************************************************/
+QString upgradedialog::generateUniqueFileName(const QString &directory, const QString &baseName, const QString &extension)
+{
+    QFileInfo fileInfo;
+    // 设置初始文件名
+    QString uniqueName = baseName + DOT + extension;
+    int counter = 1; // 设置文件名称后缀计数器
+    do
+    {
+        fileInfo.setFile(directory + DECOLLATOR + uniqueName);
+        if (fileInfo.exists())
+        {
+            // 如果文件已存在，生成带有计数器的新文件名
+            uniqueName = QString("%1_%2.%3").arg(baseName).arg(counter++).arg(extension);
+        }
+        else
+        {
+            // 文件名是唯一的，可以使用
+            break;
+        }
+    } while (true);
+
+    return directory + DECOLLATOR + uniqueName;
+}
+//复制粘贴目录
+void upgradedialog::copyPath(QString src, QString dst)
+{
+    QDir dir(src);
+    if (!dir.exists())
+        return;
+
+    for (QString d : dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
+    {
+        QString dst_path = dst + DECOLLATOR + d;
+        dir.mkpath(dst_path);
+        copyPath(src + DECOLLATOR + d, dst_path);
+    }
+    Upgrade_Progress_send(60);
+    for (QString f : dir.entryList(QDir::Files))
+    {
+        // 若路径不存在则创建不存在的文件,不然无法复制粘贴成功
+        QDir path(dst);
+        if (!path.exists())
+        {
+            path.mkdir(dst);
+        }
+        QFile file(dst + DECOLLATOR + f);
+        if(file.exists())
+        {
+            if(UpgradeType == COPY_DATA_REST)
+            {
+                if(true == Cover_SameNameFile)
+                {
+                    file.remove();//如果存在同名文件,需要先删除后在拷贝
+                }
+                else
+                {
+                    continue;//如果数据还原不覆盖已有文件,则直接进行下一个文件拷贝
+                }
+            }
+            else
+            {
+                file.remove();
+            }
+        }
+        if(!QFile::copy(src + DECOLLATOR + f, dst + DECOLLATOR + f))
+        {
+            qDebug() << "复制文件" <<src + DECOLLATOR + f <<" 到 " << dst + DECOLLATOR + f <<"失败";
+        }
+    }
+    Upgrade_Progress_send(100);
+}
+// 实现函数，检查两个文件夹中是否有同名文件
+bool upgradedialog::hasDuplicateFileNames(const QString& dir1, const QString& dir2) {
+    QDir dirObj1(dir1);
+    QDir dirObj2(dir2);
+
+    if (!dirObj1.exists() || !dirObj2.exists()) {
+        qWarning() << "One or both directories do not exist.";
+        return false;
+    }
+
+    // 使用QSet来存储第一个文件夹中的文件名，以便快速查找
+    QSet<QString> fileNamesSet;
+
+    // 获取第一个文件夹中的所有文件名
+    QFileInfoList fileInfoList1 = dirObj1.entryInfoList(QDir::Files);
+    for (const QFileInfo& fileInfo : fileInfoList1) {
+        fileNamesSet.insert(fileInfo.fileName());
+    }
+
+    // 遍历第二个文件夹，检查是否有同名文件
+    QFileInfoList fileInfoList2 = dirObj2.entryInfoList(QDir::Files);
+    for (const QFileInfo& fileInfo : fileInfoList2) {
+        if (fileNamesSet.contains(fileInfo.fileName())) {
+            return true; // 找到同名文件
+        }
+    }
+
+    return false; // 没有找到同名文件
+}
+//遍历U盘中是否有某个文件
+QString upgradedialog::findFileAndGetDirectory(const QString &usbPath, const QString &fileName) {
+    QDir dir(usbPath);
+
+    if (!dir.exists()) {
+        qWarning() << "USB directory does not exist:" << usbPath;
+        return QString();
+    }
+
+    QStringList entries = dir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot, QDir::DirsFirst);
+
+    for (const QString &entry : entries) {
+        QFileInfo fileInfo(dir.absoluteFilePath(entry));
+
+        if (fileInfo.isFile() && fileInfo.fileName() == fileName) {
+            return fileInfo.absolutePath()+DECOLLATOR+fileName;
+        } else if (fileInfo.isDir()) {
+            QString result = findFileAndGetDirectory(fileInfo.absoluteFilePath(), fileName);
+            if (!result.isEmpty()) {
+                return result;
+            }
+        }
+    }
+    return QString();
+}
+
+void upgradedialog::on_cut_button_clicked()
+{//剪切
+    cutOperation = true;
+    copyFileOrFolder();
+}
+
+void upgradedialog::on_copy_button_clicked()
+{//复制
+    cutOperation = false;
+    copyFileOrFolder();
+}
+
+void upgradedialog::on_paste_button_clicked()
+{//粘贴
+    pasteFileOrFolder();
+}
+
+void upgradedialog::on_ok_button_clicked()
+{//确定
+    QModelIndex currentIndex = ui->file_listView->currentIndex();
+
+    switch (sure_handle_type) {
+    case HANDHELD:
+    {
+        if (currentIndex.isValid() && FileSystemModel->isDir(currentIndex))
+        { // 检查索引是否有效并且当前选中是否为目录
+            ui->file_listView->setRootIndex(currentIndex); // 设置文件列表视图的根索引为该目录
+            updatePath(currentIndex);                      // 更新路径显示
+        }
+        else
+        {
+            UpFilePath = FileSystemModel->filePath(ui->file_listView->currentIndex());
+            Upgrade_Progress_send(5);
+            QThread *UpdataThread = new QThread();
+            connect(UpdataThread,&QThread::started,this,&upgradedialog::Updata_handle);
+            this->hide();
+            emit updataWidgetShowSignal();
+            UpdataThread->start();
+        }
+        break;
+    }
+    case MAINBOARD:
+    {
+        break;
+    }
+    case IOBOARD:
+    {
+        break;
+    }
+    case SERVO:
+    {
+        break;
+    }
+    case SYSTEM_DATA_COPY:
+    {
+        if (currentIndex.isValid() && FileSystemModel->isDir(currentIndex))
+        { // 检查索引是否有效并且当前选中是否为目录
+            Upgrade_Progress_send(20);
+            QString currentPath = FileSystemModel->filePath(currentIndex);
+            if(ui->teach_checkbox->isChecked())
+            {//如果选择的是示教文件
+                copyPath(m_ProgramPath,currentPath);
+            }
+            else if(ui->SysDate_checkbox->isChecked())
+            {
+                copyPath("/root",currentPath);
+            }
+            else if(ui->Cust_checkbox->isChecked())
+            {
+
+            }
+            else if(ui->All_checkbox->isChecked())
+            {
+                copyPath(m_ProgramPath,currentPath);
+                copyPath("/root",currentPath);
+            }
+        }
+        break;
+    }
+    case COPY_DATA_REST:
+    {
+        break;
+    }
+    default:
+        break;
+    }
+
+}
+
+void upgradedialog::on_new_button_clicked()
+{//新建文件夹
+//    QString newName;
+//    if (newName.isEmpty())
+//        return;
+//    QString parentPath = FileSystemModel->filePath(ui->file_listView->rootIndex());
+//    QDir dir;
+//    if (!dir.exists(parentPath + DECOLLATOR + newName))
+//    {
+//        if (dir.mkdir(parentPath + DECOLLATOR + newName))
+//        {
+//        }
+//        else
+//        {
+//            QMessageBox::information(this, tr("mkdir message"), tr("新建文件夹失败"));
+//        }
+//    }
+//    else
+//    {
+//        QMessageBox::information(this, tr("mkdir message"), tr("新建文件夹失败"));
+//    }
+}
+//重命名
+void upgradedialog::on_Rename_button_clicked()
+{
+
+}
+void upgradedialog::on_delete_button_clicked()
+{//删除
+    QModelIndexList indexes = ui->file_listView->selectionModel()->selectedIndexes();
+    for (QModelIndex index : indexes)
+    {
+        if (FileSystemModel->fileInfo(index).isDir())
+        {
+            QString filePath = FileSystemModel->filePath(index);
+            QDir dir(filePath);
+            if (dir.exists())
+            {
+                dir.removeRecursively();
+            }
+        }
+        else
+        {
+            FileSystemModel->remove(index);
+        }
+    }
+    ui->file_listView->clearSelection();
+}
+
+// 手持器升级文件拷贝函数，适用于后台线程
+void upgradedialog::Updata_handle() {
+    QDir destdir(destFilePath);
+    // 若路径不存在则创建不存在的文件,不然无法复制粘贴成功
+    if (!destdir.exists())
+    {
+        destdir.mkdir(destFilePath);
+    }
+    QCoreApplication::processEvents();
+    Upgrade_Progress_send(10);
+    QFileInfo fileInfo(UpFilePath);
+    QString fileName = fileInfo.fileName();
+    if(fileName != "MachineTool")
+    {
+        MainWindow::pMainWindow->showErrorTip("请选择文件名为MachineTool的升级文件进行升级");
+        this->close();
+        return;
+    }
+    QFile destfile(destFilePath+fileName);
+    if (destfile.exists())
+    {
+        destfile.remove();
+    }
+    Upgrade_Progress_send(20);
+    if(QFile::copy(UpFilePath, destFilePath+fileName))
+    {
+        Upgrade_Progress_send(50);
+        //进行程序校验
+//        if(verifyHash(destFilePath+fileName,expectedHash))
+        {//校验通过
+            QString backupPash = "/opt/MachineTool/bin/MachineTool";
+            QFile backfile(backupPash);
+            if(backfile.exists())
+            {
+                QFile::copy(backupPash,backupPash+".bak");//备份当前可执行文件
+                backfile.remove();
+            }
+            Upgrade_Progress_send(80);
+            if(QFile::copy(destFilePath+fileName,backupPash))
+            {//升级成功，重新启动程序
+                Upgrade_Progress_send(100);
+                system("reboot");
+//                QString pid = "";
+//                QProcess  pgrepProcess;
+//                pgrepProcess.start("/bin/sh", QStringList() << "-c" << "ps aux | grep '/opt/MachineTool/bin/MachineTool'");
+//                pgrepProcess.waitForFinished();
+
+//                QString output = pgrepProcess.readAllStandardOutput();
+//                QStringList lines = output.split('\n');
+//                foreach (const QString &line, lines) {
+//                    QStringList fields = line.split(' ');
+//                    if(fields.size()>=6)
+//                    {
+//                        pid = fields.at(0);
+//                        if(fields.at(6).contains("/opt/MachineTool/bin/MachineTool"))
+//                        {//如果获取到的ID的进程名与预期一致，运行升级后的app并杀掉老进程
+//                            QProcess_execute("/opt/MachineTool/bin/MachineTool",QStringList());
+//                        }
+//                    }
+//                }
+            }
+            else
+            {
+                qDebug()<<"升级失败";
+            }
+        }
+    }
+}
+
+bool upgradedialog::verifyHash(const QString &filePath, const QByteArray &expectedHash) {
+        QFile file(filePath);
+        if (!file.open(QIODevice::ReadOnly)) {
+            qWarning() << "Failed to open file for hash verification.";
+            return false;
+        }
+
+        QByteArray fileData = file.readAll();
+        QByteArray actualHash = QCryptographicHash::hash(fileData, QCryptographicHash::Sha256);
+
+        return actualHash == expectedHash;
+}
+
+//发送升级进度信号函数
+void upgradedialog::Upgrade_Progress_send(uint8_t progress)
+{
+    Upgrade_Progress = progress;
+    emit UpProgressRefreshSignal();
+}
+

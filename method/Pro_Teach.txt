@@ -1,0 +1,87 @@
+[P_AxisMoveCmd]
+0=[%1] [%2] 位置%3mm 速度4% 提前%5mm 延时%6s
+[P_ClawActionCmd]
+0=[%1] 延时%2s
+[P_ClawCheckCmd]
+0=[%1] 检测开始 延时%2s
+1=[%1] 检测结束 延时%2s
+[P_ReserveCheckCmd]
+0=[%1] 通检测开始 延时%2s
+1=[%1] 断检测开始 延时%2s
+2=[%1] 检测结束 延时%2s
+[P_MachineOutCmd]
+0=[%1] 延时%2s
+[P_StackResetZeroCmd]
+0=堆叠清零 延时%1s
+[P_StackMoveCmd]
+0=堆叠 延时%1s [%2]
+[P_StackFollowCmd]
+0=放料跟随 [%1] 延时%2s 
+[P_ReserveOutCmd]
+0=[%1] 通 延时%2s 间隔周期%3
+1=[%1] 通时 延时%2s 间隔周期%3
+2=[%1] 翻转 延时%2s 间隔周期%3
+[P_WaitInMachineCmd]
+0=等待[%1] 延时%2s
+[P_WaitInClawCmd]
+0=等待[%1]通 限时%2s
+1=等待[%1]断 限时%2s
+2=[%1]位置修正 延时%2s
+[P_WaitInReserveCmd]
+0=等待[%1]通 限时%2s
+1=等待[%1]断 限时%2s
+2=等待[%1]上升沿信号 限时%2s
+3=等待[%1]下降沿信号 限时%2s
+4=等待[%1]跳变沿信号 限时%2s
+[P_OtherAlarmCustCmd]
+0=延时动作 延时%1s
+[P_OtherAlarmCustCmd]
+0=报警自定义 编号%1
+[P_OtherCycStopCmd]
+0=周期停止
+[P_OtherAlarmLampCmd]
+0=[报警灯]开 延时%1s
+1=[报警灯]关 延时%1s
+[P_OtherAlarmSoundCmd]
+0=[报警声]开 延时%1s
+1=[报警声]关 延时%1s
+[P_LabelCmd]
+0=[标签%1] %2
+[P_LogicIfCmd]
+0=如果[%1]
+1=如果[%1] 并且 [%2]
+2=否则
+3=结束如果
+[P_LogicWhileStartCmd]
+0=循环开始%1次
+1=循环结束
+[P_LogicVarCmd]
+0=[%1] + %2
+1=[%1] 赋值给 [%2]
+[P_LogicAxisCmd]
+0=[%1] + %2
+1=[%1] 赋值给 [%2]
+[P_LogicStackCmd]
+0=[%1] + %2
+1=[%1] 赋值给 [%2]
+[P_LogicCurProductNumCmd]
+0=[%1] + %2
+1=[%1] 赋值给 [%2]
+[P_LogicTimeCmd]
+0=定时开始 %1
+1=定时结束 %1
+2=定时清零 %1
+[P_SearchAxisMoveCmd]
+0=%1 [%2]搜索%3mm 速度%4 提前%5mm 延时%6s 到位报警 停止信号：[%7]
+1=感应停止 延时%1s
+[P_OffsetAxisCmd]
+0=[1%]偏移%2mm  速度%3 提前%4mm 延时%5s
+[P_TorqueGardCmd]
+0=[1%]转矩保护2%
+[P_AxisStopCmd]
+0=伺服停止:[1%]延时2%s
+[P_SunProCmd]
+0=标准[1%]
+1=自动[1%]
+2=并行一次[1%]
+3=等待[1%]完成 限时2%s

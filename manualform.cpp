@@ -1,0 +1,934 @@
+﻿#include "manualform.h"
+#include "ui_manualform.h"
+
+#include <QPushButton>
+#include <QToolButton>
+#include <QHeaderView>
+#include <QTabBar>
+#include <QString>
+#include <QDebug>
+
+#include "mainwindow.h"
+
+QString REFERPOINT_PIC = ":/images/referPoint.png";
+
+ManualForm::ManualForm(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::ManualForm)
+{
+    ui->setupUi(this);
+
+    initVar();
+
+    // set tab to be invisible
+//    ui->tabAxisAction->setVisible(false);
+//    ui->tabWidgetManualPage->removeTab(1);
+    initControls();
+
+    tableReferenceInit();
+    pageInit();
+
+    ui->tabGuide->installEventFilter(this);
+    ui->tabReference->installEventFilter(this);
+//    ui->tabReference->removeEventFilter(this);
+    ui->tabWidgetManualPage->installEventFilter(this);
+
+    for (auto cobox : findChildren<QComboBox*>())
+    {
+        cobox->setFocusPolicy(Qt::NoFocus);
+    }
+
+    ui->editAxisActionSpeed->setDecimalPlaces(1);
+    ui->editPositionAdd->setDecimalPlaces(2);
+    ui->editPositionSub->setDecimalPlaces(2);
+    connect(ui->editAxisActionSpeed,&NumberEdit::textChanged,[=](const QString &){
+        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        m_manualAxis.speed=ui->editAxisActionSpeed->text().toFloat() * 10;
+        m_manualAxis.pos_pos=ui->editPositionAdd->text().toFloat() * 100;
+        m_manualAxis.sub_pos=ui->editPositionSub->text().toFloat() * 100;
+        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
+        setManualAxis(m_manualAxis);
+    });
+    connect(ui->editPositionAdd,&NumberEdit::textChanged,[=](const QString &){
+        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        m_manualAxis.speed=ui->editAxisActionSpeed->text().toFloat() * 10;
+        m_manualAxis.pos_pos=ui->editPositionAdd->text().toFloat() * 100;
+        m_manualAxis.sub_pos=ui->editPositionSub->text().toFloat() * 100;
+        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
+        setManualAxis(m_manualAxis);
+    });
+    connect(ui->editPositionSub,&NumberEdit::textChanged,[=](const QString &){
+        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        m_manualAxis.speed=ui->editAxisActionSpeed->text().toFloat() * 10;
+        m_manualAxis.pos_pos=ui->editPositionAdd->text().toFloat() * 100;
+        m_manualAxis.sub_pos=ui->editPositionSub->text().toFloat() * 100;
+        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
+    });
+    connect(ui->chbZAxisDesend, QOverload<int>::of(&QCheckBox::stateChanged), [=](int){
+        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        m_manualAxis.speed=ui->editAxisActionSpeed->text().toFloat() * 10;
+        m_manualAxis.pos_pos=ui->editPositionAdd->text().toFloat() * 100;
+        m_manualAxis.sub_pos=ui->editPositionSub->text().toFloat() * 100;
+        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
+    });
+
+
+    connect(ui->btnIntoStack, &QPushButton::clicked, this , [=](){
+        emit sigShowStackPage();
+    });
+
+//    connect(ui->tabWidgetManualPage, &QTabWidget::currentChanged, this, &ManualForm::onTabChanged);
+//    connect(MainWindow::pMainWindow, &MainWindow::sigEnterManualPage, this, [=]() {
+//        ui->tabWidgetManualPage->setCurrentIndex(4);
+//    });
+//    connect(MainWindow::pMainWindow, &MainWindow::sigLeaveManualPage, this, [=]() {
+//        int index = ui->tabWidgetManualPage->currentIndex();
+
+//        if (index == 0)
+//        {
+//            onCheckSavedGuide();
+//        }
+//        else if (index == 4)
+//        {
+//            onCheckSavedReferPointPara();
+//        }
+//    });
+
+    /*********************************操作指引逻辑********************************************/
+    connect(ui->editGuideKeyDef, &KeyEdit::saveKeyDef, this, &ManualForm::onSaveKeyDef);
+
+    connect(ui->btnHideGuide, &QPushButton::toggled, this, [=](bool checked){
+
+        ui->checkBoxEditPosGuide->setVisible(checked);
+        ui->btnImportPictureGuide->setVisible(checked);
+        ui->btnNewButton->setVisible(checked);
+        ui->btnDeleteButton->setVisible(checked);
+    });
+    /*********************************参考点逻辑********************************************/
+    connect(ui->btnHideReference, &QPushButton::toggled, this, [=](bool checked){
+
+        ui->checkBoxEditPosReference->setVisible(checked);
+        ui->btnImportPictureReference->setVisible(checked);
+        ui->btnNewButtonReference->setVisible(checked);
+        ui->btnDeleteButtonReference->setVisible(checked);
+    });
+
+}
+
+ManualForm::~ManualForm()
+{
+    delete ui;
+    qDeleteAll(guidePoints.keys());
+}
+
+void ManualForm::initControls()
+{
+    ui->cb_axisActionAxis->setCurrentIndex(m_manualAxis.axis);
+    ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed/10.0));
+    ui->editPositionAdd->setText(QString::number(m_manualAxis.pos_pos/100.0));
+    ui->editPositionSub->setText(QString::number(m_manualAxis.sub_pos/100.0));
+    ui->chbZAxisDesend->setChecked(m_manualAxis.ZDrop);
+}
+
+void ManualForm::on_btnNewButton_clicked()
+{
+    if (guidePoints.size() < GUIDE_TOTAL_NUM)
+    {
+        DraggableButton* btn = new DraggableButton(ui->tabGuide);
+        btn->setDraggable(draggable[0]);
+        btn->setCheckable(draggable[0]);
+        btn->setAutoExclusive(true);
+
+        btn->setFixedSize(120, 40);
+        QPoint btnPos = QPoint(20 + 120 * (guidePoints.size() / 8), 20 + 50 * (guidePoints.size() % 8));
+        btn->setGeometry(QRect(btnPos, btn->size()));
+        QString btnName = tr((QString("按钮") + QString::number(guidePoints.size() + 1)).toUtf8().constData());
+        btn->setText(btnName);
+        btn->show();
+
+        // Create GuidePara for the new button
+        GuidePara newGuidePara = { btnName, "0", btnPos, 0, 0 ,0};
+
+        // Insert into QHash
+        guidePoints.insert(btn, newGuidePara);
+
+        // Connect button pressed signal
+        connect(btn, &DraggableButton::pressed, this, [=]() {
+            selectedButton[0] = btn;
+            selectedButton[0]->setChecked(draggable[0]);
+
+            // Set the guide info in the UI as needed
+            if (guidePoints.contains(selectedButton[0])) {
+                GuidePara para = guidePoints.value(selectedButton[0]);
+                // update correspongding keyDef name in UI，
+                 ui->editGuideKeyDef->setText(para.keyDefStr);
+            }
+        });
+        connect(btn, &DraggableButton::positionChanged, [=]() {
+            auto it = guidePoints.find(selectedButton[0]);
+            if (it != guidePoints.end()) {
+                it.value().btnPos = btnPos;
+                ui->btnSaveGuide->setParaChangedFlag(true);
+            }
+        });
+        ui->btnSaveGuide->setParaChangedFlag(true);;
+    }
+}
+
+void ManualForm::on_btnDeleteButton_clicked()
+{
+    if (selectedButton[0] && guidePoints.contains(selectedButton[0]))
+    {
+        QString guideName = guidePoints.value(selectedButton[0]).guideName;
+        int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除：%1").arg(guideName));
+        if (reply == QDialog::Accepted)
+        {
+           // Remove the button and corresponding GuidePara
+           guidePoints.remove(selectedButton[0]);
+           delete selectedButton[0];
+
+           ui->btnSaveGuide->setParaChangedFlag(true);
+       }
+    }
+
+    if (guidePoints.isEmpty())
+    {
+        selectedButton[0] = nullptr;
+    }
+    else
+    {
+        DraggableButton* btn = guidePoints.keys().first();
+        btn->setChecked(true);
+
+        selectedButton[0] = btn;
+    }
+}
+
+void ManualForm::on_checkBoxEditPosGuide_stateChanged(int arg1)
+{
+    // Update draggable state
+    draggable[0] = arg1;
+
+    // Iterate over all buttons in guidePoints
+    for (auto btn : guidePoints.keys())
+    {
+        btn->setDraggable(draggable[0]);
+        // Optionally, set the buttons to be checkable as well
+        btn->setCheckable(draggable[0]);
+    }
+
+    selectedButton[0]->setChecked(draggable[0]);
+}
+
+void ManualForm::on_btnNewButtonReference_clicked()
+{
+    if (referencePoints.size() < REFERENCE_TOTAL_NUM)
+    {
+        addReferencePoint();
+        updateReferPointsTable();
+        ui->btnSaveReference->setParaChangedFlag(true);
+    }
+}
+
+void ManualForm::on_btnDeleteButtonReference_clicked()
+{
+    if (!referencePoints.isEmpty())
+    {
+        if (selectedButton[1])
+        {
+            auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+                return point.button == selectedButton[1];
+            });
+            if (it != referencePoints.end())
+            {
+                QString referName = it->name;
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("确定删除：%1").arg(referName));
+                if (reply == QDialog::Accepted)
+                {
+                    removeReferencePoint();
+                    updateReferPointsTable();
+                    ui->btnSaveReference->setParaChangedFlag(true);
+                }
+            }
+        }
+    }
+}
+
+void ManualForm::updateReferPointsTable()
+{
+    tableReference->clearContents();
+    tableReference->setRowCount(referencePoints.count() / 4 + 1);
+
+    QList<ReferPointPara> sortedPoints = referencePoints;
+    std::sort(sortedPoints.begin(), sortedPoints.end(), [](const ReferPointPara &a, const ReferPointPara &b) {
+        return a.index < b.index;
+    });
+
+    int num = 0;
+    for (const auto &point : sortedPoints)
+    {
+        int row = num / 4;
+        int col = (num % 4) * 2;
+        num++;
+
+        QTableWidgetItem *indexItem = new QTableWidgetItem(QString::number(point.index));
+        indexItem->setFlags(indexItem->flags() & ~Qt::ItemIsEnabled);
+        indexItem->setForeground(QBrush(Qt::black));
+        tableReference->setItem(row, col, indexItem);
+
+        QTableWidgetItem *nameItem = new QTableWidgetItem(point.name);
+        tableReference->setItem(row, col + 1, nameItem);
+    }
+
+    for (int row = 0; row < tableReference->rowCount(); ++row)
+    {
+        for (int col = 0; col < tableReference->columnCount(); ++col)
+        {
+            if (!tableReference->item(row, col))
+            {
+                QTableWidgetItem *emptyItem = new QTableWidgetItem("");
+                emptyItem->setFlags(emptyItem->flags() & ~(Qt::ItemIsSelectable | Qt::ItemIsEnabled));
+                tableReference->setItem(row, col, emptyItem);
+            }
+        }
+    }
+
+    tableReference->setVisible(!referencePoints.isEmpty());
+    // 选中当前checked button 对应的item
+    if (selectedButton[1] == nullptr) return;
+
+    int index = selectedButton[1]->text().toInt();
+    for (int row = 0; row < tableReference->rowCount(); ++row)
+    {
+        for (int col = 0; col < tableReference->columnCount(); ++col)
+        {
+            QTableWidgetItem *indexItem = tableReference->item(row, col);
+            if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index)
+            {
+                tableReference->setCurrentCell(row, col + 1);
+                break;
+            }
+        }
+    }
+}
+
+void ManualForm::on_checkBoxEditPosReference_stateChanged(int arg1)
+{
+    draggable[1] = arg1;
+
+    for (auto point : referencePoints)
+    {
+        point.button->setDraggable(draggable[1]);
+    }
+}
+
+
+void ManualForm::tableReferenceInit()
+{
+    tableReference = new QTableWidget(ui->frameRerencePoint);
+
+    // Set table to be uneditable
+    tableReference->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    // Set table to be unselectable
+//    tableReference->setSelectionMode(QAbstractItemView::NoSelection);
+    // Initialize table to be invisible
+    tableReference->setVisible(referencePoints.size());
+    tableReference->setFrameShape(QFrame::NoFrame);
+    tableReference->setFrameShadow(QFrame::Raised);
+
+    tableReference->setMaximumHeight(40 * 3);
+    tableReference->setFixedWidth(760);
+
+    tableReference->setColumnCount(8); // 4 pairs of index and button name
+    tableReference->verticalHeader()->setVisible(false); // Hide vertical header
+    tableReference->horizontalHeader()->setVisible(false); // Hide horizontal header
+
+
+    tableReference->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);// Hide scroll bar
+    tableReference->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    // Disable automatic column resizing
+//    tableReference->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    // must set minimum section size for horizontalHeader, otherwise setColumnWidth can not work
+    tableReference->horizontalHeader()->setMinimumSectionSize(30);
+    tableReference->verticalHeader()->setDefaultSectionSize(40);
+    for (int i = 0; i < tableReference->columnCount(); ++i) {
+        tableReference->setColumnWidth(i, (i % 2 == 0) ? 40 : 140); // Alternate between 40 and 140 width
+    }
+
+    connect(tableReference, &QTableWidget::itemPressed, this, [=](QTableWidgetItem *item) {
+        int row = item->row();
+        int col = item->column() - 1;
+        QTableWidgetItem *indexItem = tableReference->item(row, col);
+        int index = indexItem->data(Qt::DisplayRole).toInt();
+//        if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index)
+
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point){
+            return point.index == index;
+        });
+        if (it != referencePoints.end())
+        {
+            DraggableButton* btn =  it->button;
+            btn->setChecked(true);
+            selectedButton[1] = btn;
+            QString name = it->name;
+            ui->textReferPointName->setText(name);
+        }
+    });
+
+}
+
+void ManualForm::pageInit()
+{
+    ui->checkBoxEditPosGuide->setVisible(false);
+    ui->btnImportPictureGuide->setVisible(false);
+    ui->btnNewButton->setVisible(false);
+    ui->btnDeleteButton->setVisible(false);
+
+    ui->checkBoxEditPosReference->setVisible(false);
+    ui->btnImportPictureReference->setVisible(false);
+    ui->btnNewButtonReference->setVisible(false);
+    ui->btnDeleteButtonReference->setVisible(false);
+
+    ui->tableWgtAxisPos->setHorizontalHeaderLabels({tr("轴位置")});
+
+    ui->labelGuideBackgroud->setPixmap(QPixmap(""));
+    QPixmap picReferPoint(REFERPOINT_PIC);
+    picReferPoint.scaled(ui->labReferPointBackGround->size());
+    ui->labReferPointBackGround->setPixmap(picReferPoint);
+
+}
+
+int ManualForm::getNextAvailableIndex()
+{
+    QSet<int> usedIndices;
+    for (const auto &point : referencePoints)
+    {
+        usedIndices.insert(point.index);
+    }
+    for (int i = 1; i <= REFERENCE_TOTAL_NUM; ++i)
+    {
+        if (!usedIndices.contains(i))
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+
+void ManualForm::updateGuidePoints()
+{
+
+    for (auto it = guidePoints.begin(); it != guidePoints.end(); ++it)
+    {
+        DraggableButton* btn = it.key();
+        if (btn)
+        {
+            delete btn;
+            btn = nullptr;
+        }
+    }
+    guidePoints.clear();
+
+    for (int i = 0; i < GUIDE_TOTAL_NUM; i++)
+    {
+        if (m_Guide[i].guideFlag == false) break; // 操作点无效
+
+        QString guideName = m_Guide[i].guideName;
+        QString keyDefStr = m_Guide[i].keyDefStr;
+        QPoint btnPos =  m_Guide[i].btnPos;
+        uint8_t keyType = m_Guide[i].keyType;
+        uint8_t portNum = m_Guide[i].portNum;
+        uint8_t status = m_Guide[i].status;
+        GuidePara guide { guideName, keyDefStr, btnPos, keyType, portNum, status };
+
+        DraggableButton* btn = new DraggableButton(ui->tabGuide);
+        guidePoints.insert(btn, guide);
+
+        connect(btn, &DraggableButton::pressed, this, [=]() {
+            selectedButton[0] = btn;
+            selectedButton[0]->setChecked(draggable[0]);
+
+            // Set the guide info in the UI as needed
+            if (guidePoints.contains(selectedButton[0])) {
+                GuidePara para = guidePoints.value(selectedButton[0]);
+                // update correspongding keyDef name in UI，
+                 ui->editGuideKeyDef->setText(para.keyDefStr);
+            }
+        });
+        connect(btn, &DraggableButton::positionChanged, [=]() {
+            QPoint btnPos = btn->pos();
+            auto it = guidePoints.find(selectedButton[0]);
+            if (it != guidePoints.end()) {
+                it.value().btnPos = btnPos;
+                ui->btnSaveGuide->setParaChangedFlag(true);;
+            }
+        });
+    }
+
+    for (auto it = guidePoints.begin(); it != guidePoints.end(); ++it)
+    {
+        DraggableButton* btn = it.key();
+        GuidePara guide = it.value();
+
+        if (btn) {
+//            bool state = ui->checkBoxEditPosGuide->isChecked();
+            btn->setDraggable(draggable[0]);
+            btn->setText(guide.guideName);
+            btn->setGeometry(QRect(guide.btnPos, QSize(120, 45)));
+        }
+    }
+
+}
+
+void ManualForm::updateReferPointsList()
+{
+    for (auto& point : referencePoints)
+    {
+        delete point.button;
+        point.button = nullptr;
+    }
+    referencePoints.clear();
+
+    for (int i = 0; i < REFERENCE_TOTAL_NUM; i++)
+    {
+        if (true == m_RefPoint[i].refFlag)
+        {
+            QString referName = m_RefPoint[i].refName;
+            int refIndex = i + 1;
+            DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
+            QPoint btnPos(m_RefPoint[i].xPos, m_RefPoint[i].yPos);
+            ReferPointPara point = {refIndex, referName, btn, btnPos};
+            referencePoints.push_back(point);
+
+            btn->setCheckable(true);
+            btn->setAutoExclusive(true);
+            btn->setDraggable(draggable[1]);
+            btn->setFixedSize(40, 40);
+            btn->setStyleSheet("QPushButton{ border-style:solid; outline:none; border-width:1px; border-radius:20px;}");
+
+            btn->move(point.pointPos);
+            btn->setText(QString::number(point.index));
+            btn->show();
+            connect(btn, &DraggableButton::positionChanged, this, [=](){
+                auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+                    return point.button == btn;
+                });
+                if (it != referencePoints.end())
+                {
+                    it->pointPos = btn->pos();
+                    ui->btnSaveReference->setParaChangedFlag(true);;
+                }
+            });
+
+            connect(btn, &DraggableButton::pressed, this, [=]() {
+                selectedButton[1] = btn;
+
+                int index = 0;
+                auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& p) {
+                    return p.button == selectedButton[1];
+                });
+                if (it != referencePoints.end()) {
+                    ui->textReferPointName->setText(it->name);
+                    index = it->index;
+                }
+                for (int row = 0; row < tableReference->rowCount(); ++row) {
+                    for (int col = 0; col < tableReference->columnCount(); ++col) {
+                        QTableWidgetItem *indexItem = tableReference->item(row, col);
+                        if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index) {
+                            tableReference->setCurrentCell(row, col + 1);
+                            return;
+                        }
+                    }
+                }
+            }, Qt::UniqueConnection);
+        }
+    }
+    if (referencePoints.isEmpty())
+    {
+        selectedButton[1] = nullptr;
+    }
+    else
+    {
+        selectedButton[1] = referencePoints.at(0).button;
+        selectedButton[1]->setChecked(true);
+        emit selectedButton[1]->pressed();
+    }
+
+    updateReferPointsTable();
+
+}
+
+const QList<ReferPointPara> &ManualForm::getRerferPoints() const
+{
+    return referencePoints;
+}
+
+void ManualForm::addReferencePoint()
+{
+    DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
+    btn->setCheckable(true);
+    btn->setAutoExclusive(true);
+    btn->setDraggable(draggable[1]);
+    btn->setFixedSize(40, 40);
+    btn->setStyleSheet("QPushButton{ border-style:solid; outline:none; border-width:1px; border-radius:20px;}");
+
+    int newIndex = getNextAvailableIndex();
+    if (newIndex == 0)
+    {
+        return;
+    }
+    QString referName = QString("参考点%1").arg(newIndex);
+    int posIndex = newIndex - 1;
+    QPoint btnPos = QPoint(10 + 42 * (posIndex / 7), 120 + 42 * (posIndex % 7));
+
+    ReferPointPara point = {newIndex, referName, btn, btnPos};
+    referencePoints.append(point);
+
+    btn->setGeometry(QRect(btnPos, btn->size()));
+    btn->setText(QString::number(point.index));
+    btn->show();
+
+    // this is used to update point geometry pos in ui
+    connect(btn, &DraggableButton::positionChanged, this, [=](){
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == btn;
+        });
+        if (it != referencePoints.end())
+        {
+            it->pointPos = btn->pos();
+            ui->btnSaveReference->setParaChangedFlag(true);
+        }
+    });
+
+    connect(btn, &DraggableButton::pressed, this, [=]() {
+        selectedButton[1] = btn;
+
+        int index = 0;
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+        if (it != referencePoints.end())
+        {
+            ui->textReferPointName->setText(it->name);
+            index = it->index;
+        }
+        for (int row = 0; row < tableReference->rowCount(); ++row)
+        {
+            for (int col = 0; col < tableReference->columnCount(); ++col)
+            {
+                QTableWidgetItem *indexItem = tableReference->item(row, col);
+                if (indexItem && indexItem->data(Qt::DisplayRole).toInt() == index)
+                {
+//                        qDebug() << "Found item with armedIndex:" << index
+//                                 << " at row:" << row
+//                                 << " col:" << col;
+                    tableReference->setCurrentCell(row, col + 1);
+//                        tableReference->itemPressed(tableReference->itemAt(row, col + 1));
+                    return ;
+                }
+            }
+        }
+    });
+
+    if (selectedButton[1] == nullptr)
+    {
+       selectedButton[1] = btn;
+       btn->setChecked(true);
+       emit btn->pressed();
+    }
+}
+
+void ManualForm::removeReferencePoint()
+{
+    if (selectedButton[1])
+    {
+        // 找到与 selectedButton[1] 关联的 ReferPointPara
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+
+        if (it != referencePoints.end())
+        {
+            delete it->button;
+            referencePoints.erase(it);
+            selectedButton[1] = nullptr;
+        }
+    }
+    if (!referencePoints.isEmpty())
+    {
+        selectedButton[1] = referencePoints.last().button;
+        selectedButton[1]->setChecked(true);
+        emit selectedButton[1]->pressed();
+    }
+    else {
+        selectedButton[1] = nullptr;
+    }
+}
+
+bool ManualForm::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::Hide) {
+//        QString objectName = watched->objectName();
+//        qDebug() << objectName << "was hidden";
+
+        if (watched == ui->tabGuide) {
+            onCheckSavedGuide();
+            return true;
+        }
+        else if (watched == ui->tabReference) {
+            onCheckSavedReferPointPara();
+            return true;
+        }
+        else if (watched == ui->tabWidgetManualPage) {
+//            qDebug() << "QTabWidget was hidden";
+            int index = ui->tabWidgetManualPage->currentIndex();
+            if (index == 0)
+            {
+                onCheckSavedGuide();
+                return true;
+            }
+            else if (index == 4)
+            {
+                onCheckSavedReferPointPara();
+                return true;
+            }
+        }
+    }
+    return QWidget::eventFilter(watched, event);
+}
+
+void ManualForm::on_btnEditReference_clicked()
+{
+    if (selectedButton[1])
+    {
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+
+        if (it != referencePoints.end())
+        {
+
+            FullKeyboard *keyboard = FullKeyboard::instance();
+            keyboard->setText(it->name);
+            keyboard->setCurrentEditObj(ui->textReferPointName);
+            keyboard->exec(); // must use exec here, using open cannot ensure to save the name.
+
+            QString text = keyboard->getInputText();
+            if (it->name != text )
+            {
+                it->name = text;
+                ui->btnSaveReference->setParaChangedFlag(true);
+            }
+        }
+    }
+}
+
+void ManualForm::initVar()
+{
+    draggable[0] = false;
+    draggable[1] = false;
+    selectedButton[0] = nullptr;
+    selectedButton[1] = nullptr;
+}
+
+void ManualForm::on_btnEditGuideName_clicked()
+{
+    if (selectedButton[0] == nullptr) return;
+
+    QString guideName = selectedButton[0]->text();
+
+    FullKeyboard *keyboard = FullKeyboard::instance();
+    keyboard->setText(guideName);
+    keyboard->setCurrentEditObj(selectedButton[0]);
+    keyboard->exec();
+
+    QString currentText = selectedButton[0]->text();
+
+    if (guideName != currentText)
+    {
+        DraggableButton *currentButton = selectedButton[0];
+
+        GuidePara &guidePara = guidePoints[currentButton];
+        guidePara.guideName = currentText;
+
+        ui->btnSaveGuide->setParaChangedFlag(true);
+    }
+}
+
+void ManualForm::onSaveKeyDef()
+{
+    // save the KeyDef setting in coresponding guidePoints
+    if (selectedButton[0] && guidePoints.contains(selectedButton[0]))
+    {
+        guidePoints[selectedButton[0]].keyDefStr = ui->editGuideKeyDef->text();
+        // save the corresponding parameters in struct GuidePara
+        guidePoints[selectedButton[0]].keyType = ui->editGuideKeyDef->getKeyType();
+        guidePoints[selectedButton[0]].portNum = ui->editGuideKeyDef->getPortNum();
+        guidePoints[selectedButton[0]].status = ui->editGuideKeyDef->getKeyFuncStatus();
+
+        ui->btnSaveGuide->setParaChangedFlag(true);
+    }
+}
+
+void ManualForm::onCheckSavedGuide()
+{
+    if (ui->btnSaveGuide->isParaChanged() == false) {
+        return;
+    }
+    int reply =  MainWindow::pMainWindow->showErrorTip(tr("操作指引参数有修改，是否需要保存？"));
+    if (reply == QDialog::Accepted)
+    {
+        on_btnSaveGuide_clicked();
+    }
+    else if (reply == QDialog::Rejected)
+    {
+        updateGuidePoints();
+    }
+    ui->btnSaveGuide->setParaChangedFlag(false);;
+}
+
+void ManualForm::onCheckSavedReferPointPara()
+{
+    if (ui->btnSaveReference->isParaChanged() == false) {
+        return;
+    }
+    int reply =  MainWindow::pMainWindow->showErrorTip(tr("参考点参数有修改，是否需要保存？"));
+    if (reply == QDialog::Accepted)
+    {
+        on_btnSaveReference_clicked();
+    }
+    else if (reply == QDialog::Rejected)
+    {
+        updateReferPointsList();
+    }
+    ui->btnSaveReference->setParaChangedFlag(false);
+}
+void ManualForm::on_btnSaveGuide_clicked()
+{
+//    for (auto& [k, v] : guidePoints)
+//    {
+
+//    }
+
+    P_GuideStruct defaultGuide = {0, "", "0", QPoint(0, 0), 0, 0, 0};
+
+    // 清空 m_Guide 数组
+    std::fill(std::begin(m_Guide), std::end(m_Guide), defaultGuide);
+
+    int index = 0;
+    for (const auto& guide : guidePoints) {
+        if (index >= GUIDE_TOTAL_NUM) break;
+
+        m_Guide[index].guideFlag = true;
+        m_Guide[index].guideName = guide.guideName;
+        m_Guide[index].keyDefStr = guide.keyDefStr;
+        m_Guide[index].btnPos = guide.btnPos;
+        m_Guide[index].keyType = guide.keyType;
+        m_Guide[index].portNum = guide.portNum;
+        m_Guide[index].status = guide.status;
+        ++index;
+    }
+    ui->btnSaveGuide->setParaChangedFlag(false);
+
+}
+void ManualForm::on_btnSaveReference_clicked()
+{
+    if (selectedButton[1])
+    {
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+
+        if (it != referencePoints.end())
+        {
+            it->name = ui->textReferPointName->toPlainText();
+            QPoint pointPos = selectedButton[1]->geometry().topLeft();
+            it->pointPos = pointPos;
+
+            updateReferPointsTable();
+        }
+    }
+
+
+    // 重置结构体信息
+    P_RefStruct defaultRefPoint = {0, {0}, {0}, "", 0, 0};
+    std::fill(std::begin(m_RefPoint), std::end(m_RefPoint), defaultRefPoint);
+
+   // 更新结构体信息
+    for (int i = 0; i < referencePoints.size(); i++)
+    {
+        int arrayIndex = referencePoints.at(i).index - 1;
+        m_RefPoint[arrayIndex].refFlag = true;
+        //            m_RefPoint[arrayIndex].index = referencePoints.at(i).index;
+        m_RefPoint[arrayIndex].refName = referencePoints.at(i).name;
+        m_RefPoint[arrayIndex].xPos = referencePoints.at(i).pointPos.x();
+        m_RefPoint[arrayIndex].yPos = referencePoints.at(i).pointPos.y();
+    }
+
+    ui->btnSaveReference->setParaChangedFlag(false);
+}
+
+void ManualForm::onTabChanged(int index)
+{
+
+    static int lastTabIndex = 4;
+    if (lastTabIndex == 0)
+    {
+        onCheckSavedGuide();
+    }
+    else if (lastTabIndex == 4)
+    {
+//        qDebug() << "check if referPoint has been saved";
+        onCheckSavedReferPointPara();
+    }
+    lastTabIndex = index;
+}
+
+void ManualForm::on_btnImportPictureGuide_clicked()
+{
+    bool useDefultPic = false;
+    QPixmap pic("./guide.png");
+    if (pic.isNull())
+    {
+        int res = MainWindow::pMainWindow->showErrorTip(tr("未找到图片：guide.png，图片像素: 1001×450px。是否使用默认图片？"));
+        useDefultPic = res == QDialog::Accepted;
+
+        if (useDefultPic)
+        {
+            pic = QPixmap(":/images/guide.png");
+        }
+        else {
+            pic = QPixmap("./guide.png");
+        }
+    }
+    ui->labelGuideBackgroud->setPixmap(pic);
+}
+
+void ManualForm::on_btnImportPictureReference_clicked()
+{
+    bool useDefultPic = false;
+    QPixmap pic("./referPoint.png");
+    if (pic.isNull())
+    {
+        int res = MainWindow::pMainWindow->showErrorTip(
+                    tr("未找到图片: referPoint.png，图片像素: 760×480px。是否使用默认图片？"));
+        useDefultPic = res == QDialog::Accepted;
+
+        if (useDefultPic)
+        {
+            REFERPOINT_PIC = ":/images/referPoint.png";
+            pic = QPixmap(":/images/referPoint.png");
+        }
+        else {
+            REFERPOINT_PIC = "./referPoint.png";
+            pic = QPixmap("./referPoint.png");
+        }
+    }
+    ui->labReferPointBackGround->setPixmap(pic);
+}
+
+void ManualForm::on_cb_axisActionAxis_currentIndexChanged(int index)
+{
+    m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+}

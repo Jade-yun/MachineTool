@@ -1,0 +1,2870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IfProgramDialog</class>
+ <widget class="QDialog" name="IfProgramDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>900</width>
+    <height>620</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <widget class="QPushButton" name="btnOK">
+   <property name="geometry">
+    <rect>
+     <x>630</x>
+     <y>570</y>
+     <width>110</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCancel">
+   <property name="geometry">
+    <rect>
+     <x>770</x>
+     <y>570</y>
+     <width>110</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+  <widget class="QTabWidget" name="tabWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>50</y>
+     <width>881</width>
+     <height>511</height>
+    </rect>
+   </property>
+   <property name="currentIndex">
+    <number>0</number>
+   </property>
+   <widget class="QWidget" name="tabSig">
+    <attribute name="title">
+     <string>信号</string>
+    </attribute>
+    <widget class="QTabWidget" name="tabWgtMainBoard">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>761</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tabMainBoard">
+      <attribute name="title">
+       <string>主板</string>
+      </attribute>
+      <widget class="QGroupBox" name="grboxMBSigIn">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>10</y>
+         <width>741</width>
+         <height>181</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>输入</string>
+       </property>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>30</y>
+          <width>556</width>
+          <height>134</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="chboxMainBoardIn0">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="StateButton" name="btnMainBoardIn0">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QComboBox" name="coboxMainBoardIn0">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>X1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X4</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X5</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X6</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X7</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X8</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X9</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X10</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X11</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X12</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QCheckBox" name="chboxMainBoardIn1">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="StateButton" name="btnMainBoardIn1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QComboBox" name="coboxMainBoardIn1">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>X13</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X14</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X15</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X16</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X17</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X18</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X19</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X20</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X21</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X22</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X23</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X24</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="chboxMainBoardIn2">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="StateButton" name="btnMainBoardIn2">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QComboBox" name="coboxMainBoardIn2">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>X25</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X26</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X27</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X28</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X29</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X30</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X31</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X32</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X33</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X34</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X35</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>X36</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QCheckBox" name="chboxMainBoardInExtend0">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="StateButton" name="btnMainBoardInExtend0">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QComboBox" name="coboxMainBoardInExtend0">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>EX1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX4</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX5</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX6</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX7</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX8</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX9</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX10</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX11</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX12</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="chboxMainBoardInExtend1">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="StateButton" name="btnMainBoardInExtend1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QComboBox" name="coboxMainBoardInExtend1">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>EX13</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX14</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX15</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX16</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX17</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX18</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX19</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX20</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX21</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX22</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX23</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EX24</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="grboxMBSigOut">
+       <property name="geometry">
+        <rect>
+         <x>5</x>
+         <y>200</y>
+         <width>741</width>
+         <height>181</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>输出</string>
+       </property>
+       <widget class="QWidget" name="layoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>30</y>
+          <width>556</width>
+          <height>134</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <item row="0" column="1">
+          <widget class="StateButton" name="btnMainBoardOut0">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QComboBox" name="coboxMainBoardOut2">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>Y17</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y18</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y19</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y20</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y21</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y22</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y23</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y24</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QComboBox" name="coboxMainBoardOutExtend1">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>EY9</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY10</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY11</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY12</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY13</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY14</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY15</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY16</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="chboxMainBoardOut0">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QComboBox" name="coboxMainBoardOut0">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>Y1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y4</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y5</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y6</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y7</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y8</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="4">
+          <widget class="StateButton" name="btnMainBoardOut1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="StateButton" name="btnMainBoardOutExtend1">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QComboBox" name="coboxMainBoardOut1">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>Y9</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y10</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y11</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y12</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y13</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y14</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y15</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Y16</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QCheckBox" name="chboxMainBoardOutExtend0">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="StateButton" name="btnMainBoardOut2">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="StateButton" name="btnMainBoardOutExtend0">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="chboxMainBoardOutExtend1">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="3">
+          <widget class="QCheckBox" name="chboxMainBoardOut1">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QComboBox" name="coboxMainBoardOutExtend0">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>EY1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY4</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY5</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY6</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY7</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY8</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="chboxMainBoardOut2">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QCheckBox" name="chboxMainBoardOutExtend2">
+           <property name="minimumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>50</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="layoutDirection">
+            <enum>Qt::RightToLeft</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="autoExclusive">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="StateButton" name="btnMainBoardOutExtend2">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>通</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QComboBox" name="coboxMainBoardOutExtend2">
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <item>
+            <property name="text">
+             <string>EY17</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY18</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY19</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>EY20</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabVar">
+    <attribute name="title">
+     <string>变量</string>
+    </attribute>
+    <widget class="QGroupBox" name="grboxVar">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>861</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>变量</string>
+     </property>
+     <widget class="QComboBox" name="coboxVarStackPreOp2">
+      <property name="geometry">
+       <rect>
+        <x>67</x>
+        <y>179</y>
+        <width>150</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>堆叠1组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠2组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠3组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠4组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠5组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠6组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠7组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠8组</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="chboxVariableVar">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>42</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>变量</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chboxRealProd">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>42</y>
+        <width>151</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>实际产量</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chboxConstantStack">
+      <property name="geometry">
+       <rect>
+        <x>456</x>
+        <y>134</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>常量</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="coboxVarRealProductNumPreOp">
+      <property name="geometry">
+       <rect>
+        <x>67</x>
+        <y>87</y>
+        <width>150</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>实际产量</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="chbox3Var">
+      <property name="geometry">
+       <rect>
+        <x>21</x>
+        <y>133</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chboxConstantRealProd">
+      <property name="geometry">
+       <rect>
+        <x>456</x>
+        <y>88</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>常量</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="coboxVarSelectPreOp">
+      <property name="geometry">
+       <rect>
+        <x>67</x>
+        <y>41</y>
+        <width>150</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>变量1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>变量2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>变量3</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>变量4</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>变量5</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>变量6</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>变量7</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>变量8</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="chboxConstantVar">
+      <property name="geometry">
+       <rect>
+        <x>456</x>
+        <y>42</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>常量</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chbox4Var">
+      <property name="geometry">
+       <rect>
+        <x>21</x>
+        <y>179</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="coboxVarOperand3">
+      <property name="geometry">
+       <rect>
+        <x>223</x>
+        <y>133</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≥</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≤</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≠</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>==</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="coboxVarOperand2">
+      <property name="geometry">
+       <rect>
+        <x>223</x>
+        <y>87</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≥</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≤</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≠</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>==</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="chbox1Var">
+      <property name="geometry">
+       <rect>
+        <x>21</x>
+        <y>41</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chboxStack">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>134</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>堆叠</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="coboxVarOperand4">
+      <property name="geometry">
+       <rect>
+        <x>223</x>
+        <y>179</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>≠</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>==</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="coboxVarOperand1">
+      <property name="geometry">
+       <rect>
+        <x>223</x>
+        <y>41</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≥</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≤</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≠</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>==</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="chboxVariableRealProd">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>88</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>变量</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="coboxVarStackPreOp1">
+      <property name="geometry">
+       <rect>
+        <x>67</x>
+        <y>133</y>
+        <width>150</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>150</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>堆叠1组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠2组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠3组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠4组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠5组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠6组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠7组</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>堆叠8组</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QCheckBox" name="chbox2Var">
+      <property name="geometry">
+       <rect>
+        <x>21</x>
+        <y>87</y>
+        <width>40</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>299</x>
+        <y>41</y>
+        <width>152</width>
+        <height>391</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="NumberEdit" name="editVarPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxVarSelectPostOp1">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>变量1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxVarRealProductNumPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>实际产量</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="NumberEdit" name="editRealProdNumPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxVarSelectPostOp2">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>变量1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="NumberEdit" name="editStackPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxVarStackPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>堆叠1组</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>堆叠2组</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>堆叠3组</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>堆叠4组</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>堆叠5组</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>堆叠6组</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>堆叠7组</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>堆叠8组</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxVarFinisStack">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>堆叠完成</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabPos">
+    <attribute name="title">
+     <string>位置</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>861</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>位置表达式</string>
+     </property>
+     <widget class="QCheckBox" name="chboxConstantPos">
+      <property name="geometry">
+       <rect>
+        <x>374</x>
+        <y>60</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>位置</string>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chboxAxis">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>60</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>轴</string>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="chboxVariablePos">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>60</y>
+        <width>100</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>变量</string>
+      </property>
+      <property name="autoExclusive">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="coboxPosPreOpAxisSelect">
+      <property name="geometry">
+       <rect>
+        <x>11</x>
+        <y>60</y>
+        <width>80</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>80</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>X1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Z1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Y1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Z2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Y2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>C</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>B</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>A</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="coboxOperandPos">
+      <property name="geometry">
+       <rect>
+        <x>97</x>
+        <y>60</y>
+        <width>70</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>70</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>40</height>
+       </size>
+      </property>
+      <item>
+       <property name="text">
+        <string>&gt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>&lt;</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≥</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≤</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>≠</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>==</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>171</x>
+        <y>60</y>
+        <width>185</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QHBoxLayout" name="hLayoutPos">
+         <item>
+          <widget class="NumberEdit" name="editPosPostOp">
+           <property name="minimumSize">
+            <size>
+             <width>115</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>0.00</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labPosUnit">
+           <property name="minimumSize">
+            <size>
+             <width>60</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>mm</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxPosVarSelectPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>变量1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>变量8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxPosPostOpAxisSelect">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>X1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Z1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Z2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Y2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>C</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>B</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>A</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tabTimer">
+    <attribute name="title">
+     <string>定时器</string>
+    </attribute>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>861</width>
+       <height>441</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>定时器表达式</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>791</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QComboBox" name="coboxTimerPreOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>定时器1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxTimerOperand">
+         <property name="minimumSize">
+          <size>
+           <width>70</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>&gt;</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>&lt;</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>≥</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>≤</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>≠</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>==</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="NumberEdit" name="editTimerPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>115</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>115</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>0.00</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labTimerUnit">
+         <property name="minimumSize">
+          <size>
+           <width>35</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>s</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="coboxTimerPostOp">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>定时器1</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器2</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器3</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器4</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器5</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器6</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器7</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>定时器8</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="chboxConstantTimer">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>常量</string>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="chboxTimerTimer">
+         <property name="minimumSize">
+          <size>
+           <width>80</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>定时器</string>
+         </property>
+         <property name="autoExclusive">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NumberEdit</class>
+   <extends>QLineEdit</extends>
+   <header>customedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>StateButton</class>
+   <extends>QPushButton</extends>
+   <header>statebutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

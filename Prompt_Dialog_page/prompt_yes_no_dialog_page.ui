@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>prompt_yes_no_Dialog_page</class>
+ <widget class="QDialog" name="prompt_yes_no_Dialog_page">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>310</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog{
+	border:1px solid rgb(85, 87, 83);
+	border-radius :10px;
+	background-color:rgb(191, 217, 244);
+}
+
+QLabel{
+	font:24px;
+
+	border-radius :10px;
+}
+
+QPushButton{
+	outline:nono;/*去掉焦点虚线框*/
+	border-radius:10px;
+	background-color:rgb(211, 236, 239);
+	border: 1px solid rgb(85, 87, 83);
+	font:24px;
+}
+
+/*按下时的动态效果*/
+QPushButton:pressed{
+	padding-right:3px;
+	padding-bottom:3px;
+    border-style: outset;
+    background-color: qradialgradient(
+        cx: 0.3, cy: -0.4, fx: 0.3, fy: -0.4,
+        radius: 1.35, stop: 0  #FFF, stop: 1  #28A8EB );    	
+}
+
+/*按钮点击后虚线框消失*/
+QPushButton:focus{
+	outline:none;
+}</string>
+  </property>
+  <widget class="QLabel" name="prompt_label_top">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>480</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	background-color:rgb(46, 165, 250);
+	font:24px;
+}</string>
+   </property>
+   <property name="text">
+    <string>提    示</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="yes_no_content_label">
+   <property name="geometry">
+    <rect>
+     <x>76</x>
+     <y>64</y>
+     <width>325</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <property name="wordWrap">
+    <bool>true</bool>
+   </property>
+   <property name="openExternalLinks">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Key_yes_no_page_no">
+   <property name="geometry">
+    <rect>
+     <x>272</x>
+     <y>240</y>
+     <width>115</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Key_yes_no_page_yes">
+   <property name="geometry">
+    <rect>
+     <x>84</x>
+     <y>240</y>
+     <width>115</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
