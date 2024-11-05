@@ -44,11 +44,15 @@ private:
     upgradedialog *UpgradeDialog;
 private:
     void init();
+    void initWidgets();
+
     void readFromConfigFile();
     void writeToConfigFile();
 
 
     void syncParaToUI(); // 初始化时同步结构体参数到ui上显示
+
+    void updateRegisterCodeDisplay();
 public:
     void UpgradeHandle(int click_type);
     void showPortDefine();          //显示端口自定义

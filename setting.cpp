@@ -20,6 +20,8 @@
 
 const QString notePath = "/root/notepad/";
 
+QVector<QString> registerCode;
+
 Setting::Setting(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Setting)
@@ -33,58 +35,12 @@ Setting::Setting(QWidget *parent) :
     }
 
     init();
-
-    ui->updata_widget->hide();
-
-    ui->tableWgtPortDef->horizontalHeader()->setVisible(true);
-    ui->tableWgtPortDef->verticalHeader()->setVisible(true);
-    ui->tableWgtPortDef->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableWgtPortDef->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableWgtPortDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    ui->tableWgtNameDef->horizontalHeader()->setVisible(true);
-    ui->tableWgtNameDef->verticalHeader()->setVisible(true);
-    ui->tableWgtNameDef->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableWgtNameDef->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableWgtNameDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    ui->tableWgtNote->setColumnCount(2);
-    ui->tableWgtNote->setHorizontalHeaderLabels({ tr("标题") , tr("修改时间")});
-    ui->tableWgtNote->verticalHeader()->setVisible(true);
-     ui->tableWgtNote->horizontalHeader()->setVisible(true);
-
-    ui->tableWgtNote->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableWgtNote->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableWgtNote->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    ui->tableWgtNote->setColumnWidth(0, 180);
-    ui->tableWgtNote->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed); // 第一列宽度固定
-    ui->tableWgtNote->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch); // 第二列可伸缩
-    ui->tableWgtNote->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-
-    QDir dirNote(notePath);
-    QFileInfoList noteInfoList = dirNote.entryInfoList({"*.txt"}, QDir::Files | QDir::NoDotAndDotDot);
-
-    for (const auto noteInfo : noteInfoList)
-    {
-        QString title = noteInfo.fileName().split(".").first();
-        QString noteTime = noteInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
-
-        int rowCount = ui->tableWgtNote->rowCount();
-        ui->tableWgtNote->insertRow(rowCount);
-        ui->tableWgtNote->setItem(rowCount, 0, new QTableWidgetItem(title));
-        ui->tableWgtNote->setItem(rowCount, 1, new QTableWidgetItem(noteTime));
-
-//        ui->editNoteTitle->setText(title);
-//        ui->plainTextEditNote->clear();
-    }
-
+    initWidgets();
 
     syncParaToUI();
 
     pageSwitchInit();
     setupCommunicationConnections();
-
 
 
     ui->editBrightTime->setInputRange(30, 65535);
@@ -561,6 +517,56 @@ void Setting::init()
 #endif
 }
 
+void Setting::initWidgets()
+{
+
+    ui->updata_widget->hide();
+
+    ui->tableWgtPortDef->horizontalHeader()->setVisible(true);
+    ui->tableWgtPortDef->verticalHeader()->setVisible(true);
+    ui->tableWgtPortDef->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWgtPortDef->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableWgtPortDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->tableWgtNameDef->horizontalHeader()->setVisible(true);
+    ui->tableWgtNameDef->verticalHeader()->setVisible(true);
+    ui->tableWgtNameDef->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWgtNameDef->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableWgtNameDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->tableWgtNote->setColumnCount(2);
+    ui->tableWgtNote->setHorizontalHeaderLabels({ tr("标题") , tr("修改时间")});
+    ui->tableWgtNote->verticalHeader()->setVisible(true);
+     ui->tableWgtNote->horizontalHeader()->setVisible(true);
+
+    ui->tableWgtNote->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableWgtNote->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableWgtNote->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->tableWgtNote->setColumnWidth(0, 180);
+    ui->tableWgtNote->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Fixed); // 第一列宽度固定
+    ui->tableWgtNote->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch); // 第二列可伸缩
+    ui->tableWgtNote->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    QDir dirNote(notePath);
+    QFileInfoList noteInfoList = dirNote.entryInfoList({"*.txt"}, QDir::Files | QDir::NoDotAndDotDot);
+
+    for (const auto noteInfo : noteInfoList)
+    {
+        QString title = noteInfo.fileName().split(".").first();
+        QString noteTime = noteInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+
+        int rowCount = ui->tableWgtNote->rowCount();
+        ui->tableWgtNote->insertRow(rowCount);
+        ui->tableWgtNote->setItem(rowCount, 0, new QTableWidgetItem(title));
+        ui->tableWgtNote->setItem(rowCount, 1, new QTableWidgetItem(noteTime));
+
+//        ui->editNoteTitle->setText(title);
+//        ui->plainTextEditNote->clear();
+    }
+
+}
+
 void Setting::readFromConfigFile()
 {
     // 信号设置
@@ -906,6 +912,33 @@ void Setting::syncParaToUI()
 
 }
 
+void Setting::updateRegisterCodeDisplay()
+{
+    QLineEdit* edits[8] = {
+        ui->editCode, ui->editCode_2, ui->editCode_3,ui->editCode_4,
+        ui->editCode_5, ui->editCode_6, ui->editCode_7, ui->editCode_8
+    };
+
+
+    for (int i = 0; i < 8; i++) {
+        // Create a string of 4 characters for the current group (a group is 4 characters)
+        QString group = "";
+
+        // We want to display the last 4 characters in each QLineEdit
+        for (int j = 0; j < 4; j++) {
+            int index = i * 4 + j;
+            if (index < registerCode.size()) {
+                group += registerCode.at(index);
+            } else {
+                group += " ";  // Fill in empty spaces if we haven't reached 4 characters for this group
+            }
+        }
+
+        // Assign the group to the corresponding QLineEdit
+        edits[i]->setText(group);
+    }
+}
+
 void Setting::pageSwitchInit()
 {
     /******************************************************************************/
@@ -1193,6 +1226,7 @@ void Setting::pageSwitchInit()
         }
     });
 
+    /****************************************************************************/
     connect(ui->coboxIOTSelection, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index){
     //    qDebug() << "index = " << index;
     if (index == 2)
@@ -1210,6 +1244,45 @@ void Setting::pageSwitchInit()
     }
     ui->stkWidgetIPSet->setCurrentIndex(index);
     });
+    /************************************************************************/
+
+    {
+            QPushButton* inputBtns[16] = {
+                ui->btn0, ui->btn1, ui->btn2, ui->btn3, ui->btn4, ui->btn5, ui->btn6, ui->btn7,
+                ui->btn8, ui->btn9, ui->btn10, ui->btn11, ui->btn12, ui->btn13, ui->btn14, ui->btn15
+            };
+            QString hexChars[16] = {
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
+            };
+            for (int i = 0; i < 16; i++)
+            {
+                connect(inputBtns[i], &QPushButton::clicked, this, [=](){
+                    if (registerCode.size() < 32)
+                    {
+                        QString hexChar = hexChars[i];
+                        registerCode.append(hexChar);
+                        updateRegisterCodeDisplay();
+                    }
+                });
+            }
+
+            connect(ui->btnClearCode, &QPushButton::clicked, this, [=]() {
+                if(registerCode.isEmpty())
+                    return;
+                registerCode.clear();
+                registerCode.squeeze();
+                updateRegisterCodeDisplay();
+            });
+
+            connect(ui->btnBackspaceCode, &QPushButton::clicked, this, [=]() {
+                if (!registerCode.isEmpty())
+                {
+                    registerCode.removeLast();
+                    updateRegisterCodeDisplay();
+                }
+            });
+
+    }
 
     /***************************************Safe setting part**********************************************************/
 
