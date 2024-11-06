@@ -23,6 +23,14 @@ void   setValue(QString prefix, QString key, uint32_t value);
 int32_t getValue(QString prefix, QString key, int32_t defaultV);
 void   setValue(QString prefix, QString key, int32_t value);
 
+// 保存密码
+/**
+ * @brief savePasswdToConfig
+ * @param authority 0-为管理员权限键值后缀 1-超级管理员权限键值后缀 2-菜单权限键值后缀
+ * @param value 密码
+ */
+void savePasswdToConfig(int authority, uint32_t value);
+void readPasswdFromConfig();
 
 /*****************相关参数保存*****************/
 //输出类型

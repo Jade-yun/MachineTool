@@ -53,6 +53,7 @@ private:
     void syncParaToUI(); // 初始化时同步结构体参数到ui上显示
 
     void updateRegisterCodeDisplay();
+    void handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, const int suffix);
 public:
     void UpgradeHandle(int click_type);
     void showPortDefine();          //显示端口自定义

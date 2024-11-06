@@ -42,6 +42,123 @@ Setting::Setting(QWidget *parent) :
     pageSwitchInit();
     setupCommunicationConnections();
 
+    connect(ui->btnSavePasswdAdmin, &QPushButton::clicked, [=]() {
+        QList<NumberEdit*> edits = {ui->editAdminOldPasswd, ui->editAdminNewPasswd, ui->editAdminNewPasswdConfirm};
+        handleSavePasswd(&passwd[0], edits, 0);
+    });
+
+    connect(ui->btnSavePasswdSuperAdmin, &QPushButton::clicked, [=]() {
+        QList<NumberEdit*> edits = {ui->editSuperAdminOldPasswd, ui->editSuperAdminNewPasswd, ui->editSuperAdminNewPasswdConfirm};
+        handleSavePasswd(&passwd[1], edits, 1);
+    });
+
+    connect(ui->btnSavePasswdMenu, &QPushButton::clicked, [=]() {
+        QList<NumberEdit*> edits = {ui->editMenuOldPasswd, ui->editMenuNewPasswd, ui->editMenuNewPasswdConfirm};
+        handleSavePasswd(&passwd[2], edits, 2);
+    });
+
+//    connect(ui->btnSavePasswdAdmin, &QPushButton::clicked, [=]() {
+//       NumberEdit* const edits[] = {ui->editAdminOldPasswd, ui->editAdminNewPasswd, ui->editAdminNewPasswdConfirm};
+//        if (edits[1]->text().isEmpty())
+//            return;
+//        uint oldPasswd = edits[0]->text().toUInt();
+//        uint newPasswd = edits[1]->text().toUInt();
+//        uint confirmPasswd = edits[2]->text().toUInt();
+
+//        if (passwd[0] != oldPasswd)
+//        {
+//            MainWindow::pMainWindow->showErrorTip(tr("旧密码错误！"), TipMode::ONLY_OK);
+//            return;
+//        }
+
+//        if (newPasswd != confirmPasswd)
+//        {
+//            MainWindow::pMainWindow->showErrorTip(tr("两次输入密码不一致！"), TipMode::ONLY_OK);
+//            return;
+//        }
+
+//        if (passwd[0] == oldPasswd && newPasswd == confirmPasswd)
+//        {
+//            passwd[0] = newPasswd;
+
+//            // save the passwd to configuration file
+
+//            MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
+//            for (auto edit : edits)
+//            {
+//                edit->clear();
+//            }
+//        }
+
+//    });
+//    connect(ui->btnSavePasswdSuperAdmin, &QPushButton::clicked, [=]() {
+//       NumberEdit* const edits[] = {ui->editSuperAdminOldPasswd, ui->editSuperAdminNewPasswd, ui->editSuperAdminNewPasswdConfirm};
+//        if (edits[1]->text().isEmpty())
+//            return;
+//        uint oldPasswd = edits[0]->text().toUInt();
+//        uint newPasswd = edits[1]->text().toUInt();
+//        uint confirmPasswd = edits[2]->text().toUInt();
+
+//        if (passwd[1] != oldPasswd)
+//        {
+//            MainWindow::pMainWindow->showErrorTip(tr("旧密码错误！"), TipMode::ONLY_OK);
+//            return;
+//        }
+
+//        if (newPasswd != confirmPasswd)
+//        {
+//            MainWindow::pMainWindow->showErrorTip(tr("两次输入密码不一致！"), TipMode::ONLY_OK);
+//            return;
+//        }
+
+//        if (passwd[1] == oldPasswd && newPasswd == confirmPasswd)
+//        {
+//            passwd[1] = newPasswd;
+
+//            // save the passwd to configuration file
+
+//            MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
+//            for (auto edit : edits)
+//            {
+//                edit->clear();
+//            }
+//        }
+
+//    });
+//    connect(ui->btnSavePasswdMenu, &QPushButton::clicked, [=]() {
+//       NumberEdit* const edits[] = {ui->editMenuOldPasswd, ui->editMenuNewPasswd, ui->editMenuNewPasswdConfirm};
+//        if (edits[1]->text().isEmpty())
+//            return;
+//        uint oldPasswd = edits[0]->text().toUInt();
+//        uint newPasswd = edits[1]->text().toUInt();
+//        uint confirmPasswd = edits[2]->text().toUInt();
+
+//        if (passwd[2] != oldPasswd)
+//        {
+//            MainWindow::pMainWindow->showErrorTip(tr("旧密码错误！"), TipMode::ONLY_OK);
+//            return;
+//        }
+
+//        if (newPasswd != confirmPasswd)
+//        {
+//            MainWindow::pMainWindow->showErrorTip(tr("两次输入密码不一致！"), TipMode::ONLY_OK);
+//            return;
+//        }
+
+//        if (passwd[2] == oldPasswd && newPasswd == confirmPasswd)
+//        {
+//            passwd[2] = newPasswd;
+
+//            // save the passwd to configuration file
+
+//            MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
+//            for (auto edit : edits)
+//            {
+//                edit->clear();
+//            }
+//        }
+
+//    });
 
     ui->editBrightTime->setInputRange(30, 65535);
     connect(ui->editBrightTime, &NumberEdit::textChanged, [=](const QString& val){
@@ -187,6 +304,16 @@ void Setting::init()
     for (NumberEdit* edit : ui->tabWidgetSystem->findChildren<NumberEdit*>())
     {
         edit->setDecimalPlaces(0);
+    }
+    // 密码设置
+    for (NumberEdit* edit : ui->tabPasswdSet->findChildren<NumberEdit*>())
+    {
+        edit->setInputRange(0, 65535);
+    }
+    // 物联网
+    for (NumberEdit* edit : ui->stkWidgetIPSet->findChildren<NumberEdit*>())
+    {
+        edit->setInputRange(0, 255);
     }
 
     // 伺服安全点所有编辑框精度0.01
@@ -937,6 +1064,39 @@ void Setting::updateRegisterCodeDisplay()
         // Assign the group to the corresponding QLineEdit
         edits[i]->setText(group);
     }
+}
+
+void Setting::handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, const int suffix)
+{
+    if (edits[1]->text().isEmpty() || edits[2]->text().isEmpty()) {
+        MainWindow::pMainWindow->showErrorTip(tr("密码不能为空！"), TipMode::ONLY_OK);
+        return;
+    }
+
+    uint oldPasswd = edits[0]->text().toUInt();
+    uint newPasswd = edits[1]->text().toUInt();
+    uint confirmPasswd = edits[2]->text().toUInt();
+
+    if (*passwd != oldPasswd) {
+        MainWindow::pMainWindow->showErrorTip(tr("旧密码错误！"), TipMode::ONLY_OK);
+        return;
+    }
+
+    if (newPasswd != confirmPasswd) {
+        MainWindow::pMainWindow->showErrorTip(tr("两次输入密码不一致！"), TipMode::ONLY_OK);
+        return;
+    }
+
+    *passwd = newPasswd;
+
+    // save the passwd to configuration file
+    ::savePasswdToConfig(suffix, *passwd);
+
+    MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
+    for (auto edit : edits) {
+        edit->clear();
+    }
+
 }
 
 void Setting::pageSwitchInit()

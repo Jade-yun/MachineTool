@@ -7,6 +7,8 @@ cmd::cmd()
 
 }
 
+uint32_t passwd[3] = {12345, 12345, 12345};
+
 P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM] = {0};                                 //教导界面轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
 P_ClawActionStruct Temp_ClawActionStruct[3] = {0};                                          //教导界面卡爪动作结构体
 P_MachineOutStruct Temp_MachineOutStruct[6] = {0};                                          //教导界面机床输出控制

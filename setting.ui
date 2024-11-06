@@ -20024,7 +20024,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>5</number>
      </property>
      <property name="iconSize">
       <size>
@@ -22068,7 +22068,7 @@ border: 1px solid black;
         <string>版本信息</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>60</x>
@@ -22569,14 +22569,14 @@ border: 1px solid black;
        </widget>
       </widget>
      </widget>
-     <widget class="QWidget" name="tabStopDisconnect_3">
+     <widget class="QWidget" name="tabPasswdSet">
       <attribute name="title">
        <string>密码设置</string>
       </attribute>
       <widget class="QGroupBox" name="groupBoxAdmin">
        <property name="geometry">
         <rect>
-         <x>19</x>
+         <x>10</x>
          <y>30</y>
          <width>321</width>
          <height>461</height>
@@ -22623,25 +22623,22 @@ border: 1px solid black;
          </size>
         </property>
        </widget>
-       <widget class="QWidget" name="layoutWidget">
+       <widget class="QWidget" name="">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>40</y>
-          <width>308</width>
+          <x>11</x>
+          <y>42</y>
+          <width>301</width>
           <height>301</height>
          </rect>
         </property>
-        <layout class="QGridLayout" name="gridLayout_52">
+        <layout class="QGridLayout" name="gridLayout_4">
+         <property name="rightMargin">
+          <number>6</number>
+         </property>
          <item row="0" column="0">
           <widget class="QLabel" name="label_264">
            <property name="minimumSize">
-            <size>
-             <width>125</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
             <size>
              <width>125</width>
              <height>40</height>
@@ -22651,7 +22648,7 @@ border: 1px solid black;
             <string>旧密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -22665,18 +22662,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>旧密码</string>
@@ -22691,22 +22691,16 @@ border: 1px solid black;
              <height>40</height>
             </size>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>125</width>
-             <height>40</height>
-            </size>
-           </property>
            <property name="text">
             <string>新密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="NumberEdit" name="editAdminConfirmNewPasswd">
+          <widget class="NumberEdit" name="editAdminNewPasswd">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -22715,18 +22709,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>新密码</string>
@@ -22737,13 +22734,7 @@ border: 1px solid black;
           <widget class="QLabel" name="label_268">
            <property name="minimumSize">
             <size>
-             <width>140</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>140</width>
+             <width>125</width>
              <height>40</height>
             </size>
            </property>
@@ -22751,12 +22742,12 @@ border: 1px solid black;
             <string>确认新密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="NumberEdit" name="lineEdit_211">
+          <widget class="NumberEdit" name="editAdminNewPasswdConfirm">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -22765,18 +22756,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>确认新密码</string>
@@ -22789,7 +22783,7 @@ border: 1px solid black;
       <widget class="QGroupBox" name="groupBoxSuperAdmin">
        <property name="geometry">
         <rect>
-         <x>360</x>
+         <x>351</x>
          <y>30</y>
          <width>320</width>
          <height>461</height>
@@ -22841,11 +22835,14 @@ border: 1px solid black;
          <rect>
           <x>10</x>
           <y>40</y>
-          <width>308</width>
+          <width>301</width>
           <height>301</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_53">
+         <property name="horizontalSpacing">
+          <number>0</number>
+         </property>
          <item row="0" column="0">
           <widget class="QLabel" name="label_265">
            <property name="minimumSize">
@@ -22864,7 +22861,7 @@ border: 1px solid black;
             <string>旧密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -22878,18 +22875,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>旧密码</string>
@@ -22914,7 +22914,7 @@ border: 1px solid black;
             <string>新密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -22928,18 +22928,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>新密码</string>
@@ -22950,13 +22953,7 @@ border: 1px solid black;
           <widget class="QLabel" name="label_270">
            <property name="minimumSize">
             <size>
-             <width>140</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>140</width>
+             <width>125</width>
              <height>40</height>
             </size>
            </property>
@@ -22964,7 +22961,7 @@ border: 1px solid black;
             <string>确认新密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -22978,18 +22975,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>确认新密码</string>
@@ -23002,7 +23002,7 @@ border: 1px solid black;
       <widget class="QGroupBox" name="groupBoxMenuAuthority">
        <property name="geometry">
         <rect>
-         <x>690</x>
+         <x>681</x>
          <y>30</y>
          <width>320</width>
          <height>461</height>
@@ -23054,11 +23054,14 @@ border: 1px solid black;
          <rect>
           <x>10</x>
           <y>40</y>
-          <width>308</width>
+          <width>301</width>
           <height>301</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_54">
+         <property name="horizontalSpacing">
+          <number>0</number>
+         </property>
          <item row="0" column="0">
           <widget class="QLabel" name="label_276">
            <property name="minimumSize">
@@ -23077,7 +23080,7 @@ border: 1px solid black;
             <string>旧密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -23091,18 +23094,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>旧密码</string>
@@ -23127,7 +23133,7 @@ border: 1px solid black;
             <string>新密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -23141,18 +23147,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>新密码</string>
@@ -23163,13 +23172,7 @@ border: 1px solid black;
           <widget class="QLabel" name="label_278">
            <property name="minimumSize">
             <size>
-             <width>140</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>140</width>
+             <width>125</width>
              <height>40</height>
             </size>
            </property>
@@ -23177,7 +23180,7 @@ border: 1px solid black;
             <string>确认新密码：</string>
            </property>
            <property name="alignment">
-            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
            </property>
           </widget>
          </item>
@@ -23191,18 +23194,21 @@ border: 1px solid black;
            </property>
            <property name="minimumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>150</width>
+             <width>140</width>
              <height>40</height>
             </size>
            </property>
            <property name="text">
             <string/>
+           </property>
+           <property name="echoMode">
+            <enum>QLineEdit::Password</enum>
            </property>
            <property name="placeholderText">
             <string>确认新密码</string>
@@ -23213,7 +23219,7 @@ border: 1px solid black;
        </widget>
       </widget>
      </widget>
-     <widget class="QWidget" name="tabKeyCustomize_3">
+     <widget class="QWidget" name="tabIot">
       <attribute name="title">
        <string>物联网</string>
       </attribute>
@@ -24725,7 +24731,7 @@ border: 1px solid black;
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>110</x>

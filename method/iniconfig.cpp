@@ -4,6 +4,8 @@
 //配置文件相对路径
 QString m_configFileNamePath="/root/Ini_Para.txt";
 
+const QString sysSetConfigPath = "/Settings/sys_set.ini";
+
 /*************************************************************************
 **	输入参数：prefix:节点 key:键 defaultV:默认值
 **	输出参数：值
@@ -990,3 +992,22 @@ QStringList getIniValues(uint8_t type, QString node)
 
 
 
+
+void savePasswdToConfig(int authority, uint32_t value)
+{
+    QSettings settings(sysSetConfigPath, QSettings::IniFormat);
+    settings.beginGroup("Passwd");
+    settings.setValue(QString("Authority_%1").arg(authority), value);
+    settings.endGroup();
+}
+
+void readPasswdFromConfig()
+{
+    for (int i = 0; i < 3; i++)
+    {
+        QSettings settings(sysSetConfigPath, QSettings::IniFormat);
+        settings.beginGroup("Passwd");
+        passwd[i] = settings.value(QString("Authority_%1").arg(i), 12345).toUInt();
+        settings.endGroup();
+    }
+}
