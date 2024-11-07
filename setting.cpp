@@ -5,11 +5,12 @@
 #include <QPair>
 #include <QPropertyAnimation>
 #include <QDebug>
-#include <QSignalMapper>
 #include <QThread>
+#include <QRadioButton>
 
 #include "mainwindow.h"
 #include "upgradedialog.h"
+#include "tippasswddialog.h"
 
 #include "errortipdialog.h"
 #include "stackedit.h"
@@ -21,6 +22,9 @@
 const QString notePath = "/root/notepad/";
 
 QVector<QString> registerCode;
+
+MenuItem::MenuItem(const QString& name) : name(name), state(MenuState::Senior) {}
+
 
 Setting::Setting(QWidget *parent) :
     QWidget(parent),
@@ -36,11 +40,42 @@ Setting::Setting(QWidget *parent) :
 
     init();
     initWidgets();
+//    setupMenuAuthority();
 
     syncParaToUI();
 
     pageSwitchInit();
     setupCommunicationConnections();
+
+    connect(ui->tabWidgetSystem, &QTabWidget::currentChanged, this, [=](int index){
+        int menuIndex = ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority);
+        if (index == menuIndex)
+        {
+            ui->tabMenuAuthority->hide();
+
+            TipPasswdDialog tip(tr("请输入菜单权限密码："));
+            int reply = tip.exec();
+
+            if (reply == QDialog::Rejected)
+            {
+                ui->tabWidgetSystem->setCurrentIndex(0);
+                return;
+            }
+
+            if (reply == QDialog::Accepted)
+            {
+                uint menuPasswd = tip.getPasswd();
+
+                if (menuPasswd != passwd[2])
+                {
+                    MainWindow::pMainWindow->showErrorTip(tr("密码错误！"));
+                    ui->tabWidgetSystem->setCurrentIndex(0);
+                    return;
+                }
+                ui->tabMenuAuthority->show();
+            }
+        }
+    });
 
     connect(ui->btnSavePasswdAdmin, &QPushButton::clicked, [=]() {
         QList<NumberEdit*> edits = {ui->editAdminOldPasswd, ui->editAdminNewPasswd, ui->editAdminNewPasswdConfirm};
@@ -57,108 +92,6 @@ Setting::Setting(QWidget *parent) :
         handleSavePasswd(&passwd[2], edits, 2);
     });
 
-//    connect(ui->btnSavePasswdAdmin, &QPushButton::clicked, [=]() {
-//       NumberEdit* const edits[] = {ui->editAdminOldPasswd, ui->editAdminNewPasswd, ui->editAdminNewPasswdConfirm};
-//        if (edits[1]->text().isEmpty())
-//            return;
-//        uint oldPasswd = edits[0]->text().toUInt();
-//        uint newPasswd = edits[1]->text().toUInt();
-//        uint confirmPasswd = edits[2]->text().toUInt();
-
-//        if (passwd[0] != oldPasswd)
-//        {
-//            MainWindow::pMainWindow->showErrorTip(tr("旧密码错误！"), TipMode::ONLY_OK);
-//            return;
-//        }
-
-//        if (newPasswd != confirmPasswd)
-//        {
-//            MainWindow::pMainWindow->showErrorTip(tr("两次输入密码不一致！"), TipMode::ONLY_OK);
-//            return;
-//        }
-
-//        if (passwd[0] == oldPasswd && newPasswd == confirmPasswd)
-//        {
-//            passwd[0] = newPasswd;
-
-//            // save the passwd to configuration file
-
-//            MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
-//            for (auto edit : edits)
-//            {
-//                edit->clear();
-//            }
-//        }
-
-//    });
-//    connect(ui->btnSavePasswdSuperAdmin, &QPushButton::clicked, [=]() {
-//       NumberEdit* const edits[] = {ui->editSuperAdminOldPasswd, ui->editSuperAdminNewPasswd, ui->editSuperAdminNewPasswdConfirm};
-//        if (edits[1]->text().isEmpty())
-//            return;
-//        uint oldPasswd = edits[0]->text().toUInt();
-//        uint newPasswd = edits[1]->text().toUInt();
-//        uint confirmPasswd = edits[2]->text().toUInt();
-
-//        if (passwd[1] != oldPasswd)
-//        {
-//            MainWindow::pMainWindow->showErrorTip(tr("旧密码错误！"), TipMode::ONLY_OK);
-//            return;
-//        }
-
-//        if (newPasswd != confirmPasswd)
-//        {
-//            MainWindow::pMainWindow->showErrorTip(tr("两次输入密码不一致！"), TipMode::ONLY_OK);
-//            return;
-//        }
-
-//        if (passwd[1] == oldPasswd && newPasswd == confirmPasswd)
-//        {
-//            passwd[1] = newPasswd;
-
-//            // save the passwd to configuration file
-
-//            MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
-//            for (auto edit : edits)
-//            {
-//                edit->clear();
-//            }
-//        }
-
-//    });
-//    connect(ui->btnSavePasswdMenu, &QPushButton::clicked, [=]() {
-//       NumberEdit* const edits[] = {ui->editMenuOldPasswd, ui->editMenuNewPasswd, ui->editMenuNewPasswdConfirm};
-//        if (edits[1]->text().isEmpty())
-//            return;
-//        uint oldPasswd = edits[0]->text().toUInt();
-//        uint newPasswd = edits[1]->text().toUInt();
-//        uint confirmPasswd = edits[2]->text().toUInt();
-
-//        if (passwd[2] != oldPasswd)
-//        {
-//            MainWindow::pMainWindow->showErrorTip(tr("旧密码错误！"), TipMode::ONLY_OK);
-//            return;
-//        }
-
-//        if (newPasswd != confirmPasswd)
-//        {
-//            MainWindow::pMainWindow->showErrorTip(tr("两次输入密码不一致！"), TipMode::ONLY_OK);
-//            return;
-//        }
-
-//        if (passwd[2] == oldPasswd && newPasswd == confirmPasswd)
-//        {
-//            passwd[2] = newPasswd;
-
-//            // save the passwd to configuration file
-
-//            MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
-//            for (auto edit : edits)
-//            {
-//                edit->clear();
-//            }
-//        }
-
-//    });
 
     ui->editBrightTime->setInputRange(30, 65535);
     connect(ui->editBrightTime, &NumberEdit::textChanged, [=](const QString& val){
@@ -190,7 +123,6 @@ Setting::Setting(QWidget *parent) :
         }
 //       UsbDisk::instance()->copyFromUsb("test.sh", "/root/test.sh");
     });
-    ui->tabUserSet->installEventFilter(this);
     connect(ui->btnSaveTime, &QPushButton::clicked, [=](){
 
         ErrorTipDialog tip(tr("确定修改系统时间？"), this);
@@ -270,6 +202,8 @@ Setting::Setting(QWidget *parent) :
     connect(ui->btnSysDataBackup,&QPushButton::clicked,this,[=](){this->UpgradeHandle(SYSTEM_DATA_COPY);});
     connect(ui->btnBackupDataRestore,&QPushButton::clicked,this,[=](){this->UpgradeHandle(COPY_DATA_REST);});
     connect(ui->btnFactoryDataReset,&QPushButton::clicked,this,[=](){this->UpgradeHandle(RESTSETTING);});
+
+    ui->tabUserSet->installEventFilter(this);
 }
 
 Setting::~Setting()
@@ -646,6 +580,12 @@ void Setting::init()
 
 void Setting::initWidgets()
 {
+    ui->stackedWidget->setCurrentIndex(0); // 保证初始化时首次进入setting主界面
+
+    for (auto tabWgt : this->findChildren<QTabWidget*>())
+    {
+        tabWgt->setCurrentIndex(0);
+    }
 
     ui->updata_widget->hide();
 
@@ -694,16 +634,200 @@ void Setting::initWidgets()
 
 }
 
-void Setting::readFromConfigFile()
+void Setting::setupMenuAuthority()
 {
-    // 信号设置
-}
+    ui->treeWgt->setColumnCount(5);
+    ui->treeWgt->setColumnWidth(0, 200);
+    ui->treeWgt->header()->setSectionsMovable(false);
+    ui->treeWgt->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+    for (int i = 1; i < 5; i++)
+    {
+        ui->treeWgt->setColumnWidth(i, 135);
+        ui->treeWgt->header()->setSectionResizeMode(i, QHeaderView::Fixed);
+    }
 
-void Setting::writeToConfigFile()
-{
+    ui->treeWgt->setStyleSheet("QTreeWidget::item { height: 45px; }"
+                               "QTreeWidget::branch:open:has-children {"
+                               "   image: url(:/images/open_menu.png);"
+                               "    width: 40px;"
+                               "    height: 40px;"
+                               "}"
+                               "QTreeWidget::branch:closed:has-children {"
+                               "   image: url(:/images/close_menu.png);"
+                               "    width: 40px;"
+                               "    height: 40px;"
+                               "}"
+                               "QRadioButton::indicator:unchecked {"
+                               "    image: url(:/images/radio_unchecked.png);"
+                               "    width: 40px;"
+                               "    height: 40px;"
+                               "}"
+                               "QRadioButton::indicator:checked {"
+                               "    image: url(:/images/radio_checked.png);"
+                               "    width: 40px;"
+                               "    height: 40px;"
+                               "}"
+                               );
+    ui->treeWgt->setHeaderLabels({tr("菜单"), tr("操作员"), tr("管理员"), tr("高级"), tr("不可见")});
 
-//    setOutPortType(m_OutPortType[0]);
-    //    setOutPortType(m_OutPortType[OUT_PORT_TYPE_NUM]);
+    QList<MenuItem*> menuItems;
+    MenuItem* sigSet = new MenuItem(tr("信号设置"));
+    MenuItem* safeSet = new MenuItem(tr("安全设置"));
+    MenuItem* productSet = new MenuItem(tr("产品设置"));
+    MenuItem* systemSet = new MenuItem(tr("系统设置"));
+    MenuItem* servoPara = new MenuItem(tr("伺服参数"));
+    MenuItem* servoSafe = new MenuItem(tr("伺服安全点"));
+    MenuItem* machinePara = new MenuItem(tr("机器参数"));
+    MenuItem* stactSet = new MenuItem(tr("堆叠设置"));
+    menuItems.append(sigSet);
+    menuItems.append(safeSet);
+    menuItems.append(productSet);
+    menuItems.append(systemSet);
+    menuItems.append(servoPara);
+    menuItems.append(servoSafe);
+    menuItems.append(machinePara);
+    menuItems.append(stactSet);
+
+    // Add items for sigSet, safeSet, productSet
+    sigSet->children = {
+            new MenuItem({tr("输出类型")}),
+            new MenuItem({tr("互锁设置")}),
+            new MenuItem({tr("端口自定义")}),
+            new MenuItem({tr("名称自定义")}),
+            new MenuItem({tr("预留关联")}),
+            new MenuItem({tr("预留出类型")}),
+            new MenuItem({tr("按键/信号")}),
+            new MenuItem({tr("高级")})
+        };
+
+    safeSet->children = {
+        new MenuItem({tr("机床安全")}),
+        new MenuItem({tr("料仓安全")}),
+        new MenuItem({tr("卡爪安全")}),
+        new MenuItem({tr("联机安全")})
+    };
+    productSet->children = {
+        new MenuItem({tr("产品")}),
+        new MenuItem({tr("高级")}),
+        new MenuItem({tr("物联网")}),
+        new MenuItem({tr("联机安全")})
+    };
+
+    systemSet->children = {
+        new MenuItem({tr("语言设置")}),
+        new MenuItem({tr("用户设置")}),
+        new MenuItem({tr("升级与备份")}),
+        new MenuItem({tr("记事本")}),
+        new MenuItem({tr("密码设置")}),
+        new MenuItem({tr("物联网")}),
+        new MenuItem({tr("注册信息")})
+
+    };
+
+    servoPara->children = {
+        new MenuItem({tr("伺服")}),
+        new MenuItem({tr("轴参数")}),
+        new MenuItem({tr("轴速度")})
+    };
+    servoSafe->children = {
+        new MenuItem({tr("安全区1")}),
+        new MenuItem({tr("安全区2")}),
+        new MenuItem({tr("安全区3")}),
+        new MenuItem({tr("安全区4")}),
+        new MenuItem({tr("位置限定")})
+    };
+
+    machinePara->children = {
+        new MenuItem({tr("限位")}),
+        new MenuItem({tr("结构")}),
+        new MenuItem({tr("原点")}),
+        new MenuItem({tr("通信")})
+    };
+    stactSet->children = {
+        new MenuItem({tr("堆叠1组")}),
+        new MenuItem({tr("堆叠2组")}),
+        new MenuItem({tr("堆叠3组")}),
+        new MenuItem({tr("堆叠4组")}),
+        new MenuItem({tr("堆叠5组")}),
+        new MenuItem({tr("堆叠6组")}),
+        new MenuItem({tr("堆叠7组")}),
+        new MenuItem({tr("堆叠8组")}),
+        new MenuItem({tr("堆叠设置")})
+    };
+    // 使用 QMap 存储 MenuItem 和 QTreeWidgetItem 的映射关系
+    QMap<MenuItem*, QTreeWidgetItem*> itemMap;
+
+    // 将 MenuItem 转换为 QTreeWidgetItem 并添加到树形结构中
+    QList<QTreeWidgetItem*> treeItems;
+    for (auto menuItem : menuItems) {
+        QTreeWidgetItem* treeItem = new QTreeWidgetItem(ui->treeWgt, {menuItem->name});
+        itemMap[menuItem] = treeItem;
+        treeItems.append(treeItem);
+        for (auto& child : menuItem->children) {
+            QTreeWidgetItem* childItem = new QTreeWidgetItem(treeItem, {child->name});
+            itemMap[child] = childItem;
+        }
+    }
+
+    ui->treeWgt->addTopLevelItems(treeItems);
+
+    // 遍历每个菜单项和子项，设置按钮组
+    for (auto menuItem : menuItems) {
+
+        if (menuItem != systemSet) {
+            QButtonGroup* buttonGroup = new QButtonGroup(this);
+            buttonGroup->setExclusive(true);
+
+            for (int i = 1; i < ui->treeWgt->columnCount() - 1; ++i) {
+                QRadioButton* button = new QRadioButton(ui->treeWgt);
+                button->setFixedSize(45, 45);
+
+                QTreeWidgetItem* item = itemMap[menuItem];
+                ui->treeWgt->setItemWidget(item, i, button);
+
+                buttonGroup->addButton(button, i);
+
+                connect(buttonGroup, QOverload<int>::of(&QButtonGroup::buttonPressed), this, [=](int id) {
+                    MenuState newState = static_cast<MenuState>(id - 1);
+                    if (menuItem->state != newState) {
+                        menuItem->state = newState;
+                        emit menuItem->stateChanged(newState);
+                    }
+                });
+            }
+        }
+
+        // 子菜单项
+        for (auto& child : menuItem->children) {
+            QButtonGroup* buttonGroup = new QButtonGroup(this);
+            buttonGroup->setExclusive(true);
+
+            for (int i = 1; i < ui->treeWgt->columnCount(); ++i) {
+                QRadioButton* button = new QRadioButton(ui->treeWgt);
+                button->setFixedSize(45, 45);
+
+                QTreeWidgetItem* childItem = itemMap[child];
+                ui->treeWgt->setItemWidget(childItem, i, button);
+
+                buttonGroup->addButton(button, i);
+
+                connect(buttonGroup, QOverload<int>::of(&QButtonGroup::buttonPressed), this, [=](int id) {
+                    MenuState newState = static_cast<MenuState>(id - 1);
+                    if (child->state != newState) {
+                        child->state = newState;
+                        emit child->stateChanged(newState);  // 发出信号
+                    }
+                });
+            }
+        }
+
+        // 监听状态变化信号
+        connect(menuItem, &MenuItem::stateChanged, this, &Setting::onMenuStateChanged);
+        for (auto& child : menuItem->children)
+        {
+            connect(child, &MenuItem::stateChanged, this, &Setting::onMenuStateChanged);
+        }
+    }
 }
 
 void Setting::syncParaToUI()
@@ -1099,6 +1223,29 @@ void Setting::handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, co
 
 }
 
+void Setting::onMenuStateChanged(MenuState newState)
+{
+    MenuItem* item = qobject_cast<MenuItem*>(sender());
+    if (!item)
+        return;
+
+    qDebug() << item->name << "权限已变更，新的权限是：" << newState;
+
+    // 这里根据新的权限执行相应的操作
+    if (item->name == tr("机床安全")) {
+        if (newState == Admin) {
+            // 对 "机床安全" 的 Admin 状态执行相应操作
+            qDebug() << "执行机床安全权限为 Admin 的操作";
+        } else if (newState == Senior) {
+            // 对 "机床安全" 的 Senior 状态执行相应操作
+            qDebug() << "执行机床安全权限为 Senior 的操作";
+        } else if (newState == Operator) {
+            // 对 "机床安全" 的 Operator 状态执行相应操作
+            qDebug() << "执行机床安全权限为 Operator 的操作";
+        }
+    }
+}
+
 void Setting::pageSwitchInit()
 {
     /******************************************************************************/
@@ -1132,6 +1279,7 @@ void Setting::pageSwitchInit()
     });
     connect(ui->btnSystemSet, &QPushButton::clicked, this, [=](){
        ui->stackedWidget->setCurrentWidget(ui->pageSystem);
+       emit ui->tabWidgetSystem->currentChanged(ui->tabWidgetSystem->currentIndex());
     });
     connect(ui->btnServoSpeed, &QPushButton::clicked, this, [=](){
 
@@ -2483,7 +2631,7 @@ void Setting::saveMachineAllPara(int index)
     case 3:
     {
         uint16_t storageGroup=ui->editStorageGroup->text().toUInt();
-        if (storageGroup >=0 && storageGroup <100)
+        if (storageGroup <100)
         {
             m_ServoCommPar[storageGroup].axis=ui->coboxAxisNum->currentIndex()+1;
             m_ServoCommPar[storageGroup].index=ui->editParaIndex->text().toUInt();
@@ -2807,7 +2955,9 @@ bool Setting::eventFilter(QObject *watched, QEvent *event)
         ui->editHour->setText(QString::number(hour));
         ui->editMinute->setText(QString::number(minute));
         ui->editSecond->setText(QString::number(second));
+        return true;
     }
+
     return QWidget::eventFilter(watched, event);
 }
 

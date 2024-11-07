@@ -17,6 +17,29 @@
 #include "keydefinedialog.h"
 #include "sigdefinedialog.h"
 #include "upgradedialog.h"
+
+
+enum MenuState {
+    Operator = 0,  // 操作员
+    Admin,         // 管理员
+    Senior,        // 高级
+    Invisible      // 不可见
+};
+
+class MenuItem : public QObject {
+    Q_OBJECT
+
+public:
+    QString name;           // 菜单项的名称
+    MenuState state;        // 菜单项的状态
+    QList<MenuItem*> children; // 子菜单项列表
+
+    MenuItem(const QString& name);
+
+signals:
+    void stateChanged(MenuState newState);
+};
+
 namespace Ui {
 class Setting;
 }
@@ -42,18 +65,24 @@ public slots:
 private:
     Ui::Setting *ui;
     upgradedialog *UpgradeDialog;
+
+private:
+
 private:
     void init();
     void initWidgets();
 
-    void readFromConfigFile();
-    void writeToConfigFile();
-
+    void setupMenuAuthority();
 
     void syncParaToUI(); // 初始化时同步结构体参数到ui上显示
 
     void updateRegisterCodeDisplay();
     void handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, const int suffix);
+
+private slots:
+    void onMenuStateChanged(MenuState newState);
+
+
 public:
     void UpgradeHandle(int click_type);
     void showPortDefine();          //显示端口自定义

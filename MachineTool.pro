@@ -21,6 +21,7 @@ contains(CONFIG, desktop) {
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+#DEFINES += QT_NO_DEBUG_OUTPUT
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -49,6 +50,7 @@ SOURCES += \
     alarmform.cpp \
     autoform.cpp \
     dialogs/file_preview.cpp \
+    dialogs/tippasswddialog.cpp \
     dialogs/upgradedialog.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -94,6 +96,7 @@ HEADERS += \
     alarmform.h \
     autoform.h \
     dialogs/file_preview.h \
+    dialogs/tippasswddialog.h \
     dialogs/upgradedialog.h \
     mainwindow.h \
     manualform.h \
@@ -129,6 +132,7 @@ FORMS += \
     alarmform.ui \
     autoform.ui \
     dialogs/file_preview.ui \
+    dialogs/tippasswddialog.ui \
     dialogs/upgradedialog.ui \
     mainwindow.ui \
     manualform.ui \
