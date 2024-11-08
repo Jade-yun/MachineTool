@@ -20,10 +20,12 @@
 #include "timesetter.h"
 
 const QString notePath = "/root/notepad/";
+const QString SysSetConfigPath = "/Settings/systemset.ini";
 
 QVector<QString> registerCode;
 
-MenuItem::MenuItem(const QString& name) : name(name), state(MenuState::Senior) {}
+MenuItem::MenuItem(int id, const QString& name) :
+    id(id), name(name), state(MenuState::Senior) {}
 
 
 Setting::Setting(QWidget *parent) :
@@ -100,6 +102,10 @@ Setting::Setting(QWidget *parent) :
             return;
         BackLighter::instance()->setScreenOffTime(second);
 //        qDebug() << "time of screenOff:" << val;
+//        QSettings settings(SysSetConfigPath, QSettings::IniFormat);
+//        settings.beginGroup("Backlight");
+//        settings.setValue("time", second);
+//        settings.endGroup();
     });
     connect(ui->sliderBrightness, &QSlider::valueChanged, [=](int value){
 //        qDebug() << "value of slider:" << value;
@@ -671,14 +677,14 @@ void Setting::setupMenuAuthority()
     ui->treeWgt->setHeaderLabels({tr("菜单"), tr("操作员"), tr("管理员"), tr("高级"), tr("不可见")});
 
     QList<MenuItem*> menuItems;
-    MenuItem* sigSet = new MenuItem(tr("信号设置"));
-    MenuItem* safeSet = new MenuItem(tr("安全设置"));
-    MenuItem* productSet = new MenuItem(tr("产品设置"));
-    MenuItem* systemSet = new MenuItem(tr("系统设置"));
-    MenuItem* servoPara = new MenuItem(tr("伺服参数"));
-    MenuItem* servoSafe = new MenuItem(tr("伺服安全点"));
-    MenuItem* machinePara = new MenuItem(tr("机器参数"));
-    MenuItem* stactSet = new MenuItem(tr("堆叠设置"));
+    MenuItem* sigSet = new MenuItem(1, tr("信号设置"));
+    MenuItem* safeSet = new MenuItem(2, tr("安全设置"));
+    MenuItem* productSet = new MenuItem(3, tr("产品设置"));
+    MenuItem* systemSet = new MenuItem(4, tr("系统设置"));
+    MenuItem* servoPara = new MenuItem(5, tr("伺服参数"));
+    MenuItem* servoSafe = new MenuItem(6, tr("伺服安全点"));
+    MenuItem* machinePara = new MenuItem(7, tr("机器参数"));
+    MenuItem* stactSet = new MenuItem(8, tr("堆叠设置"));
     menuItems.append(sigSet);
     menuItems.append(safeSet);
     menuItems.append(productSet);
@@ -690,69 +696,69 @@ void Setting::setupMenuAuthority()
 
     // Add items for sigSet, safeSet, productSet
     sigSet->children = {
-            new MenuItem({tr("输出类型")}),
-            new MenuItem({tr("互锁设置")}),
-            new MenuItem({tr("端口自定义")}),
-            new MenuItem({tr("名称自定义")}),
-            new MenuItem({tr("预留关联")}),
-            new MenuItem({tr("预留出类型")}),
-            new MenuItem({tr("按键/信号")}),
-            new MenuItem({tr("高级")})
+            new MenuItem(11, {tr("输出类型")}),
+            new MenuItem(12, {tr("互锁设置")}),
+            new MenuItem(13, {tr("端口自定义")}),
+            new MenuItem(14, {tr("名称自定义")}),
+            new MenuItem(15, {tr("预留关联")}),
+            new MenuItem(16, {tr("预留出类型")}),
+            new MenuItem(17, {tr("按键/信号")}),
+            new MenuItem(18, {tr("高级")})
         };
 
     safeSet->children = {
-        new MenuItem({tr("机床安全")}),
-        new MenuItem({tr("料仓安全")}),
-        new MenuItem({tr("卡爪安全")}),
-        new MenuItem({tr("联机安全")})
+        new MenuItem(21, {tr("机床安全")}),
+        new MenuItem(22, {tr("料仓安全")}),
+        new MenuItem(23, {tr("卡爪安全")}),
+        new MenuItem(24, {tr("联机安全")})
     };
     productSet->children = {
-        new MenuItem({tr("产品")}),
-        new MenuItem({tr("高级")}),
-        new MenuItem({tr("物联网")}),
-        new MenuItem({tr("联机安全")})
+        new MenuItem(35, {tr("产品")}),
+        new MenuItem(36, {tr("高级")}),
+        new MenuItem(37, {tr("物联网")}),
+        new MenuItem(38, {tr("联机安全")})
     };
 
     systemSet->children = {
-        new MenuItem({tr("语言设置")}),
-        new MenuItem({tr("用户设置")}),
-        new MenuItem({tr("升级与备份")}),
-        new MenuItem({tr("记事本")}),
-        new MenuItem({tr("密码设置")}),
-        new MenuItem({tr("物联网")}),
-        new MenuItem({tr("注册信息")})
+        new MenuItem(41, {tr("语言设置")}),
+        new MenuItem(42, {tr("用户设置")}),
+        new MenuItem(43, {tr("升级与备份")}),
+        new MenuItem(44, {tr("记事本")}),
+        new MenuItem(45, {tr("密码设置")}),
+        new MenuItem(46, {tr("物联网")}),
+        new MenuItem(47, {tr("注册信息")})
 
     };
 
     servoPara->children = {
-        new MenuItem({tr("伺服")}),
-        new MenuItem({tr("轴参数")}),
-        new MenuItem({tr("轴速度")})
+        new MenuItem(51, {tr("伺服")}),
+        new MenuItem(52, {tr("轴参数")}),
+        new MenuItem(53, {tr("轴速度")})
     };
     servoSafe->children = {
-        new MenuItem({tr("安全区1")}),
-        new MenuItem({tr("安全区2")}),
-        new MenuItem({tr("安全区3")}),
-        new MenuItem({tr("安全区4")}),
-        new MenuItem({tr("位置限定")})
+        new MenuItem(61, {tr("安全区1")}),
+        new MenuItem(62, {tr("安全区2")}),
+        new MenuItem(63, {tr("安全区3")}),
+        new MenuItem(64, {tr("安全区4")}),
+        new MenuItem(65, {tr("位置限定")})
     };
 
     machinePara->children = {
-        new MenuItem({tr("限位")}),
-        new MenuItem({tr("结构")}),
-        new MenuItem({tr("原点")}),
-        new MenuItem({tr("通信")})
+        new MenuItem(71, {tr("限位")}),
+        new MenuItem(72, {tr("结构")}),
+        new MenuItem(73, {tr("原点")}),
+        new MenuItem(74, {tr("通信")})
     };
     stactSet->children = {
-        new MenuItem({tr("堆叠1组")}),
-        new MenuItem({tr("堆叠2组")}),
-        new MenuItem({tr("堆叠3组")}),
-        new MenuItem({tr("堆叠4组")}),
-        new MenuItem({tr("堆叠5组")}),
-        new MenuItem({tr("堆叠6组")}),
-        new MenuItem({tr("堆叠7组")}),
-        new MenuItem({tr("堆叠8组")}),
-        new MenuItem({tr("堆叠设置")})
+        new MenuItem(81, {tr("堆叠1组")}),
+        new MenuItem(82, {tr("堆叠2组")}),
+        new MenuItem(83, {tr("堆叠3组")}),
+        new MenuItem(84, {tr("堆叠4组")}),
+        new MenuItem(85, {tr("堆叠5组")}),
+        new MenuItem(86, {tr("堆叠6组")}),
+        new MenuItem(87, {tr("堆叠7组")}),
+        new MenuItem(88, {tr("堆叠8组")}),
+        new MenuItem(89, {tr("堆叠设置")})
     };
     // 使用 QMap 存储 MenuItem 和 QTreeWidgetItem 的映射关系
     QMap<MenuItem*, QTreeWidgetItem*> itemMap;
@@ -1229,10 +1235,10 @@ void Setting::onMenuStateChanged(MenuState newState)
     if (!item)
         return;
 
-    qDebug() << item->name << "权限已变更，新的权限是：" << newState;
+    qDebug() << "ID:" << item->id << "," << item->name << " new state:" << newState;
 
     // 这里根据新的权限执行相应的操作
-    if (item->name == tr("机床安全")) {
+    if (item->id == 21 && item->name == tr("机床安全")) {
         if (newState == Admin) {
             // 对 "机床安全" 的 Admin 状态执行相应操作
             qDebug() << "执行机床安全权限为 Admin 的操作";

@@ -30,11 +30,12 @@ class MenuItem : public QObject {
     Q_OBJECT
 
 public:
+    int id;                 // 确定每个项唯一的标识符
     QString name;           // 菜单项的名称
     MenuState state;        // 菜单项的状态
     QList<MenuItem*> children; // 子菜单项列表
 
-    MenuItem(const QString& name);
+    MenuItem(int id, const QString& name);
 
 signals:
     void stateChanged(MenuState newState);
