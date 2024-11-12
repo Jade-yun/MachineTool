@@ -15,6 +15,7 @@
 #include "handwheeldialog.h"
 #include "errortipdialog.h"
 #include "ifprogramdialog.h"
+#include "logindialog.h"
 
 #include "mythread.h"
 
@@ -78,6 +79,7 @@ private:
     TeachManage* teachManageWidget;
 
     ErrorTipDialog* dlgErrorTip;
+    LoginDialog* login;
 
 private:
     TriMode curMode;
