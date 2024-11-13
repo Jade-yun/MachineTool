@@ -81,13 +81,6 @@ MainWindow::MainWindow(QWidget *parent)
     {
         edit->installEventFilter(this);
     }
-
-    
-    handWheel = new HandWheelDialog(this);
-    connect(ui->btnHandWheel, &QPushButton::clicked, handWheel, [=](){
-        handWheel->exec();
-    });
-
     //串口通讯线程开启和解析
     CircularBuffer_Init();
     g_Usart = new Usart();
@@ -131,24 +124,28 @@ MainWindow::MainWindow(QWidget *parent)
             // stop mode
             curMode = TriMode::STOP;
             ui->Btn_TeachHome->setText(tr("教导管理"));
+            TrimodeSwitchCommandSend(code,value);
         }
         else if (code == 143 && value == 1)
         {
             // switch to manual mode
             curMode = TriMode::MANUAL;
             ui->Btn_TeachHome->setText(tr("教导"));
+            TrimodeSwitchCommandSend(code,value);
         }
         else if (code == 144 && value == 1)
         {
             // switch to automatic mode
             curMode = TriMode::AUTO;
+            TrimodeSwitchCommandSend(code,value);
         }
         emit ui->Btn_ManualHome->clicked();
         ui->Btn_ManualHome->setChecked(true);
     });
-    connect(scanner, &EventScanner::eventLeftKey, [](uint16_t code, int32_t value) {
+    connect(scanner, &EventScanner::eventLeftKey, this,[this](uint16_t code, int32_t value) {
         qDebug() << "Left Key event:" << code << value;
         Beeper::instance()->beep();
+        keyFunctCommandSend(code,value);
     });
     connect(scanner, &EventScanner::eventRightKey, this,[this](uint16_t code, int32_t value) {
         qDebug() << "Right Key event:" << code << value;
@@ -161,9 +158,9 @@ MainWindow::MainWindow(QWidget *parent)
 //    });
 
 //    scanner->start();
-    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){
-        scanner->start();
-    });
+//    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){
+//        scanner->start();
+//    });
 }
 
 MainWindow::~MainWindow()
@@ -194,6 +191,12 @@ void MainWindow::MainWindow_SetControl_Stake(bool state)
     ui->btnHandWheel->setEnabled(state);
     ui->btnHelp->setEnabled(state);
 
+}
+void MainWindow::PowerOnStateHandle()
+{
+    //开机不管三档开关位于那个位置,默认进入停止界面
+    ui->Btn_ManualHome->click();
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_MODE,2,0,0);
 }
 //初始化子界面函数
 void MainWindow::slotShowSubWindow()
@@ -277,14 +280,10 @@ void MainWindow::slotShowSubWindow()
         cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     }
 
-//    for (NumberEdit* edit : findChildren<NumberEdit*>())
-//    {
-//        connect(edit, &NumberEdit::showRangeError, [=](const QString& message){
-//            showErrorTip(message);
-//        });
-//    }
     Refresh_Progress_bar(100);
     MainWindow_SetControl_Stake(true);
+    scanner->start();
+    PowerOnStateHandle();//开机默认进入停止界面
 }
 
 void MainWindow::startAllThread()
@@ -403,21 +402,33 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(this,&MainWindow::signal_refresh_TeachList,teachWidget,&Teach::Teach_File_List_Refresh);//刷新教导管理程序显示列表信号
     connect(this,&MainWindow::EditOperatorVarPreOp_Refresh,teachWidget,&Teach::EditOperatorVarPreOp_handle);
     connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");});
-
-    //显示时间
+    connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
+    //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {
-		// 获取当前时间
-		QDateTime sysTime = QDateTime::currentDateTime();
-		// 转换为字符串
-		QString timeStr1 = sysTime.toString("yyyy/MM/dd");
-        QString timeStr2 = sysTime.toString("hh:mm:ss");
-		// 设置label显示的文本
-        ui->labDateTime->setText(timeStr1);
-        ui->labDateTime_2->setText(timeStr2);
+        static int timer_number = 0;
+        if(timer_number == 10)
+        {//每1s刷新一次
+            // 获取当前时间
+            QDateTime sysTime = QDateTime::currentDateTime();
+            // 转换为字符串
+            QString timeStr1 = sysTime.toString("yyyy/MM/dd");
+            QString timeStr2 = sysTime.toString("hh:mm:ss");
+            // 设置label显示的文本
+            ui->labDateTime->setText(timeStr1);
+            ui->labDateTime_2->setText(timeStr2);
+        }
+        ui->labSpeed->setText(QString::number(m_RunPar.globalSpeed)+"%");
+        ui->labRotateSpeed->setText(QString::number((double)m_AxisCurSpeed)+"rpm");
+        ui->X1_speed->setText(QString::number((double)((m_AxisCurPos[X1_AXIS]/m_AxisPar[X1_AXIS].circlePluseNum)*m_AxisPar[X1_AXIS].circleDis),'f',2)+"mm");
+        ui->Y1_speed->setText(QString::number((double)((m_AxisCurPos[Y1_AXIS]/m_AxisPar[Y1_AXIS].circlePluseNum)*m_AxisPar[Y1_AXIS].circleDis),'f',2)+"mm");
+        ui->Z1_speed->setText(QString::number((double)((m_AxisCurPos[Z1_AXIS]/m_AxisPar[Z1_AXIS].circlePluseNum)*m_AxisPar[Z1_AXIS].circleDis),'f',2)+"mm");
+        ui->C_speed->setText(QString::number((double)((m_AxisCurPos[C_AXIS]/m_AxisPar[C_AXIS].circlePluseNum)*m_AxisPar[C_AXIS].circleDis),'f',2)+"mm");
+        ui->Y2_speed->setText(QString::number((double)((m_AxisCurPos[Y2_AXIS]/m_AxisPar[Y2_AXIS].circlePluseNum)*m_AxisPar[Y2_AXIS].circleDis),'f',2)+"mm");
+        ui->Z2_speed->setText(QString::number((double)((m_AxisCurPos[Z2_AXIS]/m_AxisPar[Z2_AXIS].circlePluseNum)*m_AxisPar[Z2_AXIS].circleDis),'f',2)+"mm");
 		});
-	// 启动定时器，设置时间间隔为1秒
-    timer->start(1000);
+    // 启动定时器，设置时间间隔为100毫秒
+    timer->start(100);
 }
 
 void MainWindow::setStyleFromFile(const QString &styleSheet)
@@ -546,7 +557,99 @@ void MainWindow::on_btnHelp_clicked()
 //                              QMessageBox::Yes | QMessageBox::No, QMessageBox::NoButton);
 
 }
+//三档开关处理函数
+void MainWindow::TrimodeSwitchCommandSend(uint16_t code, int32_t value)
+{
+    switch (code) {
+    case 142://手动
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_MODE,1,0,0);
+        }
+        break;
+    }
+    case 143://停止
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_MODE,2,0,0);
+        }
+        break;
+    }
+    case 144://自动
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_MODE,3,0,0);
+        }
+        break;
+    }
+    default:
+        break;
+    }
+}
+//左侧按键功能处理函数
+void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
+{
+    switch (code) {
+    case 151://启动
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,1,10);
+        }
 
+        break;
+    }
+    case 150://停止
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,0,0);
+        }
+
+        break;
+    }
+    case 153://原点
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,3,1,50);
+            int reply = showErrorTip(tr("回原点中..."),TipMode::NORMAL);
+            if (reply == QDialog::Rejected)
+            {
+
+            }
+        }
+
+        break;
+    }
+    case 152://复归
+    {
+        if(value == 1)
+        {
+            int reply = showErrorTip(tr("是否现在复归?"),TipMode::NORMAL);
+            if (reply == QDialog::Accepted)
+            {
+                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,1,50);
+            }
+        }
+
+        break;
+    }
+    case 155://ok
+    {
+        break;
+    }
+    case 154://EXIT
+    {
+        break;
+    }
+    default:
+        break;
+    }
+}
 void MainWindow::keyAxisCommandSend(uint16_t code, int32_t value)
 {
     uint16_t axisNum = 0;

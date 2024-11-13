@@ -878,7 +878,7 @@ border: 1px solid black;
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLabel" name="label_13">
+       <widget class="QLabel" name="label_X1">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -906,7 +906,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labX1">
+       <widget class="QLabel" name="X1_speed">
         <property name="minimumSize">
          <size>
           <width>80</width>
@@ -931,7 +931,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_14">
+       <widget class="QLabel" name="label_Z1">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -959,7 +959,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labX1_2">
+       <widget class="QLabel" name="Z1_speed">
         <property name="minimumSize">
          <size>
           <width>80</width>
@@ -984,7 +984,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_15">
+       <widget class="QLabel" name="label_Y1">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -1012,7 +1012,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labX1_3">
+       <widget class="QLabel" name="Y1_speed">
         <property name="minimumSize">
          <size>
           <width>80</width>
@@ -1037,7 +1037,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_17">
+       <widget class="QLabel" name="label_C">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -1065,7 +1065,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labX1_6">
+       <widget class="QLabel" name="C_speed">
         <property name="minimumSize">
          <size>
           <width>80</width>
@@ -1090,7 +1090,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_18">
+       <widget class="QLabel" name="label_Z2">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -1118,7 +1118,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labX1_5">
+       <widget class="QLabel" name="Z2_speed">
         <property name="minimumSize">
          <size>
           <width>80</width>
@@ -1143,7 +1143,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_19">
+       <widget class="QLabel" name="label_Y2">
         <property name="minimumSize">
          <size>
           <width>40</width>
@@ -1171,7 +1171,7 @@ border: 1px solid black;
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labX1_4">
+       <widget class="QLabel" name="Y2_speed">
         <property name="minimumSize">
          <size>
           <width>80</width>
@@ -1761,13 +1761,13 @@ QPushButton::pressed {
      </property>
     </widget>
    </widget>
+   <zorder>wgtHelp</zorder>
    <zorder>groupBoxHomeBottom</zorder>
    <zorder>groupBoxXYZOUV</zorder>
    <zorder>groupBoxHomeTopLeft</zorder>
    <zorder>groupBoxHomeTopMid</zorder>
    <zorder>groupBoxHomeTopRight</zorder>
    <zorder>stkWidget</zorder>
-   <zorder>wgtHelp</zorder>
   </widget>
  </widget>
  <customwidgets>

@@ -147,7 +147,9 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
         switch(sunCmd)
         {
         case CMD_SUN_MANUAL_OUT://输出控制
-
+            sendDataBuf[len] = (uint8_t)parNum;
+            sendDataBuf[len+1] = (uint8_t)parNum2;
+            len += 2;
             break;
         case CMD_SUN_MANUAL_AXIS://轴连动
             sendDataBuf[len] = (uint8_t)parNum;
@@ -176,7 +178,28 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
             len += 6;
             break;
         case CMD_SUN_MANUAL_INCREMENT://增量
-
+            sendDataBuf[len] = (uint8_t)parNum;
+            sendDataBuf[len+1] = (uint8_t)parNum2;
+            sendDataBuf[len+2] = (uint8_t)m_manualAxis.speed;
+            sendDataBuf[len+3] = (uint8_t)(m_manualAxis.speed>>8);
+            len += 4;
+            if(parNum2 == 1)
+            {//负向
+                sendDataBuf[len] = (uint8_t)m_manualAxis.sub_pos;
+                sendDataBuf[len+1] = (uint8_t)m_manualAxis.sub_pos>>8;
+                sendDataBuf[len+2] = (uint8_t)m_manualAxis.sub_pos>>16;
+                sendDataBuf[len+3] = (uint8_t)m_manualAxis.sub_pos>>24;
+            }
+            else
+            {//正向
+                sendDataBuf[len] = (uint8_t)m_manualAxis.pos_pos;
+                sendDataBuf[len+1] = (uint8_t)m_manualAxis.pos_pos>>8;
+                sendDataBuf[len+2] = (uint8_t)m_manualAxis.pos_pos>>16;
+                sendDataBuf[len+3] = (uint8_t)m_manualAxis.pos_pos>>24;
+            }
+            len += 4;
+            sendDataBuf[len] = m_manualAxis.ZDrop;
+            len += 1;
             break;
         case CMD_SUN_MANUAL_STACK://移至堆叠点
 
@@ -1412,7 +1435,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
             break;
         }
     }
-
+    ExtendReadStaDeal(mainCmd,sunCmd,recDataBuf);
     //刷新界面、存储配置文件（后面添加，发射相关信号）
 }
 
@@ -1436,26 +1459,23 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
                 {
                     for(int j=0;j<4;j++)
                     {
-                        m_InPortSta[i*8+j]=recDataBuf[i]|0x01;
-                        recDataBuf[i]=recDataBuf[i]>>1;
+                        m_InPortSta[i*8+j]=recDataBuf[i]>>(7-j) & 1;
                     }
                 }
                 else
                 {
                     for(int j=0;j<8;j++)
                     {
-                        m_InPortSta[i*8+j]=recDataBuf[i]|0x01;
-                        recDataBuf[i]=recDataBuf[i]>>1;
+                        m_InPortSta[i*8+j]=recDataBuf[i]>>(7-j) & 1;
                     }
                 }
 
             }
-            for(i=8;i<13;i++)
+            for(i=8;i<=13;i++)
             {
                 for(int j=0;j<8;j++)
                 {
-                    m_OutPortSta[i*8+j]=recDataBuf[i]|0x01;
-                    recDataBuf[i]=recDataBuf[i]>>1;
+                    m_OutPortSta[(i-8)*8+j]=recDataBuf[i]>>(7-j) & 1;
                 }
             }
 
@@ -1596,6 +1616,7 @@ void Usart::ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             sendDataBuf[index++] = (uint8_t)parNum2;
             sendDataBuf[index++] = (uint8_t)(parNum2>>8);
             sendDataBuf[index++] = (uint8_t)parNum3;
+            sendDataBuf[index++] = m_RunPar.globalSpeed;//全局速度，在自动运行界面设置
             len = index;
             break;
         case CMD_SUN_PRO_START://程序启停控制

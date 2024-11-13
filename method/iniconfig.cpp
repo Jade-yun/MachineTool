@@ -564,7 +564,7 @@ void getAxisPar(uint8_t defaultV)
 }
 void setAxisPar(D_AxisParStruct value, uint8_t index)
 {
-    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+//    for(int i=0;i<AXIS_TOTAL_NUM;i++)
     {
         setValue("AxisPar",QString("axisType_%1").arg(index),value.axisType);
         setValue("AxisPar",QString("axisMoveMade_%1").arg(index),value.axisMoveMade);
@@ -588,7 +588,7 @@ void setAxisPar(D_AxisParStruct value, uint8_t index)
         setValue("AxisPar",QString("originOffset_%1").arg(index),value.originOffset);
         setValue("AxisPar",QString("originDir_%1").arg(index),value.originDir);
 
-        setValue("AxisPar",QString("originSignal_%1").arg(i),value.originSignal);
+        setValue("AxisPar",QString("originSignal_%1").arg(index),value.originSignal);
 
         setValue("AxisPar",QString("backOriginOrder_%1").arg(index),value.backOriginOrder);
         setValue("AxisPar",QString("originType_%1").arg(index),value.originType);

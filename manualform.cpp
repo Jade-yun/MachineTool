@@ -72,27 +72,231 @@ ManualForm::ManualForm(QWidget *parent) :
         m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
     });
 
-
+    connect(ui->handPosAdd,&QPushButton::clicked,this,[=](){
+        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,2);
+    });
+    connect(ui->HandPosDown,&QPushButton::clicked,this,[=](){
+        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
+    });
     connect(ui->btnIntoStack, &QPushButton::clicked, this , [=](){
         emit sigShowStackPage();
     });
+    /******按钮控制输出下发槽函数******/
+    connect(ui->btnRawMaterial1Loosen,&QPushButton::clicked,this,[=](){//原料1松开/夹紧
+        if(ui->btnRawMaterial1Loosen->text() == tr("原料1松开"))
+        {//原料1松开
+            setbuttonIcon(ui->btnRawMaterial1Loosen,tr("原料1夹紧"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_METERIAL_1_CLAMP].actualPortNum,1);
+        }
+        else
+        {//原料1夹紧
+            setbuttonIcon(ui->btnRawMaterial1Loosen,tr("原料1松开"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_METERIAL_1_LOOSENED].actualPortNum,1);
+        }
+    });
+    connect(ui->btnFinishedProduct1Loosen,&QPushButton::clicked,this,[=](){//成品1松开/夹紧
+        if(ui->btnFinishedProduct1Loosen->text() == tr("成品1松开"))
+        {
+            setbuttonIcon(ui->btnFinishedProduct1Loosen,tr("成品1夹紧"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_PRODUCT_1_CLAMP].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnFinishedProduct1Loosen,tr("成品1松开"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_PRODUCT_1_LOOSENED].actualPortNum,1);
+        }
+    });
+    connect(ui->btnClaw1Reverse,&QPushButton::clicked,this,[=](){//卡爪1反转/正转
+        if(ui->btnClaw1Reverse->text() == tr("卡爪1反转"))
+        {
+            setbuttonIcon(ui->btnClaw1Reverse,tr("卡爪1正转"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_CLAW_1_CLAMP].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnClaw1Reverse,tr("卡爪1反转"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_CLAW_1_LOOSENED].actualPortNum,1);
+        }
 
-//    connect(ui->tabWidgetManualPage, &QTabWidget::currentChanged, this, &ManualForm::onTabChanged);
-//    connect(MainWindow::pMainWindow, &MainWindow::sigEnterManualPage, this, [=]() {
-//        ui->tabWidgetManualPage->setCurrentIndex(4);
-//    });
-//    connect(MainWindow::pMainWindow, &MainWindow::sigLeaveManualPage, this, [=]() {
-//        int index = ui->tabWidgetManualPage->currentIndex();
+    });
+    connect(ui->btnBlow1Loosen,&QPushButton::clicked,this,[=](){//吹气1断/通
+        if(ui->btnBlow1Loosen->text() == tr("吹气1断"))
+        {
+            setbuttonIcon(ui->btnBlow1Loosen,tr("吹气1通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_GASS_1_LOOSENED].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnBlow1Loosen,tr("吹气1断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_GASS_1_LOOSENED].actualPortNum,0);
+        }
 
-//        if (index == 0)
-//        {
-//            onCheckSavedGuide();
-//        }
-//        else if (index == 4)
-//        {
-//            onCheckSavedReferPointPara();
-//        }
-//    });
+    });
+    connect(ui->btnChuck1Loosen,&QPushButton::clicked,this,[=](){//卡盘1松开/夹紧
+        if(ui->btnChuck1Loosen->text() == tr("卡盘1松开"))
+        {
+            setbuttonIcon(ui->btnChuck1Loosen,tr("卡盘1夹紧"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_CHUCK_1_CLAMP].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnChuck1Loosen,tr("卡盘1松开"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_CHUCK_1_LOOSENED].actualPortNum,1);
+        }
+
+    });
+    connect(ui->btnAutoGate1Close,&QPushButton::clicked,this,[=](){//自动门关/开
+        if(ui->btnAutoGate1Close->text() == tr("自动门1关"))
+        {
+            setbuttonIcon(ui->btnAutoGate1Close,tr("自动门1开"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnAutoGate1Close,tr("自动门1关"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].actualPortNum,1);
+        }
+
+    });
+    connect(ui->btnStartProcess1Break,&QPushButton::clicked,this,[=](){//启动加工1断/通
+        if(ui->btnStartProcess1Break->text() == tr("启动加工1断"))
+        {
+            setbuttonIcon(ui->btnStartProcess1Break,tr("启动加工1通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_START_PROCESS_1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnStartProcess1Break,tr("启动加工1断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_START_PROCESS_1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnMainAxisLocate1Break,&QPushButton::clicked,this,[=](){//主轴定位1断/通
+        if(ui->btnMainAxisLocate1Break->text() == tr("主轴定位1断"))
+        {
+            setbuttonIcon(ui->btnMainAxisLocate1Break,tr("主轴定位1通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnMainAxisLocate1Break,tr("主轴定位1断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnControlRotate1Break,&QPushButton::clicked,this,[=](){//主轴旋转1断/通
+        if(ui->btnControlRotate1Break->text() == tr("主轴旋转1断"))
+        {
+            setbuttonIcon(ui->btnControlRotate1Break,tr("主轴旋转1通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_SPINDLE_ROTATE_1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnControlRotate1Break,tr("主轴旋转1断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_SPINDLE_ROTATE_1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnReserveY10Break,&QPushButton::clicked,this,[=](){
+        if(ui->btnReserveY10Break->text() == tr("预留Y10断"))
+        {
+            setbuttonIcon(ui->btnReserveY10Break,tr("预留Y10通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+10-1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnReserveY10Break,tr("预留Y10断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+10-1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnReserveY11Break,&QPushButton::clicked,this,[=](){
+        if(ui->btnReserveY11Break->text() == tr("预留Y11断"))
+        {
+            setbuttonIcon(ui->btnReserveY11Break,tr("预留Y11通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+11-1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnReserveY11Break,tr("预留Y11断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+11-1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnReserveY12Break,&QPushButton::clicked,this,[=](){
+        if(ui->btnReserveY12Break->text() == tr("预留Y12断"))
+        {
+            setbuttonIcon(ui->btnReserveY12Break,tr("预留Y12通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+12-1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnReserveY12Break,tr("预留Y12断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+12-1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnReserveY13Break,&QPushButton::clicked,this,[=](){
+        if(ui->btnReserveY13Break->text() == tr("预留Y13断"))
+        {
+            setbuttonIcon(ui->btnReserveY13Break,tr("预留Y13通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+13-1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnReserveY13Break,tr("预留Y13断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+13-1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnReserveY14Break,&QPushButton::clicked,this,[=](){
+        if(ui->btnReserveY14Break->text() == tr("预留Y14断"))
+        {
+            setbuttonIcon(ui->btnReserveY14Break,tr("预留Y14通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+14-1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnReserveY14Break,tr("预留Y14断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+14-1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnReserveY15Break,&QPushButton::clicked,this,[=](){
+        if(ui->btnReserveY15Break->text() == tr("预留Y15断"))
+        {
+            setbuttonIcon(ui->btnReserveY15Break,tr("预留Y15通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+15-1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnReserveY15Break,tr("预留Y15断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+15-1].actualPortNum,0);
+        }
+    });
+    connect(ui->btnReserveY20Break,&QPushButton::clicked,this,[=](){
+        if(ui->btnReserveY20Break->text() == tr("预留Y20断"))
+        {
+            setbuttonIcon(ui->btnReserveY20Break,tr("预留Y20通"),1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+20-1].actualPortNum,1);
+        }
+        else
+        {
+            setbuttonIcon(ui->btnReserveY20Break,tr("预留Y20断"),0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[OUTPUT_NUM+20-1].actualPortNum,0);
+        }
+    });
+
+    connect(ui->chbMachineControl,&QCheckBox::clicked,this,[=](){//机床控制使能复选框
+        if(!ui->chbMachineControl->isChecked())
+        {
+            ui->btnAutoGate1Close->setEnabled(true);
+            ui->btnStartProcess1Break->setEnabled(false);
+            ui->btnMainAxisLocate1Break->setEnabled(false);
+            ui->btnControlRotate1Break->setEnabled(false);
+        }
+        else
+        {
+            ui->btnAutoGate1Close->setEnabled(true);
+            ui->btnStartProcess1Break->setEnabled(true);
+            ui->btnMainAxisLocate1Break->setEnabled(true);
+            ui->btnControlRotate1Break->setEnabled(true);
+        }
+    });
+
+    StateButtonInit();//初始化相关状态按钮状态
 
     /*********************************操作指引逻辑********************************************/
     connect(ui->editGuideKeyDef, &KeyEdit::saveKeyDef, this, &ManualForm::onSaveKeyDef);
@@ -164,6 +368,27 @@ void ManualForm::on_btnNewButton_clicked()
                  ui->editGuideKeyDef->setText(para.keyDefStr);
             }
         });
+        connect(btn, &DraggableButton::clicked, this,[=](){
+            selectedButton[0] = btn;
+            if (guidePoints.contains(selectedButton[0])) {
+                GuidePara para = guidePoints.value(selectedButton[0]);
+                if(para.keyType == 0)
+                {//0阀输出 1输出 2轴
+                    g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
+                }
+                else if(para.keyType == 1)
+                {
+
+                }
+                else if(para.keyType == 2)
+                {
+
+                }
+
+            }
+            qDebug() << "按键%s被按下!"<<btn->text();
+        });
+
         connect(btn, &DraggableButton::positionChanged, [=]() {
             auto it = guidePoints.find(selectedButton[0]);
             if (it != guidePoints.end()) {
@@ -396,6 +621,13 @@ void ManualForm::pageInit()
     QPixmap picReferPoint(REFERPOINT_PIC);
     picReferPoint.scaled(ui->labReferPointBackGround->size());
     ui->labReferPointBackGround->setPixmap(picReferPoint);
+
+    ui->labelGuideBackgroud->setPixmap(QPixmap(":/images/guide.png"));
+
+    ui->btnAutoGate1Close->setEnabled(true);
+    ui->btnStartProcess1Break->setEnabled(false);
+    ui->btnMainAxisLocate1Break->setEnabled(false);
+    ui->btnControlRotate1Break->setEnabled(false);
 
 }
 
@@ -930,5 +1162,50 @@ void ManualForm::on_btnImportPictureReference_clicked()
 
 void ManualForm::on_cb_axisActionAxis_currentIndexChanged(int index)
 {
-    m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+    m_manualAxis.axis=index;
+}
+//待状态灯的按钮设置状态灯状态
+void ManualForm::setbuttonIcon(QPushButton *button,QString ButtonText, uint8_t state)
+{
+    switch (state) {
+    case 1://红灯为夹紧、正转、通或开状态
+        button->setIcon(QIcon(":/images/state_red.png"));
+        break;
+    case 0://熄灭为松开、反转、断或关状态
+        button->setIcon(QIcon(":/images/state_grey.png"));
+        break;
+    default:
+        break;
+    }
+    button->setStyleSheet("text-align: left; padding-left: 10px;");
+    button->setText(ButtonText);
+    button->setIconSize(QSize(24, 24));
+}
+
+//卡爪/机床,预留界面状态灯按钮初始化
+void ManualForm::StateButtonInit()
+{
+    //卡爪/机床
+    setbuttonIcon(ui->btnRawMaterial1Loosen,tr("原料1松开"),false);
+    setbuttonIcon(ui->btnFinishedProduct1Loosen,tr("成品1松开"),false);
+    setbuttonIcon(ui->btnClaw1Reverse,tr("卡爪1反转"),false);
+    setbuttonIcon(ui->btnBlow1Loosen,tr("吹气1断"),false);
+    setbuttonIcon(ui->btnChuck1Loosen,tr("卡盘1松开"),false);
+    setbuttonIcon(ui->btnAutoGate1Close,tr("自动门1关"),false);
+    setbuttonIcon(ui->btnStartProcess1Break,tr("启动加工1断"),false);
+    setbuttonIcon(ui->btnMainAxisLocate1Break,tr("主轴定位1断"),false);
+    setbuttonIcon(ui->btnControlRotate1Break,tr("控制旋转1断"),false);
+    //预留
+    setbuttonIcon(ui->btnReserveY10Break,tr("预留Y10断"),false);
+    setbuttonIcon(ui->btnReserveY11Break,tr("预留Y11断"),false);
+    setbuttonIcon(ui->btnReserveY12Break,tr("预留Y12断"),false);
+    setbuttonIcon(ui->btnReserveY13Break,tr("预留Y13断"),false);
+    setbuttonIcon(ui->btnReserveY14Break,tr("预留Y14断"),false);
+    setbuttonIcon(ui->btnReserveY15Break,tr("预留Y15断"),false);
+    setbuttonIcon(ui->btnReserveY20Break,tr("预留Y20断"),false);
+    setbuttonIcon(ui->btnReserveY21Break,tr("预留Y21断"),false);
+    setbuttonIcon(ui->btnReserveY23Break,tr("预留Y23断"),false);
+    setbuttonIcon(ui->btnReserveY24Break,tr("预留Y24断"),false);
+    setbuttonIcon(ui->btnReserveY25Break,tr("预留Y25断"),false);
+    setbuttonIcon(ui->btnReserveYM4Break,tr("预留YM4断"),false);
 }

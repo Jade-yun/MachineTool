@@ -97,12 +97,15 @@ public:
 
     void keyAxisCommandSend(uint16_t code, int32_t value);              //按键指令分类发送
 
+    void keyFunctCommandSend(uint16_t code,int32_t value);
+
+    void TrimodeSwitchCommandSend(uint16_t code, int32_t value);
 private:
     void connectAllSignalsAndSlots();
 
     void setStyleFromFile(const QString &styleSheet);
 
-
+    void PowerOnStateHandle();
 public:
     void callFullKeyboard(QObject *watched);
 private slots:

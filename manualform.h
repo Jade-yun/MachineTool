@@ -19,7 +19,7 @@ struct GuidePara {
     QPoint btnPos;      // 操作指引点在ui上的位置
 
     uint8_t  keyType;	// 按键功能类型，0输出 1输入 2轴
-    uint8_t  portNum;	// 功能编号，输出类型时1-40，输入类型时1-60，轴类型时1-6
+    uint8_t  portNum;	// 功能编号，输出类型时1-44，输入类型时1-60，轴类型时1-6
     uint8_t  status;    // 功能状态，输出类型时0断 1通 2翻转，输入类型时0无信号 1有信号，轴类型时0正向 1反向
 };
 
@@ -49,6 +49,8 @@ signals:
     void sigShowStackPage();
 
 private slots:
+    void StateButtonInit();
+    void setbuttonIcon(QPushButton *button,QString ButtonText, uint8_t state);
     void on_checkBoxEditPosGuide_stateChanged(int arg1);
     void on_btnImportPictureGuide_clicked();
     void on_btnNewButton_clicked();

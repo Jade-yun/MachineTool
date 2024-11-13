@@ -5,12 +5,12 @@
 #include <QPair>
 #include <QPropertyAnimation>
 #include <QDebug>
+#include <QSignalMapper>
 #include <QThread>
 #include <QRadioButton>
 
 #include "mainwindow.h"
 #include "upgradedialog.h"
-#include "tippasswddialog.h"
 
 #include "errortipdialog.h"
 #include "stackedit.h"
@@ -1300,11 +1300,6 @@ void Setting::pageSwitchInit()
     connect(ui->btnStackSet, &QPushButton::clicked, this, [=](){
         ui->stackedWidget->setCurrentWidget(ui->pageStack);
     });
-    /***************************升级与备份-信号槽连接**********************************/
-    connect(ui->btnUpdateHandcontroller, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(0);});
-    connect(ui->btnUpdateIOBoard, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(2);});
-    connect(ui->btnUpdateMainboard, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(1);});
-    connect(ui->btnUpdateServo, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(3);});
      /******************************************************************************/
     connect(ui->btnLastAdvance, &QPushButton::clicked, this, [=](){
         ui->stkWgtAdvance->setCurrentIndex((ui->stkWgtAdvance->currentIndex() - 1 + ui->stkWgtAdvance->count())
@@ -2183,16 +2178,16 @@ void Setting::outportInterlockSlots()
                 switch (j)
                 {
                 case 0:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]+1/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
+                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
                     break;
                 case 1:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]+1/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
+                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
                     break;
                 case 2:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]+1/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
+                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
                     break;
                 case 3:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]+1/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
+                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
                     break;
                 }
             }
@@ -2770,6 +2765,7 @@ void Setting::savePortDefine()
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
     QThread::msleep(5);
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
+    emit monitor_port_refreash();
 }
 
 void Setting::saveNameDefine()

@@ -8,7 +8,7 @@
 #include "QComboBox"
 #include "QPushButton"
 #include "QTableWidgetItem"
-
+#include "tippasswddialog.h"
 #include "customkeyboard.h"
 #include "method/iniconfig.h"
 #include "method/port_setting.h"
@@ -17,7 +17,6 @@
 #include "keydefinedialog.h"
 #include "sigdefinedialog.h"
 #include "upgradedialog.h"
-// revised by wuyunyu
 
 enum MenuState {
     Operator = 0,  // 操作员
@@ -89,6 +88,7 @@ public:
     void showPortDefine();          //显示端口自定义
 signals:
     void LOGO_Refresh();
+    void monitor_port_refreash();
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型

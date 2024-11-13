@@ -161,21 +161,25 @@ AutoForm::AutoForm(QWidget *parent) :
     // these slots are used to adjust global speed
     connect(ui->btnGlobalSpeedAdd, &QPushButton::clicked, [=](){
         int value = ui->proBarGlobalSpeed->value();
-        if (value < 100 && value > 0 && ui->btnAdjustSpeed->isChecked())
+        if (value <= 100 && value >= 0 && ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(++value);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
     connect(ui->btnGlobalSpeedSub, &QPushButton::clicked, [=](){
         int value = ui->proBarGlobalSpeed->value();
-        if (value < 100 && value > 0 && ui->btnAdjustSpeed->isChecked())
+        if (value <= 100 && value >= 0 && ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(--value);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
     connect(ui->btn10percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(10);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
     connect(ui->btn20percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(20);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
 //    connect(ui->btn20percent, &QPushButton::toggled, [=](bool checked){
 //        if (ui->btnAdjustSpeed->isChecked())
@@ -184,18 +188,22 @@ AutoForm::AutoForm(QWidget *parent) :
     connect(ui->btn40percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(40);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
     connect(ui->btn60percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(60);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
     connect(ui->btn80percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(80);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
     connect(ui->btn100percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(100);
+        m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
     });
 /**********************************************************************/
 

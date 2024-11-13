@@ -71,7 +71,9 @@ QTabBar::tab:!selected {
 
 QTabWidget::pane {
     border: 1px solid #000000; /* 设置边框样式和颜色 */
-}</string>
+}
+
+</string>
   </property>
   <widget class="QTabWidget" name="tabWidgetManualPage">
    <property name="geometry">
@@ -130,7 +132,7 @@ QTabWidget::pane {
        <height>47</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout1">
       <property name="spacing">
        <number>1</number>
       </property>
@@ -462,7 +464,7 @@ QTabWidget::pane {
       </property>
       <layout class="QGridLayout" name="gridLayout">
        <item row="2" column="0">
-        <widget class="QPushButton" name="btnDelete_4">
+        <widget class="QPushButton" name="handPosAdd">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -707,7 +709,7 @@ QTabWidget::pane {
         </widget>
        </item>
        <item row="3" column="0">
-        <widget class="QPushButton" name="btnDelete_5">
+        <widget class="QPushButton" name="HandPosDown">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1057,28 +1059,6 @@ QTabWidget::pane {
          </property>
         </widget>
        </item>
-       <item row="0" column="0" colspan="2">
-        <widget class="QCheckBox" name="chbMachineControl">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>机床控制使能</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="btnStartProcess1Break">
          <property name="sizePolicy">
@@ -1211,6 +1191,28 @@ QTabWidget::pane {
            <width>50</width>
            <height>50</height>
           </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QCheckBox" name="chbMachineControl">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>机床控制使能</string>
          </property>
         </widget>
        </item>
@@ -1403,6 +1405,9 @@ QTabWidget::pane {
            <height>50</height>
           </size>
          </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item row="1" column="0">
@@ -1447,6 +1452,9 @@ QTabWidget::pane {
            <width>50</width>
            <height>50</height>
           </size>
+         </property>
+         <property name="checkable">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -1493,6 +1501,12 @@ QTabWidget::pane {
            <height>50</height>
           </size>
          </property>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <property name="checked">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
       </layout>
@@ -1506,8 +1520,8 @@ QTabWidget::pane {
     <widget class="QGroupBox" name="groupBox_8">
      <property name="geometry">
       <rect>
-       <x>430</x>
-       <y>70</y>
+       <x>410</x>
+       <y>60</y>
        <width>371</width>
        <height>281</height>
       </rect>
@@ -1756,8 +1770,8 @@ QTabWidget::pane {
     <widget class="QGroupBox" name="groupBox_9">
      <property name="geometry">
       <rect>
-       <x>810</x>
-       <y>70</y>
+       <x>800</x>
+       <y>60</y>
        <width>191</width>
        <height>281</height>
       </rect>
@@ -1820,7 +1834,7 @@ QTabWidget::pane {
     <widget class="QGroupBox" name="groupBox_10">
      <property name="geometry">
       <rect>
-       <x>40</x>
+       <x>20</x>
        <y>60</y>
        <width>371</width>
        <height>291</height>
@@ -2667,14 +2681,14 @@ QTabWidget::pane {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>KeyEdit</class>
-   <extends>QLineEdit</extends>
-   <header>keydefinedialog.h</header>
-  </customwidget>
-  <customwidget>
    <class>NumberEdit</class>
    <extends>QLineEdit</extends>
    <header>customedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KeyEdit</class>
+   <extends>QLineEdit</extends>
+   <header>keydefinedialog.h</header>
   </customwidget>
   <customwidget>
    <class>SaveButton</class>

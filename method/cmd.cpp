@@ -503,23 +503,38 @@ uint8_t g_GetProOrderData(uint8_t *data, uint8_t writeMode)
 uint8_t g_ProOrderDataCopy(P_ProOrderStruct *proOrder_New, P_ProOrderStruct *proOrder_Old)
 {
     uint16_t len = 0;
-
+    P_ProOrderStruct* proOrder_New_Temp = new P_ProOrderStruct;
     if(proOrder_Old->pData == NULL)
     {//被拷贝的命令数据指针为空，返回
         return 1;
     }
+    len = g_GetProOrderDataLen(proOrder_Old);									//获取命令长度
+    proOrder_New_Temp->pData = (void*)malloc(len);									//申请内存大小
+    proOrder_New_Temp->list = proOrder_Old->list;
+    proOrder_New_Temp->runOrderNum = proOrder_Old->runOrderNum;
+    proOrder_New_Temp->cmd = proOrder_Old->cmd;
+    proOrder_New_Temp->noteFlag = proOrder_Old->noteFlag;
+    proOrder_New_Temp->delay = proOrder_Old->delay;
+    memcpy(proOrder_New_Temp->pData, proOrder_Old->pData, len);		//复制命令数据
     //如果当前行命令参数指针指向有效地址，需要先释放
     g_FreeProOrder(proOrder_New);
 
-    proOrder_New->list = proOrder_Old->list;
-    proOrder_New->runOrderNum = proOrder_Old->runOrderNum;
-    proOrder_New->cmd = proOrder_Old->cmd;
-    proOrder_New->noteFlag = proOrder_Old->noteFlag;
-    proOrder_New->delay = proOrder_Old->delay;
+    proOrder_New->list = proOrder_New_Temp->list;
+    proOrder_New->runOrderNum = proOrder_New_Temp->runOrderNum;
+    proOrder_New->cmd = proOrder_New_Temp->cmd;
+    proOrder_New->noteFlag = proOrder_New_Temp->noteFlag;
+    proOrder_New->delay = proOrder_New_Temp->delay;
 
-    len = g_GetProOrderDataLen(proOrder_Old);									//获取命令长度
+    len = g_GetProOrderDataLen(proOrder_New_Temp);									//获取命令长度                                    //获取命令长度
     proOrder_New->pData = (void*)malloc(len);									//申请内存大小
-    memcpy(proOrder_New->pData, proOrder_Old->pData, len);		//复制命令数据
+    if(proOrder_New->pData != NULL)
+    {
+        memcpy(proOrder_New->pData, proOrder_New_Temp->pData, len);		//复制命令数据
+    }
+    else
+    {
+        //qDebug() <<__FUNCTION__<<"   malloc errol:"<<__LINE__;
+    }
     return 0;
 }
 

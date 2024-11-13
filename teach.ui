@@ -502,7 +502,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>删除</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/del.png</normaloff>:/images/teach_img/del.png</iconset>
       </property>
       <property name="iconSize">
@@ -543,7 +543,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>分解</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/fenjie.png</normaloff>:/images/teach_img/fenjie.png</iconset>
       </property>
       <property name="iconSize">
@@ -584,7 +584,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>组合</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/combin.png</normaloff>:/images/teach_img/combin.png</iconset>
       </property>
       <property name="iconSize">
@@ -625,7 +625,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>上移</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/up.png</normaloff>:/images/teach_img/up.png</iconset>
       </property>
       <property name="iconSize">
@@ -666,7 +666,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>下移</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/down.png</normaloff>:/images/teach_img/down.png</iconset>
       </property>
       <property name="iconSize">
@@ -707,7 +707,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>编辑</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/edit.png</normaloff>:/images/teach_img/edit.png</iconset>
       </property>
       <property name="iconSize">
@@ -754,7 +754,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>试行</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/shixing.png</normaloff>:/images/teach_img/shixing.png</iconset>
       </property>
       <property name="iconSize">
@@ -795,7 +795,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>屏蔽</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/shield.png</normaloff>:/images/teach_img/shield.png</iconset>
       </property>
       <property name="iconSize">
@@ -883,7 +883,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <string>插入</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teach_img/inset.png</normaloff>:/images/teach_img/inset.png</iconset>
       </property>
       <property name="iconSize">
@@ -915,7 +915,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -960,7 +960,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">
@@ -9669,7 +9669,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <string>标签/注释</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/label.png</normaloff>:/images/teach_img/label.png</iconset>
           </property>
           <property name="iconSize">
@@ -9713,7 +9713,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <string>子程序</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/subprogram.png</normaloff>:/images/teach_img/subprogram.png</iconset>
           </property>
           <property name="iconSize">
@@ -9757,7 +9757,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <string>转矩保护</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/torque.png</normaloff>:/images/teach_img/torque.png</iconset>
           </property>
           <property name="iconSize">
@@ -9801,7 +9801,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <string>逻辑&amp;变量</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/logic.png</normaloff>:/images/teach_img/logic.png</iconset>
           </property>
           <property name="iconSize">
@@ -9845,7 +9845,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <string>伺服停止</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/stop.png</normaloff>:/images/teach_img/stop.png</iconset>
           </property>
           <property name="iconSize">
@@ -9889,7 +9889,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <string>偏移</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/offset.png</normaloff>:/images/teach_img/offset.png</iconset>
           </property>
           <property name="iconSize">
@@ -9933,7 +9933,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <string>搜索</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/search.png</normaloff>:/images/teach_img/search.png</iconset>
           </property>
           <property name="iconSize">
@@ -12419,7 +12419,7 @@ QGroupBox::title { subcontrol-origin: margin;
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">
@@ -12465,7 +12465,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>机床</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/machine.png</normaloff>:/images/teach_img/machine.png</iconset>
           </property>
           <property name="iconSize">
@@ -12509,7 +12509,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>信号等待</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/signalWait.png</normaloff>:/images/teach_img/signalWait.png</iconset>
           </property>
           <property name="iconSize">
@@ -12553,7 +12553,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>轴动作</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/axis.png</normaloff>:/images/teach_img/axis.png</iconset>
           </property>
           <property name="iconSize">
@@ -12597,7 +12597,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>卡爪动作</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/claw.png</normaloff>:/images/teach_img/claw.png</iconset>
           </property>
           <property name="iconSize">
@@ -12641,7 +12641,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>速度教导</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/speedEdu.png</normaloff>:/images/teach_img/speedEdu.png</iconset>
           </property>
           <property name="iconSize">
@@ -12685,7 +12685,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>堆叠</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/stack.png</normaloff>:/images/teach_img/stack.png</iconset>
           </property>
           <property name="iconSize">
@@ -12729,7 +12729,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>信号检测</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/signalCheck.png</normaloff>:/images/teach_img/signalCheck.png</iconset>
           </property>
           <property name="iconSize">
@@ -12773,7 +12773,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>预留输出</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/reserveOutput.png</normaloff>:/images/teach_img/reserveOutput.png</iconset>
           </property>
           <property name="iconSize">
@@ -12817,7 +12817,7 @@ QGroupBox::title { subcontrol-origin: margin;
            <string>其他</string>
           </property>
           <property name="icon">
-           <iconset>
+           <iconset resource="images.qrc">
             <normaloff>:/images/teach_img/other.png</normaloff>:/images/teach_img/other.png</iconset>
           </property>
           <property name="iconSize">
@@ -13036,7 +13036,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>4</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">
@@ -13658,7 +13658,7 @@ QGroupBox::title { subcontrol-origin: margin;
              <string/>
             </property>
             <property name="icon">
-             <iconset>
+             <iconset resource="images.qrc">
               <normaloff>:/images/switch_right.png</normaloff>:/images/switch_right.png</iconset>
             </property>
             <property name="iconSize">
@@ -17288,6 +17288,8 @@ font: 20pt ;</string>
    <header location="global">referpointdialog.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
