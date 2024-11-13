@@ -17,7 +17,7 @@
 #include "keydefinedialog.h"
 #include "sigdefinedialog.h"
 #include "upgradedialog.h"
-
+// revised by wuyunyu
 
 enum MenuState {
     Operator = 0,  // 操作员
