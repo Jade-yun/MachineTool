@@ -151,5 +151,11 @@
         <file>images/open_menu.png</file>
         <file>images/radio_checked.png</file>
         <file>images/radio_unchecked.png</file>
+        <file>images/start.png</file>
+        <file>images/stop.png</file>
+        <file>images/last.png</file>
+        <file>images/next.png</file>
+        <file>images/origin.png</file>
+        <file>images/revert.png</file>
     </qresource>
 </RCC>

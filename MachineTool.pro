@@ -50,6 +50,7 @@ SOURCES += \
     alarmform.cpp \
     autoform.cpp \
     dialogs/file_preview.cpp \
+    dialogs/softkeywidget.cpp \
     dialogs/tippasswddialog.cpp \
     dialogs/upgradedialog.cpp \
     main.cpp \
@@ -96,6 +97,7 @@ HEADERS += \
     alarmform.h \
     autoform.h \
     dialogs/file_preview.h \
+    dialogs/softkeywidget.h \
     dialogs/tippasswddialog.h \
     dialogs/upgradedialog.h \
     mainwindow.h \
@@ -132,6 +134,7 @@ FORMS += \
     alarmform.ui \
     autoform.ui \
     dialogs/file_preview.ui \
+    dialogs/softkeywidget.ui \
     dialogs/tippasswddialog.ui \
     dialogs/upgradedialog.ui \
     mainwindow.ui \

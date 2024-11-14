@@ -16,6 +16,7 @@
 #include "errortipdialog.h"
 #include "ifprogramdialog.h"
 #include "logindialog.h"
+#include "softkeywidget.h"
 
 #include "mythread.h"
 
@@ -80,6 +81,7 @@ private:
 
     ErrorTipDialog* dlgErrorTip;
     LoginDialog* login;
+    SoftKeyWidget* softKey;
 
 private:
     TriMode curMode;

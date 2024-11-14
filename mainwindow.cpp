@@ -53,6 +53,20 @@ MainWindow::MainWindow(QWidget *parent)
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 
 
+    softKey = new SoftKeyWidget(this);
+    connect(ui->btnSoftKey, &QPushButton::clicked, [=](){
+        static bool checked = true;
+        if (checked)
+        {
+            softKey->show();
+        }
+        else
+        {
+            softKey->hide();
+        }
+        checked = !checked;
+    });
+
     login = new LoginDialog(this);
     connect(ui->btnAdmin, &QPushButton::clicked, [=](){
         if (login->exec() == QDialog::Accepted)
@@ -386,6 +400,7 @@ void MainWindow::connectAllSignalsAndSlots()
     ui->wgtHelp->hide();
     connect(ui->btnHelp, &QPushButton::clicked, this, [=](){
         ui->wgtHelp->show();
+        ui->wgtHelp->raise();
     });
 //    connect(ui->btnSoftKey, &QPushButton::clicked, this, [=](){
 //        ui->wgtHelp->hide();
