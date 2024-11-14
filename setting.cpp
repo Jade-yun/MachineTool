@@ -1054,20 +1054,20 @@ void Setting::syncParaToUI()
     {
         machineParaWidgets.at(i).axisType->setCurrentIndex(m_AxisPar[i].axisType);
         machineParaWidgets.at(i).axisMoveMade->setCurrentIndex(m_AxisPar[i].axisMoveMade);
-        machineParaWidgets.at(i).accTime->setText(QString::number(m_AxisPar[i].accTime / 100.0));
-        machineParaWidgets.at(i).decTime->setText(QString::number(m_AxisPar[i].decTime / 100.0));
+        machineParaWidgets.at(i).accTime->setText(QString::number(m_AxisPar[i].accTime / 100.0, 'f', 2));
+        machineParaWidgets.at(i).decTime->setText(QString::number(m_AxisPar[i].decTime / 100.0, 'f', 2));
         machineParaWidgets.at(i).accAcc->setText(QString::number(m_AxisPar[i].accAcc));
         machineParaWidgets.at(i).decDec->setText(QString::number(m_AxisPar[i].decDec));
         machineParaWidgets.at(i).maxSpeed->setText(QString::number(m_AxisPar[i].maxSpeed));
-        machineParaWidgets.at(i).axisMinPos->setText(QString::number(m_AxisPar[i].axisMinPos / 100.0));
-        machineParaWidgets.at(i).axisMaxPos->setText(QString::number(m_AxisPar[i].axisMaxPos / 100.0));
+        machineParaWidgets.at(i).axisMinPos->setText(QString::number(m_AxisPar[i].axisMinPos / 100.0, 'f', 2));
+        machineParaWidgets.at(i).axisMaxPos->setText(QString::number(m_AxisPar[i].axisMaxPos / 100.0, 'f', 2));
         machineParaWidgets.at(i).limitMin->setCurrentPort(m_AxisPar[i].minPosSignal);
         machineParaWidgets.at(i).limitMax->setCurrentPort(m_AxisPar[i].maxPosSignal);
         machineParaWidgets.at(i).circlePluseNum->setText(QString::number(m_AxisPar[i].circlePluseNum));
-        machineParaWidgets.at(i).circleDis->setText(QString::number(m_AxisPar[i].circleDis / 100.0));
+        machineParaWidgets.at(i).circleDis->setText(QString::number(m_AxisPar[i].circleDis / 100.0, 'f', 2));
         machineParaWidgets.at(i).findOriginSpeed->setText(QString::number(m_AxisPar[i].findOriginSpeed));
         machineParaWidgets.at(i).leaveOriginSpeed->setText(QString::number(m_AxisPar[i].leaveOriginSpeed));
-        machineParaWidgets.at(i).originOffset->setText(QString::number(m_AxisPar[i].originOffset / 100.0));
+        machineParaWidgets.at(i).originOffset->setText(QString::number(m_AxisPar[i].originOffset / 100.0, 'f', 2));
         machineParaWidgets.at(i).originDir->setCurrentIndex(m_AxisPar[i].originDir);
         machineParaWidgets.at(i).originSignal->setCurrentPort(m_AxisPar[i].originSignal);
         machineParaWidgets.at(i).backOriginOrder->setCurrentIndex(m_AxisPar[i].backOriginOrder);
@@ -1116,40 +1116,40 @@ void Setting::syncParaToUI()
         for (int i = 0; i < 2; i++)
         {
             servoPointSafeArea.at(index).machineA1Pos[i]->setText(
-                        QString::number(m_SaveArea[index].machineA1Pos[i] / 100.0));
+                        QString::number(m_SaveArea[index].machineA1Pos[i] / 100.0, 'f', 2));
             servoPointSafeArea.at(index).machineA2Pos[i]->setText(
-                        QString::number(m_SaveArea[index].machineA2Pos[i] / 100.0));
+                        QString::number(m_SaveArea[index].machineA2Pos[i] / 100.0, 'f', 2));
             servoPointSafeArea.at(index).starckB1Pos[i]->setText(
-                        QString::number(m_SaveArea[index].starckB1Pos[i] / 100.0));
+                        QString::number(m_SaveArea[index].starckB1Pos[i] / 100.0, 'f', 2));
             servoPointSafeArea.at(index).starckB2Pos[i]->setText(
-                        QString::number(m_SaveArea[index].starckB2Pos[i] / 100.0));
+                        QString::number(m_SaveArea[index].starckB2Pos[i] / 100.0, 'f', 2));
         }
         servoPointSafeArea.at(index).machineA1Pos[SAVE_Z_AXIS]->setText(
-                    QString::number(m_SaveArea[index].machineA1Pos[SAVE_Z_AXIS] / 100.0));
+                    QString::number(m_SaveArea[index].machineA1Pos[SAVE_Z_AXIS] / 100.0, 'f', 2));
         servoPointSafeArea.at(index).machineA2Pos[SAVE_Z_AXIS]->setText(
-                    QString::number(m_SaveArea[index].machineA2Pos[SAVE_Z_AXIS] / 100.0));
+                    QString::number(m_SaveArea[index].machineA2Pos[SAVE_Z_AXIS] / 100.0, 'f', 2));
 
         servoPointSafeArea.at(index).machine_Z_WaitMaxPos->setText(
-                    QString::number(m_SaveArea[index].machine_Z_WaitMaxPos / 100.0));
+                    QString::number(m_SaveArea[index].machine_Z_WaitMaxPos / 100.0, 'f', 2));
         servoPointSafeArea.at(index).machine_Z_FallMaxPos->setText(
-                    QString::number(m_SaveArea[index].machine_Z_FallMaxPos / 100.0));
+                    QString::number(m_SaveArea[index].machine_Z_FallMaxPos / 100.0, 'f', 2));
         servoPointSafeArea.at(index).machine_Z_InsideHigh->setText(
-                    QString::number(m_SaveArea[index].machine_Z_InsideHigh / 100.0));
+                    QString::number(m_SaveArea[index].machine_Z_InsideHigh / 100.0, 'f', 2));
         servoPointSafeArea.at(index).stack_Z_StartMaxPos->setText(
-                    QString::number(m_SaveArea[index].stack_Z_StartMaxPos / 100.0));
+                    QString::number(m_SaveArea[index].stack_Z_StartMaxPos / 100.0, 'f', 2));
         servoPointSafeArea.at(index).stack_Z_FallMaxPos->setText(
-                    QString::number(m_SaveArea[index].stack_Z_FallMaxPos / 100.0));
+                    QString::number(m_SaveArea[index].stack_Z_FallMaxPos / 100.0, 'f', 2));
     }
 
     /****************************伺服安全点--位置限定********************************************/
-    toleranceList[0]->setText(QString::number(m_DegreeParS.tolerance / 100.0));
-    toleranceList[1]->setText(QString::number(m_DegreeParS.originDegree / 100.0));
-    toleranceList[2]->setText(QString::number(m_DegreeParS.actionFinDegree / 100.0));
+    toleranceList[0]->setText(QString::number(m_DegreeParS.tolerance / 100.0, 'f', 2));
+    toleranceList[1]->setText(QString::number(m_DegreeParS.originDegree / 100.0, 'f', 2));
+    toleranceList[2]->setText(QString::number(m_DegreeParS.actionFinDegree / 100.0, 'f', 2));
 
-    horizontalPosList[0]->setText(QString::number(m_DegreeParS.saveRampageHige_Z1 / 100.0));
-    horizontalPosList[1]->setText(QString::number(m_DegreeParS.saveRampageHige_Z2 / 100.0));
-    horizontalPosList[2]->setText(QString::number(m_DegreeParS.saveRotatePos_Y1 / 100.0));
-    horizontalPosList[3]->setText(QString::number(m_DegreeParS.saveRotatePos_Y2 / 100.0));
+    horizontalPosList[0]->setText(QString::number(m_DegreeParS.saveRampageHige_Z1 / 100.0, 'f', 2));
+    horizontalPosList[1]->setText(QString::number(m_DegreeParS.saveRampageHige_Z2 / 100.0, 'f', 2));
+    horizontalPosList[2]->setText(QString::number(m_DegreeParS.saveRotatePos_Y1 / 100.0, 'f', 2));
+    horizontalPosList[3]->setText(QString::number(m_DegreeParS.saveRotatePos_Y2 / 100.0, 'f', 2));
 
     /****************************堆叠设置********************************************/
     for (int i = 0; i < 8; i++)

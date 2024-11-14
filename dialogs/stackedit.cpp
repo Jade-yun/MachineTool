@@ -367,14 +367,14 @@ void StackEdit::syncParaToUI()
         speed[i]->setText(QString::number(m_StackInfo[groupIndex].axisSpeed[i]));
         pointNum[i]->setText(QString::number(m_StackInfo[groupIndex].stackPointNum[i]));
         stackDirect[i]->setCurrentIndex(m_StackInfo[groupIndex].stackDir[i]);
-        speedDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeSpeed[i] / 100.0));
-        startPosA[i]->setText(QString::number(m_StackInfo[groupIndex].stackStartPos[i] / 100.0));
-        endPosB_X[i]->setText(QString::number(m_StackInfo[groupIndex].stack_X_EndPos[i] / 100.0));
-        endPosC_Y[i]->setText(QString::number(m_StackInfo[groupIndex].stack_Y_EndPos[i] / 100.0));
-        posD[i]->setText(QString::number(m_StackInfo[groupIndex].stackDiagonalPos[i] / 100.0));
-        startPosDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeStartPos[i] / 100.0));
-        intervalDis[i]->setText(QString::number(m_StackInfo[groupIndex].intevalDis[i] / 100.0));
-        offset[i]->setText(QString::number(m_StackInfo[groupIndex].offsetDis[i] / 100.0));
+        speedDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeSpeed[i] / 100.0, 'f', 2));
+        startPosA[i]->setText(QString::number(m_StackInfo[groupIndex].stackStartPos[i] / 100.0, 'f', 2));
+        endPosB_X[i]->setText(QString::number(m_StackInfo[groupIndex].stack_X_EndPos[i] / 100.0, 'f', 2));
+        endPosC_Y[i]->setText(QString::number(m_StackInfo[groupIndex].stack_Y_EndPos[i] / 100.0, 'f', 2));
+        posD[i]->setText(QString::number(m_StackInfo[groupIndex].stackDiagonalPos[i] / 100.0, 'f', 2));
+        startPosDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeStartPos[i] / 100.0, 'f', 2));
+        intervalDis[i]->setText(QString::number(m_StackInfo[groupIndex].intevalDis[i] / 100.0, 'f', 2));
+        offset[i]->setText(QString::number(m_StackInfo[groupIndex].offsetDis[i] / 100.0, 'f', 2));
     }
 }
 
