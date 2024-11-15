@@ -15,7 +15,9 @@ public:
     explicit SoftKeyWidget(QWidget *parent = nullptr);
     ~SoftKeyWidget();
 private:
+    bool moveEnable;
     QPoint mousePoint;
+
 
 private:
     Ui::SoftKeyWidget *ui;

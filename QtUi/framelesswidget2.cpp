@@ -1,6 +1,8 @@
 ﻿#include "framelesswidget2.h"
 #include "qevent.h"
 #include "qdebug.h"
+
+#include <QElapsedTimer>
 #include <QVBoxLayout>
 
 FramelessWidget2::FramelessWidget2(QObject *parent) : QObject(parent)
@@ -100,8 +102,19 @@ bool FramelessWidget2::eventFilter(QObject *watched, QEvent *event)
 //            if (moveEnable && mousePressed) {
 //                widget->move(widget->x() + offsetX, widget->y() + offsetY);
 //            }
+
+            static QElapsedTimer timer;
+            if (!timer.isValid()) timer.start();
+
+            if (timer.elapsed() < 40) // 40ms -> 25FPS
+            {
+                return QObject::eventFilter(watched, event);
+            }
+            timer.restart();
+
             if (moveEnable && mousePressed && titleBar->rect().contains(mousePoint)) {
                 widget->move(widget->x() + offsetX, widget->y() + offsetY);
+                widget->update();
             }
 
             if (resizeEnable) {

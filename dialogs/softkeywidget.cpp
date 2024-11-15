@@ -4,6 +4,7 @@
 #include <QIcon>
 #include <QPropertyAnimation>
 #include <QHoverEvent>
+#include <QElapsedTimer>
 
 #include "QtUi/framelesswidget2.h"
 
@@ -22,6 +23,8 @@ SoftKeyWidget::SoftKeyWidget(QWidget *parent) :
     ui(new Ui::SoftKeyWidget)
 {
     ui->setupUi(this);
+
+    moveEnable = false;
 
     this->setModal(false);
     this->setWindowFlags(windowFlags() | Qt::FramelessWindowHint);
@@ -94,6 +97,8 @@ SoftKeyWidget::~SoftKeyWidget()
 
 bool SoftKeyWidget::eventFilter(QObject *watched, QEvent *event)
 {
+    static QElapsedTimer timer;
+    if (!timer.isValid()) timer.start();
     if (watched == this)
     {
         if (event->type() == QEvent::MouseButtonPress) {
@@ -101,6 +106,13 @@ bool SoftKeyWidget::eventFilter(QObject *watched, QEvent *event)
             QMouseEvent *mouseEvent = (QMouseEvent *)event;
 //            mousePoint = mapToGlobal(mouseEvent->pos());
             mousePoint = mouseEvent->pos();
+            if (ui->titleBar->rect().contains(mousePoint))
+            {
+                moveEnable = true;
+            }
+        }
+        else if (event->type() == QEvent::MouseButtonRelease) {
+            moveEnable = false;
         }
         else if (event->type() == QEvent::MouseMove) {
             //设置对应鼠标形状,这个必须放在这里而不是下面,因为可以在鼠标没有按下的时候识别
@@ -110,13 +122,11 @@ bool SoftKeyWidget::eventFilter(QObject *watched, QEvent *event)
             QPoint point = mouseEvent->pos();
 
             //根据当前鼠标位置,计算XY轴移动了多少
-            int offsetX = point.x() - mousePoint.x();
-            int offsetY = point.y() - mousePoint.y();
-
-            if (ui->titleBar->rect().contains(mousePoint))
-            {
-                this->move(this->x() + offsetX, this->y() + offsetY);
+            if (moveEnable && timer.elapsed() > 50) {  // 限制刷新频率
+                QPoint newPos = mapToParent(point - mousePoint);
+                this->move(newPos);
                 this->update();
+                timer.restart();
             }
         }
     }
