@@ -14,9 +14,14 @@ class SoftKeyWidget : public QDialog
 public:
     explicit SoftKeyWidget(QWidget *parent = nullptr);
     ~SoftKeyWidget();
+private:
+    QPoint mousePoint;
 
 private:
     Ui::SoftKeyWidget *ui;
+
+protected:
+    bool eventFilter(QObject *watched, QEvent *event);
 };
 
 #endif // SOFTKEYWIDGET_H

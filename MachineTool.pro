@@ -47,6 +47,7 @@ SOURCES += \
     Prompt_Dialog_page/prompt_dialog_page.cpp \
     Prompt_Dialog_page/prompt_yes_no_dialog_page.cpp \
     Prompt_Dialog_page/yes_no_page.cpp \
+    QtUi/framelesswidget2.cpp \
     alarmform.cpp \
     autoform.cpp \
     dialogs/file_preview.cpp \
@@ -94,6 +95,7 @@ HEADERS += \
     Prompt_Dialog_page/prompt_dialog_page.h \
     Prompt_Dialog_page/prompt_yes_no_dialog_page.h \
     Prompt_Dialog_page/yes_no_page.h \
+    QtUi/framelesswidget2.h \
     alarmform.h \
     autoform.h \
     dialogs/file_preview.h \
