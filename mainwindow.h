@@ -67,7 +67,7 @@ signals:
     void sigLeaveManualPage();
     void signal_refresh_TeachList();//刷新教导界面列表信号
     void EditOperatorVarPreOp_Refresh();//教导界面变量指令-变量类型刷新信号
-
+    void signal_sync_data();       //同步数据到主控板
 private:
     Ui::MainWindow *ui;
 
@@ -110,6 +110,8 @@ private:
     void setStyleFromFile(const QString &styleSheet);
 
     void PowerOnStateHandle();
+
+    void DataSycStateHandel(uint8_t SysIndex);
 public:
     void callFullKeyboard(QObject *watched);
 private slots:
@@ -146,7 +148,6 @@ public:
 signals:
     void toggled(bool checked);
     void clicked();
-
 protected:
     void mousePressEvent(QMouseEvent *event) override;
 

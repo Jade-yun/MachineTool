@@ -1517,120 +1517,30 @@ QTabWidget::pane {
     <attribute name="title">
      <string>预留</string>
     </attribute>
-    <widget class="QGroupBox" name="groupBox_8">
+    <widget class="QGroupBox" name="groupBox_10">
      <property name="geometry">
       <rect>
-       <x>410</x>
-       <y>60</y>
-       <width>371</width>
-       <height>281</height>
+       <x>30</x>
+       <y>80</y>
+       <width>411</width>
+       <height>321</height>
       </rect>
      </property>
      <property name="title">
-      <string>组二</string>
+      <string>组一</string>
      </property>
-     <widget class="QWidget" name="layoutWidget_5">
+     <widget class="QWidget" name="layoutWidget_7">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>40</y>
-        <width>351</width>
-        <height>149</height>
+        <width>376</width>
+        <height>261</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="1">
-        <widget class="QPushButton" name="btnReserveY24Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y24断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="btnReserveY21Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y21断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
+      <layout class="QGridLayout" name="gridLayout_8">
        <item row="0" column="0">
-        <widget class="QPushButton" name="btnReserveY20Break">
+        <widget class="QPushButton" name="btnReserveY7Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1639,7 +1549,7 @@ QTabWidget::pane {
          </property>
          <property name="minimumSize">
           <size>
-           <width>170</width>
+           <width>184</width>
            <height>45</height>
           </size>
          </property>
@@ -1660,7 +1570,142 @@ QTabWidget::pane {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>预留Y20断</string>
+          <string>Y7自动灯断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QPushButton" name="btnReserveY1Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y1原料1夹紧</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="btnReserveY15Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y15报警声断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QPushButton" name="btnReserveY13Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y13急停输出断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1675,7 +1720,7 @@ QTabWidget::pane {
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QPushButton" name="btnReserveY25Break">
+        <widget class="QPushButton" name="btnReserveY16Break">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1684,7 +1729,7 @@ QTabWidget::pane {
          </property>
          <property name="minimumSize">
           <size>
-           <width>170</width>
+           <width>184</width>
            <height>45</height>
           </size>
          </property>
@@ -1705,7 +1750,437 @@ QTabWidget::pane {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>预留Y25断</string>
+          <string>Y16报警灯断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QPushButton" name="btnReserveY14Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y14润滑出断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="btnReserveY8Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y8报警灯断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QPushButton" name="btnReserveY19Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y19加工安全1断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QPushButton" name="btnReserveY3Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y3成品1夹紧</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QPushButton" name="btnReserveY5Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y5卡爪1反转</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QGroupBox" name="groupBox_8">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>80</y>
+       <width>411</width>
+       <height>321</height>
+      </rect>
+     </property>
+     <property name="title">
+      <string>组二</string>
+     </property>
+     <widget class="QWidget" name="layoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>376</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_6">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="btnReserveY22Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y22断</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="btnReserveY9Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y9自动门1开</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="btnReserveY20Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y20卡盘1夹紧</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>50</width>
+           <height>50</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="btnReserveY24Break">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>184</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>170</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>SimSun</family>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Y24断</string>
          </property>
          <property name="icon">
           <iconset>
@@ -1729,7 +2204,7 @@ QTabWidget::pane {
          </property>
          <property name="minimumSize">
           <size>
-           <width>170</width>
+           <width>184</width>
            <height>45</height>
           </size>
          </property>
@@ -1750,366 +2225,7 @@ QTabWidget::pane {
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>预留Y23断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_9">
-     <property name="geometry">
-      <rect>
-       <x>800</x>
-       <y>60</y>
-       <width>191</width>
-       <height>281</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>组三</string>
-     </property>
-     <widget class="QPushButton" name="btnReserveYM4Break">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>170</width>
-        <height>45</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>170</width>
-        <height>45</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>170</width>
-        <height>45</height>
-       </size>
-      </property>
-      <property name="font">
-       <font>
-        <family>SimSun</family>
-        <weight>50</weight>
-        <bold>false</bold>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>预留YM4断</string>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>50</width>
-        <height>50</height>
-       </size>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QGroupBox" name="groupBox_10">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>60</y>
-       <width>371</width>
-       <height>291</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>组一</string>
-     </property>
-     <widget class="QWidget" name="layoutWidget_7">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>351</width>
-        <height>200</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout_8">
-       <item row="2" column="0">
-        <widget class="QPushButton" name="btnReserveY12Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y12断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QPushButton" name="btnReserveY10Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y10断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="btnReserveY15Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y15断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="btnReserveY14Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y14断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="btnReserveY11Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y11断</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/TeachPage/teachpage_images/delete.png</normaloff>:/TeachPage/teachpage_images/delete.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>50</width>
-           <height>50</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QPushButton" name="btnReserveY13Break">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>170</width>
-           <height>45</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>SimSun</family>
-           <weight>50</weight>
-           <bold>false</bold>
-          </font>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="text">
-          <string>预留Y13断</string>
+          <string>Y23断</string>
          </property>
          <property name="icon">
           <iconset>

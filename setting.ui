@@ -391,7 +391,7 @@ QScrollBar::down-arrow:vertical:pressed
     </font>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -3943,7 +3943,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
        </column>
        <column>
         <property name="text">
-         <string>默认名称</string>
+         <string>修改名称</string>
         </property>
        </column>
        <column>
@@ -22623,7 +22623,7 @@ border: 1px solid black;
          </size>
         </property>
        </widget>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>11</x>
@@ -25248,6 +25248,11 @@ border: 1px solid black;
        <attribute name="headerStretchLastSection">
         <bool>false</bool>
        </attribute>
+       <column>
+        <property name="text">
+         <string notr="true">1</string>
+        </property>
+       </column>
       </widget>
      </widget>
     </widget>
@@ -34675,7 +34680,7 @@ border: 1px solid black;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>

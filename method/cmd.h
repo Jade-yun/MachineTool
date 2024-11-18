@@ -901,8 +901,47 @@ typedef struct
     uint16_t breakPointList;			//断点所在程序行
 }D_RunParStruct;
 
+/*参数同步结构体*/
+typedef struct
+{
+    uint8_t out_type_State;  //输出类型同步状态 false:同步未完成 ，true：同步完成
+    uint8_t interlock_State;  //互锁同步状态 false:同步未完成 ，true：同步完成
+    uint8_t in_func_def_State;  //输入端口自定义同步状态 false:同步未完成 ，true：同步完成
+    uint8_t out_func_def_State;  //输出端口同步状态 false:同步未完成 ，true：同步完成
+    uint8_t out_relevency_State;  //预留关联同步状态 false:同步未完成 ，true：同步完成
+    uint8_t out_relate_out;       //预留出类型
+    uint8_t out_key;              //按键/信号
+    uint8_t senior;               //高级
+    uint8_t senior_port;          //高级功能端口
+    uint8_t save_machine;
+    uint8_t save_stack;
+    uint8_t save_calw;
+    uint8_t save_online;
+    uint8_t product_par;
+    uint8_t product_senior;
+    uint8_t product_internet;
+    uint8_t servo_acc_dec;
+    uint8_t servo_max_speed;
+    uint8_t servo_tolerance;
+    uint8_t sp_area;
+    uint8_t sp_axis_limit;
+    uint8_t sp_rampage_limit;
+    uint8_t mac_aixs;
+    uint8_t mac_limit_swt;
+    uint8_t mac_struct;
+    uint8_t mac_servo;
+    uint8_t mac_origin;
+    uint8_t stack_par;
+    uint8_t stack_point;
+    uint8_t stack_set;
+    uint8_t SysDataFlag;          //同步参数标志
+    uint8_t SendDataStep;
+    uint8_t SendData_flag;
+    uint8_t sysdatafinish;
+    int sendDataOutTime;
+}Sync_Data;
 
-
+extern Sync_Data MySync_Data;
 /**********************************变量定义********************************/
 extern D_KeyFuncStruct m_KeyFunc[OPR_KEY_NUM];				//按键功能
 extern D_LedFuncStruct m_LedFunc[OPR_LED_NUM];				//LED功能
@@ -1056,12 +1095,12 @@ typedef struct
 /*端口自定义*/
 typedef struct
 {
-    QString     definePort;             //默认端口
+    QString     definePort;             //默认端口 X1,X2.....
     QString     defineName;             //默认名称
     QString     modifyName;             //修改名称
     QString 	modifyPort;				//修改端口
-    uint8_t     portNum;                //默认端口号
-    uint8_t     actualPortNum;          //实际端口号(改变后的)
+    uint8_t     portNum;                //默认端口号 1,2,3,....
+    uint8_t     actualPortNum;          //实际端口号(改变后的,只在端口自定义界面保存使用)
     bool        isReserve;                    //是否是预留端口
 }D_PortDefineStruct;
 /*名称自定义*/

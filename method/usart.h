@@ -4,9 +4,42 @@
 #include <QObject>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include <QTimer>
 #include "program_popup.h"
 #include <cmd.h>
-
+enum SysSendIndex{
+    CMD_OUT_TYPE,    //输出类型
+    CMD_INTERLOCK,   //互锁设置
+    CMD_IN_FUNC_DEF, //
+    CMD_OUT_FUNC_DEF,
+    CMD_OUT_RELEVENCY,
+    CMD_RELATE_OUT,
+    CMD_KEY,
+    CMD_SENIOR,
+    CMD_SENIOR_PORT,
+    CMD_SAVE_MACHINE,
+    CMD_SAVE_STACK,
+    CMD_SAVE_CALW,
+    CMD_SAVE_ONLINE,
+    CMD_PRODUCT_PAR,
+    CMD_PRODUCT_SENIOR,
+    CMD_PRODUCT_INTERNET,
+    CMD_SERVO_ACC_DEC,
+    CMD_SERVO_MAX_SPEED,
+    CMD_SERVO_TOLERANCE,
+    CMD_SP_AREA,
+    CMD_SP_AXIS_LIMIT,
+    CMD_SP_RAMPAGE_LIMIT,
+    CMD_MAC_AXIS,
+    CMD_MAC_LIMIT_SWT,
+    CMD_MAC_STRUCT,
+    CMD_MAC_SERVO,
+    CMD_MAC_ORIGIN,
+    CMD_STACK_PAR,
+    CMD_STACK_POINT,
+    CMD_STAC_SET,
+    CMD_FINISH
+};
 //表示命令头的字节数
 #define HEAD_BYTE  2
 //表示长度的字节数
@@ -32,7 +65,7 @@
 #define CMD_SUN_READ_PAR_WR									0x03      	//写参数、控制、Flash写入命令应答
 #define CMD_SUN_READ_FLASH									0x04      	//读FLASH命令
 #define CMD_SUN_READ_FLASH_ANSWER						0x05      	//读FLASH命令应答
-
+#define CMD_SUN_SYSDATA_FINISH                          0x06        //开机参数同步完成下发
 //参数读写-信号设置
 #define CMD_MAIN_SIGNAL											0x01      	//信号设置
 #define CMD_SUN_SIGNAL_OUT_TYPE							0x01      	//输出类型
@@ -145,11 +178,12 @@ public:
     uint16_t openSerialPort();
     void closeSerialPort();
     QSerialPort *m_serialPort;
-
+    QTimer *UsartTimer;
 
 signals:
     void receivedData(const QByteArray &data);
-
+    void DataSycStateSignal(uint8_t SysSend_Index);
+    void SysNextDataSignal();
 public slots:
     void onReadyRead();
     void onHandleError(QSerialPort::SerialPortError error);
@@ -166,8 +200,10 @@ public:
 
    void ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum = 0, uint16_t parNum2 = 0, uint16_t parNum3 = 0);     //下发程序编辑处理函数
 
-private:
+   uint8_t  DataSyc();
+   void sync_data_handle(void);
 
+private:
 
 public:
 

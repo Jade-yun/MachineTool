@@ -1,14 +1,26 @@
 #include "usart.h"
+#include <QThread>
+
+int dataLen = 0;                           //数据长度（命令+所有数据）
+uint8_t* sumCheckData = new uint8_t[1];                           //校验和数据
+uint8_t* recDataBuf = new uint8_t[1024];        //Data数据
+uint8_t* headBuf = new uint8_t[2];                //头命令
+uint8_t* lenBuf = new uint8_t[2];                 //数据长度
+uint8_t* cmdBuf = new uint8_t[2];                 //命令指令
+
 Usart::Usart(QObject *parent):QObject(parent)
 {
     m_serialPort=new QSerialPort(this);
+    UsartTimer = new QTimer(this);
     connect(m_serialPort, &QSerialPort::readyRead, this, &Usart::onReadyRead);
     connect(m_serialPort, &QSerialPort::errorOccurred,this,&Usart::onHandleError);
+    connect(UsartTimer, &QTimer::timeout,this,&Usart::DataSyc);
 }
 
 Usart::~Usart()
 {
     m_serialPort->close();
+    UsartTimer->deleteLater();
 }
 
 void Usart::closeSerialPort()
@@ -36,7 +48,7 @@ uint16_t Usart::openSerialPort()
 void Usart::APP_Uart_SendData(const QByteArray &data)
 {
     m_serialPort->write(data);
-//    m_serialPort->waitForBytesWritten(1000);
+//    m_serialPort->waitForBytesWritten(1000);//确保
 }
 
 
@@ -186,16 +198,16 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
             if(parNum2 == 1)
             {//负向
                 sendDataBuf[len] = (uint8_t)m_manualAxis.sub_pos;
-                sendDataBuf[len+1] = (uint8_t)m_manualAxis.sub_pos>>8;
-                sendDataBuf[len+2] = (uint8_t)m_manualAxis.sub_pos>>16;
-                sendDataBuf[len+3] = (uint8_t)m_manualAxis.sub_pos>>24;
+                sendDataBuf[len+1] = (uint8_t)(m_manualAxis.sub_pos>>8);
+                sendDataBuf[len+2] = (uint8_t)(m_manualAxis.sub_pos>>16);
+                sendDataBuf[len+3] = (uint8_t)(m_manualAxis.sub_pos>>24);
             }
             else
             {//正向
                 sendDataBuf[len] = (uint8_t)m_manualAxis.pos_pos;
-                sendDataBuf[len+1] = (uint8_t)m_manualAxis.pos_pos>>8;
-                sendDataBuf[len+2] = (uint8_t)m_manualAxis.pos_pos>>16;
-                sendDataBuf[len+3] = (uint8_t)m_manualAxis.pos_pos>>24;
+                sendDataBuf[len+1] = (uint8_t)(m_manualAxis.pos_pos>>8);
+                sendDataBuf[len+2] = (uint8_t)(m_manualAxis.pos_pos>>16);
+                sendDataBuf[len+3] = (uint8_t)(m_manualAxis.pos_pos>>24);
             }
             len += 4;
             sendDataBuf[len] = m_manualAxis.ZDrop;
@@ -914,531 +926,243 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
     {
         recDataBuf[i]=recDataBuf1[i];
     }
-    uint16_t i = 0;
-    uint16_t num = 0;
-    uint8_t axis = 0;
-    uint16_t index = 0;
+    if(mainCmd ==CMD_MAIN_READ)
+    {
+        if(sunCmd == CMD_SUN_READ_PAR_WR)
+        {
+            switch (recDataBuf[0]) {
+            case CMD_MAIN_SIGNAL:
+                switch (recDataBuf[1]) {
+                case CMD_SUN_SIGNAL_OUT_TYPE:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.out_type_State = true;
+                    }
+                    break;
+                case CMD_SUN_SIGNAL_INTERLOCK://互锁设置
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.interlock_State = true;
 
-    if(mainCmd == CMD_MAIN_SIGNAL)
-    {//信号设置
-        switch(sunCmd)
-        {
-        case CMD_SUN_SIGNAL_OUT_TYPE://输出类型
-            for(i=0; i<OUT_PORT_TYPE_NUM; i++)
-            {
-                m_OutPortType[i][0] = recDataBuf[i*2];
-                m_OutPortType[i][1] = recDataBuf[i*2+1];
-            }
-            break;
-        case CMD_SUN_SIGNAL_INTERLOCK://互锁设置
-            for(i=0; i<OUT_INTERLOCK_NUM; i++)
-            {
-                m_OutportInterlock[i][0] = recDataBuf[i*4];
-                m_OutportInterlock[i][1] = recDataBuf[i*4+1];
-                m_OutportInterlock[i][2] = recDataBuf[i*4+2];
-                m_OutportInterlock[i][3] = recDataBuf[i*4+3];
-            }
-            break;
-        case CMD_SUN_SIGNAL_IN_FUNC_DEF://输入端口自定义
-            for(i=0; i<INPUT_TOTAL_NUM; i++)
-            {
-                m_InportFuncDefine[i] = recDataBuf[i];
+                    }
+                    break;
+                case CMD_SUN_SIGNAL_IN_FUNC_DEF://输入端口自定义
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.in_func_def_State = true;
+                    }
 
-            }
-            break;
-        case CMD_SUN_SIGNAL_OUT_FUNC_DEF://输出端口自定义
-            for(i=0; i<OUTPUT_TOTAL_NUM; i++)
-            {
-                m_OutportFuncDefine[i] = recDataBuf[i];
-            }
-            break;
-        case CMD_SUN_SIGNAL_OUT_RELEVENCY://预留关联
-            for(i=0; i<OUT_PORT_RELEVANCY_NUM; i++)
-            {
-                m_OutportRelevancy[i][0] = recDataBuf[i*3];
-                m_OutportRelevancy[i][1] = recDataBuf[i*3+1];
-                m_OutportRelevancy[i][2] = recDataBuf[i*3+2];
-            }
-            break;
-        case CMD_SUN_SIGNAL_RELATE_OUT://预留出类型
-            for(i=0; i<OUT_PORT_RELEOUT_NUM; i++)
-            {
-                m_OutportReleteOut[i][0] = recDataBuf[i*2];
-                m_OutportReleteOut[i][1] = recDataBuf[i*2+1];
-            }
-            break;
-        case CMD_SUN_SIGNAL_KEY://按键/信号
-            for(i=0; i<OPR_KEY_NUM; i++)
-            {
-                m_KeyFunc[i].keyType = recDataBuf[i*3];
-                m_KeyFunc[i].funcNum = recDataBuf[i*3+1];
-                m_KeyFunc[i].oprMode = recDataBuf[i*3+2];
-            }
+                    break;
+                case CMD_SUN_SIGNAL_OUT_FUNC_DEF:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.out_func_def_State = true;
+                    }
 
-            for(i=0; i<OPR_LED_NUM; i++)
-            {
-                m_LedFunc[i].ledType = recDataBuf[OPR_KEY_NUM*3 + i*2];
-                m_LedFunc[i].funcNum = recDataBuf[OPR_KEY_NUM*3 + i*2+1];
+                    break;
+                case CMD_SUN_SIGNAL_OUT_RELEVENCY:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.out_relevency_State = true;
+                    }
+                    break;
+                case CMD_SUN_SIGNAL_RELATE_OUT:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.out_relate_out = true;
+                    }
+                    break;
+                case CMD_SUN_SIGNAL_KEY:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.out_key = true;
+                    }
+                    break;
+                case CMD_SUN_SIGNAL_SENIOR:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.senior = true;
+                    }
+                    break;
+                case CMD_SUN_SIGNAL_SENIOR_PORT:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.senior_port = true;
+                    }
+                    break;
+                default:
+                    break;
+                }
+            case CMD_MAIN_SAVE:
+                switch (recDataBuf[1]) {
+                case CMD_SUN_SAVE_MACHINE:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.save_machine = true;
+                    }
+                    break;
+                case CMD_SUN_SAVE_STACK:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.save_stack = true;
+                    }
+                    break;
+                case CMD_SUN_SAVE_CALW:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.save_calw++;
+                    }
+                    break;
+                case CMD_SUN_SAVE_ONLINE:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.save_online++;
+                    }
+                    break;
+                default:
+                    break;
+                }
+            case CMD_MAIN_PRODUCT:
+                switch (recDataBuf[1]) {
+                case CMD_SUN_PRODUCT_PAR:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.product_par = true;
+                    }
+                    break;
+                case CMD_SUN_PRODUCT_SENIOR:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.product_senior = true;
+                    }
+                    break;
+                case CMD_SUN_PRODUCT_INTERNET:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.product_internet = true;
+                    }
+                    break;
+                default:
+                    break;
+                }
+            case CMD_MAIN_SERVO:
+                switch (recDataBuf[1]) {
+                case CMD_SUN_SERVO_ACC_DEC:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.servo_acc_dec++;
+                    }
+                    break;
+                case CMD_SUN_SERVO_MAX_SPEED:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.servo_max_speed = true;
+                    }
+                    break;
+                case CMD_SUN_SERVO_TOLERANCE:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.servo_tolerance = true;
+                    }
+                    break;
+                default:
+                    break;
+                }
+            case CMD_MAIN_SP:
+                switch (recDataBuf[1]) {
+                case CMD_SUN_SP_AREA:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.sp_area++;
+                    }
+                    break;
+                case CMD_SUN_SP_AXIS_LIMIT:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.sp_axis_limit++;
+                    }
+                    break;
+                case CMD_SUN_SP_RAMPAGE_LIMIT:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.sp_rampage_limit = true;
+                    }
+                    break;
+                default:
+                    break;
+                }
+            case CMD_MAIN_MAC:
+                switch (recDataBuf[1]) {
+                case CMD_SUN_MAC_AXIS:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.mac_aixs++;
+
+                    }
+                    break;
+                case CMD_SUN_MAC_LIMIT_SWT:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.mac_limit_swt = true;
+                    }
+                    break;
+                case CMD_SUN_MAC_STRUCT:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.mac_struct = true;
+                    }
+                    break;
+                case CMD_SUN_MAC_SERVO:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.mac_servo++;
+                    }
+                    break;
+                case CMD_SUN_MAC_ORIGIN:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.mac_origin = true;
+
+                    }
+                    break;
+                default:
+                    break;
+                }
+            case CMD_MAIN_STACK:
+                switch (recDataBuf[1]) {
+                case CMD_SUN_STACK_PAR:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.stack_par++;
+                    }
+                    break;
+                case CMD_SUN_STACK_POINT:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.stack_point++;
+                    }
+                    break;
+                case CMD_SUN_STACK_SET:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.stack_set = true;
+                    }
+                    break;
+                case CMD_SUN_SYSDATA_FINISH:
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.sysdatafinish = true;
+                    }
+                default:
+                    break;
+                }
+            default:
+                break;
             }
-            break;
-        case CMD_SUN_SIGNAL_SENIOR://高级
-            memcpy(&m_SeniorFunc, recDataBuf, sizeof(D_SeniorFuncStruct));					//使用拷贝函数需要注意结构体内的元素顺序以及4字节对其
-            break;
-        case CMD_SUN_SIGNAL_SENIOR_PORT://高级功能端口
-            memcpy(&m_SeniorFuncPort, recDataBuf, sizeof(D_SeniorFuncPortStruct));	//使用拷贝函数需要注意结构体内的元素顺序以及4字节对其
-            break;
-        default:
-            break;
-        }
-    }
-    else if(mainCmd == CMD_MAIN_SAVE)
-    {//安全设置
-        switch(sunCmd)
-        {
-        case CMD_SUN_SAVE_MACHINE://机床安全
-            m_MachineSave.armFallAutoDoor1Swt = recDataBuf[0];
-            m_MachineSave.armFallAutoDoor1SwtSta = recDataBuf[1];
-            m_MachineSave.armFallAutoDoor2Swt = recDataBuf[2];
-            m_MachineSave.armFallAutoDoor2SwtSta = recDataBuf[3];
-            break;
-        case CMD_SUN_SAVE_STACK://料仓安全
-            m_StackSave.stackSaveIn1Roatore = recDataBuf[0];
-            m_StackSave.stackSaveIn2Roatore = recDataBuf[1];
-            break;
-        case CMD_SUN_SAVE_CALW://卡爪安全
-            num = recDataBuf[0] - 1;
-            m_ClawSave[num].clawKeepoutSta = recDataBuf[1];
-            index = 2;
-            m_ClawSave[num].axisSelect_X = recDataBuf[index];
-            index += 1;
-            m_ClawSave[num].axisSelect_Z = recDataBuf[index];
-            index += 1;
-            m_ClawSave[num].clawKeepoutMinX = 0;
-            m_ClawSave[num].clawKeepoutMinX |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].clawKeepoutMaxX = 0;
-            m_ClawSave[num].clawKeepoutMaxX |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].clawKeepoutHighZ = 0;
-            m_ClawSave[num].clawKeepoutHighZ |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].cKeepoutMinX = 0;
-            m_ClawSave[num].cKeepoutMinX |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].cKeepoutMaxX = 0;
-            m_ClawSave[num].cKeepoutMaxX |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].cKeepoutHighZ = 0;
-            m_ClawSave[num].cKeepoutHighZ |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].cKeepoutPosMinC = 0;
-            m_ClawSave[num].cKeepoutPosMinC |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].cKeepoutPosMaxC = 0;
-            m_ClawSave[num].cKeepoutPosMaxC |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].cKeepoutNegMinC = 0;
-            m_ClawSave[num].cKeepoutNegMinC |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ClawSave[num].cKeepoutNegMaxC = 0;
-            m_ClawSave[num].cKeepoutNegMaxC |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            break;
-        case CMD_SUN_SAVE_ONLINE://联机安全
-            num = recDataBuf[0] - 1;
-            index = 1;
-            m_OnlineSave[num].mainSunMode = recDataBuf[index];
-            index += 1;
-            m_OnlineSave[num].pluseTime = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-            index += 2;
-            m_OnlineSave[num].onlineSelect = recDataBuf[index];
-            index += 1;
-            m_OnlineSave[num].axisNum = recDataBuf[index];
-            index += 1;
-            m_OnlineSave[num].areaInNum = recDataBuf[index];
-            index += 1;
-            m_OnlineSave[num].areaOutNum = recDataBuf[index];
-            index += 1;
-            m_OnlineSave[num].requestInNum = recDataBuf[index];
-            index += 1;
-            m_OnlineSave[num].requestOutNum = recDataBuf[index];
-            index += 1;
-            m_OnlineSave[num].a1A2MainPos = 0;
-            m_OnlineSave[num].a1A2MainPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_OnlineSave[num].a1A2SunPos = 0;
-            m_OnlineSave[num].a1A2SunPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            break;
-        default:
-            break;
-        }
-    }
-    else if(mainCmd == CMD_MAIN_PRODUCT)
-    {//产品设置
-        switch(sunCmd)
-        {
-        case CMD_SUN_PRODUCT_PAR://产品参数
-            m_ProductSet.waitProcessFinTime = recDataBuf[0];
-            m_ProductSet.pluseOutTime = recDataBuf[1];
-            m_ProductSet.airVlaveLimitTime = recDataBuf[2];
-            m_ProductSet.autoCycTime = recDataBuf[3];
-            m_ProductSet.alarmBuzzerTime = recDataBuf[4];
-            m_ProductSet.chainReachDelay = recDataBuf[5];
-            m_ProductSet.clampCheckFilterTime = recDataBuf[6];
-            break;
-        case CMD_SUN_PRODUCT_SENIOR://高级
-            m_ProductSenior.lubricOpenTime = recDataBuf[0];
-            m_ProductSenior.lubricCloseTime = recDataBuf[1];
-            m_ProductSenior.lubricDelay = recDataBuf[2];
-            m_ProductSenior.lubricGapCyc = recDataBuf[3];
-            m_ProductSenior.productMemoryFlag = recDataBuf[4];
-            break;
-        case CMD_SUN_PRODUCT_INTERNET://物联网
-            m_Internet.netCommType = recDataBuf[0];
-            m_Internet.parityMode = recDataBuf[1];
-            m_Internet.baudMode = recDataBuf[2];
-            break;
-        default:
-            break;
-        }
-    }
-    else if(mainCmd == CMD_MAIN_SERVO)
-    {//伺服速度
-        switch(sunCmd)
-        {
-        case CMD_SUN_SERVO_ACC_DEC://加减速时间
-            num = recDataBuf[0] - 1;
-            if(num < AXIS_TOTAL_NUM)
-            {//轴
-                index = 1;
-                m_AxisPar[num].accTime = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-                index += 4;
-                m_AxisPar[num].decTime = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-                index += 4;
-                m_AxisPar[num].accAcc = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-                index += 2;
-                m_AxisPar[num].decDec = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-                index += 2;
-            }
-            else
-            {//手轮
-                index = 1;
-                m_HandwheelPar.accTime = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-                index += 4;
-                m_HandwheelPar.decTime = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-                index += 4;
-                m_HandwheelPar.accAcc = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-                index += 2;
-                m_HandwheelPar.decDec = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-                index += 2;
-            }
-            break;
-        case CMD_SUN_SERVO_MAX_SPEED://最大速度
-            for(i=0; i<AXIS_TOTAL_NUM; i++)
-            {
-                m_AxisPar[i].maxSpeed = (uint16_t)recDataBuf[i*2] + ((uint16_t)recDataBuf[i*2+1]<<8);
-            }
-            break;
-        case CMD_SUN_SERVO_TOLERANCE://容差
-            index = 0;
-            m_DegreeParS.tolerance = 0;
-            m_DegreeParS.tolerance |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_DegreeParS.originDegree = 0;
-            m_DegreeParS.originDegree |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_DegreeParS.actionFinDegree = 0;
-            m_DegreeParS.actionFinDegree |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8);
-            index += 2;
-            break;
-        default:
-            break;
-        }
-    }
-    else if(mainCmd == CMD_MAIN_SP)
-    {//伺服安全点
-        switch(sunCmd)
-        {
-        case CMD_SUN_SP_AREA://安全区
-            num = recDataBuf[0] - 1;
-            m_SaveArea[num].saveAreaSwt = recDataBuf[1];
-            index = 2;
-            for(i=0; i<STACK_AXIS_NUM; i++)
-            {
-                m_SaveArea[num].axisSelect[i] = recDataBuf[index+i];
-            }
-            index += STACK_AXIS_NUM;
-            m_SaveArea[num].processFinishNum = recDataBuf[index];
-            index += 1;
-            m_SaveArea[num].machineA1Pos[STACK_X_AXIS] = 0;
-            m_SaveArea[num].machineA1Pos[STACK_X_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machineA1Pos[STACK_Y_AXIS] = 0;
-            m_SaveArea[num].machineA1Pos[STACK_Y_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machineA2Pos[STACK_X_AXIS] = 0;
-            m_SaveArea[num].machineA2Pos[STACK_X_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machineA2Pos[STACK_Y_AXIS] = 0;
-            m_SaveArea[num].machineA2Pos[STACK_Y_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].starckB1Pos[STACK_X_AXIS] = 0;
-            m_SaveArea[num].starckB1Pos[STACK_X_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].starckB1Pos[STACK_Y_AXIS] = 0;
-            m_SaveArea[num].starckB1Pos[STACK_Y_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].starckB2Pos[STACK_X_AXIS] = 0;
-            m_SaveArea[num].starckB2Pos[STACK_X_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].starckB2Pos[STACK_Y_AXIS] = 0;
-            m_SaveArea[num].starckB2Pos[STACK_Y_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machineA1Pos[STACK_Z_AXIS] = 0;
-            m_SaveArea[num].machineA1Pos[STACK_Z_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machineA2Pos[STACK_Z_AXIS] = 0;
-            m_SaveArea[num].machineA2Pos[STACK_Z_AXIS] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machine_Z_WaitMaxPos = 0;
-            m_SaveArea[num].machine_Z_WaitMaxPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machine_Z_FallMaxPos = 0;
-            m_SaveArea[num].machine_Z_FallMaxPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].machine_Z_InsideHigh = 0;
-            m_SaveArea[num].machine_Z_InsideHigh |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].stack_Z_StartMaxPos = 0;
-            m_SaveArea[num].stack_Z_StartMaxPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_SaveArea[num].stack_Z_FallMaxPos = 0;
-            m_SaveArea[num].stack_Z_FallMaxPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            break;
-        case CMD_SUN_SP_AXIS_LIMIT://轴运动位置限定
-            num = recDataBuf[0] - 1;
-            index = 1;
-            m_AxisPar[num].axisMinPos = 0;
-            m_AxisPar[num].axisMinPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_AxisPar[num].axisMaxPos = 0;
-            m_AxisPar[num].axisMaxPos |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            break;
-        case CMD_SUN_SP_RAMPAGE_LIMIT://横行位置限定
-            index = 0;
-            m_DegreeParS.saveRampageHige_Z1 = 0;
-            m_DegreeParS.saveRampageHige_Z1 |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_DegreeParS.saveRampageHige_Z2 = 0;
-            m_DegreeParS.saveRampageHige_Z2 |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_DegreeParS.saveRotatePos_Y1 = 0;
-            m_DegreeParS.saveRotatePos_Y1 |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_DegreeParS.saveRotatePos_Y2 = 0;
-            m_DegreeParS.saveRotatePos_Y2 |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            break;
-        default:
-            break;
-        }
-    }
-    else if(mainCmd == CMD_MAIN_MAC)
-    {//机器参数
-        switch(sunCmd)
-        {
-        case CMD_SUN_MAC_AXIS://轴参数
-            num = recDataBuf[0] - 1;
-            index = 1;
-            m_AxisPar[num].circlePluseNum = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_AxisPar[num].circleDis = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_AxisPar[num].findOriginSpeed = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-            index += 2;
-            m_AxisPar[num].leaveOriginSpeed = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-            index += 2;
-            m_AxisPar[num].originOffset = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_AxisPar[num].originDir = recDataBuf[index];
-            index += 1;
-            m_AxisPar[num].coordDir = recDataBuf[index];
-            index += 1;
-            break;
-        case CMD_SUN_MAC_LIMIT_SWT://限位开关
-            for(i=0; i<AXIS_TOTAL_NUM; i++)
-            {
-                m_AxisPar[i].limitPosSwt = recDataBuf[i*2];
-                m_AxisPar[i].limitNegSwt = recDataBuf[i*2+1];
-            }
-            break;
-        case CMD_SUN_MAC_STRUCT://结构
-            for(i=0; i<AXIS_TOTAL_NUM; i++)
-            {
-                m_AxisPar[i].axisType = recDataBuf[i];
-            }
-            index = AXIS_TOTAL_NUM;
-            for(i=0; i<AXIS_TOTAL_NUM; i++)
-            {
-                m_AxisPar[i].axisMoveMade = recDataBuf[i+index];
-            }
-            index += AXIS_TOTAL_NUM;
-            m_ServoPar.encoderType = recDataBuf[index];
-            index += 1;
-            m_ServoPar.encoderBitNum = recDataBuf[index];
-            index += 1;
-            m_ServoPar.servoBrand = recDataBuf[index];
-            index += 1;
-            m_ServoPar.servoModel = recDataBuf[index];
-            index += 1;
-            m_ServoPar.extendIOBoard = recDataBuf[index];
-            index += 1;
-            m_ServoPar.rotateAxisUnit = recDataBuf[index];
-            index += 1;
-            break;
-        case CMD_SUN_MAC_SERVO://伺服参数
-            num = recDataBuf[0] - 1;
-            index = 1;
-            m_ServoCommPar[num].axis = recDataBuf[index];
-            index += 1;
-            m_ServoCommPar[num].index = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-            index += 2;
-            m_ServoCommPar[num].sunIndex = recDataBuf[index];
-            index += 1;
-            m_ServoCommPar[num].parLen = recDataBuf[index];
-            index += 1;
-            m_ServoCommPar[num].parValue = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_ServoCommPar[num].saveFlag = recDataBuf[index];
-            index += 1;
-            m_ServoCommPar[num].powerOnSet = recDataBuf[index];
-            index += 1;
-            break;
-        case CMD_SUN_MAC_ORIGIN://原点
-            for(i=0; i<AXIS_TOTAL_NUM; i++)
-            {
-                m_AxisPar[i].backOriginOrder = recDataBuf[i];
-            }
-            index = AXIS_TOTAL_NUM;
-            for(i=0; i<AXIS_TOTAL_NUM; i++)
-            {
-                m_AxisPar[i].originType = recDataBuf[i+index];
-            }
-            index += AXIS_TOTAL_NUM;
-            m_ServoPar.resetSunProFlag = recDataBuf[index];
-            index += 1;
-            m_ServoPar.torqueLimitFlag = recDataBuf[index];
-            index += 1;
-            break;
-        default:
-            break;
-        }
-    }
-    else if(mainCmd == CMD_MAIN_STACK)
-    {//堆叠参数
-        switch(sunCmd)
-        {
-        case CMD_SUN_STACK_PAR://堆叠基础参数
-            num = recDataBuf[0] - 1;
-            index = 1;
-            m_StackInfo[num].stackOrder = recDataBuf[index];
-            index += 1;
-            m_StackInfo[num].countMode = recDataBuf[index];
-            index += 1;
-            m_StackInfo[num].stackFinStopFlag = recDataBuf[index];
-            index += 1;
-            for(i=0; i<STACK_AXIS_NUM; i++)
-            {
-                m_StackInfo[num].axisSelect[i] = recDataBuf[index+i];
-            }
-            index += STACK_AXIS_NUM;
-            for(i=0; i<STACK_AXIS_NUM; i++)
-            {
-                m_StackInfo[num].axisSpeed[i] = recDataBuf[index+i];
-            }
-            index += STACK_AXIS_NUM;
-            for(i=0; i<STACK_AXIS_NUM; i++)
-            {
-                m_StackInfo[num].stackPointNum[i] = recDataBuf[index+i];
-            }
-            index += STACK_AXIS_NUM;
-            for(i=0; i<STACK_AXIS_NUM; i++)
-            {
-                m_StackInfo[num].stackDir[i] = recDataBuf[index+i];
-            }
-            index += STACK_AXIS_NUM;
-            for(i=0; i<STACK_AXIS_NUM; i++)
-            {
-                m_StackInfo[num].dischangeSpeed[i] = recDataBuf[index+i];
-            }
-            index += STACK_AXIS_NUM;
-            break;
-        case CMD_SUN_STACK_POINT://堆叠点位参数
-            num = recDataBuf[0] - 1;
-            index = 1;
-            axis = recDataBuf[index] - 1;
-            index += 1;
-            m_StackInfo[num].stackStartPos[axis] = 0;
-            m_StackInfo[num].stackStartPos[axis] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_StackInfo[num].stack_X_EndPos[axis] = 0;
-            m_StackInfo[num].stack_X_EndPos[axis] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_StackInfo[num].stack_Y_EndPos[axis] = 0;
-            m_StackInfo[num].stack_Y_EndPos[axis] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_StackInfo[num].stackDiagonalPos[axis] = 0;
-            m_StackInfo[num].stackDiagonalPos[axis] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_StackInfo[num].dischangeStartPos[axis] = 0;
-            m_StackInfo[num].dischangeStartPos[axis] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_StackInfo[num].intevalDis[axis] = 0;
-            m_StackInfo[num].intevalDis[axis] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_StackInfo[num].offsetDis[axis] = 0;
-            m_StackInfo[num].offsetDis[axis] |= (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            break;
-        case CMD_SUN_STACK_SET://堆叠设置
-            m_StackFunc.stackType = recDataBuf[0];
-            index = 1;
-            m_StackFunc.groupStack = recDataBuf[index];
-            index += 1;
-            m_StackFunc.rowStack = recDataBuf[index];
-            index += 1;
-            m_StackFunc.storeyStack = recDataBuf[index];
-            index += 1;
-            m_StackFunc.divideStack = recDataBuf[index];
-            index += 1;
-            m_StackFunc.stackMemory = recDataBuf[index];
-            index += 1;
-            m_StackFunc.siloType = recDataBuf[index];
-            index += 1;
-            m_StackFunc.rotateSiloFinHint = recDataBuf[index];
-            index += 1;
-            m_StackFunc.rotateSiloPlaceNum = recDataBuf[index];
-            index += 1;
-            for(i=0; i<STACK_TOTAL_NUM; i++)
-            {
-                m_StackInfo[i].groupLeaveBlank = recDataBuf[index+i];
-            }
-            index += STACK_TOTAL_NUM;
-            for(i=0; i<STACK_TOTAL_NUM; i++)
-            {
-                m_StackInfo[i].stackMoveMode = recDataBuf[index+i];
-            }
-            index += STACK_TOTAL_NUM;
-            break;
-        default:
-            break;
         }
     }
     ExtendReadStaDeal(mainCmd,sunCmd,recDataBuf);
-    //刷新界面、存储配置文件（后面添加，发射相关信号）
 }
-
 
 //解析——状态处理函数
 void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataBuf)
@@ -2681,6 +2405,957 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
     }
 
 }
+//开机参数和程序下发
+uint8_t Usart::DataSyc()
+{
+    switch (MySync_Data.SendDataStep) {
+    case SysSendIndex::CMD_OUT_TYPE://信号设置-输出类型
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_type_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_TYPE);
+            MySync_Data.SendData_flag = 1;
+        }
+        if(MySync_Data.out_type_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;//一次10ms
+            if(MySync_Data.sendDataOutTime >= 500)
+            {//超过1s未接收到反馈重新发送
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_INTERLOCK:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.interlock_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_INTERLOCK);
+            MySync_Data.SendData_flag = 1;
+        }
 
+        if(MySync_Data.interlock_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_IN_FUNC_DEF:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.in_func_def_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
+            MySync_Data.SendData_flag = 1;
+        }
 
+        if(MySync_Data.in_func_def_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_OUT_FUNC_DEF:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_func_def_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
+            MySync_Data.SendData_flag = 1;
+        }
 
+        if(MySync_Data.out_func_def_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_OUT_RELEVENCY:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_relevency_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_RELEVENCY);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.out_relevency_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_RELATE_OUT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_relate_out = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_RELATE_OUT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.out_relate_out == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_KEY:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_key = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_KEY);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.out_key == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SENIOR:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.senior = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_SENIOR);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.senior == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SENIOR_PORT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.senior_port = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_SENIOR_PORT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.senior_port == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_MACHINE:
+    {
+
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_machine = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_MACHINE);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_machine == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_STACK:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_stack = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_STACK);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_stack == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_CALW:
+    {
+
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_calw = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,1);//一共四组先发第1组
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_calw == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,2);//一共四组先发第2组
+        }
+        else if(MySync_Data.save_calw == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,3);//一共四组先发第3组
+        }
+        else if(MySync_Data.save_calw == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,4);//一共四组先发第4组
+        }
+        else if(MySync_Data.save_calw == 4)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_ONLINE:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_online = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_online == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,2);
+        }
+        if(MySync_Data.save_online == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,3);
+        }
+        if(MySync_Data.save_online == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,4);
+        }
+        else if(MySync_Data.save_online == 4)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_PRODUCT_PAR:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.product_par = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_PRODUCT,CMD_SUN_PRODUCT_PAR);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.product_par == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_PRODUCT_SENIOR:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.product_senior = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_PRODUCT,CMD_SUN_PRODUCT_SENIOR);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.product_senior == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_PRODUCT_INTERNET:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.product_internet = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_PRODUCT,CMD_SUN_PRODUCT_INTERNET);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.product_internet == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SERVO_ACC_DEC:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.servo_acc_dec = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.servo_acc_dec == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,2);
+        }
+        else if(MySync_Data.servo_acc_dec == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,3);
+        }
+        else if(MySync_Data.servo_acc_dec == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,4);
+        }
+        else if(MySync_Data.servo_acc_dec == 4)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,5);
+        }
+        else if(MySync_Data.servo_acc_dec == 5)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,6);
+        }
+        else if(MySync_Data.servo_acc_dec == 6)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,7);
+        }
+        else if(MySync_Data.servo_acc_dec == 7)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SERVO_MAX_SPEED:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.servo_max_speed = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_MAX_SPEED);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.servo_max_speed == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SERVO_TOLERANCE:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.servo_tolerance = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_TOLERANCE);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.servo_tolerance == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SP_AREA:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sp_area = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sp_area == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,2);
+        }
+        else if(MySync_Data.sp_area == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,3);
+        }
+        else if(MySync_Data.sp_area == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,4);
+        }
+        else if(MySync_Data.sp_area == 4)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SP_AXIS_LIMIT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sp_axis_limit = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sp_axis_limit == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,2);
+        }
+        else if(MySync_Data.sp_axis_limit == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,3);
+        }
+        else if(MySync_Data.sp_axis_limit == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,4);
+        }
+        else if(MySync_Data.sp_axis_limit == 4)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,5);
+        }
+        else if(MySync_Data.sp_axis_limit == 5)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,6);
+        }
+        else if(MySync_Data.sp_axis_limit == 6)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SP_RAMPAGE_LIMIT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sp_rampage_limit = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_RAMPAGE_LIMIT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sp_rampage_limit == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_AXIS:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_aixs = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_aixs == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,2);
+        }
+        else if(MySync_Data.mac_aixs == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,3);
+        }
+        else if(MySync_Data.mac_aixs == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,4);
+        }
+        else if(MySync_Data.mac_aixs == 4)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,5);
+        }
+        else if(MySync_Data.mac_aixs == 5)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,6);
+        }
+        else if(MySync_Data.mac_aixs == 6)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_LIMIT_SWT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_limit_swt = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_LIMIT_SWT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_limit_swt == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_STRUCT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_struct = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_STRUCT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_struct == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_SERVO:
+    {
+        static uint8_t SendOldIndex = 0;
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_servo = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_SERVO,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if((MySync_Data.mac_servo>0) && (MySync_Data.mac_servo < 100) && SendOldIndex != MySync_Data.mac_servo)
+        {
+            SendOldIndex = MySync_Data.mac_servo;
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_SERVO,MySync_Data.mac_servo);
+        }
+        else if(MySync_Data.mac_servo == 100)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_ORIGIN:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_origin = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_ORIGIN);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_origin == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_STACK_PAR:
+    {
+        static uint8_t SendOldIndex = 0;
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.stack_par = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if((MySync_Data.stack_par>0) && (MySync_Data.stack_par < 8) && SendOldIndex != MySync_Data.stack_par)
+        {
+            SendOldIndex = MySync_Data.stack_par;
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,MySync_Data.stack_par);
+        }
+        if(MySync_Data.stack_par == 8)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_STACK_POINT:
+    {
+        static uint8_t SendOldIndex = 0;
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.stack_point = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if((MySync_Data.stack_point >0) && (MySync_Data.stack_point < 8) && SendOldIndex != MySync_Data.stack_point)
+        {
+            SendOldIndex = MySync_Data.stack_point;
+            MySync_Data.sendDataOutTime = 0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point);
+        }
+        else if(MySync_Data.stack_point == 8)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_STAC_SET:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.stack_set = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_SET);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.stack_set == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_FINISH:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sysdatafinish = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_SYSDATA_FINISH,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sysdatafinish == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= 500)
+            {
+                MySync_Data.SendData_flag = 0;
+            }
+        }
+
+        break;
+    }
+    default:
+        break;
+    }
+    if(MySync_Data.SendDataStep == SysSendIndex::CMD_FINISH)
+    {
+        UsartTimer->stop();
+        MySync_Data.SendData_flag = 0;
+        emit DataSycStateSignal(SysSendIndex::CMD_FINISH);//参数同步到达那一步
+        return 1;
+    }
+    else
+    {
+        emit DataSycStateSignal(MySync_Data.SendDataStep);//参数同步到达那一步
+        return 0;
+    }
+}
+
+//参数同步处理函数
+void Usart::sync_data_handle(void)
+{
+    UsartTimer->start(5);
+    MySync_Data.SendDataStep = 0;
+    MySync_Data.SendData_flag = 0;
+    MySync_Data.sendDataOutTime = 0;
+    MySync_Data.SysDataFlag = 1;
+    DataSyc();
+}

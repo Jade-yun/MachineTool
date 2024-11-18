@@ -1,11 +1,21 @@
 #include "iniconfig.h"
 #include <QCoreApplication>
 
+/*****************命令相关参数保存*****************/
+QString m_configCmdPath = "/root/Cmd_Description.txt";
+QString m_configPortSettingPath = "/root/Port_Setting.txt";
+QString m_configOrderjinitPath = "/root/Pro_Teach.txt";
+
+QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //输入输出、名称定义（3）
+
+QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //输入输出、名称定义配置文件（99）
+
+QSettings ConfigPortDefine(m_configPortXYNameIniPath,QSettings::IniFormat);
 //配置文件相对路径
 QString m_configFileNamePath="/root/Ini_Para.txt";
 
 const QString PasswdConfigPath = "/Settings/passwd.ini";
-
+QSettings Ini_Parasettings(m_configFileNamePath,QSettings::IniFormat);
 /*************************************************************************
 **	输入参数：prefix:节点 key:键 defaultV:默认值
 **	输出参数：值
@@ -16,10 +26,9 @@ const QString PasswdConfigPath = "/Settings/passwd.ini";
 QString getValue(QString prefix, QString key, QString defaultV)
 {
     QString reValue = "";
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    reValue=settings.value(key,defaultV).toString();
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    reValue=Ini_Parasettings.value(key,defaultV).toString();
+    Ini_Parasettings.endGroup();
     return reValue;
 }
 /*************************************************************************
@@ -31,82 +40,73 @@ QString getValue(QString prefix, QString key, QString defaultV)
 **************************************************************************/
 void setValue(QString prefix, QString key, QString value)
 {
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    settings.setValue(key,value);
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    Ini_Parasettings.setValue(key,value);
+    Ini_Parasettings.endGroup();
 }
 
 uint8_t getValue(QString prefix, QString key, uint8_t defaultV)
 {
     uint8_t reValue = 0;
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    reValue=settings.value(key,defaultV).value<uint8_t>();
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    reValue=Ini_Parasettings.value(key,defaultV).value<uint8_t>();
+    Ini_Parasettings.endGroup();
     return reValue;
 }
 
 void setValue(QString prefix, QString key, uint8_t value)
 {
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    settings.setValue(key,value);
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    Ini_Parasettings.setValue(key,value);
+    Ini_Parasettings.endGroup();
 }
 
 uint16_t getValue(QString prefix, QString key, uint16_t defaultV)
 {
     uint16_t reValue = 0;
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    reValue=settings.value(key,defaultV).value<uint16_t>();
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    reValue=Ini_Parasettings.value(key,defaultV).value<uint16_t>();
+    Ini_Parasettings.endGroup();
     return reValue;
 }
 
 void setValue(QString prefix, QString key, uint16_t value)
 {
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    settings.setValue(key,value);
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    Ini_Parasettings.setValue(key,value);
+    Ini_Parasettings.endGroup();
 }
 
 uint32_t getValue(QString prefix, QString key, uint32_t defaultV)
 {
     uint32_t reValue = 0;
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    reValue=settings.value(key,defaultV).value<uint32_t>();
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    reValue=Ini_Parasettings.value(key,defaultV).value<uint32_t>();
+    Ini_Parasettings.endGroup();
     return reValue;
 }
 
 void setValue(QString prefix, QString key, uint32_t value)
 {
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    settings.setValue(key,value);
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    Ini_Parasettings.setValue(key,value);
+    Ini_Parasettings.endGroup();
 }
 
 int32_t getValue(QString prefix, QString key, int32_t defaultV)
 {
     int32_t reValue = 0;
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    reValue=settings.value(key,defaultV).value<int32_t>();
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    reValue=Ini_Parasettings.value(key,defaultV).value<int32_t>();
+    Ini_Parasettings.endGroup();
     return reValue;
 }
 
 void setValue(QString prefix, QString key, int32_t value)
 {
-    QSettings settings(m_configFileNamePath,QSettings::IniFormat);
-    settings.beginGroup(prefix);
-    settings.setValue(key,value);
-    settings.endGroup();
+    Ini_Parasettings.beginGroup(prefix);
+    Ini_Parasettings.setValue(key,value);
+    Ini_Parasettings.endGroup();
 }
 /*************************************************************************
 **	输入参数：defaultV:默认值
@@ -390,16 +390,16 @@ void getClawSave(uint8_t defaultV)
         m_ClawSave[i].clawKeepoutSta=getValue("ClawSave",QString("clawKeepoutSta_%1").arg(i),defaultV);
         m_ClawSave[i].axisSelect_X=getValue("ClawSave",QString("axisSelect_X_%1").arg(i),defaultV);
         m_ClawSave[i].axisSelect_Z=getValue("ClawSave",QString("axisSelect_Z_%1").arg(i),defaultV);
-        m_ClawSave[i].clawKeepoutMinX=getValue("ClawSave",QString("clawKeepoutMinX_%1").arg(i),defaultV);
-        m_ClawSave[i].clawKeepoutMaxX=getValue("ClawSave",QString("clawKeepoutMaxX_%1").arg(i),defaultV);
-        m_ClawSave[i].clawKeepoutHighZ=getValue("ClawSave",QString("clawKeepoutHighZ_%1").arg(i),defaultV);
-        m_ClawSave[i].cKeepoutMinX=getValue("ClawSave",QString("cKeepoutMinX_%1").arg(i),defaultV);
-        m_ClawSave[i].cKeepoutMaxX=getValue("ClawSave",QString("cKeepoutMaxX_%1").arg(i),defaultV);
-        m_ClawSave[i].cKeepoutHighZ=getValue("ClawSave",QString("cKeepoutHighZ_%1").arg(i),defaultV);
-        m_ClawSave[i].cKeepoutPosMinC=getValue("ClawSave",QString("cKeepoutPosMinC_%1").arg(i),defaultV);
-        m_ClawSave[i].cKeepoutPosMaxC=getValue("ClawSave",QString("cKeepoutPosMaxC_%1").arg(i),defaultV);
-        m_ClawSave[i].cKeepoutNegMinC=getValue("ClawSave",QString("cKeepoutNegMinC_%1").arg(i),defaultV);
-        m_ClawSave[i].cKeepoutNegMaxC=getValue("ClawSave",QString("cKeepoutNegMaxC_%1").arg(i),defaultV);
+        m_ClawSave[i].clawKeepoutMinX=getValue("ClawSave",QString("clawKeepoutMinX_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].clawKeepoutMaxX=getValue("ClawSave",QString("clawKeepoutMaxX_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].clawKeepoutHighZ=getValue("ClawSave",QString("clawKeepoutHighZ_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].cKeepoutMinX=getValue("ClawSave",QString("cKeepoutMinX_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].cKeepoutMaxX=getValue("ClawSave",QString("cKeepoutMaxX_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].cKeepoutHighZ=getValue("ClawSave",QString("cKeepoutHighZ_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].cKeepoutPosMinC=getValue("ClawSave",QString("cKeepoutPosMinC_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].cKeepoutPosMaxC=getValue("ClawSave",QString("cKeepoutPosMaxC_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].cKeepoutNegMinC=getValue("ClawSave",QString("cKeepoutNegMinC_%1").arg(i),(int32_t)defaultV);
+        m_ClawSave[i].cKeepoutNegMaxC=getValue("ClawSave",QString("cKeepoutNegMaxC_%1").arg(i),(int32_t)defaultV);
     }
 }
 void setClawSave(D_ClawSaveStruct value,uint8_t index)
@@ -424,15 +424,15 @@ void getOnlineSafe(uint8_t defaultV)
     for(int i=0;i<ONLINE_SAVE_NUM;i++)
     {
         m_OnlineSave[i].mainSunMode=getValue("OnlineSave",QString("mainSunMode_%1").arg(i),defaultV);
-        m_OnlineSave[i].pluseTime=getValue("OnlineSave",QString("pluseTime_%1").arg(i),defaultV);
+        m_OnlineSave[i].pluseTime=getValue("OnlineSave",QString("pluseTime_%1").arg(i),(uint16_t)defaultV);
         m_OnlineSave[i].onlineSelect=getValue("OnlineSave",QString("onlineSelect_%1").arg(i),defaultV);
         m_OnlineSave[i].axisNum=getValue("OnlineSave",QString("axisNum_%1").arg(i),defaultV);
         m_OnlineSave[i].areaInNum=getValue("OnlineSave",QString("areaInNum_%1").arg(i),defaultV);
         m_OnlineSave[i].areaOutNum=getValue("OnlineSave",QString("areaOutNum_%1").arg(i),defaultV);
         m_OnlineSave[i].requestInNum=getValue("OnlineSave",QString("requestInNum_%1").arg(i),defaultV);
         m_OnlineSave[i].requestOutNum=getValue("OnlineSave",QString("requestOutNum_%1").arg(i),defaultV);
-        m_OnlineSave[i].a1A2MainPos=getValue("OnlineSave",QString("a1A2MainPos_%1").arg(i),defaultV);
-        m_OnlineSave[i].a1A2SunPos=getValue("OnlineSave",QString("a1A2SunPos_%1").arg(i),defaultV);
+        m_OnlineSave[i].a1A2MainPos=getValue("OnlineSave",QString("a1A2MainPos_%1").arg(i),(int32_t)defaultV);
+        m_OnlineSave[i].a1A2SunPos=getValue("OnlineSave",QString("a1A2SunPos_%1").arg(i),(int32_t)defaultV);
     }
 }
 void setOnlineSafe(D_OnlineSaveStruct value,uint8_t index)
@@ -473,10 +473,10 @@ void setProductSet(D_ProductSetStruct value)
 //产品设置高级功能
 void getProductSenior(uint8_t defaultV)
 {
-    m_ProductSenior.lubricOpenTime=getValue("ProductSenior","lubricOpenTime",defaultV);
-    m_ProductSenior.lubricCloseTime=getValue("ProductSenior","lubricCloseTime",defaultV);
-    m_ProductSenior.lubricDelay=getValue("ProductSenior","lubricDelay",defaultV);
-    m_ProductSenior.lubricGapCyc=getValue("ProductSenior","lubricGapCyc",defaultV);
+    m_ProductSenior.lubricOpenTime=getValue("ProductSenior","lubricOpenTime",(uint16_t)defaultV);
+    m_ProductSenior.lubricCloseTime=getValue("ProductSenior","lubricCloseTime",(uint16_t)defaultV);
+    m_ProductSenior.lubricDelay=getValue("ProductSenior","lubricDelay",(uint16_t)defaultV);
+    m_ProductSenior.lubricGapCyc=getValue("ProductSenior","lubricGapCyc",(uint16_t)defaultV);
     m_ProductSenior.productMemoryFlag=getValue("ProductSenior","productMemoryFlag",defaultV);
 }
 void setProductSenior(D_ProductSeniorStruct value)
@@ -533,23 +533,23 @@ void getAxisPar(uint8_t defaultV)
         m_AxisPar[i].axisType=getValue("AxisPar",QString("axisType_%1").arg(i),defaultV);
         m_AxisPar[i].axisMoveMade=getValue("AxisPar",QString("axisMoveMade_%1").arg(i),defaultV);
 
-        m_AxisPar[i].accTime=getValue("AxisPar",QString("accTime_%1").arg(i),defaultV);
-        m_AxisPar[i].decTime=getValue("AxisPar",QString("decTime_%1").arg(i),defaultV);
-        m_AxisPar[i].accAcc=getValue("AxisPar",QString("accAcc_%1").arg(i),defaultV);
-        m_AxisPar[i].decDec=getValue("AxisPar",QString("decDec_%1").arg(i),defaultV);
-        m_AxisPar[i].maxSpeed=getValue("AxisPar",QString("maxSpeed_%1").arg(i),defaultV);
-        m_AxisPar[i].axisMinPos=getValue("AxisPar",QString("axisMinPos_%1").arg(i),defaultV);
-        m_AxisPar[i].axisMaxPos=getValue("AxisPar",QString("axisMaxPos_%1").arg(i),defaultV);
+        m_AxisPar[i].accTime=getValue("AxisPar",QString("accTime_%1").arg(i),(uint16_t)defaultV);
+        m_AxisPar[i].decTime=getValue("AxisPar",QString("decTime_%1").arg(i),(uint16_t)defaultV);
+        m_AxisPar[i].accAcc=getValue("AxisPar",QString("accAcc_%1").arg(i),(uint16_t)defaultV);
+        m_AxisPar[i].decDec=getValue("AxisPar",QString("decDec_%1").arg(i),(uint16_t)defaultV);
+        m_AxisPar[i].maxSpeed=getValue("AxisPar",QString("maxSpeed_%1").arg(i),(uint16_t)defaultV);
+        m_AxisPar[i].axisMinPos=getValue("AxisPar",QString("axisMinPos_%1").arg(i),(int32_t)defaultV);
+        m_AxisPar[i].axisMaxPos=getValue("AxisPar",QString("axisMaxPos_%1").arg(i),(int32_t)defaultV);
 
         m_AxisPar[i].minPosSignal=getValue("AxisPar",QString("minPosSignal_%1").arg(i),defaultV);
         m_AxisPar[i].maxPosSignal=getValue("AxisPar",QString("maxPosSignal_%1").arg(i),defaultV);
 
-        m_AxisPar[i].circlePluseNum=getValue("AxisPar",QString("circlePluseNum_%1").arg(i),defaultV);
-        m_AxisPar[i].circleDis=getValue("AxisPar",QString("circleDis_%1").arg(i),defaultV);
+        m_AxisPar[i].circlePluseNum=getValue("AxisPar",QString("circlePluseNum_%1").arg(i),(int32_t)defaultV);
+        m_AxisPar[i].circleDis=getValue("AxisPar",QString("circleDis_%1").arg(i),(int32_t)defaultV);
 
-        m_AxisPar[i].findOriginSpeed=getValue("AxisPar",QString("findOriginSpeed_%1").arg(i),defaultV);
-        m_AxisPar[i].leaveOriginSpeed=getValue("AxisPar",QString("leaveOriginSpeed_%1").arg(i),defaultV);
-        m_AxisPar[i].originOffset=getValue("AxisPar",QString("originOffset_%1").arg(i),defaultV);
+        m_AxisPar[i].findOriginSpeed=getValue("AxisPar",QString("findOriginSpeed_%1").arg(i),(uint16_t)defaultV);
+        m_AxisPar[i].leaveOriginSpeed=getValue("AxisPar",QString("leaveOriginSpeed_%1").arg(i),(uint16_t)defaultV);
+        m_AxisPar[i].originOffset=getValue("AxisPar",QString("originOffset_%1").arg(i),(int32_t)defaultV);
         m_AxisPar[i].originDir=getValue("AxisPar",QString("originDir_%1").arg(i),defaultV);
 
         m_AxisPar[i].originSignal=getValue("AxisPar",QString("originSignal_%1").arg(i),defaultV);
@@ -604,20 +604,20 @@ void getHandwheelPar(uint8_t defaultV)
     m_HandwheelPar.axisType=getValue("HandwheelPar","axisType",defaultV);
     m_HandwheelPar.axisMoveMade=getValue("HandwheelPar","axisMoveMade",defaultV);
 
-    m_HandwheelPar.accTime=getValue("HandwheelPar","accTime",defaultV);
-    m_HandwheelPar.decTime=getValue("HandwheelPar","decTime",defaultV);
-    m_HandwheelPar.accAcc=getValue("HandwheelPar","accAcc",defaultV);
-    m_HandwheelPar.decDec=getValue("HandwheelPar","decDec",defaultV);
-    m_HandwheelPar.maxSpeed=getValue("HandwheelPar","maxSpeed",defaultV);
-    m_HandwheelPar.axisMinPos=getValue("HandwheelPar","axisMinPos",defaultV);
-    m_HandwheelPar.axisMaxPos=getValue("HandwheelPar","axisMaxPos",defaultV);
+    m_HandwheelPar.accTime=getValue("HandwheelPar","accTime",(uint16_t)defaultV);
+    m_HandwheelPar.decTime=getValue("HandwheelPar","decTime",(uint16_t)defaultV);
+    m_HandwheelPar.accAcc=getValue("HandwheelPar","accAcc",(uint16_t)defaultV);
+    m_HandwheelPar.decDec=getValue("HandwheelPar","decDec",(uint16_t)defaultV);
+    m_HandwheelPar.maxSpeed=getValue("HandwheelPar","maxSpeed",(uint16_t)defaultV);
+    m_HandwheelPar.axisMinPos=getValue("HandwheelPar","axisMinPos",(int32_t)defaultV);
+    m_HandwheelPar.axisMaxPos=getValue("HandwheelPar","axisMaxPos",(int32_t)defaultV);
 
-    m_HandwheelPar.circlePluseNum=getValue("HandwheelPar","circlePluseNum",defaultV);
-    m_HandwheelPar.circleDis=getValue("HandwheelPar","circleDis",defaultV);
+    m_HandwheelPar.circlePluseNum=getValue("HandwheelPar","circlePluseNum",(int32_t)defaultV);
+    m_HandwheelPar.circleDis=getValue("HandwheelPar","circleDis",(int32_t)defaultV);
 
-    m_HandwheelPar.findOriginSpeed=getValue("HandwheelPar","findOriginSpeed",defaultV);
-    m_HandwheelPar.leaveOriginSpeed=getValue("HandwheelPar","leaveOriginSpeed",defaultV);
-    m_HandwheelPar.originOffset=getValue("HandwheelPar","originOffset",defaultV);
+    m_HandwheelPar.findOriginSpeed=getValue("HandwheelPar","findOriginSpeed",(uint16_t)defaultV);
+    m_HandwheelPar.leaveOriginSpeed=getValue("HandwheelPar","leaveOriginSpeed",(uint16_t)defaultV);
+    m_HandwheelPar.originOffset=getValue("HandwheelPar","originOffset",(int32_t)defaultV);
     m_HandwheelPar.originDir=getValue("HandwheelPar","originDir",defaultV);
 
     m_HandwheelPar.backOriginOrder=getValue("HandwheelPar","backOriginOrder",defaultV);
@@ -681,13 +681,13 @@ void setServoPar(D_ServoParStruct value)
 //伺服安全及控制精度参数
 void getDegreeParS(uint8_t defaultV)
 {
-    m_DegreeParS.tolerance=getValue("DegreeParS","tolerance",defaultV);
-    m_DegreeParS.originDegree=getValue("DegreeParS","originDegree",defaultV);
-    m_DegreeParS.actionFinDegree=getValue("DegreeParS","actionFinDegree",defaultV);
-    m_DegreeParS.saveRampageHige_Z1=getValue("DegreeParS","saveRampageHige_Z1",defaultV);
-    m_DegreeParS.saveRampageHige_Z2=getValue("DegreeParS","saveRampageHige_Z2",defaultV);
-    m_DegreeParS.saveRotatePos_Y1=getValue("DegreeParS","saveRotatePos_Y1",defaultV);
-    m_DegreeParS.saveRotatePos_Y2=getValue("DegreeParS","saveRotatePos_Y2",defaultV);
+    m_DegreeParS.tolerance=getValue("DegreeParS","tolerance",(int32_t)defaultV);
+    m_DegreeParS.originDegree=getValue("DegreeParS","originDegree",(int32_t)defaultV);
+    m_DegreeParS.actionFinDegree=getValue("DegreeParS","actionFinDegree",(uint16_t)defaultV);
+    m_DegreeParS.saveRampageHige_Z1=getValue("DegreeParS","saveRampageHige_Z1",(int32_t)defaultV);
+    m_DegreeParS.saveRampageHige_Z2=getValue("DegreeParS","saveRampageHige_Z2",(int32_t)defaultV);
+    m_DegreeParS.saveRotatePos_Y1=getValue("DegreeParS","saveRotatePos_Y1",(int32_t)defaultV);
+    m_DegreeParS.saveRotatePos_Y2=getValue("DegreeParS","saveRotatePos_Y2",(int32_t)defaultV);
 }
 void setDegreeParS(D_DegreeParStruct value)
 {
@@ -704,20 +704,21 @@ void getSaveArea(uint8_t defaultV)
 {
     for(int i=0;i<SAVE_AREA_NUM;i++)
     {
-        m_SaveArea[i].saveAreaSwt=getValue("SaveArea",QString("saveAreaSwt_%1").arg(i),defaultV);
+        m_SaveArea[i].saveAreaSwt=getValue("SaveArea",QString("saveAreaSwt_%1").arg(i),(uint16_t)defaultV);
+//        m_SaveArea[i].processFinishNum=getValue("SaveArea",QString("saveAreaSwt_%1").arg(i),(uint16_t)defaultV);//这个参数为啥子不存
         for(int j=0;j<SAVE_AXIS_NUM;j++)
         {
             m_SaveArea[i].axisSelect[j]=getValue("SaveArea",QString("axisSelect_%1_%2").arg(i).arg(j),defaultV);
-            m_SaveArea[i].machineA1Pos[j]=getValue("SaveArea",QString("machineA1Pos_%1_%2").arg(i).arg(j),defaultV);
-            m_SaveArea[i].machineA2Pos[j]=getValue("SaveArea",QString("machineA2Pos_%1_%2").arg(i).arg(j),defaultV);
-            m_SaveArea[i].starckB1Pos[j]=getValue("SaveArea",QString("starckB1Pos_%1_%2").arg(i).arg(j),defaultV);
-            m_SaveArea[i].starckB2Pos[j]=getValue("SaveArea",QString("starckB2Pos_%1_%2").arg(i).arg(j),defaultV);
+            m_SaveArea[i].machineA1Pos[j]=getValue("SaveArea",QString("machineA1Pos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_SaveArea[i].machineA2Pos[j]=getValue("SaveArea",QString("machineA2Pos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_SaveArea[i].starckB1Pos[j]=getValue("SaveArea",QString("starckB1Pos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_SaveArea[i].starckB2Pos[j]=getValue("SaveArea",QString("starckB2Pos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
         }
-        m_SaveArea[i].machine_Z_WaitMaxPos=getValue("SaveArea",QString("machine_Z_WaitMaxPos_%1").arg(i),defaultV);
-        m_SaveArea[i].machine_Z_FallMaxPos=getValue("SaveArea",QString("machine_Z_FallMaxPos_%1").arg(i),defaultV);
-        m_SaveArea[i].machine_Z_InsideHigh=getValue("SaveArea",QString("machine_Z_InsideHigh_%1").arg(i),defaultV);
-        m_SaveArea[i].stack_Z_StartMaxPos=getValue("SaveArea",QString("stack_Z_StartMaxPos_%1").arg(i),defaultV);
-        m_SaveArea[i].stack_Z_FallMaxPos=getValue("SaveArea",QString("stack_Z_FallMaxPos_%1").arg(i),defaultV);
+        m_SaveArea[i].machine_Z_WaitMaxPos=getValue("SaveArea",QString("machine_Z_WaitMaxPos_%1").arg(i),(int32_t)defaultV);
+        m_SaveArea[i].machine_Z_FallMaxPos=getValue("SaveArea",QString("machine_Z_FallMaxPos_%1").arg(i),(int32_t)defaultV);
+        m_SaveArea[i].machine_Z_InsideHigh=getValue("SaveArea",QString("machine_Z_InsideHigh_%1").arg(i),(int32_t)defaultV);
+        m_SaveArea[i].stack_Z_StartMaxPos=getValue("SaveArea",QString("stack_Z_StartMaxPos_%1").arg(i),(int32_t)defaultV);
+        m_SaveArea[i].stack_Z_FallMaxPos=getValue("SaveArea",QString("stack_Z_FallMaxPos_%1").arg(i),(int32_t)defaultV);
     }
 }
 void setSaveArea(D_SaveAreaStruct value, uint8_t index)
@@ -745,10 +746,10 @@ void getServoCommPar(uint8_t defaultV)
         m_ServoCommPar[i].saveFlag=getValue("ServoCommPar",QString("saveFlag_%1").arg(i),defaultV);
         m_ServoCommPar[i].powerOnSet=getValue("ServoCommPar",QString("powerOnSet_%1").arg(i),defaultV);
         m_ServoCommPar[i].axis=getValue("ServoCommPar",QString("axis_%1").arg(i),defaultV);
-        m_ServoCommPar[i].index=getValue("ServoCommPar",QString("index_%1").arg(i),defaultV);
+        m_ServoCommPar[i].index=getValue("ServoCommPar",QString("index_%1").arg(i),(uint16_t)defaultV);
         m_ServoCommPar[i].sunIndex=getValue("ServoCommPar",QString("sunIndex_%1").arg(i),defaultV);
         m_ServoCommPar[i].parLen=getValue("ServoCommPar",QString("parLen_%1").arg(i),defaultV);
-        m_ServoCommPar[i].parValue=getValue("ServoCommPar",QString("parValue_%1").arg(i),defaultV);
+        m_ServoCommPar[i].parValue=getValue("ServoCommPar",QString("parValue_%1").arg(i),(int32_t)defaultV);
     }
 }
 void setServoCommPar(D_ServoCommParSetStruct* value)
@@ -763,6 +764,7 @@ void setServoCommPar(D_ServoCommParSetStruct* value)
         setValue("ServoCommPar",QString("parLen_%1").arg(i),value[i].parLen);
         setValue("ServoCommPar",QString("parValue_%1").arg(i),value[i].parValue);
     }
+
 }
 //堆叠信息参数
 void getStackInfo(uint8_t defaultV)
@@ -782,14 +784,14 @@ void getStackInfo(uint8_t defaultV)
             m_StackInfo[i].stackDir[j]=getValue("StackInfo",QString("stackDir_%1_%2").arg(i).arg(j),defaultV);
             m_StackInfo[i].dischangeSpeed[j]=getValue("StackInfo",QString("dischangeSpeed_%1_%2").arg(i).arg(j),defaultV);
 
-            m_StackInfo[i].stackStartPos[j]=getValue("StackInfo",QString("stackStartPos_%1_%2").arg(i).arg(j),defaultV);
-            m_StackInfo[i].stack_X_EndPos[j]=getValue("StackInfo",QString("stack_X_EndPos_%1_%2").arg(i).arg(j),defaultV);
-            m_StackInfo[i].stack_Y_EndPos[j]=getValue("StackInfo",QString("stack_Y_EndPos_%1_%2").arg(i).arg(j),defaultV);
-            m_StackInfo[i].stackDiagonalPos[j]=getValue("StackInfo",QString("stackDiagonalPos_%1_%2").arg(i).arg(j),defaultV);
+            m_StackInfo[i].stackStartPos[j]=getValue("StackInfo",QString("stackStartPos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_StackInfo[i].stack_X_EndPos[j]=getValue("StackInfo",QString("stack_X_EndPos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_StackInfo[i].stack_Y_EndPos[j]=getValue("StackInfo",QString("stack_Y_EndPos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_StackInfo[i].stackDiagonalPos[j]=getValue("StackInfo",QString("stackDiagonalPos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
 
-            m_StackInfo[i].dischangeStartPos[j]=getValue("StackInfo",QString("dischangeStartPos_%1_%2").arg(i).arg(j),defaultV);
-            m_StackInfo[i].intevalDis[j]=getValue("StackInfo",QString("intevalDis_%1_%2").arg(i).arg(j),defaultV);
-            m_StackInfo[i].offsetDis[j]=getValue("StackInfo",QString("offsetDis_%1_%2").arg(i).arg(j),defaultV);
+            m_StackInfo[i].dischangeStartPos[j]=getValue("StackInfo",QString("dischangeStartPos_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_StackInfo[i].intevalDis[j]=getValue("StackInfo",QString("intevalDis_%1_%2").arg(i).arg(j),(int32_t)defaultV);
+            m_StackInfo[i].offsetDis[j]=getValue("StackInfo",QString("offsetDis_%1_%2").arg(i).arg(j),(int32_t)defaultV);
         }
     }
 }
@@ -846,9 +848,9 @@ void setStackFunc(D_StackFuncStruct value)
 void getManualAxis(uint8_t defaultV)
 {
     m_manualAxis.axis = getValue("ManualAxis","axis",defaultV);
-    m_manualAxis.speed = getValue("ManualAxis","speed",defaultV);
-    m_manualAxis.pos_pos = getValue("ManualAxis","pos_pos",defaultV);
-    m_manualAxis.sub_pos = getValue("ManualAxis","sub_pos",defaultV);
+    m_manualAxis.speed = getValue("ManualAxis","speed",(uint16_t)defaultV);
+    m_manualAxis.pos_pos = getValue("ManualAxis","pos_pos",(uint32_t)defaultV);
+    m_manualAxis.sub_pos = getValue("ManualAxis","sub_pos",(uint32_t)defaultV);
     m_manualAxis.ZDrop = getValue("ManualAxis","ZDrop",defaultV);
     m_manualAxis.handwheelMode = getValue("ManualAxis","handwheelMode",defaultV);
     m_manualAxis.multiply = getValue("ManualAxis","multiply",defaultV);
@@ -865,8 +867,30 @@ void setManualAxis(D_ManualAxis value)
     setValue("ManualAxis","multiply",value.multiply);
     setValue("ManualAxis","handwheelAxis",value.handwheelAxis);
 }
+//设置端口自定义界面修改端口名称和修改端口号
+void setPortDefineNameOrPortNum()
+{
+    for(int i=0;i<INPUT_TOTAL_NUM;i++)
+    {
+        ConfigPortDefine.beginGroup("Port_X_Name_Modify");
+        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].modifyName);
+        ConfigPortDefine.endGroup();
 
+        ConfigPortDefine.beginGroup("Port_X_Number_Modify");
+        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].actualPortNum);
+        ConfigPortDefine.endGroup();
+    }
+    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
+    {
+        ConfigPortDefine.beginGroup("Port_Y_Name_Modify");
+        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].modifyName);
+        ConfigPortDefine.endGroup();
 
+        ConfigPortDefine.beginGroup("Port_Y_Number_Modify");
+        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].actualPortNum);
+        ConfigPortDefine.endGroup();
+    }
+}
 /**********************************
 ***********程序存储*****************
 ***********************************/
@@ -921,15 +945,6 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value)
     setValue("File","time",str_time);
 }
 
-
-/*****************命令相关参数保存*****************/
-QString m_configCmdPath = "/root/Cmd_Description.txt";
-QString m_configPortSettingPath = "/root/Port_Setting.txt";
-QString m_configOrderjinitPath = "/root/Pro_Teach.txt";
-
-QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //输入输出、名称定义（3）
-
-QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //输入输出、名称定义配置文件（99）
 
 QStringList getIniValues(uint8_t type, QString node)
 {

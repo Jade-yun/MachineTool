@@ -39,7 +39,8 @@ extern void setOutPortType(uint8_t value[OUT_PORT_TYPE_NUM][2]);
 //互锁设置
 extern void getOutportInterlock(uint8_t defaultV = 0);
 extern void setOutportInterlock(uint8_t value[OUT_INTERLOCK_NUM][4]);
-
+//端口自定义
+extern void setPortDefineNameOrPortNum();
 //预留关联
 extern void getOutportRelevancy(uint8_t defaultV = 0);
 extern void setOutportRelevancy(uint8_t value[OUTPUT_TOTAL_NUM][3]);

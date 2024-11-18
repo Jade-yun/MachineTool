@@ -2641,7 +2641,7 @@ void Setting::saveMachineAllPara(int index)
             m_ServoCommPar[storageGroup].parValue=ui->editParaValue->text().toInt();
             m_ServoCommPar[storageGroup].saveFlag=ui->coboxIsSave->currentIndex();
             m_ServoCommPar[storageGroup].powerOnSet=ui->coboxIsPowerSet->currentIndex();
-            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_SERVO,storageGroup);
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_SERVO,storageGroup+1);
         }
         setServoCommPar(m_ServoCommPar);
     }
@@ -2761,7 +2761,7 @@ void Setting::savePortDefine()
     {
         m_OutportFuncDefine[i]=m_Port_Y[i].actualPortNum;
     }
-
+//    setPortDefineNameOrPortNum();
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
     QThread::msleep(5);
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);

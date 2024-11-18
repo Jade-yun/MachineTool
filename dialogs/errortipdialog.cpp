@@ -10,7 +10,7 @@ ErrorTipDialog::ErrorTipDialog(QWidget *parent) :
 //    QPixmap icon(":/images/alarm.png");
 //    ui->labIcon->setPixmap(icon);
     this->setWindowTitle(tr("提示"));
-    setModal(false);
+    setModal(true);
     setMode(TipMode::NORMAL);
 
     connect(ui->btnOk, &QPushButton::clicked, this, &ErrorTipDialog::accept);
@@ -71,5 +71,10 @@ void ErrorTipDialog::setMode(TipMode mode)
         ui->btnCancel->hide();
 //        ui->btnOk->show();
         ui->btnOk->setGeometry(200, 280, btnSize.width(), btnSize.height());
+    }
+    else if(mode == TipMode::NULL_BUTTON)
+    {
+        ui->btnOk->hide();
+        ui->btnCancel->hide();
     }
 }

@@ -305,6 +305,9 @@ void MainWindow::slotShowSubWindow()
     MainWindow_SetControl_Stake(true);
     scanner->start();
     PowerOnStateHandle();//开机默认进入停止界面
+    emit signal_sync_data();
+    showErrorTip(tr("参数同步中...."),TipMode::NORMAL);
+
 }
 
 void MainWindow::startAllThread()
@@ -425,6 +428,8 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(this,&MainWindow::EditOperatorVarPreOp_Refresh,teachWidget,&Teach::EditOperatorVarPreOp_handle);
     connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");});
     connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
+    connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
+    connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {
@@ -662,6 +667,8 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
     }
     case 155://ok
     {
+//        showErrorTip(tr("参数同步中...."),TipMode::NORMAL);
+//        emit signal_sync_data();
         break;
     }
     case 154://EXIT
@@ -779,4 +786,16 @@ void ClickableLabel::mousePressEvent(QMouseEvent *event)
     }
 
 }
-
+//开机同步参数处理函数，SysIndex:同步到那一步
+void MainWindow::DataSycStateHandel(uint8_t SysIndex)
+{
+    if(SysIndex!=SysSendIndex::CMD_FINISH)
+    {
+        QString errorText = tr("正在同步参数，参数同步编号：")+QString::number(SysIndex);
+        dlgErrorTip->setMessage(errorText);
+    }
+    else
+    {
+        dlgErrorTip->reject();
+    }
+}

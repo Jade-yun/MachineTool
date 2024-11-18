@@ -10,6 +10,7 @@ class ErrorTipDialog;
 enum class TipMode : unsigned char {
     NORMAL = 0,
     ONLY_OK,
+    NULL_BUTTON
 //  other mode
 };
 
