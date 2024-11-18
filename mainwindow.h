@@ -17,6 +17,7 @@
 #include "ifprogramdialog.h"
 #include "logindialog.h"
 #include "softkeywidget.h"
+#include "backgroundprocessform.h"
 
 #include "mythread.h"
 
@@ -82,6 +83,7 @@ private:
     ErrorTipDialog* dlgErrorTip;
     LoginDialog* login;
     SoftKeyWidget* softKey;
+    BackgroundProcessForm* backgroundProcess;
 
 private:
     TriMode curMode;

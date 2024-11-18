@@ -254,7 +254,7 @@ void FramelessWidget2::setTitle(const QString &title)
 void FramelessWidget2::initTitleBar()
 {
     titleBar = new QWidget(widget);
-    titleBar->setFixedHeight(40);
+    titleBar->setFixedHeight(50);
     titleBar->setStyleSheet("background-color: #444444;");  // 设置标题栏背景色
 
     titleLabel = new QLabel("窗口标题", titleBar);
@@ -262,8 +262,28 @@ void FramelessWidget2::initTitleBar()
 
     closeButton = new QPushButton("X", titleBar);
     closeButton->setFixedSize(40, 40);
-    closeButton->setStyleSheet("background-color: transparent; color: white; outline:none;"
-                               "font-size: 30px;");
+//    closeButton->setStyleSheet("background-color: transparent; color: white; outline:none;");
+
+    QString styleStr = R"(
+           QPushButton{
+               background-color: transparent;
+               color: white;
+               border-style:solid;
+               border-width:1px;
+               border-color:#7A77AC;
+               border-radius:5px;
+           }
+           QPushButton:pressed
+           {
+               background-color: transparent;
+           }
+           QPushButton:checked
+           {
+               background-color: transparent;
+           }
+       )";
+    closeButton->setStyleSheet(styleStr);
+
     connect(closeButton, &QPushButton::clicked, this, [this](){
         if (widget)
         {

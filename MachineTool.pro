@@ -50,6 +50,7 @@ SOURCES += \
     QtUi/framelesswidget2.cpp \
     alarmform.cpp \
     autoform.cpp \
+    dialogs/backgroundprocessform.cpp \
     dialogs/file_preview.cpp \
     dialogs/softkeywidget.cpp \
     dialogs/tippasswddialog.cpp \
@@ -98,6 +99,7 @@ HEADERS += \
     QtUi/framelesswidget2.h \
     alarmform.h \
     autoform.h \
+    dialogs/backgroundprocessform.h \
     dialogs/file_preview.h \
     dialogs/softkeywidget.h \
     dialogs/tippasswddialog.h \
@@ -135,6 +137,7 @@ FORMS += \
     Prompt_Dialog_page/yes_no_page.ui \
     alarmform.ui \
     autoform.ui \
+    dialogs/backgroundprocessform.ui \
     dialogs/file_preview.ui \
     dialogs/softkeywidget.ui \
     dialogs/tippasswddialog.ui \

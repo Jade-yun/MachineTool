@@ -67,6 +67,12 @@ MainWindow::MainWindow(QWidget *parent)
         checked = !checked;
     });
 
+    backgroundProcess = new BackgroundProcessForm(this);
+    backgroundProcess->hide();
+    connect(ui->btnBackgroundProgram, &QPushButton::clicked, [=](){
+        backgroundProcess->show();
+    });
+
     login = new LoginDialog(this);
     connect(ui->btnAdmin, &QPushButton::clicked, [=](){
         if (login->exec() == QDialog::Accepted)
@@ -181,6 +187,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete dlgErrorTip;
+//    delete backgroundProcess;
     delete g_Usart;
 }
 
