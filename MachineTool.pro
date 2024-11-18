@@ -33,6 +33,8 @@ INCLUDEPATH += Keyboard dialogs method Driver MyTitleBarDialog
 
 include($$PWD/method/method.pri)
 include($$PWD/Keyboard/keyboard.pri)
+include($$PWD/Calculator/calculator.pri)
+include($$PWD/QtUi/QtUi.pri)
 
 SOURCES += \
     Driver/backlighter.cpp \
@@ -47,7 +49,6 @@ SOURCES += \
     Prompt_Dialog_page/prompt_dialog_page.cpp \
     Prompt_Dialog_page/prompt_yes_no_dialog_page.cpp \
     Prompt_Dialog_page/yes_no_page.cpp \
-    QtUi/framelesswidget2.cpp \
     alarmform.cpp \
     autoform.cpp \
     dialogs/backgroundprocessform.cpp \
@@ -96,7 +97,6 @@ HEADERS += \
     Prompt_Dialog_page/prompt_dialog_page.h \
     Prompt_Dialog_page/prompt_yes_no_dialog_page.h \
     Prompt_Dialog_page/yes_no_page.h \
-    QtUi/framelesswidget2.h \
     alarmform.h \
     autoform.h \
     dialogs/backgroundprocessform.h \
@@ -175,7 +175,6 @@ RESOURCES += \
     stylesheets.qrc
 
 DISTFILES += \
-    Keyboard/keyboard.pri \
     MyTitleBarDialog/Resources/MyTitle.css \
     MyTitleBarDialog/Resources/MyTitle/close.png \
     MyTitleBarDialog/Resources/MyTitle/max.png \

@@ -18,6 +18,7 @@
 #include "logindialog.h"
 #include "softkeywidget.h"
 #include "backgroundprocessform.h"
+#include "calculator.h"
 
 #include "mythread.h"
 
@@ -84,6 +85,7 @@ private:
     LoginDialog* login;
     SoftKeyWidget* softKey;
     BackgroundProcessForm* backgroundProcess;
+    Calculator* calculator;
 
 private:
     TriMode curMode;

@@ -18,6 +18,7 @@
 
 #include "ifprogramdialog.h"
 #include <QStyleFactory>
+#include <QEasingCurve>
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -55,21 +56,34 @@ MainWindow::MainWindow(QWidget *parent)
 
     softKey = new SoftKeyWidget(this);
     connect(ui->btnSoftKey, &QPushButton::clicked, [=](){
-        static bool checked = true;
-        if (checked)
-        {
-            softKey->show();
-        }
-        else
-        {
-            softKey->hide();
-        }
-        checked = !checked;
+        ui->wgtHelp->hide();
+        softKey->show();
+    });
+
+    calculator = new Calculator(this);
+    calculator->resize(800, 480);
+    calculator->close();
+    calculator->SetAnimationCurve(QEasingCurve::OutQuart);
+
+    connect(ui->btnCaculator, &QPushButton::clicked, this, [=](){
+        ui->wgtHelp->hide();
+//        calculator->show();
+        QPoint center = this->geometry().center();
+        QPoint endPos(center.x() - calculator->width() / 2,
+                     center.y() - calculator->height() / 2);
+        calculator->StartAnimation(QPoint(endPos.x(), -this->height()), endPos, 1000, true);
+        calculator->raise();
+    });
+    connect(calculator, &Calculator::signalBackHome, this, [=](){
+//        qDebug() << "close...";
+        calculator->hide();
+//        calculator->StartAnimation(calculator->pos(), QPoint(0, -this->height()), 100, false);
     });
 
     backgroundProcess = new BackgroundProcessForm(this);
     backgroundProcess->hide();
     connect(ui->btnBackgroundProgram, &QPushButton::clicked, [=](){
+        ui->wgtHelp->hide();
         backgroundProcess->show();
     });
 
