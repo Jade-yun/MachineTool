@@ -15,6 +15,9 @@ QSettings ConfigPortDefine(m_configPortXYNameIniPath,QSettings::IniFormat);
 QString m_configFileNamePath="/root/Ini_Para.txt";
 
 const QString PasswdConfigPath = "/Settings/passwd.ini";
+const QString KeyAndSignalDescriptionPath = "/Settings/key_signal_str.ini";
+const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
+
 QSettings Ini_Parasettings(m_configFileNamePath,QSettings::IniFormat);
 /*************************************************************************
 **	输入参数：prefix:节点 key:键 defaultV:默认值
@@ -1025,4 +1028,98 @@ void readPasswdFromConfig()
         passwd[i] = settings.value(QString("Authority_%1").arg(i), 12345).toUInt();
         settings.endGroup();
     }
+}
+
+void writeKeySetStrToConfig(int index, const QString &text)
+{
+    QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup("KeyFuncDescription");
+    settings.setValue(QString("Key_%1").arg(index), text);
+    settings.endGroup();
+}
+
+void readKeySetStrFromConfig(std::vector<QString> &keyStrs)
+{
+    QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup("KeyFuncDescription");
+
+    keyStrs.resize(OPR_KEY_NUM);
+    for (int i = 0; i < OPR_KEY_NUM; i++)
+    {
+        keyStrs[i] = settings.value(QString("Key_%1").arg(i), "0").toString();
+    }
+    settings.endGroup();
+}
+
+
+void writeSigSetStrToConfig(int index, const QString &text)
+{
+    QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup("SignalDescription");
+    settings.setValue(QString("Sig_%1").arg(index), text);
+    settings.endGroup();
+}
+
+void readSigSetStrFromConfig(std::vector<QString> &sigStrs)
+{
+    QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup("SignalDescription");
+
+    sigStrs.resize(OPR_LED_NUM);
+    for (int i = 0; i < OPR_LED_NUM; i++)
+    {
+        sigStrs[i] = settings.value(QString("Sig_%1").arg(i), "0").toString();
+    }
+    settings.endGroup();
+}
+
+void writeOnlineSafeInOutDescription(int group, const std::vector<QString> &describeStrs)
+{
+    QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup(QString("OnlineSafe%1").arg(group));
+
+    for (size_t i = 0; i < 4; i++)
+    {
+        settings.setValue(QString("Sig_%1").arg(i), describeStrs[i]);
+    }
+    settings.endGroup();
+}
+
+void readOnlineSafeInOutDescription(int group, std::vector<QString> &describeStrs)
+{
+
+    QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup(QString("OnlineSafe%1").arg(group));
+
+    describeStrs.resize(4);
+    for (size_t i = 0; i < 4; i++)
+    {
+       describeStrs[i] = (settings.value(QString("Sig_%1").arg(i), "null").toString());
+    }
+    settings.endGroup();
+}
+
+void writeLimitSigDescription(int index, const std::vector<QString> &describeStrs)
+{
+    QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup(QString("LimitSignal%1").arg(index));
+
+    for (size_t i = 0; i < AXIS_TOTAL_NUM; i++)
+    {
+        settings.setValue(QString("Axis_%1").arg(i), describeStrs[i]);
+    }
+    settings.endGroup();
+}
+
+void readLimitSigDescription(int index, std::vector<QString> &describeStrs)
+{
+    QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.beginGroup(QString("LimitSignal%1").arg(index));
+
+    describeStrs.resize(AXIS_TOTAL_NUM);
+    for (size_t i = 0; i < AXIS_TOTAL_NUM; i++)
+    {
+        describeStrs[i] = settings.value(QString("Axis_%1").arg(i), "null").toString();
+    }
+    settings.endGroup();
 }

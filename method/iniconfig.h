@@ -32,6 +32,21 @@ void   setValue(QString prefix, QString key, int32_t value);
 void savePasswdToConfig(int authority, uint32_t value);
 void readPasswdFromConfig();
 
+// 保存读取按键编辑框的字符用于ui显示
+void writeKeySetStrToConfig(int index, const QString& text);
+void readKeySetStrFromConfig(std::vector<QString> &keyStrs);
+// 信号LED
+void writeSigSetStrToConfig(int index, const QString& text);
+void readSigSetStrFromConfig(std::vector<QString> &sigStrs);
+
+// 保存读取联机安全区域输入输出编辑框的字符
+void writeOnlineSafeInOutDescription(int group, const std::vector<QString> &describeStrs);
+void readOnlineSafeInOutDescription(int group, std::vector<QString> &describeStrs);
+
+// 限位 index 0～2 分别对应最小限位、最大限位、原点信号
+void writeLimitSigDescription(int index, const std::vector<QString> &describeStrs);
+void readLimitSigDescription(int index, std::vector<QString> &describeStrs);
+
 /*****************相关参数保存*****************/
 //输出类型
 extern void getOutPortType(uint8_t defaultV = 0);

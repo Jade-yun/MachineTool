@@ -872,19 +872,27 @@ void Setting::syncParaToUI()
         outportReleteOutList[i]->setCurrentIndex(m_OutportReleteOut[i][1]);
     }
     /****************************按键和信号********************************************/
+    std::vector<QString> keyFunDesription;
+    ::readKeySetStrFromConfig(keyFunDesription);
+
     for (int i = 0; i < OPR_KEY_NUM; i++)
     {
         keyEdits.at(i)->setKeyFunc(m_KeyFunc[i].keyType, m_KeyFunc[i].funcNum, m_KeyFunc[i].oprMode);
         //
 //        QString keyFunStr = getKeyFuncDescription(m_KeyFunc[i].keyType, m_KeyFunc[i].funcNum, m_KeyFunc[i].oprMode);
 //        keyEdits.at(i)->setText(keyFunStr);
+        keyEdits.at(i)->setText(keyFunDesription[i]);
     }
+
+    std::vector<QString> sigSetDesription;
+    ::readSigSetStrFromConfig(sigSetDesription);
     for (int i = 0; i < OPR_LED_NUM; i++)
     {
         sigEdits.at(i)->setSigTypeAndPort(m_LedFunc[i].ledType, m_LedFunc[i].funcNum);
 
 //        QString sigStr = getSigDescription(m_LedFunc[i].ledType, m_LedFunc[i].funcNum);
 //        sigEdits.at(i)->setText(sigStr);
+        sigEdits.at(i)->setText(sigSetDesription[i]);
     }
 
     /****************************高级********************************************/
@@ -1015,6 +1023,14 @@ void Setting::syncParaToUI()
 
         onlineSafeWidgets.at(i).a1A2MainPos->setText(QString::number(m_OnlineSave[i].a1A2MainPos / 100.0, 'f', 2));
         onlineSafeWidgets.at(i).a1A2SunPos->setText(QString::number(m_OnlineSave[i].a1A2SunPos / 100.0, 'f', 2));
+
+        std::vector<QString> tempStrs;
+        readOnlineSafeInOutDescription(i, tempStrs);
+        onlineSafeWidgets.at(i).areaInNum->setText(tempStrs[0]);
+        onlineSafeWidgets.at(i).areaOutNum->setText(tempStrs[1]);
+        onlineSafeWidgets.at(i).requestInNum->setText(tempStrs[2]);
+        onlineSafeWidgets.at(i).requestOutNum->setText(tempStrs[3]);
+
     }
 
     /****************************产品设置********************************************/
@@ -1050,6 +1066,14 @@ void Setting::syncParaToUI()
     servoPara.at(7)->setCurrentIndex(m_ServoPar.torqueLimitFlag);
 
     /****************************机器参数********************************************/
+    std::vector<QString> minLimitStrs;
+    std::vector<QString> maxLimitStrs;
+    std::vector<QString> originSigStrs;
+
+    readLimitSigDescription(0, minLimitStrs);
+    readLimitSigDescription(1, maxLimitStrs);
+    readLimitSigDescription(2, originSigStrs);
+
     for (int i = 0; i < AXIS_TOTAL_NUM; i++)
     {
         machineParaWidgets.at(i).axisType->setCurrentIndex(m_AxisPar[i].axisType);
@@ -1075,6 +1099,10 @@ void Setting::syncParaToUI()
         machineParaWidgets.at(i).limitPosSwt->setCurrentIndex(m_AxisPar[i].limitPosSwt);
         machineParaWidgets.at(i).limitNegSwt->setCurrentIndex(m_AxisPar[i].limitNegSwt);
         machineParaWidgets.at(i).coordDir->setCurrentIndex(m_AxisPar[i].coordDir);
+
+        machineParaWidgets.at(i).limitMin->setText(minLimitStrs[i]);
+        machineParaWidgets.at(i).limitMax->setText(maxLimitStrs[i]);
+        machineParaWidgets.at(i).originSignal->setText(originSigStrs[i]);
 
     }
 
@@ -2000,15 +2028,17 @@ void Setting::setupCommunicationConnections()
 
     //按键
     for (int i=0;i<OPR_KEY_NUM;i++) {
-        connect(keyEdits[i],&KeyEdit::textChanged,[=](const QString &){
+        connect(keyEdits[i],&KeyEdit::textChanged,[=](const QString &text){
             saveKeyAndLEDFuncDefine();
+            writeKeySetStrToConfig(i, text);
         });
     }
 
     //LED
     for (int i=0;i<OPR_LED_NUM;i++) {
-        connect(sigEdits[i],&SigLEDEdit::textChanged,[=](const QString &){
+        connect(sigEdits[i],&SigLEDEdit::textChanged,[=](const QString &text){
             saveKeyAndLEDFuncDefine();
+            writeSigSetStrToConfig(i, text);
         });
     }
 
@@ -2047,6 +2077,14 @@ void Setting::setupCommunicationConnections()
     {
         connect(onlineSafeList[i], &QPushButton::clicked, [=](){
             saveOnlineSafePara(i);
+
+            std::vector<QString> tempStrs = {
+                onlineSafeWidgets.at(i).areaInNum->text(),
+                onlineSafeWidgets.at(i).areaOutNum->text(),
+                onlineSafeWidgets.at(i).requestInNum->text(),
+                onlineSafeWidgets.at(i).requestOutNum->text()
+            };
+            writeOnlineSafeInOutDescription(i, tempStrs);
         });
     }
 
@@ -2578,10 +2616,25 @@ void Setting::saveMachinePara()
         m_AxisPar[i].limitPosSwt = machineParaWidgets.at(i).limitPosSwt->currentIndex();
         m_AxisPar[i].limitNegSwt = machineParaWidgets.at(i).limitNegSwt->currentIndex();
         m_AxisPar[i].coordDir = machineParaWidgets.at(i).coordDir->currentIndex();
-        setAxisPar(m_AxisPar[i],i);
+        setAxisPar(m_AxisPar[i],i);        
     }
     setServoPar(m_ServoPar);
 
+    std::array<std::vector<QString>, 3> tempStr;
+    for(auto &vec : tempStr)
+    {
+        vec.reserve(AXIS_TOTAL_NUM);
+    }
+    for (int i = 0; i < AXIS_TOTAL_NUM; i++)
+    {
+        tempStr[0].emplace_back( machineParaWidgets.at(i).limitMin->text());
+        tempStr[1].emplace_back(machineParaWidgets.at(i).limitMax->text());
+        tempStr[2].emplace_back(machineParaWidgets.at(i).originSignal->text());
+    }
+
+    writeLimitSigDescription(0, tempStr[0]);    // 最大限位
+    writeLimitSigDescription(1, tempStr[1]);    // 最小限位
+    writeLimitSigDescription(2, tempStr[2]);    // 原点信号
 
 }
 
