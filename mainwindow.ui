@@ -815,7 +815,7 @@ border: 1px solid black;
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">QSpinBox{
+       <string notr="true">QSpinBox#Progress_num{
 	background-color:transparent;
 }</string>
       </property>

@@ -11,6 +11,7 @@ QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //�
 QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //输入输出、名称定义配置文件（99）
 
 QSettings ConfigPortDefine(m_configPortXYNameIniPath,QSettings::IniFormat);
+
 //配置文件相对路径
 QString m_configFileNamePath="/root/Ini_Para.txt";
 
@@ -152,7 +153,7 @@ void getOutportInterlock(uint8_t defaultV)
             }
             else
             {
-                m_OutportInterlock[i][j] = outportInterlockIndex[i][j] + 1;
+                m_OutportInterlock[i][j] = outportInterlockIndex[i][j];
             }
         }
     }
@@ -873,6 +874,7 @@ void setManualAxis(D_ManualAxis value)
 //设置端口自定义界面修改端口名称和修改端口号
 void setPortDefineNameOrPortNum()
 {
+    ConfigPortDefine.setIniCodec("UTF-8");
     for(int i=0;i<INPUT_TOTAL_NUM;i++)
     {
         ConfigPortDefine.beginGroup("Port_X_Name_Modify");
@@ -880,7 +882,7 @@ void setPortDefineNameOrPortNum()
         ConfigPortDefine.endGroup();
 
         ConfigPortDefine.beginGroup("Port_X_Number_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].actualPortNum);
+        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].modifyPort);
         ConfigPortDefine.endGroup();
     }
     for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
@@ -890,7 +892,11 @@ void setPortDefineNameOrPortNum()
         ConfigPortDefine.endGroup();
 
         ConfigPortDefine.beginGroup("Port_Y_Number_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].actualPortNum);
+        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].modifyPort);
+        ConfigPortDefine.endGroup();
+
+        ConfigPortDefine.beginGroup("Port_Y_functionset");
+        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].functionSet);
         ConfigPortDefine.endGroup();
     }
 }

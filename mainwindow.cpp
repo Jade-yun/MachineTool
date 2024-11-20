@@ -210,7 +210,6 @@ void MainWindow::Refresh_Progress_bar(uint8_t data)
     QCoreApplication::processEvents();
     ui->Progress_bar->setValue(data);
     ui->Progress_bar->update();
-    this->update();
 }
 //设置主界面控件状态控制
 void MainWindow::MainWindow_SetControl_Stake(bool state)
@@ -282,9 +281,7 @@ void MainWindow::slotShowSubWindow()
 
     timer.restart();
     connectAllSignalsAndSlots();
-    ui->label_plan->hide();
-    ui->Progress_bar->hide();
-    ui->Progress_num->hide();
+
     FullKeyboard::instance(this)->hide();
     qDebug() << "FullKeyboard：" << timer.elapsed() << "毫秒";
     timer.restart();
@@ -314,14 +311,12 @@ void MainWindow::slotShowSubWindow()
     {
         cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     }
-
     Refresh_Progress_bar(100);
-    MainWindow_SetControl_Stake(true);
     scanner->start();
     PowerOnStateHandle();//开机默认进入停止界面
+    ui->label_plan->setText("参数同步中:");
+    Refresh_Progress_bar(0);
     emit signal_sync_data();
-    showErrorTip(tr("参数同步中...."),TipMode::NORMAL);
-
 }
 
 void MainWindow::startAllThread()
@@ -442,8 +437,10 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(this,&MainWindow::EditOperatorVarPreOp_Refresh,teachWidget,&Teach::EditOperatorVarPreOp_handle);
     connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");});
     connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
+    connect(setWidget,&Setting::RefreshPortDefineSignals,setWidget,&Setting::RefreshPortDefine);
     connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
+
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {
@@ -803,13 +800,39 @@ void ClickableLabel::mousePressEvent(QMouseEvent *event)
 //开机同步参数处理函数，SysIndex:同步到那一步
 void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 {
-    if(SysIndex!=SysSendIndex::CMD_FINISH)
+    if(SysIndex!=SysSendIndex::CMD_FINISH && SysIndex!=SysSendIndex::CMD_SENDERROR)
     {
-        QString errorText = tr("正在同步参数，参数同步编号：")+QString::number(SysIndex);
+//        QString SysText = tr("正在同步参数，参数同步编号：")+QString::number(SysIndex);
+//        dlgErrorTip->setMessage(SysText);
+//        if(!dlgErrorTip->isVisible())
+//        {
+//            showErrorTip(SysText,TipMode::NORMAL);
+//        }
+        ui->Progress_bar->setValue((100/30)*SysIndex);
+    }
+    else if(SysIndex==SysSendIndex::CMD_SENDERROR)
+    {
+        QString errorText = tr("参数同步失败，同步失败编号：")+QString::number(MySync_Data.SendDataStep);
         dlgErrorTip->setMessage(errorText);
+        if(!dlgErrorTip->isVisible())
+        {
+            showErrorTip(errorText,TipMode::NORMAL);
+        }
+        MainWindow_SetControl_Stake(true);
+        ui->label_plan->hide();
+        ui->Progress_bar->hide();
+        ui->Progress_num->hide();
     }
     else
     {
-        dlgErrorTip->reject();
+        Refresh_Progress_bar(100);
+        MainWindow_SetControl_Stake(true);
+        ui->label_plan->hide();
+        ui->Progress_bar->hide();
+        ui->Progress_num->hide();
+        if(dlgErrorTip->isVisible())
+        {
+            dlgErrorTip->reject();
+        }
     }
 }

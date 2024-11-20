@@ -2233,9 +2233,438 @@ void Setting::outportInterlockSlots()
             {
                 m_OutportInterlock[i][j] = 0;
             }
+        }
+        if(m_OutportInterlock[i][0] == 0)
+        {
+            if(i==0)
+            {//未使用原料1夹紧正向阀
+                m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet = 0;
+                m_Port_Y[CLAW_METERIAL_1_LOOSENED].functionSet = 0;
+            }
+            else if(i==1)
+            {//未使用成品1夹紧正向阀
+                m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet = 0;
+                m_Port_Y[CLAW_PRODUCT_1_LOOSENED].functionSet = 0;
+            }
+            else if(i==2)
+            {//未使用卡爪1正转正向阀
+                m_Port_Y[CLAW_CLAW_1_CLAMP].functionSet = 0;
+                m_Port_Y[CLAW_CLAW_1_LOOSENED].functionSet = 0;
+            }
+            else if(i==3)
+            {//未使用自动门开正向阀
+                m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].functionSet = 0;
+                m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].functionSet = 0;
+            }
+            else if(i==4)
+            {//未使用卡盘1夹紧正向阀
+                m_Port_Y[MACHINE_CHUCK_1_CLAMP].functionSet = 0;
+                m_Port_Y[MACHINE_CHUCK_1_LOOSENED].functionSet = 0;
+            }
+            else if(i==6)
+            {//未使用原料2夹紧正向阀
+                m_Port_Y[24].functionSet = 0;
+                m_Port_Y[25].functionSet = 0;
+            }
+            else if(i==7)
+            {//未使用成品2夹紧正向阀
+                m_Port_Y[26].functionSet = 0;
+                m_Port_Y[27].functionSet = 0;
+            }
+            else if(i==8)
+            {//未使用卡爪2正转正向阀
+                m_Port_Y[28].functionSet = 0;
+                m_Port_Y[29].functionSet = 0;
+            }
+            else if(i==9)
+            {//未使用自动门2开正向阀
+                m_Port_Y[32].functionSet = 0;
+                m_Port_Y[33].functionSet = 0;
+            }
+            else if(i==10)
+            {//未使用卡盘2夹紧正向阀
+                m_Port_Y[34].functionSet = 0;
+                m_Port_Y[35].functionSet = 0;
+            }
 
+            if(i==0)
+            {//未使用原料1夹紧正向阀
+                m_Port_X[0].functionSet = 0;
+                m_Port_X[1].functionSet = 0;
+            }
+            else if(i==1)
+            {//未使用成品1夹紧正向阀
+                m_Port_X[2].functionSet = 0;
+                m_Port_X[3].functionSet = 0;
+            }
+            else if(i==2)
+            {//未使用卡爪1正转正向阀
+                m_Port_X[4].functionSet = 0;
+                m_Port_X[5].functionSet = 0;
+            }
+            else if(i==3)
+            {//未使用自动门开正向阀
+                m_Port_X[8].functionSet = 0;
+                m_Port_X[9].functionSet = 0;
+            }
+            else if(i==4)
+            {//未使用卡盘1夹紧正向阀
+                m_Port_X[10].functionSet = 0;
+                m_Port_X[11].functionSet = 0;
+            }
+            else if(i==6)
+            {//未使用原料2夹紧正向阀
+                m_Port_X[36].functionSet = 0;
+                m_Port_X[37].functionSet = 0;
+            }
+            else if(i==7)
+            {//未使用成品2夹紧正向阀
+                m_Port_X[38].functionSet = 0;
+                m_Port_X[39].functionSet = 0;
+            }
+            else if(i==8)
+            {//未使用卡爪2正转正向阀
+                m_Port_X[40].functionSet = 0;
+                m_Port_X[41].functionSet = 0;
+            }
+            else if(i==9)
+            {//未使用自动门2开正向阀
+                m_Port_X[44].functionSet = 0;
+                m_Port_X[45].functionSet = 0;
+            }
+            else if(i==10)
+            {//未使用卡盘2夹紧正向阀
+                m_Port_X[46].functionSet = 0;
+                m_Port_X[47].functionSet = 0;
+            }
+        }
+        else
+        {
+            if(m_OutportInterlock[i][2] == 0)
+            {
+                if(i==0)
+                {//未使用原料1夹紧正向阀
+                    m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet = 1;
+                    m_Port_Y[CLAW_METERIAL_1_LOOSENED].functionSet = 0;
+                }
+                else if(i==1)
+                {//未使用成品1夹紧正向阀
+                    m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet = 1;
+                    m_Port_Y[CLAW_PRODUCT_1_LOOSENED].functionSet = 0;
+                }
+                else if(i==2)
+                {//未使用卡爪1正转正向阀
+                    m_Port_Y[CLAW_CLAW_1_CLAMP].functionSet = 1;
+                    m_Port_Y[CLAW_CLAW_1_LOOSENED].functionSet = 0;
+                }
+                else if(i==3)
+                {//未使用自动门开正向阀
+                    m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].functionSet = 1;
+                    m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].functionSet = 0;
+                }
+                else if(i==4)
+                {//未使用卡盘1夹紧正向阀
+                    m_Port_Y[MACHINE_CHUCK_1_CLAMP].functionSet = 1;
+                    m_Port_Y[MACHINE_CHUCK_1_LOOSENED].functionSet = 0;
+                }
+                else if(i==6)
+                {//未使用原料2夹紧正向阀
+                    m_Port_Y[24].functionSet = 1;
+                    m_Port_Y[25].functionSet = 0;
+                }
+                else if(i==7)
+                {//未使用成品2夹紧正向阀
+                    m_Port_Y[26].functionSet = 1;
+                    m_Port_Y[27].functionSet = 0;
+                }
+                else if(i==8)
+                {//未使用卡爪2正转正向阀
+                    m_Port_Y[28].functionSet = 1;
+                    m_Port_Y[29].functionSet = 0;
+                }
+                else if(i==9)
+                {//未使用自动门2开正向阀
+                    m_Port_Y[32].functionSet = 1;
+                    m_Port_Y[33].functionSet = 0;
+                }
+                else if(i==10)
+                {//未使用卡盘2夹紧正向阀
+                    m_Port_Y[34].functionSet = 1;
+                    m_Port_Y[35].functionSet = 0;
+                }
+
+                if(i==0)
+                {//未使用原料1松开反向检测
+                    m_Port_X[1].functionSet = 0;
+                }
+                else if(i==1)
+                {//未使用成品1松开反向检测
+                    m_Port_X[3].functionSet = 0;
+                }
+                else if(i==2)
+                {//未使用卡爪1反转反向检测
+                    m_Port_X[5].functionSet = 0;
+                }
+                else if(i==3)
+                {//未使用自动门关反向检测
+                    m_Port_X[9].functionSet = 0;
+                }
+                else if(i==4)
+                {//未使用卡盘1松开反向检测
+                    m_Port_X[11].functionSet = 0;
+                }
+                else if(i==6)
+                {//未使用原料2松开反向检测
+                    m_Port_X[37].functionSet = 0;
+                }
+                else if(i==7)
+                {//未使用成品2松开反向检测
+                    m_Port_X[39].functionSet = 0;
+                }
+                else if(i==8)
+                {//未使用卡爪2反转反向检测
+                    m_Port_X[41].functionSet = 0;
+                }
+                else if(i==9)
+                {//未自动门2关限反向检测
+                    m_Port_X[45].functionSet = 0;
+                }
+                else if(i==10)
+                {//未使用卡盘2松开限反向反向检测
+                    m_Port_X[47].functionSet = 0;
+                }
+            }
+            else
+            {
+                if(i==0)
+                {//使用原料1夹紧正向阀
+                    m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet = 1;
+                    m_Port_Y[CLAW_METERIAL_1_LOOSENED].functionSet = 1;
+                }
+                else if(i==1)
+                {//使用成品1夹紧正向阀
+                    m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet = 1;
+                    m_Port_Y[CLAW_PRODUCT_1_LOOSENED].functionSet = 1;
+                }
+                else if(i==2)
+                {//使用卡爪1正转正向阀
+                    m_Port_Y[CLAW_CLAW_1_CLAMP].functionSet = 1;
+                    m_Port_Y[CLAW_CLAW_1_LOOSENED].functionSet = 1;
+                }
+                else if(i==3)
+                {//使用自动门开正向阀
+                    m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].functionSet = 1;
+                    m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].functionSet = 1;
+
+                }
+                else if(i==4)
+                {//使用卡盘1夹紧正向阀
+                    m_Port_Y[MACHINE_CHUCK_1_CLAMP].functionSet = 1;
+                    m_Port_Y[MACHINE_CHUCK_1_LOOSENED].functionSet = 1;
+                }
+                else if(i==6)
+                {//使用原料2夹紧正向阀
+                    m_Port_Y[24].functionSet = 1;
+                    m_Port_Y[25].functionSet = 1;
+                }
+                else if(i==7)
+                {//使用成品2夹紧正向阀
+                    m_Port_Y[26].functionSet = 1;
+                    m_Port_Y[27].functionSet = 1;
+                }
+                else if(i==8)
+                {//使用卡爪2正转正向阀
+                    m_Port_Y[28].functionSet = 1;
+                    m_Port_Y[29].functionSet = 1;
+                }
+                else if(i==9)
+                {//使用自动门2开正向阀
+                    m_Port_Y[32].functionSet = 1;
+                    m_Port_Y[33].functionSet = 1;
+                }
+                else if(i==10)
+                {//使用卡盘2夹紧正向阀
+                    m_Port_Y[34].functionSet = 1;
+                    m_Port_Y[35].functionSet = 1;
+                }
+
+                if(m_OutportInterlock[i][3] == 0)
+                {//反向检测不使用
+                    if(i==0)
+                    {//未使用原料1松开反向检测
+                        m_Port_X[1].functionSet = 0;
+                    }
+                    else if(i==1)
+                    {//未使用成品1松开反向检测
+                        m_Port_X[3].functionSet = 0;
+                    }
+                    else if(i==2)
+                    {//未使用卡爪1反转反向检测
+                        m_Port_X[5].functionSet = 0;
+                    }
+                    else if(i==3)
+                    {//未使用自动门关反向检测
+                        m_Port_X[9].functionSet = 0;
+                    }
+                    else if(i==4)
+                    {//未使用卡盘1松开反向检测
+                        m_Port_X[11].functionSet = 0;
+                    }
+                    else if(i==6)
+                    {//未使用原料2松开反向检测
+                        m_Port_X[37].functionSet = 0;
+                    }
+                    else if(i==7)
+                    {//未使用成品2松开反向检测
+                        m_Port_X[39].functionSet = 0;
+                    }
+                    else if(i==8)
+                    {//未使用卡爪2反转反向检测
+                        m_Port_X[41].functionSet = 0;
+                    }
+                    else if(i==9)
+                    {//未自动门2关限反向检测
+                        m_Port_X[45].functionSet = 0;
+                    }
+                    else if(i==10)
+                    {//未使用卡盘2松开限反向反向检测
+                        m_Port_X[47].functionSet = 0;
+                    }
+                }
+                else
+                {
+                    if(i==0)
+                    {//未使用原料1松开反向检测
+                        m_Port_X[1].functionSet = 1;
+                    }
+                    else if(i==1)
+                    {//未使用成品1松开反向检测
+                        m_Port_X[3].functionSet = 1;
+                    }
+                    else if(i==2)
+                    {//未使用卡爪1反转反向检测
+                        m_Port_X[5].functionSet = 1;
+                    }
+                    else if(i==3)
+                    {//未使用自动门关反向检测
+                        m_Port_X[9].functionSet = 1;
+                    }
+                    else if(i==4)
+                    {//未使用卡盘1松开反向检测
+                        m_Port_X[11].functionSet = 1;
+                    }
+                    else if(i==6)
+                    {//未使用原料2松开反向检测
+                        m_Port_X[37].functionSet = 1;
+                    }
+                    else if(i==7)
+                    {//未使用成品2松开反向检测
+                        m_Port_X[39].functionSet = 1;
+                    }
+                    else if(i==8)
+                    {//未使用卡爪2反转反向检测
+                        m_Port_X[41].functionSet = 1;
+                    }
+                    else if(i==9)
+                    {//未自动门2关限反向检测
+                        m_Port_X[45].functionSet = 1;
+                    }
+                    else if(i==10)
+                    {//未使用卡盘2松开限反向反向检测
+                        m_Port_X[47].functionSet = 1;
+                    }
+                }
+            }
+            if(m_OutportInterlock[i][1] == 0)
+            {//正向检测不使用
+                if(i==0)
+                {//未使用原料1夹紧正向阀
+                    m_Port_X[0].functionSet = 0;
+                }
+                else if(i==1)
+                {//未使用成品1夹紧正向阀
+                    m_Port_X[2].functionSet = 0;
+                }
+                else if(i==2)
+                {//未使用卡爪1正转正向阀
+                    m_Port_X[4].functionSet = 0;
+                }
+                else if(i==3)
+                {//未使用自动门开正向阀
+                    m_Port_X[8].functionSet = 0;
+                }
+                else if(i==4)
+                {//未使用卡盘1夹紧正向阀
+                    m_Port_X[10].functionSet = 0;
+                }
+                else if(i==6)
+                {//未使用原料2夹紧正向阀
+                    m_Port_X[36].functionSet = 0;
+                }
+                else if(i==7)
+                {//未使用成品2夹紧正向阀
+                    m_Port_X[38].functionSet = 0;
+                }
+                else if(i==8)
+                {//未使用卡爪2正转正向阀
+                    m_Port_X[40].functionSet = 0;
+                }
+                else if(i==9)
+                {//未使用自动门2开正向阀
+                    m_Port_X[44].functionSet = 0;
+                }
+                else if(i==10)
+                {//未使用卡盘2夹紧正向阀
+                    m_Port_X[46].functionSet = 0;
+                }
+            }
+            else
+            {
+                if(i==0)
+                {//使用原料1夹紧正向阀
+                    m_Port_X[0].functionSet = 1;
+                }
+                else if(i==1)
+                {//使用成品1夹紧正向阀
+                    m_Port_X[2].functionSet = 1;
+                }
+                else if(i==2)
+                {//未使用卡爪1正转正向阀
+                    m_Port_X[4].functionSet = 1;
+                }
+                else if(i==3)
+                {//未使用自动门开正向阀
+                    m_Port_X[8].functionSet = 1;
+                }
+                else if(i==4)
+                {//未使用卡盘1夹紧正向阀
+                    m_Port_X[10].functionSet = 1;
+                }
+                else if(i==6)
+                {//未使用原料2夹紧正向阀
+                    m_Port_X[36].functionSet = 1;
+                }
+                else if(i==7)
+                {//未使用成品2夹紧正向阀
+                    m_Port_X[38].functionSet = 1;
+                }
+                else if(i==8)
+                {//未使用卡爪2正转正向阀
+                    m_Port_X[40].functionSet = 1;
+                }
+                else if(i==9)
+                {//未使用自动门2开正向阀
+                    m_Port_X[44].functionSet = 1;
+                }
+                else if(i==10)
+                {//未使用卡盘2夹紧正向阀
+                    m_Port_X[46].functionSet = 1;
+                }
+            }
         }
     }
+    setPortDefineNameOrPortNum();
+    emit RefreshPortDefineSignals();
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_INTERLOCK);
     setOutportInterlock(m_OutportInterlock);
 }
@@ -2324,9 +2753,45 @@ void Setting::seniorFuncSlots()
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_SENIOR_PORT);
 
     setSeniorFunc(m_SeniorFunc);
+    SeniorFuncPortSet();
+}
+//根据高级功能中功能使用情况，设置端口是否做预留端口使用
+void Setting::SeniorFuncPortSet()
+{
+    //输入端口
+    m_Port_X[6].functionSet = m_SeniorFunc.stackSaveIn1Check;
+    m_Port_X[7].functionSet = m_SeniorFunc.emergencyStopCheck;
+    m_Port_X[12].functionSet = m_SeniorFunc.remoteAuto;
+    m_Port_X[13].functionSet = m_SeniorFunc.remoteStop;
+    m_Port_X[14].functionSet = m_SeniorFunc.manualChuckIn1;
+    m_Port_X[15].functionSet = m_SeniorFunc.pressureCheck;
+    m_Port_X[31].functionSet = m_SeniorFunc.processFinish1;
+    m_Port_X[32].functionSet = m_SeniorFunc.locateFinish1;
+    m_Port_X[33].functionSet = m_SeniorFunc.knifeOrigin1Check;
+    m_Port_X[34].functionSet = m_SeniorFunc.alarmIn1Check;
+    m_Port_X[35].functionSet = m_SeniorFunc.pauseStopCheck;
+    m_Port_X[42].functionSet = m_SeniorFunc.stackSaveIn2Check;
+    m_Port_X[43].functionSet = m_SeniorFunc.manualChuckIn2;
+    m_Port_X[52].functionSet = m_SeniorFunc.processFinish2;
+    m_Port_X[53].functionSet = m_SeniorFunc.locateFinish2;
+    m_Port_X[54].functionSet = m_SeniorFunc.knifeOrigin2Check;
+    m_Port_X[55].functionSet = m_SeniorFunc.alarmIn2Check;
+    //输出端口
+    m_Port_Y[6].functionSet = m_SeniorFunc.autoLight;//根据某个端口功能是否使用，置端口预留标志位
+    m_Port_Y[7].functionSet = m_SeniorFunc.alarmLight;
+    m_Port_Y[10].functionSet = m_SeniorFunc.biowAir1;
+    m_Port_Y[12].functionSet = m_SeniorFunc.emergencyStopOut;
+    m_Port_Y[13].functionSet = m_SeniorFunc.lubPump;
+    m_Port_Y[14].functionSet = m_SeniorFunc.alarmBuzzer;
+    m_Port_Y[15].functionSet = m_SeniorFunc.pauseLight;
+    m_Port_Y[16].functionSet = m_SeniorFunc.startProduct1;
+    m_Port_Y[17].functionSet = m_SeniorFunc.mainAxisLocate1;
+    m_Port_Y[18].functionSet = m_SeniorFunc.processSave1;
+    m_Port_Y[42].functionSet = m_SeniorFunc.processSave2;
+    m_Port_Y[20].functionSet = m_SeniorFunc.mainAxisRotate1;
+    emit RefreshPortDefineSignals();
 
 }
-
 void Setting::saveKeyAndLEDFuncDefine()
 {
     for (int i = 0; i < OPR_KEY_NUM; i++)
@@ -2783,10 +3248,20 @@ void Setting::showPortDefine()
     {
         QTableWidgetItem* item1=new QTableWidgetItem(m_Port_X[i].definePort);
         ui->tableWgtPortDef->setItem(i,0,item1);
-        QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].defineName);
-        ui->tableWgtPortDef->setItem(i,1,item2);
-        QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].modifyName);
-        ui->tableWgtPortDef->setItem(i,2,item3);
+        if(m_Port_X[i].functionSet == 1)
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].defineName);
+            ui->tableWgtPortDef->setItem(i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].modifyName);
+            ui->tableWgtPortDef->setItem(i,2,item3);
+        }
+        else
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].ResDefineName);
+            ui->tableWgtPortDef->setItem(i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].ResModifyName);
+            ui->tableWgtPortDef->setItem(i,2,item3);
+        }
         QTableWidgetItem* item4=new QTableWidgetItem(m_Port_X[i].modifyPort);
         ui->tableWgtPortDef->setItem(i,3,item4);
     }
@@ -2795,32 +3270,138 @@ void Setting::showPortDefine()
 
         QTableWidgetItem* item1=new QTableWidgetItem(m_Port_Y[i].definePort);
         ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,0,item1);
-        QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].defineName);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
-        QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].modifyName);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
+        if(m_Port_Y[i].functionSet == 1)
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].defineName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].modifyName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
+        }
+        else
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].ResDefineName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].ResModifyName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
+        }
         QTableWidgetItem* item4=new QTableWidgetItem(m_Port_Y[i].modifyPort);
         ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,3,item4);
     }
 }
-
+//端口自定义刷新
+void Setting::RefreshPortDefine()
+{
+    for(int i=0;i<INPUT_TOTAL_NUM;i++)
+    {
+        QTableWidgetItem *defineNameItem = ui->tableWgtPortDef->item(i,1);//默认名称栏
+        QTableWidgetItem *modifyNameItem = ui->tableWgtPortDef->item(i,2);
+        QTableWidgetItem *modifyPortItem = ui->tableWgtPortDef->item(i,3);
+        if(m_Port_X[i].functionSet == 1)
+        {//如果端口使用了指定功能，显示功能端口名称，如果未开启对应端口功能，则显示预留名称
+             if(defineNameItem)
+             {
+                 defineNameItem->setText(m_Port_X[i].defineName);
+             }
+             if(modifyNameItem)
+             {
+                 modifyNameItem->setText(m_Port_X[i].modifyName);
+             }
+        }
+        else if(m_Port_X[i].functionSet == 0)
+        {
+            if(defineNameItem)
+            {
+                defineNameItem->setText(m_Port_X[i].ResDefineName);
+            }
+            if(modifyNameItem)
+            {
+                modifyNameItem->setText(m_Port_X[i].ResModifyName);
+            }
+        }
+        if(modifyPortItem)
+        {
+            modifyPortItem->setText(m_Port_X[i].modifyPort);
+        }
+    }
+    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
+    {
+        QTableWidgetItem *defineNameItem = ui->tableWgtPortDef->item(INPUT_TOTAL_NUM+i,1);//默认名称栏
+        QTableWidgetItem *modifyNameItem = ui->tableWgtPortDef->item(INPUT_TOTAL_NUM+i,2);//修改名称栏
+        QTableWidgetItem *modifyPortItem = ui->tableWgtPortDef->item(INPUT_TOTAL_NUM+i,3);//修改端口栏
+        if(m_Port_Y[i].functionSet == 1)
+        {//如果端口使用了指定功能，显示功能端口名称，如果未开启对应端口功能，则显示预留名称
+             if(defineNameItem)
+             {
+                 defineNameItem->setText(m_Port_Y[i].defineName);
+             }
+             if(modifyNameItem)
+             {
+                 modifyNameItem->setText(m_Port_Y[i].modifyName);
+             }
+        }
+        else if(m_Port_Y[i].functionSet == 0)
+        {
+            if(defineNameItem)
+            {
+                defineNameItem->setText(m_Port_Y[i].ResDefineName);
+            }
+            if(modifyNameItem)
+            {
+                modifyNameItem->setText(m_Port_Y[i].ResModifyName);
+            }
+        }
+        if(modifyPortItem)
+        {
+            modifyPortItem->setText(m_Port_Y[i].modifyPort);
+        }
+    }
+    ui->tableWgtPortDef->repaint();//强制刷新列表
+}
+//保存端口自定义
 void Setting::savePortDefine()
 {
     for(int i=0;i<INPUT_TOTAL_NUM;i++)
     {
+        QTableWidgetItem *XmodifyNameItem = ui->tableWgtPortDef->item(i,2);
+        QTableWidgetItem *XmodifyPortItem = ui->tableWgtPortDef->item(i,3);
+        if(XmodifyNameItem)
+        {
+            m_Port_X[i].modifyName = XmodifyNameItem->text();
+        }
+        if(XmodifyPortItem)
+        {
+            m_Port_X[i].modifyPort = XmodifyPortItem->text();
+        }
         m_InportFuncDefine[i]=m_Port_X[i].actualPortNum;
     }
     for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
     {
-        m_OutportFuncDefine[i]=m_Port_Y[i].actualPortNum;
+        QTableWidgetItem *YmodifyNameItem = ui->tableWgtPortDef->item(INPUT_TOTAL_NUM+i,2);
+        QTableWidgetItem *YmodifyPortItem = ui->tableWgtPortDef->item(INPUT_TOTAL_NUM+i,3);
+        if(YmodifyNameItem)
+        {
+            if(m_Port_Y[i].functionSet == 1)
+            {
+                m_Port_Y[i].modifyName = YmodifyNameItem->text();
+            }
+            else
+            {
+                m_Port_Y[i].ResModifyName = YmodifyNameItem->text();
+            }
+        }
+        if(YmodifyPortItem)
+        {
+            m_Port_Y[i].modifyPort = YmodifyPortItem->text();
+        }
+        m_OutportFuncDefine[i] = m_Port_Y[i].actualPortNum;
     }
-//    setPortDefineNameOrPortNum();
+    setPortDefineNameOrPortNum();
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
     QThread::msleep(5);
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
     emit monitor_port_refreash();
 }
-
+//保存名称自定义
 void Setting::saveNameDefine()
 {
 

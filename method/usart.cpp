@@ -914,6 +914,14 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             break;
         }
     }
+    else if(mainCmd == CMD_MAIN_READ)
+    {
+        if(sunCmd == CMD_SUN_SYSDATA_FINISH)
+        {
+            sendDataBuf[0]=0;
+        }
+
+    }
 
     ExtendSendParProReadAnswer(mainCmd, sunCmd, sendDataBuf, len);
 }
@@ -993,6 +1001,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 default:
                     break;
                 }
+                break;
             case CMD_MAIN_SAVE:
                 switch (recDataBuf[1]) {
                 case CMD_SUN_SAVE_MACHINE:
@@ -1022,6 +1031,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 default:
                     break;
                 }
+                break;
             case CMD_MAIN_PRODUCT:
                 switch (recDataBuf[1]) {
                 case CMD_SUN_PRODUCT_PAR:
@@ -1045,6 +1055,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 default:
                     break;
                 }
+                break;
             case CMD_MAIN_SERVO:
                 switch (recDataBuf[1]) {
                 case CMD_SUN_SERVO_ACC_DEC:
@@ -1068,6 +1079,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 default:
                     break;
                 }
+                break;
             case CMD_MAIN_SP:
                 switch (recDataBuf[1]) {
                 case CMD_SUN_SP_AREA:
@@ -1091,6 +1103,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 default:
                     break;
                 }
+                break;
             case CMD_MAIN_MAC:
                 switch (recDataBuf[1]) {
                 case CMD_SUN_MAC_AXIS:
@@ -1128,6 +1141,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 default:
                     break;
                 }
+                break;
             case CMD_MAIN_STACK:
                 switch (recDataBuf[1]) {
                 case CMD_SUN_STACK_PAR:
@@ -1148,16 +1162,20 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                         MySync_Data.stack_set = true;
                     }
                     break;
-                case CMD_SUN_SYSDATA_FINISH:
-                    if(MySync_Data.SysDataFlag == 1)
-                    {
-                        MySync_Data.sysdatafinish = true;
-                    }
+
                 default:
                     break;
                 }
+                break;
             default:
                 break;
+            }
+        }
+        else if(sunCmd == CMD_SUN_SYSDATA_FINISH)
+        {
+            if(MySync_Data.SysDataFlag == 1)
+            {
+                MySync_Data.sysdatafinish = true;
             }
         }
     }
@@ -2405,6 +2423,7 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
     }
 
 }
+#if 0
 //开机参数和程序下发
 uint8_t Usart::DataSyc()
 {
@@ -2426,7 +2445,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;//一次10ms
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {//超过1s未接收到反馈重新发送
                 MySync_Data.SendData_flag = 0;
             }
@@ -2451,7 +2470,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2476,7 +2495,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2501,7 +2520,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2526,7 +2545,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2551,7 +2570,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2576,7 +2595,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2601,7 +2620,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2626,7 +2645,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2652,7 +2671,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2677,7 +2696,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2718,7 +2737,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2758,7 +2777,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2783,7 +2802,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2808,7 +2827,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2833,7 +2852,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2888,7 +2907,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2913,7 +2932,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2938,7 +2957,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -2978,7 +2997,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3028,7 +3047,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3053,7 +3072,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3103,7 +3122,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3128,7 +3147,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3153,7 +3172,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3185,7 +3204,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3210,7 +3229,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3242,7 +3261,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3274,7 +3293,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3299,7 +3318,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3324,7 +3343,7 @@ uint8_t Usart::DataSyc()
         else
         {
             MySync_Data.sendDataOutTime++;
-            if(MySync_Data.sendDataOutTime >= 500)
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.SendData_flag = 0;
             }
@@ -3348,14 +3367,1278 @@ uint8_t Usart::DataSyc()
         return 0;
     }
 }
+#else
+//开机参数和程序下发
+uint8_t Usart::DataSyc()
+{
+    switch (MySync_Data.SendDataStep) {
+    case SysSendIndex::CMD_OUT_TYPE://信号设置-输出类型
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_type_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_TYPE);
+            MySync_Data.SendData_flag = 1;
+        }
+        if(MySync_Data.out_type_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;//一次5ms
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {//超过1s未接收到反馈重新发送
+               MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_INTERLOCK:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.interlock_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_INTERLOCK);
+            MySync_Data.SendData_flag = 1;
+        }
 
+        if(MySync_Data.interlock_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum=0;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_IN_FUNC_DEF:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.in_func_def_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.in_func_def_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum=0;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_OUT_FUNC_DEF:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_func_def_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.out_func_def_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_OUT_RELEVENCY:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_relevency_State = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_RELEVENCY);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.out_relevency_State == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_RELATE_OUT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_relate_out = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_RELATE_OUT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.out_relate_out == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_KEY:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.out_key = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_KEY);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.out_key == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SENIOR:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.senior = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_SENIOR);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.senior == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SENIOR_PORT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.senior_port = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_SENIOR_PORT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.senior_port == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_MACHINE:
+    {
+
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_machine = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_MACHINE);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_machine == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_STACK:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_stack = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_STACK);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_stack == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_CALW:
+    {
+
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_calw = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,1);//一共四组先发第1组
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_calw == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,2);//一共四组先发第2组
+        }
+        else if(MySync_Data.save_calw == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,3);//一共四组先发第3组
+        }
+        else if(MySync_Data.save_calw == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,4);//一共四组先发第4组
+        }
+        else if(MySync_Data.save_calw == 4)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SAVE_ONLINE:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.save_online = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.save_online == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,2);
+        }
+        if(MySync_Data.save_online == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,3);
+        }
+        if(MySync_Data.save_online == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,4);
+        }
+        else if(MySync_Data.save_online == 4)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_PRODUCT_PAR:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.product_par = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_PRODUCT,CMD_SUN_PRODUCT_PAR);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.product_par == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_PRODUCT_SENIOR:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.product_senior = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_PRODUCT,CMD_SUN_PRODUCT_SENIOR);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.product_senior == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_PRODUCT_INTERNET:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.product_internet = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_PRODUCT,CMD_SUN_PRODUCT_INTERNET);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.product_internet == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SERVO_ACC_DEC:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.servo_acc_dec = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.servo_acc_dec == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,2);
+        }
+        else if(MySync_Data.servo_acc_dec == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,3);
+        }
+        else if(MySync_Data.servo_acc_dec == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,4);
+        }
+        else if(MySync_Data.servo_acc_dec == 4)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,5);
+        }
+        else if(MySync_Data.servo_acc_dec == 5)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,6);
+        }
+        else if(MySync_Data.servo_acc_dec == 6)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,7);
+        }
+        else if(MySync_Data.servo_acc_dec == 7)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SERVO_MAX_SPEED:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.servo_max_speed = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_MAX_SPEED);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.servo_max_speed == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SERVO_TOLERANCE:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.servo_tolerance = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_TOLERANCE);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.servo_tolerance == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SP_AREA:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sp_area = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sp_area == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,2);
+        }
+        else if(MySync_Data.sp_area == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,3);
+        }
+        else if(MySync_Data.sp_area == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,4);
+        }
+        else if(MySync_Data.sp_area == 4)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SP_AXIS_LIMIT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sp_axis_limit = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sp_axis_limit == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,2);
+        }
+        else if(MySync_Data.sp_axis_limit == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,3);
+        }
+        else if(MySync_Data.sp_axis_limit == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,4);
+        }
+        else if(MySync_Data.sp_axis_limit == 4)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,5);
+        }
+        else if(MySync_Data.sp_axis_limit == 5)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,6);
+        }
+        else if(MySync_Data.sp_axis_limit == 6)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_SP_RAMPAGE_LIMIT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sp_rampage_limit = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_RAMPAGE_LIMIT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sp_rampage_limit == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_AXIS:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_aixs = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_aixs == 1)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,2);
+        }
+        else if(MySync_Data.mac_aixs == 2)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,3);
+        }
+        else if(MySync_Data.mac_aixs == 3)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,4);
+        }
+        else if(MySync_Data.mac_aixs == 4)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,5);
+        }
+        else if(MySync_Data.mac_aixs == 5)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,6);
+        }
+        else if(MySync_Data.mac_aixs == 6)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_LIMIT_SWT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_limit_swt = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_LIMIT_SWT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_limit_swt == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_STRUCT:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_struct = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_STRUCT);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_struct == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_SERVO:
+    {
+        static uint8_t SendOldIndex = 0;
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_servo = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_SERVO,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if((MySync_Data.mac_servo>0) && (MySync_Data.mac_servo < 100) && SendOldIndex != MySync_Data.mac_servo)
+        {
+            SendOldIndex = MySync_Data.mac_servo;
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_SERVO,MySync_Data.mac_servo);
+        }
+        else if(MySync_Data.mac_servo == 100)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_MAC_ORIGIN:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.mac_origin = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_ORIGIN);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.mac_origin == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_STACK_PAR:
+    {
+        static uint8_t SendOldIndex = 0;
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.stack_par = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if((MySync_Data.stack_par>0) && (MySync_Data.stack_par < 8) && SendOldIndex != MySync_Data.stack_par)
+        {
+            SendOldIndex = MySync_Data.stack_par;
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,MySync_Data.stack_par);
+        }
+        if(MySync_Data.stack_par == 8)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_STACK_POINT:
+    {
+        static uint8_t SendOldIndex = 0;
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.stack_point = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,1);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if((MySync_Data.stack_point >0) && (MySync_Data.stack_point < 8) && SendOldIndex != MySync_Data.stack_point)
+        {
+            SendOldIndex = MySync_Data.stack_point;
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sendDataNum=0;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point);
+        }
+        else if(MySync_Data.stack_point == 8)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_STAC_SET:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.stack_set = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_SET);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.stack_set == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+        break;
+    }
+    case SysSendIndex::CMD_END:
+    {
+        if(MySync_Data.SendData_flag == 0)
+        {
+            MySync_Data.sendDataOutTime = 0;
+            MySync_Data.sysdatafinish = false;
+            g_Usart->ExtendSendParDeal(CMD_MAIN_READ,CMD_SUN_SYSDATA_FINISH);
+            MySync_Data.SendData_flag = 1;
+        }
+
+        if(MySync_Data.sysdatafinish == true)
+        {
+            MySync_Data.SendData_flag = 0;
+            MySync_Data.SendDataStep++;
+            MySync_Data.sendDataNum=0;
+        }
+        else
+        {
+            MySync_Data.sendDataOutTime++;
+            if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
+            {
+                MySync_Data.sendDataNum++;
+                if(MySync_Data.sendDataNum>=5)
+                {
+                    MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
+                }
+                else
+                {
+                    MySync_Data.SendData_flag = 0;
+                }
+            }
+        }
+
+        break;
+    }
+    case SysSendIndex::CMD_SENDERROR:
+    {
+        break;
+    }
+    default:
+        break;
+    }
+    if(MySync_Data.SendDataStep == SysSendIndex::CMD_FINISH)
+    {
+        UsartTimer->stop();
+        MySync_Data.SendData_flag = 0;
+        emit DataSycStateSignal(SysSendIndex::CMD_FINISH);//发送同步结果
+        return 1;
+    }
+    else if(MySync_Data.SendDataStep == SysSendIndex::CMD_SENDERROR)
+    {
+        UsartTimer->stop();
+        MySync_Data.SendData_flag = 0;
+        emit DataSycStateSignal(SysSendIndex::CMD_SENDERROR);//发送同步结果
+    }
+    else
+    {
+        emit DataSycStateSignal(MySync_Data.SendDataStep);//参数同步到达那一步
+        return 0;
+    }
+}
+#endif
 //参数同步处理函数
 void Usart::sync_data_handle(void)
 {
-    UsartTimer->start(5);
+    UsartTimer->start(20);
     MySync_Data.SendDataStep = 0;
     MySync_Data.SendData_flag = 0;
     MySync_Data.sendDataOutTime = 0;
     MySync_Data.SysDataFlag = 1;
+    MySync_Data.sendDataNum=0;
+    MySync_Data.OutTimenum=25;
     DataSyc();
 }

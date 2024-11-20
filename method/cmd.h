@@ -642,12 +642,12 @@ typedef struct
     uint8_t  remoteAutoPort;									//远程自动 0关 1-60输入口
     uint8_t  remoteStopPort;									//远程停止 0关 1-60输入口
     uint8_t  bottomOilLimitPort;							//底油限 0关 1-60输入口
-    uint8_t  oilerSwtPort;										//注油器 0关 1-40输出口										//注油器 0关 1-40输出口
+    uint8_t  oilerSwtPort;										//注油器 0关 1-40输出口
     uint8_t  lubPumpPort;										//润滑泵 0关 1-40输出口
 
     uint8_t  processSave1Port;								//加工安全1 0关 1-40输出口
     uint8_t  processSave2Port;								//加工安全2 0关 1-40输出口
-    uint8_t  emergencySnapMotorEnablePort;		//急停断使能 0无
+    uint8_t  emergencySnapMotorEnablePort;              //急停断使能 0无
     uint8_t  emergencyStopOutPort;						//急停输出 0关 1-40输出口
     uint8_t  autoLightPort;									//自动灯 0关 1-40输出口
     uint8_t  alarmLightPort;									//报警灯 0关 1-40输出口
@@ -939,6 +939,8 @@ typedef struct
     uint8_t SendData_flag;
     uint8_t sysdatafinish;
     int sendDataOutTime;
+    int OutTimenum;
+    uint8_t sendDataNum;//发送次数，同一参数下发5次未收到反馈，说明通信异常，返回同步失败
 }Sync_Data;
 
 extern Sync_Data MySync_Data;
@@ -1098,10 +1100,13 @@ typedef struct
     QString     definePort;             //默认端口 X1,X2.....
     QString     defineName;             //默认名称
     QString     modifyName;             //修改名称
+    QString     ResDefineName;          //functionSet=0时，即做预留端口时的默认名称
+    QString     ResModifyName;          //functionSet=0时，即做预留端口时的修改名称
     QString 	modifyPort;				//修改端口
     uint8_t     portNum;                //默认端口号 1,2,3,....
     uint8_t     actualPortNum;          //实际端口号(改变后的,只在端口自定义界面保存使用)
-    bool        isReserve;                    //是否是预留端口
+    uint8_t     functionSet;            //表示该端口是否设置了使用功能，0-预留端口，1-设定了其他功能
+    bool        isReserve;              //是否是预留端口，用来区分X，EX，Y，EY
 }D_PortDefineStruct;
 /*名称自定义*/
 typedef struct
@@ -1121,7 +1126,7 @@ extern uint16_t m_FileNameNum;                                                  
 extern D_NameDefineStruct m_NameDefine[DEFINE_NAME_NUM];                        //名称自定义
 extern D_PortDefineStruct m_Port_X[INPUT_TOTAL_NUM];                                  //输入自定义
 extern D_PortDefineStruct m_Port_Y[OUTPUT_TOTAL_NUM];                                  //输出自定义
-
+extern D_PortDefineStruct m_ResPort_Y[OUTPUT_TOTAL_NUM];                               //输出端口作预留时存储默认名称和修改名称
 class  Usart;
 //串口通信
 extern Usart *g_Usart;

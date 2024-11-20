@@ -38,7 +38,9 @@ enum SysSendIndex{
     CMD_STACK_PAR,
     CMD_STACK_POINT,
     CMD_STAC_SET,
-    CMD_FINISH
+    CMD_END,
+    CMD_FINISH,
+    CMD_SENDERROR
 };
 //表示命令头的字节数
 #define HEAD_BYTE  2

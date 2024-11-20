@@ -78,7 +78,7 @@ private:
 
     void updateRegisterCodeDisplay();
     void handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, const int suffix);
-
+    void SeniorFuncPortSet();
 private slots:
     void onMenuStateChanged(MenuState newState);
 
@@ -89,6 +89,7 @@ public:
 signals:
     void LOGO_Refresh();
     void monitor_port_refreash();
+    void RefreshPortDefineSignals();
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型
@@ -244,10 +245,10 @@ private slots:
 
    void modifyPort(int row, int column);           //端口自定义界面修改端口号
    void on_btnLogoUpdate_clicked();
-
    // QObject interface
 public:
    bool eventFilter(QObject *watched, QEvent *event);
+   void RefreshPortDefine();//端口自定义刷新
 };
 
 #endif // SETTING_H

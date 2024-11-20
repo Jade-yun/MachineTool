@@ -131,6 +131,7 @@ D_NameDefineStruct m_NameDefine[DEFINE_NAME_NUM]={0};                        //�
 
 D_PortDefineStruct m_Port_X[INPUT_TOTAL_NUM];                                  //输入自定义
 D_PortDefineStruct m_Port_Y[OUTPUT_TOTAL_NUM];                                  //输出自定义
+D_PortDefineStruct m_ResPort_Y[OUTPUT_TOTAL_NUM];                               //输出端口作预留时存储默认名称和修改名称
 //输出自定义
 
 Usart *g_Usart = NULL;

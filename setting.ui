@@ -926,7 +926,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>7</number>
      </property>
      <property name="iconSize">
       <size>
@@ -2964,7 +2964,7 @@ QPushButton::released{
         </font>
        </property>
        <property name="title">
-        <string>自动门1开</string>
+        <string>自动门2开</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3110,7 +3110,7 @@ QPushButton::released{
         </font>
        </property>
        <property name="title">
-        <string>原料1夹紧</string>
+        <string>原料2夹紧</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3256,7 +3256,7 @@ QPushButton::released{
         </font>
        </property>
        <property name="title">
-        <string>卡盘1夹紧</string>
+        <string>卡盘2夹紧</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3402,7 +3402,7 @@ QPushButton::released{
         </font>
        </property>
        <property name="title">
-        <string>卡爪1正转</string>
+        <string>卡爪2正转</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3548,7 +3548,7 @@ QPushButton::released{
         </font>
        </property>
        <property name="title">
-        <string>成品1夹紧</string>
+        <string>成品2夹紧</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -8533,7 +8533,7 @@ QComboBox::down-arrow {
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <widget class="QWidget" name="layoutWidget">
@@ -10267,12 +10267,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -10364,12 +10364,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -10461,12 +10461,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -10527,12 +10527,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -10562,12 +10562,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -10597,12 +10597,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -10911,12 +10911,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -10946,12 +10946,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11012,12 +11012,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11087,12 +11087,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11153,12 +11153,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11228,12 +11228,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11418,12 +11418,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11484,12 +11484,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11550,12 +11550,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>
@@ -11713,12 +11713,12 @@ QComboBox::down-arrow {
             </property>
             <item>
              <property name="text">
-              <string>使用</string>
+              <string>不使用</string>
              </property>
             </item>
             <item>
              <property name="text">
-              <string>不使用</string>
+              <string>使用</string>
              </property>
             </item>
            </widget>

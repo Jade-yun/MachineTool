@@ -19,6 +19,10 @@ void readIniPortStruct()
     QStringList tempList12=getIniValues(99,"Port_X_Name_Modify");
     QStringList tempList13=getIniValues(99,"Port_X_Number_Modify");             //仅为显示
 
+    QStringList tempList17=getIniValues(3,"ResPort_X");
+    QStringList tempList18=getIniValues(99,"ResPort_X_Name_Modify");
+    QStringList tempList19=getIniValues(99,"Port_X_functionset");
+
     for(int i=0;i<INPUT_TOTAL_NUM;i++)
     {
         if(i<INPUT_NUM)
@@ -52,13 +56,29 @@ void readIniPortStruct()
         {
             m_Port_X[i].actualPortNum=tempList13[i].mid(1).toUInt();
         }
-
+        //读取输入端口做预留功能时的名称
+        m_Port_X[i].ResDefineName=tempList17[i];
+        if(tempList18[i].compare("0")==0)
+        {
+            m_Port_X[i].ResModifyName=tempList17[i];
+        }
+        else
+        {
+            m_Port_X[i].ResModifyName=tempList18[i];
+        }
+        //读取每个端口是否设置了指定功能
+        m_Port_X[i].functionSet = (uint8_t)tempList19[i].toUInt();
     }
 
     //Y
     tempList11=getIniValues(3,"Port_Y");
     tempList12=getIniValues(99,"Port_Y_Name_Modify");
     tempList13=getIniValues(99,"Port_Y_Number_Modify");             //仅为显示
+
+    QStringList tempList14=getIniValues(3,"ResPort_Y");
+    QStringList tempList15=getIniValues(99,"ResPort_Y_Name_Modify");
+    QStringList tempList16=getIniValues(99,"Port_Y_functionset");
+
     for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
     {
         if(i<OUTPUT_NUM)
@@ -91,7 +111,20 @@ void readIniPortStruct()
         {
             m_Port_Y[i].actualPortNum=tempList13[i].mid(1).toUInt();
         }
+        //读取输出端口做预留功能时的名称
+        m_Port_Y[i].ResDefineName=tempList14[i];
+        if(tempList15[i].compare("0")==0)
+        {
+            m_Port_Y[i].ResModifyName=tempList14[i];
+        }
+        else
+        {
+            m_Port_Y[i].ResModifyName=tempList15[i];
+        }
+        //读取每个端口是否设置了指定功能
+        m_Port_Y[i].functionSet = (uint8_t)tempList16[i].toUInt();
     }
+
     //名称自定义
     tempList11=getIniValues(3,"DefineName");
     tempList12=getIniValues(99,"DefineName_Modify");
