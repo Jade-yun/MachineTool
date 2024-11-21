@@ -1027,13 +1027,13 @@ void savePasswdToConfig(int authority, uint32_t value)
 
 void readPasswdFromConfig()
 {
+    QSettings settings(PasswdConfigPath, QSettings::IniFormat);
+    settings.beginGroup("Passwd");
     for (int i = 0; i < 3; i++)
     {
-        QSettings settings(PasswdConfigPath, QSettings::IniFormat);
-        settings.beginGroup("Passwd");
         passwd[i] = settings.value(QString("Authority_%1").arg(i), 12345).toUInt();
-        settings.endGroup();
     }
+    settings.endGroup();
 }
 
 void writeKeySetStrToConfig(int index, const QString &text)

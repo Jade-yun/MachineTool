@@ -3,10 +3,14 @@
 
 #include <QPainter>
 
+#include "errortipdialog.h"
+
+extern uint32_t passwd[3]; // 0-管理员密码 1-超级管理密码 2-菜单密码
+
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginDialog),
-    mode(LoginMode::Operator), passwd(0)
+    mode(LoginMode::Operator)
 {
     ui->setupUi(this);
     setModal(true);
@@ -35,34 +39,55 @@ LoginDialog::~LoginDialog()
     delete ui;
 }
 
-int LoginDialog::getLoginMode() const
+LoginMode LoginDialog::getLoginMode() const
 {
     return mode;
 }
 
-uint LoginDialog::getInputPasswd() const
-{
-    return passwd;
-}
-
 void LoginDialog::onBtnOk()
 {
+    LoginMode inputMode;
+    uint32_t inputPasswd = ui->editPasswd->text().toUInt();
+
     if (ui->chboxOperator->isChecked())
     {
-        mode = LoginMode::Operator;
-        passwd = 0;
+        inputMode = LoginMode::Operator;
     }
     else if (ui->chboxAdmin->isChecked())
     {
-        mode = LoginMode::Admin;
-        passwd = ui->editPasswd->text().toUInt();
+        if (!verifyPassword(inputPasswd, passwd[0]))
+        {
+            ui->editPasswd->clear();
+            return;
+        }
+        inputMode = LoginMode::Admin;
     }
     else if (ui->chboxAdvance->isChecked())
     {
-        mode = LoginMode::Advance;
-        passwd = ui->editPasswd->text().toUInt();
+        if (!verifyPassword(inputPasswd, passwd[1]))
+        {
+            ui->editPasswd->clear();
+            return;
+        }
+        inputMode = LoginMode::Advance;
+    }
+
+    if (mode != inputMode)
+    {
+        mode = inputMode;
+        emit loginModeChanged(mode);
     }
     accept();
+}
+
+bool LoginDialog::verifyPassword(uint32_t inputPasswd, uint32_t correctPasswd)
+{
+    if (inputPasswd != correctPasswd) {
+        ErrorTipDialog tip(tr("密码错误！"), TipMode::ONLY_OK);
+        tip.exec();
+        return false;
+    }
+    return true;
 }
 
 void LoginDialog::showEvent(QShowEvent *event)
@@ -82,7 +107,6 @@ void LoginDialog::showEvent(QShowEvent *event)
     }
 
     ui->editPasswd->clear();
-    passwd = 0;
 
     if (parentWidget()) {
         QPoint center = parentWidget()->geometry().center();

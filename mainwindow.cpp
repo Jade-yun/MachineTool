@@ -89,15 +89,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     login = new LoginDialog(this);
     connect(ui->btnAdmin, &QPushButton::clicked, [=](){
-        if (login->exec() == QDialog::Accepted)
-        {
-            int mode = login->getLoginMode();
-            uint loginPasswd = login->getInputPasswd();
-        }
-        else
-        {
+        login->exec();
+    });
 
-        }
+    connect(login, &LoginDialog::loginModeChanged, this, [=](LoginMode mode){
+        qDebug() << "switch to " << (int)mode ;
+//        handleLoginModeChanged(mode);
     });
 
     // set the style for whole app

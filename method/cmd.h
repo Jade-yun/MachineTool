@@ -84,16 +84,8 @@ public:
 
 #define DEFINE_NAME_NUM                                 58          //名称自定义个数
 
-//枚举--机械手工作模式
-enum WorkMode
-{
-    STOP_MODE = 1,			//停止模式
-    HAND_MODE,					//手动模式
-    AUTO_MODE,					//自动模式
-};
 // 密码
 extern uint32_t passwd[3]; // 0-管理员密码 1-超级管理密码 2-菜单密码
-
 
 /***********************程序相关变量定义*******************************/
 //命令--cmd

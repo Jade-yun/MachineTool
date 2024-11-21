@@ -105,7 +105,7 @@ QTabWidget::pane {
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>3</number>
    </property>
    <property name="iconSize">
     <size>
@@ -1520,7 +1520,7 @@ QTabWidget::pane {
     <widget class="QGroupBox" name="groupBox_10">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>170</x>
        <y>80</y>
        <width>411</width>
        <height>321</height>
@@ -1995,7 +1995,7 @@ QTabWidget::pane {
     <widget class="QGroupBox" name="groupBox_8">
      <property name="geometry">
       <rect>
-       <x>450</x>
+       <x>590</x>
        <y>80</y>
        <width>411</width>
        <height>321</height>
