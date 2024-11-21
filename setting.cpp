@@ -1245,10 +1245,13 @@ void Setting::handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, co
         return;
     }
 
-    *passwd = newPasswd;
+    if (*passwd != newPasswd)
+    {
+        *passwd = newPasswd;
 
-    // save the passwd to configuration file
-    ::savePasswdToConfig(suffix, *passwd);
+        // save the passwd to configuration file
+        ::savePasswdToConfig(suffix, *passwd);
+    }
 
     MainWindow::pMainWindow->showErrorTip(tr("密码修改成功！"), TipMode::ONLY_OK);
     for (auto edit : edits) {
