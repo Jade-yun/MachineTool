@@ -86,36 +86,36 @@ ManualForm::ManualForm(QWidget *parent) :
         if(ui->btnRawMaterial1Loosen->text() == tr("原料1松开"))
         {//原料1松开
             setbuttonIcon(ui->btnRawMaterial1Loosen,tr("原料1夹紧"),1);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_METERIAL_1_LOOSENED].actualPortNum,1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_METERIAL_1_CLAMP].actualPortNum,1);
         }
         else
         {//原料1夹紧
             setbuttonIcon(ui->btnRawMaterial1Loosen,tr("原料1松开"),0);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_METERIAL_1_LOOSENED].actualPortNum,0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_METERIAL_1_CLAMP].actualPortNum,0);
         }
     });
     connect(ui->btnFinishedProduct1Loosen,&QPushButton::clicked,this,[=](){//成品1松开/夹紧
         if(ui->btnFinishedProduct1Loosen->text() == tr("成品1松开"))
         {
             setbuttonIcon(ui->btnFinishedProduct1Loosen,tr("成品1夹紧"),1);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_PRODUCT_1_LOOSENED].actualPortNum,1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_PRODUCT_1_CLAMP].actualPortNum,1);
         }
         else
         {
             setbuttonIcon(ui->btnFinishedProduct1Loosen,tr("成品1松开"),0);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_PRODUCT_1_LOOSENED].actualPortNum,0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_PRODUCT_1_CLAMP].actualPortNum,0);
         }
     });
     connect(ui->btnClaw1Reverse,&QPushButton::clicked,this,[=](){//卡爪1反转/正转
         if(ui->btnClaw1Reverse->text() == tr("卡爪1反转"))
         {
             setbuttonIcon(ui->btnClaw1Reverse,tr("卡爪1正转"),1);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_CLAW_1_LOOSENED].actualPortNum,1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_CLAW_1_CLAMP].actualPortNum,1);
         }
         else
         {
             setbuttonIcon(ui->btnClaw1Reverse,tr("卡爪1反转"),0);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_CLAW_1_LOOSENED].actualPortNum,0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[CLAW_CLAW_1_CLAMP].actualPortNum,0);
         }
 
     });
@@ -136,12 +136,12 @@ ManualForm::ManualForm(QWidget *parent) :
         if(ui->btnChuck1Loosen->text() == tr("卡盘1松开"))
         {
             setbuttonIcon(ui->btnChuck1Loosen,tr("卡盘1夹紧"),1);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_CHUCK_1_LOOSENED].actualPortNum,1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_CHUCK_1_CLAMP].actualPortNum,1);
         }
         else
         {
             setbuttonIcon(ui->btnChuck1Loosen,tr("卡盘1松开"),0);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_CHUCK_1_LOOSENED].actualPortNum,0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_CHUCK_1_CLAMP].actualPortNum,0);
         }
 
     });
@@ -149,12 +149,12 @@ ManualForm::ManualForm(QWidget *parent) :
         if(ui->btnAutoGate1Close->text() == tr("自动门1关"))
         {
             setbuttonIcon(ui->btnAutoGate1Close,tr("自动门1开"),1);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].actualPortNum,1);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].actualPortNum,1);
         }
         else
         {
             setbuttonIcon(ui->btnAutoGate1Close,tr("自动门1关"),0);
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].actualPortNum,0);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].actualPortNum,0);
         }
 
     });

@@ -926,7 +926,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -3792,7 +3792,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
         <bool>false</bool>
        </attribute>
        <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>170</number>
+        <number>50</number>
        </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
         <number>170</number>
@@ -38516,6 +38516,11 @@ border: 1px solid black;
    <header>customedit.h</header>
   </customwidget>
   <customwidget>
+   <class>KeyEdit</class>
+   <extends>QLineEdit</extends>
+   <header>keydefinedialog.h</header>
+  </customwidget>
+  <customwidget>
    <class>IOOnlineInEdit</class>
    <extends>QLineEdit</extends>
    <header>ioportdialog.h</header>
@@ -38524,11 +38529,6 @@ border: 1px solid black;
    <class>IOOnlineOutEdit</class>
    <extends>QLineEdit</extends>
    <header>ioportdialog.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KeyEdit</class>
-   <extends>QLineEdit</extends>
-   <header>keydefinedialog.h</header>
   </customwidget>
   <customwidget>
    <class>SigLEDEdit</class>
