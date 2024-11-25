@@ -926,7 +926,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>
@@ -3795,7 +3795,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
         <number>50</number>
        </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>170</number>
+        <number>150</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
@@ -4816,10 +4816,10 @@ QHeaderView                    // QTableWidget 标题头整个区域
         <bool>false</bool>
        </attribute>
        <attribute name="horizontalHeaderMinimumSectionSize">
-        <number>345</number>
+        <number>200</number>
        </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>345</number>
+        <number>300</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>

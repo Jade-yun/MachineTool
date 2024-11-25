@@ -19,6 +19,29 @@
 #include "usbdisk.h"
 #include "timesetter.h"
 
+
+struct InterLockGroup {
+    int forwardValuePort;       // 正向操作端口号（如阀门开启）
+    int reverseValuePort;       // 反向操作端口号（如阀门关闭）
+    int forwardDetectPort;      // 正向检测端口号
+    int reverseDetectPort;      // 反向检测端口号
+};
+
+constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
+    {CLAW_METERIAL_1_CLAMP, CLAW_METERIAL_1_LOOSENED, 0, 1},        // 原料1
+    {CLAW_PRODUCT_1_CLAMP, CLAW_PRODUCT_1_LOOSENED, 2, 3},          // 成品1
+    {CLAW_CLAW_1_CLAMP, CLAW_CLAW_1_LOOSENED, 4, 5},                // 卡爪1
+    {MACHINE_AUTO_DOOR_1_OPEN, MACHINE_AUTO_DOOR_1_CLOSE, 8, 9},    // 自动门1
+    {MACHINE_CHUCK_1_CLAMP, MACHINE_CHUCK_1_LOOSENED, 10, 11},      // 卡盘1
+    {-1, -1, -1, -1},                                               // 预留1
+    {24, 25, 36, 37},                                               // 原料2
+    {26, 27, 38, 39},                                               // 成品2
+    {28, 29, 40, 41},                                               // 卡爪2
+    {32, 33, 44, 45},                                               // 自动门2
+    {34, 35, 46, 47},                                               // 卡盘2
+    {-1, -1, -1, -1}                                                // 预留2
+};
+
 const QString notePath = "/root/notepad/";
 const QString SysSetConfigPath = "/Settings/systemset.ini";
 
@@ -600,12 +623,16 @@ void Setting::initWidgets()
     ui->tableWgtPortDef->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWgtPortDef->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableWgtPortDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWgtPortDef->setColumnWidth(0, 80);
+    ui->tableWgtPortDef->setColumnWidth(1, 200);
+    ui->tableWgtPortDef->setColumnWidth(2, 200);
 
     ui->tableWgtNameDef->horizontalHeader()->setVisible(true);
     ui->tableWgtNameDef->verticalHeader()->setVisible(true);
     ui->tableWgtNameDef->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWgtNameDef->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableWgtNameDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableWgtNameDef->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->tableWgtNote->setColumnCount(2);
     ui->tableWgtNote->setHorizontalHeaderLabels({ tr("标题") , tr("修改时间")});
@@ -2078,6 +2105,7 @@ void Setting::outportInterlockSlots()
                 m_OutportInterlock[i][j] = 0;
             }
         }
+#if 0
         if(m_OutportInterlock[i][0] == 0)
         {
             if(i==0)
@@ -2506,7 +2534,28 @@ void Setting::outportInterlockSlots()
                 }
             }
         }
+#endif
     }
+//    auto updateInterLockFlag = [=]()
+
+    for (int i = 0; i < OUT_INTERLOCK_NUM; i++) {
+        bool useForwardValue = m_OutportInterlock[i][0] != 0;
+        bool useReverseValue = m_OutportInterlock[i][2] != 0;
+        bool forwardCheck = m_OutportInterlock[i][1] != 0;
+        bool reverseCheck = m_OutportInterlock[i][3] != 0;
+
+        const auto &group = interLockGroups[i];
+
+        if (group.forwardValuePort == -1) continue;
+
+        m_Port_Y[group.forwardValuePort].functionSet = useForwardValue;
+        m_Port_Y[group.reverseValuePort].functionSet = useForwardValue && useReverseValue;
+
+        m_Port_X[group.forwardDetectPort].functionSet = useForwardValue && forwardCheck;
+        m_Port_X[group.reverseDetectPort].functionSet = useForwardValue && reverseCheck;
+
+    }
+
     setPortDefineNameOrPortNum();
     emit RefreshPortDefineSignals();
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_INTERLOCK);
@@ -3084,9 +3133,6 @@ void Setting::saveMachineAllPara(int index)
 //端口自定义显示
 void Setting::showPortDefine()
 {
-    ui->tableWgtPortDef->setColumnWidth(0, 80);
-    ui->tableWgtPortDef->setColumnWidth(1, 200);
-    ui->tableWgtPortDef->setColumnWidth(2, 200);
     for(int i=0;i<INPUT_TOTAL_NUM;i++)
     {
         QTableWidgetItem* item1=new QTableWidgetItem(m_Port_X[i].definePort);
@@ -3266,7 +3312,7 @@ void Setting::modifyPort(int row, int column)
     {
         if(row < INPUT_TOTAL_NUM)
         {
-            IOPortDialog dialog(this, IOPortMode::IN);
+            IOPortDialog dialog(nullptr, IOPortMode::IN);
             if (dialog.exec() == QDialog::Accepted)
             {
                 QString text = dialog.getIOOnlineIn();
@@ -3276,7 +3322,7 @@ void Setting::modifyPort(int row, int column)
         }
         else
         {
-            IOPortDialog dialog(this, IOPortMode::OUT);
+            IOPortDialog dialog(nullptr, IOPortMode::OUT);
             if (dialog.exec() == QDialog::Accepted)
             {
                 QString text = dialog.getIOOnlineOut();

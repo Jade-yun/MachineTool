@@ -78,6 +78,10 @@ private:
 
     void updateRegisterCodeDisplay();
     void handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, const int suffix);
+
+    //
+//    void updateInterLockPortFlag(int index, bool isUsed, bool)
+
     void SeniorFuncPortSet();
 private slots:
     void onMenuStateChanged(MenuState newState);
