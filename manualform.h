@@ -5,6 +5,7 @@
 #include <QTableWidget>
 #include <QSettings>
 #include <QHash>
+#include <QGroupBox>
 
 #include "draggablebutton.h"
 #include "customkeyboard.h"
@@ -50,7 +51,7 @@ signals:
 
 private slots:
     void StateButtonInit();
-    void setbuttonIcon(QPushButton *button,QString ButtonText, uint8_t state);
+    void setbuttonIcon(QPushButton *button, const QString &ButtonText, uint8_t state);
     void on_checkBoxEditPosGuide_stateChanged(int arg1);
     void on_btnImportPictureGuide_clicked();
     void on_btnNewButton_clicked();
@@ -86,10 +87,15 @@ private:
     void updateGuidePoints();
     void updateReferPointsList();
 
+    void setupReserveWidgets();
+    void updateGroupBoxVisibility(const std::vector<std::pair<std::vector<QPushButton *>, QGroupBox *> > &buttonGroups);
+
     void initControls();            //pxc 初始化控件并对控件进行赋值
 
 public:
     const QList<ReferPointPara>& getRerferPoints() const;
+public slots:
+    void updateReserveButtonState(); // 更新端口对应按钮的可见性和文本
 
 private:
     DraggableButton* selectedButton[2];
@@ -100,11 +106,13 @@ private:
     QTableWidget* tableReference;
 
     QHash<DraggableButton*, GuidePara> guidePoints;
+
+    std::vector<QPushButton*> reserveButtons;
 private:
     Ui::ManualForm *ui;
 
     // QObject interface
-public:
+protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
 };
 

@@ -78,6 +78,7 @@ QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed{
 	color:yellow;
 }
 /******************************************************/
+/*
 QGroupBox {
 	border: 1px solid black;
 	border-radius:5px;
@@ -88,6 +89,7 @@ QGroupBox::title {
 	left: 10px;
 	bottom: 5px;
 }
+*/
 
 QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
 

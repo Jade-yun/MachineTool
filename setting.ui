@@ -28,38 +28,25 @@ QWidget#centralwidget{
 
 QWidget{ 
 	font-family: 'SimSun';
-	font-size: 22px; 
+	font-size: 20px; 
 }
 QStackedWidget#stkWidget{
 	font-family: 'SimSun';
-	font-size: 22px; 
 	background-color: rgb(255, 255, 255);
 }
 
 QLabel { 
 	font-family: 'SimSun';
-	font-size: 22px; 
 }
 QLabel#labProgramName { 
 	font-family: 'SimSun';
 	font:bold;
-	font-size: 22px; 
 }
 QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed{ 
 
 	color:yellow;
 }
 /******************************************************/
-QGroupBox {
-	border: 1px solid black;
-	border-radius:5px;
-	margin-top:10px; 
-}
-QGroupBox::title { 
-	subcontrol-origin: margin;
-	left: 10px;
-	bottom: 5px;
-}
 
 QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
 
@@ -74,7 +61,6 @@ QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZ
 QPushButton
 {
 	font-family: 'SimSun';
-	font-size: 22px; 
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
 
     border-style:solid; /*边框风格*/
@@ -100,7 +86,6 @@ QPushButton:checked
 }
 QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
 	font-family: 'SimSun';
-	font-size: 22px; 
     background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
     border-color:#0055ff; /*边框颜色*/
 	border-style:outset; /*边框风格*/
@@ -123,7 +108,6 @@ QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:
 QPushButton#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
 {
 	font-family: 'SimSun';
-	font-size: 22px; 
     background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
     border-color:#0055ff; /*边框颜色*/
 	border-style:outset; /*边框风格*/
@@ -391,7 +375,7 @@ QScrollBar::down-arrow:vertical:pressed
     </font>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -913,9 +897,9 @@ QPushButton::released{
     <widget class="QTabWidget" name="tabWidgetSig">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>5</x>
        <y>0</y>
-       <width>1024</width>
+       <width>1011</width>
        <height>576</height>
       </rect>
      </property>
@@ -926,7 +910,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>7</number>
      </property>
      <property name="iconSize">
       <size>
@@ -1926,13 +1910,1542 @@ QPushButton::released{
       <attribute name="title">
        <string>互锁设置</string>
       </attribute>
-      <widget class="QGroupBox" name="grboxInterlock0">
+      <widget class="QStackedWidget" name="stkWgtInterLock">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>10</y>
-         <width>311</width>
-         <height>111</height>
+         <x>0</x>
+         <y>0</y>
+         <width>1011</width>
+         <height>461</height>
+        </rect>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <widget class="QWidget" name="page_5">
+        <layout class="QFormLayout" name="formLayout_14">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_37">
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="grboxInterlock0">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>原料1夹紧</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_15">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup0">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup0">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup0">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup0">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="grboxInterlock1">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>成品1夹紧</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_2">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_19">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup1">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup1">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup1">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup1">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QGroupBox" name="grboxInterlock2">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>卡爪1正转</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_3">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_21">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup2">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="grboxInterlock3">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>自动门1开</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_4">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_24">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup3">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup3">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup3">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup3">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QGroupBox" name="grboxInterlock4">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>卡盘1夹紧</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_5">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_29">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup4">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup4">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup4">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup4">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QGroupBox" name="grboxInterlock5">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>预留</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_6">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_30">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup5">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup5">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup5">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup5">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="page_6">
+        <layout class="QFormLayout" name="formLayout_13">
+         <item row="0" column="0">
+          <layout class="QGridLayout" name="gridLayout_38">
+           <item row="1" column="0">
+            <widget class="QGroupBox" name="grboxInterlock9">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>自动门2开</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_11">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_34">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup9">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup9">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup9">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup9">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QGroupBox" name="grboxInterlock11">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>预留</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_7">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_36">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup11">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup11">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup11">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup11">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QGroupBox" name="grboxInterlock6">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>原料2夹紧</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_12">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_31">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup6">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup6">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup6">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup6">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QGroupBox" name="grboxInterlock7">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>成品2夹紧</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_10">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_32">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup7">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup7">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup7">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup7">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QGroupBox" name="grboxInterlock8">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>卡爪2正转</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_8">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_33">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup8">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup8">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup8">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup8">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QGroupBox" name="grboxInterlock10">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+               <pointsize>-1</pointsize>
+              </font>
+             </property>
+             <property name="title">
+              <string>卡盘2夹紧</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             </property>
+             <layout class="QFormLayout" name="formLayout_9">
+              <item row="0" column="0">
+               <layout class="QGridLayout" name="gridLayout_35">
+                <property name="verticalSpacing">
+                 <number>0</number>
+                </property>
+                <item row="0" column="0">
+                 <widget class="QCheckBox" name="chbox0InterlockGroup10">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QCheckBox" name="chbox1InterlockGroup10">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向阀</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QCheckBox" name="chbox2InterlockGroup10">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>正向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chbox3InterlockGroup10">
+                  <property name="minimumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>130</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>反向检测</string>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>10</width>
+                    <height>10</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="label_201">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>470</y>
+         <width>101</width>
+         <height>40</height>
         </rect>
        </property>
        <property name="font">
@@ -1941,144 +3454,23 @@ QPushButton::released{
          <pointsize>-1</pointsize>
         </font>
        </property>
-       <property name="title">
-        <string>原料1夹紧</string>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="text">
+        <string>页码：</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
        </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup0">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup0">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup0">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup0">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
       </widget>
-      <widget class="QGroupBox" name="grboxInterlock1">
+      <widget class="QLabel" name="labPageNumInterLock">
        <property name="geometry">
         <rect>
-         <x>360</x>
-         <y>10</y>
-         <width>311</width>
-         <height>111</height>
+         <x>110</x>
+         <y>470</y>
+         <width>51</width>
+         <height>40</height>
         </rect>
        </property>
        <property name="font">
@@ -2087,1597 +3479,79 @@ QPushButton::released{
          <pointsize>-1</pointsize>
         </font>
        </property>
-       <property name="title">
-        <string>成品1夹紧</string>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="text">
+        <string>1/2</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        <set>Qt::AlignCenter</set>
        </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup1">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup1">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup1">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup1">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
       </widget>
-      <widget class="QGroupBox" name="grboxInterlock2">
+      <widget class="QPushButton" name="btnLastInterLock">
        <property name="geometry">
         <rect>
-         <x>700</x>
-         <y>10</y>
-         <width>311</width>
-         <height>111</height>
+         <x>850</x>
+         <y>470</y>
+         <width>75</width>
+         <height>40</height>
         </rect>
        </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
+       <property name="text">
+        <string/>
        </property>
-       <property name="title">
-        <string>卡爪1正转</string>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/images/switch_left.png</normaloff>:/images/switch_left.png</iconset>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup2">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup2">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup2">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup2">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
       </widget>
-      <widget class="QGroupBox" name="grboxInterlock3">
+      <widget class="QPushButton" name="btnNextInterLock">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>135</y>
-         <width>311</width>
-         <height>111</height>
+         <x>930</x>
+         <y>470</y>
+         <width>75</width>
+         <height>40</height>
         </rect>
        </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
+       <property name="text">
+        <string/>
        </property>
-       <property name="title">
-        <string>自动门1开</string>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/images/switch_right.png</normaloff>:/images/switch_right.png</iconset>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
        </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup3">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup3">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup3">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup3">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
       </widget>
-      <widget class="QGroupBox" name="grboxInterlock4">
-       <property name="geometry">
-        <rect>
-         <x>360</x>
-         <y>135</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>卡盘1夹紧</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup4">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup4">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup4">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup4">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="grboxInterlock5">
-       <property name="geometry">
-        <rect>
-         <x>700</x>
-         <y>135</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>预留</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup5">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup5">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup5">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup5">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="grboxInterlock11">
-       <property name="geometry">
-        <rect>
-         <x>700</x>
-         <y>400</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>预留</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup11">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup11">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup11">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup11">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="grboxInterlock9">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>400</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>自动门2开</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup9">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup9">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup9">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup9">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="grboxInterlock6">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>275</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>原料2夹紧</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup6">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup6">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup6">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup6">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="grboxInterlock10">
-       <property name="geometry">
-        <rect>
-         <x>360</x>
-         <y>400</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>卡盘2夹紧</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup10">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup10">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup10">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup10">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="grboxInterlock8">
-       <property name="geometry">
-        <rect>
-         <x>700</x>
-         <y>275</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>卡爪2正转</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup8">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup8">
-        <property name="geometry">
-         <rect>
-          <x>23</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup8">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup8">
-        <property name="geometry">
-         <rect>
-          <x>159</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="grboxInterlock7">
-       <property name="geometry">
-        <rect>
-         <x>360</x>
-         <y>275</y>
-         <width>311</width>
-         <height>111</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <family>SimSun</family>
-         <pointsize>-1</pointsize>
-        </font>
-       </property>
-       <property name="title">
-        <string>成品2夹紧</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-       </property>
-       <widget class="QCheckBox" name="chbox0InterlockGroup7">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox2InterlockGroup7">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>正向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox3InterlockGroup7">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>70</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向检测</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-       <widget class="QCheckBox" name="chbox1InterlockGroup7">
-        <property name="geometry">
-         <rect>
-          <x>169</x>
-          <y>26</y>
-          <width>130</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>反向阀</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </widget>
-      </widget>
+      <zorder>stkWgtInterLock</zorder>
+      <zorder>grboxInterlock0</zorder>
+      <zorder>grboxInterlock1</zorder>
+      <zorder>grboxInterlock2</zorder>
+      <zorder>grboxInterlock3</zorder>
+      <zorder>grboxInterlock4</zorder>
+      <zorder>grboxInterlock5</zorder>
+      <zorder>grboxInterlock11</zorder>
+      <zorder>grboxInterlock9</zorder>
+      <zorder>grboxInterlock6</zorder>
+      <zorder>grboxInterlock10</zorder>
+      <zorder>grboxInterlock8</zorder>
+      <zorder>grboxInterlock7</zorder>
+      <zorder>label_201</zorder>
+      <zorder>labPageNumInterLock</zorder>
+      <zorder>btnLastInterLock</zorder>
+      <zorder>btnNextInterLock</zorder>
      </widget>
      <widget class="QWidget" name="tabPortCustomize">
       <attribute name="title">
@@ -4459,11 +4333,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QGroupBox { border: 1px solid black;
-border-radius:8px;
-margin-top:10px; }
-QGroupBox::title { subcontrol-origin: margin;
-	left: 10px;}</string>
+        <string notr="true"/>
        </property>
        <property name="title">
         <string>名称恢复</string>
@@ -11793,7 +11663,7 @@ QComboBox::down-arrow {
     </widget>
    </widget>
    <widget class="QWidget" name="pageSafety">
-    <widget class="QTabWidget" name="tabClawSafety">
+    <widget class="QTabWidget" name="tabWgtSafe">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -11809,7 +11679,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>
@@ -12392,7 +12262,7 @@ QComboBox::down-arrow {
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="tabPortCustomize_2">
+     <widget class="QWidget" name="tabClawSafety">
       <attribute name="title">
        <string>卡爪安全</string>
       </attribute>

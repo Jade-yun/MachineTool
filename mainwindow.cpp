@@ -438,6 +438,8 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
 
+    connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
+
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {

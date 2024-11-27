@@ -27,6 +27,7 @@ ManualForm::ManualForm(QWidget *parent) :
 
     tableReferenceInit();
     pageInit();
+    setupReserveWidgets();
 
     ui->tabGuide->installEventFilter(this);
     ui->tabReference->installEventFilter(this);
@@ -194,6 +195,8 @@ ManualForm::ManualForm(QWidget *parent) :
             g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_SPINDLE_ROTATE_1].actualPortNum,0);
         }
     });
+
+#if 0
     connect(ui->btnReserveY7Break,&QPushButton::clicked,this,[=](){
         if(ui->btnReserveY7Break->text() == tr("Y7自动灯断"))
         {
@@ -374,7 +377,7 @@ ManualForm::ManualForm(QWidget *parent) :
             g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[20-1].actualPortNum,0);
         }
     });
-
+#endif
     connect(ui->chbMachineControl,&QCheckBox::clicked,this,[=](){//机床控制使能复选框
         if(!ui->chbMachineControl->isChecked())
         {
@@ -887,9 +890,103 @@ void ManualForm::updateReferPointsList()
 
 }
 
+void ManualForm::setupReserveWidgets()
+{
+    for (auto vlayout : ui->tabReserve->findChildren<QVBoxLayout*>())
+    {
+        vlayout->setAlignment(Qt::AlignTop);
+    }
+    for (auto hlayout : ui->tabReserve->findChildren<QHBoxLayout*>())
+    {
+        hlayout->setAlignment(Qt::AlignLeft);
+    }
+
+//    ui->tabWgtReserve->removeTab(1);
+    ui->tabWgtReserve->setTabEnabled(1, false);
+
+    const std::vector<QPushButton*> group1 = {
+        ui->btnPortY1, ui->btnPortY2, ui->btnPortY3, ui->btnPortY4,
+        ui->btnPortY5, ui->btnPortY6, ui->btnPortY7, ui->btnPortY8};
+    const std::vector<QPushButton*> group2 = {
+        ui->btnPortY9, ui->btnPortY10, ui->btnPortY11, ui->btnPortY12,
+        ui->btnPortY13, ui->btnPortY14, ui->btnPortY15, ui->btnPortY16};
+    const std::vector<QPushButton*> group3 = {
+        ui->btnPortY17, ui->btnPortY18, ui->btnPortY19, ui->btnPortY20,
+        ui->btnPortY21, ui->btnPortY22, ui->btnPortY23, ui->btnPortY24};
+
+    const std::vector<std::pair<std::vector<QPushButton*>, QGroupBox*>> buttonGroups = {
+        {group1, ui->grboxReserveMb1},
+        {group2, ui->grboxReserveMb2},
+        {group3, ui->grboxReserveMb3},
+    };
+
+    for (size_t i = 0; i < reserveButtons.size(); i++)
+    {
+        auto btn = reserveButtons[i];
+        setbuttonIcon(btn, btn->text(), 0);
+        connect(btn, &QPushButton::clicked, this, [=](){
+            const QString& portName = m_Port_Y[i].functionSet == 0 ? m_Port_Y[i].ResModifyName : m_Port_Y[i].modifyName;
+
+            if (m_OutPortSta[i])
+            {
+                setbuttonIcon(btn, portName + tr("断"), 0);
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL, CMD_SUN_MANUAL_OUT, m_Port_Y[i].actualPortNum, 0);
+            }
+            else
+            {
+                setbuttonIcon(btn, portName + tr("通"), 1);
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL, CMD_SUN_MANUAL_OUT, m_Port_Y[i].actualPortNum, 1);
+            }
+        });
+    }
+
+    for (const auto& group : buttonGroups)
+    {
+        for (auto btn : group.first)
+        {
+
+        }
+    }
+}
+
+void ManualForm::updateGroupBoxVisibility(const std::vector<std::pair<std::vector<QPushButton *>, QGroupBox *> > &buttonGroups)
+{
+    for (const auto& group : buttonGroups) {
+        bool anyButtonVisible = false;
+
+        for (auto btn : group.first) {
+            if (btn->isVisible()) {
+                anyButtonVisible = true;
+                break;
+            }
+        }
+
+        group.second->setVisible(anyButtonVisible);
+    }
+}
+
 const QList<ReferPointPara> &ManualForm::getRerferPoints() const
 {
     return referencePoints;
+}
+
+void ManualForm::updateReserveButtonState()
+{
+    for (size_t i = 0; i < reserveButtons.size(); ++i)
+    {
+        const auto& port = m_Port_Y[i];
+        auto button = reserveButtons[i];
+
+        bool isVisible = (port.functionSet == 0);
+        button->setVisible(isVisible);
+
+        const QString& portName = (port.functionSet == 0) ? port.ResDefineName : port.defineName;
+
+        QString statusText = m_OutPortSta[i] ? tr("通") : tr("断");
+
+        button->setText(portName + statusText);
+    }
+
 }
 
 void ManualForm::addReferencePoint()
@@ -1058,6 +1155,15 @@ void ManualForm::initVar()
     draggable[1] = false;
     selectedButton[0] = nullptr;
     selectedButton[1] = nullptr;
+
+    reserveButtons = {
+        ui->btnPortY1, ui->btnPortY2, ui->btnPortY3, ui->btnPortY4,
+        ui->btnPortY5, ui->btnPortY6, ui->btnPortY7, ui->btnPortY8,
+        ui->btnPortY9, ui->btnPortY10, ui->btnPortY11, ui->btnPortY12,
+        ui->btnPortY13, ui->btnPortY14, ui->btnPortY15, ui->btnPortY16,
+        ui->btnPortY17, ui->btnPortY18, ui->btnPortY19, ui->btnPortY20,
+        ui->btnPortY21, ui->btnPortY22, ui->btnPortY23, ui->btnPortY24
+    };
 }
 
 void ManualForm::on_btnEditGuideName_clicked()
@@ -1261,7 +1367,7 @@ void ManualForm::on_cb_axisActionAxis_currentIndexChanged(int index)
     m_manualAxis.axis=index;
 }
 //待状态灯的按钮设置状态灯状态
-void ManualForm::setbuttonIcon(QPushButton *button,QString ButtonText, uint8_t state)
+void ManualForm::setbuttonIcon(QPushButton *button,const QString &ButtonText, uint8_t state)
 {
     switch (state) {
     case 1://红灯为夹紧、正转、通或开状态
@@ -1292,19 +1398,19 @@ void ManualForm::StateButtonInit()
     setbuttonIcon(ui->btnMainAxisLocate1Break,tr("主轴定位1断"),false);
     setbuttonIcon(ui->btnControlRotate1Break,tr("控制旋转1断"),false);
     //预留
-    setbuttonIcon(ui->btnReserveY7Break,tr("Y7自动灯断"),false);
-    setbuttonIcon(ui->btnReserveY8Break,tr("Y8报警灯断"),false);
-    setbuttonIcon(ui->btnReserveY13Break,tr("Y13急停断"),false);
-    setbuttonIcon(ui->btnReserveY14Break,tr("Y14润滑出断"),false);
-    setbuttonIcon(ui->btnReserveY15Break,tr("Y15报警灯断"),false);
-    setbuttonIcon(ui->btnReserveY16Break,tr("Y16暂停灯断"),false);
-    setbuttonIcon(ui->btnReserveY19Break,tr("Y19加工安全1断"),false);
-    setbuttonIcon(ui->btnReserveY22Break,tr("Y22断"),false);
-    setbuttonIcon(ui->btnReserveY23Break,tr("Y23断"),false);
-    setbuttonIcon(ui->btnReserveY24Break,tr("Y24断"),false);
-    setbuttonIcon(ui->btnReserveY1Break,tr("Y1原料1夹紧断"),false);
-    setbuttonIcon(ui->btnReserveY3Break,tr("Y3成品1夹紧断"),false);
-    setbuttonIcon(ui->btnReserveY5Break,tr("Y5卡爪1正转断"),false);
-    setbuttonIcon(ui->btnReserveY9Break,tr("Y9自动门1开断"),false);
-    setbuttonIcon(ui->btnReserveY20Break,tr("Y20卡盘1夹紧断"),false);
+//    setbuttonIcon(ui->btnReserveY7Break,tr("Y7自动灯断"),false);
+//    setbuttonIcon(ui->btnReserveY8Break,tr("Y8报警灯断"),false);
+//    setbuttonIcon(ui->btnReserveY13Break,tr("Y13急停断"),false);
+//    setbuttonIcon(ui->btnReserveY14Break,tr("Y14润滑出断"),false);
+//    setbuttonIcon(ui->btnReserveY15Break,tr("Y15报警灯断"),false);
+//    setbuttonIcon(ui->btnReserveY16Break,tr("Y16暂停灯断"),false);
+//    setbuttonIcon(ui->btnReserveY19Break,tr("Y19加工安全1断"),false);
+//    setbuttonIcon(ui->btnReserveY22Break,tr("Y22断"),false);
+//    setbuttonIcon(ui->btnReserveY23Break,tr("Y23断"),false);
+//    setbuttonIcon(ui->btnReserveY24Break,tr("Y24断"),false);
+//    setbuttonIcon(ui->btnReserveY1Break,tr("Y1原料1夹紧断"),false);
+//    setbuttonIcon(ui->btnReserveY3Break,tr("Y3成品1夹紧断"),false);
+//    setbuttonIcon(ui->btnReserveY5Break,tr("Y5卡爪1正转断"),false);
+//    setbuttonIcon(ui->btnReserveY9Break,tr("Y9自动门1开断"),false);
+//    setbuttonIcon(ui->btnReserveY20Break,tr("Y20卡盘1夹紧断"),false);
 }

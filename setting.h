@@ -67,6 +67,11 @@ private:
     upgradedialog *UpgradeDialog;
 
 private:
+    std::map<int, MenuState> menuStateMap; // store the authority of every MenuItem id
+//    std::map<int, QTabWidget*> tabWidgetMap; // store the mapping of each QTabWidget group about MenuItem id/10
+    std::map<int, QWidget*> tabContentMap;     // store the mapping of each tab about MenuItem id
+    std::map<int, QString> tabNameMap;
+    int currentLoginState = MenuState::Operator;
 
 private:
     void init();
@@ -79,6 +84,7 @@ private:
     void updateRegisterCodeDisplay();
     void handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, const int suffix);
 
+    void updateTabVisibility();
     //
 //    void updateInterLockPortFlag(int index, bool isUsed, bool)
 
@@ -94,6 +100,7 @@ signals:
     void LOGO_Refresh();
     void monitor_port_refreash();
     void RefreshPortDefineSignals();
+    void refreshManualReserve();
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型

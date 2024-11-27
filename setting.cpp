@@ -860,6 +860,8 @@ void Setting::setupMenuAuthority()
         {
             connect(child, &MenuItem::stateChanged, this, &Setting::onMenuStateChanged);
         }
+
+        // 从配置文件中读取每个item的状态，将对应的按钮setChecked
     }
 }
 
@@ -1287,13 +1289,65 @@ void Setting::handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, co
 
 }
 
+void Setting::updateTabVisibility()
+{
+    static const std::map<int, QTabWidget*> tabWidgetMap = {
+        {1, ui->tabWidgetSig},
+        {2, ui->tabWgtSafe  },
+        {3, ui->tabWidgetProduct},
+        {4, ui->tabWidgetSystem},
+        {5, ui->tabWgtServoPara},
+        {6, ui->tabWgtServoSafePoint},
+        {7, ui->tabWidgetMachinePara},
+        {8, ui->tabWidgetStack}
+    };
+
+//    tabNameMap need to be initialized
+    // tab
+
+    for (const auto& pair : menuStateMap) {
+        int id = pair.first;
+        MenuState tabState = pair.second;
+
+        // 分解 ID：第一个数字是 QTabWidget 的组，第二个数字是 Tab 的索引
+        int tabWidgetGroup = id / 10; // 第一位表示 TabWidget 组
+        int tabIndex = id % 10 - 1;   // 第二位表示 Tab 索引（从 0 开始）
+
+//        bool shouldShow = tabState == MenuState::Invisible ? false : (currentLoginState >= tabState);
+        bool shouldShow = (tabState != MenuState::Invisible) && (currentLoginState >= tabState);
+
+        // 查找对应的 QTabWidget 和内容 Widget
+        if (tabWidgetMap.count(tabWidgetGroup) && tabContentMap.count(id)) {
+            QTabWidget* tabWidget = tabWidgetMap.at(tabWidgetGroup);
+            QWidget* contentWidget = tabContentMap[id];
+
+            int currentTabIndex = tabWidget->indexOf(contentWidget);
+            QString tabName = tabNameMap.at(id);
+
+            if (shouldShow) {
+                // 如果需要显示，检查是否已存在
+                if (currentTabIndex == -1) {
+                    tabWidget->insertTab(tabIndex, contentWidget, tabName);
+                }
+            }
+            else {
+                if (currentTabIndex != -1) {
+                    tabWidget->removeTab(currentTabIndex);
+                }
+            }
+        }
+    }
+}
+
 void Setting::onMenuStateChanged(MenuState newState)
 {
     MenuItem* item = qobject_cast<MenuItem*>(sender());
     if (!item)
         return;
 
-    qDebug() << "ID:" << item->id << "," << item->name << " new state:" << newState;
+//    qDebug() << "ID:" << item->id << "," << item->name << " new state:" << newState;
+
+    menuStateMap[item->id] = newState;
 
     // 这里根据新的权限执行相应的操作
     if (item->id == 21 && item->name == tr("机床安全")) {
@@ -1424,27 +1478,16 @@ void Setting::pageSwitchInit()
         chbox->stateChanged(chbox->checkState());
     }
 
-//    {
-//        QCheckBox* chboxs[] = {
-//            ui->chbox0InterlockGroup0,
-//            ui->chbox0InterlockGroup1,
-//            ui->chbox0InterlockGroup2,
-//            ui->chbox0InterlockGroup3,
-//            ui->chbox0InterlockGroup4,
-//            ui->chbox0InterlockGroup5,
-//            ui->chbox0InterlockGroup6,
-//            ui->chbox0InterlockGroup7,
-//            ui->chbox0InterlockGroup8,
-//            ui->chbox0InterlockGroup9,
-//            ui->chbox0InterlockGroup10,
-//            ui->chbox0InterlockGroup11,
-//        };
-//        for (auto chbox : chboxs)
-//        {
-//            chbox->stateChanged(chbox->checkState());
-//        }
-//    }
-
+    connect(ui->btnLastInterLock, &QPushButton::clicked, this, [=](){
+        ui->stkWgtInterLock->setCurrentIndex((ui->stkWgtInterLock->currentIndex() - 1 + ui->stkWgtInterLock->count())
+                                                 % ui->stkWgtInterLock->count());
+        ui->labPageNumInterLock->setText(QString("%1/2").arg(ui->stkWgtInterLock->currentIndex() + 1));
+    });
+    connect(ui->btnNextInterLock, &QPushButton::clicked, this, [=](){
+        ui->stkWgtInterLock->setCurrentIndex((ui->stkWgtInterLock->currentIndex() + 1 + ui->stkWgtInterLock->count())
+                                                 % ui->stkWgtInterLock->count());
+        ui->labPageNumInterLock->setText(QString("%1/2").arg(ui->stkWgtInterLock->currentIndex() + 1));
+    });
 
     /***************************************System setting part**********************************************************/
 
@@ -1813,6 +1856,7 @@ void Setting::pageSwitchInit()
                 labSafeAreaPic->setPixmap(pic);
             }
         });
+        emit coboxAxisY->currentIndexChanged(coboxAxisY->currentIndex());
     };
 
     setSafeAreaPic(ui->coboxAxisYSA1, ui->labSafeArea1Pic);
@@ -2669,9 +2713,18 @@ void Setting::SeniorFuncPortSet()
     m_Port_X[53].functionSet = m_SeniorFunc.locateFinish2;
     m_Port_X[54].functionSet = m_SeniorFunc.knifeOrigin2Check;
     m_Port_X[55].functionSet = m_SeniorFunc.alarmIn2Check;
+
     //输出端口
+    // m_Port_Y[0] -> Y1 原料1夹紧
+    // m_Port_Y[1] -> Y2 原料1夹紧
+    // m_Port_Y[2] -> Y3 成品1夹紧
+    // m_Port_Y[3] -> Y4 成品1夹紧
+    // m_Port_Y[4] -> Y5 卡爪1夹紧
+    // m_Port_Y[5] -> Y6 卡爪1夹紧
     m_Port_Y[6].functionSet = m_SeniorFunc.autoLight;//根据某个端口功能是否使用，置端口预留标志位
     m_Port_Y[7].functionSet = m_SeniorFunc.alarmLight;
+    m_Port_Y[8].functionSet = m_SeniorFunc.autoDoorCot1;
+    m_Port_Y[9].functionSet = m_SeniorFunc.autoDoorCot1;
     m_Port_Y[10].functionSet = m_SeniorFunc.biowAir1;
     m_Port_Y[12].functionSet = m_SeniorFunc.emergencyStopOut;
     m_Port_Y[13].functionSet = m_SeniorFunc.lubPump;
@@ -2680,9 +2733,27 @@ void Setting::SeniorFuncPortSet()
     m_Port_Y[16].functionSet = m_SeniorFunc.startProduct1;
     m_Port_Y[17].functionSet = m_SeniorFunc.mainAxisLocate1;
     m_Port_Y[18].functionSet = m_SeniorFunc.processSave1;
-    m_Port_Y[42].functionSet = m_SeniorFunc.processSave2;
+    // m_Port_Y[19] -> Y20 卡盘1夹紧
     m_Port_Y[20].functionSet = m_SeniorFunc.mainAxisRotate1;
+
+
+    m_Port_Y[OUTPUT_NUM +  7].functionSet = m_SeniorFunc.biowAir2;
+    m_Port_Y[OUTPUT_NUM +  8].functionSet = m_SeniorFunc.autoDoorCot2;
+    m_Port_Y[OUTPUT_NUM +  9].functionSet = m_SeniorFunc.autoDoorCot2;
+    m_Port_Y[OUTPUT_NUM + 16].functionSet = m_SeniorFunc.startProduct2;
+    m_Port_Y[OUTPUT_NUM + 17].functionSet = m_SeniorFunc.mainAxisLocate2;
+    m_Port_Y[OUTPUT_NUM + 18].functionSet = m_SeniorFunc.processSave2;
     emit RefreshPortDefineSignals();
+
+//    const std::vector<QComboBox*> coboxs = {
+//        ui->coboxAutoLigth, ui->coboxAlarmLight, ui->coboxAutoDoorCtl1,ui->coboxBlow1,
+//        ui->coboxEmergenceStopOutput, ui->coboxLubricationPump, ui->coboxAlarmBuzzer, ui->coboxPauseLight,
+//        ui->coboxStartProcess1, ui->coboxMainAxisLocate1, ui->coboxProcessSafe1, ui->coboxMainAxisRotate1,
+
+//        ui->coboxBlow2, ui->coboxAutoDoorCtl2, ui->coboxStartProcess2, ui->coboxMainAxisLocate2,
+//        ui->coboxProcessSafe2, ui->coboxMainAxisRotate2,
+//    };
+    emit refreshManualReserve();
 
 }
 void Setting::saveKeyAndLEDFuncDefine()
