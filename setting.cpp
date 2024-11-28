@@ -252,6 +252,22 @@ void Setting::ShowStackPage()
     ui->stackedWidget->setCurrentWidget(ui->pageStack);
 }
 
+void Setting::handleLoginModeChanged(LoginMode mode)
+{
+    if (mode == LoginMode::Operator)
+    {
+
+    }
+    else if (mode == LoginMode::Admin)
+    {
+
+    }
+    else if (mode == LoginMode::Advance)
+    {
+
+    }
+}
+
 
 // to initial all variables in this function
 void Setting::init()
@@ -2580,7 +2596,9 @@ void Setting::outportInterlockSlots()
         }
 #endif
     }
-//    auto updateInterLockFlag = [=]()
+
+    g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_INTERLOCK);
+    setOutportInterlock(m_OutportInterlock);
 
     for (int i = 0; i < OUT_INTERLOCK_NUM; i++) {
         bool useForwardValue = m_OutportInterlock[i][0] != 0;
@@ -2590,6 +2608,7 @@ void Setting::outportInterlockSlots()
 
         const auto &group = interLockGroups[i];
 
+        // 如果是预留的组，跳过
         if (group.forwardValuePort == -1) continue;
 
         m_Port_Y[group.forwardValuePort].functionSet = useForwardValue;
@@ -2602,8 +2621,7 @@ void Setting::outportInterlockSlots()
 
     setPortDefineNameOrPortNum();
     emit RefreshPortDefineSignals();
-    g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_INTERLOCK);
-    setOutportInterlock(m_OutportInterlock);
+    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
 }
 
 void Setting::outportRelevancySlots()
@@ -2691,6 +2709,8 @@ void Setting::seniorFuncSlots()
 
     setSeniorFunc(m_SeniorFunc);
     SeniorFuncPortSet();
+
+    emit refreshManualReserve();
 }
 //根据高级功能中功能使用情况，设置端口是否做预留端口使用
 void Setting::SeniorFuncPortSet()
@@ -2753,7 +2773,7 @@ void Setting::SeniorFuncPortSet()
 //        ui->coboxBlow2, ui->coboxAutoDoorCtl2, ui->coboxStartProcess2, ui->coboxMainAxisLocate2,
 //        ui->coboxProcessSafe2, ui->coboxMainAxisRotate2,
 //    };
-    emit refreshManualReserve();
+//    emit refreshManualReserve();
 
 }
 void Setting::saveKeyAndLEDFuncDefine()

@@ -91,6 +91,9 @@ private:
     TriMode curMode;
     EventScanner* scanner; // customize input event monitoring
 
+private:
+    void handleLoginModeChanged(LoginMode mode);
+
 public:
     static MainWindow* pMainWindow;
 // dialogs
@@ -118,9 +121,9 @@ public:
     void callFullKeyboard(QObject *watched);
 private slots:
     void on_btnHelp_clicked();
-public slots:
-    bool eventFilter(QObject *,QEvent *) override;
+
 protected:
+    bool eventFilter(QObject *,QEvent *) override;
     void mousePressEvent(QMouseEvent *event) override;
 
     //子线程相关

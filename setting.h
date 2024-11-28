@@ -17,6 +17,7 @@
 #include "keydefinedialog.h"
 #include "sigdefinedialog.h"
 #include "upgradedialog.h"
+#include "logindialog.h"
 
 enum MenuState {
     Operator = 0,  // 操作员
@@ -61,6 +62,7 @@ private:
 public slots:
     void slotSettingHome();
     void ShowStackPage();
+    void handleLoginModeChanged(LoginMode mode);
 
 private:
     Ui::Setting *ui;

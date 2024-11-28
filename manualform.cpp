@@ -485,7 +485,7 @@ void ManualForm::on_btnNewButton_clicked()
                 }
 
             }
-            qDebug() << "按键%s被按下!"<<btn->text();
+//            qDebug() << "按键%s被按下!"<<btn->text();
         });
 
         connect(btn, &DraggableButton::positionChanged, [=]() {
@@ -968,6 +968,31 @@ void ManualForm::updateGroupBoxVisibility(const std::vector<std::pair<std::vecto
 const QList<ReferPointPara> &ManualForm::getRerferPoints() const
 {
     return referencePoints;
+}
+
+void ManualForm::handleLoginModeChanged(LoginMode mode)
+{
+    if (mode == LoginMode::Operator)
+    {
+        ui->tabWidgetManualPage->removeTab(4);
+        bool canUse = false;
+
+        ui->btnIntoStack->setEnabled(canUse);
+        ui->checkBoxEditPosReference->setVisible(canUse);
+        ui->btnImportPictureReference->setVisible(canUse);
+        ui->btnNewButtonReference->setVisible(canUse);
+        ui->btnDeleteButtonReference->setVisible(canUse);
+        ui->btnEditGuideName->setVisible(canUse);
+        ui->editGuideKeyDef->setVisible(canUse);
+        ui->btnSaveGuide->setVisible(canUse);
+    }
+    else
+    {
+        bool canUse = true;
+
+        ui->tabWidgetManualPage->addTab(ui->tabReference, tr("参考点"));
+        ui->btnIntoStack->setEnabled(canUse);
+    }
 }
 
 void ManualForm::updateReserveButtonState()

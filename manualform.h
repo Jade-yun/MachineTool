@@ -11,6 +11,7 @@
 #include "customkeyboard.h"
 #include "cmd.h"
 #include "referencewidget.h"
+#include "logindialog.h"
 
 #define SAVEPOINT_VERSION_1
 
@@ -67,12 +68,12 @@ private slots:
     void on_btnImportPictureReference_clicked();
     void on_btnSaveReference_clicked();
 
+    void on_cb_axisActionAxis_currentIndexChanged(int index);
 private slots:
     void onTabChanged(int index);
     void onSaveKeyDef();
     void onCheckSavedGuide();
     void onCheckSavedReferPointPara();
-    void on_cb_axisActionAxis_currentIndexChanged(int index);
 
 private:
     void initVar();
@@ -94,6 +95,7 @@ private:
 
 public:
     const QList<ReferPointPara>& getRerferPoints() const;
+    void handleLoginModeChanged(LoginMode mode);
 public slots:
     void updateReserveButtonState(); // 更新端口对应按钮的可见性和文本
 

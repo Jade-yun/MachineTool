@@ -94,7 +94,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(login, &LoginDialog::loginModeChanged, this, [=](LoginMode mode){
         qDebug() << "switch to " << (int)mode ;
-//        handleLoginModeChanged(mode);
+        handleLoginModeChanged(mode);
     });
 
     // set the style for whole app
@@ -222,6 +222,20 @@ void MainWindow::MainWindow_SetControl_Stake(bool state)
     ui->btnHandWheel->setEnabled(state);
     ui->btnHelp->setEnabled(state);
 
+}
+
+void MainWindow::handleLoginModeChanged(LoginMode mode)
+{
+    if (mode == LoginMode::Operator)
+    {
+        ui->Btn_TeachHome->setEnabled(false);
+    }
+    else {
+        ui->Btn_TeachHome->setEnabled(true);
+    }
+
+//    setWidget->handleLoginModeChanged(mode);
+//    manualWidget->handleLoginModeChanged(mode);
 }
 void MainWindow::PowerOnStateHandle()
 {
