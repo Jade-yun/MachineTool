@@ -86,6 +86,7 @@ private:
     void removeReferencePoint();
 
     void updateGuidePoints();
+    void setupGuidePointConnections(DraggableButton* btn);
     void updateReferPointsList();
 
     void setupReserveWidgets();

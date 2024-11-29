@@ -442,7 +442,7 @@ void ManualForm::on_btnNewButton_clicked()
         btn->setCheckable(draggable[0]);
         btn->setAutoExclusive(true);
 
-        btn->setFixedSize(120, 40);
+        btn->setFixedSize(120, 45);
         QPoint btnPos = QPoint(20 + 120 * (guidePoints.size() / 8), 20 + 50 * (guidePoints.size() % 8));
         btn->setGeometry(QRect(btnPos, btn->size()));
         QString btnName = tr((QString("按钮") + QString::number(guidePoints.size() + 1)).toUtf8().constData());
@@ -455,47 +455,10 @@ void ManualForm::on_btnNewButton_clicked()
         // Insert into QHash
         guidePoints.insert(btn, newGuidePara);
 
-        // Connect button pressed signal
-        connect(btn, &DraggableButton::pressed, this, [=]() {
-            selectedButton[0] = btn;
-            selectedButton[0]->setChecked(draggable[0]);
+        //setup connections to perform responsible logic
+        setupGuidePointConnections(btn);
 
-            // Set the guide info in the UI as needed
-            if (guidePoints.contains(selectedButton[0])) {
-                GuidePara para = guidePoints.value(selectedButton[0]);
-                // update correspongding keyDef name in UI，
-                 ui->editGuideKeyDef->setText(para.keyDefStr);
-            }
-        });
-        connect(btn, &DraggableButton::clicked, this,[=](){
-            selectedButton[0] = btn;
-            if (guidePoints.contains(selectedButton[0])) {
-                GuidePara para = guidePoints.value(selectedButton[0]);
-                if(para.keyType == 0)
-                {//0阀输出 1输出 2轴
-                    g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
-                }
-                else if(para.keyType == 1)
-                {
-
-                }
-                else if(para.keyType == 2)
-                {
-
-                }
-
-            }
-//            qDebug() << "按键%s被按下!"<<btn->text();
-        });
-
-        connect(btn, &DraggableButton::positionChanged, [=]() {
-            auto it = guidePoints.find(selectedButton[0]);
-            if (it != guidePoints.end()) {
-                it.value().btnPos = btnPos;
-                ui->btnSaveGuide->setParaChangedFlag(true);
-            }
-        });
-        ui->btnSaveGuide->setParaChangedFlag(true);;
+        ui->btnSaveGuide->setParaChangedFlag(true);
     }
 }
 
@@ -542,6 +505,7 @@ void ManualForm::on_checkBoxEditPosGuide_stateChanged(int arg1)
     }
 
     selectedButton[0]->setChecked(draggable[0]);
+    update();
 }
 
 void ManualForm::on_btnNewButtonReference_clicked()
@@ -763,7 +727,7 @@ void ManualForm::updateGuidePoints()
 
     for (int i = 0; i < GUIDE_TOTAL_NUM; i++)
     {
-        if (m_Guide[i].guideFlag == false) break; // 操作点无效
+        if (m_Guide[i].guideFlag == false) continue; // 操作点无效
 
         QString guideName = m_Guide[i].guideName;
         QString keyDefStr = m_Guide[i].keyDefStr;
@@ -776,31 +740,14 @@ void ManualForm::updateGuidePoints()
         DraggableButton* btn = new DraggableButton(ui->tabGuide);
         guidePoints.insert(btn, guide);
 
-        connect(btn, &DraggableButton::pressed, this, [=]() {
-            selectedButton[0] = btn;
-            selectedButton[0]->setChecked(draggable[0]);
-
-            // Set the guide info in the UI as needed
-            if (guidePoints.contains(selectedButton[0])) {
-                GuidePara para = guidePoints.value(selectedButton[0]);
-                // update correspongding keyDef name in UI，
-                 ui->editGuideKeyDef->setText(para.keyDefStr);
-            }
-        });
-        connect(btn, &DraggableButton::positionChanged, [=]() {
-            QPoint btnPos = btn->pos();
-            auto it = guidePoints.find(selectedButton[0]);
-            if (it != guidePoints.end()) {
-                it.value().btnPos = btnPos;
-                ui->btnSaveGuide->setParaChangedFlag(true);;
-            }
-        });
+        // setup connections to handle
+        setupGuidePointConnections(btn);
     }
 
     for (auto it = guidePoints.begin(); it != guidePoints.end(); ++it)
     {
         DraggableButton* btn = it.key();
-        GuidePara guide = it.value();
+        const GuidePara& guide = it.value();
 
         if (btn) {
 //            bool state = ui->checkBoxEditPosGuide->isChecked();
@@ -810,6 +757,53 @@ void ManualForm::updateGuidePoints()
         }
     }
 
+}
+
+void ManualForm::setupGuidePointConnections(DraggableButton *btn)
+{
+    connect(btn, &DraggableButton::pressed, this, [this, btn]() {
+        selectedButton[0] = btn;
+        selectedButton[0]->setChecked(draggable[0]);
+
+        // Check if the button exists in the guidePoints map
+        auto it = guidePoints.find(selectedButton[0]);
+        if (it != guidePoints.end()) {
+            // Update corresponding keyDef name in UI
+            ui->editGuideKeyDef->setText(it.value().keyDefStr);
+        }
+    });
+
+    connect(btn, &DraggableButton::positionChanged, [=]() {
+        auto it = guidePoints.find(selectedButton[0]);
+        if (it != guidePoints.end()) {
+            it.value().btnPos = btn->pos();
+            ui->btnSaveGuide->setParaChangedFlag(true);
+        }
+    });
+    connect(btn, &DraggableButton::clicked, this, [this, btn]() {
+        // Retrieve guide information from the guidePoints map
+        const auto it = guidePoints.find(btn);
+        if (it != guidePoints.end()) {
+            // Use const reference to avoid unnecessary copying
+            const GuidePara& para = it.value();
+
+            qDebug() << "keyType:" << para.keyType << ",port:" << para.portNum << ",status:" << para.status;
+
+            if(para.keyType == 0)
+            {//0阀输出 1输出 2轴
+
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
+            }
+            else if(para.keyType == 1)
+            {
+
+            }
+            else if(para.keyType == 2)
+            {
+
+            }
+        }
+    });
 }
 
 void ManualForm::updateReferPointsList()
@@ -901,8 +895,8 @@ void ManualForm::setupReserveWidgets()
         hlayout->setAlignment(Qt::AlignLeft);
     }
 
-//    ui->tabWgtReserve->removeTab(1);
-    ui->tabWgtReserve->setTabEnabled(1, false);
+    ui->tabWgtReserve->removeTab(1);
+//    ui->tabWgtReserve->setTabEnabled(1, false);
 
     const std::vector<QPushButton*> group1 = {
         ui->btnPortY1, ui->btnPortY2, ui->btnPortY3, ui->btnPortY4,
@@ -1189,6 +1183,9 @@ void ManualForm::initVar()
         ui->btnPortY17, ui->btnPortY18, ui->btnPortY19, ui->btnPortY20,
         ui->btnPortY21, ui->btnPortY22, ui->btnPortY23, ui->btnPortY24
     };
+
+    ::readGuideInfo();
+    updateGuidePoints();
 }
 
 void ManualForm::on_btnEditGuideName_clicked()
@@ -1269,6 +1266,7 @@ void ManualForm::on_btnSaveGuide_clicked()
 //    {
 
 //    }
+    if (ui->btnSaveGuide->isParaChanged() == false) return;
 
     P_GuideStruct defaultGuide = {0, "", "0", QPoint(0, 0), 0, 0, 0};
 
@@ -1288,11 +1286,16 @@ void ManualForm::on_btnSaveGuide_clicked()
         m_Guide[index].status = guide.status;
         ++index;
     }
+
+    ::writeGuideInfo();
+
     ui->btnSaveGuide->setParaChangedFlag(false);
 
 }
 void ManualForm::on_btnSaveReference_clicked()
 {
+    if (ui->btnSaveReference->isParaChanged() == false) return;
+
     if (selectedButton[1])
     {
         auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {

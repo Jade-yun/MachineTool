@@ -47,6 +47,12 @@ void readOnlineSafeInOutDescription(int group, std::vector<QString> &describeStr
 void writeLimitSigDescription(int index, const std::vector<QString> &describeStrs);
 void readLimitSigDescription(int index, std::vector<QString> &describeStrs);
 
+/**
+ * @brief writeGuideInfo 存储操作指引参数到配置文件
+ */
+void writeGuideInfo();
+void readGuideInfo();
+
 /*****************相关参数保存*****************/
 //输出类型
 extern void getOutPortType(uint8_t defaultV = 0);

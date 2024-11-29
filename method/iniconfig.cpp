@@ -19,6 +19,8 @@ const QString PasswdConfigPath = "/Settings/passwd.ini";
 const QString KeyAndSignalDescriptionPath = "/Settings/key_signal_str.ini";
 const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
 
+const QString GuideInfoPath = "/Settings/guide_info.ini";
+
 QSettings Ini_Parasettings(m_configFileNamePath,QSettings::IniFormat);
 /*************************************************************************
 **	输入参数：prefix:节点 key:键 defaultV:默认值
@@ -1129,3 +1131,53 @@ void readLimitSigDescription(int index, std::vector<QString> &describeStrs)
     }
     settings.endGroup();
 }
+
+void writeGuideInfo()
+{
+    QSettings settings(GuideInfoPath, QSettings::IniFormat);
+
+    for (int i = 0; i < GUIDE_TOTAL_NUM; i++)
+    {
+        // Create a group for each guide entry
+        QString groupName = QString("Guide%1").arg(i);  // You can use the index to create a unique group name
+        settings.beginGroup(groupName);
+
+        // Store each field in the corresponding group
+        settings.setValue("guideFlag", m_Guide[i].guideFlag);
+        settings.setValue("guideName", m_Guide[i].guideName);
+        settings.setValue("keyDefStr", m_Guide[i].keyDefStr);
+        settings.setValue("btnPos_x", m_Guide[i].btnPos.x());
+        settings.setValue("btnPos_y", m_Guide[i].btnPos.y());
+        settings.setValue("keyType", m_Guide[i].keyType);
+        settings.setValue("portNum", m_Guide[i].portNum);
+        settings.setValue("status", m_Guide[i].status);
+
+        // End the group
+        settings.endGroup();
+    }
+}
+
+void readGuideInfo()
+{
+    QSettings settings(GuideInfoPath, QSettings::IniFormat);
+
+    for (int i = 0; i < GUIDE_TOTAL_NUM; i++)
+    {
+        // Construct the group name for each guide entry
+        QString groupName = QString("Guide%1").arg(i);
+        settings.beginGroup(groupName);
+
+        // Read each field from the corresponding group
+        m_Guide[i].guideFlag = settings.value("guideFlag", 0).toUInt();
+        m_Guide[i].guideName = settings.value("guideName", "").toString();
+        m_Guide[i].keyDefStr = settings.value("keyDefStr", "").toString();
+        m_Guide[i].btnPos.setX(settings.value("btnPos_x", 0).toInt());
+        m_Guide[i].btnPos.setY(settings.value("btnPos_y", 0).toInt());
+        m_Guide[i].keyType = settings.value("keyType", 0).toUInt();
+        m_Guide[i].portNum = settings.value("portNum", 0).toUInt();
+        m_Guide[i].status = settings.value("status", 0).toUInt();
+        // End the group
+        settings.endGroup();
+    }
+}
+
