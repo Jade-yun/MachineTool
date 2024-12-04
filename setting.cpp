@@ -129,17 +129,40 @@ Setting::Setting(QWidget *parent) :
 //        settings.beginGroup("Backlight");
 //        settings.setValue("time", second);
 //        settings.endGroup();
+        m_SystemSet.backlightTime = second;
+        ::setSystemSet(m_SystemSet);
     });
+
     connect(ui->sliderBrightness, &QSlider::valueChanged, [=](int value){
 //        qDebug() << "value of slider:" << value;
         BackLighter::instance()->setBrightness(value);
         ui->percentageBrightness->setValue(value);
 //        qDebug() << "brightness:" << BackLighter::instance()->getBrightness();
     });
+    connect(ui->sliderBrightness, &QSlider::sliderReleased, [=](){
+        m_SystemSet.backlightBrightness = ui->sliderBrightness->value();
+        ::setSystemSet(m_SystemSet);
+    });
 
     connect(ui->chboxBuzzer, &QCheckBox::stateChanged, [=](int state){
         bool enable = state;
         Beeper::instance()->setEnable(enable);
+
+        m_SystemSet.keyListen = state;
+        ::setSystemSet(m_SystemSet);
+    });
+
+    connect(ui->btnSaveSysName, &QPushButton::clicked, [=](){
+        QString sysName = ui->editSystemName->text();
+        m_SystemSet.sysName = sysName;
+        ::setSystemSet(m_SystemSet);
+        emit sysNameChanged(sysName);
+    });
+    connect(ui->btnDefaultName, &QPushButton::clicked, [=](){
+        const QString defaultSysName = QString("展晖机床机械手系统");
+        m_SystemSet.sysName = defaultSysName;
+        ::setSystemSet(m_SystemSet);
+        emit sysNameChanged(defaultSysName);
     });
 
     connect(ui->btnImportPortDef, &QPushButton::clicked, [=](){
@@ -254,17 +277,37 @@ void Setting::ShowStackPage()
 
 void Setting::handleLoginModeChanged(LoginMode mode)
 {
+    const std::vector<QPushButton*> settingButtons = {
+        ui->btnSigSet, ui->btnSafetySet, ui->btnProductSet, ui->btnSystemSet,
+        ui->btnServoSpeed, ui->btnServoSafePoint, ui->btnMachinePara, ui->btnStackSet
+    };
+    const std::vector<int> groupIDs = {
+        10, 20, 30, 40, 50, 60, 70, 80
+    };
+
+    MenuState tempState;
+
     if (mode == LoginMode::Operator)
     {
-
+        tempState = MenuState::Operator;
     }
     else if (mode == LoginMode::Admin)
     {
-
+        tempState = MenuState::Admin;
     }
     else if (mode == LoginMode::Advance)
     {
+        tempState = MenuState::Senior;
+    }
 
+    for (size_t i = 0; i < settingButtons.size(); i++)
+    {
+        auto btn = settingButtons[i];
+        auto id = groupIDs[i];
+        const auto& state = menuStateMap.at(id);
+
+        bool enable = state > tempState;
+        btn->setEnabled(enable);
     }
 }
 
@@ -340,13 +383,27 @@ void Setting::init()
     ui->editMinute->setInputRange(0, 59);
     ui->editSecond->setInputRange(0, 59);
 
+    // font
+//    ui->coboxFonts->setCurrentIndex(m_SystemSet.typeFace);
+//    ui->coboxFontSize->setCurrentIndex(m_SystemSet.wordSize);
+
+    // buzzer
+    Beeper::instance()->setEnable(m_SystemSet.keyListen);
+    ui->chboxBuzzer->setChecked(m_SystemSet.keyListen);
+
     // fresh backlight time dispaly
+    BackLighter::instance()->setScreenOffTime(m_SystemSet.backlightTime);
     int duration = BackLighter::instance()->getScreenOffTime();
     ui->editBrightTime->setText(QString::number(duration));
 
     // fresh backlight brightness dispaly
+    BackLighter::instance()->setBrightness(m_SystemSet.backlightBrightness);
     int level = BackLighter::instance()->getBrightness();
     ui->sliderBrightness->setValue(level);
+    ui->percentageBrightness->setValue(level);
+
+    // system name
+    ui->editSystemName->setText(m_SystemSet.sysName);
 
     ui->labClawSafePic->setPixmap(QPixmap(":/images/settingPageImages/claw_safe.png"));
     ui->labOnlineSafePic->setPixmap(QPixmap(":/images/settingPageImages/online_safe.png"));
@@ -883,6 +940,15 @@ void Setting::setupMenuAuthority()
 
 void Setting::syncParaToUI()
 {
+    /****************************系统设置********************************************/
+//    m_SystemSet.lan;
+//    ui->coboxFonts->setCurrentIndex(m_SystemSet.typeFace);
+//    ui->coboxFontSize->setCurrentIndex(m_SystemSet.wordSize);
+
+//    ui->chboxBuzzer->setChecked(m_SystemSet.keyListen);
+//    ui->editBrightTime->setText(QString::number(m_SystemSet.backlightTime));
+//    ui->sliderBrightness->setValue(m_SystemSet.backlightBrightness);
+
     /****************************输出类型********************************************/
     for (int i = 0;i < OUT_PORT_TYPE_NUM;i++)
     {
@@ -1317,6 +1383,58 @@ void Setting::updateTabVisibility()
         {7, ui->tabWidgetMachinePara},
         {8, ui->tabWidgetStack}
     };
+    std::map<int, QWidget*> tabContentMap = {
+        {11, ui->tabOutType},
+        {12, ui->tabSetInterlock},
+        {13, ui->tabPortCustomize},
+        {14, ui->tabNameCustomize},
+        {15, ui->tabReserveAssociation},
+        {16, ui->tabReserveOutType},
+        {17, ui->tabKeyAndSig},
+        {18, ui->tabAdvance},
+
+        {21, ui->tabMachineToolSafety},
+        {22, ui->tabBinSafety},
+        {23, ui->tabClawSafety},
+        {24, ui->tabOnlineSafe},
+
+        {31, ui->tabProduct},
+        {32, ui->tabAdvanceProduct},
+        {33, ui->tabIOTProduct},
+
+        {41, ui->tabLangurageSet},
+        {42, ui->tabUserSet},
+        {43, ui->tabUpdateAndBackup},
+        {44, ui->tabNotepad},
+        {45, ui->tabPasswdSet},
+        {46, ui->tabIot},
+        {47, ui->tabSignUp},
+
+        {51, ui->tabServo},
+        {52, ui->tabAxisPara},
+        {53, ui->tabAxisSpeed},
+
+        {61, ui->tabSafeArea1},
+        {62, ui->tabSafeArea2},
+        {63, ui->tabSafeArea3},
+        {64, ui->tabSafeArea4},
+        {65, ui->tabPosLimit},
+
+        {71, ui->tabLimitPos},
+        {72, ui->tabMachineStruct},
+        {73, ui->tabOrigin},
+        {74, ui->tabCommunication},
+
+        {81, ui->tabStack1},
+        {82, ui->tabStack2},
+        {83, ui->tabStack3},
+        {84, ui->tabStack4},
+        {85, ui->tabStack5},
+        {86, ui->tabStack6},
+        {87, ui->tabStack7},
+        {88, ui->tabStack8},
+        {89, ui->tabStackSet}
+    };
 
 //    tabNameMap need to be initialized
     // tab
@@ -1364,6 +1482,7 @@ void Setting::onMenuStateChanged(MenuState newState)
 //    qDebug() << "ID:" << item->id << "," << item->name << " new state:" << newState;
 
     menuStateMap[item->id] = newState;
+    tabNameMap[item->id] = item->name;
 
     // 这里根据新的权限执行相应的操作
     if (item->id == 21 && item->name == tr("机床安全")) {

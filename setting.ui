@@ -375,7 +375,7 @@ QScrollBar::down-arrow:vertical:pressed
     </font>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -910,7 +910,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>5</number>
      </property>
      <property name="iconSize">
       <size>
@@ -3535,23 +3535,6 @@ QPushButton::released{
         </size>
        </property>
       </widget>
-      <zorder>stkWgtInterLock</zorder>
-      <zorder>grboxInterlock0</zorder>
-      <zorder>grboxInterlock1</zorder>
-      <zorder>grboxInterlock2</zorder>
-      <zorder>grboxInterlock3</zorder>
-      <zorder>grboxInterlock4</zorder>
-      <zorder>grboxInterlock5</zorder>
-      <zorder>grboxInterlock11</zorder>
-      <zorder>grboxInterlock9</zorder>
-      <zorder>grboxInterlock6</zorder>
-      <zorder>grboxInterlock10</zorder>
-      <zorder>grboxInterlock8</zorder>
-      <zorder>grboxInterlock7</zorder>
-      <zorder>label_201</zorder>
-      <zorder>labPageNumInterLock</zorder>
-      <zorder>btnLastInterLock</zorder>
-      <zorder>btnNextInterLock</zorder>
      </widget>
      <widget class="QWidget" name="tabPortCustomize">
       <attribute name="title">
@@ -6049,7 +6032,7 @@ QComboBox::down-arrow {
        </property>
       </widget>
      </widget>
-     <widget class="QWidget" name="coboxReserveOutType">
+     <widget class="QWidget" name="tabReserveOutType">
       <attribute name="title">
        <string>预留出类型</string>
       </attribute>
@@ -11679,7 +11662,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -18696,7 +18679,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -19357,7 +19340,7 @@ QComboBox::down-arrow {
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="tabIOT">
+     <widget class="QWidget" name="tabIOTProduct">
       <attribute name="title">
        <string>物联网</string>
       </attribute>
@@ -19894,7 +19877,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>8</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -21351,7 +21334,7 @@ QSlider::sub-page:horizontal{
       <zorder>btnTouchCalibration</zorder>
       <zorder>btnSaveColor</zorder>
      </widget>
-     <widget class="QWidget" name="tabPortCustomize_5">
+     <widget class="QWidget" name="tabUpdateAndBackup">
       <attribute name="title">
        <string>升级与备份</string>
       </attribute>
@@ -21913,7 +21896,7 @@ border: 1px solid black;
        <zorder>Progress_num</zorder>
       </widget>
      </widget>
-     <widget class="QWidget" name="tabNameCustomize_3">
+     <widget class="QWidget" name="tabSystemInfo">
       <attribute name="title">
        <string>系统信息</string>
       </attribute>
@@ -22080,7 +22063,7 @@ border: 1px solid black;
        </layout>
       </widget>
      </widget>
-     <widget class="QWidget" name="tabReserveAssociation_3">
+     <widget class="QWidget" name="tabNotepad">
       <attribute name="title">
        <string>记事本</string>
       </attribute>
@@ -24006,7 +23989,7 @@ border: 1px solid black;
        </widget>
       </widget>
      </widget>
-     <widget class="QWidget" name="tabAdvance_3">
+     <widget class="QWidget" name="tabSignUp">
       <attribute name="title">
        <string>注册信息</string>
       </attribute>
@@ -25156,7 +25139,7 @@ border: 1px solid black;
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -27634,7 +27617,7 @@ border: 1px solid black;
       </font>
      </property>
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -34550,7 +34533,7 @@ border: 1px solid black;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>

@@ -22,7 +22,7 @@ public:
     explicit LoginDialog(QWidget *parent = nullptr);
     ~LoginDialog();
 
-    LoginMode getLoginMode() const;
+    static LoginMode getLoginMode();
 
 signals:
     void loginModeChanged(LoginMode mode);
@@ -32,7 +32,7 @@ private slots:
 
 private:
     Ui::LoginDialog *ui;
-    LoginMode mode;
+    static LoginMode mode;
 
 protected:
     void showEvent(QShowEvent *event) override;

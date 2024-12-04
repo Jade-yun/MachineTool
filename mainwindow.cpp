@@ -224,6 +224,14 @@ void MainWindow::MainWindow_SetControl_Stake(bool state)
 
 }
 
+void MainWindow::initUI()
+{
+    emit login->loginModeChanged(LoginMode::Operator);
+
+    ui->Btn_TeachHome->setText(tr("教导管理"));
+    ui->Btn_ManualHome->setText(tr("停止页面"));
+}
+
 void MainWindow::handleLoginModeChanged(LoginMode mode)
 {
     if (mode == LoginMode::Operator)
@@ -235,7 +243,7 @@ void MainWindow::handleLoginModeChanged(LoginMode mode)
     }
 
 //    setWidget->handleLoginModeChanged(mode);
-//    manualWidget->handleLoginModeChanged(mode);
+    manualWidget->handleLoginModeChanged(mode);
 }
 void MainWindow::PowerOnStateHandle()
 {
@@ -328,6 +336,8 @@ void MainWindow::slotShowSubWindow()
     ui->label_plan->setText("参数同步中:");
     Refresh_Progress_bar(0);
     emit signal_sync_data();
+
+    initUI();
 }
 
 void MainWindow::startAllThread()
@@ -453,6 +463,9 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
 
     connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
+    connect(setWidget, &Setting::sysNameChanged, this, [=](const QString& sysName){
+//        ui->labProgramName->setText(sysName);
+    });
 
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);

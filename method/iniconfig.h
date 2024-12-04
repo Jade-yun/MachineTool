@@ -99,7 +99,7 @@ extern void setProductSenior(D_ProductSeniorStruct value);
 extern void getInternet(uint8_t defaultV = 0);
 extern void setInternet(D_InternetStruct value);
 //系统参数
-extern D_SystemSetStruct getSystemSet(D_SystemSetStruct defaultV = {0});
+extern void getSystemSet();
 extern void setSystemSet(D_SystemSetStruct value);
 //轴运动参数
 extern void getAxisPar(uint8_t defaultV = 0);

@@ -507,18 +507,17 @@ void setInternet(D_InternetStruct value)
     setValue("Internet","baudMode",value.baudMode);
 }
 //系统参数
-D_SystemSetStruct getSystemSet(D_SystemSetStruct defaultV)
+void getSystemSet()
 {
-    D_SystemSetStruct arr=defaultV;
-    arr.lan=getValue("SystemSet","lan",defaultV.lan);
-    arr.typeFace=getValue("SystemSet","typeFace",defaultV.typeFace);
-    arr.wordSize=getValue("SystemSet","wordSize",defaultV.wordSize);
-    arr.keyListen=getValue("SystemSet","keyListen",defaultV.keyListen);
-    arr.backlightTime=getValue("SystemSet","backlightTime",defaultV.backlightTime);
-    arr.backlightBrightness=getValue("SystemSet","backlightBrightness",defaultV.backlightBrightness);
-    arr.sysName=getValue("SystemSet","sysName",defaultV.sysName);
-    arr.sysColor=getValue("SystemSet","sysColor",defaultV.sysColor);
-    return arr;
+    D_SystemSetStruct defaultV{0, 0, 0, 0, 0, 0, "", 0};
+    m_SystemSet.lan=getValue("SystemSet","lan",defaultV.lan);
+    m_SystemSet.typeFace=getValue("SystemSet","typeFace",defaultV.typeFace);
+    m_SystemSet.wordSize=getValue("SystemSet","wordSize",defaultV.wordSize);
+    m_SystemSet.keyListen=getValue("SystemSet","keyListen",defaultV.keyListen);
+    m_SystemSet.backlightTime=getValue("SystemSet","backlightTime",defaultV.backlightTime);
+    m_SystemSet.backlightBrightness=getValue("SystemSet","backlightBrightness",defaultV.backlightBrightness);
+    m_SystemSet.sysName=getValue("SystemSet","sysName",defaultV.sysName);
+    m_SystemSet.sysColor=getValue("SystemSet","sysColor",defaultV.sysColor);
 }
 void setSystemSet(D_SystemSetStruct value)
 {

@@ -504,8 +504,11 @@ void ManualForm::on_checkBoxEditPosGuide_stateChanged(int arg1)
         btn->setCheckable(draggable[0]);
     }
 
-    selectedButton[0]->setChecked(draggable[0]);
-    update();
+    if (selectedButton[0])
+    {
+        selectedButton[0]->setChecked(draggable[0]);
+        update();
+    }
 }
 
 void ManualForm::on_btnNewButtonReference_clicked()
@@ -972,6 +975,8 @@ void ManualForm::handleLoginModeChanged(LoginMode mode)
         bool canUse = false;
 
         ui->btnIntoStack->setEnabled(canUse);
+
+        ui->btnHideGuide->setChecked(false);
         ui->checkBoxEditPosReference->setVisible(canUse);
         ui->btnImportPictureReference->setVisible(canUse);
         ui->btnNewButtonReference->setVisible(canUse);
@@ -979,13 +984,25 @@ void ManualForm::handleLoginModeChanged(LoginMode mode)
         ui->btnEditGuideName->setVisible(canUse);
         ui->editGuideKeyDef->setVisible(canUse);
         ui->btnSaveGuide->setVisible(canUse);
+        ui->btnHideGuide->setVisible(canUse);
     }
     else
     {
         bool canUse = true;
 
         ui->tabWidgetManualPage->addTab(ui->tabReference, tr("参考点"));
+
         ui->btnIntoStack->setEnabled(canUse);
+
+        ui->btnHideGuide->setChecked(false);
+        ui->checkBoxEditPosReference->setVisible(canUse);
+        ui->btnImportPictureReference->setVisible(canUse);
+        ui->btnNewButtonReference->setVisible(canUse);
+        ui->btnDeleteButtonReference->setVisible(canUse);
+        ui->btnEditGuideName->setVisible(canUse);
+        ui->editGuideKeyDef->setVisible(canUse);
+        ui->btnSaveGuide->setVisible(canUse);
+        ui->btnHideGuide->setVisible(canUse);
     }
 }
 

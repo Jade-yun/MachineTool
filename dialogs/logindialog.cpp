@@ -6,11 +6,11 @@
 #include "errortipdialog.h"
 
 extern uint32_t passwd[3]; // 0-管理员密码 1-超级管理密码 2-菜单密码
+LoginMode LoginDialog::mode = LoginMode::Operator;
 
 LoginDialog::LoginDialog(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::LoginDialog),
-    mode(LoginMode::Operator)
+    ui(new Ui::LoginDialog)
 {
     ui->setupUi(this);
     setModal(true);
@@ -39,7 +39,7 @@ LoginDialog::~LoginDialog()
     delete ui;
 }
 
-LoginMode LoginDialog::getLoginMode() const
+LoginMode LoginDialog::getLoginMode()
 {
     return mode;
 }

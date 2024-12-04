@@ -71,7 +71,7 @@ private:
 private:
     std::map<int, MenuState> menuStateMap; // store the authority of every MenuItem id
 //    std::map<int, QTabWidget*> tabWidgetMap; // store the mapping of each QTabWidget group about MenuItem id/10
-    std::map<int, QWidget*> tabContentMap;     // store the mapping of each tab about MenuItem id
+//    std::map<int, QWidget*> tabContentMap;     // store the mapping of each tab about MenuItem id
     std::map<int, QString> tabNameMap;
     int currentLoginState = MenuState::Operator;
 
@@ -103,6 +103,8 @@ signals:
     void monitor_port_refreash();
     void RefreshPortDefineSignals();
     void refreshManualReserve();
+    void sysNameChanged(const QString& name);
+
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型

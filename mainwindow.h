@@ -92,6 +92,7 @@ private:
     EventScanner* scanner; // customize input event monitoring
 
 private:
+    void initUI();
     void handleLoginModeChanged(LoginMode mode);
 
 public:
