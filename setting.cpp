@@ -117,6 +117,14 @@ Setting::Setting(QWidget *parent) :
         handleSavePasswd(&passwd[2], edits, 2);
     });
 
+    // langurage set
+    connect(ui->coboxFonts, QOverload<int>::of(&QComboBox::activated), this, [=](int){
+        updateAppFont();
+    });
+    connect(ui->coboxFontSize, QOverload<int>::of(&QComboBox::activated), this, [=](int){
+        updateAppFont();
+    });
+
 
     ui->editBrightTime->setInputRange(30, 65535);
     connect(ui->editBrightTime, &NumberEdit::textChanged, [=](const QString& val){
@@ -682,7 +690,10 @@ void Setting::init()
 
 void Setting::initWidgets()
 {
-    ui->stackedWidget->setCurrentIndex(0); // 保证初始化时首次进入setting主界面
+    for (auto stkWgt : this->findChildren<QStackedWidget*>())
+    {
+        stkWgt->setCurrentIndex(0);
+    }
 
     for (auto tabWgt : this->findChildren<QTabWidget*>())
     {
@@ -1496,6 +1507,29 @@ void Setting::onMenuStateChanged(MenuState newState)
             // 对 "机床安全" 的 Operator 状态执行相应操作
             qDebug() << "执行机床安全权限为 Operator 的操作";
         }
+    }
+}
+
+void Setting::updateAppFont()
+{
+    const QString defaultFont = "SimSun";
+    const int defaultPixelSize = 20;
+
+    QString selectedFont = (ui->coboxFonts->currentIndex() == 0)
+                           ? defaultFont
+                           : ui->coboxFonts->currentText();
+    int selectedPixelSize = (ui->coboxFontSize->currentIndex() == 0)
+                            ? defaultPixelSize
+                            : ui->coboxFontSize->currentText().toInt();
+
+    QFont font(selectedFont);
+    font.setPixelSize(selectedPixelSize);
+
+    qApp->setFont(font);
+    for (auto widget : MainWindow::pMainWindow->findChildren<QWidget*>())
+    {
+        widget->setFont(font);
+//        widget->update();
     }
 }
 

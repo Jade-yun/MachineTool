@@ -93,7 +93,7 @@ private:
     void SeniorFuncPortSet();
 private slots:
     void onMenuStateChanged(MenuState newState);
-
+    void updateAppFont();
 
 public:
     void UpgradeHandle(int click_type);

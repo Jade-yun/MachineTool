@@ -11,316 +11,7 @@
    </rect>
   </property>
   <property name="styleSheet">
-   <string notr="true">QMainWindow{
- background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
-
-	/*border-image:url(/opt/MachineTool/images/bgTest.png);*/
-}
-/*
-QWidget#centralwidget{
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
-	background-color: rgb(255, 255, 255);
-}
-*/
- QScrollBar:vertical
-{ /*滑块设置*/
-	width:50px;
-	border: 3px solid grey;
-	border-radius: 8px; /* 圆角 */
-    background: rgb(238, 238, 236);
-	padding-top:55px;
-	padding-bottom:55px;
-}
-/*按压时的颜色*/
-QScrollBar::handle:vertical:pressed
-{
-	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
-    border-radius: 10px; /* 按下时保持圆角 */
-	border-radius:4px;
-}
-QScrollBar::handle:vertical
-{
- 	/*background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #EEE9E9, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);*/
-	background:qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgb(222, 221, 218), stop:1 rgb(222, 221, 218));
-	min-height:40px;
-    border-radius: 10px; /* 圆角 */
-	border-radius:4px;
-}
-/*设置上键头*/
-QScrollBar::sub-line:vertical
-{
-	height:55px;width:50px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-	/*background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgb(222, 221, 218), stop:1 rgb(222, 221, 218));*/
-    border-radius: 4px; /* 圆角 */
-	border-image:url(:/images/List_upRelease.png)；
-}
-/*设置下键头*/
-QScrollBar::add-line:vertical
-{
-	height:55px;width:50px;
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-	/*background: qlineargradient(x1:0, y1:0, x2:1, y2:1, stop:0 rgb(222, 221, 218), stop:1 rgb(222, 221, 218));*/
-    border-radius: 4px; /* 圆角 */
-	border-image:url(:/images/List_DownRelease.png)；
-}
-/*设置上键头按下状态*/
-QScrollBar::sub-line:vertical:pressed
-{
-	height:55px;width:50px;
-	background:rgb(98, 160, 234);
-	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
-    border-radius: 8px; /* 按下时保持圆角 */
-	border-image:url(:/images/List_up.png)；
-}
-/*设置下键头按下状态*/
-QScrollBar::add-line:vertical:pressed
-{
-	height:55px;width:50px;
-	background:rgb(98, 160, 234);
-	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
-    border-radius: 8px; /* 按下时保持圆角 */
-	border-image:url(:/images/List_down.png)；
-}
-
-QWidget{ 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
-QStackedWidget#stkWidget{
-	font-family: 'SimSun';
-	font-size: 22px; 
-	background-color: rgb(255, 255, 255);
-}
-
-QLabel { 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
-QLabel#labProgramName { 
-	font-family: 'SimSun';
-	font:bold;
-	font-size: 22px; 
-}
-QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed{ 
-
-	color:yellow;
-}
-/******************************************************/
-QGroupBox {
-	border: 1px solid black;
-	border-radius:5px;
-	margin-top:10px; 
-}
-QGroupBox::title { 
-	subcontrol-origin: margin;
-	left: 10px;
-	bottom: 5px;
-}
-
-QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
-
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);
-	border-radius:0px;
-	margin-top:0px; 
-	border:none;
-
-}
-
-/************************************************/
-QPushButton
-{
-	font-family: 'SimSun';
-	font-size: 22px; 
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton:pressed
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton:checked
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
-	font-family: 'SimSun';
-	font-size: 22px; 
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-color:#0055ff; /*边框颜色*/
-	border-style:outset; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:checked#Btn_TeachHome,QPushButton:checked#Btn_AlarmHome,QPushButton::checked#Btn_ManualHome
-{
-    background-color:#E7E8EB;
-    border-style:solid; 
-    border-width:1px;
-    border-color:#0A7C25; 
-}
-/**************************************************************/
-
-QPushButton#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
-{
-	font-family: 'SimSun';
-	font-size: 22px; 
-    background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
-    border-color:#0055ff; /*边框颜色*/
-	border-style:outset; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton:checked#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
-{
-    background-color:#E7E8EB;;
-    border-style:solid; 
-    border-width:1px;
-    border-color:#0A7C25; 
-}
-
-
-
-
-/**********************************************************/
-QTabBar::tab{
-	background:rgb(160, 160, 160);
-	min-width:110px;
-	height:40px;
-}
-QTabBar::tab:selected {
-      border-color: #9B9B9B;
-      border-bottom-color: #C2C7CB; /* same as pane color */
-  }
-QTabBar::tab:!selected {
-      margin-top: 2px; /* make non-selected tabs look smaller */
-  }
-  QTabWidget::pane { /* The tab widget frame */
-      border-top: 2px solid #C2C7CB;
-  }
-
-  QTabWidget::tab-bar {
-      alignment:left;
-      left: 5px; /* move to the right by 5px */
-  }
-
-  /* Style the tab using the tab sub-control. Note that
-      it reads QTabBar _not_ QTabWidget */
-  QTabBar::tab {
-	background-color:qlineargradient(x1 : 0, y1 : 0, x2 : 0, y2 : 1, stop : 0 #00befa, stop: 1 #0160ea);
-      border: 2px solid #C4C4C3;
-      border-bottom-color: #C2C7CB; /* same as the pane color */
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      padding: 2px;
-  }
-
-  QTabBar::tab:selected, QTabBar::tab:hover {
-      background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                  stop: 0 #fafafa, stop: 0.4 #f4f4f4,
-                                  stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
-  }
-
-  QTabBar::tab:selected {
-      border-color: #9B9B9B;
-      border-bottom-color: #C2C7CB; /* same as pane color */
-  }
-
-  QTabBar::tab:!selected {
-      margin-top: 2px; /* make non-selected tabs look smaller */
-  }
-
-QTabWidget::pane {
-    border: 1px solid #000000; /* 设置边框样式和颜色 */
-}
-
-
-/*******************************************************/
-QCheckBox { 
-font-weight:normal;
-font-family: 'SimSun';
-}
-QCheckBox::indicator{
-width: 35px;
-height: 35px;
-border: 1px solid black; 
-background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-}
-QCheckBox::indicator:checked {
-background-color: qlineargradient(x1 : 0, y1 : 0, x2 : 1, y2 : 0,stop : 0 #F8F8FF, stop: 1 #1E90FF); 
-        image: url(:/images/check_mark1.png);
-        border-image: none;
-    }
-
-/*****************************************************************/
-QComboBox {
-    border: 2px solid #808A87; /* 边框宽度和颜色 */
-}
-
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
-
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-QComboBox QAbstractItemView::item:hover { 
-    background-color: #409CE1;
-    color: rgb(252, 233, 79);
-}
-
-QComboBox QAbstractItemView::item:selected {
-    background-color: #409CE1;
-    color: rgb(252, 233, 79);
-}
-
-/* 添加每个 item 的高度设置 */
-QComboBox QAbstractItemView::item {
-    min-height: 40px; /* 设置每个 item 的最小高度 */
-    color: black; /* 设置默认文本颜色 */
-    background-color: white; /* 设置默认背景颜色 */
-}
-
-QComboBox:editable QLineEdit {
-    color: black; /* 设置可编辑状态下的文本颜色 */
-    background: white; /* 设置可编辑状态下的背景颜色 */
-}
-
-QComboBox:!editable, QComboBox:editable:on {
-    color: black; /* 设置非编辑状态下的文本颜色 */
-    background: white; /* 设置非编辑状态下的背景颜色 */
-}
-
-/****************************************************************************/
-QLineEdit {
-
-	padding-left: 6px;
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QTableWidget" name="tableWgtTeach">
    <property name="geometry">
@@ -334,7 +25,6 @@ QLineEdit {
    <property name="font">
     <font>
      <family>SimSun</family>
-     <pointsize>-1</pointsize>
     </font>
    </property>
    <property name="styleSheet">
@@ -495,7 +185,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -536,7 +225,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -577,7 +265,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -618,7 +305,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -659,7 +345,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -700,7 +385,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -747,7 +431,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -788,7 +471,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -832,7 +514,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -876,7 +557,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
        </font>
       </property>
       <property name="text">
@@ -908,7 +588,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
    <property name="font">
     <font>
      <family>SimSun</family>
-     <pointsize>-1</pointsize>
     </font>
    </property>
    <property name="tabPosition">
@@ -9556,7 +9235,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -9659,7 +9337,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -9703,7 +9380,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -9747,7 +9423,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -9791,7 +9466,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -9835,7 +9509,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -9879,7 +9552,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -9923,7 +9595,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -11884,7 +11555,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -11948,7 +11618,6 @@ QGroupBox::title { subcontrol-origin: margin;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <item>
@@ -12054,7 +11723,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -12118,7 +11786,6 @@ QGroupBox::title { subcontrol-origin: margin;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="currentIndex">
@@ -12233,7 +11900,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -12348,7 +12014,6 @@ QGroupBox::title { subcontrol-origin: margin;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -12455,7 +12120,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12499,7 +12163,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12543,7 +12206,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12587,7 +12249,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12631,7 +12292,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12675,7 +12335,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12719,7 +12378,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12763,7 +12421,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12807,7 +12464,6 @@ QGroupBox::title { subcontrol-origin: margin;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="styleSheet">
@@ -12872,7 +12528,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -12918,7 +12573,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -12964,7 +12618,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -13010,7 +12663,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -13051,7 +12703,6 @@ QGroupBox::title { subcontrol-origin: margin;
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -13648,7 +13299,6 @@ QGroupBox::title { subcontrol-origin: margin;
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -13686,7 +13336,6 @@ QGroupBox::title { subcontrol-origin: margin;
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -13733,7 +13382,6 @@ QGroupBox::title { subcontrol-origin: margin;
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -13803,7 +13451,6 @@ QGroupBox::title { subcontrol-origin: margin;
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -13853,7 +13500,6 @@ QGroupBox::title { subcontrol-origin: margin;
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -13903,7 +13549,6 @@ QGroupBox::title { subcontrol-origin: margin;
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -13940,7 +13585,6 @@ QGroupBox::title { subcontrol-origin: margin;
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -13980,7 +13624,6 @@ font: 20pt ;</string>
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="styleSheet">
@@ -14144,7 +13787,6 @@ font: 20pt ;</string>
                <property name="font">
                 <font>
                  <family>SimSun</family>
-                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <item>
@@ -14175,7 +13817,6 @@ font: 20pt ;</string>
                <property name="font">
                 <font>
                  <family>SimSun</family>
-                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <item>
@@ -14206,7 +13847,6 @@ font: 20pt ;</string>
                <property name="font">
                 <font>
                  <family>SimSun</family>
-                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <item>
@@ -14237,7 +13877,6 @@ font: 20pt ;</string>
                <property name="font">
                 <font>
                  <family>SimSun</family>
-                 <pointsize>-1</pointsize>
                 </font>
                </property>
                <item>
@@ -14407,7 +14046,6 @@ font: 20pt ;</string>
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -14446,7 +14084,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -14499,7 +14136,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -14527,7 +14163,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -14555,7 +14190,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -14583,7 +14217,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -14636,7 +14269,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="styleSheet">
@@ -16597,7 +16229,6 @@ font: 20pt ;</string>
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -16646,7 +16277,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <item>
@@ -16684,7 +16314,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <item>
@@ -16721,7 +16350,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <item>
@@ -16797,7 +16425,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="focusPolicy">
@@ -16850,7 +16477,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <item>

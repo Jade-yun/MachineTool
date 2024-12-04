@@ -31,7 +31,6 @@
   <property name="font">
    <font>
     <family>SimSun</family>
-    <pointsize>-1</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -54,24 +53,12 @@ QWidget#centralwidget{
 }
 */
 
-QWidget{ 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
 QStackedWidget#stkWidget{
-	font-family: 'SimSun';
-	font-size: 22px; 
 	background-color: rgb(255, 255, 255);
 }
 
-QLabel { 
-	font-family: 'SimSun';
-	font-size: 22px; 
-}
 QLabel#labProgramName { 
-	font-family: 'SimSun';
 	font:bold;
-	font-size: 22px; 
 }
 QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed{ 
 
@@ -103,8 +90,6 @@ QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZ
 /************************************************/
 QPushButton
 {
-	font-family: 'SimSun';
-	font-size: 22px; 
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
 
     border-style:solid; /*边框风格*/
@@ -129,8 +114,6 @@ QPushButton:checked
     border-radius:5px; /*边框倒角*/
 }
 QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
-	font-family: 'SimSun';
-	font-size: 22px; 
     background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
     border-color:#0055ff; /*边框颜色*/
 	border-style:outset; /*边框风格*/
@@ -159,8 +142,6 @@ QPushButton:pressed#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:
 
 QPushButton#btnSA1Arm1,#btnSA1Arm2,#btnSA2Arm1,#btnSA2Arm2
 {
-	font-family: 'SimSun';
-	font-size: 22px; 
     background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/
     border-color:#0055ff; /*边框颜色*/
 	border-style:outset; /*边框风格*/
@@ -240,10 +221,6 @@ QTabWidget::pane {
 
 
 /*******************************************************/
-QCheckBox { 
-font-weight:normal;
-font-family: 'SimSun';
-}
 QCheckBox::indicator{
 width: 35px;
 height: 35px;
@@ -430,7 +407,6 @@ QScrollBar::down-arrow:vertical:pressed
      <property name="font">
       <font>
        <family>SimSun</family>
-       <pointsize>-1</pointsize>
       </font>
      </property>
      <property name="text">
@@ -480,7 +456,6 @@ QScrollBar::down-arrow:vertical:pressed
      <property name="font">
       <font>
        <family>SimSun</family>
-       <pointsize>-1</pointsize>
       </font>
      </property>
      <property name="text">
@@ -527,7 +502,6 @@ QScrollBar::down-arrow:vertical:pressed
      <property name="font">
       <font>
        <family>SimSun</family>
-       <pointsize>-1</pointsize>
       </font>
      </property>
      <property name="text">
@@ -577,7 +551,6 @@ QScrollBar::down-arrow:vertical:pressed
      <property name="font">
       <font>
        <family>SimSun</family>
-       <pointsize>-1</pointsize>
       </font>
      </property>
      <property name="text">
@@ -627,7 +600,6 @@ QScrollBar::down-arrow:vertical:pressed
      <property name="font">
       <font>
        <family>SimSun</family>
-       <pointsize>-1</pointsize>
       </font>
      </property>
      <property name="text">
@@ -810,7 +782,6 @@ border: 1px solid black;
       <property name="font">
        <font>
         <family>SimSun</family>
-        <pointsize>-1</pointsize>
         <weight>50</weight>
         <italic>false</italic>
         <bold>false</bold>
@@ -896,7 +867,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -924,7 +894,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -949,7 +918,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -977,7 +945,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1002,7 +969,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1030,7 +996,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1055,7 +1020,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1083,7 +1047,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1108,7 +1071,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1136,7 +1098,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1161,7 +1122,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1189,7 +1149,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1276,7 +1235,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1301,7 +1259,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="layoutDirection">
@@ -1335,7 +1292,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="frameShadow">
@@ -1363,7 +1319,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1388,7 +1343,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="locale">
@@ -1416,7 +1370,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1451,7 +1404,6 @@ border: 1px solid black;
      <property name="font">
       <font>
        <family>SimSun</family>
-       <pointsize>-1</pointsize>
        <weight>75</weight>
        <italic>false</italic>
        <bold>true</bold>

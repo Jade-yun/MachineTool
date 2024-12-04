@@ -16,6 +16,10 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
+    QFont font("SimSun");
+    font.setPixelSize(20);
+    qApp->setFont(font);
+
 //    a.setStyle(QStyleFactory::create("motif"));
     //    a.setStyle(QStyleFactory::create("windows"));
 

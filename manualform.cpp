@@ -379,20 +379,16 @@ ManualForm::ManualForm(QWidget *parent) :
     });
 #endif
     connect(ui->chbMachineControl,&QCheckBox::clicked,this,[=](){//机床控制使能复选框
-        if(!ui->chbMachineControl->isChecked())
-        {
-            ui->btnAutoGate1Close->setEnabled(true);
-            ui->btnStartProcess1Break->setEnabled(false);
-            ui->btnMainAxisLocate1Break->setEnabled(false);
-            ui->btnControlRotate1Break->setEnabled(false);
-        }
-        else
-        {
-            ui->btnAutoGate1Close->setEnabled(true);
-            ui->btnStartProcess1Break->setEnabled(true);
-            ui->btnMainAxisLocate1Break->setEnabled(true);
-            ui->btnControlRotate1Break->setEnabled(true);
-        }
+        bool canUse = ui->chbMachineControl->isChecked();
+        ui->btnAutoGate1Close->setEnabled(canUse);
+        ui->btnStartProcess1Break->setEnabled(canUse);
+        ui->btnMainAxisLocate1Break->setEnabled(canUse);
+        ui->btnControlRotate1Break->setEnabled(canUse);
+
+//        ui->btnAutoGate1Close->setEnabled(canUse && m_OutportInterlock[3][0]);
+//        ui->btnStartProcess1Break->setEnabled(canUse && m_SeniorFunc[]);
+//        ui->btnMainAxisLocate1Break->setEnabled(canUse && m_SeniorFunc[]);
+//        ui->btnControlRotate1Break->setEnabled(canUse && m_SeniorFunc[]);
     });
 
     StateButtonInit();//初始化相关状态按钮状态
@@ -1008,6 +1004,26 @@ void ManualForm::handleLoginModeChanged(LoginMode mode)
 
 void ManualForm::updateReserveButtonState()
 {
+    const std::vector<QPushButton*> interLockButtons = {
+        ui->btnRawMaterial1Loosen, ui->btnFinishedProduct1Loosen, ui->btnClaw1Reverse, ui->btnAutoGate1Close,
+        ui->btnChuck1Loosen, ui->btnBlow1Loosen, ui->btnStartProcess1Break, ui->btnControlRotate1Break,
+        ui->btnMainAxisLocate1Break
+    };
+    std::vector<bool> buttonState(9, true);
+    for (int i = 0; i < 5; i++)
+    {
+        buttonState[i] = m_OutportInterlock[i][0];
+    }
+
+    for (size_t i = 0; i < interLockButtons.size(); i++)
+    {
+       auto btn = interLockButtons.at(i);
+
+       bool isUse = buttonState[i];
+//       btn->setEnabled(isUse);
+       btn->setVisible(isUse);
+    }
+
     for (size_t i = 0; i < reserveButtons.size(); ++i)
     {
         const auto& port = m_Port_Y[i];
