@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     pMainWindow = this; // it's better to initialize pMainWindow here
     connect(ui->Progress_bar,SIGNAL(valueChanged(int)),ui->Progress_num,SLOT(setValue(int)));//进度条当前值与显示数字关联
     ui->stkWidget->setCurrentWidget(ui->Init_page);
+    ui->Progress_bar->setWindowModality(Qt::WindowModality::WindowModal);
 
     ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");
 

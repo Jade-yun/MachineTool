@@ -39,9 +39,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
 {
     background:;        // 整个标题头区域背景色
 	color: rgb(255, 170, 127);
-}
- 
-</string>
+}</string>
   </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
@@ -69,8 +67,11 @@ QHeaderView                    // QTableWidget 标题头整个区域
      <family>SimSun</family>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>

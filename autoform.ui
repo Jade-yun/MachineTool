@@ -14,7 +14,428 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">/*255,115,0     246,188,139    234,157,91*/
+/*通用控件样式*/
+/*QGroupBox 样式设置*/
+QGroupBox {
+        background-color:transparent;
+ }
+QGroupBox::title {
+    color:black;
+ }
+ /* QTableView,QTableWidget,QTreeWidget 样式*/
+ QTableView,QTableWidget,QTreeWidget{
+     color:black;
+     selection-background-color:rgb(255,115,0);/*表格选中时的颜色*/
+     background-color:white;/*整个表格的背景色，这里为白色*/
+     border:1px solid #E0DDDC;/*边框为1像素，灰色*/
+     gridline-color:#B8B8B8;/*这个是表格的格子线的颜色，为亮灰*/
+ }
+ QTableView,QTableWidget,QTreeWidget QHeaderView::section:hover
+ {
+     background-color: rgb(246,188,139);
+ }
+
+ QTableView,QTableWidget,QTreeWidget QHeaderView::section:checked
+ {
+     background-color: rgb(255,115,0);
+ }
+ QTableView,QTableWidget,QTreeWidget QHeaderView::section {
+      border-color: gray;
+      background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(199, 199, 199, 255), stop:1 rgba(255, 255, 255, 255));
+ }
+ QTabBar::tab:selected{
+     background-color: qlineargradient(spread:reflect, x1:0.46244, y1:0.38, x2:0.445129, y2:1, stop:0.252446 rgba(220, 220, 220, 255), stop:0.409804 rgba(230, 230, 230, 255), stop:0.98 rgba(240, 240, 240, 255), stop:1 rgba(0, 0, 0, 0));
+     color:black;
+ }
+ QTabBar::tab:!selected{
+     background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(255,115,0, 255), stop:0.68099 rgba(255,115,0, 255), stop:0.816406 rgba(255,115,0, 255), stop:0.976562 rgba(255, 255, 255, 255));
+     color:white;
+
+ }
+
+QWidget#tab_lathe QTabBar::tab:selected{
+    position: relative;
+    top:0px;
+    width: 80px;
+    height: 38px;
+    border:1px solid gray;
+    border-bottom: 0px;
+    background-color: qlineargradient(spread:reflect, x1:0.46244, y1:0.38, x2:0.445129, y2:1, stop:0.252446 rgba(220, 220, 220, 255), stop:0.409804 rgba(230, 230, 230, 255), stop:0.98 rgba(240, 240, 240, 255), stop:1 rgba(0, 0, 0, 0));
+    color:black;
+}
+
+QWidget#tab_lathe QTabBar::tab:!selected{
+    width: 80px;
+    height: 35px;
+    position: relative;
+    top: 5px;
+    border:1px solid gray;
+    border-bottom: 0px;
+    border-style: inset;
+    background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(255,115,0, 255), stop:0.68099 rgba(255,115,0, 255), stop:0.816406 rgba(255,115,0, 255), stop:0.976562 rgba(255, 255, 255, 255));
+    color:white;
+}
+ /*QLabel 样式*/
+ QWidget#MainWindows QWidget#widget_5 QLabel{
+ color:black;
+ background-color:transparent;
+ }
+ /*QComboBox 样式*/
+ QComboBox QAbstractItemView{
+     background-color:#E6E6FA;
+     color:black;
+ }
+ QComboBox::drop-down {
+     border-left-color: darkgray;
+ }
+ /*QPushButton  QToolButton样式*/
+ QPushButton,QToolButton{
+      border-color: gray;
+      background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(199, 199, 199, 255), stop:1 rgba(255, 255, 255, 255));
+ }
+
+ QToolButton::disabled,
+ QPushButton::disabled{
+         background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(199, 199, 199, 255), stop:1 rgba(255, 255, 255, 255));
+         color:lightgray;
+ }
+
+QPushButton:pressed,
+QToolButton:pressed,
+QPushButton:checked,
+QToolButton:checked,
+QDialog#ButtonImitateDlg QPushButton:checked
+{
+    border-style: inset;
+    background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(255,115,0, 255), stop:0.68099 rgba(255,115,0, 255), stop:0.816406 rgba(255,115,0, 255), stop:0.976562 rgba(255, 255, 255, 255));
+    color:white;
+}
+
+QPushButton#pushButton_Take:pressed,
+QPushButton#pushButton_TakeBack:pressed,
+QPushButton#pushButton_Storage:pressed
+{
+    border-color: gray;
+    color:white;
+    background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(199, 199, 199, 255), stop:1 rgba(255, 255, 255, 255));
+}
+
+QPushButton#pushButton_Take:checked,
+QPushButton#pushButton_TakeBack:checked,
+QPushButton#pushButton_Storage:checked
+{
+    border-style: inset;
+    background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(255,115,0, 255), stop:0.68099 rgba(255,115,0, 255), stop:0.816406 rgba(255,115,0, 255), stop:0.976562 rgba(255, 255, 255, 255));
+    color:white;
+}
+
+QScrollBar:horizontal {
+    border: 2px solid #6c6c6c;
+    background: rgba(214,212,210,100%);
+    height: 30px;
+    min-width: 30px;
+    margin: 2px 0px 1px 0px;
+    padding-left:33px;
+    padding-right:33px;
+}
+QScrollBar:vertical {
+    border: 2px solid #6c6c6c;
+    background: rgba(214,212,210,100%);
+    width: 30px;  
+    min-height: 30px; 
+    margin: 2px 0px 1px 0px;
+    padding-top: 30px;
+    padding-bottom: 33px;  
+}
+ /*进度条*/
+ QProgressBar::chunk{
+     background: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255,115,0, 255), stop:1 rgba(255,115,0, 255));
+ }
+QProgressBar#progressBar_start::chunk{
+     border-radius: 15px;
+}
+/*主页面背景色*/
+QWidget#MainWindows QWidget#widget_5 {
+background-color:rgb(255,115,0);
+}
+/*功能模块背景透明*/
+QWidget#MainWindows QStackedWidget#stackedWidget{
+    background-color:rgb(240,240,240);
+    border-radius: 15px;
+}
+/*主界面跳转按钮样式*/
+QWidget#MainWindows QWidget#widget_2  QToolButton
+{
+    background-color: rgb(240, 240, 240,255);
+    background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(255,115,0,255), stop:0.68099 rgba(255,115,0, 255), stop:0.816406 rgba(255,115,0, 255), stop:0.976562 rgba(255, 255, 255, 255));
+    color:white;
+}
+QWidget#MainWindows QWidget#widget_2  QToolButton:disabled{
+     background-color:gray;
+     color:lightgray;
+}
+QWidget#MainWindows QWidget#widget_2  QToolButton#tBtn_functionSetPage:checked,
+QWidget#MainWindows QWidget#widget_2  QToolButton#tBtn_monitorPage:checked,
+QWidget#MainWindows QWidget#widget_2  QToolButton#tBtn_teach:checked,
+QWidget#MainWindows QWidget#widget_2  QToolButton#tBtn_recordpage:checked,
+QWidget#MainWindows QWidget#widget_2  QToolButton#tBtn_alarmpage:checked,
+QWidget#MainWindows QWidget#widget_2  QToolButton#tBtn_mainpage:checked{
+    background-color: qlineargradient(spread:reflect, x1:0.46244, y1:0.38, x2:0.445129, y2:1, stop:0.252446 rgba(220, 220, 220, 255), stop:0.409804 rgba(230, 230, 230, 255), stop:0.98 rgba(240, 240, 240, 255), stop:1 rgba(0, 0, 0, 0));
+    color:black;
+}
+
+/*登入界面*/
+QDialog#LoginDlg,
+/*提示框界面*/
+QDialog#frmMessageBox QPushButton
+{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(234,157,91,255), stop:1 rgba(234,157,91,255));
+}
+QDialog#frmMessageBox QWidget#widget_title
+{
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 #1B89CA, stop:1 #1077B5);
+}
+/*监视界面、安全区页面、逻辑教导*/
+QWidget#page_DoublePage QPushButton#pushButton_ManipulatorInput,
+QWidget#page_DoublePage QPushButton#pushButton_ManipulatorOutput,
+QWidget#page_DoublePage QPushButton#pushButton_InjectionInput,
+QWidget#page_DoublePage QPushButton#pushButton_ServoMonitor,
+QWidget#page_DoublePage QPushButton#pushButton_InjectionOutput,
+QWidget SafeAreaForm QPushButton#btnArm1,
+QWidget SafeAreaForm QPushButton#btnArm2,
+QDialog#ConditionDlg QPushButton#btn_logicSignal,
+QDialog#ConditionDlg QPushButton#btn_logicVar,
+QDialog#ConditionDlg QPushButton#btn_logicPosition,
+QDialog#ConditionDlg QPushButton#btn_logicTimer
+{
+    background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(255,115,0,255), stop:0.68099 rgba(255,115,0, 255), stop:0.816406 rgba(255,115,0, 255), stop:0.976562 rgba(255, 255, 255, 255));
+    color:white;
+}
+QWidget#page_DoublePage QPushButton#pushButton_ManipulatorInput:checked,
+QWidget#page_DoublePage QPushButton#pushButton_ManipulatorOutput:checked,
+QWidget#page_DoublePage QPushButton#pushButton_InjectionInput:checked,
+QWidget#page_DoublePage QPushButton#pushButton_ServoMonitor:checked,
+QWidget#page_DoublePage QPushButton#pushButton_InjectionOutput:checked,
+QWidget SafeAreaForm QPushButton#btnArm1:checked,
+QWidget SafeAreaForm QPushButton#btnArm2:checked,
+QDialog#ConditionDlg QPushButton#btn_logicSignal:checked,
+QDialog#ConditionDlg QPushButton#btn_logicVar:checked,
+QDialog#ConditionDlg QPushButton#btn_logicPosition:checked,
+QDialog#ConditionDlg QPushButton#btn_logicTimer:checked
+{
+    background-color: qlineargradient(spread:reflect, x1:0.46244, y1:0.38, x2:0.445129, y2:1, stop:0.252446 rgba(220, 220, 220, 255), stop:0.409804 rgba(230, 230, 230, 255), stop:0.98 rgba(240, 240, 240, 255), stop:1 rgba(0, 0, 0, 0));
+    color:black;
+}
+/*手动界面*/
+QWidget#ManualStatusWin QTableWidget#tableWidget,
+/*自动页面*/
+QWidget#AutoStatusWin QTableWidget#tableWidget_auto QHeaderView::section
+{
+    color:black; 
+    background-color:rgb(255,115,0);
+}
+/*子页面标题栏*/
+QWidget#TitleBar
+{
+    background-color: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(255,115,0,255), stop:1 rgba(255, 255, 255, 255));
+}
+/*计算每转脉冲距离键盘*/
+QDialog#gearCalculatorDlg QPushButton#pBtn_0,
+QDialog#gearCalculatorDlg QPushButton#pBtn_1,
+QDialog#gearCalculatorDlg QPushButton#pBtn_2,
+QDialog#gearCalculatorDlg QPushButton#pBtn_3,
+QDialog#gearCalculatorDlg QPushButton#pBtn_4,
+QDialog#gearCalculatorDlg QPushButton#pBtn_5,
+QDialog#gearCalculatorDlg QPushButton#pBtn_6,
+QDialog#gearCalculatorDlg QPushButton#pBtn_7,
+QDialog#gearCalculatorDlg QPushButton#pBtn_8,
+QDialog#gearCalculatorDlg QPushButton#pBtn_9,
+QDialog#gearCalculatorDlg QPushButton#pBtn_10,
+/*密码键盘*/
+QDialog#PasswdInputDlg QPushButton#pBtn_0,
+QDialog#PasswdInputDlg QPushButton#pBtn_1,
+QDialog#PasswdInputDlg QPushButton#pBtn_2,
+QDialog#PasswdInputDlg QPushButton#pBtn_3,
+QDialog#PasswdInputDlg QPushButton#pBtn_4,
+QDialog#PasswdInputDlg QPushButton#pBtn_5,
+QDialog#PasswdInputDlg QPushButton#pBtn_6,
+QDialog#PasswdInputDlg QPushButton#pBtn_7,
+QDialog#PasswdInputDlg QPushButton#pBtn_8,
+QDialog#PasswdInputDlg QPushButton#pBtn_9,
+QDialog#PasswdInputDlg QPushButton#pBtn_10,
+QDialog#PasswdInputDlg QPushButton#pBtn_11,
+QDialog#PasswdInputDlg QPushButton#pBtn_12,
+QDialog#PasswdInputDlg QPushButton#pBtn_13,
+QDialog#PasswdInputDlg QPushButton#pBtn_14,
+QDialog#PasswdInputDlg QPushButton#pBtn_15,
+/*中文输入法界面*/
+QDialog#KeyBoardDlg QPushButton,
+/*科学计算器*/
+QWidget#MathCalculatorForm QPushButton,
+/*数值输入法*/
+QDialog#CalculatorDlg QPushButton#pBtn_0,
+QDialog#CalculatorDlg QPushButton#pBtn_1,
+QDialog#CalculatorDlg QPushButton#pBtn_2,
+QDialog#CalculatorDlg QPushButton#pBtn_3,
+QDialog#CalculatorDlg QPushButton#pBtn_4,
+QDialog#CalculatorDlg QPushButton#pBtn_5,
+QDialog#CalculatorDlg QPushButton#pBtn_6,
+QDialog#CalculatorDlg QPushButton#pBtn_7,
+QDialog#CalculatorDlg QPushButton#pBtn_8,
+QDialog#CalculatorDlg QPushButton#pBtn_9,
+QDialog#CalculatorDlg QPushButton#pBtn_10
+
+{
+        border: 2px solid gray;
+        border-radius: 6px;
+        border-style: outset;
+        color:black;
+        background-color: rgb(246,188,139);
+        font:30px;
+
+}
+/*计算每转脉冲距离键盘*/
+QDialog#gearCalculatorDlg QPushButton#pBtn_0:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_1:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_2:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_3:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_4:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_5:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_6:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_7:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_8:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_9:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_10:pressed,
+/*密码键盘*/
+QDialog#PasswdInputDlg QPushButton#pBtn_0:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_1:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_2:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_3:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_4:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_5:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_6:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_7:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_8:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_9:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_10:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_11:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_12:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_13:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_14:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_15:pressed,
+/*中文输入法界面*/
+QDialog#KeyBoardDlg QPushButton:pressed,
+/*科学计算器*/
+QWidget#MathCalculatorForm QPushButton:pressed,
+/*数值输入法*/
+QDialog#CalculatorDlg QPushButton#pBtn_0:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_1:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_2:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_3:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_4:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_5:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_6:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_7:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_8:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_9:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_10:pressed
+{
+        border: 2px solid gray;
+        border-radius: 6px;
+        border-style: inset;
+        color:black;
+        background-color: rgb(245 ,245, 245);
+
+}
+/*计算每转脉冲距离键盘*/
+QDialog#gearCalculatorDlg QPushButton#pBtn_negative,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Backspace,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Cancel,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Ok,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Clear,
+/*密码键盘*/
+QDialog#PasswdInputDlg QPushButton#pBtn_Backspace,
+QDialog#PasswdInputDlg QPushButton#pBtn_Cancel,
+QDialog#PasswdInputDlg QPushButton#pBtn_Ok,
+QDialog#PasswdInputDlg QPushButton#pBtn_Clear,
+/*科学计算器*/
+QWidget#MathCalculatorForm QPushButton#buttonDel,
+QWidget#MathCalculatorForm QPushButton#buttonClear,
+QWidget#MathCalculatorForm QPushButton#buttonEqual,
+/*数值输入法*/
+QDialog#CalculatorDlg QPushButton#pBtn_negative,
+QDialog#CalculatorDlg QPushButton#pBtn_Backspace,
+QDialog#CalculatorDlg QPushButton#pBtn_Cancel,
+QDialog#CalculatorDlg QPushButton#pBtn_Ok,
+QDialog#CalculatorDlg QPushButton#pBtn_Clear
+{
+        border: 1px solid gray;
+        border-radius: 6px;
+        border-style: outset;
+        color:black;
+        background-color: rgb(255,115,0);
+        font:26px;
+}
+/*计算每转脉冲距离键盘*/
+QDialog#gearCalculatorDlg QPushButton#pBtn_negative:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Backspace:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Cancel:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Ok:pressed,
+QDialog#gearCalculatorDlg QPushButton#pBtn_Clear:pressed,
+/*密码键盘*/
+QDialog#PasswdInputDlg QPushButton#pBtn_Backspace:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_Cancel:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_Ok:pressed,
+QDialog#PasswdInputDlg QPushButton#pBtn_Clear:pressed,
+/*科学计算器*/
+QWidget#MathCalculatorForm QPushButton#buttonDel:pressed,
+QWidget#MathCalculatorForm QPushButton#buttonClear:pressed,
+QWidget#MathCalculatorForm QPushButton#buttonEqual:pressed,
+/*数值输入法*/
+QDialog#CalculatorDlg QPushButton#pBtn_negative:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_Backspace:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_Cancel:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_Ok:pressed,
+QDialog#CalculatorDlg QPushButton#pBtn_Clear:pressed
+{
+        border: 1px solid gray;
+        border-radius: 6px;
+        border-style: inset;
+        color:black;
+        background-color: rgb(245, 245, 245);
+}
+/*主页面按钮图标*/
+QWidget#MainWindows QFrame#frame_4 QPushButton#btn_Wheel{
+    qproperty-icon:url(:/icon/wheelDisable.png);
+}
+
+/*主页面数值型文字颜色*/
+QWidget#MainWindows QWidget#widget_4 QLabel{
+    color:rgb(253, 213, 0);
+}
+/*主界面文字显示的颜色*/
+QWidget#MainWindows QWidget#widget_4 QLabel#label_handSpeedShow,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_motorSpeedShow,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_Z1,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_Y1,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_X1,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_A,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_Y2,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_X2,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_B,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_C,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_load,
+QWidget#MainWindows QWidget#widget_4 QLabel#label_torque
+{
+    color:white;
+}
+
+/*切换图标*/
+QLabel#label_swith
+{
+    image: url(:/icon/extendBtn2.png);
+}</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -706,7 +1127,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page1AutoState">
       <widget class="QPushButton" name="btnMergeExpand">
@@ -1292,17 +1713,17 @@ QPushButton:pressed
        <property name="columnCount">
         <number>2</number>
        </property>
-       <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>120</number>
-       </attribute>
        <attribute name="horizontalHeaderMinimumSectionSize">
         <number>120</number>
        </attribute>
-       <attribute name="verticalHeaderDefaultSectionSize">
-        <number>40</number>
+       <attribute name="horizontalHeaderDefaultSectionSize">
+        <number>120</number>
        </attribute>
        <attribute name="verticalHeaderMinimumSectionSize">
         <number>30</number>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>40</number>
        </attribute>
        <row/>
        <row/>
@@ -2727,14 +3148,14 @@ border: 1px solid #000000;
       <attribute name="horizontalHeaderVisible">
        <bool>false</bool>
       </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>50</number>
+      </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>100</number>
       </attribute>
       <attribute name="horizontalHeaderHighlightSections">
        <bool>false</bool>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>50</number>
       </attribute>
       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
        <bool>false</bool>
@@ -2748,14 +3169,14 @@ border: 1px solid #000000;
       <attribute name="verticalHeaderCascadingSectionResizes">
        <bool>false</bool>
       </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>20</number>
+      </attribute>
       <attribute name="verticalHeaderDefaultSectionSize">
        <number>50</number>
       </attribute>
       <attribute name="verticalHeaderHighlightSections">
        <bool>true</bool>
-      </attribute>
-      <attribute name="verticalHeaderMinimumSectionSize">
-       <number>20</number>
       </attribute>
       <attribute name="verticalHeaderShowSortIndicator" stdset="0">
        <bool>false</bool>

@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string/>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
@@ -28,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -554,7 +557,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -596,7 +599,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -636,7 +638,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -667,7 +668,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -702,7 +702,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -737,7 +736,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -768,7 +766,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -803,7 +800,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -838,7 +834,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -869,7 +864,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -900,7 +894,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -931,7 +924,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -971,7 +963,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1006,7 +997,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1037,7 +1027,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1080,7 +1069,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1111,7 +1099,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1146,7 +1133,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1177,7 +1163,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1212,7 +1197,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1247,7 +1231,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1284,7 +1267,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1319,7 +1301,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1350,7 +1331,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1381,7 +1361,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1416,7 +1395,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -1447,7 +1425,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1493,7 +1470,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -1533,7 +1509,6 @@ QPushButton::released{
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -3083,7 +3058,6 @@ QPushButton::released{
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -3108,7 +3082,6 @@ QPushButton::released{
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -3205,22 +3178,7 @@ QPushButton::released{
 	border:1px solid black;
 	gridline-color:#0F0963;
 }
-
- QScrollBar:vertical
-{ /*滑块设置*/
-	width:35px;
-	background: rgb(238, 238, 236);
-	padding-top:20px;
-	padding-bottom:20px;
-}
-/*按压时的颜色*/
-QScrollBar::handle:vertical:hover
-{
-	background:rgb(46, 165, 250);
-	border-radius:4px;
-}
-
-QHeaderView                    // QTableWidget 标题头整个区域
+QHeaderView 
 {
     background:;        // 整个标题头区域背景色
 	color: rgb(255, 170, 127);
@@ -3475,21 +3433,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
- 
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
+        <string notr="true">
 
 
 </string>
@@ -3799,7 +3743,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -3849,7 +3792,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -3899,7 +3841,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -3936,7 +3877,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -3978,7 +3918,6 @@ QGroupBox::title { subcontrol-origin: margin;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -4024,7 +3963,6 @@ QGroupBox::title { subcontrol-origin: margin;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -4071,7 +4009,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -4118,7 +4055,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -4168,7 +4104,6 @@ QGroupBox::title { subcontrol-origin: margin;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -4221,21 +4156,6 @@ QGroupBox::title { subcontrol-origin: margin;
 	border:1px solid black;
 	gridline-color:#0F0963;
 }
-
- QScrollBar:vertical
-{ /*滑块设置*/
-	width:35px;
-	background: rgb(238, 238, 236);
-	padding-top:20px;
-	padding-bottom:20px;
-}
-/*按压时的颜色*/
-QScrollBar::handle:vertical:hover
-{
-	background:rgb(46, 165, 250);
-	border-radius:4px;
-}
-
 QHeaderView                    // QTableWidget 标题头整个区域
 {
     background:;        // 整个标题头区域背景色
@@ -4423,24 +4343,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">QComboBox::!editable {
-                      border: 2px solid #808A87; /* 边框宽度和颜色 */
-                       }
-QComboBox::drop-down {
-    subcontrol-origin: padding-right;
-    subcontrol-position: top right;
-    width: 20px; /* 下拉箭头宽度 */
-    border-left-width: 2px; /* 文本和箭头之间的分隔线宽度 */
-    border-left-color: gray; /* 文本和箭头之间的分隔线颜色 */
-    border-left-style: solid; /* 文本和箭头之间的分隔线样式 */
-}
- 
-QComboBox::down-arrow {
-    image: url(:/images/arrow_down_normal.png); /* 自定义下拉箭头图片 */
-}
-
-
-</string>
+        <string notr="true"/>
        </property>
        <item>
         <property name="text">
@@ -4515,7 +4418,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -4561,7 +4463,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -4607,7 +4508,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -4644,7 +4544,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -4681,7 +4580,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -4718,7 +4616,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -4764,7 +4661,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -4801,7 +4697,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -4847,7 +4742,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -4884,7 +4778,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -4921,7 +4814,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -4967,7 +4859,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5013,7 +4904,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5050,7 +4940,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5087,7 +4976,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5133,7 +5021,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5170,7 +5057,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5207,7 +5093,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5244,7 +5129,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5290,7 +5174,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5336,7 +5219,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5382,7 +5264,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5428,7 +5309,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5465,7 +5345,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5502,7 +5381,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5548,7 +5426,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5594,7 +5471,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5640,7 +5516,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5682,7 +5557,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5719,7 +5593,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5770,7 +5643,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5807,7 +5679,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5858,7 +5729,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -5909,7 +5779,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5946,7 +5815,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -5983,7 +5851,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6020,7 +5887,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6071,7 +5937,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6108,7 +5973,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6159,7 +6023,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6196,7 +6059,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6233,7 +6095,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6284,7 +6145,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6335,7 +6195,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6386,7 +6245,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6437,7 +6295,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6474,7 +6331,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6511,7 +6367,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6562,7 +6417,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6599,7 +6453,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6650,7 +6503,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6701,7 +6553,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6738,7 +6589,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6775,7 +6625,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6826,7 +6675,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -6877,7 +6725,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -6925,7 +6772,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -6956,7 +6802,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -6987,7 +6832,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7066,7 +6910,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7113,7 +6956,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7144,7 +6986,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7175,7 +7016,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7206,7 +7046,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7237,7 +7076,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7300,7 +7138,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7331,7 +7168,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7410,7 +7246,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7473,7 +7308,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7536,7 +7370,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7583,7 +7416,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7630,7 +7462,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7677,7 +7508,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7724,7 +7554,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7771,7 +7600,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7818,7 +7646,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7865,7 +7692,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -7914,7 +7740,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -7939,7 +7764,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShadow">
@@ -11229,7 +11053,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11260,7 +11083,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11291,7 +11113,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11322,7 +11143,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11362,7 +11182,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11397,7 +11216,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11432,7 +11250,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11463,7 +11280,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11503,7 +11319,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11534,7 +11349,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11569,7 +11383,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11600,7 +11413,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11652,7 +11464,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11683,7 +11494,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11718,7 +11528,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -11749,7 +11558,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -11802,7 +11610,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -12018,7 +11825,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -12105,7 +11911,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -12195,7 +12000,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -12296,7 +12100,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -12444,7 +12247,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -12535,7 +12337,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -12602,7 +12403,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -12659,7 +12459,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -12696,7 +12495,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -12730,7 +12528,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -12872,7 +12669,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -12920,7 +12716,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -13180,7 +12975,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -13261,7 +13055,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -13345,7 +13138,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -13433,7 +13225,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -13500,7 +13291,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -13557,7 +13347,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -13594,7 +13383,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -13628,7 +13416,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -13770,7 +13557,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -13818,7 +13604,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -14028,7 +13813,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -14109,7 +13893,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -14193,7 +13976,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -14331,7 +14113,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -14398,7 +14179,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -14455,7 +14235,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -14492,7 +14271,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -14526,7 +14304,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -14668,7 +14445,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -14716,7 +14492,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -14926,7 +14701,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -15007,7 +14781,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -15091,7 +14864,6 @@ QComboBox::down-arrow {
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -15232,7 +15004,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -15299,7 +15070,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -15359,7 +15129,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -15396,7 +15165,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -15703,7 +15471,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -15775,7 +15542,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -15897,7 +15663,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -15947,7 +15712,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -16018,7 +15782,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -16103,7 +15866,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -16180,7 +15942,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -16302,7 +16063,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -16402,7 +16162,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -16608,7 +16367,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -16658,7 +16416,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -16779,7 +16536,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -16856,7 +16612,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -16981,7 +16736,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -17081,7 +16835,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -17293,7 +17046,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -17343,7 +17095,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -17464,7 +17215,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -17541,7 +17291,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -17666,7 +17415,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -17766,7 +17514,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -17978,7 +17725,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -18028,7 +17774,6 @@ QComboBox::down-arrow {
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="layoutDirection">
@@ -18149,7 +17894,6 @@ QComboBox::down-arrow {
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="text">
@@ -18248,7 +17992,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18298,7 +18041,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18348,7 +18090,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18398,7 +18139,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18448,7 +18188,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18498,7 +18237,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18548,7 +18286,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18618,7 +18355,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18668,7 +18404,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18718,7 +18453,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18768,7 +18502,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18818,7 +18551,6 @@ QComboBox::down-arrow {
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -18880,7 +18612,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -18913,7 +18644,6 @@ QComboBox::down-arrow {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -18954,7 +18684,6 @@ QComboBox::down-arrow {
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -19131,7 +18860,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -19167,7 +18895,6 @@ QComboBox::down-arrow {
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -19202,7 +18929,6 @@ QComboBox::down-arrow {
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -19292,7 +19018,6 @@ QComboBox::down-arrow {
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -19400,7 +19125,7 @@ QComboBox::down-arrow {
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -19439,7 +19164,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -19493,7 +19217,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -20059,7 +19782,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -20081,7 +19803,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -20141,7 +19862,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -20173,7 +19893,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -20205,7 +19924,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -20249,7 +19967,6 @@ QComboBox::down-arrow {
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -20913,7 +20630,6 @@ QSlider::sub-page:horizontal{
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -20952,7 +20668,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -20998,7 +20713,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21044,7 +20758,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21073,7 +20786,6 @@ QSlider::sub-page:horizontal{
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -21112,7 +20824,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21158,7 +20869,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21204,7 +20914,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21250,7 +20959,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21288,7 +20996,6 @@ QSlider::sub-page:horizontal{
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -21474,7 +21181,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -21699,7 +21405,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -21743,7 +21448,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="styleSheet">
@@ -21802,7 +21506,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21846,7 +21549,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -21890,7 +21592,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -22000,7 +21701,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -22021,7 +21721,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -22207,7 +21906,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -22228,7 +21926,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -22426,7 +22123,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -22447,7 +22143,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -22662,7 +22357,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -23505,7 +23199,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -23524,7 +23217,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -23610,7 +23302,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23635,7 +23326,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23660,7 +23350,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23685,7 +23374,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23710,7 +23398,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23735,7 +23422,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23760,7 +23446,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23785,7 +23470,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23810,7 +23494,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23853,7 +23536,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23878,7 +23560,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23933,7 +23614,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23958,7 +23638,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -23983,7 +23662,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -24008,7 +23686,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -24033,7 +23710,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -24058,7 +23734,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -24083,7 +23758,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -24108,7 +23782,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -24133,7 +23806,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="text">
@@ -25245,7 +24917,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -25316,7 +24987,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -25411,7 +25081,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -25667,7 +25336,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -25721,7 +25389,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -25876,7 +25543,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -25968,7 +25634,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -26338,7 +26003,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -27204,7 +26868,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -27386,7 +27049,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -27441,7 +27103,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -27507,7 +27168,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -27578,7 +27238,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -27619,7 +27278,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -27731,7 +27389,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -28059,7 +27716,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -28643,7 +28299,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -28698,7 +28353,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -28764,7 +28418,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -28835,7 +28488,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -28876,7 +28528,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -28988,7 +28639,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -29316,7 +28966,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -29501,7 +29150,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -30085,7 +29733,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -30114,7 +29761,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -30169,7 +29815,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -30235,7 +29880,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -30306,7 +29950,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -30347,7 +29990,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -30459,7 +30101,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -30787,7 +30428,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -30972,7 +30612,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -31556,7 +31195,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -31611,7 +31249,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -31677,7 +31314,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -31748,7 +31384,6 @@ border: 1px solid black;
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="focusPolicy">
@@ -31789,7 +31424,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -31901,7 +31535,6 @@ border: 1px solid black;
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -32229,7 +31862,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -32414,7 +32046,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -33026,7 +32657,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -33070,7 +32700,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -33114,7 +32743,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -33174,7 +32802,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -33268,7 +32895,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="frameShadow">
@@ -33484,7 +33110,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -33558,7 +33183,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -33677,7 +33301,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -33763,7 +33386,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -33834,7 +33456,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -33905,7 +33526,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -33976,7 +33596,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -34042,7 +33661,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="focusPolicy">
@@ -34132,7 +33750,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34258,7 +33875,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34320,7 +33936,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34436,7 +34051,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34530,7 +34144,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34586,7 +34199,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34696,7 +34308,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34736,7 +34347,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34776,7 +34386,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34816,7 +34425,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34872,7 +34480,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -34988,7 +34595,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35139,7 +34745,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -35173,7 +34778,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -35217,7 +34821,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35252,7 +34855,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35314,7 +34916,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35349,7 +34950,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35389,7 +34989,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35429,7 +35028,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35513,7 +35111,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35570,7 +35167,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35610,7 +35206,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35694,7 +35289,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35729,7 +35323,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35808,7 +35401,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35845,7 +35437,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -35892,7 +35483,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35952,7 +35542,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -35987,7 +35576,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36113,7 +35701,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36173,7 +35760,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36213,7 +35799,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36273,7 +35858,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36440,7 +36024,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36532,7 +36115,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36586,7 +36168,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36791,7 +36372,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36853,7 +36433,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -36888,7 +36467,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37035,7 +36613,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37070,7 +36647,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37148,7 +36724,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37246,7 +36821,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37286,7 +36860,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37436,7 +37009,6 @@ border: 1px solid black;
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="text">
@@ -37699,7 +37271,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37792,7 +37363,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37856,7 +37426,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
@@ -37891,7 +37460,6 @@ border: 1px solid black;
           <property name="font">
            <font>
             <family>SimSun</family>
-            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="focusPolicy">
