@@ -44,11 +44,12 @@ constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
 
 const QString notePath = "/root/notepad/";
 const QString SysSetConfigPath = "/Settings/systemset.ini";
+const QString menuStateConfigPath = "/Settings/menustate_config.ini";
 
 QVector<QString> registerCode;
 
 MenuItem::MenuItem(int id, const QString& name) :
-    id(id), name(name), state(MenuState::Senior) {}
+    id(id), name(name), state(MenuState::Operator) {}
 
 
 Setting::Setting(QWidget *parent) :
@@ -72,8 +73,10 @@ Setting::Setting(QWidget *parent) :
     pageSwitchInit();
     setupCommunicationConnections();
 
-    connect(ui->tabWidgetSystem, &QTabWidget::currentChanged, this, [=](int index){
+    connect(ui->tabWidgetSystem, &QTabWidget::tabBarClicked, this, [=](int index){
         int menuIndex = ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority);
+        if (menuIndex == -1) return;
+
         if (index == menuIndex)
         {
             ui->tabMenuAuthority->hide();
@@ -87,7 +90,7 @@ Setting::Setting(QWidget *parent) :
                 return;
             }
 
-            if (reply == QDialog::Accepted)
+            else if (reply == QDialog::Accepted)
             {
                 uint menuPasswd = tip.getPasswd();
 
@@ -289,15 +292,16 @@ void Setting::handleLoginModeChanged(LoginMode mode)
         ui->btnSigSet, ui->btnSafetySet, ui->btnProductSet, ui->btnSystemSet,
         ui->btnServoSpeed, ui->btnServoSafePoint, ui->btnMachinePara, ui->btnStackSet
     };
-    const std::vector<int> groupIDs = {
-        10, 20, 30, 40, 50, 60, 70, 80
-    };
+//    const std::vector<int> groupIDs = {
+//        1, 2, 3, 4, 5, 6, 7, 8
+//    };
 
     MenuState tempState;
 
     if (mode == LoginMode::Operator)
     {
         tempState = MenuState::Operator;
+//        ui->tabWidgetSystem->removeTab(ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority));
     }
     else if (mode == LoginMode::Admin)
     {
@@ -311,12 +315,17 @@ void Setting::handleLoginModeChanged(LoginMode mode)
     for (size_t i = 0; i < settingButtons.size(); i++)
     {
         auto btn = settingButtons[i];
-        auto id = groupIDs[i];
+//        auto id = groupIDs[i];
+        int id = i + 1;
         const auto& state = menuStateMap.at(id);
 
-        bool enable = state > tempState;
+        bool enable = tempState >= state;
         btn->setEnabled(enable);
     }
+
+    currentLoginState = (int)mode;
+    updateTabVisibility();
+
 }
 
 
@@ -888,6 +897,30 @@ void Setting::setupMenuAuthority()
 
     ui->treeWgt->addTopLevelItems(treeItems);
 
+    // 从配置文件中读取每个item的状态，将对应的按钮setChecked
+    QSettings settings(menuStateConfigPath, QSettings::IniFormat);
+    QMap<MenuItem*, int> menuItemStateCache;
+
+    // 读取配置并缓存
+    for (auto menuItem : menuItems) {
+        int savedState = settings.value(QString::number(menuItem->id) + "/state", static_cast<int>(MenuState::Operator)).toInt();
+        menuItemStateCache[menuItem] = savedState;
+
+        menuStateMap[menuItem->id] = static_cast<MenuState>(savedState);
+        tabNameMap[menuItem->id] = menuItem->name;
+        // 子菜单项的状态
+        for (auto& child : menuItem->children) {
+            int savedChildState = settings.value(QString::number(child->id) + "/state", static_cast<int>(MenuState::Operator)).toInt();
+            menuItemStateCache[child] = savedChildState;
+
+            menuStateMap[child->id] = static_cast<MenuState>(savedChildState);
+            tabNameMap[child->id] = child->name;
+        }
+    }
+
+    // 配置文件没有系统设置 id = 4 的权限，设置为最高权限
+//    menuStateMap[4] = MenuState::Senior;
+
     // 遍历每个菜单项和子项，设置按钮组
     for (auto menuItem : menuItems) {
 
@@ -904,11 +937,18 @@ void Setting::setupMenuAuthority()
 
                 buttonGroup->addButton(button, i);
 
+                int savedState = menuItemStateCache.value(menuItem);
+                if (savedState == (i - 1)) {
+                    button->setChecked(true);
+                }
+
                 connect(buttonGroup, QOverload<int>::of(&QButtonGroup::buttonPressed), this, [=](int id) {
                     MenuState newState = static_cast<MenuState>(id - 1);
                     if (menuItem->state != newState) {
                         menuItem->state = newState;
+                        buttonGroup->button(id)->repaint();
                         emit menuItem->stateChanged(newState);
+//                        saveMenuState(menuItems);
                     }
                 });
             }
@@ -928,11 +968,18 @@ void Setting::setupMenuAuthority()
 
                 buttonGroup->addButton(button, i);
 
+                int savedState = menuItemStateCache.value(menuItem);
+                if (savedState == (i - 1)) {
+                    button->setChecked(true); // 恢复选中状态
+                }
+
                 connect(buttonGroup, QOverload<int>::of(&QButtonGroup::buttonPressed), this, [=](int id) {
                     MenuState newState = static_cast<MenuState>(id - 1);
                     if (child->state != newState) {
                         child->state = newState;
+                        buttonGroup->button(id)->repaint();
                         emit child->stateChanged(newState);  // 发出信号
+//                        saveMenuState(menuItems);
                     }
                 });
             }
@@ -944,10 +991,23 @@ void Setting::setupMenuAuthority()
         {
             connect(child, &MenuItem::stateChanged, this, &Setting::onMenuStateChanged);
         }
-
-        // 从配置文件中读取每个item的状态，将对应的按钮setChecked
     }
 }
+
+//void Setting::saveMenuState(const QList<MenuItem*>& menuItems)
+//{
+//    QSettings settings(menuStateConfigPath, QSettings::IniFormat);
+//    for (const auto menuItem : menuItems) {
+//        settings.beginGroup(menuItem->name);
+//        settings.setValue("state", static_cast<int>(menuItem->state));
+//        settings.endGroup();
+//        for (auto& child : menuItem->children) {
+//            settings.beginGroup(child->name);
+//            settings.setValue("state", static_cast<int>(child->state));
+//            settings.endGroup();
+//        }
+//    }
+//}
 
 void Setting::syncParaToUI()
 {
@@ -1394,7 +1454,7 @@ void Setting::updateTabVisibility()
         {7, ui->tabWidgetMachinePara},
         {8, ui->tabWidgetStack}
     };
-    std::map<int, QWidget*> tabContentMap = {
+    static const std::map<int, QWidget*> tabContentMap = {
         {11, ui->tabOutType},
         {12, ui->tabSetInterlock},
         {13, ui->tabPortCustomize},
@@ -1449,7 +1509,7 @@ void Setting::updateTabVisibility()
 
 //    tabNameMap need to be initialized
     // tab
-
+#if 1
     for (const auto& pair : menuStateMap) {
         int id = pair.first;
         MenuState tabState = pair.second;
@@ -1461,10 +1521,10 @@ void Setting::updateTabVisibility()
 //        bool shouldShow = tabState == MenuState::Invisible ? false : (currentLoginState >= tabState);
         bool shouldShow = (tabState != MenuState::Invisible) && (currentLoginState >= tabState);
 
-        // 查找对应的 QTabWidget 和内容 Widget
+        // 查找对应的 QTabWidget 和内容tab QWidget
         if (tabWidgetMap.count(tabWidgetGroup) && tabContentMap.count(id)) {
             QTabWidget* tabWidget = tabWidgetMap.at(tabWidgetGroup);
-            QWidget* contentWidget = tabContentMap[id];
+            QWidget* contentWidget = tabContentMap.at(id);
 
             int currentTabIndex = tabWidget->indexOf(contentWidget);
             QString tabName = tabNameMap.at(id);
@@ -1482,6 +1542,62 @@ void Setting::updateTabVisibility()
             }
         }
     }
+#else
+
+    std::map<int, std::vector<int>> groupTabs;
+
+    for (const auto& pair : menuStateMap) {
+        int id = pair.first;
+        MenuState tabState = pair.second;
+
+        int tabWidgetGroup = id / 10;  // 第一位表示 TabWidget 组
+        bool shouldShow = (tabState != MenuState::Invisible) && (currentLoginState >= tabState);
+
+        if (shouldShow && tabContentMap.count(id)) {
+            groupTabs[tabWidgetGroup].push_back(id);
+        }
+    }
+
+    for (auto& group : groupTabs) {
+        int groupId = group.first;
+        std::vector<int> idsToShow = group.second;
+
+        // 排序ID
+        std::sort(idsToShow.begin(), idsToShow.end());
+
+        if (tabWidgetMap.count(groupId)) {
+            QTabWidget* tabWidget = tabWidgetMap.at(groupId);
+            //            tabWidget->clear();  // 清空Tab
+
+            // 按顺序插入Tab
+            for (int id : idsToShow) {
+                if (tabContentMap.count(id)) {
+                    QWidget* contentWidget = tabContentMap.at(id);
+                    QString tabName = tabNameMap.at(id);
+//                    tabWidget->addTab(contentWidget, tabName);  // 插入新的Tab
+
+                    int tabIndex = id % 10 - 1;
+                    int currentTabIndex = tabWidget->indexOf(contentWidget);
+
+                    // 检查是否已存在
+                    if (currentTabIndex == -1)
+                    {
+                        tabWidget->insertTab(tabIndex, contentWidget, tabName);
+                    }
+                    else {
+                        tabWidget->removeTab(currentTabIndex);
+                    }
+                }
+            }
+        }
+    }
+#endif
+    if (currentLoginState){
+        ui->tabWidgetSystem->addTab(ui->tabMenuAuthority, tr("菜单权限"));
+    }
+    else {
+        ui->tabWidgetSystem->removeTab(ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority));
+    }
 }
 
 void Setting::onMenuStateChanged(MenuState newState)
@@ -1490,24 +1606,17 @@ void Setting::onMenuStateChanged(MenuState newState)
     if (!item)
         return;
 
-//    qDebug() << "ID:" << item->id << "," << item->name << " new state:" << newState;
+    qDebug() << "ID:" << item->id << "," << item->name << " new state:" << newState;
 
     menuStateMap[item->id] = newState;
-    tabNameMap[item->id] = item->name;
 
-    // 这里根据新的权限执行相应的操作
-    if (item->id == 21 && item->name == tr("机床安全")) {
-        if (newState == Admin) {
-            // 对 "机床安全" 的 Admin 状态执行相应操作
-            qDebug() << "执行机床安全权限为 Admin 的操作";
-        } else if (newState == Senior) {
-            // 对 "机床安全" 的 Senior 状态执行相应操作
-            qDebug() << "执行机床安全权限为 Senior 的操作";
-        } else if (newState == Operator) {
-            // 对 "机床安全" 的 Operator 状态执行相应操作
-            qDebug() << "执行机床安全权限为 Operator 的操作";
-        }
-    }
+    QSettings settings(menuStateConfigPath, QSettings::IniFormat);
+    const QString prefix = QString::number(item->id);
+    settings.setValue(prefix + "/state", static_cast<int>(newState));
+    settings.setValue(prefix + "/name", item->name);
+
+//    updateTabVisibility();
+//    handleLoginModeChanged(LoginDialog::getLoginMode());
 }
 
 void Setting::updateAppFont()

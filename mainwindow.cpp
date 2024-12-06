@@ -212,17 +212,16 @@ void MainWindow::Refresh_Progress_bar(uint8_t data)
 //设置主界面控件状态控制
 void MainWindow::MainWindow_SetControl_Stake(bool state)
 {
-    ui->Btn_SetHome->setEnabled(state);
-    ui->Btn_TeachHome->setEnabled(state);
-    ui->Btn_AlarmHome->setEnabled(state);
-    ui->Btn_MonitorHome->setEnabled(state);
-    ui->Btn_ManualHome->setEnabled(state);
+    ui->Btn_SetHome->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+    ui->Btn_TeachHome->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+    ui->Btn_AlarmHome->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+    ui->Btn_MonitorHome->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+    ui->Btn_ManualHome->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
 
-    ui->btnAdmin->setEnabled(state);
-    ui->btnAlarm->setEnabled(state);
-    ui->btnHandWheel->setEnabled(state);
-    ui->btnHelp->setEnabled(state);
-
+    ui->btnAdmin->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+    ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+    ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+    ui->btnHelp->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
 }
 
 void MainWindow::initUI()

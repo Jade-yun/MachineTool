@@ -80,6 +80,7 @@ private:
     void initWidgets();
 
     void setupMenuAuthority();
+//    void saveMenuState(const QList<MenuItem *> &menuItems);
 
     void syncParaToUI(); // 初始化时同步结构体参数到ui上显示
 
