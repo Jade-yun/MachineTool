@@ -50,6 +50,25 @@ MainWindow::MainWindow(QWidget *parent)
     readIniPortStruct();
     readIniPara();
 
+    // after reading all init parameters, set the style for whole app.
+    const std::vector<QString> styles = {
+        "/Settings/style/style.qss",
+        "/Settings/style/style_orange_color.qss",
+        "/Settings/style/style_yellow_color.qss",
+        "/Settings/style/style_green_color.qss",
+        "/Settings/style/style_brown_color.qss"
+    };
+
+    if (m_SystemSet.sysColor < styles.size())
+    {
+        setStyleFromFile(styles[m_SystemSet.sysColor]);
+    }
+    else
+    {
+        setStyleFromFile(styles[0]);
+    }
+
+
 //    setWindowTitle(QString());
 //    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);

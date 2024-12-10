@@ -5,9 +5,12 @@
 #include <QPair>
 #include <QPropertyAnimation>
 #include <QDebug>
+#include <QElapsedTimer>
+
 #include <QSignalMapper>
 #include <QThread>
 #include <QRadioButton>
+#include <QProgressDialog>
 
 #include "mainwindow.h"
 #include "upgradedialog.h"
@@ -174,6 +177,102 @@ Setting::Setting(QWidget *parent) :
         m_SystemSet.sysName = defaultSysName;
         ::setSystemSet(m_SystemSet);
         emit sysNameChanged(defaultSysName);
+    });
+
+    connect(ui->btnSaveColor, &QPushButton::clicked, [=]() {
+        static const std::vector<QString> styles = {
+            "/Settings/style/style.qss",              // 默认
+            "/Settings/style/style_orange_color.qss", // 橙色
+            "/Settings/style/style_yellow_color.qss", // 黄色
+            "/Settings/style/style_green_color.qss",  // 绿色
+            "/Settings/style/style_brown_color.qss"   // 棕色
+        };
+
+        const std::vector<QCheckBox*> colorCheckBoxes = {
+            ui->chboxColorDefault, // 默认
+            ui->chboxColorOriange, // 橙色
+            ui->chboxColorYellow,  // 黄色
+            ui->chboxColorGreen,   // 绿色
+            ui->chboxBrown         // 棕色
+        };
+
+        auto it = std::find_if(colorCheckBoxes.begin(), colorCheckBoxes.end(), [](QCheckBox* checkbox) {
+            return checkbox && checkbox->isChecked();
+        });
+
+//        static uint8_t setColor;
+//        setColor = (it != colorCheckBoxes.end()) ? std::distance(colorCheckBoxes.begin(), it) : 0;
+        uint8_t setColor = (it != colorCheckBoxes.end()) ? std::distance(colorCheckBoxes.begin(), it) : 0;
+
+        if (m_SystemSet.sysColor == setColor) {
+            return;
+        }
+
+        m_SystemSet.sysColor = setColor;
+        ::setSystemSet(m_SystemSet);
+
+#if 0
+        QDialog progressDialog(this);
+        progressDialog.setFixedSize(500, 300);
+        progressDialog.setStyleSheet("background-color: #24B4A5;"); // 设置背景颜色
+
+        QVBoxLayout layout(&progressDialog);
+        QLabel label(tr("Please wait, applying new color settings..."));
+        label.setAlignment(Qt::AlignCenter); // 居中显示文本
+        layout.addWidget(&label);
+        progressDialog.setLayout(&layout);
+        progressDialog.setModal(true);
+
+#else
+        static QProgressDialog progressDialog(this);
+        progressDialog.setLabelText(tr("Please wait, applying new color settings..."));
+        progressDialog.setCancelButton(nullptr);
+        progressDialog.setWindowModality(Qt::WindowModal);
+        progressDialog.setFixedSize(500, 300);
+        progressDialog.setStyleSheet(
+            "QProgressDialog {"
+            "   background-color: #24B4A5;"
+            "   border-radius: 10px;"
+            "}"
+            "QProgressBar {"
+            "   border: 2px solid white;"
+            "   border-radius: 5px;"
+            "   background: #ffffff;"
+            "   color: #000000;"
+            "}"
+        );
+        progressDialog.show();
+
+//        QTimer* timer = new QTimer;
+//        int progress = 0;
+
+//        progressDialog.setValue(10);
+//        QObject::connect(timer, &QTimer::timeout, [&]() {
+//            progress += 10;
+//            progressDialog.setValue(progress);
+//            progressDialog.repaint();
+//            if (progress >= 100) {
+//                timer->stop();
+//                delete timer;
+//                return;
+//            }
+//        });
+//        timer->start(1000);
+#endif
+
+        QTimer::singleShot(0, [&]() {
+            QFile file(styles[setColor]);
+            if (file.open(QIODevice::ReadOnly)) {
+                qApp->setStyleSheet(QString::fromLatin1(file.readAll()));
+                file.close();
+                qDebug() << "System color has changed to index:" << setColor;
+            } else {
+                qDebug() << "Fail to open stylesheet file:" << styles[setColor];
+            }
+            progressDialog.accept();
+        });
+
+        progressDialog.exec();
     });
 
     connect(ui->btnImportPortDef, &QPushButton::clicked, [=](){

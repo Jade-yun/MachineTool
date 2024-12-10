@@ -7,7 +7,7 @@
 #include <QElapsedTimer>
 
 #include "QtUi/framelesswidget2.h"
-
+#include "method/usart.h"
 
 const QString key_icons_path[6] = {
     ":/images/start.png",
@@ -88,6 +88,29 @@ SoftKeyWidget::SoftKeyWidget(QWidget *parent) :
 
     mousePoint = QPoint(0, 0);
 //    this->installEventFilter(this);
+
+    connect(ui->btnStart, &QPushButton::clicked, [=](){
+
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 1, 1, 10);
+
+    });
+    connect(ui->btnStop, &QPushButton::clicked, [=](){
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 0, 0, 0);
+
+    });
+    connect(ui->btnOrigin, &QPushButton::clicked, [=](){
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 3, 1, 50);
+
+    });
+    connect(ui->btnRevert, &QPushButton::clicked, [=](){
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 4, 1, 50);
+    });
+    connect(ui->btnLast, &QPushButton::clicked, [=](){
+
+    });
+    connect(ui->btnNext, &QPushButton::clicked, [=](){
+
+    });
 }
 
 SoftKeyWidget::~SoftKeyWidget()

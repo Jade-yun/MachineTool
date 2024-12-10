@@ -3433,10 +3433,7 @@ QHeaderView
         <enum>Qt::NoFocus</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-
-
-</string>
+        <string notr="true"/>
        </property>
        <item>
         <property name="text">
@@ -19125,7 +19122,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
       </font>
      </property>
      <property name="currentIndex">
-      <number>8</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -20094,7 +20091,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="styleSheet">
            <string notr="true">QCheckBox
 {
-    background-color:#ff9900;
+    background-color:rgb(248,226,17);
     color: white;
 }</string>
           </property>
@@ -20132,7 +20129,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="styleSheet">
            <string notr="true">QCheckBox
 {
-    background-color: #00f278;
+    background-color: rgb(53, 246, 38);
     color: white;
 }</string>
           </property>
@@ -20170,7 +20167,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
           <property name="styleSheet">
            <string notr="true">QCheckBox
 {
-    background-color: #734212;
+    background-color: rgb(115, 66, 18);
     color: white;
 }</string>
           </property>
@@ -22222,7 +22219,7 @@ border: 1px solid black;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="page_3">
         <widget class="QLabel" name="label_307">

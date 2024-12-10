@@ -180,10 +180,10 @@ DISTFILES += \
     MyTitleBarDialog/Resources/MyTitle/max.png \
     MyTitleBarDialog/Resources/MyTitle/min.png \
     MyTitleBarDialog/Resources/MyTitle/restore.png \
-    MyTitleBarDialog/Resources/titleicon.png \
-    images/gif/XYZ.gif \
-    images/gif/YXZ.gif \
-    images/gif/ZXY.gif \
-    images/gif/ZYX.gif \
-    images/referPoint.png
+    MyTitleBarDialog/Resources/titleicon.png
+#    images/gif/XYZ.gif \
+#    images/gif/YXZ.gif \
+#    images/gif/ZXY.gif \
+#    images/gif/ZYX.gif \
+#    images/referPoint.png
 
