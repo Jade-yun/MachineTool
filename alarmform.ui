@@ -14,32 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QTableWidget{
-	background-color:#ADE2F4;
-	alternate-background-color:#F8FAD2;
-	border:1px solid black;
-	gridline-color:#0F0963;
-}
-
- QScrollBar:vertical
-{ /*滑块设置*/
-	width:35px;
-	background: rgb(238, 238, 236);
-	padding-top:20px;
-	padding-bottom:20px;
-}
-/*按压时的颜色*/
-QScrollBar::handle:vertical:hover
-{
-	background:rgb(46, 165, 250);
-	border-radius:4px;
-}
-
-QHeaderView                    // QTableWidget 标题头整个区域
-{
-    background:;        // 整个标题头区域背景色
-	color: rgb(255, 170, 127);
-}</string>
+   <string notr="true"/>
   </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">

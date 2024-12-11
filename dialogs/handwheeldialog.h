@@ -2,13 +2,12 @@
 #define HANDWHEELDIALOG_H
 
 #include <QDialog>
-#include "basewindow.h"
 #include <QCheckBox>
 namespace Ui {
 class HandWheelDialog;
 }
 
-class HandWheelDialog : public BaseWindow
+class HandWheelDialog : public QDialog
 {
     Q_OBJECT
 
@@ -20,12 +19,14 @@ private:
     Ui::HandWheelDialog *ui;
 
 private:
-    void initControls();
-    void initCheckBoxGrop();
+    void initWidgets();
 
 private:
     QVector<QCheckBox*> handWheelScale;         //手轮刻度
     QVector<QCheckBox*> handWheelAxis;          //手轮轴
+
+protected:
+    void showEvent(QShowEvent *event);
 };
 
 #endif // HANDWHEELDIALOG_H

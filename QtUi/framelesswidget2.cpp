@@ -257,7 +257,7 @@ void FramelessWidget2::initTitleBar()
     titleBar->setFixedHeight(50);
     titleBar->setStyleSheet("background-color: #444444;");  // 设置标题栏背景色
 
-    titleLabel = new QLabel("窗口标题", titleBar);
+    titleLabel = new QLabel("", titleBar);
     titleLabel->setStyleSheet("color: white;");
 
     closeButton = new QPushButton("X", titleBar);
@@ -269,8 +269,8 @@ void FramelessWidget2::initTitleBar()
                background-color: transparent;
                color: white;
                border-style:solid;
-               border-width:1px;
-               border-color:#7A77AC;
+               border-width:2px;
+               border-color:#888888;
                border-radius:5px;
            }
            QPushButton:pressed

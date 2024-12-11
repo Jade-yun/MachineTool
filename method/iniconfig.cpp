@@ -15,6 +15,7 @@ QSettings ConfigPortDefine(m_configPortXYNameIniPath,QSettings::IniFormat);
 //配置文件相对路径
 QString m_configFileNamePath="/root/Ini_Para.txt";
 
+const QString SysSetConfigPath = "/Settings/systemset.ini";
 const QString PasswdConfigPath = "/Settings/passwd.ini";
 const QString KeyAndSignalDescriptionPath = "/Settings/key_signal_str.ini";
 const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
@@ -510,25 +511,36 @@ void setInternet(D_InternetStruct value)
 void getSystemSet()
 {
     D_SystemSetStruct defaultV{0, 0, 0, 0, 0, 0, "", 0};
-    m_SystemSet.lan=getValue("SystemSet","lan",defaultV.lan);
-    m_SystemSet.typeFace=getValue("SystemSet","typeFace",defaultV.typeFace);
-    m_SystemSet.wordSize=getValue("SystemSet","wordSize",defaultV.wordSize);
-    m_SystemSet.keyListen=getValue("SystemSet","keyListen",defaultV.keyListen);
-    m_SystemSet.backlightTime=getValue("SystemSet","backlightTime",defaultV.backlightTime);
-    m_SystemSet.backlightBrightness=getValue("SystemSet","backlightBrightness",defaultV.backlightBrightness);
-    m_SystemSet.sysName=getValue("SystemSet","sysName",defaultV.sysName);
-    m_SystemSet.sysColor=getValue("SystemSet","sysColor",defaultV.sysColor);
+
+    QSettings settings(SysSetConfigPath, QSettings::IniFormat);
+    settings.beginGroup("SystemSet");
+
+    m_SystemSet.lan = settings.value("lan",defaultV.lan).toUInt();
+    m_SystemSet.typeFace = settings.value("typeFace", defaultV.typeFace).toUInt();
+    m_SystemSet.wordSize = settings.value("wordSize", defaultV.wordSize).toUInt();
+    m_SystemSet.keyListen = settings.value("keyListen", defaultV.keyListen).toUInt();
+    m_SystemSet.backlightTime = settings.value("backlightTime", defaultV.backlightTime).toUInt();
+    m_SystemSet.backlightBrightness = settings.value("backlightBrightness", defaultV.backlightBrightness).toUInt();
+    m_SystemSet.sysName = settings.value("sysName", defaultV.sysName).toString();
+    m_SystemSet.sysColor = settings.value("sysColor", defaultV.sysColor).toUInt();
+
+    settings.endGroup();
 }
 void setSystemSet(D_SystemSetStruct value)
 {
-    setValue("SystemSet","lan",value.lan);
-    setValue("SystemSet","typeFace",value.typeFace);
-    setValue("SystemSet","wordSize",value.wordSize);
-    setValue("SystemSet","keyListen",value.keyListen);
-    setValue("SystemSet","backlightTime",value.backlightTime);
-    setValue("SystemSet","backlightBrightness",value.backlightBrightness);
-    setValue("SystemSet","sysName",value.sysName);
-    setValue("SystemSet","sysColor",value.sysColor);
+    QSettings settings(SysSetConfigPath, QSettings::IniFormat);
+    settings.beginGroup("SystemSet");
+
+    settings.setValue("lan", value.lan);
+    settings.setValue("typeFace", value.typeFace);
+    settings.setValue("wordSize", value.wordSize);
+    settings.setValue("keyListen", value.keyListen);
+    settings.setValue("backlightTime", value.backlightTime);
+    settings.setValue("backlightBrightness", value.backlightBrightness);
+    settings.setValue("sysName", value.sysName);
+    settings.setValue("sysColor", value.sysColor);
+
+    settings.endGroup();
 }
 //轴运动参数
 void getAxisPar(uint8_t defaultV)

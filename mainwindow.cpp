@@ -52,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // after reading all init parameters, set the style for whole app.
     const std::vector<QString> styles = {
-        "/Settings/style/style.qss",
+        ":/styleSheets/style.qss",
         "/Settings/style/style_orange_color.qss",
         "/Settings/style/style_yellow_color.qss",
         "/Settings/style/style_green_color.qss",
@@ -158,14 +158,20 @@ MainWindow::MainWindow(QWidget *parent)
         if (code == 0 && value == 1)
         {
             //to do...
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,2);
+            if (m_manualAxis.handwheelMode)
+            {
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,2);
+            }
 
         }
         // 逆时针旋转
         else if (code == 0 && value == -1)
         {
             // to do...
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,1);
+            if (m_manualAxis.handwheelMode)
+            {
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,1);
+            }
         }
     });
     connect(scanner, &EventScanner::eventTrimodeSwitch, [this](uint16_t code, int32_t value) {
@@ -391,7 +397,6 @@ void MainWindow::on_Btn_ManualHome_clicked()
         ui->Btn_ManualHome->setText(tr("手动页面"));
         ui->labRotateSpeed->setNum(10);
         ui->stkWidget->setCurrentWidget(manualWidget);
-        emit sigEnterManualPage();
 //        flag = 2;
     }
     // set to auto mode

@@ -290,7 +290,6 @@ void readIniPara()
     getProductSet();
     getProductSenior();
     getInternet();
-    getSystemSet();
     getAxisPar();
     getHandwheelPar();
     getServoPar();
@@ -300,4 +299,6 @@ void readIniPara()
     getStackInfo();
     getStackFunc();
     getManualAxis();
+
+    getSystemSet();
 }

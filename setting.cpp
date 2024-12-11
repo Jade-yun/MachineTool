@@ -45,8 +45,7 @@ constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
     {-1, -1, -1, -1}                                                // 预留2
 };
 
-const QString notePath = "/root/notepad/";
-const QString SysSetConfigPath = "/Settings/systemset.ini";
+const QString noteDirPath = "/Settings/notepad/";
 const QString menuStateConfigPath = "/Settings/menustate_config.ini";
 
 QVector<QString> registerCode;
@@ -124,11 +123,19 @@ Setting::Setting(QWidget *parent) :
     });
 
     // langurage set
-    connect(ui->coboxFonts, QOverload<int>::of(&QComboBox::activated), this, [=](int){
-        updateAppFont();
+    connect(ui->coboxFonts, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
+        if (index != m_SystemSet.typeFace) {
+            updateAppFont();
+            m_SystemSet.typeFace = index;
+            ::setSystemSet(m_SystemSet);
+        }
     });
-    connect(ui->coboxFontSize, QOverload<int>::of(&QComboBox::activated), this, [=](int){
-        updateAppFont();
+    connect(ui->coboxFontSize, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
+        if (index != m_SystemSet.wordSize) {
+            updateAppFont();
+            m_SystemSet.wordSize = index;
+            ::setSystemSet(m_SystemSet);
+        }
     });
 
 
@@ -138,11 +145,6 @@ Setting::Setting(QWidget *parent) :
         if (second < 30 && second > 65535)
             return;
         BackLighter::instance()->setScreenOffTime(second);
-//        qDebug() << "time of screenOff:" << val;
-//        QSettings settings(SysSetConfigPath, QSettings::IniFormat);
-//        settings.beginGroup("Backlight");
-//        settings.setValue("time", second);
-//        settings.endGroup();
         m_SystemSet.backlightTime = second;
         ::setSystemSet(m_SystemSet);
     });
@@ -181,7 +183,7 @@ Setting::Setting(QWidget *parent) :
 
     connect(ui->btnSaveColor, &QPushButton::clicked, [=]() {
         static const std::vector<QString> styles = {
-            "/Settings/style/style.qss",              // 默认
+            ":/styleSheets/style.qss",                // 默认
             "/Settings/style/style_orange_color.qss", // 橙色
             "/Settings/style/style_yellow_color.qss", // 黄色
             "/Settings/style/style_green_color.qss",  // 绿色
@@ -500,8 +502,8 @@ void Setting::init()
     ui->editSecond->setInputRange(0, 59);
 
     // font
-//    ui->coboxFonts->setCurrentIndex(m_SystemSet.typeFace);
-//    ui->coboxFontSize->setCurrentIndex(m_SystemSet.wordSize);
+    ui->coboxFonts->setCurrentIndex(m_SystemSet.typeFace);
+    ui->coboxFontSize->setCurrentIndex(m_SystemSet.wordSize);
 
     // buzzer
     Beeper::instance()->setEnable(m_SystemSet.keyListen);
@@ -520,6 +522,17 @@ void Setting::init()
 
     // system name
     ui->editSystemName->setText(m_SystemSet.sysName);
+
+    // system color
+    {
+        std::vector<QCheckBox*> chboxColor = {
+            ui->chboxColorDefault, ui->chboxColorOriange, ui->chboxColorYellow, ui->chboxColorGreen, ui->chboxBrown
+        };
+        auto index = m_SystemSet.sysColor;
+        if (index < chboxColor.size()) {
+            chboxColor[index]->setChecked(true);
+        }
+    }
 
     ui->labClawSafePic->setPixmap(QPixmap(":/images/settingPageImages/claw_safe.png"));
     ui->labOnlineSafePic->setPixmap(QPixmap(":/images/settingPageImages/online_safe.png"));
@@ -840,7 +853,7 @@ void Setting::initWidgets()
     ui->tableWgtNote->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch); // 第二列可伸缩
     ui->tableWgtNote->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
-    QDir dirNote(notePath);
+    QDir dirNote(noteDirPath);
     QFileInfoList noteInfoList = dirNote.entryInfoList({"*.txt"}, QDir::Files | QDir::NoDotAndDotDot);
 
     for (const auto noteInfo : noteInfoList)
@@ -1875,7 +1888,7 @@ void Setting::pageSwitchInit()
             ui->editNoteTitle->setText(title);
 
             // 构建文件名
-            QString fileName = notePath + title + ".txt";
+            QString fileName = noteDirPath + title + ".txt";
 
             // 读取文件内容
             QFile file(fileName);
@@ -1922,10 +1935,10 @@ void Setting::pageSwitchInit()
                 MainWindow::pMainWindow->showErrorTip(tr("文件名格式错误！"), TipMode::ONLY_OK);
                 return;
             }
-            QString newFileName = notePath + newTitle + ".txt";
+            QString newFileName = noteDirPath + newTitle + ".txt";
 
             QString title = ui->tableWgtNote->item(currentRow, 0)->text();
-            QString fileName = notePath + title + ".txt";
+            QString fileName = noteDirPath + title + ".txt";
 
             QFile file(newFileName);
             if (file.open(QIODevice::WriteOnly | QIODevice::Text))
@@ -1963,15 +1976,22 @@ void Setting::pageSwitchInit()
     });
 
     connect(ui->btnNewNote, &QPushButton::clicked, this, [=](){
+        QDir dir(noteDirPath);
+         if (!dir.exists()) {
+             if (!dir.mkpath(".")) {
+                 qDebug() << "Failed to create directory:" << noteDirPath;
+                 return;
+             }
+         }
 
        int rowCount = ui->tableWgtNote->rowCount();
 
        QString newTitle = QString("untitled%1").arg(rowCount + 1);
-       QString newFileName = notePath + newTitle + ".txt";
+       QString newFileName = noteDirPath + newTitle + ".txt";
 
        int count = 1;
        while (QFile::exists(newFileName)) {
-           newFileName = notePath + QString("untitled%1").arg(rowCount + 1 + count) + ".txt";
+           newFileName = noteDirPath + QString("untitled%1").arg(rowCount + 1 + count) + ".txt";
            count++;
        }
 
@@ -2000,7 +2020,7 @@ void Setting::pageSwitchInit()
         if (currentRow >= 0)
         {
             QString title = ui->tableWgtNote->item(currentRow, 0)->text();
-            QString fileName = notePath + title + ".txt";
+            QString fileName = noteDirPath + title + ".txt";
 
             QFile file(fileName);
             if (file.exists())

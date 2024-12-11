@@ -783,15 +783,14 @@ void ManualForm::setupGuidePointConnections(DraggableButton *btn)
         // Retrieve guide information from the guidePoints map
         const auto it = guidePoints.find(btn);
         if (it != guidePoints.end()) {
-            // Use const reference to avoid unnecessary copying
             const GuidePara& para = it.value();
 
             qDebug() << "keyType:" << para.keyType << ",port:" << para.portNum << ",status:" << para.status;
 
+            // 0阀输出 1输出 2轴
             if(para.keyType == 0)
-            {//0阀输出 1输出 2轴
-
-                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
+            {
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT, para.portNum, para.status);
             }
             else if(para.keyType == 1)
             {
@@ -799,7 +798,9 @@ void ManualForm::setupGuidePointConnections(DraggableButton *btn)
             }
             else if(para.keyType == 2)
             {
-
+                int axisIndex = para.portNum;
+                int direct = para.status == 1 ? 1 : 2;
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT, axisIndex, direct);
             }
         }
     });

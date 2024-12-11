@@ -87,8 +87,8 @@ QString KeyDefineDialog::getAxisMoveDirectStr() const
 
 int KeyDefineDialog::getValveOutputStatus() const
 {
-    if (ui->chboxValveOutStatus0->isChecked()) return 0;
-    if (ui->chboxValveOutStatus1->isChecked()) return 1;
+    if (ui->chboxValveOutStatus0->isChecked()) return 1;
+    if (ui->chboxValveOutStatus1->isChecked()) return 0;
     if (ui->chboxValveOutStatus2->isChecked()) return 2;
     return 0;
 }
@@ -158,8 +158,8 @@ int KeyDefineDialog::getValveOutputPort() const
 
 int KeyDefineDialog::getReserveOutStatus() const
 {
-    if (ui->chboxReserveOutStatus0->isChecked()) return 0;
-    if (ui->chboxReserveOutStatus1->isChecked()) return 1;
+    if (ui->chboxReserveOutStatus0->isChecked()) return 1;
+    if (ui->chboxReserveOutStatus1->isChecked()) return 0;
     if (ui->chboxReserveOutStatus2->isChecked()) return 2;
     return 0;
 }

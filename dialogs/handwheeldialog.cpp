@@ -1,31 +1,42 @@
 #include "handwheeldialog.h"
 #include "ui_handwheeldialog.h"
 #include <QButtonGroup>
+#include <QDebug>
+
+#include "cmd.h"
+#include "iniconfig.h"
+#include "QtUi/framelesswidget2.h"
 
 HandWheelDialog::HandWheelDialog(QWidget *parent) :
-    BaseWindow(parent),
+    QDialog(parent),
     ui(new Ui::HandWheelDialog)
 {
     ui->setupUi(this);
-    initCheckBoxGrop();
-    initControls();
     setModal(true);
+
+    FramelessWidget2* frameBase = new FramelessWidget2(this);
+
+    frameBase->setWidget(this);
+    frameBase->setTitle(tr("手轮"));
+
+    initWidgets();
     connect(ui->btnOK, &QPushButton::clicked, [=](){
-       for(int i=0;i<handWheelScale.size();i++)
+       for(int i = 0; i < handWheelScale.size(); i++)
        {
            if(handWheelScale[i]->isChecked())
            {
-               m_manualAxis.multiply=i;
+               m_manualAxis.multiply = i;
            }
        }
-       for(int i=0;i<handWheelAxis.size();i++)
+       for(int i=0; i < handWheelAxis.size(); i++)
        {
            if(handWheelAxis[i]->isChecked())
            {
-               m_manualAxis.handwheelAxis = i+1;
+               m_manualAxis.handwheelAxis = i + 1;
            }
        }
-       m_manualAxis.handwheelMode=ui->chboxMode->isChecked();
+
+       m_manualAxis.handwheelMode = ui->chboxMode->isChecked();
        setManualAxis(m_manualAxis);
        this->close();
     });
@@ -36,34 +47,54 @@ HandWheelDialog::~HandWheelDialog()
     delete ui;
 }
 
-void HandWheelDialog::initControls()
+void HandWheelDialog::initWidgets()
+{
+    handWheelScale = {ui->chbox0_01, ui->chbox0_1, ui->chbox1, ui->chbox3};
+    handWheelAxis = {ui->chboxX1, ui->chboxY1, ui->chboxZ1, ui->chboxC, ui->chboxA, ui->chboxB};
+
+    QButtonGroup* pButtonGroup1 = new QButtonGroup(this);
+    QButtonGroup* pButtonGroup2 = new QButtonGroup(this);
+    for(int i=0; i<handWheelScale.size(); i++)
+    {
+        pButtonGroup1->addButton(handWheelScale[i], i + 1);
+    }
+    for(int i=0; i<handWheelAxis.size(); i++)
+    {
+        pButtonGroup2->addButton(handWheelAxis[i], i + 1);
+    }
+}
+
+void HandWheelDialog::showEvent(QShowEvent *event)
 {
     ui->chboxMode->setChecked(m_manualAxis.handwheelMode);
-    handWheelScale[m_manualAxis.multiply]->setChecked(1);
-    if(m_manualAxis.handwheelAxis == 0)
+
+    if (m_manualAxis.multiply < handWheelAxis.size())
     {
-        handWheelAxis[0]->setChecked(1);
+        handWheelScale[m_manualAxis.multiply]->setChecked(true);
     }
     else
     {
-        handWheelAxis[m_manualAxis.handwheelAxis-1]->setChecked(1);
+        qDebug() << "Error: m_manualAxis.multiply is out of bounds";
     }
-}
-
-void HandWheelDialog::initCheckBoxGrop()
-{
-    handWheelScale = {ui->chbox0_01,ui->chbox0_1,ui->chbox0_5,ui->chbox1,ui->chbox3};
-    handWheelAxis = {ui->chboxX1,ui->chboxZ1,ui->chboxY1,ui->chboxC1,ui->chboxZ2,ui->chboxY2,ui->chboxB,ui->chboxA};
-    QButtonGroup* pButtonGroup1 = new QButtonGroup(this);
-    QButtonGroup* pButtonGroup2 = new QButtonGroup(this);
-    for(int i=0;i<handWheelScale.size();i++)
+    if(m_manualAxis.handwheelAxis == 0)
     {
-        pButtonGroup1->addButton(handWheelScale[i],i+1);
+        for (auto chbox : handWheelAxis)
+        {
+            chbox->setChecked(false);
+        }
     }
-    for(int i=0;i<handWheelAxis.size();i++)
+    else
     {
-        pButtonGroup2->addButton(handWheelAxis[i],i+1);
+        if (m_manualAxis.handwheelAxis < handWheelAxis.size() + 1)
+        {
+            handWheelAxis[m_manualAxis.handwheelAxis - 1]->setChecked(true);
+        }
+        else
+        {
+            qDebug() << "Error: m_manualAxis.handwheelAxis is out of bounds";
+        }
     }
-}
 
+    QWidget::showEvent(event);
+}
 

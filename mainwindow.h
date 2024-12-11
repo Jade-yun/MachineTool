@@ -64,8 +64,6 @@ public slots:
     void MainWindow_SetControl_Stake(bool state);
 signals:
     void sigSettingHome();
-    void sigEnterManualPage();
-    void sigLeaveManualPage();
     void signal_refresh_TeachList();//刷新教导界面列表信号
     void EditOperatorVarPreOp_Refresh();//教导界面变量指令-变量类型刷新信号
     void signal_sync_data();       //同步数据到主控板
