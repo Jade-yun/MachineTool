@@ -47,8 +47,23 @@ MainWindow::MainWindow(QWidget *parent)
     //开机读取配置文件信息，暂时做测试用，后续整理
     getOrderjoinIni();
     readIniProgramStruct();
-    readIniPortStruct();
+    readSigSetPara();
     readIniPara();
+
+    // set fonts for whole app
+    const std::vector<QString> fontType = {
+        "WenQuanYi Zen Hei",            // 默认字体
+        "SimSun",                       // 宋体
+        "KaiTi",                        // 楷体
+        "DejaVu Sans"
+    };
+    QFont font("SimSun");
+    const std::vector<int> fontSize = {
+        20, // default
+        15, 16, 17, 18, 19, 20, 21, 22
+    };
+    font.setPixelSize(fontSize[m_SystemSet.wordSize]);
+    qApp->setFont(font);
 
     // after reading all init parameters, set the style for whole app.
     const std::vector<QString> styles = {
@@ -180,7 +195,9 @@ MainWindow::MainWindow(QWidget *parent)
         {
             // stop mode
             curMode = TriMode::STOP;
+            ui->Btn_TeachHome->setEnabled(true);
             ui->Btn_TeachHome->setText(tr("教导管理"));
+            ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             TrimodeSwitchCommandSend(code,value);
         }
         else if (code == 143 && value == 1)
@@ -188,12 +205,14 @@ MainWindow::MainWindow(QWidget *parent)
             // switch to manual mode
             curMode = TriMode::MANUAL;
             ui->Btn_TeachHome->setText(tr("教导"));
+            ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, false);
             TrimodeSwitchCommandSend(code,value);
         }
         else if (code == 144 && value == 1)
         {
             // switch to automatic mode
             curMode = TriMode::AUTO;
+            ui->Btn_TeachHome->setEnabled(false);
             TrimodeSwitchCommandSend(code,value);
         }
         emit ui->Btn_ManualHome->clicked();
@@ -488,7 +507,10 @@ void MainWindow::connectAllSignalsAndSlots()
 
     connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
     connect(setWidget, &Setting::sysNameChanged, this, [=](const QString& sysName){
-//        ui->labProgramName->setText(sysName);
+        const QString& programName = m_CurrentProgramNameAndPath.fileName;
+
+        QString name = sysName + "  " + programName;
+        ui->labProgramName->setText(name);
     });
 
     //显示时间和刷新实时参数
@@ -637,14 +659,6 @@ void MainWindow::callFullKeyboard(QObject *watched)
 
 }
 
-
-void MainWindow::on_btnHelp_clicked()
-{
-
-//    QMessageBox::information(this, "tips", "this is test",
-//                              QMessageBox::Yes | QMessageBox::No, QMessageBox::NoButton);
-
-}
 //三档开关处理函数
 void MainWindow::TrimodeSwitchCommandSend(uint16_t code, int32_t value)
 {

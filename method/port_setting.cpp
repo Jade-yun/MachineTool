@@ -4,14 +4,14 @@
 uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置,存储的实际端口号
 
 /*************************************************************************
-**  函数名：  readIniPortStruct()
+**  函数名：  readSigSetPara()
 **	输入参数：无
 **	输出参数：无
 **	函数功能：读取端口自定义的所有信息
 **  作者：    PXC
 **  开发日期：2024/11/1
 **************************************************************************/
-void readIniPortStruct()
+void readSigSetPara()
 {
 #if 1
     //X
@@ -125,23 +125,9 @@ void readIniPortStruct()
         m_Port_Y[i].functionSet = (uint8_t)tempList16[i].toUInt();
     }
 
+
     //名称自定义
-    tempList11=getIniValues(3,"DefineName");
-    tempList12=getIniValues(99,"DefineName_Modify");
-    for(int i=0;i<DEFINE_NAME_NUM;i++)
-    {
-        m_NameDefine[i].defineName=tempList11[i];
-        if(tempList12[i].compare("0")==0)       //如果存的是0，则表示名称没有修改，为默认名称
-        {
-            m_NameDefine[i].modifyName=tempList11[i];
-        }
-        else
-        {
-            m_NameDefine[i].modifyName=tempList12[i];
-        }
-    }
-
-
+    ::readNameDefine();
 
     uint8_t tempIndex=0;
     //输出类型
@@ -301,4 +287,5 @@ void readIniPara()
     getManualAxis();
 
     getSystemSet();
+    ::readPasswdFromConfig();
 }

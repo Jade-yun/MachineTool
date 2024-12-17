@@ -62,6 +62,17 @@ extern void getOutportInterlock(uint8_t defaultV = 0);
 extern void setOutportInterlock(uint8_t value[OUT_INTERLOCK_NUM][4]);
 //端口自定义
 extern void setPortDefineNameOrPortNum();
+
+// 名称自定义
+/**
+ * @brief writeNameDefine 读取默认名称和修改名称
+ */
+void readNameDefine();
+/**
+ * @brief writeNameDefine 只写入修改后的名称
+ */
+void writeNameDefine();
+
 //预留关联
 extern void getOutportRelevancy(uint8_t defaultV = 0);
 extern void setOutportRelevancy(uint8_t value[OUTPUT_TOTAL_NUM][3]);

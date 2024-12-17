@@ -1,5 +1,6 @@
 #include "iniconfig.h"
 #include <QCoreApplication>
+#include <QTextCodec>
 
 /*****************命令相关参数保存*****************/
 QString m_configCmdPath = "/root/Cmd_Description.txt";
@@ -21,6 +22,7 @@ const QString KeyAndSignalDescriptionPath = "/Settings/key_signal_str.ini";
 const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
 
 const QString GuideInfoPath = "/Settings/guide_info.ini";
+const QString CustomizeNameDefPath = "/Settings/NameDef_Customize_CN.ini";
 
 QSettings Ini_Parasettings(m_configFileNamePath,QSettings::IniFormat);
 /*************************************************************************
@@ -513,6 +515,8 @@ void getSystemSet()
     D_SystemSetStruct defaultV{0, 0, 0, 0, 0, 0, "", 0};
 
     QSettings settings(SysSetConfigPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup("SystemSet");
 
     m_SystemSet.lan = settings.value("lan",defaultV.lan).toUInt();
@@ -529,6 +533,8 @@ void getSystemSet()
 void setSystemSet(D_SystemSetStruct value)
 {
     QSettings settings(SysSetConfigPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup("SystemSet");
 
     settings.setValue("lan", value.lan);
@@ -1052,6 +1058,8 @@ void readPasswdFromConfig()
 void writeKeySetStrToConfig(int index, const QString &text)
 {
     QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup("KeyFuncDescription");
     settings.setValue(QString("Key_%1").arg(index), text);
     settings.endGroup();
@@ -1060,6 +1068,8 @@ void writeKeySetStrToConfig(int index, const QString &text)
 void readKeySetStrFromConfig(std::vector<QString> &keyStrs)
 {
     QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup("KeyFuncDescription");
 
     keyStrs.resize(OPR_KEY_NUM);
@@ -1074,6 +1084,8 @@ void readKeySetStrFromConfig(std::vector<QString> &keyStrs)
 void writeSigSetStrToConfig(int index, const QString &text)
 {
     QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup("SignalDescription");
     settings.setValue(QString("Sig_%1").arg(index), text);
     settings.endGroup();
@@ -1082,6 +1094,8 @@ void writeSigSetStrToConfig(int index, const QString &text)
 void readSigSetStrFromConfig(std::vector<QString> &sigStrs)
 {
     QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup("SignalDescription");
 
     sigStrs.resize(OPR_LED_NUM);
@@ -1095,6 +1109,8 @@ void readSigSetStrFromConfig(std::vector<QString> &sigStrs)
 void writeOnlineSafeInOutDescription(int group, const std::vector<QString> &describeStrs)
 {
     QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup(QString("OnlineSafe%1").arg(group));
 
     for (size_t i = 0; i < 4; i++)
@@ -1108,6 +1124,8 @@ void readOnlineSafeInOutDescription(int group, std::vector<QString> &describeStr
 {
 
     QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup(QString("OnlineSafe%1").arg(group));
 
     describeStrs.resize(4);
@@ -1121,6 +1139,8 @@ void readOnlineSafeInOutDescription(int group, std::vector<QString> &describeStr
 void writeLimitSigDescription(int index, const std::vector<QString> &describeStrs)
 {
     QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup(QString("LimitSignal%1").arg(index));
 
     for (size_t i = 0; i < AXIS_TOTAL_NUM; i++)
@@ -1133,6 +1153,8 @@ void writeLimitSigDescription(int index, const std::vector<QString> &describeStr
 void readLimitSigDescription(int index, std::vector<QString> &describeStrs)
 {
     QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
     settings.beginGroup(QString("LimitSignal%1").arg(index));
 
     describeStrs.resize(AXIS_TOTAL_NUM);
@@ -1146,6 +1168,7 @@ void readLimitSigDescription(int index, std::vector<QString> &describeStrs)
 void writeGuideInfo()
 {
     QSettings settings(GuideInfoPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
     for (int i = 0; i < GUIDE_TOTAL_NUM; i++)
     {
@@ -1171,6 +1194,7 @@ void writeGuideInfo()
 void readGuideInfo()
 {
     QSettings settings(GuideInfoPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
     for (int i = 0; i < GUIDE_TOTAL_NUM; i++)
     {
@@ -1192,3 +1216,69 @@ void readGuideInfo()
     }
 }
 
+
+void readNameDefine()
+{
+    QSettings settings(CustomizeNameDefPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+    const QStringList groups = {"Default", "Modify"};
+
+    for (int groupIndex = 0; groupIndex < groups.size(); ++groupIndex) {
+        settings.beginGroup(groups[groupIndex]);
+
+        m_NameDefine[groupIndex].adminName = settings.value("MGR").toString();
+        m_NameDefine[groupIndex].operatorName = settings.value("OPR").toString();
+
+        for (int i = 0; i < 8; i++) {
+            m_NameDefine[groupIndex].subProgName[i] = settings.value(QString("SQ%1").arg(i+1)).toString();
+        }
+        for (int i = 0; i < AXIS_TOTAL_NUM; i++) {
+            m_NameDefine[groupIndex].axisName[i] = settings.value(QString("AXIS%1").arg(i+1)).toString();
+        }
+        for (int i = 0; i < VAR_TOTAL_NUM; i++) {
+            m_NameDefine[groupIndex].varName[i] = settings.value(QString("VAR%1").arg(i+1)).toString();
+        }
+        for (int i = 0; i < STACK_TOTAL_NUM; i++) {
+            m_NameDefine[groupIndex].stackName[i] = settings.value(QString("STACK%1").arg(i+1)).toString();
+        }
+        for (int i = 0; i < FOLLOW_STACK_NUM; i++) {
+            m_NameDefine[groupIndex].followStackName[i] = settings.value(QString("FOLLOW%1").arg(i+1)).toString();
+        }
+        for (int i = 0; i < TIME_TOTAL_NUM; i++) {
+            m_NameDefine[groupIndex].timerName[i] = settings.value(QString("TIMER%1").arg(i+1)).toString();
+        }
+
+        settings.endGroup();
+    }
+}
+
+void writeNameDefine()
+{
+    QSettings settings(CustomizeNameDefPath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+    settings.beginGroup("Modify");
+
+    settings.setValue("MGR", m_NameDefine[1].adminName);
+    settings.setValue("OPR", m_NameDefine[1].operatorName);
+
+    for (int i = 0; i < 8; i++) {
+        settings.setValue(QString("SQ%1").arg(i+1), m_NameDefine[1].subProgName[i]);
+    }
+    for (int i = 0; i < AXIS_TOTAL_NUM; i++) {
+        settings.setValue(QString("AXIS%1").arg(i+1), m_NameDefine[1].axisName[i]);
+    }
+    for (int i = 0; i < VAR_TOTAL_NUM; i++) {
+        settings.setValue(QString("VAR%1").arg(i+1), m_NameDefine[1].varName[i]);
+    }
+    for (int i = 0; i < STACK_TOTAL_NUM; i++) {
+        settings.setValue(QString("STACK%1").arg(i+1), m_NameDefine[1].stackName[i]);
+    }
+    for (int i = 0; i < FOLLOW_STACK_NUM; i++) {
+        settings.setValue(QString("FOLLOW%1").arg(i+1), m_NameDefine[1].followStackName[i]);
+    }
+    for (int i = 0; i < TIME_TOTAL_NUM; i++) {
+        settings.setValue(QString("TIMER%1").arg(i+1), m_NameDefine[1].timerName[i]);
+    }
+
+    settings.endGroup();
+}

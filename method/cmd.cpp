@@ -126,7 +126,7 @@ QList<D_ProgramNameAndPathStruct> m_ProgramNameAndPath;                  //所�
 D_ProgramNameAndPathStruct m_CurrentProgramNameAndPath;                  //当前选中的文件信息
 uint16_t m_FileNameNum = 0;                                                  //程序文件个数
 
-D_NameDefineStruct m_NameDefine[DEFINE_NAME_NUM]={0};                        //名称自定义
+D_NameDefineStruct m_NameDefine[2];                        //名称自定义
 
 
 D_PortDefineStruct m_Port_X[INPUT_TOTAL_NUM];                                  //输入自定义

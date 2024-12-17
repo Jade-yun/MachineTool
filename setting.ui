@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -557,7 +557,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>
@@ -3172,19 +3172,7 @@ QPushButton::released{
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QTableWidget{
-	background-color:#ADE2F4;
-	alternate-background-color:#F8FAD2;
-	border:1px solid black;
-	gridline-color:#0F0963;
-}
-QHeaderView 
-{
-    background:;        // 整个标题头区域背景色
-	color: rgb(255, 170, 127);
-}
- 
-</string>
+        <string notr="true"/>
        </property>
        <property name="frameShadow">
         <enum>QFrame::Sunken</enum>
@@ -4147,18 +4135,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QTableWidget{
-	background-color:#ADE2F4;
-	alternate-background-color:#F8FAD2;
-	border:1px solid black;
-	gridline-color:#0F0963;
-}
-QHeaderView                    // QTableWidget 标题头整个区域
-{
-    background:;        // 整个标题头区域背景色
-	color: rgb(255, 170, 127);
-}
- </string>
+        <string notr="true"/>
        </property>
        <property name="lineWidth">
         <number>1</number>
@@ -4212,7 +4189,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
         <number>200</number>
        </attribute>
        <attribute name="horizontalHeaderDefaultSectionSize">
-        <number>300</number>
+        <number>250</number>
        </attribute>
        <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>

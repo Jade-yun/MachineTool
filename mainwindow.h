@@ -79,11 +79,13 @@ private:
     ManualForm *manualWidget;
     TeachManage* teachManageWidget;
 
+    // dialogs
     ErrorTipDialog* dlgErrorTip;
     LoginDialog* login;
     SoftKeyWidget* softKey;
     BackgroundProcessForm* backgroundProcess;
     Calculator* calculator;
+    HandWheelDialog *handWheel;
 
 private:
     TriMode curMode;
@@ -95,9 +97,8 @@ private:
 
 public:
     static MainWindow* pMainWindow;
-// dialogs
+
 public:
-    HandWheelDialog *handWheel;
     int showErrorTip(const QString& message, TipMode mode = TipMode::NORMAL);
 //    void showErrorTip(const QString &message, bool onlyOK);
 
@@ -118,8 +119,6 @@ private:
     void DataSycStateHandel(uint8_t SysIndex);
 public:
     void callFullKeyboard(QObject *watched);
-private slots:
-    void on_btnHelp_clicked();
 
 protected:
     bool eventFilter(QObject *,QEvent *) override;

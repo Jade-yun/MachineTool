@@ -55,7 +55,7 @@ extern uint8_t outputRelevancyIndex[OUT_PORT_RELEVANCY_NUM][2];                /
 extern uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM];                    //预留出类型
 extern uint8_t seniorFuncIndex[SENIOR_NUM];                    //高级功能
 
-extern void readIniPortStruct();                                       //读取配置文件中所有的端口
+extern void readSigSetPara();
 
 extern void readIniPara();                                              //读取配置文件信息（总配置文件）
 

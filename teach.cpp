@@ -4087,6 +4087,7 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
         m_OperateProNum = 0;//切换程序编号到主程序
         m_CurrentSelectProOrderList = 0;//当前操作行号
         Switch_Pro_ReadOrder(m_OperateProNum);
+#if 0
         ui->Subroutine1_button->setText(m_NameDefine[2].modifyName);
         ui->Subroutine2_button->setText(m_NameDefine[3].modifyName);
         ui->Subroutine3_button->setText(m_NameDefine[4].modifyName);
@@ -4095,7 +4096,16 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
         ui->Subroutine6_button->setText(m_NameDefine[7].modifyName);
         ui->Subroutine7_button->setText(m_NameDefine[8].modifyName);
         ui->Subroutine8_button->setText(m_NameDefine[9].modifyName);
-
+#else
+        ui->Subroutine1_button->setText(m_NameDefine[1].subProgName[0]);
+        ui->Subroutine2_button->setText(m_NameDefine[1].subProgName[1]);
+        ui->Subroutine3_button->setText(m_NameDefine[1].subProgName[2]);
+        ui->Subroutine4_button->setText(m_NameDefine[1].subProgName[3]);
+        ui->Subroutine5_button->setText(m_NameDefine[1].subProgName[4]);
+        ui->Subroutine6_button->setText(m_NameDefine[1].subProgName[5]);
+        ui->Subroutine7_button->setText(m_NameDefine[1].subProgName[6]);
+        ui->Subroutine8_button->setText(m_NameDefine[1].subProgName[7]);
+#endif
         int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
         if (reply == QDialog::Accepted)
         {

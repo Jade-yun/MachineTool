@@ -79,6 +79,7 @@ private:
     void init();
     void initWidgets();
 
+    void setupNameDefine();
     void setupMenuAuthority();
 //    void saveMenuState(const QList<MenuItem *> &menuItems);
 

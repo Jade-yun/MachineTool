@@ -43,6 +43,8 @@ public:
 
 //堆叠组总个数
 #define	STACK_TOTAL_NUM								8
+// 跟随堆叠个数
+#define FOLLOW_STACK_NUM 4
 //堆叠轴个数及编号
 #define STACK_AXIS_NUM								3			//堆叠轴数量
 #define STACK_X_AXIS									0			//横向X轴
@@ -79,10 +81,6 @@ public:
 #define SAVE_X_AXIS										0			//安全区X轴
 #define SAVE_Y_AXIS										1			//安全区Y轴
 #define SAVE_Z_AXIS										2			//安全区Z轴
-
-
-
-#define DEFINE_NAME_NUM                                 58          //名称自定义个数
 
 // 密码
 extern uint32_t passwd[3]; // 0-管理员密码 1-超级管理密码 2-菜单密码
@@ -1103,8 +1101,15 @@ typedef struct
 /*名称自定义*/
 typedef struct
 {
-    QString     defineName;             //默认名称
-    QString     modifyName;             //修改名称
+    QString adminName;                                   // 管理员
+    QString operatorName;                                // 操作员
+    QString subProgName[8];                              // 子程序
+    QString axisName[AXIS_TOTAL_NUM];                    // 轴
+    QString varName[VAR_TOTAL_NUM];                      // 变量名
+    QString stackName[STACK_TOTAL_NUM];                  // 堆叠
+    QString followStackName[FOLLOW_STACK_NUM];           // 跟随堆叠
+    QString timerName[TIME_TOTAL_NUM];                   // 定时器
+
 }D_NameDefineStruct;
 
 
@@ -1115,7 +1120,7 @@ extern QList<D_ProgramNameAndPathStruct> m_ProgramNameAndPath;                  
 extern D_ProgramNameAndPathStruct m_CurrentProgramNameAndPath;                  //当前选中的文件信息
 extern uint16_t m_FileNameNum;                                                  //程序文件个数
 
-extern D_NameDefineStruct m_NameDefine[DEFINE_NAME_NUM];                        //名称自定义
+extern D_NameDefineStruct m_NameDefine[2]; // 名称自定义 0对应默认名字 1对应修改名字
 extern D_PortDefineStruct m_Port_X[INPUT_TOTAL_NUM];                                  //输入自定义
 extern D_PortDefineStruct m_Port_Y[OUTPUT_TOTAL_NUM];                                  //输出自定义
 extern D_PortDefineStruct m_ResPort_Y[OUTPUT_TOTAL_NUM];                               //输出端口作预留时存储默认名称和修改名称

@@ -45,6 +45,8 @@ QStringList axisStopOrderjointList;                         //伺服停止命令
 QStringList sunProOrderjointList;                         //子程序命令
 QStringList ProEndJointList;                             //结束命令
 
+#define USE_REFATOR_NAMEDEFINE 1
+
 /*************************************************************************
 **  函数名：  getOrderjoinIni()
 **	输入参数：无
@@ -251,8 +253,16 @@ QString AxisActJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
     P_AxisMoveStruct* pAxisAct = (P_AxisMoveStruct*)OIS.pData;
+#if USE_REFATOR_NAMEDEFINE
+    QString axisStr;
+    if (pAxisAct->axis < AXIS_TOTAL_NUM)
+    {
+        axisStr = m_NameDefine[1].axisName[pAxisAct->axis];
+    }
+#else
     uint8_t axisStrNum = 10+pAxisAct->axis;//配置文件中x轴从第十个元素开始存
     QString axisStr = m_NameDefine[axisStrNum].modifyName;//当前行运行操作轴显示
+#endif
     double axispos = pAxisAct->pos;
     double advCSpeedDis = pAxisAct->advCSpeedDis;
     double AxisMovedelay = OIS.delay;
@@ -530,7 +540,11 @@ QString StackResetZeroJoint(P_ProOrderStruct OIS)
     QString stacknumStr = "";
     if(StackResetZero->stackNum>0)
     {
+#if USE_REFATOR_NAMEDEFINE
+        stacknumStr = m_NameDefine[1].stackName[StackResetZero->stackNum - 1];
+#else
         stacknumStr = m_NameDefine[StackResetZero->stackNum-1+35].modifyName;
+#endif
     }
     contStr = QString(stackResetZeroOrderjointList.at(0)).arg(QString::number(StackDelay/100,'f',2)).arg(stacknumStr);
     return contStr;
@@ -552,7 +566,12 @@ QString StackMoveJoint(P_ProOrderStruct OIS)
     QString stacknumStr = "";
     if(StackMove->stackNum>0)
     {
+#if USE_REFATOR_NAMEDEFINE
+        stacknumStr = m_NameDefine[1].stackName[StackMove->stackNum - 1];
+#else
         stacknumStr = m_NameDefine[StackMove->stackNum-1+35].modifyName;
+#endif
+
     }
     contStr = QString(stackMoveOrderjointList.at(0)).arg(QString::number(StackMoveDelay/100,'f',2)).arg(stacknumStr);
     return contStr;
@@ -574,7 +593,11 @@ QString StackFollowJoint(P_ProOrderStruct OIS)
     QString stacknumStr = "";
     if(StackFollow->stackNum>0)
     {
+#if USE_REFATOR_NAMEDEFINE
+        stacknumStr = m_NameDefine[1].stackName[StackFollow->stackNum - 1];
+#else
         stacknumStr = m_NameDefine[StackFollow->stackNum-1+46].modifyName;
+#endif
     }
     contStr = QString(stackFollowOrderjointList.at(0)).arg(stacknumStr).arg(QString::number(StackFollowDelay/100,'f',2));
     return contStr;
@@ -847,7 +870,12 @@ QString SunProJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     P_SunProStruct* SunPro = (P_SunProStruct*)OIS.pData;
     double delay = OIS.delay;
+#if USE_REFATOR_NAMEDEFINE
+    QString SunNumStr = m_NameDefine[1].subProgName[SunPro->sunProNum - 1];
+#else
     QString SunNumStr = m_NameDefine[1+SunPro->sunProNum].modifyName;//子程序名称
+
+#endif
     if(SunPro->oprMode == 0)
     {//标准
         contStr = QString(sunProOrderjointList.at(0)).arg(SunNumStr);
@@ -880,7 +908,11 @@ QString AxisStopJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     P_AxisStopStruct* AxisStop = (P_AxisStopStruct*)OIS.pData;
     double delay = OIS.delay;
+#if USE_REFATOR_NAMEDEFINE
+    QString AxisStopStr = m_NameDefine[1].axisName[AxisStop->axis];
+#else
     QString AxisStopStr = m_NameDefine[10+AxisStop->axis].modifyName;
+#endif
     contStr = QString(axisStopOrderjointList.at(0)).arg(AxisStopStr).arg(QString::number(delay/100,'f',2));
     return contStr;
 }
@@ -897,7 +929,11 @@ QString TorqueGardJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
     P_TorqueGardStruct* TorqueGard = (P_TorqueGardStruct*)OIS.pData;
+#if USE_REFATOR_NAMEDEFINE
+    QString TorqueGardStr = m_NameDefine[1].axisName[TorqueGard->axis];
+#else
     QString TorqueGardStr = m_NameDefine[10+TorqueGard->axis].modifyName;
+#endif
     contStr = QString(torqueGardOrderjointList.at(0)).arg(TorqueGardStr).arg(TorqueGard->torqueValue);
     return contStr;
 }
@@ -917,7 +953,11 @@ QString OffsetAxisJoint(P_ProOrderStruct OIS)
     double delay = OIS.delay;
     double OffsetPos = OffsetAxis->offsetPos;
     double AdvEndPos = OffsetAxis->advEndDis;
+#if USE_REFATOR_NAMEDEFINE
+    QString OffsetAxisStr = m_NameDefine[1].axisName[OffsetAxis->axis];
+#else
     QString OffsetAxisStr = m_NameDefine[10+OffsetAxis->axis].modifyName;
+#endif
     contStr = QString(offsetAxisOrderjointList.at(0)).arg(OffsetAxisStr).arg(QString::number(OffsetPos/100,'f',2)).arg(OffsetAxis->speed).arg(QString::number(AdvEndPos/100,'f',2)).arg(QString::number(delay/100,'f',2));
     return contStr;
 }
@@ -941,7 +981,11 @@ QString SearchAxisJoint(P_ProOrderStruct OIS)
         QString SearchinportNum =Get_XYPort_Name(OIS);
         double OffsetPos = SearchAxis->offsetDis;
         double advCDis = SearchAxis->advCDis;//提前位置
+#if USE_REFATOR_NAMEDEFINE
+        QString SearchAxisStr = m_NameDefine[1].axisName[SearchAxis->axis];
+#else
         QString SearchAxisStr = m_NameDefine[10+SearchAxis->axis].modifyName;
+#endif
         contStr = QString(searchAxisMoveOrderjointList.at(0)).arg("搜索"+QString::number(SearchAxis->searchNum)).arg(SearchAxisStr).arg(QString::number(OffsetPos/100,'f',2)).arg(SearchAxis->runSpeed).arg(QString::number(advCDis/100,'f',2)).arg(QString::number(delay/100,'f',2)).arg(SearchinportNum);
     }
     else
@@ -1071,7 +1115,11 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
     }
     else if(LogicIf->cmpType[IfIndex]>=1 && LogicIf->cmpType[IfIndex]<=20)
     {//比较类型是变量
+#if USE_REFATOR_NAMEDEFINE
+        LogicIfStr = m_NameDefine[1].varName[LogicIf->cmpType[IfIndex] - 1];
+#else
         LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] + 17].modifyName;
+#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
         if(LogicIf->sufferCmpType[IfIndex] == 0)
         {//被比较对象类型-常量
@@ -1089,8 +1137,12 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
             }
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
-        {//被比较对象类型-变量
+        {//被比较对象类型-变量#if USE_REFATOR_NAMEDEFINE
+#if USE_REFATOR_NAMEDEFINE
+            LogicIfStr = m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
+#else
             LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
+#endif
         }
         else if(LogicIf->sufferCmpType[IfIndex] == 102)
         {//被比较对象类型-实际产量
@@ -1107,12 +1159,20 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
         {//被比较对象类型-变量
+#if USE_REFATOR_NAMEDEFINE
+            LogicIfStr = m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
+#else
             LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
+#endif
         }
     }
     else if(LogicIf->cmpType[IfIndex]>=21 && LogicIf->cmpType[IfIndex]<=40)
     {//堆叠组方式1
-        LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] + 14].modifyName;
+#if USE_REFATOR_NAMEDEFINE
+            LogicIfStr = m_NameDefine[1].stackName[LogicIf->cmpType[IfIndex] - 21];
+#else
+            LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] + 14].modifyName;
+#endif
 
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
         if(LogicIf->sufferCmpType[IfIndex] == 0)
@@ -1121,18 +1181,30 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 21 && LogicIf->sufferCmpType[IfIndex] <= 40)
         {//被比较对象类型-堆叠
+#if USE_REFATOR_NAMEDEFINE
+            LogicIfStr = LogicIfStr+m_NameDefine[1].stackName[LogicIf->sufferCmpType[IfIndex] - 21];
+#else
             LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 14].modifyName;
+#endif
         }
     }
     else if(LogicIf->cmpType[IfIndex]>=41 && LogicIf->cmpType[IfIndex]<=60)
     {//堆叠组方式2
+#if USE_REFATOR_NAMEDEFINE
+        LogicIfStr = m_NameDefine[1].stackName[LogicIf->cmpType[IfIndex] - 41];
+#else
         LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] + 5].modifyName;
+#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
         LogicIfStr = LogicIfStr+"堆叠完成";
     }
     else if(LogicIf->cmpType[IfIndex]>=61 && LogicIf->cmpType[IfIndex]<=80)
     {//轴-位置
+#if USE_REFATOR_NAMEDEFINE
+        LogicIfStr = m_NameDefine[1].axisName[LogicIf->cmpType[IfIndex] - 61];
+#else
         LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] - 51].modifyName;
+#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
 
         if(LogicIf->sufferCmpType[IfIndex] == 0)
@@ -1141,16 +1213,28 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
         {//被比较对象类型-变量
+#if USE_REFATOR_NAMEDEFINE
+            LogicIfStr = LogicIfStr + m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
+#else
             LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
+#endif
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 61 && LogicIf->sufferCmpType[IfIndex] <= 80)
         {//被比较对象类型-轴
+#if USE_REFATOR_NAMEDEFINE
+            LogicIfStr = LogicIfStr + m_NameDefine[1].axisName[LogicIf->sufferCmpType[IfIndex] - 61];
+#else
             LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] - 51].modifyName;
+#endif
         }
     }
     else if(LogicIf->cmpType[IfIndex]>=81 && LogicIf->cmpType[IfIndex]<=100)
     {//定时器
+#if USE_REFATOR_NAMEDEFINE
+        LogicIfStr = m_NameDefine[1].timerName[LogicIf->cmpType[IfIndex] - 81];
+#else
         LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex]-31].modifyName;
+#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
 
         if(LogicIf->sufferCmpType[IfIndex] == 0)
@@ -1159,7 +1243,11 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->cmpType[IfIndex]>=81 && LogicIf->cmpType[IfIndex]<=100)
         {//被比较对象类型-定时器
-            LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex]-31].modifyName;
+#if USE_REFATOR_NAMEDEFINE
+        LogicIfStr = m_NameDefine[1].timerName[LogicIf->cmpType[IfIndex] - 81];
+#else
+        LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex]-31].modifyName;
+#endif
         }
     }
     return LogicIfStr;
@@ -1239,7 +1327,11 @@ QString LogicVarStructJoint(P_ProOrderStruct OIS)
     P_LogicVarStruct* LogicVarStart = (P_LogicVarStruct*) OIS.pData;
     QString contStr= "";
     QString OperStr = GetLogicVarStr(OIS);
+#if USE_REFATOR_NAMEDEFINE
+    contStr = QString(logicVarOrderjointList.at(LogicVarStart->operMode)).arg(m_NameDefine[1].varName[LogicVarStart->varNum - 1]).arg(OperStr);
+#else
     contStr = QString(logicVarOrderjointList.at(LogicVarStart->operMode)).arg(m_NameDefine[17+LogicVarStart->varNum].modifyName).arg(OperStr);
+#endif
     return contStr;
 }
 
@@ -1257,7 +1349,11 @@ QString LogicAxisJoint(P_ProOrderStruct OIS)
     P_LogicAxisStruct* LogicAxis = (P_LogicAxisStruct*) OIS.pData;
     QString contStr= "";
     QString OperStr = GetLogicVarStr(OIS);
+#if USE_REFATOR_NAMEDEFINE
+    contStr = QString(logicAxisOrderjointList.at(LogicAxis->operMode)).arg(m_NameDefine[1].axisName[LogicAxis->axisNum - 1]).arg(OperStr);
+#else
     contStr = QString(logicAxisOrderjointList.at(LogicAxis->operMode)).arg(m_NameDefine[9+LogicAxis->axisNum].modifyName).arg(OperStr);
+#endif
     return contStr;
 }
 /*************************************************************************
@@ -1273,7 +1369,11 @@ QString LogicStackJoint(P_ProOrderStruct OIS)
     P_LogicStackStruct* LogicStack = (P_LogicStackStruct*) OIS.pData;
     QString contStr= "";
     QString OperStr = GetLogicVarStr(OIS);
+#if USE_REFATOR_NAMEDEFINE
+    contStr = QString(logicAxisOrderjointList.at(LogicStack->operMode)).arg(m_NameDefine[1].stackName[LogicStack->stackNum - 1]).arg(OperStr);
+#else
     contStr = QString(logicStackOrderjointList.at(LogicStack->operMode)).arg(m_NameDefine[34+LogicStack->stackNum].modifyName).arg(OperStr);
+#endif
     return contStr;
 }
 
@@ -1306,7 +1406,12 @@ QString LogicTimeJoint(P_ProOrderStruct OIS)
 {
     P_LogicTimeStruct* LogicTime = (P_LogicTimeStruct*) OIS.pData;
     QString contStr= "";
+#if USE_REFATOR_NAMEDEFINE
+    contStr = QString(logicAxisOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[1].timerName[LogicTime->timeNum - 1]);
+#else
+
     contStr = QString(logicTimeOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[49+LogicTime->timeNum].modifyName);
+#endif
     return contStr;
 }
 /*************************************************************************
@@ -1343,11 +1448,20 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicVarStart->sufferOperType>=1 && LogicVarStart->sufferOperType<=20)
         {//1-20变量
+#if USE_REFATOR_NAMEDEFINE
+            returnstr = m_NameDefine[1].varName[LogicVarStart->sufferOperType - 1];
+#else
             returnstr = m_NameDefine[17+LogicVarStart->sufferOperType].modifyName;
+#endif
         }
         else if(LogicVarStart->sufferOperType>=21 && LogicVarStart->sufferOperType<=40)
         {//21-40轴
+#if USE_REFATOR_NAMEDEFINE
+            returnstr = m_NameDefine[1].axisName[LogicVarStart->sufferOperType - 21];
+#else
+
             returnstr = m_NameDefine[LogicVarStart->sufferOperType-11].modifyName;
+#endif
         }
         else if(LogicVarStart->sufferOperType == 101)
         {//101实际产量
@@ -1365,7 +1479,12 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicAxisStart->sufferOperType>=1 && LogicAxisStart->sufferOperType<=20)
         {//1-20变量
+#if USE_REFATOR_NAMEDEFINE
+            returnstr = m_NameDefine[1].varName[LogicAxisStart->sufferOperType - 1];
+#else
+
             returnstr = m_NameDefine[17+LogicAxisStart->sufferOperType].modifyName;
+#endif
         }
         break;
     }
@@ -1378,7 +1497,11 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicStackStart->sufferOperType>=1 && LogicStackStart->sufferOperType<=20)
         {//1-20堆叠计数
+#if USE_REFATOR_NAMEDEFINE
+            returnstr = m_NameDefine[1].stackName[LogicStackStart->sufferOperType - 1];
+#else
             returnstr = m_NameDefine[34+LogicStackStart->sufferOperType].modifyName;
+#endif
         }
         break;
     }
@@ -1391,7 +1514,12 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicCurProductNumStruct->sufferOperType>=1 && LogicCurProductNumStruct->sufferOperType<=20)
         {//1-20变量
+#if USE_REFATOR_NAMEDEFINE
+            returnstr = m_NameDefine[1].varName[LogicCurProductNumStruct->sufferOperType - 1];
+#else
+
             returnstr = m_NameDefine[17+LogicCurProductNumStruct->sufferOperType].modifyName;
+#endif
         }
         break;
     }

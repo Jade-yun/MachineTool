@@ -737,6 +737,7 @@ void ManualForm::updateGuidePoints()
         GuidePara guide { guideName, keyDefStr, btnPos, keyType, portNum, status };
 
         DraggableButton* btn = new DraggableButton(ui->tabGuide);
+        btn->setAutoExclusive(true);
         guidePoints.insert(btn, guide);
 
         // setup connections to handle
@@ -1220,6 +1221,8 @@ void ManualForm::initVar()
 
     ::readGuideInfo();
     updateGuidePoints();
+
+    updateReserveButtonState();
 }
 
 void ManualForm::on_btnEditGuideName_clicked()

@@ -68,7 +68,8 @@ Setting::Setting(QWidget *parent) :
 
     init();
     initWidgets();
-//    setupMenuAuthority();
+    setupNameDefine();
+    setupMenuAuthority();
 
     syncParaToUI();
 
@@ -229,7 +230,7 @@ Setting::Setting(QWidget *parent) :
         static QProgressDialog progressDialog(this);
         progressDialog.setLabelText(tr("Please wait, applying new color settings..."));
         progressDialog.setCancelButton(nullptr);
-        progressDialog.setWindowModality(Qt::WindowModal);
+//        progressDialog.setWindowModality(Qt::WindowModal);
         progressDialog.setFixedSize(500, 300);
         progressDialog.setStyleSheet(
             "QProgressDialog {"
@@ -243,26 +244,23 @@ Setting::Setting(QWidget *parent) :
             "   color: #000000;"
             "}"
         );
-        progressDialog.show();
 
 //        QTimer* timer = new QTimer;
 //        int progress = 0;
 
-//        progressDialog.setValue(10);
 //        QObject::connect(timer, &QTimer::timeout, [&]() {
-//            progress += 10;
+//            progress += 1;
 //            progressDialog.setValue(progress);
-//            progressDialog.repaint();
-//            if (progress >= 100) {
+//            if (progress >= 99) {
 //                timer->stop();
 //                delete timer;
 //                return;
 //            }
 //        });
-//        timer->start(1000);
+//        timer->start(100);
 #endif
 
-        QTimer::singleShot(0, [&]() {
+        QTimer::singleShot(0, [setColor]() {
             QFile file(styles[setColor]);
             if (file.open(QIODevice::ReadOnly)) {
                 qApp->setStyleSheet(QString::fromLatin1(file.readAll()));
@@ -271,7 +269,7 @@ Setting::Setting(QWidget *parent) :
             } else {
                 qDebug() << "Fail to open stylesheet file:" << styles[setColor];
             }
-            progressDialog.accept();
+            progressDialog.close();
         });
 
         progressDialog.exec();
@@ -328,7 +326,6 @@ Setting::Setting(QWidget *parent) :
         }
     });
 
-
     connect(ui->coboxSiloType, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
         if (index == 0) // 平板式料仓
         {
@@ -351,6 +348,129 @@ Setting::Setting(QWidget *parent) :
         }
     });
     emit ui->coboxSiloType->currentIndexChanged(ui->coboxSiloType->currentIndex());
+
+    connect(ui->coboxLimitPosX1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        // 不使用
+        if (index == 0)
+        {
+            m_Port_X[18].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[18].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegX1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        // 不使用
+        if (index == 0)
+        {
+            m_Port_X[16].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[16].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitPosY1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[13].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[13].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegY1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[18].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[18].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitPosZ1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[12].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[12].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegZ1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[17].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[17].functionSet = 1;
+        }
+    });
+//    connect(ui->coboxLimitPosC, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+//        if (index == 0)
+//        {
+//            m_Port_X[17].functionSet = 0;
+//        }
+//        else
+//        {
+//            m_Port_X[17].functionSet = 1;
+//        }
+//    });
+//    connect(ui->coboxLimitNegC, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+//        if (index == 0)
+//        {
+//            m_Port_X[17].functionSet = 0;
+//        }
+//        else
+//        {
+//            m_Port_X[17].functionSet = 1;
+//        }
+//    });
+    connect(ui->coboxLimitPosY2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[14].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[14].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegY2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[21].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[21].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitPosZ2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[22].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[22].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegZ2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[20].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[20].functionSet = 1;
+        }
+    });
 
     //PXC_240914
     showPortDefine();
@@ -837,7 +957,6 @@ void Setting::initWidgets()
     ui->tableWgtNameDef->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWgtNameDef->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableWgtNameDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableWgtNameDef->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     ui->tableWgtNote->setColumnCount(2);
     ui->tableWgtNote->setHorizontalHeaderLabels({ tr("标题") , tr("修改时间")});
@@ -869,6 +988,152 @@ void Setting::initWidgets()
 //        ui->editNoteTitle->setText(title);
 //        ui->plainTextEditNote->clear();
     }
+
+}
+
+void Setting::setupNameDefine()
+{
+    // 计算总行数
+    int rowCnt = 2 + 8 + STACK_TOTAL_NUM + AXIS_TOTAL_NUM + VAR_TOTAL_NUM + FOLLOW_STACK_NUM + TIME_TOTAL_NUM;
+
+
+    auto tableNameDef = ui->tableWgtNameDef;
+    tableNameDef->setRowCount(rowCnt);
+    tableNameDef->setColumnCount(2);
+
+    // 设置表头
+    tableNameDef->setHorizontalHeaderLabels({tr("默认名称"), tr("修改名称")});
+
+    int currentRow = 0;
+
+    // 插入管理员名称
+    tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].adminName));
+    tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].adminName));
+
+    // 插入操作员名称
+    tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].operatorName));
+    tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].operatorName));
+
+    // 插入子程序名称
+    for (int i = 0; i < 8; i++) {
+        tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].subProgName[i]));
+        tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].subProgName[i]));
+    }
+
+    // 插入轴
+    for (int i = 0; i < AXIS_TOTAL_NUM; i++) {
+        tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].axisName[i]));
+        tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].axisName[i]));
+    }
+
+    // 插入变量名称
+    for (int i = 0; i < VAR_TOTAL_NUM; i++) {
+        tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].varName[i]));
+        tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].varName[i]));
+    }
+
+    // 插入堆叠名称
+    for (int i = 0; i < STACK_TOTAL_NUM; i++) {
+        tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].stackName[i]));
+        tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].stackName[i]));
+    }
+
+    // 插入跟随堆叠名称
+    for (int i = 0; i < FOLLOW_STACK_NUM; i++) {
+        tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].followStackName[i]));
+        tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].followStackName[i]));
+    }
+
+    // 插入定时器名称
+    for (int i = 0; i < TIME_TOTAL_NUM; i++) {
+        tableNameDef->setItem(currentRow, 0, new QTableWidgetItem(m_NameDefine[0].timerName[i]));
+        tableNameDef->setItem(currentRow++, 1, new QTableWidgetItem(m_NameDefine[1].timerName[i]));
+    }
+
+    connect(ui->tableWgtNameDef, &QTableWidget::cellClicked, this, [=](int row, int col){
+        if (col == 1)
+        {
+            auto item = ui->tableWgtNameDef->item(row, col);
+            QString originText = item->text();
+            FullKeyboard* keyboard = FullKeyboard::instance();
+            keyboard->setText(originText);
+            keyboard->setCurrentEditObj(nullptr);
+            keyboard->exec();
+            item->setText(keyboard->getInputText());
+        }
+    });
+
+    connect(ui->btnSaveNameDef, &QPushButton::clicked, this, [=](){
+        ::writeNameDefine();
+        // to fresh all name display in every windows.
+
+    });
+    connect(ui->btnExportNameDef, &QPushButton::clicked, this, [=](){
+       if (!UsbDisk::instance()->isInserted())
+       {
+           MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"), TipMode::ONLY_OK);
+           return;
+       }
+       //       UsbDisk::instance()->copyToUsb()
+    });
+    connect(ui->btnImportNameDef, &QPushButton::clicked, this, [=](){
+       if (!UsbDisk::instance()->isInserted())
+       {
+           MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"), TipMode::ONLY_OK);
+           return;
+       }
+
+    });
+    connect(ui->btnRestoreNameAllNameDef, &QPushButton::clicked, this, [=](){
+
+        int totalRows = 8 + AXIS_TOTAL_NUM + VAR_TOTAL_NUM + STACK_TOTAL_NUM + FOLLOW_STACK_NUM + TIME_TOTAL_NUM;
+        if (tableNameDef->rowCount() < totalRows) {
+            tableNameDef->setRowCount(totalRows);
+        }
+
+        // 按顺序写入数据
+        int index = 0;
+        tableNameDef->item(index++, 1)->setText(m_NameDefine->adminName);
+
+        tableNameDef->item(index++, 1)->setText(m_NameDefine->operatorName);
+
+        for (int i = 0; i < 8; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            item->setText(m_NameDefine[0].subProgName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            item->setText(m_NameDefine[0].axisName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            item->setText(m_NameDefine[0].varName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            item->setText(m_NameDefine[0].stackName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            item->setText(m_NameDefine[0].followStackName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            item->setText(m_NameDefine[0].timerName[i]);
+            ++index;
+        }
+    });
+
 
 }
 
@@ -1733,12 +1998,15 @@ void Setting::onMenuStateChanged(MenuState newState)
 
 void Setting::updateAppFont()
 {
-    const QString defaultFont = "SimSun";
+    const std::vector<QString> fontType = {
+        "WenQuanYi Zen Hei",            // 默认字体
+        "SimSun",                      // 宋体
+        "KaiTi",                        // 楷体
+        "DejaVu Sans"
+    };
     const int defaultPixelSize = 20;
 
-    QString selectedFont = (ui->coboxFonts->currentIndex() == 0)
-                           ? defaultFont
-                           : ui->coboxFonts->currentText();
+    QString selectedFont = fontType[ui->coboxFonts->currentIndex()];
     int selectedPixelSize = (ui->coboxFontSize->currentIndex() == 0)
                             ? defaultPixelSize
                             : ui->coboxFontSize->currentText().toInt();
