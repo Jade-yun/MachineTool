@@ -25,7 +25,6 @@
 #include "mythread.h"
 
 #include "eventscanner.h"
-#include "beeper.h"
 
 #include <QThread>
 

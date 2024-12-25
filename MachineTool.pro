@@ -41,6 +41,7 @@ SOURCES += \
     Driver/beeper.cpp \
     Driver/eventscanner.cpp \
     Driver/globaleventfilter.cpp \
+    Driver/ledcontroller.cpp \
     Driver/timesetter.cpp \
     Driver/usbdisk.cpp \
     MyTitleBarDialog/basewindow.cpp \
@@ -89,6 +90,7 @@ HEADERS += \
     Driver/beeper.h \
     Driver/eventscanner.h \
     Driver/globaleventfilter.h \
+    Driver/ledcontroller.h \
     Driver/timesetter.h \
     Driver/usbdisk.h \
     MyTitleBarDialog/basewindow.h \

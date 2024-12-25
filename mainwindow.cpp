@@ -20,6 +20,9 @@
 #include <QStyleFactory>
 #include <QEasingCurve>
 
+#include "beeper.h"
+#include "ledcontroller.h"
+
 #include <fcntl.h>
 #include <unistd.h>
 #include <linux/input.h>
@@ -339,6 +342,21 @@ void MainWindow::onCheckPara()
             ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, true);
         }
     }
+
+    // LED0~5 的使能状态码分别分为0～8位对应位置1
+    // 如 LED0 使能 0x01, LED3 使能 0x04
+    // 最终控制多个 LED 需要多个状态码进行 |（按位或）操作
+    uint8_t ledStatus = 0;
+    for (int i = 0; i < OPR_LED_NUM; i++)
+    {
+        if (m_LedFunc[i].funcNum)
+        {
+            auto temp = m_LedFunc[i].ledType ? m_InPortSta[m_LedFunc[i].funcNum - 1] : m_OutPortSta[m_LedFunc[i].funcNum - 1];
+            ledStatus |= (temp & 1) << i;
+        }
+    }
+
+    LEDController::instance()->updateLEDStatus(&ledStatus);
 
 }
 

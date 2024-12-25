@@ -239,8 +239,8 @@ void setLedFunc(D_LedFuncStruct* value)
 {
     for(int i=0;i<OPR_LED_NUM;i++)
     {
-        getValue("LedFunc",QString("V%1_ledType").arg(i),value[i].ledType);
-        getValue("LedFunc",QString("V%1_funcNum").arg(i),value[i].funcNum);
+        setValue("LedFunc",QString("V%1_ledType").arg(i),value[i].ledType);
+        setValue("LedFunc",QString("V%1_funcNum").arg(i),value[i].funcNum);
     }
 }
 //信号设置高级功能
