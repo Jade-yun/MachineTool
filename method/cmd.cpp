@@ -82,6 +82,8 @@ uint8_t m_RobotRunSta = 0;																							//机器运行状态
 uint8_t m_RobotWorkMode = 0;																						//机器工作模式
 uint16_t m_AlarmNum = 0;																								//报警编号，0无故障 1-99紧急停止(急停，重新回原) 100-499急停报警(急停，不需要回原)                                                                                                                                 //500-999普通报警(停止) 1000-1499提示报警(暂停) 1500-1999提示(运行状态不变化)
 
+QQueue<AlarmInfo> alarmInfoQueue;
+
 uint32_t m_TotalProductNum = 0;																				//产品总产量---可用于物联网
 uint32_t m_OilerProductNum = 0;																				//打油产量计数
 

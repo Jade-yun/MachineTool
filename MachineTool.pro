@@ -49,8 +49,10 @@ SOURCES += \
     Prompt_Dialog_page/prompt_dialog_page.cpp \
     Prompt_Dialog_page/prompt_yes_no_dialog_page.cpp \
     Prompt_Dialog_page/yes_no_page.cpp \
+    alarmbar.cpp \
     alarmform.cpp \
     autoform.cpp \
+    dialogs/alarminfodialog.cpp \
     dialogs/backgroundprocessform.cpp \
     dialogs/file_preview.cpp \
     dialogs/softkeywidget.cpp \
@@ -60,7 +62,6 @@ SOURCES += \
     mainwindow.cpp \
     manualform.cpp \
     monitorform.cpp \
-    savebutton.cpp \
     setting.cpp \
     teach.cpp \
     draggablebutton.cpp \
@@ -81,7 +82,6 @@ SOURCES += \
     dialogs/ifprogramdialog.cpp \
     dialogs/ioportdialog.cpp \
     dialogs/vartypedialog.cpp \
-    statebutton.cpp \
     referencewidget.cpp
 
 HEADERS += \
@@ -97,8 +97,10 @@ HEADERS += \
     Prompt_Dialog_page/prompt_dialog_page.h \
     Prompt_Dialog_page/prompt_yes_no_dialog_page.h \
     Prompt_Dialog_page/yes_no_page.h \
+    alarmbar.h \
     alarmform.h \
     autoform.h \
+    dialogs/alarminfodialog.h \
     dialogs/backgroundprocessform.h \
     dialogs/file_preview.h \
     dialogs/softkeywidget.h \
@@ -107,7 +109,6 @@ HEADERS += \
     mainwindow.h \
     manualform.h \
     monitorform.h \
-    savebutton.h \
     setting.h \
     teach.h \
     draggablebutton.h \
@@ -128,15 +129,16 @@ HEADERS += \
     dialogs/ifprogramdialog.h \
     dialogs/ioportdialog.h \
     dialogs/vartypedialog.h \
-    statebutton.h \
-    referencewidget.h \
+    referencewidget.h
 
 FORMS += \
     Prompt_Dialog_page/prompt_dialog_page.ui \
     Prompt_Dialog_page/prompt_yes_no_dialog_page.ui \
     Prompt_Dialog_page/yes_no_page.ui \
+    alarmbar.ui \
     alarmform.ui \
     autoform.ui \
+    dialogs/alarminfodialog.ui \
     dialogs/backgroundprocessform.ui \
     dialogs/file_preview.ui \
     dialogs/softkeywidget.ui \

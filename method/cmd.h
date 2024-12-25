@@ -326,7 +326,7 @@ typedef struct
     uint8_t  ret[2];
 }P_OtherAlarmLampStruct;
 
-/*其他-报警声命令结构体*/
+/*其他-声命令结构体*/
 typedef struct
 {//4Byte
     uint8_t  outportNum;					//输出端口号
@@ -450,7 +450,7 @@ typedef struct
     int32_t	offsetDis;						//偏移位置，单位0.01mm
     uint8_t	axis;									//轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2
     uint8_t	posStoreFlag;					//位置记忆，0不使用 1使用
-    uint8_t	reachPosAlarmFlag;		//到位报警，0不使用 1使用
+    uint8_t	reachPosAlarmFlag;		//到位，0不使用 1使用
     uint8_t	runSpeed;							//运行速度，1-100
     uint8_t	advCSpeed;						//提前速度，1-100
     uint8_t	searchNum;						//搜索编号，1-8
@@ -510,9 +510,9 @@ extern P_ReserveOutStruct Temp_ReserveOutStruct;                                
 extern P_WaitInMachineStruct Temp_WaitInMachineStruct;                                       //教导界面机床等待指令
 extern P_WaitInClawStruct Temp_WaitInClawStruct;                                           //教导界面等待卡爪指令
 extern P_WaitInReserveStruct Temp_WaitInReserveStruct;                                     //教导界面等待预留指令
-extern P_OtherAlarmCustStruct Temp_OtherAlarmCustStruct;                                   //教导界面其他-报警自定义指令
-extern P_OtherAlarmLampStruct Temp_OtherAlarmLampStruct;                                   //教导界面其他-报警灯指令
-extern P_OtherAlarmSoundStruct Temp_OtherAlarmSoundStruct;                                   //教导界面其他-报警声指令
+extern P_OtherAlarmCustStruct Temp_OtherAlarmCustStruct;                                   //教导界面其他-自定义指令
+extern P_OtherAlarmLampStruct Temp_OtherAlarmLampStruct;                                   //教导界面其他-灯指令
+extern P_OtherAlarmSoundStruct Temp_OtherAlarmSoundStruct;                                   //教导界面其他-声指令
 extern P_OtherCycStopStruct Temp_OtherCycStopCustStruct;                                     //教导界面其他-周期停止
 extern P_SunProStruct Temp_SunProStruct;                                                     //教导界面高级-子程序
 extern P_AxisStopStruct Temp_AxisStopStruct;                                                 //教导界面高级-伺服停止
@@ -991,11 +991,19 @@ extern uint16_t m_AxisCurTorque;                                //当前扭矩�
 #define MAC_STA_RUN														33			//自动-运行中
 #define MAC_STA_PAUSE													34			//自动-暂停中
 
+#define ALARM_MAX_SIZE 100          // 报警信息最大条数
 
 extern uint8_t m_RobotRunSta;															//机器运行状态
 extern uint8_t m_RobotWorkMode;														//机器工作模式
 extern uint16_t m_AlarmNum;																//报警编号，0无故障 1-99紧急停止(急停，重新回原) 100-499急停报警(急停，不需要回原)
                                                                                                             //500-999普通报警(停止) 1000-1499提示报警(暂停) 1500-1999提示(运行状态不变化)
+struct AlarmInfo {
+    uint16_t alarmNum;  // 报警编号
+    QString alarmTime;
+};
+
+extern QQueue<AlarmInfo> alarmInfoQueue;
+
 extern uint32_t m_TotalProductNum;													//产品总产量---可用于物联网
 extern uint32_t m_OilerProductNum;													//打油产量计数                                                                                //500-999普通报警(停止)
                                                                                     //1000-1499提示报警(暂停)

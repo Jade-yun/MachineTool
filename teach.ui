@@ -594,7 +594,7 @@ QHeaderView                    // QTableWidget 标题头整个区域
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="iconSize">
     <size>
@@ -9631,7 +9631,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -9682,7 +9681,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -9743,7 +9741,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="currentIndex">
@@ -10048,7 +10045,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="title">
@@ -10103,7 +10099,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="focusPolicy">
@@ -10413,7 +10408,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="focusPolicy">
@@ -10645,7 +10639,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -10747,7 +10740,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -10849,7 +10841,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="focusPolicy">
@@ -11026,7 +11017,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
             <property name="font">
              <font>
               <family>SimSun</family>
-              <pointsize>-1</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -11057,7 +11047,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -11078,7 +11067,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
         <property name="font">
          <font>
           <family>SimSun</family>
-          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -11112,7 +11100,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <item>
@@ -11168,7 +11155,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <item>
@@ -11386,7 +11372,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -11493,7 +11478,6 @@ QHeaderView                    // QTableWidget 标题头整个区域
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <item>
@@ -14787,7 +14771,6 @@ font: 20pt ;</string>
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <item>
@@ -15213,7 +15196,6 @@ font: 20pt ;</string>
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">
@@ -15274,7 +15256,6 @@ font: 20pt ;</string>
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
            </property>
            <property name="text">
@@ -16093,7 +16074,6 @@ font: 20pt ;</string>
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="currentIndex">
@@ -16124,7 +16104,6 @@ font: 20pt ;</string>
          <property name="font">
           <font>
            <family>SimSun</family>
-           <pointsize>-1</pointsize>
           </font>
          </property>
          <property name="styleSheet">
@@ -16188,7 +16167,6 @@ font: 20pt ;</string>
              <property name="font">
               <font>
                <family>SimSun</family>
-               <pointsize>-1</pointsize>
               </font>
              </property>
              <item>
@@ -16720,7 +16698,6 @@ font: 20pt ;</string>
        <property name="font">
         <font>
          <family>SimSun</family>
-         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="title">

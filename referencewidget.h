@@ -1,7 +1,7 @@
 #ifndef REFERENCEWIDGET_H
 #define REFERENCEWIDGET_H
 
-#include <QWidget>
+#include <QDialog>
 #include <QTableWidget>
 #include <QPushButton>
 #include <QTextBrowser>
@@ -10,6 +10,8 @@
 #include "draggablebutton.h"
 #include "cmd.h"
 #include "customkeyboard.h"
+
+#include "framelesswidget2.h"
 
 struct ReferPointPara
 {
@@ -20,7 +22,7 @@ struct ReferPointPara
     QPoint pointPos; // 参考点在ui上的位置
 };
 
-class ReferenceWidget : public QWidget
+class ReferenceWidget : public QDialog
 {
     Q_OBJECT
 public:
@@ -34,7 +36,6 @@ private:
     void updateUI(const QList<ReferPointPara>& referPoints);
     void init();
     void updateReferPointsTable();
-    void callFullKeyboard(QObject* obj);
     void updateReferPoints();
 
 private:
@@ -51,7 +52,7 @@ private:
     QPushButton *btnFresh;
     QPushButton *btnEditRefName;
 
-    FullKeyboard* keyboard;
+//    FullKeyboard* keyboard;
 
     // QWidget interface
 protected:

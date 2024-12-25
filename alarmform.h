@@ -13,7 +13,18 @@ class AlarmForm : public QWidget
 
 public:
     explicit AlarmForm(QWidget *parent = nullptr);
-    ~AlarmForm();
+
+public:
+    void handleAlarm(uint16_t alarmNum);
+
+private:
+    void addNewAlarmInfo();
+    void saveAlarmQueueToConfig();
+    void loadAlarmQueueFromConfig();
+
+    void setupAlarmTable();
+
+//    void getAlarmInfo(int alarmNum, QString& alarmContent, )
 
 private:
     Ui::AlarmForm *ui;

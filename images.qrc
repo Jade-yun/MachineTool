@@ -157,5 +157,17 @@
         <file>images/next.png</file>
         <file>images/origin.png</file>
         <file>images/revert.png</file>
+        <file>images/cancel.png</file>
+        <file>images/alarm_help.png</file>
+        <file>images/autoPageImages/revise_position.png</file>
+        <file>images/autoPageImages/operation_auto.png</file>
+        <file>images/autoPageImages/cycle_stop.png</file>
+        <file>images/autoPageImages/adjust_speed.png</file>
+        <file>images/autoPageImages/stack.png</file>
+        <file>images/autoPageImages/adjustSpeed.png</file>
+        <file>images/autoPageImages/step_into.png</file>
+        <file>images/autoPageImages/breakpoint.png</file>
+        <file>images/autoPageImages/continue.png</file>
+        <file>images/autoPageImages/clear.png</file>
     </qresource>
 </RCC>

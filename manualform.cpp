@@ -411,6 +411,31 @@ ManualForm::ManualForm(QWidget *parent) :
         ui->btnNewButtonReference->setVisible(checked);
         ui->btnDeleteButtonReference->setVisible(checked);
     });
+    /*********************************轴动作********************************************/
+    connect(ui->btnAdjustFunc, &QPushButton::clicked, this, [=](){
+        TipPasswdDialog tip(tr("请输入高级管理员密码"), nullptr);
+        int reply = tip.exec();
+        if (reply == QDialog::Rejected)
+        {
+            return;
+        }
+        else if (reply == QDialog::Accepted)
+        {
+            uint advancePasswd = tip.getPasswd();
+
+            if (advancePasswd == passwd[1])
+            {
+                ui->stkWgtAdjustMachine->setCurrentIndex(1);
+            }
+        }
+    });
+    connect(ui->chboxUseAdjustMachine, &QCheckBox::stateChanged, this, [=](int state){
+        if (!state)
+        {
+            ui->stkWgtAdjustMachine->setCurrentIndex(0);
+            ui->chboxUseAdjustMachine->setChecked(true);
+        }
+    });
 
 }
 

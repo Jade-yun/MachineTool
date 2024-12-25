@@ -137,6 +137,10 @@
       <property name="text">
        <string>跟随</string>
       </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/moveto.png</normaloff>:/images/moveto.png</iconset>
+      </property>
       <property name="iconSize">
        <size>
         <width>25</width>
@@ -177,6 +181,10 @@
       </property>
       <property name="text">
        <string>编辑</string>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/autoPageImages/edit.png</normaloff>:/images/autoPageImages/edit.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -263,10 +271,14 @@
       <property name="text">
        <string>试行</string>
       </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/autoPageImages/step_into.png</normaloff>:/images/autoPageImages/step_into.png</iconset>
+      </property>
       <property name="iconSize">
        <size>
-        <width>25</width>
-        <height>25</height>
+        <width>20</width>
+        <height>20</height>
        </size>
       </property>
      </widget>
@@ -303,6 +315,10 @@
       </property>
       <property name="text">
        <string>操作</string>
+      </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/autoPageImages/operation_auto.png</normaloff>:/images/autoPageImages/operation_auto.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -345,10 +361,14 @@
       <property name="text">
        <string>允许调速</string>
       </property>
+      <property name="icon">
+       <iconset resource="images.qrc">
+        <normaloff>:/images/autoPageImages/adjust_speed.png</normaloff>:/images/autoPageImages/adjust_speed.png</iconset>
+      </property>
       <property name="iconSize">
        <size>
-        <width>25</width>
-        <height>25</height>
+        <width>32</width>
+        <height>32</height>
        </size>
       </property>
       <property name="checkable">

@@ -18,7 +18,9 @@
 #include "logindialog.h"
 #include "softkeywidget.h"
 #include "backgroundprocessform.h"
+#include "alarmbar.h"
 #include "calculator.h"
+#include "alarminfodialog.h"
 
 #include "mythread.h"
 
@@ -57,6 +59,8 @@ private slots:
     void on_Btn_AlarmHome_clicked();
 
     void Refresh_Progress_bar(uint8_t data);
+
+    void handleAlarm(uint16_t alarmNum);
 public slots:
 
     void slotShowSubWindow();
@@ -67,6 +71,9 @@ signals:
     void signal_refresh_TeachList();//刷新教导界面列表信号
     void EditOperatorVarPreOp_Refresh();//教导界面变量指令-变量类型刷新信号
     void signal_sync_data();       //同步数据到主控板
+
+    void alarmOccurred(int alarmNum);
+
 private:
     Ui::MainWindow *ui;
 
@@ -86,14 +93,17 @@ private:
     BackgroundProcessForm* backgroundProcess;
     Calculator* calculator;
     HandWheelDialog *handWheel;
+    AlarmBar* alarmBar;
 
 private:
     TriMode curMode;
     EventScanner* scanner; // customize input event monitoring
+    QTimer* checkParaTimer;
 
 private:
     void initUI();
     void handleLoginModeChanged(LoginMode mode);
+    void onCheckPara();
 
 public:
     static MainWindow* pMainWindow;

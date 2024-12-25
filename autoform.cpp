@@ -91,6 +91,25 @@ AutoForm::AutoForm(QWidget *parent) :
     menu->addAction(action5);
     menu->addAction(action6);
 
+    const std::vector<QString> iconsPath = {
+        ":/images/autoPageImages/stack.png",
+        ":/images/autoPageImages/continue.png",
+        ":/images/autoPageImages/breakpoint.png",
+        ":/images/autoPageImages/clear.png",
+        ":/images/autoPageImages/edit.png",
+        ":/images/autoPageImages/revise_position.png"
+    };
+
+    std::vector<QAction*> actions = {action1, action2, action3, action4, action5, action6};
+
+    const QSize iconSize(25, 25); // Desired size for icons
+    for (size_t i = 0; i < actions.size() && i < iconsPath.size(); ++i)
+    {
+        QIcon icon(iconsPath[i]);
+        QPixmap pixmap = icon.pixmap(iconSize);
+        actions[i]->setIcon(QIcon(pixmap));
+    }
+
     ui->btnOperate->setMenu(menu);
 
     referEditDialog = new ReferenceWidget(this);

@@ -24,6 +24,8 @@
 #include <unistd.h>
 #include <linux/input.h>
 
+const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
+
 MainWindow* MainWindow::pMainWindow = nullptr;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -195,7 +197,8 @@ MainWindow::MainWindow(QWidget *parent)
         {
             // stop mode
             curMode = TriMode::STOP;
-            ui->Btn_TeachHome->setEnabled(true);
+            bool enabled = LoginDialog::getLoginMode() != LoginMode::Operator;
+            ui->Btn_TeachHome->setEnabled(enabled);
             ui->Btn_TeachHome->setText(tr("教导管理"));
             ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             TrimodeSwitchCommandSend(code,value);
@@ -228,15 +231,30 @@ MainWindow::MainWindow(QWidget *parent)
         Beeper::instance()->beep();
         keyAxisCommandSend(code,value);
     });
-//    connect(scanner, &EventScanner::errorOccurred, [](const QString &errorString) {
-//        qWarning() << "Error:" << errorString;
-//        Beeper::instance()->beep();
-//    });
 
-//    scanner->start();
-//    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){
-//        scanner->start();
-//    });
+    checkParaTimer = new QTimer(this);
+    checkParaTimer->setInterval(100);
+    connect(checkParaTimer, &QTimer::timeout, this, &MainWindow::onCheckPara);
+    connect(this, &MainWindow::alarmOccurred, this, &MainWindow::handleAlarm);
+
+    alarmBar = new AlarmBar(this);
+//    alarmBar->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
+//    alarmBar->setAttribute(Qt::WA_ShowWithoutActivating);
+    alarmBar->hide();
+    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){
+        alarmBar->setGeometry(5, 640, 1014, 60);
+
+        int newAlarmNum = alarmInfoQueue.back().alarmNum;
+
+        QSettings alarmInfoSettings(alarmInfoMappingPath, QSettings::IniFormat);
+        alarmInfoSettings.setIniCodec("utf-8");
+        alarmInfoSettings.beginGroup(QString::number(newAlarmNum));
+        QString alarmContent = alarmInfoSettings.value("AlarmContent").toString();
+        alarmInfoSettings.endGroup();
+
+        alarmBar->showAlarm(newAlarmNum, alarmContent);
+    });
+
 }
 
 MainWindow::~MainWindow()
@@ -245,6 +263,8 @@ MainWindow::~MainWindow()
     delete dlgErrorTip;
 //    delete backgroundProcess;
     delete g_Usart;
+
+    delete scanner;
 }
 
 void MainWindow::Refresh_Progress_bar(uint8_t data)
@@ -252,6 +272,20 @@ void MainWindow::Refresh_Progress_bar(uint8_t data)
     QCoreApplication::processEvents();
     ui->Progress_bar->setValue(data);
     ui->Progress_bar->update();
+}
+
+void MainWindow::handleAlarm(uint16_t alarmNum)
+{
+    if (alarmInfoQueue.size() >= ALARM_MAX_SIZE)
+    {
+        alarmInfoQueue.dequeue();
+    }
+    QString alarmTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+
+    alarmInfoQueue.enqueue({alarmNum, alarmTime});
+
+    alarmWidget->handleAlarm(alarmNum);
+
 }
 //设置主界面控件状态控制
 void MainWindow::MainWindow_SetControl_Stake(bool state)
@@ -278,17 +312,36 @@ void MainWindow::initUI()
 
 void MainWindow::handleLoginModeChanged(LoginMode mode)
 {
-    if (mode == LoginMode::Operator)
-    {
-        ui->Btn_TeachHome->setEnabled(false);
-    }
-    else {
-        ui->Btn_TeachHome->setEnabled(true);
-    }
+    bool enabled = mode != LoginMode::Operator;
+
+    ui->Btn_TeachHome->setEnabled(enabled && (curMode != TriMode::AUTO));
 
 //    setWidget->handleLoginModeChanged(mode);
     manualWidget->handleLoginModeChanged(mode);
 }
+
+void MainWindow::onCheckPara()
+{
+    static int lastAlarmNum = 0;
+
+    if (lastAlarmNum != m_AlarmNum)
+    {
+        lastAlarmNum = m_AlarmNum;
+        // new alarm occurs
+        if (lastAlarmNum)
+        {
+            emit alarmOccurred(lastAlarmNum);
+            ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+        }
+        // alarm release
+        else
+        {
+            ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+        }
+    }
+
+}
+
 void MainWindow::PowerOnStateHandle()
 {
     //开机不管三档开关位于那个位置,默认进入停止界面
@@ -380,6 +433,8 @@ void MainWindow::slotShowSubWindow()
     ui->label_plan->setText("参数同步中:");
     Refresh_Progress_bar(0);
     emit signal_sync_data();
+
+    checkParaTimer->start();
 
     initUI();
 }

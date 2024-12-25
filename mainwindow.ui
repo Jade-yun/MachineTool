@@ -1386,13 +1386,13 @@ QPushButton::pressed {
      </property>
     </widget>
    </widget>
+   <zorder>stkWidget</zorder>
    <zorder>wgtHelp</zorder>
    <zorder>groupBoxHomeBottom</zorder>
    <zorder>groupBoxXYZOUV</zorder>
    <zorder>groupBoxHomeTopLeft</zorder>
    <zorder>groupBoxHomeTopMid</zorder>
    <zorder>groupBoxHomeTopRight</zorder>
-   <zorder>stkWidget</zorder>
   </widget>
  </widget>
  <customwidgets>
