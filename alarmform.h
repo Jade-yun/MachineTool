@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "maintaininfomodel.h"
+
 namespace Ui {
 class AlarmForm;
 }
@@ -18,16 +20,18 @@ public:
     void handleAlarm(uint16_t alarmNum);
 
 private:
+    void setupAlarmInfo();
     void addNewAlarmInfo();
     void saveAlarmQueueToConfig();
     void loadAlarmQueueFromConfig();
 
-    void setupAlarmTable();
-
-//    void getAlarmInfo(int alarmNum, QString& alarmContent, )
+    void setupMaintainInfo();
 
 private:
     Ui::AlarmForm *ui;
+
+private:
+    MaintainInfoModel *m_maintainModel;
 };
 
 #endif // ALARMFORM_H

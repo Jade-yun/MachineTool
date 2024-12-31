@@ -2,12 +2,14 @@
 #include "ui_alarmform.h"
 
 #include <QSettings>
+#include <QDate>
 
 #include "cmd.h"
 #include "alarminfodialog.h"
 
 const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
 const QString alarmInfoDataPath = "/Settings/AlarmInfoData.ini";
+const QString maintainInfoDataPath = "/Settings/MaintainInfoData.ini";
 
 AlarmForm::AlarmForm(QWidget *parent) :
     QWidget(parent),
@@ -17,7 +19,8 @@ AlarmForm::AlarmForm(QWidget *parent) :
 
     loadAlarmQueueFromConfig();
 
-    setupAlarmTable();
+    setupAlarmInfo();
+    setupMaintainInfo();
 
 }
 
@@ -98,7 +101,7 @@ void AlarmForm::loadAlarmQueueFromConfig()
     settings.endArray();
 }
 
-void AlarmForm::setupAlarmTable()
+void AlarmForm::setupAlarmInfo()
 {
     // style set, which is supposed to encapsulate
     ui->tableAlarmInfo->horizontalHeader()->setVisible(true);
@@ -149,3 +152,53 @@ void AlarmForm::setupAlarmTable()
         AlarmInfoDialog::instance()->showAlarmInfo(alarmNum);
     });
 }
+
+void AlarmForm::setupMaintainInfo()
+{
+    m_maintainModel = new MaintainInfoModel(this);
+    ui->tableMaintainInfo->setModel(m_maintainModel);
+
+    QStringList headers = {tr("维护内容"), tr("维护周期"), tr("剩余天数"), tr("下次保养时间")};
+    for (int i = 0; i < headers.size(); ++i) {
+//        m_maintainModel->setHeaderData(i, Qt::Horizontal, headers[i], Qt::DisplayRole);
+        m_maintainModel->setHorizontalHeader(i, headers[i]);
+    }
+
+    ui->tableMaintainInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableMaintainInfo->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    ui->tableMaintainInfo->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableMaintainInfo->setSelectionMode(QAbstractItemView::SingleSelection);
+
+    ui->tableMaintainInfo->setColumnWidth(1, 100);
+    ui->tableMaintainInfo->setColumnWidth(2, 100);
+    ui->tableMaintainInfo->setColumnWidth(3, 300);
+    ui->tableMaintainInfo->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+
+    connect(ui->btnNewMaintainInfo, &QPushButton::clicked, this, [this]() {
+        int rowCount = m_maintainModel->rowCount();
+        m_maintainModel->addMaintainInfo(QString("untitled%1").arg(rowCount + 1), 30);
+        m_maintainModel->saveToConfigFile(maintainInfoDataPath);
+    });
+
+    connect(ui->btnDeleteMaintainInfo, &QPushButton::clicked, this, [this]() {
+        int selectedRow = ui->tableMaintainInfo->currentIndex().row();
+        m_maintainModel->removeMaintainInfo(selectedRow);
+        m_maintainModel->saveToConfigFile(maintainInfoDataPath);
+    });
+
+    connect(ui->btnEditMaintainInfo, &QPushButton::clicked, this, [this]() {
+
+    });
+
+    connect(ui->btnRetimingMaintainInfo, &QPushButton::clicked, this, [this]() {
+        int selectedRow = ui->tableMaintainInfo->currentIndex().row();
+        m_maintainModel->resetCountdown(selectedRow);
+
+        m_maintainModel->saveToConfigFile(maintainInfoDataPath);
+    });
+
+    m_maintainModel->loadFromConfigFile(maintainInfoDataPath);
+}
+
+
+

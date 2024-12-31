@@ -46,7 +46,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="iconSize">
     <size>
@@ -557,13 +557,13 @@
     <attribute name="title">
      <string>保养信息</string>
     </attribute>
-    <widget class="QTableWidget" name="tableActionLog_2">
+    <widget class="QTableView" name="tableMaintainInfo">
      <property name="geometry">
       <rect>
        <x>1</x>
        <y>1</y>
        <width>1018</width>
-       <height>537</height>
+       <height>461</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -571,6 +571,12 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>461</height>
+      </size>
      </property>
      <property name="styleSheet">
       <string notr="true"/>
@@ -602,119 +608,76 @@
      <property name="sortingEnabled">
       <bool>false</bool>
      </property>
-     <property name="rowCount">
-      <number>50</number>
+    </widget>
+    <widget class="QWidget" name="layoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>470</y>
+       <width>540</width>
+       <height>52</height>
+      </rect>
      </property>
-     <property name="columnCount">
-      <number>3</number>
+     <property name="minimumSize">
+      <size>
+       <width>130</width>
+       <height>45</height>
+      </size>
      </property>
-     <attribute name="horizontalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>100</number>
-     </attribute>
-     <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>200</number>
-     </attribute>
-     <attribute name="horizontalHeaderHighlightSections">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderStretchLastSection">
-      <bool>true</bool>
-     </attribute>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderCascadingSectionResizes">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderMinimumSectionSize">
-      <number>21</number>
-     </attribute>
-     <attribute name="verticalHeaderDefaultSectionSize">
-      <number>50</number>
-     </attribute>
-     <attribute name="verticalHeaderHighlightSections">
-      <bool>true</bool>
-     </attribute>
-     <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderStretchLastSection">
-      <bool>false</bool>
-     </attribute>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <row/>
-     <column>
-      <property name="text">
-       <string>动作</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>事件</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>日期时间</string>
-      </property>
-     </column>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="btnEditMaintainInfo">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>编辑</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnRetimingMaintainInfo">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>重新计时</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnNewMaintainInfo">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>新建</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnDeleteMaintainInfo">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>删除</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </widget>
    <widget class="QWidget" name="tabDeveloperOpt">

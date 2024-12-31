@@ -60,6 +60,7 @@ SOURCES += \
     dialogs/tippasswddialog.cpp \
     dialogs/upgradedialog.cpp \
     main.cpp \
+    maintaininfomodel.cpp \
     mainwindow.cpp \
     manualform.cpp \
     monitorform.cpp \
@@ -108,6 +109,7 @@ HEADERS += \
     dialogs/softkeywidget.h \
     dialogs/tippasswddialog.h \
     dialogs/upgradedialog.h \
+    maintaininfomodel.h \
     mainwindow.h \
     manualform.h \
     monitorform.h \
