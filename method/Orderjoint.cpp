@@ -328,11 +328,11 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
         P_ReserveCheckStruct* ReserveCheck = (P_ReserveCheckStruct*) OIS.pData;
         if(ReserveCheck->inportNum>=1 && ReserveCheck->inportNum<=36)
         {
-            NameStr = "[X"+QString::number(ReserveCheck->inportNum);
+            NameStr = "X"+QString::number(ReserveCheck->inportNum);
         }
         else if(ReserveCheck->inportNum>36 && ReserveCheck->inportNum<=60)
         {
-            NameStr = "[EX"+QString::number(ReserveCheck->inportNum-36);
+            NameStr = "EX"+QString::number(ReserveCheck->inportNum-36);
         }
         break;
     }
@@ -366,11 +366,11 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
         P_ReserveOutStruct* ReserveOut = (P_ReserveOutStruct*) OIS.pData;
         if(ReserveOut->outportNum>=1 && ReserveOut->outportNum<=24)
         {
-            NameStr = "[Y"+QString::number(ReserveOut->outportNum);
+            NameStr = "Y"+QString::number(ReserveOut->outportNum);
         }
-        else if(ReserveOut->outportNum>24 && ReserveOut->outportNum<=40)
+        else if(ReserveOut->outportNum>24 && ReserveOut->outportNum<=44)
         {
-            NameStr = "[EY"+QString::number(ReserveOut->outportNum-24);
+            NameStr = "EY"+QString::number(ReserveOut->outportNum-24);
         }
         break;
     }
@@ -1139,7 +1139,7 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
         {//被比较对象类型-变量#if USE_REFATOR_NAMEDEFINE
 #if USE_REFATOR_NAMEDEFINE
-            LogicIfStr = m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
+            LogicIfStr = LogicIfStr+m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
 #else
             LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
 #endif
@@ -1160,7 +1160,7 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
         {//被比较对象类型-变量
 #if USE_REFATOR_NAMEDEFINE
-            LogicIfStr = m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
+            LogicIfStr = LogicIfStr+m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
 #else
             LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
 #endif
@@ -1407,7 +1407,7 @@ QString LogicTimeJoint(P_ProOrderStruct OIS)
     P_LogicTimeStruct* LogicTime = (P_LogicTimeStruct*) OIS.pData;
     QString contStr= "";
 #if USE_REFATOR_NAMEDEFINE
-    contStr = QString(logicAxisOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[1].timerName[LogicTime->timeNum - 1]);
+    contStr = QString(logicTimeOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[1].timerName[LogicTime->timeNum - 1]);
 #else
 
     contStr = QString(logicTimeOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[49+LogicTime->timeNum].modifyName);

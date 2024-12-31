@@ -875,7 +875,7 @@ typedef struct
 typedef struct
 {
     uint32_t runTime;						//运行时间，精度0.1s
-    uint32_t preShootCyc;				//前排周期，精度0.1s
+    uint32_t preShootCyc;				//前拍周期，精度0.1s
     uint32_t takeShapeCyc;				//成型周期，精度0.1s
     uint32_t fetchTime;					//取物时间，精度0.01s
     uint32_t actualProductNum;		//实际产品个数，1件
@@ -884,11 +884,11 @@ typedef struct
 /*运行参数定义结构体*/
 typedef struct
 {
-    uint32_t planProductNum;			//计划产品个数，1件
+    uint32_t    planProductNum;			//计划产品个数，1件
     uint8_t 	globalSpeed;				//全局速度，1-100
     uint8_t 	breakPointFlag;			//断点开关，0不使用 1使用
     uint8_t 	breakPointProNum;		//断点所在程序，0主程序 1-8子程序
-    uint16_t breakPointList;			//断点所在程序行
+    uint16_t    breakPointList;			//断点所在程序行
 }D_RunParStruct;
 
 /*参数同步结构体*/
@@ -964,7 +964,6 @@ extern D_StackFuncStruct m_StackFunc;														//堆叠功能参数
 
 extern uint8_t m_InPortSta[INPUT_TOTAL_NUM];								//输入状态
 extern uint8_t m_OutPortSta[OUTPUT_TOTAL_NUM];							//输出状态
-extern int32_t m_AxisCurPos[AXIS_TOTAL_NUM];							//轴当前位置
 extern uint8_t  m_AxisCurDir[AXIS_TOTAL_NUM];							//轴当前运动方向
 extern uint8_t  m_AxisMoveFlag[AXIS_TOTAL_NUM];						//轴运动标志 0结束运动 1运动中
 extern uint8_t  m_AxisMovePauseReq[AXIS_TOTAL_NUM];				//轴运动暂停请求 0无请求 1暂停请求
@@ -1184,6 +1183,15 @@ typedef struct
     uint32_t    encoderPulse;       //编码器脉冲
     uint32_t    internalPluse;      //内部脉冲
 }D_ManualAdjust;
+
+/*自动界面信息刷新结构体*/
+typedef struct
+{
+    uint8_t Program_Follow_Flog;    //自动界面跟随刷新行号时，是否执行某些程序标志
+    uint16_t Old_Follow_ProNum;     //上一次刷新行号
+}AutoInforRefresh;
+
+extern AutoInforRefresh m_AutoInforRefresh;
 
 extern D_ManualAxis m_manualAxis;          //手动操作参数
 extern D_ManualAdjust m_manualAdjust;      //手动调机

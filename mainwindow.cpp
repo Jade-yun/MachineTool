@@ -578,7 +578,9 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget,&Setting::RefreshPortDefineSignals,setWidget,&Setting::RefreshPortDefine);
     connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
-
+    connect(autoWidget,&AutoForm::Send_planProductNum_Signal,this,[=](){//计划产品个数下发
+        g_Usart->ExtendSendProDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0,0);
+    });
     connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
     connect(setWidget, &Setting::sysNameChanged, this, [=](const QString& sysName){
         const QString& programName = m_CurrentProgramNameAndPath.fileName;
@@ -606,6 +608,9 @@ void MainWindow::connectAllSignalsAndSlots()
         }
         ui->labSpeed->setText(QString::number(m_RunPar.globalSpeed)+"%");
         ui->labRotateSpeed->setText(QString::number((double)m_AxisCurSpeed)+"rpm");
+
+        /*自动界面内容刷新*/
+        autoWidget->AutoForm_Refresh();
     });
     // 启动定时器，设置时间间隔为100毫秒
     timer->start(100);
@@ -965,6 +970,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         ui->label_plan->hide();
         ui->Progress_bar->hide();
         ui->Progress_num->hide();
+        Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
     }
     else
     {
@@ -977,5 +983,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         {
             dlgErrorTip->reject();
         }
+        Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
     }
+
 }

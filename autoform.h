@@ -24,6 +24,7 @@ public:
 signals:
     void Auto_File_List_Refresh_signal();//自动运行界面列表刷新信号
     void Switch_ProNum_Signal(uint8_t ProNum);//切换主子程序信号
+    void Send_planProductNum_Signal();//计划产品个数下发信号
 private slots:
 
     void on_btnEdit_pressed();
@@ -34,11 +35,25 @@ private slots:
 
     void showReferPointDialog();
 
+    void on_Auto_file_List_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
+
+    void on_AutoEditAxisPos_textChanged(const QString &arg1);
+
+    void on_AutoEditchboxIfCondition1_clicked(bool checked);
+
+    void on_AutoEditchboxIfCondition2_clicked(bool checked);
+
 private:
     void updateLabelState(int index);
-
+    void Program_Follow_Refresh();
+    void Auto_State_Refresh();
+    void OrderEditHandel();
+    void OrderEditSaveHandel();
+    void AutoFromIfOrderEditHandle(uint8_t IfIndex);
+    void AutoFromIfOrderEditSaveHandle(uint8_t IfIndex);
 public:
     void Auto_File_List_Refresh(uint8_t ProNum);//刷新自动界面内容显示列表
+    void AutoForm_Refresh();
 private:
     Ui::AutoForm *ui;
     ReferenceWidget* referEditDialog;

@@ -55,8 +55,8 @@ extern QStringList axisStopCmdList;                         //伺服停止命令
 extern QStringList sunProCmdList;                         //子程序命令
 
 
-
-
+extern uint16_t SetProgramIndex();
+extern bool Load_Program_Handle(QString fileName);
 extern void readIniProgramStruct();
 extern uint8_t newBuildProgram(const QString& fileName);
 extern bool writeBasicProgram(D_ProgramNameAndPathStruct pro_temp);

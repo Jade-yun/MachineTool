@@ -46,11 +46,6 @@ SOURCES += \
     Driver/usbdisk.cpp \
     MyTitleBarDialog/basewindow.cpp \
     MyTitleBarDialog/mytitlebar.cpp \
-    Prompt_Dialog_page/prompt_com.cpp \
-    Prompt_Dialog_page/prompt_dialog_page.cpp \
-    Prompt_Dialog_page/prompt_yes_no_dialog_page.cpp \
-    Prompt_Dialog_page/yes_no_page.cpp \
-    alarmbar.cpp \
     alarmform.cpp \
     autoform.cpp \
     dialogs/alarminfodialog.cpp \
@@ -96,11 +91,6 @@ HEADERS += \
     Driver/usbdisk.h \
     MyTitleBarDialog/basewindow.h \
     MyTitleBarDialog/mytitlebar.h \
-    Prompt_Dialog_page/prompt_com.h \
-    Prompt_Dialog_page/prompt_dialog_page.h \
-    Prompt_Dialog_page/prompt_yes_no_dialog_page.h \
-    Prompt_Dialog_page/yes_no_page.h \
-    alarmbar.h \
     alarmform.h \
     autoform.h \
     dialogs/alarminfodialog.h \
@@ -136,10 +126,6 @@ HEADERS += \
     referencewidget.h
 
 FORMS += \
-    Prompt_Dialog_page/prompt_dialog_page.ui \
-    Prompt_Dialog_page/prompt_yes_no_dialog_page.ui \
-    Prompt_Dialog_page/yes_no_page.ui \
-    alarmbar.ui \
     alarmform.ui \
     autoform.ui \
     dialogs/alarminfodialog.ui \

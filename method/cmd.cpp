@@ -9,7 +9,8 @@ cmd::cmd()
 
 uint32_t passwd[3] = {12345, 12345, 12345};
 
-Sync_Data MySync_Data;
+AutoInforRefresh m_AutoInforRefresh; //自动界面信息刷新标志
+Sync_Data MySync_Data; //参数同步结构体
 
 P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM] = {0};                                 //教导界面轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
 P_ClawActionStruct Temp_ClawActionStruct[3] = {0};                                          //教导界面卡爪动作结构体
@@ -71,7 +72,6 @@ D_StackFuncStruct m_StackFunc = {0};															//堆叠功能参数
 
 uint8_t  m_InPortSta[INPUT_TOTAL_NUM] = {0};														//输入状态
 uint8_t  m_OutPortSta[OUTPUT_TOTAL_NUM] = {0};													//输出状态
-int32_t m_AxisCurPos[AXIS_TOTAL_NUM] = {0};														//轴当前位置
 uint8_t  m_AxisCurDir[AXIS_TOTAL_NUM] = {0};														//轴当前运动方向
 uint8_t  m_AxisMoveFlag[AXIS_TOTAL_NUM] = {0};													//轴运动标志 0结束运动 1运动中
 uint8_t  m_AxisMovePauseReq[AXIS_TOTAL_NUM] = {0};											//轴运动暂停请求
@@ -121,7 +121,6 @@ uint32_t m_ManualIncrementDis = 0;																			//手动运动-增量距离
 uint8_t  m_ManualStackNum = 0;																					//手动运动-堆叠组号
 uint8_t  m_ManualStackPointNum[STACK_AXIS_NUM] = {0};									//手动运动-移植堆叠点
 
-//P_ProOrderStruct m_ProOrder[PRO_NUM][PRO_LINE_MAIN] = {0};				//程序命令
 D_SystemSetStruct m_SystemSet = {0};                       //系统参数
 
 QList<D_ProgramNameAndPathStruct> m_ProgramNameAndPath;                  //所有文件信息
@@ -570,7 +569,7 @@ void g_ProOrderSwap(P_ProOrderStruct *proOrder_Old, P_ProOrderStruct *proOrder_N
     proOrder_Old->pData = proOrder.pData;
 
 //    g_FreeProOrder(&proOrder);
-    proOrder.pData = NULL;
+//    proOrder.pData = NULL;
 }
 
 //插入程序命令----外部调用

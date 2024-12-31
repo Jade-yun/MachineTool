@@ -141,9 +141,10 @@ extern void getManualAxis(uint8_t defaultV = 0);
 extern void setManualAxis(D_ManualAxis value);
 
 //程序文件存储
-extern QList<D_ProgramNameAndPathStruct> getProgramNameAndPath();
+extern void getProgramNameAndPath();
 extern void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value);
-
+extern void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value);
+extern D_ProgramNameAndPathStruct readPowerOnReadOneProInfo();
 
 /*****************命令相关参数保存*****************/
 extern QStringList fileSectionList;                        //程序保存节点
@@ -165,6 +166,8 @@ extern QStringList waitInMachineCmdList;                         //信号等待-
 extern QStringList waitInClawCmdList;                         //信号等待-等待卡爪命令
 extern QStringList waitInReserveCmdList;                         //信号等待-等待预留命令
 extern QStringList otherAlarmCustCmdList;                         //其他-报警自定义命令
+extern QStringList other_alarm_lamp;                            //其他-报警灯指令
+extern QStringList other_alarm_sound;                           //其他-报警声指令
 extern QStringList otherCycStopCmdList;                         //其他-周期停止命令
 extern QStringList labelCmdList;                         //标签命令
 

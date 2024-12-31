@@ -30,6 +30,8 @@ QStringList waitInClawCmdList;                         //信号等待-等待卡�
 QStringList waitInReserveCmdList;                         //信号等待-等待预留命令
 QStringList otherAlarmCustCmdList;                         //其他-报警自定义命令
 QStringList otherCycStopCmdList;                         //其他-周期停止命令
+QStringList other_alarm_lamp;                            //其他-报警灯指令
+QStringList other_alarm_sound;                           //其他-报警声指令
 QStringList labelCmdList;                         //标签命令
 
 QStringList logicIfCmdList;                         //逻辑&变量-如果-如果命令
@@ -90,6 +92,8 @@ void readIniProgramStruct()
     waitInClawCmdList=getIniValues(0,"P_WaitInClawCmd");                        //信号等待-等待卡爪命令
     waitInReserveCmdList=getIniValues(0,"P_WaitInReserveCmd");                        //信号等待-等待预留命令
     otherAlarmCustCmdList=getIniValues(0,"P_OtherAlarmCustCmd");                        //其他-报警自定义命令
+    other_alarm_lamp=getIniValues(0,"P_OtherAlarmLampCmd");                        //其他-报警灯命令
+    other_alarm_sound=getIniValues(0,"P_OtherAlarmSoundCmd");                        //其他-报警声命令
     otherCycStopCmdList=getIniValues(0,"P_OtherCycStopCmd");                        //其他-周期停止命令
     labelCmdList=getIniValues(0,"P_LabelCmd");                        //标签命令
 
@@ -108,6 +112,21 @@ void readIniProgramStruct()
     sunProCmdList=getIniValues(0,"P_SunProCmd");                         //子程序命令
 }
 
+/*************************************************************************
+**  函数名：  ProgramIndexUpdate()
+**	输入参数：
+**	输出参数：返回一个程序编号,从1开始
+**	函数功能：设置程序编号
+**  作者：    wk
+**  开发日期：2024/12/30
+**************************************************************************/
+uint16_t SetProgramIndex()
+{
+    for(int i=0;i<m_FileNameNum;i++)
+    {
+        m_ProgramNameAndPath[i].index = i+1;
+    }
+}
 /*************************************************************************
 **  函数名：  newBuildProgram(QString fileName)
 **	输入参数：输入的文件名
@@ -135,13 +154,19 @@ uint8_t newBuildProgram(const QString& fileName)
     QString filePath=m_ProgramPath+"/"+fileName+".txt";
     P_NamePathTemp.filePath=filePath;
     P_NamePathTemp.index=m_FileNameNum;
+    P_NamePathTemp.filePermission=0;//文件操作权限默认为：0-允许
     QDateTime currentDate=QDateTime::currentDateTime();
     P_NamePathTemp.changeTime=currentDate.toString("yyyy-MM-dd hh:mm:ss");
     m_ProgramNameAndPath.append(P_NamePathTemp);
-
+    SetProgramIndex();//设置程序文件编号
     if(!writeBasicProgram(P_NamePathTemp))
+    {
         return PROGRAM_OPEN_WRITE;
-
+    }
+    else
+    {
+        setProgramNameAndPath(m_ProgramNameAndPath);//新建文件成功，存储所有文件信息
+    }
     return 0;
 }
 //新建基础程序
@@ -420,6 +445,14 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
             case C_OTHER_CYC_STOP:
                 out << signalSpace << QString(otherCycStopCmdList[0]).arg(QString::number(((P_OtherCycStopStruct*)m_ProOrder[i][j].pData)->cycleNum));
                 break;
+            case C_OTHER_ALARM_LAMP:
+                out << signalSpace << QString(other_alarm_lamp[0]).arg(QString::number(((P_OtherAlarmLampStruct*)m_ProOrder[i][j].pData)->outportNum));
+                out << signalSpace << QString(other_alarm_lamp[1]).arg(QString::number(((P_OtherAlarmLampStruct*)m_ProOrder[i][j].pData)->type));
+                break;
+            case C_OTHER_ALARM_SOUND:
+                out << signalSpace << QString(other_alarm_sound[0]).arg(QString::number(((P_OtherAlarmSoundStruct*)m_ProOrder[i][j].pData)->outportNum));
+                out << signalSpace << QString(other_alarm_sound[1]).arg(QString::number(((P_OtherAlarmSoundStruct*)m_ProOrder[i][j].pData)->type));
+                break;
             case C_LABEL:
                 out << signalSpace << QString(labelCmdList[0]).arg(QString::number(((P_LabelStruct*)m_ProOrder[i][j].pData)->labelNum));
                 out << signalSpace << QString(labelCmdList[1]).arg(QString::number(((P_LabelStruct*)m_ProOrder[i][j].pData)->type));
@@ -513,14 +546,15 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
                 out << signalSpace << QString(searchAxisMoveCmdList[5]).arg(QString::number(((P_SearchAxisMoveStruct*)m_ProOrder[i][j].pData)->reachPosAlarmFlag));
                 out << signalSpace << QString(searchAxisMoveCmdList[6]).arg(QString::number(((P_SearchAxisMoveStruct*)m_ProOrder[i][j].pData)->runSpeed));
                 out << signalSpace << QString(searchAxisMoveCmdList[7]).arg(QString::number(((P_SearchAxisMoveStruct*)m_ProOrder[i][j].pData)->advCSpeed));
+                out << signalSpace << QString(searchAxisMoveCmdList[8]).arg(QString::number(((P_SearchAxisMoveStruct*)m_ProOrder[i][j].pData)->searchNum));
                 for(int m=0;m<SEARCH_INPORT_TOTAL_NUM;m++)
                 {
-                    out << signalSpace << QString(searchAxisMoveCmdList[7]).arg(QString::number(m)).
+                    out << signalSpace << QString(searchAxisMoveCmdList[9]).arg(QString::number(m)).
                             arg(QString::number(((P_SearchAxisMoveStruct*)m_ProOrder[i][j].pData)->inportNum[m]));
                 }
                 for(int m=0;m<SEARCH_INPORT_TOTAL_NUM;m++)
                 {
-                    out << signalSpace << QString(searchAxisMoveCmdList[8]).arg(QString::number(m)).
+                    out << signalSpace << QString(searchAxisMoveCmdList[10]).arg(QString::number(m)).
                             arg(QString::number(((P_SearchAxisMoveStruct*)m_ProOrder[i][j].pData)->inporttype[m]));
                 }
                 break;
@@ -558,6 +592,7 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
             out<< LableNameList[i][j] << lineFeed;
         }
     }
+    out << lineFeed;
     file.close();
 
     return true;
@@ -1119,7 +1154,7 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 temp_C_OTHER_ALARM_CUST.alarmNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
                 temp_C_OTHER_ALARM_CUST.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                for(int m=0;m<3;m++)
+                for(int m=0;m<1;m++)
                 {
                     temp_C_OTHER_ALARM_CUST.ret[m]=0;
                 }
@@ -1135,6 +1170,30 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 }
                 m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherCycStopStruct));
                 memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_CYC_STOP,sizeof(P_OtherCycStopStruct));
+                break;
+            case C_OTHER_ALARM_LAMP:
+                P_OtherAlarmLampStruct temp_C_OTHER_ALARM_LAMP;
+                temp_C_OTHER_ALARM_LAMP.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_OTHER_ALARM_LAMP.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_OTHER_ALARM_LAMP.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherAlarmLampStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_ALARM_LAMP,sizeof(P_OtherAlarmLampStruct));
+                break;
+            case C_OTHER_ALARM_SOUND:
+                P_OtherAlarmSoundStruct temp_C_OTHER_ALARM_SOUND;
+                temp_C_OTHER_ALARM_SOUND.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_OTHER_ALARM_SOUND.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<2;m++)
+                {
+                    temp_C_OTHER_ALARM_SOUND.ret[m]=0;
+                }
+                m_ProOrder[i][j].pData = (void *)malloc(sizeof(P_OtherAlarmSoundStruct));
+                memcpy(m_ProOrder[i][j].pData,&temp_C_OTHER_ALARM_SOUND,sizeof(P_OtherAlarmSoundStruct));
                 break;
             case C_LABEL:
                 P_LabelStruct temp_C_LABEL;
@@ -1323,6 +1382,8 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 temp_C_SEARCH_AXIS_MOVE.runSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
                 temp_C_SEARCH_AXIS_MOVE.advCSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_SEARCH_AXIS_MOVE.searchNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
                 for(int m=0;m<3;m++)
                 {
@@ -1892,6 +1953,30 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             m_ProOrder[j].pData = (void *)malloc(sizeof(P_OtherCycStopStruct));
             memcpy(m_ProOrder[j].pData,&temp_C_OTHER_CYC_STOP,sizeof(P_OtherCycStopStruct));
             break;
+        case C_OTHER_ALARM_LAMP:
+            P_OtherAlarmLampStruct temp_C_OTHER_ALARM_LAMP;
+            temp_C_OTHER_ALARM_LAMP.outportNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            index++;
+            temp_C_OTHER_ALARM_LAMP.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            for(int m=0;m<3;m++)
+            {
+                temp_C_OTHER_ALARM_LAMP.ret[m]=0;
+            }
+            m_ProOrder[j].pData = (void *)malloc(sizeof(P_OtherAlarmLampStruct));
+            memcpy(m_ProOrder[j].pData,&temp_C_OTHER_ALARM_LAMP,sizeof(P_OtherAlarmLampStruct));
+            break;
+        case C_OTHER_ALARM_SOUND:
+            P_OtherAlarmSoundStruct temp_C_OTHER_ALARM_SOUND;
+            temp_C_OTHER_ALARM_SOUND.outportNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            index++;
+            temp_C_OTHER_ALARM_SOUND.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            for(int m=0;m<3;m++)
+            {
+                temp_C_OTHER_ALARM_SOUND.ret[m]=0;
+            }
+            m_ProOrder[j].pData = (void *)malloc(sizeof(P_OtherAlarmSoundStruct));
+            memcpy(m_ProOrder[j].pData,&temp_C_OTHER_ALARM_SOUND,sizeof(P_OtherAlarmSoundStruct));
+            break;
         case C_LABEL:
             P_LabelStruct temp_C_LABEL;
             temp_C_LABEL.labelNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
@@ -2080,6 +2165,8 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             index++;
             temp_C_SEARCH_AXIS_MOVE.advCSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
+            temp_C_SEARCH_AXIS_MOVE.searchNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            index++;
             for(int m=0;m<3;m++)
             {
                 temp_C_SEARCH_AXIS_MOVE.ret[m]=0;
@@ -2163,6 +2250,60 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
 }
 
 
+/*************************************************************************
+**  函数名：  	Load_Program_Handle()
+**	输入参数：	ProgramName:需要加载的程序名称
+**	输出参数：	return 0:失败  1:成功
+**	函数功能：	指令控制函数
+**	备注：	  	无
+**  作者：    	wukui
+**  开发日期：	2024.12.24
+**************************************************************************/
+bool Load_Program_Handle(QString fileName)
+{
+    int curProgramIndex = -1;
+    for(int i=0;i<m_ProgramNameAndPath.count();i++)
+    {
+        if(m_ProgramNameAndPath[i].fileName == fileName)
+        {
+            curProgramIndex = i;
+            break;
+        }
+    }
+    if (curProgramIndex == -1)
+    {
+        return false;
+    }
+    //如果选择的文件不是当前程序，进行载入
+    if(m_CurrentProgramNameAndPath.fileName != m_ProgramNameAndPath[curProgramIndex].fileName)
+    {//如果选择的文件不是当前程序，进行载入
+        for(int i=0;i<PRO_NUM;i++)
+        {
+            for(int j=0;j<PRO_LINE_MAIN;j++)
+            {
+                g_FreeProOrder(&m_ProOrder[i][j]);//释放程序命令的数据指针
+            }
+        }
+        memset(&m_CurrentProgramNameAndPath,0,sizeof(D_ProgramNameAndPathStruct));//清除当前程序信息
+        memcpy(&m_CurrentProgramNameAndPath,&m_ProgramNameAndPath[curProgramIndex],sizeof(D_ProgramNameAndPathStruct));//改变当前程序信息
+        readProgram(m_CurrentProgramNameAndPath);//读取当前程序指令
+        readLableOrderName(m_CurrentProgramNameAndPath);//读取当前程序中标签名称列表
+        m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
+        memcpy(&m_OperateProOrder,&m_ProOrder,sizeof(P_ProOrderStruct)*m_OperateProOrderListNum);//将读取的程序赋给当前操作程序
+        savePowerOnReadOneProInfo(m_CurrentProgramNameAndPath);
+    }
+    //发送程序
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+    for(int i=0;i<PRO_NUM;i++)
+    {
+        for(int j=0;j<m_ProInfo.proNum[i];j++)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_ORDER,i,j,0);
+        }
+    }
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
+    return true;
+}
 
 
 

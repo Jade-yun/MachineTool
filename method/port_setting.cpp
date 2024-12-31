@@ -285,7 +285,7 @@ void readIniPara()
     getStackInfo();
     getStackFunc();
     getManualAxis();
-
+    getProgramNameAndPath();//读取所有程序文件信息
     getSystemSet();
     ::readPasswdFromConfig();
 }

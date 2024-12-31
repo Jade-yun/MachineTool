@@ -3,7 +3,6 @@
 #include "./method/program_save.h"
 #include "./method/cmd.h"
 #include "./method/Orderjoint.h"
-#include "./Prompt_Dialog_page/prompt_com.h"
 #include <QString>
 #include <QDebug>
 #include "stackedit.h"
@@ -32,7 +31,7 @@ Teach::Teach(QWidget* parent) :
         if(OrderNeedSaveFlag)
         {
             if(SaveIconShow){
-                ui->btnSave->setIcon(QIcon(":/images/teach_img/save.png"));
+                ui->btnSave->setIcon(QIcon(":/images/save.png"));
             }
             else{
                 ui->btnSave->setIcon(QIcon());//设置为空图标
@@ -41,12 +40,11 @@ Teach::Teach(QWidget* parent) :
         }
         else
         {
-            ui->btnSave->setIcon(QIcon(":/images/teach_img/save.png"));
+            ui->btnSave->setIcon(QIcon(":/images/save.png"));
             Teach_timer->stop();
         }
     });
 
-    prompt_yes_no_Dialog_ui = new prompt_yes_no_Dialog_page;
     /*堆叠编辑弹窗*/
     stack_Dialog = new BaseWindow();
     stack_Temp = new StackEdit();
@@ -71,10 +69,6 @@ Teach::Teach(QWidget* parent) :
             ui->stackedWidget_General->setCurrentIndex(0);
         }
         });
-
-    connect(prompt_yes_no_Dialog_ui,SIGNAL(DeleteOrder_Return()),this,SLOT(Teach_File_List_Refresh()));//发射删除成功信号
-    connect(prompt_yes_no_Dialog_ui,SIGNAL(DeleteOrder_Return()),this,SLOT(Refresh_listWgtJumpto()));//发射删除成功刷新标签表格
-
     connect(ui->chboxCondition1If,SIGNAL(clicked()),this,SLOT(chboxCondition1If2If_handle()));
     connect(ui->chboxCondition2If,SIGNAL(clicked()),this,SLOT(chboxCondition1If2If_handle()));
     connect(ui->Edit_Var_const,SIGNAL(clicked()),this,SLOT(LogicVar_handle()));
@@ -207,14 +201,14 @@ Teach::Teach(QWidget* parent) :
     EditOperatorVarPreOp_handle();
     ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
     pageInit();
-    connect(ui->btnModify, &QPushButton::pressed, this, [=](){
+    connect(ui->btnModify, &QPushButton::clicked, this, [=](){
         // 根据当前选中的程序切换到相应的编辑页面
         if (ui->btnModify->isChecked())
         {
             return;
         }
-        ui->tabWidget_Teach->setCurrentIndex(0);
-//        ui->stkWgtProgram->setCurrentIndex(3);
+        ui->tabWidget_Teach->setCurrentIndex(2);//取消编辑时，自动切换到通用主界面
+        ui->stackedWidget_General->setCurrentWidget(ui->General_main_page);
     });
 }
 
@@ -365,12 +359,12 @@ void Teach::Pro_MachineOutStructInit(void)
     ui->lineEdit_Auto_Door->setText("0.00");
     ui->lineEdit_Blow_Air->setText("0.00");
     ui->lineEdit_Chuck->setText("0.00");
-    ui->Start_Up_Mach_button->setText("启动加工1通");
-    ui->Main_Axis_Rotate_button->setText("主轴旋转1通");
-    ui->Auto_Door_button->setText("自动门1开");
-    ui->Main_Axis_locat_button->setText("主轴定位1通");
-    ui->Blow_Air_button->setText("吹气1通");
-    ui->Chuck_button->setText("卡盘1松开");
+    ui->Start_Up_Mach_button->setText("启动加工1断");
+    ui->Main_Axis_Rotate_button->setText("主轴旋转1断");
+    ui->Auto_Door_button->setText("自动门1关");
+    ui->Main_Axis_locat_button->setText("主轴定位1断");
+    ui->Blow_Air_button->setText("吹气1断");
+    ui->Chuck_button->setText("卡盘1松关");
     memset(Temp_MachineOutStruct,0,sizeof(Temp_MachineOutStruct));
 }
 //堆叠界面参数初始化
@@ -406,6 +400,7 @@ void Teach::Pro_ReserveOutStructInit(void)
     ui->lineEdit_Reserve_Overturn->setText("");
     ui->lineEdit_Reserve_time->setText("0.00");
     ui->lineEdit_Reserve_num->setText("0");
+    ui->Reserve_Pass_Button->setText("预留通");
     Temp_ReserveOutStruct.type=0;
     Temp_ReserveOutStruct.function = 0;
     Temp_ReserveOutStruct.interval = 0;
@@ -921,11 +916,29 @@ void Teach::on_btnDelete_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();//获取当前选中行号，从0开始
-    prompt_yes_no_Dialog_ui->show();
-    prompt_yes_no_Dialog_ui->ui->yes_no_content_label->setText(Return_DoubleButtonDisplay_string(DOUBLE_BUTTON_01));
-    LCD_DoubleButton_Num = DOUBLE_BUTTON_01;
-    OrderNeedSaveFlag = true;
-    Teach_timer->start();
+    int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除所选动作？"));
+    if (reply == QDialog::Accepted)
+    {
+        if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) == 0)
+        {
+            if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_LABEL)
+            {
+                P_LabelStruct* LabelStruct = (P_LabelStruct*) m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+                if(LabelStruct->labelNum>0)
+                {
+                    LableNameList[m_OperateProNum].removeAt(LabelStruct->labelNum-1);
+                }
+            }
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,1,0);
+            Teach_File_List_Refresh();//刷新程序列表
+            OrderNeedSaveFlag = true;
+            Teach_timer->start();
+        }
+        else
+        {
+            MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+        }
+    }
 }
 //教导界面-分解按钮处理函数
 void Teach::on_btnDevide_clicked()
@@ -1020,7 +1033,7 @@ void Teach::on_btnInset_clicked()
                         data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                         data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                         data_Temp[5] = C_AXIS_MOVE;
-                        data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                        data_Temp[6] = 0;
                         data_Temp[9] = Temp_AxisMoveOrder[i-1].pos;
                         data_Temp[10] = Temp_AxisMoveOrder[i-1].pos>>8;
                         data_Temp[11] = Temp_AxisMoveOrder[i-1].pos>>16;
@@ -1051,7 +1064,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[5] = C_CLAW_ACTION;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 if(ui->cb_General_X1_3->isChecked())
                 {//成品1夹紧
                     data_Temp[9] = Temp_ClawActionStruct[1].outportNum;//输出端口号
@@ -1078,7 +1091,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 if(ui->tabWidget_Reserve->currentWidget() == ui->tabDoubleValve)
                 {//卡爪检测界面
                     data_Temp[5] = C_CLAW_CHECK;
@@ -1187,7 +1200,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[5] = C_MACHINE_OUT;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 if(ui->Start_Up_Mach_chbox->isChecked()){//启动加工1通/断-选中
                     MachineDelay = ui->lineEdit_Start_Up_Mach->text().toDouble();
                     data_Temp[7] = (uint16_t)(MachineDelay*100);
@@ -1258,7 +1271,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 if(ui->AlarmDelay_chbox->isChecked())
                 {//报警延时
                     data_Temp[5] = C_OTHER_DELAY;
@@ -1304,7 +1317,7 @@ void Teach::on_btnInset_clicked()
             data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
             data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
             data_Temp[5] = C_STACK_MOVE;
-            data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+            data_Temp[6] = 0;
             if(ui->Stack_group_1->isChecked())
             {
                 data_Temp[33] = 1;//堆叠组号，1-11
@@ -1400,7 +1413,7 @@ void Teach::on_btnInset_clicked()
             data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
             data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
             data_Temp[5] = C_RESERVE_OUT;
-            data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+            data_Temp[6] = 0;
             Temp_ReserveOutStruct.interval = ui->lineEdit_Reserve_num->text().toUInt();
             double Reserve_time = ui->lineEdit_Reserve_time->text().toDouble();
             data_Temp[7] = (uint16_t)(Reserve_time*100);
@@ -1444,7 +1457,7 @@ void Teach::on_btnInset_clicked()
             data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
             data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
             data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+            data_Temp[6] = 0;
             switch(ui->tabWgtSigWait->currentIndex())
             {
             case 0://等待机床界面
@@ -1651,7 +1664,7 @@ void Teach::on_btnInset_clicked()
             data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
             data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
             data_Temp[5] = C_SUN_PRO;
-            data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+            data_Temp[6] = 0;
             data_Temp[9] = Temp_SunProStruct.sunProNum;
             data_Temp[10] = Temp_SunProStruct.oprMode;
             g_InsertProOrder(data_Temp);
@@ -1667,7 +1680,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[5] = C_AXIS_STOP;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 data_Temp[7] = (uint16_t)(delay*100);
                 data_Temp[8] = (uint16_t)(delay*100)>>8;
                 data_Temp[9] = Temp_AxisStopStruct.axis;
@@ -1685,7 +1698,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[5] = C_TORQUE_GARD;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 data_Temp[7] = 0/*(delay*100)*/;
                 data_Temp[8] = 0/*(delay*100)>>8*/;
                 data_Temp[9] = Temp_TorqueGardStruct.axis;
@@ -1703,7 +1716,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[5] = C_OFFSET_AXIS;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 data_Temp[9] = Temp_OffsetAxisStruct.offsetPos;
                 data_Temp[10] = Temp_OffsetAxisStruct.offsetPos>>8;
                 data_Temp[11] = Temp_OffsetAxisStruct.offsetPos>>16;
@@ -1720,7 +1733,7 @@ void Teach::on_btnInset_clicked()
             data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
             data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
             data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+            data_Temp[6] = 0;
             if(ui->chboxSearchAxisSelect->isChecked())
             {
                 Temp_SearchAxisMoveStruct.searchNum = ui->coboxSearchNum->currentIndex()+1;
@@ -1746,7 +1759,11 @@ void Teach::on_btnInset_clicked()
                 if(ui->editSigStop->text() != "")
                 {
                     Temp_SearchAxisMoveStruct.inportNum[0] = ui->editSigStop->getCurrentPort();//获取停止通道
-                    data_Temp[30] = Temp_SearchAxisMoveStruct.inportNum[0];
+                    Temp_SearchAxisMoveStruct.inportNum[1] = ui->editSigStop->getCurrentPort();//获取停止通道
+                    data_Temp[29] = Temp_SearchAxisMoveStruct.inportNum[0];
+                    data_Temp[30] = Temp_SearchAxisMoveStruct.inportNum[1];
+                    data_Temp[31] = Temp_SearchAxisMoveStruct.inporttype[0];
+                    data_Temp[32] = Temp_SearchAxisMoveStruct.inporttype[1];
                     g_InsertProOrder(data_Temp);
                 }
                 Teach_File_List_Refresh();//刷新程序列表
@@ -1765,7 +1782,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
 
                 if(ui->chboxIfCondition1->isChecked())
                 {//选择了 条件1
@@ -1834,7 +1851,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 if(ui->chboxLoopStart->isChecked())
                 {//选中循环开始
                     Temp_LogicWhileStartStruct.cycNum = ui->editLoopNum->text().toUInt();
@@ -1858,7 +1875,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 Temp_LogicVarStruct.operMode = ui->coboxVarOperand->currentIndex(); // + - * / ==
                 if(ui->chboxVarSelectVarPreOp->isChecked())
                 {//选择变量
@@ -1977,7 +1994,7 @@ void Teach::on_btnInset_clicked()
                 data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+                data_Temp[6] = 0;
                 data_Temp[5] = C_LOGIC_TIME;
                 Temp_LogicTimeStruct.timeNum = ui->coboxTimerSelect->currentIndex()+1;
                 if(ui->chboxTimerStart->isChecked())
@@ -2011,7 +2028,7 @@ void Teach::on_btnInset_clicked()
             data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
             data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
             data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[6] = m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag;
+            data_Temp[6] = 0;
             data_Temp[5] = C_LABEL;
             if(ui->chboxComment->isChecked())
             {
@@ -2090,7 +2107,6 @@ void Teach::on_btnSave_clicked()
                 P_ReserveOutStruct* ReserveOut =(P_ReserveOutStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
                 m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_ReserveOut_time->text().toDouble()*100;
                 ReserveOut->interval = ui->lineEdit_Edit_ReserveOut_Num->text().toUInt();
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,ReserveOut,sizeof(P_ReserveOutStruct));
             }
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageSigWait)
@@ -2109,7 +2125,6 @@ void Teach::on_btnSave_clicked()
                     WaitInMachine->type = 1;
                     WaitInMachine->label = ui->comboBox_Edit_Wait_label->currentIndex();
                 }
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,WaitInMachine,sizeof(P_WaitInMachineStruct));
             }
             else if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_WAIT_IN_CLAW)
             {
@@ -2125,7 +2140,6 @@ void Teach::on_btnSave_clicked()
                     WaitInClaw->type = 1;
                     WaitInClaw->label = ui->comboBox_Edit_Wait_label->currentIndex();
                 }
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,WaitInClaw,sizeof(P_WaitInClawStruct));
             }
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageSigWait_2)
@@ -2144,7 +2158,6 @@ void Teach::on_btnSave_clicked()
                     WaitInReserve->type = 1;
                     WaitInReserve->label = ui->comboBox_Edit_Wait_label_2->currentIndex();
                 }
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,WaitInReserve,sizeof(P_WaitInReserveStruct));
             }
 
         }
@@ -2163,7 +2176,6 @@ void Teach::on_btnSave_clicked()
                     OtherAlarmCust->type = 5;
                     OtherAlarmCust->alarmNum = ui->lineEdit_edit_tips_num->text().toUInt();
                 }
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,OtherAlarmCust,sizeof(P_OtherAlarmCustStruct));
             }
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageSubProgEdit)
@@ -2172,7 +2184,6 @@ void Teach::on_btnSave_clicked()
             {
                 P_SunProStruct* SunPro =(P_SunProStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
                 SunPro->sunProNum = ui->coboxSubProgSelectEdit->currentIndex()+1;
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,SunPro,sizeof(P_SunProStruct));
             }
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageTorqueProtect)
@@ -2182,9 +2193,7 @@ void Teach::on_btnSave_clicked()
                 P_TorqueGardStruct* TorqueGard =(P_TorqueGardStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
                 TorqueGard->torqueValue = ui->lineEdit_Edit_torque_value->text().toUInt();
                 TorqueGard->axis = ui->comboBox_Edit_torque_axis->currentIndex();
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,TorqueGard,sizeof(P_TorqueGardStruct));
             }
-
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageOffset)
         {//偏移移-轴偏移运动命令编辑保存处理
@@ -2212,7 +2221,6 @@ void Teach::on_btnSave_clicked()
                 else{
                     OffsetAxis->advCSpeedFlag = 0;
                 }
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,OffsetAxis,sizeof(P_OffsetAxisStruct));
             }
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageSearch)
@@ -2233,13 +2241,13 @@ void Teach::on_btnSave_clicked()
                     SearchAxisMove->reachPosAlarmFlag = 0;
                 }
                 m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Search_delay->text().toDouble()*100;
-                SearchAxisMove->maxPos = ui->lineEdit_Search_Mix_Pos->text().toDouble()*100;
+                SearchAxisMove->maxPos = (int32_t)ui->lineEdit_Search_Mix_Pos->text().toDouble()*100;
                 SearchAxisMove->runSpeed = ui->lineEdit_Search_runspeed->text().toUInt();
-                SearchAxisMove->advCDis = ui->lineEdit_Search_AdvPos->text().toDouble()*100;
+                SearchAxisMove->advCDis = (int32_t)ui->lineEdit_Search_AdvPos->text().toDouble()*100;
                 SearchAxisMove->advCSpeed = ui->lineEdit_Search_Adv_speed->text().toUInt();
-                SearchAxisMove->offsetDis = ui->lineEdit_Search_offseet_pos->text().toDouble()*100;
+                SearchAxisMove->searchNum = ui->coboxSearchNum->currentIndex()+1;//1-8编号
+                SearchAxisMove->offsetDis = (int32_t)ui->lineEdit_Search_offseet_pos->text().toDouble()*100;
                 SearchAxisMove->inportNum[0] = ui->lineEdit_Search_stop->getCurrentPort();
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,SearchAxisMove,sizeof(P_SearchAxisMoveStruct));
             }
 
         }
@@ -2301,7 +2309,6 @@ void Teach::on_btnSave_clicked()
                         LogicVar->operMode = 4;
                         LogicVar->sufferOperType = 101;
                     }
-                    memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,LogicVar,sizeof(P_LogicVarStruct));
                 }
 
             }
@@ -2320,7 +2327,6 @@ void Teach::on_btnSave_clicked()
                         LogicAxis->operMode = 4;
                         LogicAxis->sufferOperType = ui->comboBox_Edit_Axis_Var->currentIndex()+1;
                     }
-                    memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,LogicAxis,sizeof(P_LogicAxisStruct));
                 }
 
             }
@@ -2339,7 +2345,6 @@ void Teach::on_btnSave_clicked()
                         LogicStack->sufferOperType = ui->comboBox_Edit_Stack_num1->currentIndex()+1;
                         LogicStack->operMode = 4;
                     }
-                    memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,LogicStack,sizeof(P_LogicStackStruct));
                 }
 
             }
@@ -2358,7 +2363,6 @@ void Teach::on_btnSave_clicked()
                         LogicCurProductNum->sufferOperType = ui->comboBox_Edit_Prod_Var->currentIndex()+1;
                         LogicCurProductNum->operMode = 4;
                     }
-                    memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,LogicCurProductNum,sizeof(P_LogicCurProductNumStruct));
 
                 }
 
@@ -2370,7 +2374,6 @@ void Teach::on_btnSave_clicked()
             {
                 P_LogicWhileStartStruct* LogicWhileStart =(P_LogicWhileStartStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
                 LogicWhileStart->cycNum = ui->lineEdit_Loop_num->text().toUInt();
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,LogicWhileStart,sizeof(P_LogicWhileStartStruct));
             }
 
         }
@@ -2392,7 +2395,6 @@ void Teach::on_btnSave_clicked()
                 else if(LabelStruct->type == 1)
                 {//跳转到指令
                     LabelStruct->labelNum = listWgtJumptoLabelIndex;
-                    memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,LabelStruct,sizeof(P_LabelStruct));
                 }
             }
 
@@ -2457,17 +2459,12 @@ void Teach::on_btnSave_clicked()
                 }
                 StackMove->advEndDis[1] = ui->Stack_Edit_AdvPos_3->text().toDouble()*100;
                 StackMove->advCSpeedSpeed[1] = ui->Stack_Edit_AdvSpeed_3->text().toUInt();
-                memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,StackMove,sizeof(P_StackMoveStruct));
             }
 
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageDelayTime)
         {//延时指令编辑保存处理
-            if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_OTHER_DELAY)
-            {
-                m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_OtherDelay->text().toDouble()*100;
-            }
-
+            m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_OtherDelay->text().toDouble()*100;
         }
     }
     bool isSpeedTeach = true;
@@ -2479,11 +2476,8 @@ void Teach::on_btnSave_clicked()
             Save_Speed_Educat();
         }
     }
-    if(0!=memcmp(m_ProOrder[m_OperateProNum],m_OperateProOrder,sizeof(m_OperateProOrder)))
-    {
-        g_TotalProCopy(m_ProOrder[m_OperateProNum],m_OperateProOrder);
-        saveProgram(m_CurrentProgramNameAndPath);
-    }
+    g_TotalProCopy(m_ProOrder[m_OperateProNum],m_OperateProOrder);
+    saveProgram(m_CurrentProgramNameAndPath);
 
     if(isSpeedTeach)
     {
@@ -2533,7 +2527,6 @@ void Teach::Save_Speed_Educat()
                     if(AxisMove->axis == i && i<=5)
                     {
                         AxisMove->speed = Speed_EducatEdit[i]->text().toUInt();
-                        memcpy(m_OperateProOrder[j].pData,AxisMove,sizeof(P_AxisMoveStruct));
                         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_OperateProOrder[j].list,1);
                     }
                     else if(i>5)
@@ -2541,13 +2534,11 @@ void Teach::Save_Speed_Educat()
                         if(AxisMove->axis == 4 && i==6)
                         {
                             AxisMove->speed = Speed_EducatEdit[i]->text().toUInt();
-                            memcpy(m_OperateProOrder[j].pData,AxisMove,sizeof(P_AxisMoveStruct));
                             g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_OperateProOrder[j].list,1);
                         }
                         else if(AxisMove->axis == 5 && i==7)
                         {
                             AxisMove->speed = Speed_EducatEdit[i]->text().toUInt();
-                            memcpy(m_OperateProOrder[j].pData,AxisMove,sizeof(P_AxisMoveStruct));
                             g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_OperateProOrder[j].list,1);
                         }
                     }
@@ -2759,7 +2750,6 @@ void Teach::Edit_ifOrder_Save_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex)
             LogicIf->sufferCmpType[IfIndex] = ui->coboxRealProductNum_2->currentIndex()+1;
         }
     }
-    memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,LogicIf,sizeof(P_LogicIfStruct));
 }
 
 /*************************************************************************
@@ -2793,8 +2783,7 @@ void Teach::Edit_AxisMove_Save_handle(void)
         {
             AxisMove->advCSpeedFlag = 0;
         }
-        AxisMove->referPointNum = ui->editReferPoint->getRefPointIndex();
-        memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,AxisMove,sizeof(P_AxisMoveStruct));
+        AxisMove->referPointNum = (uint8_t)ui->editReferPoint->getRefPointIndex();
         m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_AxisMove_delay->text().toDouble()*100;
     }
 }
@@ -2846,7 +2835,6 @@ void Teach::Edit_ClawAction_handle()
         ClawAction->outportNum = m_Port_Y[modPortIndex].portNum;//变成松开端口
     }
     m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->ClawDelay->text().toDouble()*100;
-    memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,ClawAction,sizeof(P_ClawActionStruct));
 }
 
 
@@ -3773,15 +3761,14 @@ void Teach::pageInit()
 //预留通按钮
 void Teach::on_Reserve_Pass_Button_clicked()
 {
+    Temp_ReserveOutStruct.type =~Temp_ReserveOutStruct.type;
     if(Temp_ReserveOutStruct.type == 0)
     {
         ui->Reserve_Pass_Button->setText("预留通");
-        Temp_ReserveOutStruct.type = 1;
     }
     else
     {
         ui->Reserve_Pass_Button->setText("预留断");
-        Temp_ReserveOutStruct.type = 0;
     }
 }
 
@@ -4061,30 +4048,9 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
 {
     if(index == 0)
     {
-<<<<<<< HEAD
         m_OperateProNum = 0;//切换程序编号到主程序
         m_CurrentSelectProOrderList = 0;//当前操作行号
         Switch_Pro_ReadOrder(m_OperateProNum);
-#if 0
-=======
-        Switch_Pro_ReadOrder(0);
-        int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-        if (reply == QDialog::Accepted)
-        {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-        }
->>>>>>> 2f6b01e (自动界面第一次修改)
-        ui->Subroutine1_button->setText(m_NameDefine[2].modifyName);
-        ui->Subroutine2_button->setText(m_NameDefine[3].modifyName);
-        ui->Subroutine3_button->setText(m_NameDefine[4].modifyName);
-        ui->Subroutine4_button->setText(m_NameDefine[5].modifyName);
-        ui->Subroutine5_button->setText(m_NameDefine[6].modifyName);
-        ui->Subroutine6_button->setText(m_NameDefine[7].modifyName);
-        ui->Subroutine7_button->setText(m_NameDefine[8].modifyName);
-        ui->Subroutine8_button->setText(m_NameDefine[9].modifyName);
-<<<<<<< HEAD
-#else
         ui->Subroutine1_button->setText(m_NameDefine[1].subProgName[0]);
         ui->Subroutine2_button->setText(m_NameDefine[1].subProgName[1]);
         ui->Subroutine3_button->setText(m_NameDefine[1].subProgName[2]);
@@ -4093,7 +4059,6 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
         ui->Subroutine6_button->setText(m_NameDefine[1].subProgName[5]);
         ui->Subroutine7_button->setText(m_NameDefine[1].subProgName[6]);
         ui->Subroutine8_button->setText(m_NameDefine[1].subProgName[7]);
-#endif
         int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
         if (reply == QDialog::Accepted)
         {
@@ -4101,8 +4066,6 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
             g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
         }
         Teach_File_List_Refresh();//刷新列表
-=======
->>>>>>> 2f6b01e (自动界面第一次修改)
     }
     ui->btnModify->setChecked(false);//切换界面时关闭编辑状态
 }
@@ -4818,11 +4781,11 @@ void Teach::OrderEdit_Handle()
         double advpos = SearchAxisMove->advCDis;
         double offseet_pos = SearchAxisMove->offsetDis;
         ui->lineEdit_Search_delay->setText(QString::number(Search_delay/100,'f',2));
-        ui->lineEdit_Search_Mix_Pos->setText(QString::number(maxPos/200,'f',2));
+        ui->lineEdit_Search_Mix_Pos->setText(QString::number(maxPos/100,'f',2));
         ui->lineEdit_Search_runspeed->setText(QString::number(SearchAxisMove->runSpeed));
-        ui->lineEdit_Search_AdvPos->setText(QString::number(advpos/200,'f',2));
+        ui->lineEdit_Search_AdvPos->setText(QString::number(advpos/100,'f',2));
         ui->lineEdit_Search_Adv_speed->setText(QString::number(SearchAxisMove->advCSpeed));
-        ui->lineEdit_Search_offseet_pos->setText(QString::number(offseet_pos/200,'f',2));
+        ui->lineEdit_Search_offseet_pos->setText(QString::number(offseet_pos/100,'f',2));
         ui->lineEdit_Search_stop->setText("X"+QString::number(SearchAxisMove->inportNum[0]));//需要修改
         if(SearchAxisMove->posStoreFlag == 1)
         {
@@ -5405,22 +5368,27 @@ void Teach::on_btn_General_Refresh_clicked()
         switch (Temp_AxisMoveOrder[i].axis) {
         case X1_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_x;//m_AxisCurPos[X1_AXIS];
+            Temp_AxisMoveOrder[X1_AXIS].pos = AxisCurPos;
             ui->lineEdit_General_Position_X1->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case Y1_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_y;//m_AxisCurPos[Y1_AXIS];
+            Temp_AxisMoveOrder[Y1_AXIS].pos = AxisCurPos;
             ui->lineEdit_General_Position_Y1->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case Z1_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_z;//m_AxisCurPos[Z1_AXIS];
+            Temp_AxisMoveOrder[Z1_AXIS].pos = AxisCurPos;
             ui->lineEdit_General_Position_Z1->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case C_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_c;//m_AxisCurPos[C_AXIS];
+            Temp_AxisMoveOrder[C_AXIS].pos = AxisCurPos;
             ui->lineEdit_General_Position_C->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case Y2_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_y2;//m_AxisCurPos[Y2_AXIS];
+            Temp_AxisMoveOrder[Y2_AXIS].pos = AxisCurPos;
             if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
             {
                 ui->lineEdit_General_Position_Y2->setText(QString::number(AxisCurPos/100,'f',2));
@@ -5435,6 +5403,7 @@ void Teach::on_btn_General_Refresh_clicked()
             break;
         case Z2_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
+            Temp_AxisMoveOrder[Z2_AXIS].pos = AxisCurPos;
             if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
             {
                 ui->lineEdit_General_Position_Z2->setText(QString::number(AxisCurPos/100,'f',2));
@@ -5487,3 +5456,117 @@ void Teach::on_btn_Refresh_clicked()
     }
 }
 
+//堆叠轴坐标刷新
+void Teach::on_AxisEditRefresh_clicked()
+{
+//    double AxisCurPos = 0;
+//    if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_AXIS_MOVE)
+//    {
+//        P_AxisMoveStruct *AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+//        switch (AxisMove->axis) {
+//        case X1_AXIS:
+//            AxisCurPos = m_AxisCurPos.Pos_x;//m_AxisCurPos[X1_AXIS];
+//            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//            break;
+//        case Y1_AXIS:
+//            AxisCurPos = m_AxisCurPos.Pos_y;//m_AxisCurPos[Y1_AXIS];
+//            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//            break;
+//        case Z1_AXIS:
+//            AxisCurPos = m_AxisCurPos.Pos_z;//m_AxisCurPos[Z1_AXIS];
+//            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//            break;
+//        case C_AXIS:
+//            AxisCurPos = m_AxisCurPos.Pos_c;//m_AxisCurPos[C_AXIS];
+//            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//            break;
+//        case Y2_AXIS:
+//            AxisCurPos = m_AxisCurPos.Pos_y2;//m_AxisCurPos[Y2_AXIS];
+//            if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
+//            {
+//                ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//            }
+//            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
+//            {
+//                if(ui->cb_General_A->isChecked())
+//                {
+//                    ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//                }
+//            }
+//            break;
+//        case Z2_AXIS:
+//            AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
+//            if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
+//            {
+//                ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//            }
+//            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
+//            {
+//                if(ui->cb_General_B->isChecked())
+//                {
+//                    ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+//                }
+//            }
+//            break;
+//        default:
+//            break;
+//        }
+//    }
+}
+//轴编辑坐标刷新
+void Teach::on_Edit_AxisMove_Refresh_clicked()
+{
+    double AxisCurPos = 0;
+    if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_AXIS_MOVE)
+    {
+        P_AxisMoveStruct *AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+        switch (AxisMove->axis) {
+        case X1_AXIS:
+            AxisCurPos = m_AxisCurPos.Pos_x;//m_AxisCurPos[X1_AXIS];
+            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+            break;
+        case Y1_AXIS:
+            AxisCurPos = m_AxisCurPos.Pos_y;//m_AxisCurPos[Y1_AXIS];
+            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+            break;
+        case Z1_AXIS:
+            AxisCurPos = m_AxisCurPos.Pos_z;//m_AxisCurPos[Z1_AXIS];
+            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+            break;
+        case C_AXIS:
+            AxisCurPos = m_AxisCurPos.Pos_c;//m_AxisCurPos[C_AXIS];
+            ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+            break;
+        case Y2_AXIS:
+            AxisCurPos = m_AxisCurPos.Pos_y2;//m_AxisCurPos[Y2_AXIS];
+            if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
+            {
+                ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+            }
+            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
+            {
+                if(ui->cb_General_A->isChecked())
+                {
+                    ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+                }
+            }
+            break;
+        case Z2_AXIS:
+            AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
+            if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
+            {
+                ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+            }
+            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
+            {
+                if(ui->cb_General_B->isChecked())
+                {
+                    ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
+                }
+            }
+            break;
+        default:
+            break;
+        }
+    }
+}

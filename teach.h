@@ -5,8 +5,6 @@
 #include <QPushButton>
 #include <QCheckBox>
 #include "stackedit.h"
-#include "./Prompt_Dialog_page/prompt_yes_no_dialog_page.h"
-#include "ui_prompt_yes_no_dialog_page.h"
 #include "vartypedialog.h"
 #include "cmd.h"
 #include <QMouseEvent>
@@ -330,6 +328,10 @@ private slots:
 
     void on_tableWgtTeach_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
 
+    void on_AxisEditRefresh_clicked();
+
+    void on_Edit_AxisMove_Refresh_clicked();
+
 private:
     void pageInit();
 private:
@@ -338,7 +340,6 @@ private:
 	QString generalIconPath[4];
 	QStringList generalStrList;			//使用哪几个
 	QStringList generalIconPathList;
-    prompt_yes_no_Dialog_page *prompt_yes_no_Dialog_ui;
     StackEdit* stack_Temp;
     BaseWindow *stack_Dialog;
     QTimer *Teach_timer;

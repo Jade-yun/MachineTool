@@ -23,6 +23,8 @@ const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
 
 const QString GuideInfoPath = "/Settings/guide_info.ini";
 const QString CustomizeNameDefPath = "/Settings/NameDef_Customize_CN.ini";
+//开机自动加载程序信息
+const QString PowerOnReadOneProPath = "/Settings/PowerOnReadOneProInfo.ini";
 
 QSettings Ini_Parasettings(m_configFileNamePath,QSettings::IniFormat);
 /*************************************************************************
@@ -923,32 +925,37 @@ void setPortDefineNameOrPortNum()
 ***********程序存储*****************
 ***********************************/
 
-//程序文件存储
-QList<D_ProgramNameAndPathStruct> getProgramNameAndPath()
+//读取所有文件程序信息
+void getProgramNameAndPath()
 {
-    QList<D_ProgramNameAndPathStruct> namePathTempList;
+    D_ProgramNameAndPathStruct P_NamePathTemp;
     QStringList str_name=getValue("File","name","").split(";");
     QStringList str_path=getValue("File","path","").split(";");
     QStringList str_index=getValue("File","index","").split(";");
+    QStringList str_Permission=getValue("File","Permission","").split(";");
     QStringList str_time=getValue("File","time","").split(";");
     if(str_name.count()==1&&str_name[0]=="")
-        return namePathTempList;
-    for(int i=0;i<str_name.count();i++)
+        return;
+    if(str_name.count() == str_path.count() && str_name.count() == str_index.count()  && str_name.count() == str_Permission.count()  && str_name.count() == str_time.count())
     {
-        D_ProgramNameAndPathStruct P_NamePathTemp;
-        P_NamePathTemp.fileName=str_name[i];
-        P_NamePathTemp.filePath=str_path[i];
-        P_NamePathTemp.index=str_index[i].toUInt();
-        P_NamePathTemp.changeTime=str_time[i];
-        namePathTempList.append(P_NamePathTemp);
+        for(int i=0;i<str_name.count();i++)
+        {
+            P_NamePathTemp.fileName=str_name[i];
+            P_NamePathTemp.filePath=str_path[i];
+            P_NamePathTemp.index=str_index[i].toUInt();
+            P_NamePathTemp.filePermission=str_Permission[i].toUInt();
+            P_NamePathTemp.changeTime=str_time[i];
+            m_ProgramNameAndPath.append(P_NamePathTemp);
+        }
     }
-    return namePathTempList;
 }
+//保存所有文件程序信息
 void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value)
 {
     QString str_name;
     QString str_path;
     QString str_index;
+    QString str_Permission;
     QString str_time;
     for(int i=0;i<value.count();i++)
     {
@@ -957,6 +964,7 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value)
             str_name+=value[i].fileName;
             str_path+=value[i].filePath;
             str_index+=QString::number(value[i].index);
+            str_Permission+=QString::number(value[i].filePermission);
             str_time+=value[i].changeTime;
         }
         else
@@ -964,13 +972,41 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value)
             str_name=str_name+";"+value[i].fileName;
             str_path=str_path+";"+value[i].filePath;
             str_index=str_index+";"+QString::number(value[i].index);
+            str_Permission=str_Permission+";"+QString::number(value[i].filePermission);
             str_time=str_time+";"+value[i].changeTime;
         }
     }
     setValue("File","name",str_name);
     setValue("File","path",str_path);
     setValue("File","index",str_index);
+    setValue("File","Permission",str_Permission);
     setValue("File","time",str_time);
+}
+//保存开机加载程序信息
+void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
+{
+    QSettings settings(PowerOnReadOneProPath, QSettings::IniFormat);
+    settings.beginGroup("PowerOnFileInfo");
+    settings.setValue("name",value.fileName);
+    settings.setValue("path",value.filePath);
+    settings.setValue("index",value.index);
+    settings.setValue("Permission",value.filePermission);
+    settings.setValue("time",value.changeTime);
+    settings.endGroup();
+}
+//读取开机加载程序信息
+D_ProgramNameAndPathStruct readPowerOnReadOneProInfo()
+{
+    D_ProgramNameAndPathStruct m_ProgramNameAndPath = {"","",0,0,""};
+    QSettings settings(PowerOnReadOneProPath, QSettings::IniFormat);
+    settings.beginGroup("PowerOnFileInfo");
+    m_ProgramNameAndPath.fileName = settings.value("name").toString();
+    m_ProgramNameAndPath.filePath = settings.value("path").toString();
+    m_ProgramNameAndPath.index = settings.value("index").toUInt();
+    m_ProgramNameAndPath.filePermission = settings.value("Permission").toUInt();
+    m_ProgramNameAndPath.changeTime = settings.value("time").toString();
+    settings.endGroup();
+    return m_ProgramNameAndPath;
 }
 
 

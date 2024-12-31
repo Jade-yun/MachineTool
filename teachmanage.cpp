@@ -172,6 +172,7 @@ void TeachManage::on_btn_Copy_clicked()
             P_NamePathTemp.index = m_FileNameNum;
             P_NamePathTemp.changeTime= curTime;
             m_ProgramNameAndPath.append(P_NamePathTemp);
+            SetProgramIndex();//设置程序文件编号
         }
 
         // fresh table dispaly
@@ -200,63 +201,13 @@ void TeachManage::on_btn_Copy_clicked()
 
 void TeachManage::on_btn_Load_clicked()
 {
-    int curProgramIndex = -1;
     int curRow = ui->tableTeachManage->currentIndex().row();
     if(curRow<0)
     {
         curRow = 0;
     }
     QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
-
-    for(int i=0;i<m_ProgramNameAndPath.count();i++)
-    {
-        if(m_ProgramNameAndPath[i].fileName == fileName)
-        {
-            curProgramIndex = i;
-            break;
-        }
-    }
-    if (curProgramIndex == -1)
-    {
-        // need a tip dialog
-        qDebug() << "cannot find Program " << fileName;
-        return;
-    }
-    //如果选择的文件不是当前程序，进行载入
-    if(m_CurrentProgramNameAndPath.index != m_ProgramNameAndPath[curProgramIndex].index)
-    {//如果选择的文件不是当前程序，进行载入
-        for(int i=0;i<PRO_NUM;i++)
-        {
-            for(int j=0;j<PRO_LINE_MAIN;j++)
-            {
-                g_FreeProOrder(&m_ProOrder[i][j]);//释放程序命令的数据指针
-            }
-        }
-        memset(&m_CurrentProgramNameAndPath,0,sizeof(D_ProgramNameAndPathStruct));//清除当前程序信息
-        memcpy(&m_CurrentProgramNameAndPath,&m_ProgramNameAndPath[curProgramIndex],sizeof(D_ProgramNameAndPathStruct));//改变当前程序信息
-        readProgram(m_CurrentProgramNameAndPath);//读取当前程序指令
-        readLableOrderName(m_CurrentProgramNameAndPath);//读取当前程序中标签名称列表
-        m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
-        memcpy(&m_OperateProOrder,&m_ProOrder,sizeof(P_ProOrderStruct)*m_OperateProOrderListNum);//将读取的程序赋给当前操作程序
-
-    }
-    //发送程序
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-    for(int i=0;i<PRO_NUM;i++)
-    {
-        for(int j=0;j<m_ProInfo.proNum[i];j++)
-        {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_ORDER,i,j,0);
-        }
-    }
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
-
-
-//    QMainWindow* mainWindow =  qobject_cast<QMainWindow*>(this->parent());
-//    if(mainWindow)
-//    {
-//        mainWindow->setSysProgramName(QString("展晖机床机械手控制系统") + m_CurrentProgramNameAndPath.fileName);
-//    }
+    Load_Program_Handle(fileName);
 }
 
 void TeachManage::on_btn_Preview_clicked()
@@ -315,7 +266,7 @@ void TeachManage::on_btn_Del_clicked()
         }
 
         // insure that selected program is not the current running
-        if(m_CurrentProgramNameAndPath.index != m_ProgramNameAndPath[selectedProgramIndex].index)
+        if(m_CurrentProgramNameAndPath.fileName != m_ProgramNameAndPath[selectedProgramIndex].fileName)
         {
             // update program struct
             m_ProgramNameAndPath.removeAt(selectedProgramIndex);
@@ -332,7 +283,8 @@ void TeachManage::on_btn_Del_clicked()
 
             // fresh table dispaly
             deleteOneRowFromTable(ui->tableTeachManage);
-
+            SetProgramIndex();//设置程序文件编号
+            setProgramNameAndPath(m_ProgramNameAndPath);//更新文件保存文件中的内容
         }
         else
         {
@@ -497,7 +449,7 @@ void TeachManage::on_btn_Import_clicked()
                 P_NamePathTemp.index = m_FileNameNum;
                 P_NamePathTemp.changeTime = fileTime;
                 m_ProgramNameAndPath.append(P_NamePathTemp);
-
+                SetProgramIndex();//设置程序文件编号
                 UsbDisk::instance()->copy(file, m_ProgramPath + "/");
 
                 {
@@ -702,7 +654,7 @@ void TeachManage::on_chboxForbide_clicked()
 
 void TeachManage::init()
 {
-
+#if 0
     // update all program file to table
     QDir dir(m_ProgramPath);
     QFileInfoList fileList = dir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
@@ -742,4 +694,39 @@ void TeachManage::init()
         m_ProgramNameAndPath.append(P_NamePathTemp);
 
     }
+#else
+    // update all program file to table
+    QDir dir(m_ProgramPath);
+    QFileInfoList fileList = dir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
+    for (const auto& fileInfo : fileList)
+    {
+        for(int i = 0;i<m_ProgramNameAndPath.count();i++)
+        {
+            if(m_ProgramNameAndPath[i].fileName == fileInfo.fileName().split(".").first())
+            {
+                auto tableTeachManage = ui->tableTeachManage;
+                int newRow = tableTeachManage->rowCount();
+                tableTeachManage->insertRow(newRow);
+                QCheckBox* chbox = new QCheckBox(tableTeachManage);
+                tableTeachManage->setCellWidget(newRow, 0, chbox);
+
+                QLabel* labIcon = new QLabel(tableTeachManage);
+        //        labIcon->setProperty("filePermission", 0);
+                setFilePermision(labIcon, m_ProgramNameAndPath[i].filePermission);
+                QPixmap pix(authIconPath[m_ProgramNameAndPath[i].filePermission]);
+                pix.scaled(tableTeachManage->columnWidth(1), tableTeachManage->rowHeight(newRow));
+                labIcon->setPixmap(pix);
+                tableTeachManage->setCellWidget(newRow, 1, labIcon);
+
+                tableTeachManage->setItem(newRow, 2, new QTableWidgetItem(m_ProgramNameAndPath[i].fileName));
+                tableTeachManage->setItem(newRow, 3, new QTableWidgetItem(m_ProgramNameAndPath[i].changeTime));
+
+                tableTeachManage->setColumnHidden(0, true);
+                tableTeachManage->resizeRowsToContents();
+                m_FileNameNum++;
+            }
+        }
+    }
+
+#endif
 }

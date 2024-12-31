@@ -922,6 +922,27 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
         }
 
     }
+    else if(mainCmd == CMD_MAIN_STA)
+    {
+        if(sunCmd == CMD_SUN_STA_PAR)
+        {
+            len = 0;
+            sendDataBuf[len] = (uint8_t)m_RunPar.planProductNum;
+            sendDataBuf[len+1] = (uint8_t)(m_RunPar.planProductNum>>8);
+            sendDataBuf[len+2] = (uint8_t)(m_RunPar.planProductNum>>16);
+            sendDataBuf[len+3] = (uint8_t)(m_RunPar.planProductNum>>24);
+            len+=4;
+            sendDataBuf[len] = m_RunPar.globalSpeed;
+            len+=1;
+            sendDataBuf[len] = m_RunPar.breakPointFlag;
+            len+=1;
+            sendDataBuf[len] = m_RunPar.breakPointProNum;
+            len+=1;
+            sendDataBuf[len] = (uint8_t)m_RunPar.breakPointList;
+            sendDataBuf[len+1] = (uint8_t)(m_RunPar.breakPointList>>8);
+            len+=1;
+        }
+    }
 
     ExtendSendParProReadAnswer(mainCmd, sunCmd, sendDataBuf, len);
 }
@@ -1220,8 +1241,6 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
                     m_OutPortSta[(i-8)*8+j]=recDataBuf[i]>>(7-j) & 1;
                 }
             }
-
-
             break;
         case CMD_SUN_STA_AXIS_POS://轴当前位置读取
             index=0;
@@ -1261,14 +1280,19 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
 
             break;
         case CMD_SUN_STA_MAC://控制器状态读取
+            index = 0;
+            m_RobotRunSta = recDataBuf[index];
+            index = 1;
+            m_AlarmNum = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);//报警编号
             index = 3;
-            m_ProRunInfo.proNum[0] = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-            index = 5;
+            //存放复位状态
+            index = 4;
+            m_ProRunInfo.proNum[0] = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);//运行行号
+            index = 6;
             for(i=1; i<PRO_NUM; i++)
             {
                 m_ProRunInfo.proNum[i] = recDataBuf[index + i - 1];
             }
-            index += PRO_NUM-1;
             break;
         case CMD_SUN_STA_INFO://运行信息读取
             index = 0;
@@ -1277,19 +1301,19 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             m_RunInfo.actualProductNum = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
             index += 4;
             break;
-        case CMD_SUN_STA_PAR://运行参数读写
-            index = 0;
-            m_RunPar.planProductNum = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
-            index += 4;
-            m_RunPar.globalSpeed = recDataBuf[index];
-            index += 1;
-            m_RunPar.breakPointFlag = recDataBuf[index];
-            index += 1;
-            m_RunPar.breakPointProNum = recDataBuf[index];
-            index += 1;
-            m_RunPar.breakPointList = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-            index += 2;
-            break;
+//        case CMD_SUN_STA_PAR://运行参数读写
+//            index = 0;
+//            m_RunPar.planProductNum = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
+//            index += 4;
+//            m_RunPar.globalSpeed = recDataBuf[index];
+//            index += 1;
+//            m_RunPar.breakPointFlag = recDataBuf[index];
+//            index += 1;
+//            m_RunPar.breakPointProNum = recDataBuf[index];
+//            index += 1;
+//            m_RunPar.breakPointList = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
+//            index += 2;
+//            break;
         case CMD_SUN_STA_STACK://堆叠实时参数读写
             for(i=0; i<STACK_TOTAL_NUM; i++)
             {
@@ -1451,7 +1475,7 @@ void Usart::GetProData1(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf,
     sendDataBuf[index++]=(uint8_t)m_OperateProOrder[parNum2].delay;
     sendDataBuf[index++] = (uint8_t)(m_OperateProOrder[parNum2].delay>>8);
 
-    switch (m_OperateProOrder->cmd)
+    switch (m_OperateProOrder[parNum2].cmd)
     {
     case C_AXIS_MOVE:
         sendDataBuf[index++] = (uint8_t)((P_AxisMoveStruct*)m_OperateProOrder[parNum2].pData)->pos;
@@ -1872,7 +1896,11 @@ void Usart::GetProData1(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf,
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->reachPosAlarmFlag;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->runSpeed;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->advCSpeed;
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->reachPosAlarmFlag;
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->searchNum;
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inportNum[0];
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inportNum[1];
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inporttype[0];
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inporttype[1];
         for(int m=0;m<2;m++)
         {
             sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->ret[m];
@@ -2380,7 +2408,11 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->reachPosAlarmFlag;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->runSpeed;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->advCSpeed;
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->reachPosAlarmFlag;
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->searchNum;
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inportNum[0];
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inportNum[1];
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inporttype[0];
+        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inporttype[1];
         for(int m=0;m<3;m++)
         {
             sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->ret[m];
