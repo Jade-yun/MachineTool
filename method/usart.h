@@ -7,6 +7,7 @@
 #include <QTimer>
 #include "program_popup.h"
 #include <cmd.h>
+#include <QElapsedTimer>
 enum SysSendIndex{
     CMD_OUT_TYPE,    //输出类型
     CMD_INTERLOCK,   //互锁设置
@@ -42,6 +43,16 @@ enum SysSendIndex{
     CMD_FINISH,
     CMD_SENDERROR
 };
+typedef struct
+{
+    int32_t Pos_x;
+    int32_t Pos_y;
+    int32_t Pos_z;
+    int32_t Pos_c;
+    int32_t Pos_y2;
+    int32_t Pos_z2;
+}AxisCurPos;
+extern AxisCurPos m_AxisCurPos;
 //表示命令头的字节数
 #define HEAD_BYTE  2
 //表示长度的字节数
@@ -186,6 +197,7 @@ signals:
     void receivedData(const QByteArray &data);
     void DataSycStateSignal(uint8_t SysSend_Index);
     void SysNextDataSignal();
+    void posflashsignal(AxisCurPos data);
 public slots:
     void onReadyRead();
     void onHandleError(QSerialPort::SerialPortError error);
@@ -206,7 +218,7 @@ public:
    void sync_data_handle(void);
 
 private:
-
+    QElapsedTimer timer;
 public:
 
     uint16_t SUM_CHK(uint8_t *data, uint16_t len, uint8_t sum);

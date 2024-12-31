@@ -1,13 +1,13 @@
 #include "usart.h"
 #include <QThread>
-
+#include <QDebug>
 int dataLen = 0;                           //数据长度（命令+所有数据）
 uint8_t* sumCheckData = new uint8_t[1];                           //校验和数据
 uint8_t* recDataBuf = new uint8_t[1024];        //Data数据
 uint8_t* headBuf = new uint8_t[2];                //头命令
 uint8_t* lenBuf = new uint8_t[2];                 //数据长度
 uint8_t* cmdBuf = new uint8_t[2];                 //命令指令
-
+AxisCurPos m_AxisCurPos;//轴当前实时位置
 Usart::Usart(QObject *parent):QObject(parent)
 {
     m_serialPort=new QSerialPort(this);
@@ -1189,7 +1189,7 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
     uint8_t ret = 0;
     uint8_t errCode = 0;
     uint16_t index = 0;
-
+    int32_t AxisCurPos = 0;
     if(mainCmd == CMD_MAIN_STA)
     {//运行状态及实时位置
         switch(sunCmd)
@@ -1228,8 +1228,32 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             for(i=0;i<AXIS_TOTAL_NUM;i++)
             {
                 index=i*4;
-                m_AxisCurPos[i]=(uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
+                AxisCurPos = (int32_t)(((uint32_t)recDataBuf[index])  |((uint32_t)recDataBuf[index+1]<<8)  |((uint32_t)recDataBuf[index+2]<<16)  |((uint32_t)recDataBuf[index+3]<<24));
+                switch (i) {
+                case X1_AXIS:
+                    m_AxisCurPos.Pos_x = AxisCurPos;
+                    break;
+                case Y1_AXIS:
+                    m_AxisCurPos.Pos_y = AxisCurPos;
+                    break;
+                case Z1_AXIS:
+                    m_AxisCurPos.Pos_z = AxisCurPos;
+                    break;
+                case C_AXIS:
+                    m_AxisCurPos.Pos_c = AxisCurPos;
+                    break;
+                case Y2_AXIS:
+                    m_AxisCurPos.Pos_y2 = AxisCurPos;
+                    break;
+                case Z2_AXIS:
+                    m_AxisCurPos.Pos_z2 = AxisCurPos;
+                    break;
+                default:
+                    break;
+                }
+
             }
+            emit posflashsignal(m_AxisCurPos);
             index=24;
             m_AxisCurSpeed=(uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
             index=26;
@@ -3380,6 +3404,8 @@ uint8_t Usart::DataSyc()
             MySync_Data.out_type_State = false;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_TYPE);
             MySync_Data.SendData_flag = 1;
+            timer.restart();
+            qDebug() << "addWidget(setWidget)：" << timer.elapsed() << "毫秒";
         }
         if(MySync_Data.out_type_State == true)
         {
@@ -3392,6 +3418,7 @@ uint8_t Usart::DataSyc()
             MySync_Data.sendDataOutTime++;//一次5ms
             if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {//超过1s未接收到反馈重新发送
+                qDebug() << "addWidget(setWidget)：" << timer.elapsed() << "毫秒";
                MySync_Data.sendDataNum++;
                 if(MySync_Data.sendDataNum>=5)
                 {
@@ -4634,11 +4661,12 @@ uint8_t Usart::DataSyc()
 void Usart::sync_data_handle(void)
 {
     UsartTimer->start(20);
+    timer.start();
     MySync_Data.SendDataStep = 0;
     MySync_Data.SendData_flag = 0;
     MySync_Data.sendDataOutTime = 0;
     MySync_Data.SysDataFlag = 1;
     MySync_Data.sendDataNum=0;
-    MySync_Data.OutTimenum=25;
+    MySync_Data.OutTimenum=3;
     DataSyc();
 }

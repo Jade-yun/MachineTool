@@ -497,6 +497,7 @@ void MainWindow::on_Btn_ManualHome_clicked()
 //        flag = 0;
         ui->Btn_ManualHome->setText(tr("自动页面"));
         ui->stkWidget->setCurrentWidget(autoWidget);
+        emit Auto_File_List_Refresh_signal(0);//切换到自动界面时默认显示主程序
     }
 
 }
@@ -585,7 +586,9 @@ void MainWindow::connectAllSignalsAndSlots()
         QString name = sysName + "  " + programName;
         ui->labProgramName->setText(name);
     });
-
+    connect(g_Usart,&Usart::posflashsignal,this,&MainWindow::posflashhandle);//当前坐标实时刷新
+    connect(this,&MainWindow::Auto_File_List_Refresh_signal,autoWidget,&AutoForm::Auto_File_List_Refresh);//自动运行界面列表刷新
+    connect(autoWidget,&AutoForm::Switch_ProNum_Signal,teachWidget,&Teach::Switch_Pro_ReadOrder);//自动界面切换程序编号
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {
@@ -603,17 +606,20 @@ void MainWindow::connectAllSignalsAndSlots()
         }
         ui->labSpeed->setText(QString::number(m_RunPar.globalSpeed)+"%");
         ui->labRotateSpeed->setText(QString::number((double)m_AxisCurSpeed)+"rpm");
-        ui->X1_speed->setText(QString::number((double)((m_AxisCurPos[X1_AXIS]/m_AxisPar[X1_AXIS].circlePluseNum)*m_AxisPar[X1_AXIS].circleDis),'f',2)+"mm");
-        ui->Y1_speed->setText(QString::number((double)((m_AxisCurPos[Y1_AXIS]/m_AxisPar[Y1_AXIS].circlePluseNum)*m_AxisPar[Y1_AXIS].circleDis),'f',2)+"mm");
-        ui->Z1_speed->setText(QString::number((double)((m_AxisCurPos[Z1_AXIS]/m_AxisPar[Z1_AXIS].circlePluseNum)*m_AxisPar[Z1_AXIS].circleDis),'f',2)+"mm");
-        ui->C_speed->setText(QString::number((double)((m_AxisCurPos[C_AXIS]/m_AxisPar[C_AXIS].circlePluseNum)*m_AxisPar[C_AXIS].circleDis),'f',2)+"mm");
-        ui->Y2_speed->setText(QString::number((double)((m_AxisCurPos[Y2_AXIS]/m_AxisPar[Y2_AXIS].circlePluseNum)*m_AxisPar[Y2_AXIS].circleDis),'f',2)+"mm");
-        ui->Z2_speed->setText(QString::number((double)((m_AxisCurPos[Z2_AXIS]/m_AxisPar[Z2_AXIS].circlePluseNum)*m_AxisPar[Z2_AXIS].circleDis),'f',2)+"mm");
-		});
+    });
     // 启动定时器，设置时间间隔为100毫秒
     timer->start(100);
 }
-
+//刷新实时坐标处理函数，通过信号传值的方式，避免发生线程访问安全
+void MainWindow::posflashhandle(AxisCurPos data)
+{
+    ui->X1_speed->setText(QString::number((double)(((double)data.Pos_x/(double)m_AxisPar[X1_AXIS].circlePluseNum)*(double)m_AxisPar[X1_AXIS].circleDis/100),'f',2)+"mm");
+    ui->Y1_speed->setText(QString::number((double)(((double)data.Pos_y/(double)m_AxisPar[Y1_AXIS].circlePluseNum)*(double)m_AxisPar[Y1_AXIS].circleDis/100),'f',2)+"mm");
+    ui->Z1_speed->setText(QString::number((double)(((double)data.Pos_z/(double)m_AxisPar[Z1_AXIS].circlePluseNum)*(double)m_AxisPar[Z1_AXIS].circleDis/100),'f',2)+"mm");
+    ui->C_speed->setText(QString::number((double)(((double)data.Pos_c/(double)m_AxisPar[C_AXIS].circlePluseNum)*(double)m_AxisPar[C_AXIS].circleDis/100),'f',2)+"mm");
+    ui->Y2_speed->setText(QString::number((double)(((double)data.Pos_y2/(double)m_AxisPar[Y2_AXIS].circlePluseNum)*(double)m_AxisPar[Y2_AXIS].circleDis/100),'f',2)+"mm");
+    ui->Z2_speed->setText(QString::number((double)(((double)data.Pos_z2/(double)m_AxisPar[Z2_AXIS].circlePluseNum)*(double)m_AxisPar[Z2_AXIS].circleDis/100),'f',2)+"mm");
+}
 void MainWindow::setStyleFromFile(const QString &styleSheet)
 {
     QFile file(styleSheet);
@@ -772,7 +778,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,1,10);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,1,m_RunPar.globalSpeed);
         }
 
         break;
@@ -781,7 +787,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,0,0);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,1,0);
         }
 
         break;
@@ -790,7 +796,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,3,1,50);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,3,1,m_RunPar.globalSpeed);
             int reply = showErrorTip(tr("回原点中..."),TipMode::NORMAL);
             if (reply == QDialog::Rejected)
             {
@@ -807,7 +813,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
             int reply = showErrorTip(tr("是否现在复归?"),TipMode::NORMAL);
             if (reply == QDialog::Accepted)
             {
-                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,1,50);
+                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,1,m_RunPar.globalSpeed);
             }
         }
 

@@ -23,11 +23,12 @@ public:
     explicit Teach(QWidget *parent = nullptr);
     ~Teach();
 
+    void Switch_Pro_ReadOrder(uint8_t ProNum);
 private:
     Ui::Teach *ui;
     uint16_t listWgtJumptoLabelIndex = 0;//标签列表中有跳转标签序号 0-未选中，
 public slots:
-
+    void OrderColorShow_Handle();
     void Edit_ifOrder_Save_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex);
     void Edit_ifOrder_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex);
     void on_btn_Tags_clicked();
@@ -74,11 +75,7 @@ public slots:
     void EditOperatorVarPreOp_handle();
 private slots:
 
-    void OrderColorShow_Handle();
-
     void Save_Speed_Educat();
-
-    void Switch_Pro_ReadOrder(uint8_t ProNum);
 
     void Search_Init(void);
 

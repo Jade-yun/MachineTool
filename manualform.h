@@ -73,8 +73,7 @@ private slots:
     void onTabChanged(int index);
     void onSaveKeyDef();
     void onCheckSavedGuide();
-    void onCheckSavedReferPointPara();
-
+    void onCheckSavedReferPointPara();   
 private:
     void initVar();
     void updateReferPointsTable();

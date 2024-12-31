@@ -1059,7 +1059,7 @@ void ManualForm::updateReserveButtonState()
         bool isVisible = (port.functionSet == 0);
         button->setVisible(isVisible);
 
-        const QString& portName = (port.functionSet == 0) ? port.ResDefineName : port.defineName;
+        const QString& portName = (port.functionSet == 0) ? port.ResModifyName : port.modifyName;
 
         QString statusText = m_OutPortSta[i] ? tr("通") : tr("断");
 

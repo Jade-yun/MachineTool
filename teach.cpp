@@ -541,9 +541,11 @@ void Teach::Search_Init(void)
 void Teach::Switch_Pro_ReadOrder(uint8_t ProNum)
 {
     m_OperateProNum = ProNum;
+    m_CurrentSelectProOrderList = 0;//当前操作行号
     m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
     g_TotalProCopy(m_OperateProOrder,m_ProOrder[m_OperateProNum]);//将读取的程序赋给当前操作程序
     readLableOrderName(m_CurrentProgramNameAndPath);//每次切换都获取一次标签指令名称
+    Teach_File_List_Refresh();//刷新列表
 }
 /*************************************************************************
 **  函数名：  Teach_File_List_Refresh()
@@ -3967,127 +3969,112 @@ void Teach::on_lineEdit_General_Position_A_editingFinished()
         //可添加提示超出最大范围
     }
 }
-
 void Teach::on_Subroutine1_button_clicked()
 {
-    m_OperateProNum = 1;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(1);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_Subroutine2_button_clicked()
 {
-    m_OperateProNum = 2;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(2);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_Subroutine3_button_clicked()
 {
-    m_OperateProNum = 3;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(3);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_Subroutine4_button_clicked()
 {
-    m_OperateProNum = 4;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(4);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_Subroutine5_button_clicked()
 {
-    m_OperateProNum = 5;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(5);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_Subroutine6_button_clicked()
 {
-    m_OperateProNum = 6;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(6);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_Subroutine7_button_clicked()
 {
-    m_OperateProNum = 7;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(7);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_Subroutine8_button_clicked()
 {
-    m_OperateProNum = 8;//切换程序编号到主程序
-    m_CurrentSelectProOrderList = 0;//当前操作行号
-    Switch_Pro_ReadOrder(m_OperateProNum);
+    Switch_Pro_ReadOrder(8);
     int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
     if (reply == QDialog::Accepted)
     {
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
     }
-    Teach_File_List_Refresh();//刷新列表
 }
 
 void Teach::on_tabWidget_Teach_tabBarClicked(int index)
 {
     if(index == 0)
     {
+<<<<<<< HEAD
         m_OperateProNum = 0;//切换程序编号到主程序
         m_CurrentSelectProOrderList = 0;//当前操作行号
         Switch_Pro_ReadOrder(m_OperateProNum);
 #if 0
+=======
+        Switch_Pro_ReadOrder(0);
+        int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
+        if (reply == QDialog::Accepted)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
+        }
+>>>>>>> 2f6b01e (自动界面第一次修改)
         ui->Subroutine1_button->setText(m_NameDefine[2].modifyName);
         ui->Subroutine2_button->setText(m_NameDefine[3].modifyName);
         ui->Subroutine3_button->setText(m_NameDefine[4].modifyName);
@@ -4096,6 +4083,7 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
         ui->Subroutine6_button->setText(m_NameDefine[7].modifyName);
         ui->Subroutine7_button->setText(m_NameDefine[8].modifyName);
         ui->Subroutine8_button->setText(m_NameDefine[9].modifyName);
+<<<<<<< HEAD
 #else
         ui->Subroutine1_button->setText(m_NameDefine[1].subProgName[0]);
         ui->Subroutine2_button->setText(m_NameDefine[1].subProgName[1]);
@@ -4113,6 +4101,8 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
             g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
         }
         Teach_File_List_Refresh();//刷新列表
+=======
+>>>>>>> 2f6b01e (自动界面第一次修改)
     }
     ui->btnModify->setChecked(false);//切换界面时关闭编辑状态
 }
@@ -5414,23 +5404,23 @@ void Teach::on_btn_General_Refresh_clicked()
     {
         switch (Temp_AxisMoveOrder[i].axis) {
         case X1_AXIS:
-            AxisCurPos = m_AxisCurPos[X1_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_x;//m_AxisCurPos[X1_AXIS];
             ui->lineEdit_General_Position_X1->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case Y1_AXIS:
-            AxisCurPos = m_AxisCurPos[Y1_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_y;//m_AxisCurPos[Y1_AXIS];
             ui->lineEdit_General_Position_Y1->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case Z1_AXIS:
-            AxisCurPos = m_AxisCurPos[Z1_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_z;//m_AxisCurPos[Z1_AXIS];
             ui->lineEdit_General_Position_Z1->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case C_AXIS:
-            AxisCurPos = m_AxisCurPos[C_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_c;//m_AxisCurPos[C_AXIS];
             ui->lineEdit_General_Position_C->setText(QString::number(AxisCurPos/100,'f',2));
             break;
         case Y2_AXIS:
-            AxisCurPos = m_AxisCurPos[Y2_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_y2;//m_AxisCurPos[Y2_AXIS];
             if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
             {
                 ui->lineEdit_General_Position_Y2->setText(QString::number(AxisCurPos/100,'f',2));
@@ -5444,7 +5434,7 @@ void Teach::on_btn_General_Refresh_clicked()
             }
             break;
         case Z2_AXIS:
-            AxisCurPos = m_AxisCurPos[Z2_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
             if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
             {
                 ui->lineEdit_General_Position_Z2->setText(QString::number(AxisCurPos/100,'f',2));
@@ -5471,24 +5461,24 @@ void Teach::on_btn_Refresh_clicked()
     {
         switch (Axis_Index) {
         case X1_AXIS:
-            AxisCurPos = m_AxisCurPos[X1_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_x;//m_AxisCurPos[X1_AXIS];
             break;
         case Y1_AXIS:
-            AxisCurPos = m_AxisCurPos[Y1_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_y;//m_AxisCurPos[Y1_AXIS];
             break;
         case Z1_AXIS:
-            AxisCurPos = m_AxisCurPos[Z1_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_z;//m_AxisCurPos[Z1_AXIS];
             break;
         case C_AXIS:
-            AxisCurPos = m_AxisCurPos[C_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_c;//m_AxisCurPos[C_AXIS];
             break;
         case Y2_AXIS:
         case Y2_AXIS+2:
-            AxisCurPos = m_AxisCurPos[Y2_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_y2;//m_AxisCurPos[Y2_AXIS];
             break;
         case Z2_AXIS:
         case Z2_AXIS+2:
-            AxisCurPos = m_AxisCurPos[Z2_AXIS];
+            AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
             break;
         default:
             break;

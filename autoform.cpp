@@ -4,7 +4,7 @@
 #include <QAction>
 #include <QDebug>
 #include <QMessageBox>
-
+#include "Orderjoint.h"
 #include "manualform.h"
 #include "customedit.h"
 
@@ -14,6 +14,15 @@ AutoForm::AutoForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //列表初始化设置
+    ui->Auto_file_List->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选择行为时每次选择一行
+    ui->Auto_file_List->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可编辑
+    ui->Auto_file_List->setSelectionMode(QAbstractItemView::SingleSelection);//设置为单选
+    ui->Auto_file_List->setShowGrid(true); //是否显示网格
+    ui->Auto_file_List->setAlternatingRowColors(true);//开启隔行自动变色
+    ui->Auto_file_List->setPalette(QPalette(QColor(237, 212, 0)));//隔行颜色
+    ui->Auto_file_List->setColumnWidth(0,80);
+    ui->Auto_file_List->setColumnWidth(1,10);
     // init some members;
 
     stackSet = new StackSetDialog(this);
@@ -252,7 +261,33 @@ AutoForm::AutoForm(QWidget *parent) :
         updateLabelState(index);
 
     });
-
+    connect(ui->btnTrial,&QPushButton::clicked,this,[=](){//自动运行界面试行按钮
+        if(m_OperateProOrderListNum == 0)
+        {//如果未载入程序，直接返回
+            return;
+        }
+        m_CurrentSelectProOrderList = ui->Auto_file_List->currentIndex().row();
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DEBUG,m_OperateProNum,m_CurrentSelectProOrderList+1);//运行行号从1开始，为当前选中行序号+1
+    });
+    connect(ui->coboxProgram, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {//自动运行界面程序编号切换
+        emit Switch_ProNum_Signal(index);//发送切换程序编号信号，刷新教导界面列表
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
+        Auto_File_List_Refresh(index);//刷新自动界面列表
+    });
+    connect(ui->btnFollow,&QPushButton::clicked,this,[=](){//自动界面跟随按钮
+//        if(ui->btnFollow->isChecked() == true)
+//        {
+//            if (m_ProRunInfo.proNum[0] < ui->Auto_file_List->rowCount())
+//            {
+//                QTableWidgetItem *item = ui->Auto_file_List->item(m_ProRunInfo.proNum[0],0);
+//                if(item)
+//                {
+//                    item->setBackground(Qt::blue);
+//                }
+//            }
+//        }
+    });
 }
 
 AutoForm::~AutoForm()
@@ -260,7 +295,54 @@ AutoForm::~AutoForm()
     delete ui;
 }
 
+/*************************************************************************
+**  函数名：  Teach_File_List_Refresh()
+**	输入参数：
+**	输出参数：
+**	函数功能：教导-刷新程序列表
+**  作者：    wukui
+**  开发日期：2024/8/2
+**************************************************************************/
+void AutoForm::Auto_File_List_Refresh(uint8_t ProNum)
+{
+    uint16_t i=0;
+    if(ProNum != m_OperateProNum)
+    {
+        emit Switch_ProNum_Signal(ProNum);//发送切换程序编号信号，刷新教导界面列表
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
+    }
+    //先清空表格并重新设置行数和列数
+    uint16_t Old_CurrentSelectList = m_CurrentSelectProOrderList;
+    ui->Auto_file_List->clearContents();
+    ui->Auto_file_List->setRowCount(0);
+    ui->Auto_file_List->setColumnCount(3);
+    for(i=0;i<m_OperateProOrderListNum;i++)
+    {
+        QTableWidgetItem *Auto_File_List_NumItem = new QTableWidgetItem();
+        QTableWidgetItem *Auto_File_List_OrderItem = new QTableWidgetItem();
+        QTableWidgetItem *Auto_File_List_OrderColor = new QTableWidgetItem();
+        Auto_File_List_NumItem->setText(JointRunOrderNum(m_OperateProOrder[i]));
+        Auto_File_List_NumItem->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);//设置执行行号内容居中显示
+        Auto_File_List_OrderItem->setText(JointStrDeal(m_OperateProOrder[i]));//拼接显示内容
+        Auto_File_List_OrderItem->setData(Qt::TextAlignmentRole, Qt::AlignLeft);//内容左右对齐靠左显示
+        Auto_File_List_OrderItem->setData(Qt::TextAlignmentRole, Qt::AlignVCenter);//内容上下对齐居中对齐显示
+        Auto_File_List_OrderItem->setData(Qt::TextWordWrap,1);//设置内容自动换行显示
+        ui->Auto_file_List->insertRow(i);
+        ui->Auto_file_List->setItem(i,0,Auto_File_List_NumItem);   //显示命令执行序号
+        ui->Auto_file_List->setItem(i,2,Auto_File_List_OrderItem);                 //显示命令内容
+        ui->Auto_file_List->setItem(i,1,Auto_File_List_OrderColor);
+        if(m_OperateProOrder[i].noteFlag == 1)
+        {//屏蔽指令时行背景显示灰色
+            ui->Auto_file_List->item(i,0)->setBackground(QColor(192, 191, 188));
+            ui->Auto_file_List->item(i,1)->setBackground(QColor(192, 191, 188));
+            ui->Auto_file_List->item(i,2)->setBackground(QColor(192, 191, 188));
+        }
 
+        m_CurrentSelectProOrderList = Old_CurrentSelectList;
+        ui->Auto_file_List->selectRow(m_CurrentSelectProOrderList);
+    }
+}
 
 void AutoForm::updateLabelState(int index)
 {

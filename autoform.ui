@@ -147,6 +147,9 @@
         <height>25</height>
        </size>
       </property>
+      <property name="checkable">
+       <bool>true</bool>
+      </property>
      </widget>
     </item>
     <item>
@@ -2684,7 +2687,7 @@ border: 1px solid #000000;
      <number>5</number>
     </property>
     <item>
-     <widget class="QTableWidget" name="tableWgtTeach">
+     <widget class="QTableWidget" name="Auto_file_List">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -2739,7 +2742,7 @@ border: 1px solid #000000;
        <bool>false</bool>
       </property>
       <property name="rowCount">
-       <number>50</number>
+       <number>0</number>
       </property>
       <property name="columnCount">
        <number>2</number>
@@ -2748,7 +2751,7 @@ border: 1px solid #000000;
        <bool>false</bool>
       </attribute>
       <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>50</number>
+       <number>10</number>
       </attribute>
       <attribute name="horizontalHeaderDefaultSectionSize">
        <number>100</number>
@@ -2772,7 +2775,7 @@ border: 1px solid #000000;
        <number>20</number>
       </attribute>
       <attribute name="verticalHeaderDefaultSectionSize">
-       <number>50</number>
+       <number>58</number>
       </attribute>
       <attribute name="verticalHeaderHighlightSections">
        <bool>true</bool>
@@ -2783,56 +2786,6 @@ border: 1px solid #000000;
       <attribute name="verticalHeaderStretchLastSection">
        <bool>false</bool>
       </attribute>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
-      <row/>
       <column>
        <property name="text">
         <string>编号</string>

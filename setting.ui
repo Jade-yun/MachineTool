@@ -3477,11 +3477,7 @@ QPushButton::released{
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QGroupBox { border: 1px solid black;
-border-radius:8px;
-margin-top:10px; }
-QGroupBox::title { subcontrol-origin: margin;
-	left: 10px;}</string>
+        <string notr="true"/>
        </property>
        <property name="title">
         <string>名称恢复</string>
@@ -3595,11 +3591,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">QGroupBox { border: 1px solid black;
-border-radius:8px;
-margin-top:10px; }
-QGroupBox::title { subcontrol-origin: margin;
-	left: 10px;}</string>
+        <string notr="true"/>
        </property>
        <property name="title">
         <string>端口恢复</string>

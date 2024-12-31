@@ -72,7 +72,7 @@ signals:
     void signal_sync_data();       //同步数据到主控板
 
     void alarmOccurred(int alarmNum);
-
+    void Auto_File_List_Refresh_signal(uint8_t ProNum);//刷新自动运行界面列表信号
 private:
     Ui::MainWindow *ui;
 
@@ -126,6 +126,8 @@ private:
     void PowerOnStateHandle();
 
     void DataSycStateHandel(uint8_t SysIndex);
+
+    void posflashhandle(AxisCurPos data);
 public:
     void callFullKeyboard(QObject *watched);
 
