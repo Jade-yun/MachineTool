@@ -157,7 +157,6 @@
         <file>images/next.png</file>
         <file>images/origin.png</file>
         <file>images/revert.png</file>
-<<<<<<< HEAD
         <file>images/cancel.png</file>
         <file>images/alarm_help.png</file>
         <file>images/autoPageImages/revise_position.png</file>
@@ -170,8 +169,6 @@
         <file>images/autoPageImages/breakpoint.png</file>
         <file>images/autoPageImages/continue.png</file>
         <file>images/autoPageImages/clear.png</file>
-=======
         <file>images/autoPageImages/Here_run.png</file>
->>>>>>> 5414349 (自动界面指令编辑，跟随，自动状态显示)
     </qresource>
 </RCC>

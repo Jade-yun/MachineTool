@@ -161,28 +161,18 @@ AutoForm::AutoForm(QWidget *parent) :
 
     });
 
-    connect(action2, &QAction::triggered, this, [=]() {
-//        qDebug() << "从此运行 ";
-//        if (currentRow = 0)
-//            ui->labStartStep0->hide();
-//            ui->labStartStep->hide();
-        ui->labStartStep0->show();
-        ui->labStartStep->show();
+    connect(action2, &QAction::triggered, this, [=]() {//从改行运行
+        SetAutoRunParIcon(0);
     });
 
     connect(action3, &QAction::triggered, this, [=]() {
 //        qDebug() << "断点设置 ";
-        ui->labBreakPointPos0->show();
-        ui->labBreakPointPos->show();
-        int step = 0; // get this
-        ui->labBreakPointPos->setText(QString("主程序第%1部分").arg(step));
-        // put a breakpoint icon in program table
-
+        ui->labBreakPointPos->setText(QString("主程序第%1步").arg(m_CurrentSelectProOrderList+1));
+        SetAutoRunParIcon(1);
     });
     connect(action4, &QAction::triggered, this, [=]() {
 //        qDebug() << "断点清除 ";
-        ui->labBreakPointPos0->hide();
-        ui->labBreakPointPos->hide();
+        SetAutoRunParIcon(2);
     });
 
     connect(action5, &QAction::triggered, this, &AutoForm::showReferPointDialog);
@@ -199,6 +189,9 @@ AutoForm::AutoForm(QWidget *parent) :
     connect(ui->btnOperate, &QPushButton::clicked, [=]() {
         QPoint pos = ui->btnOperate->mapToGlobal(QPoint(0, 0));
         menu->exec(QPoint(pos.x(), pos.y() - menu->sizeHint().height()));
+        qDebug()<<"pos.x"<<pos.x()<<"pos.y-menu.height"<<pos.y() - menu->sizeHint().height();
+        qDebug()<<"menuHight"<<menu->sizeHint().height();
+        qDebug()<<"pos.y"<<pos.y();
     });
 
 /**********************************************************************/
@@ -208,22 +201,26 @@ AutoForm::AutoForm(QWidget *parent) :
         if (value <= 100 && value >= 0 && ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(++value);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btnGlobalSpeedSub, &QPushButton::clicked, [=](){
         int value = ui->proBarGlobalSpeed->value();
         if (value <= 100 && value >= 0 && ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(--value);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn10percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(10);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn20percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(20);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
 //    connect(ui->btn20percent, &QPushButton::toggled, [=](bool checked){
 //        if (ui->btnAdjustSpeed->isChecked())
@@ -233,21 +230,25 @@ AutoForm::AutoForm(QWidget *parent) :
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(40);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn60percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(60);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn80percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(80);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn100percent, &QPushButton::clicked, [=](){
         if (ui->btnAdjustSpeed->isChecked())
             ui->proBarGlobalSpeed->setValue(100);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
 /**********************************************************************/
 
@@ -309,7 +310,120 @@ void AutoForm::on_Auto_file_List_currentCellChanged(int currentRow, int currentC
             OrderEditHandel();
         }
     }
+}
+//设置自动运行界面操作中的自动运行，断点设置，断点清除图标处理函数
+void AutoForm::SetAutoRunParIcon(uint8_t type)
+{
+    switch (type) {
+    case 0://设置从此运行行号图标
+    {
+        if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd != C_PRO_END)
+        {
+            m_RunPar.startRunLineFlag = true;
+            m_RunPar.startRunLineNum = m_CurrentSelectProOrderList+1;//从1行开始
+            m_RunPar.startRunLineProNum = m_OperateProNum;
+            if(m_RunPar.breakPointFlag == true && m_RunPar.startRunLineNum == m_RunPar.breakPointList && m_RunPar.startRunLineProNum == m_RunPar.breakPointProNum)
+            {
+                m_RunPar.breakPointFlag = 0;
+                m_RunPar.breakPointList = 0;
+                m_RunPar.breakPointProNum = 0;
+            }
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+            //为目标行设置新的图标和文本
+            SetAutoRunIcon();
+        }
+        break;
+    }
+    case 1://设置断点图标
+    {
+        if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd != C_PRO_END)
+        {
+            if(m_CurrentSelectProOrderList+1  < m_ProInfo.proNum[m_OperateProNum]-1)
+            {
+                //为目标行设置新的图标和文本
+                m_RunPar.breakPointFlag = true;
+                m_RunPar.breakPointList = m_CurrentSelectProOrderList;
+                m_RunPar.breakPointProNum = m_OperateProNum;
+                if(m_RunPar.startRunLineFlag == true && m_RunPar.startRunLineNum == m_RunPar.breakPointList && m_RunPar.startRunLineProNum == m_RunPar.breakPointProNum)
+                {
+                    m_RunPar.startRunLineFlag = 0;
+                    m_RunPar.startRunLineNum = 1;
+                    m_RunPar.startRunLineProNum = 0;
+                }
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+                SetAutoRunIcon();
+            }
+            else
+            {
+                MainWindow::pMainWindow->showErrorTip("最后一步不允许设为断点！",TipMode::ONLY_OK);
+            }
+        }
+        break;
+    }
+    case 2://断点清除
+    {
+        m_RunPar.breakPointFlag = false;
+        m_RunPar.breakPointList = 0;
+        m_RunPar.breakPointProNum = false;
+        m_RunPar.startRunLineFlag = 0;
+        m_RunPar.startRunLineNum = 1;
+        m_RunPar.startRunLineProNum = 0;
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+        SetAutoRunIcon();
+        break;
+    }
+    default:
+        break;
+    }
+}
+void AutoForm::SetAutoRunIcon()
+{
+    for(int row=0;row<ui->Auto_file_List->rowCount();row++)
+    {
+        QTableWidgetItem *item = ui->Auto_file_List->item(row,0);
+        if(item)
+        {
+            item->setIcon(QIcon());//先清除图标
+            item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
+        }
+    }
+    if(m_RunPar.breakPointFlag == true)
+    {
+        //为目标行设置新的图标和文本
+        QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.breakPointList].runOrderNum));
+        QIcon icon(":/images/autoPageImages/breakpoint.png");
+        ui->Auto_file_List->setItem(m_RunPar.breakPointList,0,item);
+        item->setIcon(icon);
+        item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
 
+        ui->labBreakPointPos0->show();
+        ui->labBreakPointPos->show();
+        ui->labBreakPointPos->setText(QString("主程序第%1步").arg(m_CurrentSelectProOrderList+1));
+    }
+    else
+    {
+        ui->labBreakPointPos0->hide();
+        ui->labBreakPointPos->hide();
+    }
+
+    if(m_RunPar.startRunLineFlag == true)
+    {
+        //为目标行设置新的图标和文本
+        QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.startRunLineNum].runOrderNum));
+        QIcon icon(":/images/autoPageImages/continue.png");
+        ui->Auto_file_List->setItem(m_RunPar.startRunLineNum,0,item);
+        item->setIcon(icon);
+        item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
+
+        ui->labStartStep->show();
+        ui->labStartStep0->show();
+        ui->labStartStep->setText(QString::number(m_CurrentSelectProOrderList+1));
+    }
+    else
+    {
+        ui->labStartStep->hide();
+        ui->labStartStep0->hide();
+    }
 }
 /*************************************************************************
 **  函数名：  OrderEditSaveHandel()
@@ -329,15 +443,20 @@ void AutoForm::OrderEditSaveHandel()
             AxisMove->pos = AxisMove->pos+ui->AutoEditAxisPos->text().toDouble()*100;
             AxisMove->speed = ui->AutoEditAxisSpeed->text().toUInt();
             m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->AutoEditAxisDelay->text().toDouble()*100;
-            memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,AxisMove,sizeof(P_AxisMoveStruct));
         }
         else if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_SEARCH_AXIS_MOVE)
         {
             P_SearchAxisMoveStruct* SearchAxisMove = (P_SearchAxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-            SearchAxisMove->maxPos = ui->AutoEditAxisPos->text().toDouble()*100;
+            SearchAxisMove->maxPos = SearchAxisMove->maxPos+ui->AutoEditAxisPos->text().toDouble()*100;
             SearchAxisMove->runSpeed = ui->AutoEditAxisSpeed->text().toUInt();
             m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->AutoEditAxisDelay->text().toDouble()*100;
-            memcpy(m_OperateProOrder[m_CurrentSelectProOrderList].pData,SearchAxisMove,sizeof(P_SearchAxisMoveStruct));
+        }
+        else if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_OFFSET_AXIS)
+        {
+            P_OffsetAxisStruct* OffsetAxis = (P_OffsetAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            OffsetAxis->offsetPos = OffsetAxis->offsetPos+ui->AutoEditAxisPos->text().toDouble()*100;
+            OffsetAxis->speed = ui->AutoEditAxisSpeed->text().toUInt();
+            m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->AutoEditAxisDelay->text().toDouble()*100;
         }
     }
     else if(ui->stkWgtEdit->currentWidget()==ui->AutoEditDelaypage)
@@ -467,6 +586,7 @@ void AutoForm::OrderEditHandel()
     case C_AXIS_MOVE:
     {
         ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
+        ui->AutoEditSavebtn->show();
         P_AxisMoveStruct* AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         double AxisPos = 0.00;
         double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
@@ -478,6 +598,7 @@ void AutoForm::OrderEditHandel()
     case C_SEARCH_AXIS_MOVE:
     {
         ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
+        ui->AutoEditSavebtn->show();
         P_SearchAxisMoveStruct* SearchAxisMove = (P_SearchAxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         double AxisPos = 0.00;
         double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
@@ -489,11 +610,12 @@ void AutoForm::OrderEditHandel()
     case C_OFFSET_AXIS:
     {
         ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
-        P_SearchAxisMoveStruct* SearchAxisMove =(P_SearchAxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+        ui->AutoEditSavebtn->show();
+        P_OffsetAxisStruct* OffsetAxis =(P_OffsetAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         double AxisPos = 0.00;
         double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
         ui->AutoEditAxisPos->setText(QString::number(AxisPos));
-        ui->AutoEditAxisSpeed->setText(QString::number(SearchAxisMove->runSpeed));
+        ui->AutoEditAxisSpeed->setText(QString::number(OffsetAxis->speed));
         ui->AutoEditAxisDelay->setText(QString::number(AxisMove_delay/100,'f',2));
         break;
     }
@@ -513,6 +635,7 @@ void AutoForm::OrderEditHandel()
     case C_SEARCH_STOP:
     {
         ui->stkWgtEdit->setCurrentWidget(ui->AutoEditDelaypage);
+        ui->AutoEditSavebtn->show();
         double ClawAction_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
         ui->AutoEditdelay->setText(QString::number(ClawAction_delay/100,'f',2));
         break;
@@ -521,6 +644,7 @@ void AutoForm::OrderEditHandel()
     case C_STACK_FOLLOW:
     {
         ui->stkWgtEdit->setCurrentWidget(ui->AutoEditStack);
+        ui->AutoEditSavebtn->show();
         ui->AutoEditStackX1btn->setChecked(true);
         double ClawAction_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
         ui->AutoEditStackdelay->setText(QString::number(ClawAction_delay/100,'f',2));
@@ -539,6 +663,7 @@ void AutoForm::OrderEditHandel()
     case C_LOGIC_IF:
     {
         ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
+        ui->AutoEditSavebtn->show();
         ui->AutoEditchboxIfCondition1->setChecked(true);
         AutoFromIfOrderEditHandle(0);
         break;
@@ -919,6 +1044,7 @@ void AutoForm::AutoForm_Refresh()
 {
     Program_Follow_Refresh();//跟随刷新
     Auto_State_Refresh();
+    Auto_CurStep_Refresh();
 }
 /*************************************************************************
 **  函数名：  AutoForm_Refresh()
@@ -936,6 +1062,28 @@ void AutoForm::Auto_State_Refresh()
     ui->labFetchTime->setText(QString::number(((double)m_RunInfo.fetchTime),'f',2)+"s"); //取物时间
     ui->labActualProd->setText(QString::number(m_RunInfo.actualProductNum));             //实际产品
     ui->labCurrentStepNumber->setText(QString::number(m_ProRunInfo.proNum[m_OperateProNum]));//当前步号
+}
+/*************************************************************************
+**  函数名：  Auto_CurStep_Refresh()
+**	输入参数：
+**	输出参数：
+**	函数功能：自动运行界面当前步号刷新
+**  作者：    wukui
+**  开发日期：2025/1/2
+**************************************************************************/
+void AutoForm::Auto_CurStep_Refresh()
+{
+    if(ui->stkWgtState->currentWidget() == ui->page4CurrentStep)
+    {
+        ui->labMainProgStepNum->setText(QString::number(m_ProRunInfo.proNum[0]));
+        ui->labSubProg1StepNum->setText(QString::number(m_ProRunInfo.proNum[1]));
+        ui->labSubProg2StepNum->setText(QString::number(m_ProRunInfo.proNum[2]));
+        ui->labSubProg3StepNum->setText(QString::number(m_ProRunInfo.proNum[3]));
+        ui->labSubProg5StepNum->setText(QString::number(m_ProRunInfo.proNum[4]));
+        ui->labSubProg6StepNum->setText(QString::number(m_ProRunInfo.proNum[5]));
+        ui->labSubProg7StepNum->setText(QString::number(m_ProRunInfo.proNum[6]));
+        ui->labSubProg8StepNum->setText(QString::number(m_ProRunInfo.proNum[7]));
+    }
 }
 /*************************************************************************
 **  函数名：  Program_Follow_Refresh()
@@ -1198,7 +1346,16 @@ void AutoForm::on_AutoEditAxisPos_textChanged(const QString &arg1)
     else if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_SEARCH_AXIS_MOVE)
     {
         P_SearchAxisMoveStruct* SearchAxisMove = (P_SearchAxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        if(ui->AutoEditAxisPos->text().toDouble()*100 > SearchAxisMove->maxPos+5 || ui->AutoEditAxisPos->text().toDouble()*100 < SearchAxisMove->maxPos-5)
+        if(SearchAxisMove->maxPos+ui->AutoEditAxisPos->text().toDouble()*100 > SearchAxisMove->maxPos+500 || SearchAxisMove->maxPos+ui->AutoEditAxisPos->text().toDouble()*100 < SearchAxisMove->maxPos-500)
+        {
+            MainWindow::pMainWindow->showErrorTip("输入值的范围不能超过-5.00～5.00,请重新输入。",TipMode::ONLY_OK);
+            ui->AutoEditAxisPos->setText(QString::number(0.00));
+        }
+    }
+    else if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_OFFSET_AXIS)
+    {
+        P_OffsetAxisStruct* OffsetAxis = (P_OffsetAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+        if(OffsetAxis->offsetPos+ui->AutoEditAxisPos->text().toDouble()*100 > OffsetAxis->offsetPos+500 || OffsetAxis->offsetPos+ui->AutoEditAxisPos->text().toDouble()*100 < OffsetAxis->offsetPos-500)
         {
             MainWindow::pMainWindow->showErrorTip("输入值的范围不能超过-5.00～5.00,请重新输入。",TipMode::ONLY_OK);
             ui->AutoEditAxisPos->setText(QString::number(0.00));
@@ -1221,3 +1378,4 @@ void AutoForm::on_AutoEditchboxIfCondition2_clicked(bool checked)
         AutoFromIfOrderEditHandle(1);//条件1复选框选中
     }
 }
+

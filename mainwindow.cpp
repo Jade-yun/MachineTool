@@ -224,14 +224,17 @@ MainWindow::MainWindow(QWidget *parent)
         emit ui->Btn_ManualHome->clicked();
         ui->Btn_ManualHome->setChecked(true);
     });
+
     connect(scanner, &EventScanner::eventLeftKey, this,[this](uint16_t code, int32_t value) {
         qDebug() << "Left Key event:" << code << value;
         Beeper::instance()->beep();
+        emit monitor_hand_contril(code,value);
         keyFunctCommandSend(code,value);
     });
     connect(scanner, &EventScanner::eventRightKey, this,[this](uint16_t code, int32_t value) {
         qDebug() << "Right Key event:" << code << value;
         Beeper::instance()->beep();
+        emit monitor_hand_contril(code,value);
         keyAxisCommandSend(code,value);
     });
 
@@ -244,18 +247,19 @@ MainWindow::MainWindow(QWidget *parent)
 //    alarmBar->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
 //    alarmBar->setAttribute(Qt::WA_ShowWithoutActivating);
     alarmBar->hide();
-    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){
-        alarmBar->setGeometry(5, 640, 1014, 60);
+    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){   
+        if(!alarmInfoQueue.isEmpty())
+        {
+            alarmBar->setGeometry(5, 640, 1014, 60);
+            int newAlarmNum = alarmInfoQueue.back().alarmNum;
+            QSettings alarmInfoSettings(alarmInfoMappingPath, QSettings::IniFormat);
+            alarmInfoSettings.setIniCodec("utf-8");
+            alarmInfoSettings.beginGroup(QString::number(newAlarmNum));
+            QString alarmContent = alarmInfoSettings.value("AlarmContent").toString();
+            alarmInfoSettings.endGroup();
 
-        int newAlarmNum = alarmInfoQueue.back().alarmNum;
-
-        QSettings alarmInfoSettings(alarmInfoMappingPath, QSettings::IniFormat);
-        alarmInfoSettings.setIniCodec("utf-8");
-        alarmInfoSettings.beginGroup(QString::number(newAlarmNum));
-        QString alarmContent = alarmInfoSettings.value("AlarmContent").toString();
-        alarmInfoSettings.endGroup();
-
-        alarmBar->showAlarm(newAlarmNum, alarmContent);
+            alarmBar->showAlarm(newAlarmNum, alarmContent);
+        }
     });
 
 }
@@ -579,7 +583,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
     connect(autoWidget,&AutoForm::Send_planProductNum_Signal,this,[=](){//计划产品个数下发
-        g_Usart->ExtendSendProDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0,0);
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
     connect(setWidget, &Setting::sysNameChanged, this, [=](const QString& sysName){
@@ -591,6 +595,9 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(g_Usart,&Usart::posflashsignal,this,&MainWindow::posflashhandle);//当前坐标实时刷新
     connect(this,&MainWindow::Auto_File_List_Refresh_signal,autoWidget,&AutoForm::Auto_File_List_Refresh);//自动运行界面列表刷新
     connect(autoWidget,&AutoForm::Switch_ProNum_Signal,teachWidget,&Teach::Switch_Pro_ReadOrder);//自动界面切换程序编号
+    connect(this,&MainWindow::monitor_hand_contril,monitorWidget,&MonitorForm::monitor_hand_contril_handle);//监视界面手控器界面状态刷新
+    connect(setWidget,&Setting::updatemonitorhandcontrol,monitorWidget,&MonitorForm::SetHandControlName);//刷新监视界面手持器界面内容显示
+    connect(setWidget,&Setting::WidgetNameRefresh_signal,teachWidget,&Teach::WidgetNameRefresh);//监视界面控件名称需要刷新
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {
@@ -779,29 +786,29 @@ void MainWindow::TrimodeSwitchCommandSend(uint16_t code, int32_t value)
 void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
 {
     switch (code) {
-    case 151://启动
+    case HandControlKeyCode::START://启动
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,1,m_RunPar.globalSpeed);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
         }
 
         break;
     }
-    case 150://停止
+    case HandControlKeyCode::STOP://停止
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,1,0);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,m_RunPar.startRunLineNum,0);
         }
 
         break;
     }
-    case 153://原点
+    case HandControlKeyCode::ORIGIN://原点
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,3,1,m_RunPar.globalSpeed);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,3,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
             int reply = showErrorTip(tr("回原点中..."),TipMode::NORMAL);
             if (reply == QDialog::Rejected)
             {
@@ -811,26 +818,26 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
 
         break;
     }
-    case 152://复归
+    case HandControlKeyCode::RETURN://复归
     {
         if(value == 1)
         {
             int reply = showErrorTip(tr("是否现在复归?"),TipMode::NORMAL);
             if (reply == QDialog::Accepted)
             {
-                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,1,m_RunPar.globalSpeed);
+                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
             }
         }
 
         break;
     }
-    case 155://ok
+    case HandControlKeyCode::UP://ok
     {
 //        showErrorTip(tr("参数同步中...."),TipMode::NORMAL);
 //        emit signal_sync_data();
         break;
     }
-    case 154://EXIT
+    case HandControlKeyCode::DOWN://EXIT
     {
         break;
     }
@@ -838,57 +845,59 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
         break;
     }
 }
+
+//按键膜按键按下并发送按下指令，
 void MainWindow::keyAxisCommandSend(uint16_t code, int32_t value)
 {
     uint16_t axisNum = 0;
     uint16_t direction = 0;
     switch (code)
     {
-    case 158:
+    case HandControlKeyCode::RIGHT_KEY1:
         axisNum=2;
         direction=1;
         break;
-    case 170:
+    case HandControlKeyCode::RIGHT_KEY2:
         axisNum=2;
         direction=2;
         break;
-    case 162:
+    case HandControlKeyCode::RIGHT_KEY3:
         axisNum=1;
         direction=1;
         break;
-    case 166:
+    case HandControlKeyCode::RIGHT_KEY4:
         axisNum=1;
         direction=2;
         break;
-    case 157:
+    case HandControlKeyCode::RIGHT_KEY5:
         axisNum=3;
         direction=1;
         break;
-    case 161:
+    case HandControlKeyCode::RIGHT_KEY6:
         axisNum=3;
         direction=2;
         break;
-    case 165:
+    case HandControlKeyCode::RIGHT_KEY7:
         axisNum=4;
         direction=1;
         break;
-    case 169:
+    case HandControlKeyCode::RIGHT_KEY8:
         axisNum=4;
         direction=2;
         break;
-    case 156:
+    case HandControlKeyCode::RIGHT_KEY9:
         axisNum=5;
         direction=1;
         break;
-    case 168:
+    case HandControlKeyCode::RIGHT_KEY10:
         axisNum=5;
         direction=2;
         break;
-    case 160:
+    case HandControlKeyCode::RIGHT_KEY11:
         axisNum=6;
         direction=1;
         break;
-    case 164:
+    case HandControlKeyCode::RIGHT_KEY12:
         axisNum=6;
         direction=2;
         break;
@@ -985,5 +994,10 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         }
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
     }
+
+}
+//滚动显示
+void MainWindow::updatelabProgramName()
+{
 
 }

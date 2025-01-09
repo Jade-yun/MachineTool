@@ -7,8 +7,11 @@ cmd::cmd()
 
 }
 
+std::vector<QString> keyFunDesription;
+std::vector<QString> sigSetDesription;
 uint32_t passwd[3] = {12345, 12345, 12345};
 
+bool SufferOperNeedRefreash = false;//变量类型是否需要刷新标志
 AutoInforRefresh m_AutoInforRefresh; //自动界面信息刷新标志
 Sync_Data MySync_Data; //参数同步结构体
 

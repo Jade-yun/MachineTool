@@ -942,6 +942,16 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             sendDataBuf[len+1] = (uint8_t)(m_RunPar.breakPointList>>8);
             len+=1;
         }
+        else if(sunCmd == CMD_SUN_STA_VAR_TYPE)
+        {
+            len=0;
+            sendDataBuf[len]= (uint8_t)parNum;
+            for(int i=0;i<VAR_TOTAL_NUM;i++)
+            {
+                sendDataBuf[i+1] = m_VariableType[i];
+                len+=1;
+            }
+        }
     }
 
     ExtendSendParProReadAnswer(mainCmd, sunCmd, sendDataBuf, len);
@@ -1281,17 +1291,17 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             break;
         case CMD_SUN_STA_MAC://控制器状态读取
             index = 0;
-            m_RobotRunSta = recDataBuf[index];
+            m_RobotRunSta = (uint8_t)recDataBuf[index];
             index = 1;
             m_AlarmNum = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);//报警编号
             index = 3;
             //存放复位状态
             index = 4;
-            m_ProRunInfo.proNum[0] = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);//运行行号
+            m_ProRunInfo.proNum[0] = ((uint16_t)recDataBuf[index])  | ((uint16_t)recDataBuf[index+1]<<8);
             index = 6;
             for(i=1; i<PRO_NUM; i++)
             {
-                m_ProRunInfo.proNum[i] = recDataBuf[index + i - 1];
+                m_ProRunInfo.proNum[i] = (uint8_t)recDataBuf[index + i - 1];
             }
             break;
         case CMD_SUN_STA_INFO://运行信息读取
@@ -1391,9 +1401,10 @@ void Usart::ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             len = index;
             break;
         case CMD_SUN_PRO_SPEED://程序轴速度教导
-            sendDataBuf[index++] = (uint8_t)parNum;
-            sendDataBuf[index++] = (uint8_t)parNum2;
-            sendDataBuf[index++] = (uint8_t)(parNum2>>8);
+            sendDataBuf[index++] = (uint8_t)parNum;//程序号
+            sendDataBuf[index++] = (uint8_t)parNum2;//轴编号
+            sendDataBuf[index++] = (uint8_t)parNum3;//速度
+            sendDataBuf[index++] = (uint8_t)(parNum3>>8);
             len = index;
             break;
         case CMD_SUN_PRO_OUT://程序信号输出
@@ -1659,7 +1670,7 @@ void Usart::GetProData1(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf,
         sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_OperateProOrder[parNum2].pData)->inportSta;
         sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_OperateProOrder[parNum2].pData)->type;
         sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_OperateProOrder[parNum2].pData)->label;
-        for(int m=0;m<3;m++)
+        for(int m=0;m<2;m++)
         {
             sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_OperateProOrder[parNum2].pData)->ret[m];
         }
@@ -1738,6 +1749,7 @@ void Usart::GetProData1(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf,
     case C_LABEL:
         sendDataBuf[index++]=(uint8_t)((P_LabelStruct*)m_OperateProOrder[parNum2].pData)->labelNum;
         sendDataBuf[index++] = (uint8_t)(((P_LabelStruct*)m_OperateProOrder[parNum2].pData)->labelNum>>8);
+        sendDataBuf[index++]=(uint8_t)((P_LabelStruct*)m_OperateProOrder[parNum2].pData)->type;
         for(int m=0;m<2;m++)
         {
             sendDataBuf[index++] = ((P_LabelStruct*)m_OperateProOrder[parNum2].pData)->ret[m];
@@ -1897,10 +1909,6 @@ void Usart::GetProData1(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf,
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->runSpeed;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->advCSpeed;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->searchNum;
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inportNum[0];
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inportNum[1];
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inporttype[0];
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->inporttype[1];
         for(int m=0;m<2;m++)
         {
             sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_OperateProOrder[parNum2].pData)->ret[m];
@@ -2189,7 +2197,7 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
         sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_ProOrder[parNum][parNum2].pData)->inportSta;
         sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_ProOrder[parNum][parNum2].pData)->type;
         sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_ProOrder[parNum][parNum2].pData)->label;
-        for(int m=0;m<3;m++)
+        for(int m=0;m<2;m++)
         {
             sendDataBuf[index++] = ((P_WaitInMachineStruct*)m_ProOrder[parNum][parNum2].pData)->ret[m];
         }
@@ -2250,6 +2258,7 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
     case C_LABEL:
         sendDataBuf[index++]=(uint8_t)((P_LabelStruct*)m_ProOrder[parNum][parNum2].pData)->labelNum;
         sendDataBuf[index++] = (uint8_t)(((P_LabelStruct*)m_ProOrder[parNum][parNum2].pData)->labelNum>>8);
+        sendDataBuf[index++]=(uint8_t)((P_LabelStruct*)m_ProOrder[parNum][parNum2].pData)->type;
         for(int m=0;m<2;m++)
         {
             sendDataBuf[index++] = ((P_LabelStruct*)m_ProOrder[parNum][parNum2].pData)->ret[m];
@@ -2409,11 +2418,7 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->runSpeed;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->advCSpeed;
         sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->searchNum;
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inportNum[0];
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inportNum[1];
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inporttype[0];
-        sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->inporttype[1];
-        for(int m=0;m<3;m++)
+        for(int m=0;m<2;m++)
         {
             sendDataBuf[index++] = ((P_SearchAxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->ret[m];
         }
@@ -2428,22 +2433,33 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
         len = index;
         break;
     case C_OFFSET_AXIS:
-        sendDataBuf[index++] = (uint8_t)((P_OffsetAxisStruct*)m_ProOrder[parNum][parNum2].pData)->offsetPos;
-        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_ProOrder[parNum][parNum2].pData)->offsetPos>>8);
-        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_ProOrder[parNum][parNum2].pData)->offsetPos>>16);
-        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_ProOrder[parNum][parNum2].pData)->offsetPos>>24);
-        sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_ProOrder[parNum][parNum2].pData)->axis;
-        sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_ProOrder[parNum][parNum2].pData)->speed;
-        for(int m=0;m<2;m++)
+        sendDataBuf[index++] = (uint8_t)((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->offsetPos;
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->offsetPos>>8);
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->offsetPos>>16);
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->offsetPos>>24);
+        sendDataBuf[index++] = (uint8_t)((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advEndDis;
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advEndDis>>8);
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advEndDis>>16);
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advEndDis>>24);
+        sendDataBuf[index++] = (uint8_t)((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advCSpeedDis;
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advCSpeedDis>>8);
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advCSpeedDis>>16);
+        sendDataBuf[index++] = (uint8_t)(((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advCSpeedDis>>24);
+        sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->axis;
+        sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->speed;
+        sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advEndFlag;
+        sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advCSpeedFlag;
+        sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->advCSpeedSpeed;
+        for(int m=0;m<3;m++)
         {
-            sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_ProOrder[parNum][parNum2].pData)->ret[m];
+            sendDataBuf[index++] = ((P_OffsetAxisStruct*)m_OperateProOrder[parNum2].pData)->ret[m];
         }
         len = index;
         break;
     case C_TORQUE_GARD:
         sendDataBuf[index++] = ((P_TorqueGardStruct*)m_ProOrder[parNum][parNum2].pData)->axis;
         sendDataBuf[index++] = ((P_TorqueGardStruct*)m_ProOrder[parNum][parNum2].pData)->torqueValue;
-        for(int m=0;m<2;m++)
+        for(int m=0;m<3;m++)
         {
             sendDataBuf[index++] = ((P_TorqueGardStruct*)m_ProOrder[parNum][parNum2].pData)->ret[m];
         }

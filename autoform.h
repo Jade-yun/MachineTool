@@ -51,6 +51,9 @@ private:
     void OrderEditSaveHandel();
     void AutoFromIfOrderEditHandle(uint8_t IfIndex);
     void AutoFromIfOrderEditSaveHandle(uint8_t IfIndex);
+    void SetAutoRunParIcon(uint8_t type);
+    void SetAutoRunIcon();
+    void Auto_CurStep_Refresh();
 public:
     void Auto_File_List_Refresh(uint8_t ProNum);//刷新自动界面内容显示列表
     void AutoForm_Refresh();

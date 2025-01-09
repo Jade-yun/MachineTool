@@ -208,6 +208,7 @@ void TeachManage::on_btn_Load_clicked()
     }
     QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
     Load_Program_Handle(fileName);
+    m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
 }
 
 void TeachManage::on_btn_Preview_clicked()

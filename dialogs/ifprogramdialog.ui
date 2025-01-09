@@ -52,7 +52,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="tabSig">
     <attribute name="title">
@@ -2337,22 +2337,12 @@
       </item>
       <item>
        <property name="text">
-        <string>Z1</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
         <string>Y1</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>Z2</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Y2</string>
+        <string>Z1</string>
        </property>
       </item>
       <item>
@@ -2362,12 +2352,12 @@
       </item>
       <item>
        <property name="text">
-        <string>B</string>
+        <string>A/Y2</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string>A</string>
+        <string>B/Z2</string>
        </property>
       </item>
      </widget>
@@ -2862,7 +2852,7 @@
   <customwidget>
    <class>StateButton</class>
    <extends>QPushButton</extends>
-   <header>statebutton.h</header>
+   <header location="global">statebutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

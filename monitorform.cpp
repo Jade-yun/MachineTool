@@ -30,6 +30,7 @@ MonitorForm::MonitorForm(QWidget* parent) :
 		}
 	}
     InitAllLedName();//设置所有led灯的名称
+    SetHandControlName();
     RefreshLedTime = new QTimer;
     RefreshLedTime->setInterval(100);//100毫秒刷新一次
     connect(RefreshLedTime,&QTimer::timeout,this,&MonitorForm::RefreshLedState);
@@ -703,7 +704,241 @@ void MonitorForm::RefreshLedState()
         break;
     }
 }
-
+/*************************************************************************
+**  函数名：  monitor_hand_contril_handle()
+**	输入参数：code:按键编号,value 按键值，0-松开 1-按下
+**	输出参数：
+**	函数功能：根据获取到的led灯状态设置LED灯状态
+**  作者：    wukui
+**  开发日期：2025/1/2
+**************************************************************************/
+void MonitorForm::monitor_hand_contril_handle(uint16_t code, int32_t value)
+{
+    if(ui->stackedWidget_main->currentIndex() && ui->single_tabWidget->currentWidget() == ui->tabhandControl)
+    {//手控器界面
+        switch(code)
+        {
+        case HandControlKeyCode::START:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_StartUp,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_StartUp,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::STOP:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_stop,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_stop,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::ORIGIN:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_origin,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_origin,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RETURN:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_return,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_return,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::UP:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_up,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_up,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::DOWN:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_down,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_down,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY1:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn2,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn2,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY2:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn9,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn9,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY3:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn1,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn1,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY4:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn8,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn8,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY5:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn3,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn3,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY6:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn10,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn10,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY7:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn4,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn4,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY8:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn11,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn11,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY9:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn5,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn5,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY10:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn12,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn12,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY11:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn6,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn6,0,30);//灰色
+            }
+            break;
+        }
+        case HandControlKeyCode::RIGHT_KEY12:
+        {
+            if(value == 1)
+            {
+                setLED(ui->label_btn13,2,30);//绿色
+            }
+            else
+            {
+                setLED(ui->label_btn13,0,30);//灰色
+            }
+            break;
+        }
+        default:
+            break;
+        }
+    }
+}
 /*************************************************************************
 **  函数名：  setLedState()
 **	输入参数：port:需要设置状态的端口,type 0-输入端口 1-输出端口
@@ -745,6 +980,73 @@ void MonitorForm::setLedName(QLabel* label, uint8_t port,uint8_t type)
     }
 }
 
+/*************************************************************************
+**  函数名：  SetHandControlName()
+**	输入参数：
+**	输出参数：
+**	函数功能：设置手控器界面按钮内容
+**  作者：    wukui
+**  开发日期：2025/1/3
+**************************************************************************/
+void MonitorForm::SetHandControlName()
+{
+    //KEY
+    ui->label_btn1text->setText(keyFunDesription[0]);
+    ui->label_btn2text->setText(keyFunDesription[2]);
+    ui->label_btn3text->setText(keyFunDesription[4]);
+    ui->label_btn4text->setText(keyFunDesription[6]);
+    ui->label_btn5text->setText(keyFunDesription[8]);
+    ui->label_btn6text->setText(keyFunDesription[10]);
+    ui->label_btn7text->setText(keyFunDesription[12]);
+    ui->label_btn8text->setText(keyFunDesription[1]);
+    ui->label_btn9text->setText(keyFunDesription[3]);
+    ui->label_btn10text->setText(keyFunDesription[5]);
+    ui->label_btn11text->setText(keyFunDesription[7]);
+    ui->label_btn12text->setText(keyFunDesription[9]);
+    ui->label_btn13text->setText(keyFunDesription[11]);
+    ui->label_btn14text->setText(keyFunDesription[13]);
+    //LED
+    if(sigSetDesription[0]!="0")
+    {
+        ui->label_btn15text->setText(tr("工作:")+sigSetDesription[0]);
+    }
+    else
+    {
+        ui->label_btn15text->setText(tr("工作"));
+    }
+    if(sigSetDesription[1]!="0")
+    {
+        ui->label_btn16text->setText(tr("加工完成:")+sigSetDesription[1]);
+    }
+    else
+    {
+        ui->label_btn16text->setText(tr("加工完成"));
+    }
+    if(sigSetDesription[2]!="0")
+    {
+        ui->label_btn17text->setText(tr("启动加工:")+sigSetDesription[2]);
+    }
+    else
+    {
+        ui->label_btn17text->setText(tr("启动加工"));
+    }
+    if(sigSetDesription[3]!="0")
+    {
+        ui->label_btn18text->setText(tr("信号:")+sigSetDesription[3]);
+    }
+    else
+    {
+        ui->label_btn18text->setText(tr("信号"));
+    }
+    if(sigSetDesription[4]!="0")
+    {
+        ui->label_btn19text->setText(tr("手轮按键:")+sigSetDesription[4]);
+    }
+    else
+    {
+        ui->label_btn19text->setText(tr("手轮按键"));
+    }
+}
 void MonitorForm::InitAllLedName()
 {
     setLedName(ui->x1,1,0);

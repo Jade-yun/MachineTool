@@ -17,6 +17,7 @@ public:
     explicit MonitorForm(QWidget *parent = nullptr);
     ~MonitorForm();
     void InitAllLedName();
+
 private:
     Ui::MonitorForm *ui;
     void setLED(QLabel* label, int color, int size);
@@ -39,6 +40,9 @@ private slots:
     void on_btnOutWidget_add_clicked();
 
     void on_btnMerge_Expand_clicked();
+public slots:
+    void monitor_hand_contril_handle(uint16_t code, int32_t value);
+    void SetHandControlName();
 };
 
 #endif // MONITORFORM_H

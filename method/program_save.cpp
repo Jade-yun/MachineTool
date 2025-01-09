@@ -559,9 +559,14 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
                 }
                 break;
             case C_OFFSET_AXIS:
-                out << signalSpace << QString(offsetAxisCmdList[0]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->offsetPos));
-                out << signalSpace << QString(offsetAxisCmdList[1]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->axis));
-                out << signalSpace << QString(offsetAxisCmdList[2]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->speed));
+                out << signalSpace << QString(offsetAxisCmdList[0]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->offsetPos*PRECISION_001, 'f', 2));
+                out << signalSpace << QString(offsetAxisCmdList[1]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->advEndDis*PRECISION_001, 'f', 2));
+                out << signalSpace << QString(offsetAxisCmdList[2]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->advCSpeedDis*PRECISION_001, 'f', 2));
+                out << signalSpace << QString(offsetAxisCmdList[3]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->axis));
+                out << signalSpace << QString(offsetAxisCmdList[4]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->speed));
+                out << signalSpace << QString(offsetAxisCmdList[5]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->advEndFlag));
+                out << signalSpace << QString(offsetAxisCmdList[6]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->advCSpeedFlag));
+                out << signalSpace << QString(offsetAxisCmdList[7]).arg(QString::number(((P_OffsetAxisStruct*)m_ProOrder[i][j].pData)->advCSpeedSpeed));
                 break;
             case C_TORQUE_GARD:
                 out << signalSpace << QString(torqueGardCmdList[0]).arg(QString::number(((P_TorqueGardStruct*)m_ProOrder[i][j].pData)->axis));
@@ -1075,7 +1080,7 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 index++;
                 temp_C_RESERVE_OUT.outportNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
-                temp_C_RESERVE_OUT.function=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                temp_C_RESERVE_OUT.function=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
                 temp_C_RESERVE_OUT.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 for(int m=0;m<3;m++)
@@ -1115,7 +1120,7 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 temp_C_WAIT_IN_CLAW.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
                 temp_C_WAIT_IN_CLAW.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                for(int m=0;m<2;m++)
+                for(int m=0;m<3;m++)
                 {
                     temp_C_WAIT_IN_CLAW.ret[m]=0;
                 }
@@ -1133,7 +1138,7 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 temp_C_WAIT_IN_RESERVE.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
                 temp_C_WAIT_IN_RESERVE.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                for(int m=0;m<2;m++)
+                for(int m=0;m<3;m++)
                 {
                     temp_C_WAIT_IN_RESERVE.ret[m]=0;
                 }
@@ -1406,10 +1411,20 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 P_OffsetAxisStruct temp_C_OFFSET_AXIS;
                 temp_C_OFFSET_AXIS.offsetPos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
                 index++;
+                temp_C_OFFSET_AXIS.advEndDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
+                temp_C_OFFSET_AXIS.advCSpeedDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                index++;
                 temp_C_OFFSET_AXIS.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
                 index++;
                 temp_C_OFFSET_AXIS.speed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-                for(int m=0;m<2;m++)
+                index++;
+                temp_C_OFFSET_AXIS.advEndFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_OFFSET_AXIS.advCSpeedFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                index++;
+                temp_C_OFFSET_AXIS.advCSpeedSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+                for(int m=0;m<3;m++)
                 {
                     temp_C_OFFSET_AXIS.ret[m]=0;
                 }
@@ -1897,7 +1912,7 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             temp_C_WAIT_IN_CLAW.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
             temp_C_WAIT_IN_CLAW.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-            for(int m=0;m<2;m++)
+            for(int m=0;m<3;m++)
             {
                 temp_C_WAIT_IN_CLAW.ret[m]=0;
             }
@@ -1915,7 +1930,7 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             temp_C_WAIT_IN_RESERVE.type=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
             temp_C_WAIT_IN_RESERVE.label=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-            for(int m=0;m<2;m++)
+            for(int m=0;m<3;m++)
             {
                 temp_C_WAIT_IN_RESERVE.ret[m]=0;
             }
@@ -1936,7 +1951,7 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             temp_C_OTHER_ALARM_CUST.alarmNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
             temp_C_OTHER_ALARM_CUST.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-            for(int m=0;m<3;m++)
+            for(int m=0;m<1;m++)
             {
                 temp_C_OTHER_ALARM_CUST.ret[m]=0;
             }
@@ -1958,7 +1973,7 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             temp_C_OTHER_ALARM_LAMP.outportNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
             temp_C_OTHER_ALARM_LAMP.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-            for(int m=0;m<3;m++)
+            for(int m=0;m<2;m++)
             {
                 temp_C_OTHER_ALARM_LAMP.ret[m]=0;
             }
@@ -1970,7 +1985,7 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             temp_C_OTHER_ALARM_SOUND.outportNum=(uint16_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
             temp_C_OTHER_ALARM_SOUND.type=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-            for(int m=0;m<3;m++)
+            for(int m=0;m<2;m++)
             {
                 temp_C_OTHER_ALARM_SOUND.ret[m]=0;
             }
@@ -2167,7 +2182,7 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             index++;
             temp_C_SEARCH_AXIS_MOVE.searchNum=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
-            for(int m=0;m<3;m++)
+            for(int m=0;m<2;m++)
             {
                 temp_C_SEARCH_AXIS_MOVE.ret[m]=0;
             }
@@ -2188,10 +2203,20 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             P_OffsetAxisStruct temp_C_OFFSET_AXIS;
             temp_C_OFFSET_AXIS.offsetPos=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
             index++;
+            temp_C_OFFSET_AXIS.advEndDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+            index++;
+            temp_C_OFFSET_AXIS.advCSpeedDis=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+            index++;
             temp_C_OFFSET_AXIS.axis=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
             index++;
             temp_C_OFFSET_AXIS.speed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
-            for(int m=0;m<2;m++)
+            index++;
+            temp_C_OFFSET_AXIS.advEndFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            index++;
+            temp_C_OFFSET_AXIS.advCSpeedFlag=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            index++;
+            temp_C_OFFSET_AXIS.advCSpeedSpeed=(uint8_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toUInt());
+            for(int m=0;m<3;m++)
             {
                 temp_C_OFFSET_AXIS.ret[m]=0;
             }
@@ -2292,6 +2317,7 @@ bool Load_Program_Handle(QString fileName)
         memcpy(&m_OperateProOrder,&m_ProOrder,sizeof(P_ProOrderStruct)*m_OperateProOrderListNum);//将读取的程序赋给当前操作程序
         savePowerOnReadOneProInfo(m_CurrentProgramNameAndPath);
     }
+    m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
     //发送程序
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
     for(int i=0;i<PRO_NUM;i++)

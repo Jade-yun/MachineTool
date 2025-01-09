@@ -33,7 +33,9 @@ public:
     QString getIOOnlineOut() const;
     unsigned int getInputPort() const;
     unsigned int getOutputPort() const;
-
+public slots:
+    void setchboxMainBoardInItem();
+    void setchboxMainBoardOutItem();
 private:
     Ui::IOPortDialog *ui;
 };

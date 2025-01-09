@@ -163,7 +163,7 @@ extern AxisCurPos m_AxisCurPos;
 #define CMD_SUN_PRO_START										0x09      	//程序启停控制
 #define CMD_SUN_PRO_MODE										0x0A      	//设备模式切换
 #define CMD_SUN_PRO_SAVE										0x0B      	//保存、切换操作的程序
-
+#define CMD_SUN_STA_VAR_TYPE                                    0x0C        //变量类型读写
 //程序标志
 #define PRO_FLAG_CMDLINE_03                                     3              //程序命令行读写
 #define PRO_FLAG_CMDLINE_04                                     4              //程序命令行插入、停止修改、自动修改

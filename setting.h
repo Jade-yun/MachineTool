@@ -106,7 +106,8 @@ signals:
     void RefreshPortDefineSignals();
     void refreshManualReserve();
     void sysNameChanged(const QString& name);
-
+    void updatemonitorhandcontrol();//更新监视界面手控器界面内容
+    void WidgetNameRefresh_signal();//教导界面控件名称需要刷新信号
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型

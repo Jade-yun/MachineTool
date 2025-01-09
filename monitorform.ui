@@ -14394,7 +14394,7 @@ font: 20pt ;</string>
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>
@@ -21506,13 +21506,13 @@ font: 20pt ;</string>
         <rect>
          <x>10</x>
          <y>10</y>
-         <width>764</width>
+         <width>809</width>
          <height>351</height>
         </rect>
        </property>
        <layout class="QGridLayout" name="gridLayout_39" rowstretch="0,0,0,0,0,0,0" columnstretch="0,0,0,0,0,0,0,0">
         <item row="0" column="2">
-         <widget class="QLabel" name="label_611">
+         <widget class="QLabel" name="label_btn1">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21537,7 +21537,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="6" column="3">
-         <widget class="QLabel" name="label_598">
+         <widget class="QLabel" name="label_btn7text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -21567,7 +21567,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLabel" name="label_590">
+         <widget class="QLabel" name="label_stopicon">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21595,7 +21595,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="5">
-         <widget class="QLabel" name="label_615">
+         <widget class="QLabel" name="label_btn9text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -21625,7 +21625,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QLabel" name="label_555">
+         <widget class="QLabel" name="label_StartUp">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21650,7 +21650,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="5" column="3">
-         <widget class="QLabel" name="label_604">
+         <widget class="QLabel" name="label_btn6text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -21680,7 +21680,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="0" column="6">
-         <widget class="QLabel" name="label_622">
+         <widget class="QLabel" name="label_btn15">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21705,7 +21705,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QLabel" name="label_588">
+         <widget class="QLabel" name="label_startupicon">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21733,7 +21733,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="6">
-         <widget class="QLabel" name="label_626">
+         <widget class="QLabel" name="label_btn19">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21758,7 +21758,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="4">
-         <widget class="QLabel" name="label_619">
+         <widget class="QLabel" name="label_btn10">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21783,7 +21783,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="6">
-         <widget class="QLabel" name="label_625">
+         <widget class="QLabel" name="label_btn18">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21808,7 +21808,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="6">
-         <widget class="QLabel" name="label_624">
+         <widget class="QLabel" name="label_btn16">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21833,7 +21833,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="2">
-         <widget class="QLabel" name="label_610">
+         <widget class="QLabel" name="label_btn2">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21858,7 +21858,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="0" column="5">
-         <widget class="QLabel" name="label_613">
+         <widget class="QLabel" name="label_btn8text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -21888,7 +21888,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="2">
-         <widget class="QLabel" name="label_608">
+         <widget class="QLabel" name="label_btn4">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -21913,7 +21913,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="5" column="5">
-         <widget class="QLabel" name="label_612">
+         <widget class="QLabel" name="label_btn13text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -21943,7 +21943,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="5">
-         <widget class="QLabel" name="label_606">
+         <widget class="QLabel" name="label_btn10text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -21973,7 +21973,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="5">
-         <widget class="QLabel" name="label_605">
+         <widget class="QLabel" name="label_btn12text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22003,7 +22003,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="5" column="4">
-         <widget class="QLabel" name="label_616">
+         <widget class="QLabel" name="label_btn13">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22028,7 +22028,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="0">
-         <widget class="QLabel" name="label_558">
+         <widget class="QLabel" name="label_up">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22053,7 +22053,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="3">
-         <widget class="QLabel" name="label_601">
+         <widget class="QLabel" name="label_btn5text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22083,7 +22083,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="1">
-         <widget class="QLabel" name="label_591">
+         <widget class="QLabel" name="label_upicon">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22111,7 +22111,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="6" column="4">
-         <widget class="QLabel" name="label_595">
+         <widget class="QLabel" name="label_btn14">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22136,7 +22136,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="5" column="0">
-         <widget class="QLabel" name="label_557">
+         <widget class="QLabel" name="label_down">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22161,7 +22161,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="5">
-         <widget class="QLabel" name="label_614">
+         <widget class="QLabel" name="label_btn11text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22191,7 +22191,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="0">
-         <widget class="QLabel" name="label_560">
+         <widget class="QLabel" name="label_origin">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22216,7 +22216,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="QLabel" name="label_597">
+         <widget class="QLabel" name="label_btn2text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22246,7 +22246,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QLabel" name="label_594">
+         <widget class="QLabel" name="label_downicon">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22274,7 +22274,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="4">
-         <widget class="QLabel" name="label_621">
+         <widget class="QLabel" name="label_btn12">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22299,7 +22299,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="2">
-         <widget class="QLabel" name="label_603">
+         <widget class="QLabel" name="label_btn5">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22324,7 +22324,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLabel" name="label_592">
+         <widget class="QLabel" name="label_returnicon">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22352,7 +22352,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="label_556">
+         <widget class="QLabel" name="label_stop">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22377,7 +22377,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="4">
-         <widget class="QLabel" name="label_617">
+         <widget class="QLabel" name="label_btn11">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22402,7 +22402,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="4">
-         <widget class="QLabel" name="label_618">
+         <widget class="QLabel" name="label_btn9">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22427,7 +22427,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="6" column="2">
-         <widget class="QLabel" name="label_589">
+         <widget class="QLabel" name="label_btn7">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22452,7 +22452,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="2">
-         <widget class="QLabel" name="label_609">
+         <widget class="QLabel" name="label_btn3">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22477,7 +22477,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="QLabel" name="label_596">
+         <widget class="QLabel" name="label_btn4text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22507,7 +22507,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="0">
-         <widget class="QLabel" name="label_559">
+         <widget class="QLabel" name="label_return">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22532,7 +22532,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="0" column="3">
-         <widget class="QLabel" name="label_599">
+         <widget class="QLabel" name="label_btn1text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22562,7 +22562,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="3">
-         <widget class="QLabel" name="label_600">
+         <widget class="QLabel" name="label_btn3text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22592,7 +22592,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="0" column="4">
-         <widget class="QLabel" name="label_620">
+         <widget class="QLabel" name="label_btn8">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22617,7 +22617,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="1">
-         <widget class="QLabel" name="label_593">
+         <widget class="QLabel" name="label_originicon">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22645,7 +22645,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="5" column="2">
-         <widget class="QLabel" name="label_602">
+         <widget class="QLabel" name="label_btn6">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22670,7 +22670,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="6">
-         <widget class="QLabel" name="label_623">
+         <widget class="QLabel" name="label_btn17">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -22695,7 +22695,7 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="6" column="5">
-         <widget class="QLabel" name="label_607">
+         <widget class="QLabel" name="label_btn14text">
           <property name="minimumSize">
            <size>
             <width>210</width>
@@ -22725,10 +22725,10 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="0" column="7">
-         <widget class="QLabel" name="label_631">
+         <widget class="QLabel" name="label_btn15text">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>140</width>
             <height>40</height>
            </size>
           </property>
@@ -22755,10 +22755,10 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="1" column="7">
-         <widget class="QLabel" name="label_630">
+         <widget class="QLabel" name="label_btn16text">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>140</width>
             <height>40</height>
            </size>
           </property>
@@ -22785,10 +22785,10 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="2" column="7">
-         <widget class="QLabel" name="label_628">
+         <widget class="QLabel" name="label_btn17text">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>140</width>
             <height>40</height>
            </size>
           </property>
@@ -22815,10 +22815,10 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="3" column="7">
-         <widget class="QLabel" name="label_629">
+         <widget class="QLabel" name="label_btn18text">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>140</width>
             <height>40</height>
            </size>
           </property>
@@ -22845,10 +22845,10 @@ font: 20pt ;</string>
          </widget>
         </item>
         <item row="4" column="7">
-         <widget class="QLabel" name="label_627">
+         <widget class="QLabel" name="label_btn19text">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>140</width>
             <height>40</height>
            </size>
           </property>

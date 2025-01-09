@@ -244,7 +244,7 @@ void Teach::EditOperatorVarPreOp_handle()
     {//修改小数位数
         ui->editConstantVarPostOp->setDecimalPlaces(VarType);
     }
-
+    SufferOperNeedRefreash = true;
 }
 /*************************************************************************
 **  函数名：  Pro_AxisActOrderInit()
@@ -270,7 +270,7 @@ void Teach::Pro_AxisActOrderInit(void)
         Temp_AxisMoveOrder[i].advCSpeedSpeed = 0;
         Temp_AxisMoveOrder[i].referPointNum = 0;
 
-        m_AxisPar[i].axisMaxPos = 1000000;//测试用，后续删除
+        m_AxisPar[i].axisMaxPos = 0;
     }
 
     ui->cb_General_X1->setChecked(false);
@@ -309,18 +309,19 @@ void Teach::Pro_AxisActOrderInit(void)
 //卡爪动作指令参数初始化
 void Teach::Pro_ClawActionStructInit(void)
 {
-    ui->btn_General_Refresh_2->setText(m_Port_Y[CLAW_METERIAL_1_LOOSENED].modifyName);
-    ui->btn_General_Refresh_3->setText(m_Port_Y[CLAW_PRODUCT_1_LOOSENED].modifyName);
-    ui->btn_General_Refresh_4->setText(m_Port_Y[CLAW_CLAW_1_LOOSENED].modifyName);
-    ui->cb_General_X1_3->setChecked(false);
-    ui->cb_General_X1_4->setChecked(false);
-    ui->cb_General_X1_5->setChecked(false);
-    Temp_ClawActionStruct[0].type = 0;
-    Temp_ClawActionStruct[1].type = 0;
-    Temp_ClawActionStruct[2].type = 0;
-    Temp_ClawActionStruct[0].outportNum =  m_Port_Y[CLAW_METERIAL_1_LOOSENED].portNum;//实际端口
-    Temp_ClawActionStruct[1].outportNum =  m_Port_Y[CLAW_PRODUCT_1_LOOSENED].portNum;//实际端口
-    Temp_ClawActionStruct[2].outportNum =  m_Port_Y[CLAW_CLAW_1_LOOSENED].portNum;//实际端口
+    ui->btn_Material_clamp_1->setText(m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName);
+    ui->btn_finish_product_1->setText(m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName);
+    ui->btn_Claw_roll_1->setText(m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName);
+    ui->cb_finish_product_1->setChecked(false);
+    ui->cb_Claw_roll_1->setChecked(false);
+    ui->cb_Material_clamp_1->setChecked(false);
+    Temp_ClawActionStruct[0].type = 1;
+    Temp_ClawActionStruct[1].type = 1;
+    Temp_ClawActionStruct[2].type = 1;
+    Temp_ClawActionStruct[0].outportNum =  m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum;//实际端口
+    Temp_ClawActionStruct[1].outportNum =  m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum;//实际端口
+    Temp_ClawActionStruct[2].outportNum =  m_Port_Y[CLAW_CLAW_1_CLAMP].portNum;//实际端口
+    WidgetNameRefresh();
 }
 //卡爪检测界面参数初始化
 void Teach::Pro_ClawCheckStructInit(void)
@@ -333,6 +334,7 @@ void Teach::Pro_ClawCheckStructInit(void)
     ui->combo_General_PassStop->setCurrentIndex(0);
     ui->combo_General_PineStart->setCurrentIndex(0);
     ui->combo_General_PineEnd->setCurrentIndex(0);
+    WidgetNameRefresh();
 }
 //预留检测界面参数初始化
 void Teach::Pro_ReserveCheckStructInit(void)
@@ -359,13 +361,31 @@ void Teach::Pro_MachineOutStructInit(void)
     ui->lineEdit_Auto_Door->setText("0.00");
     ui->lineEdit_Blow_Air->setText("0.00");
     ui->lineEdit_Chuck->setText("0.00");
-    ui->Start_Up_Mach_button->setText("启动加工1断");
-    ui->Main_Axis_Rotate_button->setText("主轴旋转1断");
-    ui->Auto_Door_button->setText("自动门1关");
-    ui->Main_Axis_locat_button->setText("主轴定位1断");
-    ui->Blow_Air_button->setText("吹气1断");
-    ui->Chuck_button->setText("卡盘1松关");
-    memset(Temp_MachineOutStruct,0,sizeof(Temp_MachineOutStruct));
+    ui->Start_Up_Mach_button->setState(true);
+    ui->Main_Axis_Rotate_button->setState(true);
+    ui->Auto_Door_button->setState(true);
+    ui->Main_Axis_locat_button->setState(true);
+    ui->Blow_Air_button->setState(true);
+    ui->Chuck_button->setState(true);
+    ui->Start_Up_Mach_button->setText(m_Port_Y[MACHINE_START_PROCESS_1].modifyName+tr("通"));//机床——启动加工1（输出）
+    ui->Main_Axis_Rotate_button->setText(m_Port_Y[MACHINE_SPINDLE_ROTATE_1].modifyName+tr("通"));//机床——主轴旋转1（输出）
+    ui->Auto_Door_button->setText(m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].modifyName);//自动门1开
+    ui->Main_Axis_locat_button->setText(m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].modifyName+tr("通")); //机床——主轴定位1（输出）
+    ui->Blow_Air_button->setText(m_Port_Y[MACHINE_GASS_1_LOOSENED].modifyName+tr("通"));//机床——吹气1（输出）
+    ui->Chuck_button->setText(m_Port_Y[MACHINE_CHUCK_1_CLAMP].modifyName);//卡盘1夹紧
+    Temp_MachineOutStruct[0].type = 1;
+    Temp_MachineOutStruct[1].type = 1;
+    Temp_MachineOutStruct[2].type = 1;
+    Temp_MachineOutStruct[3].type = 1;
+    Temp_MachineOutStruct[4].type = 1;
+    Temp_MachineOutStruct[5].type = 1;
+    Temp_MachineOutStruct[0].outportNum = m_Port_Y[MACHINE_START_PROCESS_1].portNum;
+    Temp_MachineOutStruct[1].outportNum = m_Port_Y[MACHINE_SPINDLE_ROTATE_1].portNum;
+    Temp_MachineOutStruct[2].outportNum = m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].portNum;
+    Temp_MachineOutStruct[3].outportNum = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
+    Temp_MachineOutStruct[4].outportNum = m_Port_Y[MACHINE_GASS_1_LOOSENED].portNum;
+    Temp_MachineOutStruct[5].outportNum = m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum;
+    WidgetNameRefresh();
 }
 //堆叠界面参数初始化
 void Teach::Pro_StackResetZeroStructInit(void)
@@ -440,7 +460,7 @@ void Teach::Wait_Signal_Init(void)
         ui->Wait_clamp_on_comboBox->setCurrentIndex(0);
         ui->Wait_clamp_off_comboBox->setCurrentIndex(0);
         ui->Wait_release_on_comboBox->setCurrentIndex(0);
-        ui->Wait_release_on_comboBox->setCurrentIndex(0);
+        ui->Wait_release_off_comboBox->setCurrentIndex(0);
         ui->Wait_pos_cor_comboBox->setCurrentIndex(0);
         QStringList labelText;
         ui->coboxReturnLabe_box->clear();
@@ -493,7 +513,7 @@ void Teach::Wait_Signal_Init(void)
     Temp_WaitInMachineStruct.label = 0;//标签号
     Temp_WaitInClawStruct.label = 0;//标签号
     Temp_WaitInReserveStruct.label = 0;//标签号
-
+    WidgetNameRefresh();
 }
 //子程序指令界面参数初始化
 void Teach::SunPro_Init(void)
@@ -832,17 +852,22 @@ void Teach::on_btn_General_Other_clicked()
     }
     //界面参数初始化
     Temp_OtherAlarmCustStruct.alarmNum = 1450;
-    Temp_OtherAlarmCustStruct.type = 5;
-    Temp_OtherAlarmLampStruct.type = 0;
-    Temp_OtherAlarmSoundStruct.type = 0;
+    Temp_OtherAlarmCustStruct.type = 4;
+    Temp_OtherAlarmLampStruct.type = 1;
+    Temp_OtherAlarmSoundStruct.type = 1;
     Temp_OtherCycStopCustStruct.cycleNum = 0;
-    ui->btnAlarmLamp_button->setText("报警灯关");
-    ui->btnAlarmSound_button->setText("报警声关");
+    ui->btnAlarmLamp_button->setState(true);
+    ui->btnAlarmSound_button->setState(true);
+    ui->btnAlarmLamp_button->setText(m_Port_Y[OTHER_ALARM_LAMP].modifyName+tr("开"));
+    ui->btnAlarmSound_button->setText(m_Port_Y[OTHER_ALARM_SOUND].modifyName+tr("开"));
+
+    ui->AlarmLamp_chbox->setChecked(false);
+    ui->AlarmSound_chbox->setChecked(false);
+
     ui->AlarmDelay_chbox->setChecked(false);
     ui->AlarmCust_chbox->setChecked(false);
     ui->CycStop_chbox->setChecked(false);
-    ui->AlarmLamp_chbox->setChecked(false);
-    ui->AlarmSound_chbox->setChecked(false);
+    WidgetNameRefresh();
 }
 
 void Teach::on_btn_General_1_clicked()
@@ -1065,19 +1090,19 @@ void Teach::on_btnInset_clicked()
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[5] = C_CLAW_ACTION;
                 data_Temp[6] = 0;
-                if(ui->cb_General_X1_3->isChecked())
+                if(ui->cb_finish_product_1->isChecked())
                 {//成品1夹紧
                     data_Temp[9] = Temp_ClawActionStruct[1].outportNum;//输出端口号
                     data_Temp[10] = Temp_ClawActionStruct[1].type;
                     g_InsertProOrder(data_Temp);
                 }
-                else if(ui->cb_General_X1_4->isChecked())
+                else if(ui->cb_Claw_roll_1->isChecked())
                 {//卡爪1夹紧
                     data_Temp[9] = Temp_ClawActionStruct[2].outportNum;//输出端口号
                     data_Temp[10] = Temp_ClawActionStruct[2].type;
                     g_InsertProOrder(data_Temp);
                 }
-                else if(ui->cb_General_X1_5->isChecked())
+                else if(ui->cb_Material_clamp_1->isChecked())
                 {//原料1夹紧
                     data_Temp[9] = Temp_ClawActionStruct[0].outportNum;//输出端口号
                     data_Temp[10] = Temp_ClawActionStruct[0].type;
@@ -1097,72 +1122,68 @@ void Teach::on_btnInset_clicked()
                     data_Temp[5] = C_CLAW_CHECK;
                     if(ui->cb_General_PassStart->isChecked())
                     {//夹紧检测开始
-                        switch (ui->combo_General_PassStart->currentIndex()) {
-                        case 0:
+                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].portNum;
-                            break;
-                        case 1:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].portNum;
-                            break;
-                        case 2:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].portNum;
-                            break;
-                        default:
-                            break;
                         }
                         data_Temp[10] = 1;
                         g_InsertProOrder(data_Temp);
                     }
                     else if(ui->cb_General_PassStop->isChecked())
                     {//夹紧检测结束
-                        switch (ui->combo_General_PassStop->currentIndex()) {
-                        case 0:
+                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].portNum;
-                            break;
-                        case 1:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].portNum;
-                            break;
-                        case 2:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].portNum;
-                            break;
-                        default:
-                            break;
                         }
                         data_Temp[10] = 0;
                         g_InsertProOrder(data_Temp);
                     }
                     else if(ui->cb_General_PineStart->isChecked())
                     {//松开检测开始
-                        switch (ui->combo_General_PineStart->currentIndex()) {
-                        case 0:
+                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
-                            break;
-                        case 1:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
-                            break;
-                        case 2:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
-                            break;
-                        default:
-                            break;
                         }
                         data_Temp[10] = 2;
                         g_InsertProOrder(data_Temp);
                     }
                     else if(ui->cb_General_PineEnd->isChecked())
                     {//松开检测结束
-                        switch (ui->combo_General_PineEnd->currentIndex()) {
-                        case 0:
+                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
-                            break;
-                        case 1:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
-                            break;
-                        case 2:
+                        }
+                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                        {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
-                            break;
-                        default:
-                            break;
                         }
                         data_Temp[10] = 0;
                         g_InsertProOrder(data_Temp);
@@ -1229,11 +1250,11 @@ void Teach::on_btnInset_clicked()
                     MachineDelay = ui->lineEdit_Auto_Door->text().toDouble();
                     data_Temp[7] = (uint16_t)(MachineDelay*100);
                     data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
-                    if(Temp_MachineOutStruct[3].type == 0)
+                    if(Temp_MachineOutStruct[3].type == 1)
                     {//自动门开
                         data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
                     }
-                    else if(Temp_MachineOutStruct[3].type == 1)
+                    else if(Temp_MachineOutStruct[3].type == 0)
                     {//自动门关
                         data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].portNum;
                     }
@@ -1463,11 +1484,12 @@ void Teach::on_btnInset_clicked()
             case 0://等待机床界面
                 if(ui->Wait_machine_signal_box->isChecked())
                 {
-                    if(ui->Wait_machine_signal_port->currentIndex() == 0)
+                    Temp_WaitInMachineStruct.inportSta = 1;//默认有信号
+                    if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].modifyName)
                     {
                         Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].portNum;
                     }
-                    else if(ui->Wait_machine_signal_port->currentIndex() == 1)
+                    else if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].modifyName)
                     {
                         Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].portNum;
                     }
@@ -1484,75 +1506,75 @@ void Teach::on_btnInset_clicked()
             case 1://等待卡爪界面
                 if(ui->Wait_clamp_on_chbox->isChecked())
                 {
-                    if(ui->Wait_clamp_on_comboBox->currentIndex() == 0)
+                    if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].portNum;
                     }
-                    else if(ui->Wait_clamp_on_comboBox->currentIndex() == 1)
+                    else if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].portNum;
                     }
-                    else if(ui->Wait_clamp_on_comboBox->currentIndex() == 2)
+                    else if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].portNum;
                     }
                 }
                 else if(ui->Wait_release_on_chbox->isChecked())
                 {
-                    if(ui->Wait_release_on_comboBox->currentIndex() == 0)
+                    if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].portNum;
                     }
-                    else if(ui->Wait_release_on_comboBox->currentIndex() == 1)
+                    else if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].portNum;
                     }
-                    else if(ui->Wait_release_on_comboBox->currentIndex() == 2)
+                    else if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].portNum;
                     }
                 }
                 else if(ui->Wait_clamp_off_chbox->isChecked())
                 {
-                    if(ui->Wait_clamp_off_comboBox->currentIndex() == 0)
+                    if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].portNum;
                     }
-                    else if(ui->Wait_clamp_off_comboBox->currentIndex() == 1)
+                    else if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].portNum;
                     }
-                    else if(ui->Wait_clamp_off_comboBox->currentIndex() == 2)
+                    else if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].portNum;
                     }
                 }
                 else if(ui->Wait_release_off_chbox->isChecked())
                 {
-                    if(ui->Wait_release_off_comboBox->currentIndex() == 0)
+                    if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].portNum;
                     }
-                    else if(ui->Wait_release_off_comboBox->currentIndex() == 1)
+                    else if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].portNum;
                     }
-                    else if(ui->Wait_release_off_comboBox->currentIndex() == 2)
+                    else if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].portNum;
                     }
                 }
                 else if(ui->Wait_pos_cor_chbox->isChecked())
                 {
-                    if(ui->Wait_pos_cor_comboBox->currentIndex() == 0)
+                    if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_METERIAL_1_CLAMP].portNum;
                     }
-                    else if(ui->Wait_pos_cor_comboBox->currentIndex() == 1)
+                    else if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_PRODUCT_1_CLAMP].portNum;
                     }
-                    else if(ui->Wait_pos_cor_comboBox->currentIndex() == 2)
+                    else if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP].modifyName)
                     {
                         Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_CHUCK_1_CLAMP].portNum;
                     }
@@ -1583,7 +1605,6 @@ void Teach::on_btnInset_clicked()
                     data_Temp[12] = Temp_WaitInClawStruct.inportSta;
                     g_InsertProOrder(data_Temp);
                 }
-
                 break;
             case 2://等待预留界面
                 Temp_WaitInReserveStruct.label = ui->coboxReturnLabe_box->currentIndex();
@@ -1721,8 +1742,8 @@ void Teach::on_btnInset_clicked()
                 data_Temp[10] = Temp_OffsetAxisStruct.offsetPos>>8;
                 data_Temp[11] = Temp_OffsetAxisStruct.offsetPos>>16;
                 data_Temp[12] = Temp_OffsetAxisStruct.offsetPos>>24;
-                data_Temp[13] = Temp_OffsetAxisStruct.axis;
-                data_Temp[14] = Temp_OffsetAxisStruct.speed;
+                data_Temp[21] = Temp_OffsetAxisStruct.axis;
+                data_Temp[22] = Temp_OffsetAxisStruct.speed;
                 g_InsertProOrder(data_Temp);
                 Teach_File_List_Refresh();//刷新程序列表
             }
@@ -1877,6 +1898,9 @@ void Teach::on_btnInset_clicked()
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[6] = 0;
                 Temp_LogicVarStruct.operMode = ui->coboxVarOperand->currentIndex(); // + - * / ==
+                Temp_LogicAxisStruct.operMode = ui->coboxVarOperand->currentIndex(); // + - * / ==
+                Temp_LogicStackStruct.operMode  = ui->coboxVarOperand->currentIndex(); // + - * / ==
+                Temp_LogicCurProductNumStruct.operMode  = ui->coboxVarOperand->currentIndex(); // + - * / ==
                 if(ui->chboxVarSelectVarPreOp->isChecked())
                 {//选择变量
                     data_Temp[5] = C_LOGIC_VAR;
@@ -1927,7 +1951,7 @@ void Teach::on_btnInset_clicked()
                     if(ui->chboxConstantVarOp->isChecked())
                     {//操作数类型-常量
                         Temp_LogicAxisStruct.sufferOperType = 0;
-                        Temp_LogicAxisStruct.sufferOperValue = ui->editConstantVarPostOp->text().toDouble();
+                        Temp_LogicAxisStruct.sufferOperValue = ui->editConstantVarPostOp->text().toDouble()*100;
                     }
                     else if(ui->chboxVariableVarOp->isChecked())
                     {//操作数类型-变量
@@ -2205,7 +2229,7 @@ void Teach::on_btnSave_clicked()
                 OffsetAxis->advCSpeedDis = ui->lineEdit_Edit_offset_advenddis->text().toDouble()*100;
                 OffsetAxis->speed = ui->lineEdit_edit_offsetspeed->text().toUInt();
                 OffsetAxis->advCSpeedSpeed = ui->lineEdit_Edit_offset_advCspeed->text().toUInt();
-                m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_offsetDelay->text().toUInt();
+                m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_offsetDelay->text().toDouble()*100;
                 if(ui->Edit_offset_advendflag->isChecked()){
                     OffsetAxis->advEndFlag = 1;
                 }
@@ -2422,6 +2446,7 @@ void Teach::on_btnSave_clicked()
                     StackMove->advCSpeedFlag[0] = 0;
                 }
                 StackMove->advEndDis[0] = ui->Stack_Edit_AdvPos->text().toDouble()*100;
+                StackMove->advCSpeedDis[0] = ui->Stack_Edit_AdvPos->text().toDouble()*100;
                 StackMove->advCSpeedSpeed[0] = ui->Stack_Edit_AdvSpeed->text().toUInt();
                 //z1轴参数
                 m_StackInfo[StackMove->stackNum-1].stackStartPos[2] = ui->Stack_Edit_Pos_2->text().toDouble()*100;
@@ -2440,6 +2465,7 @@ void Teach::on_btnSave_clicked()
                     StackMove->advCSpeedFlag[2] = 0;
                 }
                 StackMove->advEndDis[2] = ui->Stack_Edit_AdvPos_2->text().toDouble()*100;
+                StackMove->advCSpeedDis[2] = ui->Stack_Edit_AdvPos_2->text().toDouble()*100;
                 StackMove->advCSpeedSpeed[2] = ui->Stack_Edit_AdvSpeed_2->text().toUInt();
                 //Y1轴参数
                 m_StackInfo[StackMove->stackNum-1].stackStartPos[1] = ui->Stack_Edit_Pos_3->text().toDouble()*100;
@@ -2458,6 +2484,7 @@ void Teach::on_btnSave_clicked()
                     StackMove->advCSpeedFlag[1] = 0;
                 }
                 StackMove->advEndDis[1] = ui->Stack_Edit_AdvPos_3->text().toDouble()*100;
+                StackMove->advCSpeedDis[1] = ui->Stack_Edit_AdvPos_3->text().toDouble()*100;
                 StackMove->advCSpeedSpeed[1] = ui->Stack_Edit_AdvSpeed_3->text().toUInt();
             }
 
@@ -2484,9 +2511,36 @@ void Teach::on_btnSave_clicked()
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,1);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,1);
+        if(SufferOperNeedRefreash == true)
+        {//变量类型发生改变时，下发更新变量类型
+            g_Usart->ExtendSendParDeal(CMD_MAIN_PRO,CMD_SUN_STA_VAR_TYPE,1,0);
+            SufferOperNeedRefreash = false;
+        }
     }
     Teach_File_List_Refresh();//刷新程序列表
     OrderNeedSaveFlag = false;
+}
+//变量类型更新函数
+void Teach::SufferOperUpdata_Handel()
+{
+    for(int i=0;i<PRO_NUM;i++)
+    {
+        if(i!=m_OperateProNum)
+        {
+            for(int j=0;j<m_ProInfo.proNum[i];j++)
+            {
+                if(m_ProOrder[i][j].cmd == )
+            }
+        }
+        else
+        {
+            for(int j=0;j<m_ProInfo.proNum[m_OperateProNum];j++)
+            {
+
+            }
+        }
+
+    }
 }
 //赋值速度教导界面的轴速度
 void Teach::Save_Speed_Educat()
@@ -2521,29 +2575,27 @@ void Teach::Save_Speed_Educat()
         {
             for(uint16_t j=0;j<m_OperateProOrderListNum;j++)
             {
-                if(m_OperateProOrder->cmd == C_AXIS_MOVE)
+                if(m_OperateProOrder[j].cmd == C_AXIS_MOVE)
                 {
                     P_AxisMoveStruct* AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[j].pData;
                     if(AxisMove->axis == i && i<=5)
                     {
                         AxisMove->speed = Speed_EducatEdit[i]->text().toUInt();
-                        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_OperateProOrder[j].list,1);
                     }
                     else if(i>5)
                     {
                         if(AxisMove->axis == 4 && i==6)
                         {
                             AxisMove->speed = Speed_EducatEdit[i]->text().toUInt();
-                            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_OperateProOrder[j].list,1);
                         }
                         else if(AxisMove->axis == 5 && i==7)
                         {
                             AxisMove->speed = Speed_EducatEdit[i]->text().toUInt();
-                            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_OperateProOrder[j].list,1);
                         }
                     }
                 }
             }
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SPEED,m_OperateProNum,i,Speed_EducatEdit[i]->text().toUInt());
         }
     }
 }
@@ -3070,47 +3122,47 @@ void Teach::on_lineEdit_General_Position_Z2_editingFinished()
 }
 
 //原料1松开/夹紧
-void Teach::on_btn_General_Refresh_2_clicked()
+void Teach::on_btn_Material_clamp_1_clicked()
 {
     Temp_ClawActionStruct[0].type = !Temp_ClawActionStruct[0].type;
     if(Temp_ClawActionStruct[0].type == 0)
     {
-        ui->btn_General_Refresh_2->setText(m_Port_Y[CLAW_METERIAL_1_LOOSENED].modifyName);//原料1松开
+        ui->btn_Material_clamp_1->setText(m_Port_Y[CLAW_METERIAL_1_LOOSENED].modifyName);//原料1松开
         Temp_ClawActionStruct[0].outportNum =  m_Port_Y[CLAW_METERIAL_1_LOOSENED].portNum;//实际端口
     }
     else
     {
-        ui->btn_General_Refresh_2->setText(m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName);//原料1夹紧
+        ui->btn_Material_clamp_1->setText(m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName);//原料1夹紧
         Temp_ClawActionStruct[0].outportNum =  m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum;//实际端口
     }
 }
 //成品1松开/夹紧
-void Teach::on_btn_General_Refresh_3_clicked()
+void Teach::on_btn_finish_product_1_clicked()
 {
     Temp_ClawActionStruct[1].type = !Temp_ClawActionStruct[1].type;
     if(Temp_ClawActionStruct[1].type == 0)
     {
-        ui->btn_General_Refresh_3->setText(m_Port_Y[CLAW_PRODUCT_1_LOOSENED].modifyName);
+        ui->btn_finish_product_1->setText(m_Port_Y[CLAW_PRODUCT_1_LOOSENED].modifyName);
         Temp_ClawActionStruct[1].outportNum =  m_Port_Y[CLAW_PRODUCT_1_LOOSENED].portNum;//实际端口
     }
     else
     {
-        ui->btn_General_Refresh_3->setText(m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName);
+        ui->btn_finish_product_1->setText(m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName);
         Temp_ClawActionStruct[1].outportNum =  m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum;//实际端口
     }
 }
 //卡爪正转/反转
-void Teach::on_btn_General_Refresh_4_clicked()
+void Teach::on_btn_Claw_roll_1_clicked()
 {
     Temp_ClawActionStruct[2].type = !Temp_ClawActionStruct[2].type;
     if(Temp_ClawActionStruct[2].type == 0)
     {
-        ui->btn_General_Refresh_4->setText(m_Port_Y[CLAW_CLAW_1_LOOSENED].modifyName);//卡爪1正转
+        ui->btn_Claw_roll_1->setText(m_Port_Y[CLAW_CLAW_1_LOOSENED].modifyName);//卡爪1正转
         Temp_ClawActionStruct[2].outportNum = m_Port_Y[CLAW_CLAW_1_LOOSENED].portNum;//实际端口
     }
     else
     {
-        ui->btn_General_Refresh_4->setText(m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName);//卡爪1反转
+        ui->btn_Claw_roll_1->setText(m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName);//卡爪1反转
         Temp_ClawActionStruct[2].outportNum = m_Port_Y[CLAW_CLAW_1_CLAMP].portNum;//实际端口
     }
 }
@@ -3152,7 +3204,7 @@ void Teach::on_Main_Axis_Rotate_button_clicked()
     {
         ui->Main_Axis_Rotate_button->setText(m_Port_Y[MACHINE_SPINDLE_ROTATE_1].modifyName+"断");//主轴旋转1断
     }
-    Temp_MachineOutStruct[0].outportNum = m_Port_Y[MACHINE_SPINDLE_ROTATE_1].portNum;
+    Temp_MachineOutStruct[1].outportNum = m_Port_Y[MACHINE_SPINDLE_ROTATE_1].portNum;
 }
 //主轴定位1通/断按键
 void Teach::on_Main_Axis_locat_button_clicked()
@@ -4127,7 +4179,7 @@ void Teach::on_lineEdit_Shift_Speed_editingFinished()
 
 void Teach::on_editSearchPosition_editingFinished()
 {
-    Temp_SearchAxisMoveStruct.offsetDis = ui->editSearchPosition->text().toDouble()*100;
+    Temp_SearchAxisMoveStruct.maxPos = ui->editSearchPosition->text().toDouble()*100;
 }
 
 void Teach::on_editSearchSpeed_editingFinished()
@@ -4511,6 +4563,8 @@ void Teach::OrderEdit_Handle()
     {
         ui->stkWgtProgram->setCurrentWidget(ui->pageAlarmDef);
         P_OtherAlarmCustStruct* OtherAlarmCust =(P_OtherAlarmCustStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+        ui->checkBox_fault_num->setChecked(false);
+        ui->checkBox_tips_num->setChecked(false);
         if(OtherAlarmCust->type==4)
         {
             ui->checkBox_fault_num->setChecked(true);
@@ -5568,5 +5622,348 @@ void Teach::on_Edit_AxisMove_Refresh_clicked()
         default:
             break;
         }
+    }
+}
+//教导界面控件名称刷新
+void Teach::WidgetNameRefresh()
+{
+    //原料1松开/夹紧
+    if(m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet == 1)
+    {
+        ui->cb_Material_clamp_1->setEnabled(true);
+        ui->btn_Material_clamp_1->setEnabled(true);
+        if(ui->btn_Material_clamp_1->text() != m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName)
+        {
+            ui->btn_Material_clamp_1->setText(m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName);
+        }
+    }
+    else
+    {
+        ui->cb_Material_clamp_1->setEnabled(false);
+        ui->cb_Material_clamp_1->setChecked(false);
+        ui->btn_Material_clamp_1->setEnabled(false);
+    }
+    //成品1松开/夹紧
+    if(m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet == 1)
+    {
+        ui->cb_finish_product_1->setEnabled(true);
+        ui->btn_finish_product_1->setEnabled(true);
+        if(ui->btn_finish_product_1->text() != m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName)
+        {
+            ui->btn_finish_product_1->setText(m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName);
+        }
+    }
+    else
+    {
+        ui->cb_finish_product_1->setEnabled(false);
+        ui->btn_finish_product_1->setEnabled(false);
+        ui->cb_finish_product_1->setChecked(false);
+    }
+    //卡爪1正转/反转
+    if(m_Port_Y[CLAW_CLAW_1_CLAMP].functionSet == 1)
+    {
+        ui->cb_Claw_roll_1->setEnabled(true);
+        ui->btn_Claw_roll_1->setEnabled(true);
+        if(ui->btn_Claw_roll_1->text() != m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName)
+        {
+            ui->btn_Claw_roll_1->setText(m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName);
+        }
+    }
+    else
+    {
+        ui->cb_Claw_roll_1->setEnabled(false);
+        ui->btn_Claw_roll_1->setEnabled(false);
+        ui->cb_Claw_roll_1->setChecked(false);
+    }
+    //报警灯和报警声
+    if(m_SeniorFunc.alarmLight == 1)
+    {
+        ui->btnAlarmLamp_button->setEnabled(true);
+        ui->AlarmLamp_chbox->setEnabled(true);
+    }
+    else
+    {
+        ui->btnAlarmLamp_button->setEnabled(false);
+        ui->AlarmLamp_chbox->setEnabled(false);
+    }
+    if(m_SeniorFunc.alarmBuzzer == 1)
+    {
+        ui->btnAlarmSound_button->setEnabled(true);
+        ui->AlarmSound_chbox->setEnabled(true);
+    }
+    else
+    {
+        ui->btnAlarmSound_button->setEnabled(false);
+        ui->AlarmSound_chbox->setEnabled(false);
+    }
+    //卡爪检测界面
+    if(m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet == 1 || m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet == 1 || m_Port_Y[MACHINE_CHUCK_1_CLAMP].functionSet == 1)
+    {
+        if(m_OutportInterlock[0][1] != 0 || m_OutportInterlock[0][3] != 0    //原料1夹紧-正向/反向检测使用
+            ||m_OutportInterlock[1][1] != 0 || m_OutportInterlock[1][3] != 0 //成品1夹紧-正向/反向检测使用
+            ||m_OutportInterlock[4][1] != 0 || m_OutportInterlock[4][3] != 0)//卡盘2夹紧-正向/反向检测使用
+        {
+            ui->cb_General_PassStart->setEnabled(true);
+            ui->cb_General_PassStop->setEnabled(true);
+            ui->cb_General_PineEnd->setEnabled(true);
+            ui->cb_General_PineStart->setEnabled(true);
+            ui->combo_General_PassStart->setEnabled(true);
+            ui->combo_General_PassStop->setEnabled(true);
+            ui->combo_General_PineStart->setEnabled(true);
+            ui->combo_General_PineEnd->setEnabled(true);
+            ui->combo_General_PassStart->clear();//先清空所有选项
+            ui->combo_General_PassStop->clear();
+            ui->combo_General_PineStart->clear();
+            ui->combo_General_PineEnd->clear();
+            if(m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet == 1 && (m_OutportInterlock[0][1] != 0 || m_OutportInterlock[0][3] != 0))
+            {
+                ui->combo_General_PassStart->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName);
+                ui->combo_General_PineStart->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName);
+                ui->combo_General_PassStop->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName);
+                ui->combo_General_PineEnd->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName);
+            }
+            if(m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet == 1 && (m_OutportInterlock[1][1] != 0 || m_OutportInterlock[1][3] != 0))
+            {
+                ui->combo_General_PassStart->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName);
+                ui->combo_General_PineStart->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName);
+                ui->combo_General_PassStop->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName);
+                ui->combo_General_PineEnd->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName);
+            }
+            if(m_Port_Y[MACHINE_CHUCK_1_CLAMP].functionSet == 1 && (m_OutportInterlock[4][1] != 0 || m_OutportInterlock[4][3] != 0))
+            {
+                ui->combo_General_PassStart->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName);
+                ui->combo_General_PineStart->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName);
+                ui->combo_General_PassStop->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName);
+                ui->combo_General_PineEnd->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName);
+            }
+
+            if(ui->combo_General_PassStart->count()>0)
+            {
+                ui->combo_General_PassStart->setCurrentIndex(0);
+            }
+            if(ui->combo_General_PassStop->count()>0)
+            {
+                ui->combo_General_PassStop->setCurrentIndex(0);
+            }
+            if(ui->combo_General_PineStart->count()>0)
+            {
+                ui->combo_General_PineStart->setCurrentIndex(0);
+            }
+            if(ui->combo_General_PineEnd->count()>0)
+            {
+                ui->combo_General_PineEnd->setCurrentIndex(0);
+            }
+        }
+        else
+        {
+            ui->cb_General_PassStart->setEnabled(false);
+            ui->cb_General_PassStop->setEnabled(false);
+            ui->cb_General_PineEnd->setEnabled(false);
+            ui->cb_General_PineStart->setEnabled(false);
+            ui->combo_General_PassStart->setEnabled(false);
+            ui->combo_General_PassStop->setEnabled(false);
+            ui->combo_General_PineStart->setEnabled(false);
+            ui->combo_General_PineEnd->setEnabled(false);
+        }
+    }
+    else
+    {
+        ui->cb_General_PassStart->setEnabled(false);
+        ui->cb_General_PassStop->setEnabled(false);
+        ui->cb_General_PineEnd->setEnabled(false);
+        ui->cb_General_PineStart->setEnabled(false);
+        ui->combo_General_PassStart->setEnabled(false);
+        ui->combo_General_PassStop->setEnabled(false);
+        ui->combo_General_PineStart->setEnabled(false);
+        ui->combo_General_PineEnd->setEnabled(false);
+    }
+    //机床输出界面
+    if(m_SeniorFunc.startProduct1 == 1)
+    {//启动加工1使用
+        ui->Start_Up_Mach_chbox->setEnabled(true);
+        ui->Start_Up_Mach_button->setEnabled(true);
+        ui->lineEdit_Start_Up_Mach->setEnabled(true);
+    }
+    else
+    {
+        ui->Start_Up_Mach_chbox->setEnabled(false);
+        ui->Start_Up_Mach_button->setEnabled(false);
+        ui->lineEdit_Start_Up_Mach->setEnabled(false);
+    }
+    if(m_SeniorFunc.mainAxisRotate1 == 1)
+    {//主轴旋转1使用
+        ui->Main_Axis_Rotate_chbox->setEnabled(true);
+        ui->Main_Axis_Rotate_button->setEnabled(true);
+        ui->lineEdit_Main_Axis_Rotate->setEnabled(true);
+    }
+    else
+    {
+        ui->Main_Axis_Rotate_chbox->setEnabled(false);
+        ui->Main_Axis_Rotate_button->setEnabled(false);
+        ui->lineEdit_Main_Axis_Rotate->setEnabled(false);
+    }
+    if(m_SeniorFunc.mainAxisLocate1 == 1)
+    {//主轴定位1使用
+        ui->Main_Axis_locat_chbox->setEnabled(true);
+        ui->Main_Axis_locat_button->setEnabled(true);
+        ui->lineEdit_Main_Axis_locat->setEnabled(true);
+    }
+    else
+    {
+        ui->Main_Axis_locat_chbox->setEnabled(false);
+        ui->Main_Axis_locat_button->setEnabled(false);
+        ui->lineEdit_Main_Axis_locat->setEnabled(false);
+    }
+    if(m_SeniorFunc.autoDoorCot1 == 1)
+    {//自动门1使用
+        ui->Auto_Door_chbox->setEnabled(true);
+        ui->Auto_Door_button->setEnabled(true);
+        ui->lineEdit_Auto_Door->setEnabled(true);
+    }
+    else
+    {
+        ui->Auto_Door_chbox->setEnabled(false);
+        ui->Auto_Door_button->setEnabled(false);
+        ui->lineEdit_Auto_Door->setEnabled(false);
+    }
+    if(m_SeniorFunc.biowAir1 == 1)
+    {//吹气1使用
+        ui->Blow_Air_chbox->setEnabled(true);
+        ui->lineEdit_Blow_Air->setEnabled(true);
+        ui->Blow_Air_button->setEnabled(true);
+    }
+    else
+    {
+        ui->Blow_Air_chbox->setEnabled(false);
+        ui->lineEdit_Blow_Air->setEnabled(false);
+        ui->Blow_Air_button->setEnabled(false);
+    }
+    if(m_OutportInterlock[4][1] != 0)
+    {//互锁设置-卡盘1夹紧使用
+        ui->Chuck_chbox->setEnabled(true);
+        ui->Chuck_button->setEnabled(true);
+        ui->lineEdit_Chuck->setEnabled(true);
+    }
+    else
+    {
+        ui->Chuck_chbox->setEnabled(false);
+        ui->Chuck_button->setEnabled(false);
+        ui->lineEdit_Chuck->setEnabled(false);
+    }
+    //信号等待界面-等待机床界面
+    ui->Wait_machine_signal_port->clear();
+    ui->Wait_machine_signal_box->setEnabled(true);
+    ui->Wait_machine_signal_port->setEnabled(true);
+    if(m_SeniorFunc.knifeOrigin1Check == 1)
+    {//刀座原点1检测 0关 1开
+        ui->Wait_machine_signal_port->addItem(m_Port_X[33].modifyName);
+    }
+    if(m_SeniorFunc.processFinish1 == 1)
+    {//加工完成1 0关 1开
+        ui->Wait_machine_signal_port->addItem(m_Port_X[31].modifyName);
+    }
+    if(m_SeniorFunc.locateFinish1 == 1)
+    {//定位完成1 0关 1开
+        ui->Wait_machine_signal_port->addItem(m_Port_X[32].modifyName);
+    }
+    if(m_SeniorFunc.knifeOrigin1Check == 0 && m_SeniorFunc.processFinish1 == 0 && m_SeniorFunc.locateFinish1 == 0)
+    {
+        ui->Wait_machine_signal_box->setEnabled(false);
+        ui->Wait_machine_signal_port->setEnabled(false);
+    }
+    //信号等待界面-等待卡爪界面
+    if(m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet == 1 || m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet == 1 || m_Port_Y[MACHINE_CHUCK_1_CLAMP].functionSet == 1)
+    {
+        if(m_OutportInterlock[0][1] != 0 || m_OutportInterlock[0][3] != 0    //原料1夹紧-正向/反向检测使用
+            ||m_OutportInterlock[1][1] != 0 || m_OutportInterlock[1][3] != 0 //成品1夹紧-正向/反向检测使用
+            ||m_OutportInterlock[4][1] != 0 || m_OutportInterlock[4][3] != 0)//卡盘2夹紧-正向/反向检测使用
+        {
+            ui->Wait_clamp_on_chbox->setEnabled(true);
+            ui->Wait_clamp_off_chbox->setEnabled(true);
+            ui->Wait_release_on_chbox->setEnabled(true);
+            ui->Wait_release_off_chbox->setEnabled(true);
+            ui->Wait_pos_cor_chbox->setEnabled(true);
+            ui->Wait_clamp_on_comboBox->setEnabled(true);
+            ui->Wait_clamp_off_comboBox->setEnabled(true);
+            ui->Wait_release_on_comboBox->setEnabled(true);
+            ui->Wait_release_off_comboBox->setEnabled(true);
+            ui->Wait_pos_cor_comboBox->setEnabled(true);
+            ui->Wait_clamp_on_comboBox->clear();//先清空所有选项
+            ui->Wait_clamp_off_comboBox->clear();
+            ui->Wait_release_on_comboBox->clear();
+            ui->Wait_release_off_comboBox->clear();
+            ui->Wait_pos_cor_comboBox->clear();
+            if(m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet == 1 && (m_OutportInterlock[0][1] != 0 || m_OutportInterlock[0][3] != 0))
+            {
+                ui->Wait_clamp_on_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName);
+                ui->Wait_clamp_off_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName);
+                ui->Wait_release_on_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName);
+                ui->Wait_release_off_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName);
+                ui->Wait_pos_cor_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName);
+            }
+            if(m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet == 1 && (m_OutportInterlock[1][1] != 0 || m_OutportInterlock[1][3] != 0))
+            {
+                ui->Wait_clamp_on_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName);
+                ui->Wait_clamp_off_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName);
+                ui->Wait_release_on_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName);
+                ui->Wait_release_off_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName);
+                ui->Wait_pos_cor_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName);
+            }
+            if(m_Port_Y[MACHINE_CHUCK_1_CLAMP].functionSet == 1 && (m_OutportInterlock[4][1] != 0 || m_OutportInterlock[4][3] != 0))
+            {
+                ui->Wait_clamp_on_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName);
+                ui->Wait_clamp_off_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName);
+                ui->Wait_release_on_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName);
+                ui->Wait_release_off_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName);
+                ui->Wait_pos_cor_comboBox->addItem(m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName);
+            }
+
+            if(ui->Wait_clamp_on_comboBox->count()>0)
+            {
+                ui->Wait_clamp_on_comboBox->setCurrentIndex(0);
+            }
+            if(ui->Wait_clamp_off_comboBox->count()>0)
+            {
+                ui->Wait_clamp_off_comboBox->setCurrentIndex(0);
+            }
+            if(ui->Wait_release_on_comboBox->count()>0)
+            {
+                ui->Wait_release_on_comboBox->setCurrentIndex(0);
+            }
+            if(ui->Wait_release_off_comboBox->count()>0)
+            {
+                ui->Wait_release_off_comboBox->setCurrentIndex(0);
+            }
+            if(ui->Wait_pos_cor_comboBox->count()>0)
+            {
+                ui->Wait_pos_cor_comboBox->setCurrentIndex(0);
+            }
+        }
+        else
+        {
+            ui->Wait_clamp_on_chbox->setEnabled(false);
+            ui->Wait_clamp_off_chbox->setEnabled(false);
+            ui->Wait_release_on_chbox->setEnabled(false);
+            ui->Wait_release_off_chbox->setEnabled(false);
+            ui->Wait_pos_cor_chbox->setEnabled(false);
+            ui->Wait_clamp_on_comboBox->setEnabled(false);
+            ui->Wait_clamp_off_comboBox->setEnabled(false);
+            ui->Wait_release_on_comboBox->setEnabled(false);
+            ui->Wait_release_off_comboBox->setEnabled(false);
+            ui->Wait_pos_cor_comboBox->setEnabled(false);
+        }
+    }
+    else
+    {
+        ui->Wait_clamp_on_chbox->setEnabled(false);
+        ui->Wait_clamp_off_chbox->setEnabled(false);
+        ui->Wait_release_on_chbox->setEnabled(false);
+        ui->Wait_release_off_chbox->setEnabled(false);
+        ui->Wait_pos_cor_chbox->setEnabled(false);
+        ui->Wait_clamp_on_comboBox->setEnabled(false);
+        ui->Wait_clamp_off_comboBox->setEnabled(false);
+        ui->Wait_release_on_comboBox->setEnabled(false);
+        ui->Wait_release_off_comboBox->setEnabled(false);
+        ui->Wait_pos_cor_comboBox->setEnabled(false);
     }
 }

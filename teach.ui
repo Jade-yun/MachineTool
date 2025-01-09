@@ -578,7 +578,7 @@
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <property name="iconSize">
     <size>
@@ -623,7 +623,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>12</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">
@@ -3944,6 +3944,9 @@
           <property name="text">
            <string>故障编号</string>
           </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="0" column="1">
@@ -4000,6 +4003,9 @@
           </property>
           <property name="text">
            <string>提示编号</string>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
@@ -9728,7 +9734,7 @@
         </font>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -11011,6 +11017,41 @@
               <string>定时器1</string>
              </property>
             </item>
+            <item>
+             <property name="text">
+              <string>定时器2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>定时器3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>定时器4</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>定时器5</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>定时器6</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>定时器7</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>定时器8</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -12052,7 +12093,7 @@ QGroupBox::title { subcontrol-origin: margin;
       </rect>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">
@@ -12656,7 +12697,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">
@@ -13372,13 +13413,19 @@ QGroupBox::title { subcontrol-origin: margin;
            <rect>
             <x>20</x>
             <y>30</y>
-            <width>301</width>
-            <height>134</height>
+            <width>311</width>
+            <height>135</height>
            </rect>
           </property>
-          <layout class="QGridLayout" name="gridLayout_10">
+          <layout class="QGridLayout" name="gridLayout_10" columnminimumwidth="0,0">
+           <property name="rightMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
            <item row="0" column="0">
-            <widget class="QCheckBox" name="cb_General_X1_5">
+            <widget class="QCheckBox" name="cb_Material_clamp_1">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -13403,7 +13450,7 @@ QGroupBox::title { subcontrol-origin: margin;
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QPushButton" name="btn_General_Refresh_2">
+            <widget class="StateButton" name="btn_Material_clamp_1">
              <property name="minimumSize">
               <size>
                <width>250</width>
@@ -13427,7 +13474,7 @@ QGroupBox::title { subcontrol-origin: margin;
             </widget>
            </item>
            <item row="1" column="0">
-            <widget class="QCheckBox" name="cb_General_X1_3">
+            <widget class="QCheckBox" name="cb_finish_product_1">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -13452,7 +13499,7 @@ QGroupBox::title { subcontrol-origin: margin;
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QPushButton" name="btn_General_Refresh_3">
+            <widget class="StateButton" name="btn_finish_product_1">
              <property name="minimumSize">
               <size>
                <width>250</width>
@@ -13476,7 +13523,7 @@ QGroupBox::title { subcontrol-origin: margin;
             </widget>
            </item>
            <item row="2" column="0">
-            <widget class="QCheckBox" name="cb_General_X1_4">
+            <widget class="QCheckBox" name="cb_Claw_roll_1">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -13501,7 +13548,7 @@ QGroupBox::title { subcontrol-origin: margin;
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QPushButton" name="btn_General_Refresh_4">
+            <widget class="StateButton" name="btn_Claw_roll_1">
              <property name="minimumSize">
               <size>
                <width>250</width>
@@ -13559,7 +13606,7 @@ QGroupBox::title { subcontrol-origin: margin;
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="iconSize">
           <size>
@@ -14036,11 +14083,11 @@ font: 20pt ;</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_13">
            <item row="4" column="1">
-            <widget class="QPushButton" name="Blow_Air_button">
+            <widget class="StateButton" name="Blow_Air_button">
              <property name="minimumSize">
               <size>
                <width>230</width>
-               <height>40</height>
+               <height>45</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -14088,11 +14135,11 @@ font: 20pt ;</string>
             </widget>
            </item>
            <item row="1" column="1">
-            <widget class="QPushButton" name="Main_Axis_Rotate_button">
+            <widget class="StateButton" name="Main_Axis_Rotate_button">
              <property name="minimumSize">
               <size>
                <width>230</width>
-               <height>40</height>
+               <height>45</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -14115,11 +14162,11 @@ font: 20pt ;</string>
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QPushButton" name="Auto_Door_button">
+            <widget class="StateButton" name="Auto_Door_button">
              <property name="minimumSize">
               <size>
                <width>230</width>
-               <height>40</height>
+               <height>45</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -14142,17 +14189,17 @@ font: 20pt ;</string>
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QPushButton" name="Start_Up_Mach_button">
+            <widget class="StateButton" name="Start_Up_Mach_button">
              <property name="minimumSize">
               <size>
                <width>230</width>
-               <height>40</height>
+               <height>45</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
                <width>230</width>
-               <height>40</height>
+               <height>45</height>
               </size>
              </property>
              <property name="font">
@@ -14160,20 +14207,32 @@ font: 20pt ;</string>
                <family>SimSun</family>
               </font>
              </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
              <property name="styleSheet">
               <string notr="true"/>
              </property>
              <property name="text">
               <string>启动加工1通</string>
              </property>
+             <property name="autoRepeatDelay">
+              <number>300</number>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QPushButton" name="Main_Axis_locat_button">
+            <widget class="StateButton" name="Main_Axis_locat_button">
              <property name="minimumSize">
               <size>
                <width>230</width>
-               <height>40</height>
+               <height>45</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -14221,11 +14280,11 @@ font: 20pt ;</string>
             </widget>
            </item>
            <item row="5" column="1">
-            <widget class="QPushButton" name="Chuck_button">
+            <widget class="StateButton" name="Chuck_button">
              <property name="minimumSize">
               <size>
                <width>230</width>
-               <height>40</height>
+               <height>45</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -14515,7 +14574,7 @@ font: 20pt ;</string>
           <string>报警灯开</string>
          </property>
          <property name="checkable">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
         <widget class="StateButton" name="btnAlarmSound_button">
@@ -14531,7 +14590,7 @@ font: 20pt ;</string>
           <string>报警声开</string>
          </property>
          <property name="checkable">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
         <widget class="QCheckBox" name="AlarmSound_chbox">
@@ -16061,7 +16120,7 @@ font: 20pt ;</string>
         </font>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>

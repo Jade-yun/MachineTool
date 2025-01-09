@@ -340,7 +340,19 @@ void IfProgramDialog::SaveLogicIfStruct(uint8_t CondIndex)
 {
     uint8_t tabwidgetindex = 0;
     tabwidgetindex = ui->tabWidget->currentIndex();
+    Clear_Temp_LogicIfStruct(CondIndex);//先清空if条件指令结构体参数，再赋值
     setLogicStructPar(tabwidgetindex,CondIndex);
+}
+//清空if条件指令结构体参数
+void IfProgramDialog::Clear_Temp_LogicIfStruct(uint8_t CondIndex)
+{
+    Temp_LogicIfStruct.sufferCmpValue[CondIndex]=0;
+    Temp_LogicIfStruct.sufferCmpType[CondIndex]=0;
+    Temp_LogicIfStruct.cmpType[CondIndex]=1;
+    Temp_LogicIfStruct.reqSelectFlag[CondIndex] = 0;
+    Temp_LogicIfStruct.inportNum[CondIndex]=0;
+    Temp_LogicIfStruct.inportType[CondIndex]=0;
+    Temp_LogicIfStruct.cmpMode[CondIndex]=0;
 }
 /*************************************************************************
 **  函数名：  setLogicStructPar()
@@ -505,7 +517,7 @@ void IfProgramDialog::setLogicStructPar(uint8_t page_index,uint8_t CondIndex)
             Temp_LogicIfStruct.cmpType[CondIndex] = 61+ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
             Temp_LogicIfStruct.cmpMode[CondIndex] = ui->coboxOperandPos->currentIndex();//比较方式
             Temp_LogicIfStruct.sufferCmpType[CondIndex] = 0;//被比较对象类型-常量
-            Temp_LogicIfStruct.sufferCmpValue[CondIndex] = ui->editVarPostOp->text().toDouble()*100;//被比较对象值
+            Temp_LogicIfStruct.sufferCmpValue[CondIndex] = ui->editPosPostOp->text().toDouble()*100;//被比较对象值
         }
         else if (ui->chboxVariablePos->isChecked())
         {

@@ -346,11 +346,11 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
                 NameStr = m_Port_Y[i].modifyName;
                 if(i!=MACHINE_AUTO_DOOR_1_OPEN && i!=MACHINE_AUTO_DOOR_1_CLOSE && i!=MACHINE_CHUCK_1_CLAMP && i!=MACHINE_CHUCK_1_LOOSENED)
                 {
-                    if(MachineOut->type == 0)
+                    if(MachineOut->type == 1)
                     {
                         NameStr = NameStr+"通";
                     }
-                    else if(MachineOut->type == 1)
+                    else if(MachineOut->type == 0)
                     {
                         NameStr = NameStr+"断";
                     }

@@ -46,6 +46,7 @@ SOURCES += \
     Driver/usbdisk.cpp \
     MyTitleBarDialog/basewindow.cpp \
     MyTitleBarDialog/mytitlebar.cpp \
+    alarmbar.cpp \
     alarmform.cpp \
     autoform.cpp \
     dialogs/alarminfodialog.cpp \
@@ -91,6 +92,7 @@ HEADERS += \
     Driver/usbdisk.h \
     MyTitleBarDialog/basewindow.h \
     MyTitleBarDialog/mytitlebar.h \
+    alarmbar.h \
     alarmform.h \
     autoform.h \
     dialogs/alarminfodialog.h \
@@ -126,6 +128,7 @@ HEADERS += \
     referencewidget.h
 
 FORMS += \
+    alarmbar.ui \
     alarmform.ui \
     autoform.ui \
     dialogs/alarminfodialog.ui \

@@ -17,6 +17,8 @@ public:
     ~IfProgramDialog();
 
 private slots:
+    void Clear_Temp_LogicIfStruct(uint8_t CondIndex);
+
     void on_chboxConstantVar_clicked();
 
     void on_chboxVariableVar_clicked();

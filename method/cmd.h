@@ -11,7 +11,26 @@ class cmd
 public:
     cmd();
 };
-
+enum HandControlKeyCode{
+    START   = 151,    //启动按键
+    STOP    = 150,   //停止按键
+    ORIGIN  = 153,   //原点
+    RETURN  = 152,   //复归
+    UP      = 155,
+    DOWN    = 154,
+    RIGHT_KEY1 = 158,//默认用作Y-
+    RIGHT_KEY2 = 170,//Y+
+    RIGHT_KEY3 = 162,//x-
+    RIGHT_KEY4 = 166,//x+
+    RIGHT_KEY5 = 157,//Z-
+    RIGHT_KEY6 = 161,//Z+
+    RIGHT_KEY7 = 165,//A-
+    RIGHT_KEY8 = 169,//A+
+    RIGHT_KEY9 = 156,//Y2-
+    RIGHT_KEY10 = 168,//Y2+
+    RIGHT_KEY11 = 160,//X2-
+    RIGHT_KEY12 = 164,//X2+
+};
 #define AXIS_MIN_POSITION     				-9000000    //轴运动的最小坐标
 #define AXIS_MAX_POSITION     				9000000    	//轴运动的最大坐标
 
@@ -203,7 +222,7 @@ typedef struct
 typedef struct
 {//4Byte
     uint8_t  outportNum;					//输出端口号，互锁设置的正向阀输出编号
-    uint8_t  type;								//当前设定,0-不检测,1-检测有信号,2-检测无信号（0-夹紧检测结束，1-夹紧检测开始，2-松开检测开始）
+    uint8_t  type;				//当前设定,0-不检测,1-检测有信号,2-检测无信号（0-夹紧检测结束，1-夹紧检测开始，2-松开检测开始）
     uint8_t  ret[2];
 }P_ClawCheckStruct;
 
@@ -326,7 +345,7 @@ typedef struct
     uint8_t  ret[2];
 }P_OtherAlarmLampStruct;
 
-/*其他-声命令结构体*/
+/*其他-报警声命令结构体*/
 typedef struct
 {//4Byte
     uint8_t  outportNum;					//输出端口号
@@ -527,6 +546,7 @@ extern P_LogicStackStruct Temp_LogicStackStruct;                                
 extern P_LogicCurProductNumStruct Temp_LogicCurProductNumStruct;                           //教导界面高级-逻辑&变量-变量-实际产量命令
 extern P_LogicTimeStruct Temp_LogicTimeStruct;                                                  //教导界面高级-逻辑&变量-变量-计数器命令
 extern bool OrderNeedSaveFlag;
+extern bool SufferOperNeedRefreash;//变量类型是否需要刷新标志
 /*********************************参数结构体定义********************************/
 /**********信号设置**********/
 extern uint8_t m_OutPortType[OUT_PORT_TYPE_NUM][2];								//字节1为输出端口号：0不使用 1-40输出口编号
@@ -889,6 +909,9 @@ typedef struct
     uint8_t 	breakPointFlag;			//断点开关，0不使用 1使用
     uint8_t 	breakPointProNum;		//断点所在程序，0主程序 1-8子程序
     uint16_t    breakPointList;			//断点所在程序行
+    uint8_t     startRunLineFlag;       //从此运行开关，0不使用 1使用
+    uint8_t     startRunLineProNum;     //从此行运行所在程序，0-主程序 1-8子程序
+    uint16_t    startRunLineNum;        //从此行运行程序行号
 }D_RunParStruct;
 
 /*参数同步结构体*/
@@ -1023,7 +1046,7 @@ extern P_ProInfoStruct m_ProRunInfo;									//运行信息--当前行号
 extern D_RunInfoStruct m_RunInfo;											//运行信息
 extern D_RunParStruct m_RunPar;												//运行参数
 extern uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM];				//当前每个堆叠组的堆叠计数
-extern uint8_t m_VariableType[VAR_TOTAL_NUM];                   //当前变量的小数类型
+extern uint8_t m_VariableType[VAR_TOTAL_NUM];                   //当前变量的小数类型 0-整数 1-一位小数 2-两位小数
 extern uint32_t m_VariableCurValue[VAR_TOTAL_NUM];                       //当前每个变量的变量值
 extern uint32_t m_TimeCurValue[VAR_TOTAL_NUM];					//当前每个定时器的计数值
 extern uint8_t  m_BackOriginStep[AXIS_TOTAL_NUM];					//回零流程步骤号
@@ -1196,6 +1219,6 @@ extern AutoInforRefresh m_AutoInforRefresh;
 extern D_ManualAxis m_manualAxis;          //手动操作参数
 extern D_ManualAdjust m_manualAdjust;      //手动调机
 
-
-
+extern std::vector<QString> keyFunDesription;//按键/信号显示内容
+extern std::vector<QString> sigSetDesription;//信号灯显示内容
 #endif // CMD_H

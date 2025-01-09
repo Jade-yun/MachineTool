@@ -71,7 +71,10 @@ public slots:
     void Stack_Edit_Handle(uint8_t AxisIndex);
 
     void EditOperatorVarPreOp_handle();
+
+    void WidgetNameRefresh();
 private slots:
+    void SufferOperUpdata_Handel();
 
     void Save_Speed_Educat();
 
@@ -155,11 +158,11 @@ private slots:
 
     void on_lineEdit_General_Position_Z2_editingFinished();
 
-    void on_btn_General_Refresh_2_clicked();
+    void on_btn_Material_clamp_1_clicked();
 
-    void on_btn_General_Refresh_4_clicked();
+    void on_btn_Claw_roll_1_clicked();
 
-    void on_btn_General_Refresh_3_clicked();
+    void on_btn_finish_product_1_clicked();
 
 
     void on_tabWidget_Reserve_currentChanged(int index);

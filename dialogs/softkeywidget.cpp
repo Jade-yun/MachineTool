@@ -91,19 +91,19 @@ SoftKeyWidget::SoftKeyWidget(QWidget *parent) :
 
     connect(ui->btnStart, &QPushButton::clicked, [=](){
 
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 1, 1, 10);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 1, m_RunPar.startRunLineNum, 10);
 
     });
     connect(ui->btnStop, &QPushButton::clicked, [=](){
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 0, 0, 0);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 0, m_RunPar.startRunLineNum, 0);
 
     });
     connect(ui->btnOrigin, &QPushButton::clicked, [=](){
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 3, 1, 50);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 3, m_RunPar.startRunLineNum, 50);
 
     });
     connect(ui->btnRevert, &QPushButton::clicked, [=](){
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 4, 1, 50);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 4, m_RunPar.startRunLineNum, 50);
     });
     connect(ui->btnLast, &QPushButton::clicked, [=](){
 

@@ -60,6 +60,8 @@ private slots:
     void Refresh_Progress_bar(uint8_t data);
 
     void handleAlarm(uint16_t alarmNum);
+
+    void updatelabProgramName();
 public slots:
 
     void slotShowSubWindow();
@@ -73,6 +75,7 @@ signals:
 
     void alarmOccurred(int alarmNum);
     void Auto_File_List_Refresh_signal(uint8_t ProNum);//刷新自动运行界面列表信号
+    void monitor_hand_contril(uint16_t code, int32_t value);//监视界面手控器界面刷新
 private:
     Ui::MainWindow *ui;
 
