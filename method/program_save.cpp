@@ -2,6 +2,7 @@
 
 QString m_ProgramPath="/Program";
 
+const QString SUFFIX_PROGRAM = ".ZHpro";
 
 QString signalSpace = " ";
 QString doubleSpace = "  ";
@@ -151,7 +152,7 @@ uint8_t newBuildProgram(const QString& fileName)
     P_NamePathTemp.fileName=fileName;
     m_FileNameNum++;
     //开始将程序写出（基本程序）
-    QString filePath=m_ProgramPath+"/"+fileName+".txt";
+    QString filePath=m_ProgramPath+"/"+fileName+SUFFIX_PROGRAM;
     P_NamePathTemp.filePath=filePath;
     P_NamePathTemp.index=m_FileNameNum;
     P_NamePathTemp.filePermission=0;//文件操作权限默认为：0-允许
@@ -2300,7 +2301,11 @@ bool Load_Program_Handle(QString fileName)
         return false;
     }
     //如果选择的文件不是当前程序，进行载入
-    if(m_CurrentProgramNameAndPath.fileName != m_ProgramNameAndPath[curProgramIndex].fileName)
+    if(m_CurrentProgramNameAndPath.fileName == m_ProgramNameAndPath[curProgramIndex].fileName)
+    {
+        return false;
+    }
+    else
     {//如果选择的文件不是当前程序，进行载入
         for(int i=0;i<PRO_NUM;i++)
         {

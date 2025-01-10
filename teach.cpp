@@ -2523,24 +2523,24 @@ void Teach::on_btnSave_clicked()
 //变量类型更新函数
 void Teach::SufferOperUpdata_Handel()
 {
-    for(int i=0;i<PRO_NUM;i++)
-    {
-        if(i!=m_OperateProNum)
-        {
-            for(int j=0;j<m_ProInfo.proNum[i];j++)
-            {
-                if(m_ProOrder[i][j].cmd == )
-            }
-        }
-        else
-        {
-            for(int j=0;j<m_ProInfo.proNum[m_OperateProNum];j++)
-            {
+//    for(int i=0;i<PRO_NUM;i++)
+//    {
+//        if(i!=m_OperateProNum)
+//        {
+//            for(int j=0;j<m_ProInfo.proNum[i];j++)
+//            {
+//                if(m_ProOrder[i][j].cmd == )
+//            }
+//        }
+//        else
+//        {
+//            for(int j=0;j<m_ProInfo.proNum[m_OperateProNum];j++)
+//            {
 
-            }
-        }
+//            }
+//        }
 
-    }
+//    }
 }
 //赋值速度教导界面的轴速度
 void Teach::Save_Speed_Educat()

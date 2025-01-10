@@ -61,7 +61,6 @@ private slots:
 
     void handleAlarm(uint16_t alarmNum);
 
-    void updatelabProgramName();
 public slots:
 
     void slotShowSubWindow();
@@ -113,8 +112,6 @@ public:
 public:
     int showErrorTip(const QString& message, TipMode mode = TipMode::NORMAL);
 //    void showErrorTip(const QString &message, bool onlyOK);
-
-    void setSysProgramName(const QString& name);
 
     void keyAxisCommandSend(uint16_t code, int32_t value);              //按键指令分类发送
 

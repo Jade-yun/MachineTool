@@ -2,6 +2,10 @@
 #include <QCoreApplication>
 #include <QTextCodec>
 
+#include <fcntl.h>
+#include <unistd.h>
+
+extern QString m_ProgramPath;
 /*****************命令相关参数保存*****************/
 QString m_configCmdPath = "/root/Cmd_Description.txt";
 QString m_configPortSettingPath = "/root/Port_Setting.txt";
@@ -928,6 +932,7 @@ void setPortDefineNameOrPortNum()
 //读取所有文件程序信息
 void getProgramNameAndPath()
 {
+#if 0
     D_ProgramNameAndPathStruct P_NamePathTemp;
     QStringList str_name=getValue("File","name","").split(";");
     QStringList str_path=getValue("File","path","").split(";");
@@ -948,32 +953,61 @@ void getProgramNameAndPath()
             m_ProgramNameAndPath.append(P_NamePathTemp);
         }
     }
+#endif
+
+    m_ProgramNameAndPath.clear();
+
+    QSettings settings("/Settings/ProgramNameAndPathInfo.ini", QSettings::IniFormat);
+    QStringList groups = settings.childGroups();
+        for (const QString& group : qAsConst(groups))
+        {
+            settings.beginGroup(group);
+
+            // 检查是否所有必要的键都存在
+            if (!settings.contains("name") || !settings.contains("path") ||
+                !settings.contains("index") || !settings.contains("permission") ||
+                !settings.contains("time")) {
+                settings.endGroup();
+                continue;
+            }
+
+            D_ProgramNameAndPathStruct prog;
+            prog.fileName = settings.value("name").toString();
+            prog.filePath = settings.value("path").toString();
+            prog.index = settings.value("index").toUInt();
+            prog.filePermission = settings.value("permission").toUInt();
+            prog.changeTime = settings.value("time").toString();
+            settings.endGroup();
+
+            m_ProgramNameAndPath.append(prog);
+        }
 }
 //保存所有文件程序信息
-void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value)
+void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
 {
+#if 0
     QString str_name;
     QString str_path;
     QString str_index;
     QString str_Permission;
     QString str_time;
-    for(int i=0;i<value.count();i++)
+    for(int i=0;i<programsInfo.count();i++)
     {
         if(i==0)
         {
-            str_name+=value[i].fileName;
-            str_path+=value[i].filePath;
-            str_index+=QString::number(value[i].index);
-            str_Permission+=QString::number(value[i].filePermission);
-            str_time+=value[i].changeTime;
+            str_name+=programsInfo[i].fileName;
+            str_path+=programsInfo[i].filePath;
+            str_index+=QString::number(programsInfo[i].index);
+            str_Permission+=QString::number(programsInfo[i].filePermission);
+            str_time+=programsInfo[i].changeTime;
         }
         else
         {
-            str_name=str_name+";"+value[i].fileName;
-            str_path=str_path+";"+value[i].filePath;
-            str_index=str_index+";"+QString::number(value[i].index);
-            str_Permission=str_Permission+";"+QString::number(value[i].filePermission);
-            str_time=str_time+";"+value[i].changeTime;
+            str_name=str_name+";"+programsInfo[i].fileName;
+            str_path=str_path+";"+programsInfo[i].filePath;
+            str_index=str_index+";"+QString::number(programsInfo[i].index);
+            str_Permission=str_Permission+";"+QString::number(programsInfo[i].filePermission);
+            str_time=str_time+";"+programsInfo[i].changeTime;
         }
     }
     setValue("File","name",str_name);
@@ -981,6 +1015,23 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value)
     setValue("File","index",str_index);
     setValue("File","Permission",str_Permission);
     setValue("File","time",str_time);
+#endif
+
+    QSettings settings("/Settings/ProgramNameAndPathInfo.ini", QSettings::IniFormat);
+    settings.clear();
+
+    int cnt = 0;
+    for (const auto& prog : programsInfo)
+    {
+        settings.beginGroup(QString::number(cnt++));
+        settings.setValue("name", prog.fileName);
+        settings.setValue("path", prog.filePath);
+        settings.setValue("index", prog.index);
+        settings.setValue("permission", prog.filePermission);
+        settings.setValue("time", prog.changeTime);
+        settings.endGroup();
+    }
+    settings.sync();
 }
 //保存开机加载程序信息
 void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
@@ -1317,4 +1368,72 @@ void writeNameDefine()
     }
 
     settings.endGroup();
+}
+
+void writeReferenceInfo()
+{
+    const QString filePath = m_CurrentProgramNameAndPath.filePath.split(".").first() + ".ref";
+    QSettings settings(filePath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
+    for(int i = 0; i < REFERENCE_TOTAL_NUM; ++i)
+    {
+        settings.beginGroup(QString("RefPoint%1").arg(i));
+
+        settings.setValue("refFlag", m_RefPoint[i].refFlag);
+
+        for(int axis = 0; axis < AXIS_TOTAL_NUM; ++axis)
+        {
+            settings.setValue(QString("axisPos%1").arg(axis), m_RefPoint[i].pos[axis]);
+        }
+
+        settings.setValue("refName", m_RefPoint[i].refName);
+        settings.setValue("xPos", m_RefPoint[i].xPos);
+        settings.setValue("yPos", m_RefPoint[i].yPos);
+
+        settings.endGroup();
+    }
+
+    // Refresh user buffer
+    settings.sync();
+}
+
+void readReferenceInfo()
+{
+    const QString filePath = m_CurrentProgramNameAndPath.filePath.split(".").first() + ".ref";
+    QSettings settings(filePath, QSettings::IniFormat);
+    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+
+    for(int i = 0; i < REFERENCE_TOTAL_NUM; ++i)
+    {
+        settings.beginGroup(QString("RefPoint%1").arg(i));
+
+        m_RefPoint[i].refFlag = settings.value("refFlag").toUInt();
+
+        for(int axis = 0; axis < AXIS_TOTAL_NUM; ++axis)
+        {
+            m_RefPoint[i].pos[axis] = settings.value(QString("axisPos%1").arg(axis)).toInt();
+        }
+
+        m_RefPoint[i].refName = settings.value("refName").toString();
+        m_RefPoint[i].xPos = settings.value("xPos").toInt();
+        m_RefPoint[i].yPos = settings.value("yPos").toInt();
+
+        settings.endGroup();
+    }
+}
+
+void setProgramPermission(const QString &programName, int permission)
+{
+    QSettings settings(m_ProgramPath + "/" + programName + ".progperm", QSettings::IniFormat);
+
+    settings.setValue("permission", permission);
+}
+
+int getProgramPermission(const QString &programName)
+{
+    int permission;
+    QSettings settings(m_ProgramPath + "/" + programName + ".progperm", QSettings::IniFormat);
+    permission = settings.value("permission", 0).toUInt();
+    return permission;
 }

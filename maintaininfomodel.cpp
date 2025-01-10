@@ -58,6 +58,26 @@ void MaintainInfoModel::addMaintainInfo(const QString &content, int cycle) {
     endInsertRows();
 }
 
+void MaintainInfoModel::reviseMaintainCycle(int index, int cycle)
+{
+    if (index < m_data.size() && index > 0)
+    {
+        auto &info = m_data[index];
+        info.cycle = cycle;
+        info.nextMaintenance = info.creationDate.addDays(info.cycle);
+        info.remainingDays = QDate::currentDate().daysTo(info.nextMaintenance);
+    }
+}
+
+void MaintainInfoModel::reviseMaintainContent(int index, const QString &content)
+{
+    if (index < m_data.size() && index > 0)
+    {
+        auto &info = m_data[index];
+        info.content = content;
+    }
+}
+
 // 移除保养信息
 void MaintainInfoModel::removeMaintainInfo(int row) {
     if (row < 0 || row >= m_data.size())
@@ -80,6 +100,26 @@ void MaintainInfoModel::resetCountdown(int row) {
     emit dataChanged(index(row, 2), index(row, 3));
 }
 
+bool MaintainInfoModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    Q_UNUSED(role)
+
+    if (!checkIndex(index))
+        return false;
+    auto &info = m_data[index.row()];
+    if (index.column() == 0)
+    {
+        info.content = value.toString();
+    }
+    else if (index.column() == 1)
+    {
+        info.cycle = value.toInt();
+        info.nextMaintenance = info.creationDate.addDays(info.cycle);
+        info.remainingDays = QDate::currentDate().daysTo(info.nextMaintenance);
+    }
+    return true;
+}
+
 void MaintainInfoModel::setHorizontalHeader(int section, const QVariant &value)
 {
     if (section >= 0 && section < m_headerData.size()) {
@@ -87,16 +127,6 @@ void MaintainInfoModel::setHorizontalHeader(int section, const QVariant &value)
         emit headerDataChanged(Qt::Horizontal, section, section);
     }
 }
-
-//bool MaintainInfoModel::setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role)
-//{
-//    if (role == Qt::DisplayRole && orientation == Qt::Horizontal && section >= 0 && section < m_headerData.size()) {
-//        m_headerData[section] = value.toString();
-//        emit headerDataChanged(orientation, section, section);
-//        return true;
-//    }
-//    return false;
-//}
 
 // 保存数据
 void MaintainInfoModel::saveToConfigFile(const QString& fileName){

@@ -1076,7 +1076,7 @@ border: 1px solid black;
     <property name="title">
      <string/>
     </property>
-    <widget class="ClickableLabel" name="labProgramName">
+    <widget class="ScrollLabel" name="labProgramName">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1397,9 +1397,9 @@ QPushButton::pressed {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ClickableLabel</class>
+   <class>ScrollLabel</class>
    <extends>QLabel</extends>
-   <header>mainwindow.h</header>
+   <header>scrolllabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

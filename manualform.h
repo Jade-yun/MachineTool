@@ -96,6 +96,8 @@ private:
 public:
     const QList<ReferPointPara>& getRerferPoints() const;
     void handleLoginModeChanged(LoginMode mode);
+    void reloadReferPoint();
+
 public slots:
     void updateReserveButtonState(); // 更新端口对应按钮的可见性和文本
 

@@ -13,6 +13,7 @@ extern QString signalSpace;                            //单个空格
 extern QString doubleSpace;                            //两个空格
 extern QString lineFeed;                               //换行符
 
+extern const QString SUFFIX_PROGRAM;                 // 程序后缀名
 extern QString m_ProgramPath;                   //存放程序文件的文件夹
 
 extern QStringList fileSectionList;                        //程序保存节点

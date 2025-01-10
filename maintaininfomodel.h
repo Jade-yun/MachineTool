@@ -22,19 +22,19 @@ public:
     };
 
     void addMaintainInfo(const QString &content, int cycle);
+    void reviseMaintainCycle(int index, int cycle);
+    void reviseMaintainContent(int index, const QString& content);
     void removeMaintainInfo(int row);
     void resetCountdown(int row);
-//    bool setHeaderData(int section, Qt::Orientation orientation, const QVariant &value, int role) override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     void setHorizontalHeader(int section, const QVariant &value);
+    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     int columnCount(const QModelIndex &parent = QModelIndex()) const override;
 
     void saveToConfigFile(const QString& fileName);
     void loadFromConfigFile(const QString& fileName);
-
-protected:
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-    QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
 private:
 

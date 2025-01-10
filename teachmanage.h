@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTableWidget>
 #include <QLabel>
+#include <QFileDialog>
 
 #include "customkeyboard.h"
 #include "cmd.h"
@@ -23,7 +24,12 @@ public:
 private:
     Ui::TeachManage *ui;
 
-public slots:
+    QFileDialog* fileDialog;
+
+signals:
+    void programLoaded();
+
+private slots:
     void on_btn_New_clicked();
     void on_btn_Copy_clicked();
     void on_btn_Load_clicked();
@@ -45,14 +51,15 @@ private slots:
 
 private:
     void init();
-
+    void initWidgets();
     void deleteOneRowFromTable(QTableWidget *tableTeachManage);
-    void addOneRowToTable(QTableWidget *tableTeachManage);
+    void addNewRowToTable(const QString& programName, const QString& fileTime, int permission);
+    void changeProgramPermission(const QString* programName, int permission);
 
     void setFilePermision(QWidget *lab, const QVariant& permission);
     int getFilePermission(QWidget *lab) const;
 
-    void updateFilePermission(int iconIndex);
+    void updateFilePermission(int index);
 
 private:
     // 当前选中文件权限 0 允许    1 时间/位置允许   2 时间允许  3 禁止

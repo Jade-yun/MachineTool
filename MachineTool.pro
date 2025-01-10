@@ -92,6 +92,7 @@ HEADERS += \
     Driver/usbdisk.h \
     MyTitleBarDialog/basewindow.h \
     MyTitleBarDialog/mytitlebar.h \
+    RefreshKernelBuffer.h \
     alarmbar.h \
     alarmform.h \
     autoform.h \

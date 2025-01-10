@@ -600,7 +600,7 @@
       <number>16</number>
      </property>
      <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
+      <enum>QAbstractItemView::SelectItems</enum>
      </property>
      <property name="showGrid">
       <bool>true</bool>

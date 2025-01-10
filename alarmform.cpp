@@ -7,6 +7,8 @@
 #include "cmd.h"
 #include "alarminfodialog.h"
 
+#include "customkeyboard.h"
+
 const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
 const QString alarmInfoDataPath = "/Settings/AlarmInfoData.ini";
 const QString maintainInfoDataPath = "/Settings/MaintainInfoData.ini";
@@ -166,8 +168,8 @@ void AlarmForm::setupMaintainInfo()
 
     ui->tableMaintainInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->tableMaintainInfo->verticalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-    ui->tableMaintainInfo->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableMaintainInfo->setSelectionMode(QAbstractItemView::SingleSelection);
+//    ui->tableMaintainInfo->setSelectionBehavior(QAbstractItemView::SelectRows);
+//    ui->tableMaintainInfo->setSelectionMode(QAbstractItemView::SingleSelection);
 
     ui->tableMaintainInfo->setColumnWidth(1, 100);
     ui->tableMaintainInfo->setColumnWidth(2, 100);
@@ -187,6 +189,42 @@ void AlarmForm::setupMaintainInfo()
     });
 
     connect(ui->btnEditMaintainInfo, &QPushButton::clicked, this, [this]() {
+        auto index = ui->tableMaintainInfo->currentIndex();
+        int curRow = ui->tableMaintainInfo->currentIndex().row();
+        int curCol = ui->tableMaintainInfo->currentIndex().column();
+        if (curCol == 0)
+        {
+            FullKeyboard* keyboard = FullKeyboard::instance();
+            keyboard->setText("");
+            keyboard->setCurrentEditObj(nullptr);
+            keyboard->exec();
+
+            QString content = keyboard->getInputText();
+
+            if (content.isNull()) return;
+
+//            m_maintainModel->reviseMaintainContent(curRow, content);
+            m_maintainModel->setData(index, content);
+
+            m_maintainModel->saveToConfigFile(maintainInfoDataPath);
+        }
+        else if (curCol == 1)
+        {
+            NumKeyboard temp;
+            auto keyboard = &temp;
+            QLabel lab;
+            keyboard->setCurrentEditObj(&lab);
+            keyboard->exec();
+
+            int maintainCycle = lab.text().toInt();
+            if (maintainCycle == 0) return;
+
+//            m_maintainModel->reviseMaintainCycle(curRow, maintainCycle);
+            m_maintainModel->setData(index, maintainCycle);
+
+            m_maintainModel->saveToConfigFile(maintainInfoDataPath);
+        }
+
 
     });
 

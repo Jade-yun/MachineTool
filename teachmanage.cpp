@@ -9,8 +9,9 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QComboBox>
-#include <QFileDialog>
 #include <QDir>
+
+#include "RefreshKernelBuffer.h"
 
 // 文件权限图标路径
 const QStringList authIconPath = {
@@ -20,6 +21,8 @@ const QStringList authIconPath = {
     ":/images/teachManageImages/lock-red.png"
 };
 
+extern const QString SUFFIX_PROGRAM;
+
 TeachManage::TeachManage(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TeachManage),
@@ -27,37 +30,7 @@ TeachManage::TeachManage(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->lineEdit_OriginalFileName->setAlignment(Qt::AlignCenter);
-    ui->lineEdit_NowFileName->setAlignment(Qt::AlignCenter);
-    QPalette palette = ui->lineEdit_OriginalFileName->palette();
-    palette.setColor(QPalette::Disabled, QPalette::Text, QColor(Qt::black));
-    ui->lineEdit_OriginalFileName->setPalette(palette);
-//    ui->lineEdit_OriginalFileName->setStyleSheet("QLineEdit:disabled { color: black; }");
-
-
-
-    ui->btn_USB->setCheckable(true);
-    ui->stackedWidget_TeachManage->setCurrentIndex(0);
-
-    ui->tableTeachManage->setRowCount(0);
-    ui->tableTeachManage->setColumnCount(4);
-    ui->tableTeachManage->setFixedWidth(860);
-    ui->tableTeachManage->setMaximumWidth(860);
-    ui->tableTeachManage->setMaximumHeight(450);
-    ui->tableTeachManage->horizontalHeader()->setVisible(true);
-    ui->tableTeachManage->verticalHeader()->setVisible(true);
-
-    ui->tableTeachManage->setHorizontalHeaderLabels({"", "", tr("文件名"), tr("最后修改时间")});
-    ui->tableTeachManage->setColumnWidth(0, 40);
-    ui->tableTeachManage->setColumnWidth(1, 40);
-    ui->tableTeachManage->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
-    ui->tableTeachManage->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
-
-    ui->tableTeachManage->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableTeachManage->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableTeachManage->setEditTriggers(QAbstractItemView::NoEditTriggers);
-
-    ui->tableTeachManage->setColumnHidden(0, true);
+    initWidgets();
 
     init();
 
@@ -92,7 +65,10 @@ void TeachManage::on_btn_New_clicked()
 //    res = 0;
     if (res == 0)
     {
-        addOneRowToTable(ui->tableTeachManage);
+        QString programName = ui->lineEdit_NowFileName->text();
+        QString changeTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+//        addOneRowToTable(ui->tableTeachManage);
+        addNewRowToTable(programName, changeTime, 0);
         return;
     }
     // 程序文本不能为空
@@ -124,24 +100,29 @@ void TeachManage::on_btn_New_clicked()
 void TeachManage::on_btn_Copy_clicked()
 {
     int curRow = ui->tableTeachManage->currentRow();
+    if (curRow == -1)
+    {
+        ErrorTipDialog tip(tr("请选择一个要复制的程序！"), TipMode::ONLY_OK);
+        tip.exec();
+        return;
+    }
     QString curTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
 
-    QString fileName = ui->tableTeachManage->item(curRow, 2)->text() + ".txt";
-    QString filePath = m_ProgramPath + "/" + fileName;
-    QFile sourceFile(filePath);
+    QString sourceProgName = ui->tableTeachManage->item(curRow, 2)->text();
+    QString filePath = m_ProgramPath + "/" + sourceProgName + SUFFIX_PROGRAM;
+//    QFile sourceFile(filePath);
 
-    QString programName = ui->lineEdit_NowFileName->text();
-    if (programName.isEmpty())
+    QString targeProgName = ui->lineEdit_NowFileName->text().trimmed();
+    if (targeProgName.isEmpty())
     {
         ErrorTipDialog tip(tr("程序名不能为空！"), TipMode::ONLY_OK);
         tip.exec();
         return;
     }
 
-    QString targeFileName = ui->lineEdit_NowFileName->text() + ".txt";
-    QString targeFilePath = QDir(m_ProgramPath).filePath(targeFileName);
+    QString targetFilePath = QDir(m_ProgramPath).filePath(targeProgName + SUFFIX_PROGRAM);
 
-    if (QFile::exists(targeFilePath))
+    if (QFile::exists(targetFilePath))
     {
         ErrorTipDialog dlgTip(tr("文件已存在！"), TipMode::ONLY_OK);
         dlgTip.exec();
@@ -149,66 +130,59 @@ void TeachManage::on_btn_Copy_clicked()
     }
 
     bool copied = false;
-    if (sourceFile.open(QIODevice::ReadOnly))
-    {
-        QFile targetFile(targeFilePath);
-        if (targetFile.open(QIODevice::WriteOnly))
-        {
-            targetFile.write(sourceFile.readAll());
-            targetFile.close();
 
-            copied = true;
-        }
-        sourceFile.close();
+    QDir progDir(m_ProgramPath);
+    QString fileNamePattern = QString("%1.*").arg(sourceProgName);
+    QFileInfoList fileInfoList = progDir.entryInfoList(QStringList() << fileNamePattern,
+                                               QDir::Files | QDir::NoDotAndDotDot);
+
+    for (const auto& fileInfo : fileInfoList)
+    {
+        QString sourceFilePath = fileInfo.absoluteFilePath();
+
+        QString targetFilePathWithSuffix = targetFilePath.left(targetFilePath.lastIndexOf('.')) + "." + fileInfo.suffix();
+        copied = QFile::copy(sourceFilePath, targetFilePathWithSuffix);
     }
 
     if (copied)
     {
-        {
-            D_ProgramNameAndPathStruct P_NamePathTemp;
-            P_NamePathTemp.fileName = ui->lineEdit_NowFileName->text();
-            m_FileNameNum++;
-            P_NamePathTemp.filePath = targeFilePath;
-            P_NamePathTemp.index = m_FileNameNum;
-            P_NamePathTemp.changeTime= curTime;
-            m_ProgramNameAndPath.append(P_NamePathTemp);
-            SetProgramIndex();//设置程序文件编号
-        }
+
+        D_ProgramNameAndPathStruct P_NamePathTemp;
+        P_NamePathTemp.fileName = ui->lineEdit_NowFileName->text();
+        m_FileNameNum++;
+        P_NamePathTemp.filePath = targetFilePath;
+        P_NamePathTemp.index = m_FileNameNum;
+        P_NamePathTemp.filePermission = ::getProgramPermission(sourceProgName);
+        P_NamePathTemp.changeTime= curTime;
+        m_ProgramNameAndPath.append(P_NamePathTemp);
+        SetProgramIndex();//设置程序文件编号
+
+        ::setProgramNameAndPath(m_ProgramNameAndPath);
+
 
         // fresh table dispaly
-
-        auto tableTeachManage = ui->tableTeachManage;
-        int newRow = tableTeachManage->rowCount();
-        tableTeachManage->insertRow(newRow);
-        QCheckBox* chbox = new QCheckBox(tableTeachManage);
-        tableTeachManage->setCellWidget(newRow, 0, chbox);
-
-        QLabel* labIcon = new QLabel(tableTeachManage);
-        setFilePermision(labIcon, 0);
-        QPixmap pix(authIconPath[0]);
-        pix.scaled(tableTeachManage->columnWidth(1), tableTeachManage->rowHeight(newRow));
-        labIcon->setPixmap(pix);
-        tableTeachManage->setCellWidget(newRow, 1, labIcon);
-
-        QString fileText = ui->lineEdit_NowFileName->text();
-        tableTeachManage->setItem(newRow, 2, new QTableWidgetItem(fileText));
-        tableTeachManage->setItem(newRow, 3, new QTableWidgetItem(curTime));
-
-        tableTeachManage->setColumnHidden(0, true);
-        tableTeachManage->resizeRowsToContents();
+        addNewRowToTable(targeProgName, curTime, P_NamePathTemp.filePermission);
+    }
+    else
+    {
+        ErrorTipDialog tip(tr("文件复制失败！"), TipMode::ONLY_OK);
+        tip.exec();
     }
 }
 
 void TeachManage::on_btn_Load_clicked()
 {
     int curRow = ui->tableTeachManage->currentIndex().row();
-    if(curRow<0)
+    if(curRow < 0)
     {
-        curRow = 0;
+        return;
     }
     QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
-    Load_Program_Handle(fileName);
-    m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
+    if (Load_Program_Handle(fileName))
+    {
+        emit programLoaded();
+        m_RunPar.startRunLineNum = 1;//加载程序时起始行号设置为1
+    }
 }
 
 void TeachManage::on_btn_Preview_clicked()
@@ -274,14 +248,30 @@ void TeachManage::on_btn_Del_clicked()
             m_FileNameNum--;
 
             // delete file
-            const QString filePath = m_ProgramPath + "/" + programName + ".txt";
+#if 0
+            const QString filePath = m_ProgramPath + "/" + programName + SUFFIX_PROGRAM;
             QFile file(filePath);
 
             if (file.exists())
             {
                 file.remove();
             }
+#else
+            // delete all the file corresponding the programName.
+            QString fileNamePattern = QString("%1.*").arg(programName);
+            QDir dir(m_ProgramPath);
+            QFileInfoList fileList = dir.entryInfoList(QStringList() << fileNamePattern,
+                                                       QDir::Files | QDir::NoDotAndDotDot);
 
+            for (const QFileInfo& fileInfo : fileList)
+            {
+                QFile file(fileInfo.absoluteFilePath());
+                if (file.exists())
+                {
+                    file.remove();
+                }
+            }
+#endif
             // fresh table dispaly
             deleteOneRowFromTable(ui->tableTeachManage);
             SetProgramIndex();//设置程序文件编号
@@ -313,11 +303,9 @@ void TeachManage::on_btn_SelectNotAll_clicked()
 
 void TeachManage::on_btn_Export_clicked()
 {
-
     // check whether insert the USB FLASH Drive fistly.
     if (UsbDisk::instance()->isInserted() == false)
     {
-
          // remind
         ErrorTipDialog tip(tr("请插入U盘！"));
         tip.exec();
@@ -338,150 +326,128 @@ void TeachManage::on_btn_Export_clicked()
 
 //    qDebug() << selectedFiles;
 
-
     for (const auto &programName : selectedFiles)
     {
-        QString file = m_ProgramPath+ "/" + programName+ ".txt";
-        UsbDisk::instance()->copyToUsb(file, "program/");
+//        QString file = m_ProgramPath+ "/" + programName+ SUFFIX_PROGRAM;
+//        UsbDisk::instance()->copyToUsb(file, "HMI/" + programName);
+
+        QDir dir(m_ProgramPath);
+        QString fileNamePattern = QString("%1.*").arg(programName);
+        QFileInfoList fileList = dir.entryInfoList(QStringList() << fileNamePattern,
+                                                   QDir::Files | QDir::NoDotAndDotDot);
+        for (const QFileInfo& fileInfo : fileList)
+        {
+            UsbDisk::instance()->copyToUsb(fileInfo.absoluteFilePath(), "HMI/");
+        }
+        ::sync();
     }
 
-
+    ErrorTipDialog tip(tr("文件导出成功！"), TipMode::ONLY_OK, nullptr);
+    tip.exec();
 }
 
 void TeachManage::on_btn_Import_clicked()
 {
-    if (UsbDisk::instance()->isInserted() == false)
-    {
-//        qDebug() << tr("请插入U盘！");
-        ErrorTipDialog tip(tr("请插入U盘！"));
-        tip.show();
-        return;
-    }
 
-//    QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
-//                                                    "/run/media/sda1",
-//                                                    tr("Text (*.txt)"));//文件类型
-    QFileDialog *fileDialog = new QFileDialog(this);
-    fileDialog->setFixedSize(800, 600);
-    fileDialog->setViewMode(QFileDialog::Detail);
-    fileDialog->setFileMode(QFileDialog::ExistingFile);
-    QString mountPoint = UsbDisk::instance()->getUsbMountPoint();
-    fileDialog->setDirectory(mountPoint);
-    fileDialog->setNameFilter(tr("Text(*.txt)"));
+    if (!UsbDisk::instance()->isInserted())
+        {
+            ErrorTipDialog tip(tr("请插入U盘！"));
+            tip.exec();
+            return;
+        }
+    fileDialog->setDirectory(UsbDisk::instance()->getUsbMountPoint());
 
-    fileDialog->setAcceptDrops(false);
-    fileDialog->setOptions(QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
-
-    for (auto& cobox : fileDialog->findChildren<QComboBox*>())
-    {
-        cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-    }
-
-    bool canceled = false;
+    // 打开文件对话框并获取选择的文件路径
     if (fileDialog->exec() == QDialog::Rejected)
     {
-        canceled = true;
+        return; // 用户取消了文件选择
     }
 
-    QStringList selectedFiles;
-    if (!canceled)
+    const QStringList selectedFiles = fileDialog->selectedFiles();
+    if (selectedFiles.isEmpty())
     {
-       selectedFiles = fileDialog->selectedFiles();
-    }
-
-    if (selectedFiles.isEmpty() || canceled) {
         ErrorTipDialog tip(tr("没有选择要导入的文件！"), TipMode::ONLY_OK);
         tip.exec();
         return;
     }
-    else
+
+    QString filePath = selectedFiles.first(); // 获取第一个文件路径
+    QFileInfo progFileInfo(filePath);
+    QString programName = progFileInfo.baseName();
+    QString progModifiedTime = progFileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+
+    // 检查是否存在相同名称的程序
+    auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
+                           [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });
+
+    if (it != m_ProgramNameAndPath.end())
     {
-        QString file = selectedFiles.first(); // 获取第一个文件路径
-        qDebug() << "Selected file:" << file;
+        ErrorTipDialog tip(tr("系统中存在相同文件，请确认是否覆盖？"));
+        if (tip.exec() != QDialog::Accepted)
+            return;
+
+        QDir dir(progFileInfo.dir());
+        QString fileNamePattern = QString("%1.*").arg(programName);
+        QFileInfoList fileList = dir.entryInfoList(QStringList() << fileNamePattern,
+                                                   QDir::Files | QDir::NoDotAndDotDot);
+        for (const auto& matchingFile : fileList)
         {
-            QFileInfo fileInfo(file);
+            UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+        }
+        ::sync();
 
-            QString programName = fileInfo.fileName().split(".").first();
-            QString fileTime = fileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+        // 更新现有程序信息
+        it->filePath = m_ProgramPath + "/" + programName + SUFFIX_PROGRAM;
+        it->filePermission = ::getProgramPermission(programName);
+        it->changeTime = progModifiedTime;
 
-            auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
-                                   [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });
-
-            if (it != m_ProgramNameAndPath.end())
+        // 更新表格中的显示
+        for (int i = 0; i < ui->tableTeachManage->rowCount(); ++i)
+        {
+            if (ui->tableTeachManage->item(i, 2)->text() == programName)
             {
-                ErrorTipDialog tip(tr("系统中存在相同文件，请确认是否覆盖？"));
-                if (tip.exec() == QDialog::Accepted)
+                QLabel* labIcon = qobject_cast<QLabel*>(ui->tableTeachManage->cellWidget(i, 1));
+                if (labIcon)
                 {
-                    it->fileName = programName;
-                    //                    m_FileNameNum++;
-                    it->filePath = m_ProgramPath + "/" + programName + ".txt";
-                    //                    prog.index = m_FileNameNum;
-                    it->changeTime= fileTime;
-                    UsbDisk::instance()->copy(file, m_ProgramPath + "/");
-
-                    {
-                        for (int i = 0; i < ui->tableTeachManage->rowCount(); i++)
-                        {
-
-                            QString text = ui->tableTeachManage->item(i, 2)->text();
-                            if (text == programName)
-                            {
-                                // update program permission
-
-                                // update time
-                                ui->tableTeachManage->item(i, 3)->setText(fileTime);
-
-                            }
-                        }
-                    }
-
-                }
-                else
-                {
-                    return;
-                }
-            }
-            else
-            {
-                D_ProgramNameAndPathStruct P_NamePathTemp;
-                P_NamePathTemp.fileName = programName;
-                m_FileNameNum++;
-                P_NamePathTemp.filePath = m_ProgramPath + "/" + programName + ".txt";
-                P_NamePathTemp.index = m_FileNameNum;
-                P_NamePathTemp.changeTime = fileTime;
-                m_ProgramNameAndPath.append(P_NamePathTemp);
-                SetProgramIndex();//设置程序文件编号
-                UsbDisk::instance()->copy(file, m_ProgramPath + "/");
-
-                {
-                    auto tableTeachManage = ui->tableTeachManage;
-                    int newRow = tableTeachManage->rowCount();
-                    tableTeachManage->insertRow(newRow);
-                    QCheckBox* chbox = new QCheckBox(tableTeachManage);
-                    tableTeachManage->setCellWidget(newRow, 0, chbox);
-
-                    QLabel* labIcon = new QLabel(tableTeachManage);
-                    //    labIcon->setProperty("filePermission", 0);
                     setFilePermision(labIcon, 0);
-                    QPixmap pix(authIconPath[0]);
-                    pix.scaled(tableTeachManage->columnWidth(1), tableTeachManage->rowHeight(newRow));
-                    labIcon->setPixmap(pix);
-                    tableTeachManage->setCellWidget(newRow, 1, labIcon);
-
-                    tableTeachManage->setItem(newRow, 2, new QTableWidgetItem(programName));
-                    tableTeachManage->setItem(newRow, 3, new QTableWidgetItem(fileTime));
-
-                    tableTeachManage->setColumnHidden(0, true);
-                    tableTeachManage->resizeRowsToContents();
                 }
+                ui->tableTeachManage->item(i, 3)->setText(progModifiedTime);
+                break;
             }
-
         }
     }
+    else
+    {
+        QDir dir(progFileInfo.dir());
+        QString fileNamePattern = QString("%1.*").arg(programName);
+        QFileInfoList fileList = dir.entryInfoList(QStringList() << fileNamePattern,
+                                                   QDir::Files | QDir::NoDotAndDotDot);
+        for (const auto& matchingFile : fileList)
+        {
+            UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+        }
+        ::sync();
+
+        // 添加新程序信息
+        uint8_t permission = ::getProgramPermission(programName);
+        D_ProgramNameAndPathStruct P_NamePathTemp = {
+            programName,
+            m_ProgramPath + "/" + programName + SUFFIX_PROGRAM,
+            ++m_FileNameNum,
+            permission,
+            progModifiedTime
+        };
+        m_ProgramNameAndPath.append(P_NamePathTemp);
+        SetProgramIndex();
+
+        // 更新表格显示
+        addNewRowToTable(programName, progModifiedTime, permission);
+    }
+
+    setProgramNameAndPath(m_ProgramNameAndPath);
 
     ErrorTipDialog tip(tr("文件导入成功！"), TipMode::ONLY_OK);
     tip.exec();
-
 }
 
 void TeachManage::deleteOneRowFromTable(QTableWidget *tableTeachManage)
@@ -533,45 +499,29 @@ void TeachManage::deleteOneRowFromTable(QTableWidget *tableTeachManage)
 
 }
 
-void TeachManage::addOneRowToTable(QTableWidget *tableTeachManage)
+void TeachManage::addNewRowToTable(const QString &programName, const QString &fileTime, int permission)
 {
-//    if (tableTeachManage->rowCount() != 0)
-//    {
-//        QList<QTableWidgetItem *> selectedItems = tableTeachManage->selectedItems();
-//        if (selectedItems.isEmpty()) {
-//            return;
-//        }
-//    }
+    ui->tableTeachManage->setUpdatesEnabled(false);
 
-    int newRow = tableTeachManage->rowCount();
-    tableTeachManage->insertRow(newRow);
-    QCheckBox* chbox = new QCheckBox(tableTeachManage);
-    tableTeachManage->setCellWidget(newRow, 0, chbox);
-//    QTableWidgetItem* chbox= new QTableWidgetItem();
-//    tableTeachManage->setItem(newRow, 0, chbox);
-//    tableTeachManage->item(newRow, 0)->setCheckState(Qt::Checked);
+    int newRow = ui->tableTeachManage->rowCount();
+    ui->tableTeachManage->insertRow(newRow);
 
-    // add Icon of Limit Authority
-//    tableTeachManage->setItem(newRow, 1, new QTableWidgetItem());
-//    tableTeachManage->item(newRow, 1)->setIcon(QIcon(":/images/teachManageImages/unlock.png"));
-//    tableTeachManage->setIconSize(QSize(tableTeachManage->columnWidth(0), tableTeachManage->rowHeight(newRow)));
-    QLabel* labIcon = new QLabel(tableTeachManage);
-//    labIcon->setProperty("filePermission", 0);
-    setFilePermision(labIcon, 0);
-    QPixmap pix(authIconPath[0]);
-    pix.scaled(tableTeachManage->columnWidth(1), tableTeachManage->rowHeight(newRow));
-    labIcon->setPixmap(pix);
-    tableTeachManage->setCellWidget(newRow, 1, labIcon);
+    QCheckBox* chbox = new QCheckBox(ui->tableTeachManage);
+    ui->tableTeachManage->setCellWidget(newRow, 0, chbox);
 
+    QLabel* labIcon = new QLabel(ui->tableTeachManage);
+    setFilePermision(labIcon, permission);
+    QPixmap pix(authIconPath[permission]);
+    labIcon->setPixmap(pix.scaled(ui->tableTeachManage->columnWidth(1), ui->tableTeachManage->rowHeight(newRow), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    ui->tableTeachManage->setCellWidget(newRow, 1, labIcon);
 
-    QString fileName = ui->lineEdit_NowFileName->text();
-    tableTeachManage->setItem(newRow, 2, new QTableWidgetItem(fileName));
+    ui->tableTeachManage->setItem(newRow, 2, new QTableWidgetItem(programName));
+    ui->tableTeachManage->setItem(newRow, 3, new QTableWidgetItem(fileTime));
 
-    QString changeTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-    tableTeachManage->setItem(newRow, 3, new QTableWidgetItem(changeTime));
+    ui->tableTeachManage->setColumnHidden(0, true);
+    ui->tableTeachManage->resizeRowsToContents();
 
-    tableTeachManage->setColumnHidden(0, true);
-    tableTeachManage->resizeRowsToContents();
+    ui->tableTeachManage->setUpdatesEnabled(true);
 }
 
 void TeachManage::setFilePermision(QWidget *lab, const QVariant &permission)
@@ -584,7 +534,7 @@ int TeachManage::getFilePermission(QWidget *lab) const
     return lab->property("filePermission").toInt();
 }
 
-void TeachManage::updateFilePermission(int iconIndex)
+void TeachManage::updateFilePermission(int index)
 {
 
     int curRow = ui->tableTeachManage->currentRow();
@@ -594,17 +544,32 @@ void TeachManage::updateFilePermission(int iconIndex)
     QLabel* labIcon = qobject_cast<QLabel*>(ui->tableTeachManage->cellWidget(curRow, 1));
     if (!labIcon)
         return;
-    setFilePermision(labIcon, iconIndex);
+    setFilePermision(labIcon, index);
 
-    QPixmap pix(authIconPath[iconIndex]);
-//    pix = pix.scaled(ui->tableTeachManage->columnWidth(1), ui->tableTeachManage->rowHeight(curRow), Qt::KeepAspectRatio);
-    labIcon->setPixmap(pix);
+    QPixmap pix(authIconPath[index]);
+    labIcon->setPixmap(pix.scaled(ui->tableTeachManage->columnWidth(1), ui->tableTeachManage->rowHeight(curRow),
+                                  Qt::KeepAspectRatio, Qt::SmoothTransformation));
+
+    auto item = ui->tableTeachManage->item(curRow, 2);
+    if (item)
+    {
+        QString progName = item->text();
+
+        ::setProgramPermission(progName, index);
+    }
 }
 
 void TeachManage::on_tableTeachManage_itemSelectionChanged()
 {
     int curRow = ui->tableTeachManage->currentRow();
-    filePermission = getFilePermission(ui->tableTeachManage->cellWidget(curRow, 1));
+    if (curRow < 0)
+        return;
+
+    auto widget = ui->tableTeachManage->cellWidget(curRow, 1);
+    if (widget)
+    {
+        filePermission = getFilePermission(ui->tableTeachManage->cellWidget(curRow, 1));
+    }
     if (filePermission == 0)
     {
         ui->chboxAllow->setChecked(true);
@@ -623,8 +588,12 @@ void TeachManage::on_tableTeachManage_itemSelectionChanged()
     }
 
     // 在原文件名编辑框中显示文件名
-    QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
-    ui->lineEdit_OriginalFileName->setText(fileName);
+    auto item  = ui->tableTeachManage->item(curRow, 2);
+    if (item)
+    {
+        QString fileName = item->text();
+        ui->lineEdit_OriginalFileName->setText(fileName);
+    }
 }
 
 void TeachManage::on_chboxAllow_clicked()
@@ -655,79 +624,79 @@ void TeachManage::on_chboxForbide_clicked()
 
 void TeachManage::init()
 {
-#if 0
+
+    std::vector<int> indicesToRemove;
+        for (int i = 0; i < m_ProgramNameAndPath.count(); ++i) {
+            QString filePath = QDir(m_ProgramPath).filePath(m_ProgramNameAndPath[i].fileName + SUFFIX_PROGRAM);
+            if (!QFile::exists(filePath)) {
+                indicesToRemove.push_back(i);
+            }
+        }
+
+        // 反向迭代以安全地移除元素
+        for (auto it = indicesToRemove.rbegin(); it != indicesToRemove.rend(); ++it) {
+            m_ProgramNameAndPath.removeAt(*it);
+        }
+
     // update all program file to table
     QDir dir(m_ProgramPath);
-    QFileInfoList fileList = dir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
-
+    QFileInfoList fileList = dir.entryInfoList(QStringList() << "*" + SUFFIX_PROGRAM, QDir::Files | QDir::NoDotAndDotDot);
     for (const auto& fileInfo : fileList)
     {
-        QString programName = fileInfo.fileName().split(".").first();
-        QString fileTime = fileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
-        QString filePath = fileInfo.absoluteFilePath();
-
-        auto tableTeachManage = ui->tableTeachManage;
-        int newRow = tableTeachManage->rowCount();
-        tableTeachManage->insertRow(newRow);
-        QCheckBox* chbox = new QCheckBox(tableTeachManage);
-        tableTeachManage->setCellWidget(newRow, 0, chbox);
-
-        QLabel* labIcon = new QLabel(tableTeachManage);
-//        labIcon->setProperty("filePermission", 0);
-        setFilePermision(labIcon, 0);
-        QPixmap pix(authIconPath[0]);
-        pix.scaled(tableTeachManage->columnWidth(1), tableTeachManage->rowHeight(newRow));
-        labIcon->setPixmap(pix);
-        tableTeachManage->setCellWidget(newRow, 1, labIcon);
-
-        tableTeachManage->setItem(newRow, 2, new QTableWidgetItem(programName));
-        tableTeachManage->setItem(newRow, 3, new QTableWidgetItem(fileTime));
-
-        tableTeachManage->setColumnHidden(0, true);
-        tableTeachManage->resizeRowsToContents();
-
-        D_ProgramNameAndPathStruct P_NamePathTemp;
-        P_NamePathTemp.fileName = programName;
-        m_FileNameNum++;
-        P_NamePathTemp.filePath = filePath;
-        P_NamePathTemp.index = m_FileNameNum;
-        P_NamePathTemp.changeTime= fileTime;
-        m_ProgramNameAndPath.append(P_NamePathTemp);
-
-    }
-#else
-    // update all program file to table
-    QDir dir(m_ProgramPath);
-    QFileInfoList fileList = dir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
-    for (const auto& fileInfo : fileList)
-    {
+        const QString programName = fileInfo.baseName();
         for(int i = 0;i<m_ProgramNameAndPath.count();i++)
         {
-            if(m_ProgramNameAndPath[i].fileName == fileInfo.fileName().split(".").first())
+            if (m_ProgramNameAndPath[i].fileName == programName)
             {
-                auto tableTeachManage = ui->tableTeachManage;
-                int newRow = tableTeachManage->rowCount();
-                tableTeachManage->insertRow(newRow);
-                QCheckBox* chbox = new QCheckBox(tableTeachManage);
-                tableTeachManage->setCellWidget(newRow, 0, chbox);
-
-                QLabel* labIcon = new QLabel(tableTeachManage);
-        //        labIcon->setProperty("filePermission", 0);
-                setFilePermision(labIcon, m_ProgramNameAndPath[i].filePermission);
-                QPixmap pix(authIconPath[m_ProgramNameAndPath[i].filePermission]);
-                pix.scaled(tableTeachManage->columnWidth(1), tableTeachManage->rowHeight(newRow));
-                labIcon->setPixmap(pix);
-                tableTeachManage->setCellWidget(newRow, 1, labIcon);
-
-                tableTeachManage->setItem(newRow, 2, new QTableWidgetItem(m_ProgramNameAndPath[i].fileName));
-                tableTeachManage->setItem(newRow, 3, new QTableWidgetItem(m_ProgramNameAndPath[i].changeTime));
-
-                tableTeachManage->setColumnHidden(0, true);
-                tableTeachManage->resizeRowsToContents();
+                addNewRowToTable(programName, m_ProgramNameAndPath[i].changeTime, m_ProgramNameAndPath[i].filePermission);
                 m_FileNameNum++;
             }
         }
     }
+}
 
-#endif
+void TeachManage::initWidgets()
+{
+    ui->lineEdit_OriginalFileName->setAlignment(Qt::AlignCenter);
+    ui->lineEdit_NowFileName->setAlignment(Qt::AlignCenter);
+    QPalette palette = ui->lineEdit_OriginalFileName->palette();
+    palette.setColor(QPalette::Disabled, QPalette::Text, QColor(Qt::black));
+    ui->lineEdit_OriginalFileName->setPalette(palette);
+//    ui->lineEdit_OriginalFileName->setStyleSheet("QLineEdit:disabled { color: black; }");
+
+    ui->btn_USB->setCheckable(true);
+    ui->stackedWidget_TeachManage->setCurrentIndex(0);
+
+    ui->tableTeachManage->setRowCount(0);
+    ui->tableTeachManage->setColumnCount(4);
+    ui->tableTeachManage->setFixedWidth(860);
+    ui->tableTeachManage->setMaximumWidth(860);
+    ui->tableTeachManage->setMaximumHeight(450);
+    ui->tableTeachManage->horizontalHeader()->setVisible(true);
+    ui->tableTeachManage->verticalHeader()->setVisible(true);
+
+    ui->tableTeachManage->setHorizontalHeaderLabels({"", "", tr("文件名"), tr("最后修改时间")});
+    ui->tableTeachManage->setColumnWidth(0, 40);
+    ui->tableTeachManage->setColumnWidth(1, 40);
+    ui->tableTeachManage->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
+    ui->tableTeachManage->horizontalHeader()->setSectionResizeMode(3, QHeaderView::Stretch);
+
+    ui->tableTeachManage->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->tableTeachManage->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->tableTeachManage->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    ui->tableTeachManage->setColumnHidden(0, true);
+
+    fileDialog = new QFileDialog(this);
+    fileDialog->setFixedSize(800, 600);
+    fileDialog->setViewMode(QFileDialog::Detail);
+    fileDialog->setFileMode(QFileDialog::ExistingFile);
+    fileDialog->setNameFilter(QString("Program files(*%1)").arg(SUFFIX_PROGRAM));
+    fileDialog->setAcceptDrops(false);
+    fileDialog->setOptions(QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
+
+    for (auto& comboBox : fileDialog->findChildren<QComboBox*>())
+    {
+        comboBox->setFocusPolicy(Qt::NoFocus);
+    }
 }

@@ -1029,6 +1029,12 @@ void ManualForm::handleLoginModeChanged(LoginMode mode)
     }
 }
 
+void ManualForm::reloadReferPoint()
+{
+    ::readReferenceInfo();
+    updateReferPointsList();
+}
+
 void ManualForm::updateReserveButtonState()
 {
     const std::vector<QPushButton*> interLockButtons = {
@@ -1389,6 +1395,10 @@ void ManualForm::on_btnSaveReference_clicked()
         m_RefPoint[arrayIndex].xPos = referencePoints.at(i).pointPos.x();
         m_RefPoint[arrayIndex].yPos = referencePoints.at(i).pointPos.y();
     }
+
+    ::writeReferenceInfo();
+    // need to save axis position to corresponding program file.
+    // TO DO...
 
     ui->btnSaveReference->setParaChangedFlag(false);
 }

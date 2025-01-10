@@ -5,12 +5,14 @@ HEADERS += \
     $$PWD/qtpixmapbutton.h \
     $$PWD/qtwidgetbase.h \
     $$PWD/savebutton.h \
+    $$PWD/scrolllabel.h \
     $$PWD/statebutton.h
 SOURCES += \
     $$PWD/framelesswidget2.cpp \
     $$PWD/qtpixmapbutton.cpp \
     $$PWD/qtwidgetbase.cpp \
     $$PWD/savebutton.cpp \
+    $$PWD/scrolllabel.cpp \
     $$PWD/statebutton.cpp
 
 RESOURCES += \

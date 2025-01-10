@@ -247,11 +247,13 @@ MainWindow::MainWindow(QWidget *parent)
 //    alarmBar->setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
 //    alarmBar->setAttribute(Qt::WA_ShowWithoutActivating);
     alarmBar->hide();
-    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){   
-        if(!alarmInfoQueue.isEmpty())
+    connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){
+        if (!alarmInfoQueue.isEmpty())
         {
             alarmBar->setGeometry(5, 640, 1014, 60);
+
             int newAlarmNum = alarmInfoQueue.back().alarmNum;
+
             QSettings alarmInfoSettings(alarmInfoMappingPath, QSettings::IniFormat);
             alarmInfoSettings.setIniCodec("utf-8");
             alarmInfoSettings.beginGroup(QString::number(newAlarmNum));
@@ -549,11 +551,6 @@ int MainWindow::showErrorTip(const QString &message, TipMode mode)
     return dlgErrorTip->exec();
 }
 
-void MainWindow::setSysProgramName(const QString &name)
-{
-    ui->labProgramName->setText(name);
-}
-
 void MainWindow::connectAllSignalsAndSlots()
 {
 
@@ -592,6 +589,15 @@ void MainWindow::connectAllSignalsAndSlots()
         QString name = sysName + "  " + programName;
         ui->labProgramName->setText(name);
     });
+    connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, &ManualForm::reloadReferPoint);
+    connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, [=](){
+        const QString& programName = m_CurrentProgramNameAndPath.fileName;
+
+        QString name = m_SystemSet.sysName + "  " + programName;
+        ui->labProgramName->setText(name);
+    });
+
+
     connect(g_Usart,&Usart::posflashsignal,this,&MainWindow::posflashhandle);//当前坐标实时刷新
     connect(this,&MainWindow::Auto_File_List_Refresh_signal,autoWidget,&AutoForm::Auto_File_List_Refresh);//自动运行界面列表刷新
     connect(autoWidget,&AutoForm::Switch_ProNum_Signal,teachWidget,&Teach::Switch_Pro_ReadOrder);//自动界面切换程序编号
@@ -980,6 +986,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         ui->Progress_bar->hide();
         ui->Progress_num->hide();
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
+        manualWidget->reloadReferPoint();
     }
     else
     {
@@ -993,11 +1000,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
             dlgErrorTip->reject();
         }
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
+        manualWidget->reloadReferPoint();
     }
-
-}
-//滚动显示
-void MainWindow::updatelabProgramName()
-{
 
 }

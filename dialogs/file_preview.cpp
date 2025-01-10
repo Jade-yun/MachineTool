@@ -1,5 +1,6 @@
 #include "file_preview.h"
 #include "ui_file_preview.h"
+#include "framelesswidget2.h"
 
 bool File_Preview_Label = false;
 File_Preview::File_Preview(int curProgramIndex, QWidget *parent) :
@@ -7,6 +8,10 @@ File_Preview::File_Preview(int curProgramIndex, QWidget *parent) :
     ui(new Ui::File_Preview)
 {
     ui->setupUi(this);
+
+    FramelessWidget2* frameBase = new FramelessWidget2(this);
+    frameBase->setWidget(this);
+
     setModal(true);
     ui->preview_list->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选择行为时每次选择一行
     ui->preview_list->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可编辑

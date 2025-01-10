@@ -53,6 +53,12 @@ void readLimitSigDescription(int index, std::vector<QString> &describeStrs);
 void writeGuideInfo();
 void readGuideInfo();
 
+/**
+ * @brief writeReferenceUiInfo 存储参考点在ui上的信息到配置文件，该文件与程序配套（名字相同，后缀名为.ref)
+ */
+void writeReferenceInfo();
+void readReferenceInfo();
+
 /*****************相关参数保存*****************/
 //输出类型
 extern void getOutPortType(uint8_t defaultV = 0);
@@ -142,9 +148,12 @@ extern void setManualAxis(D_ManualAxis value);
 
 //程序文件存储
 extern void getProgramNameAndPath();
-extern void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> value);
+extern void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programInfo);
 extern void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value);
 extern D_ProgramNameAndPathStruct readPowerOnReadOneProInfo();
+
+void setProgramPermission(const QString& programName, int permission);
+int getProgramPermission(const QString& programName);
 
 /*****************命令相关参数保存*****************/
 extern QStringList fileSectionList;                        //程序保存节点
