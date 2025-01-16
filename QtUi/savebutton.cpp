@@ -45,6 +45,11 @@ void SaveButton::onTimeout() {
 }
 
 void SaveButton::startFlashing() {
+    QTimer::singleShot(300, this, [this]() {
+        if (timer->isActive()) {
+            setIcon(emptyIcon);
+        }
+    });
     timer->start(1000);
 }
 

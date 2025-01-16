@@ -317,6 +317,10 @@ void MainWindow::initUI()
 
     ui->Btn_TeachHome->setText(tr("教导管理"));
     ui->Btn_ManualHome->setText(tr("停止页面"));
+
+    const QString& programName = m_CurrentProgramNameAndPath.fileName;
+    QString name = m_SystemSet.sysName + "  "  + tr("程式：") + programName;
+    ui->labProgramName->setText(name);
 }
 
 void MainWindow::handleLoginModeChanged(LoginMode mode)
@@ -363,7 +367,7 @@ void MainWindow::onCheckPara()
     }
 
     LEDController::instance()->updateLEDStatus(&ledStatus);
-
+    monitorWidget->showSignalLEDStatus(ledStatus);
 }
 
 void MainWindow::PowerOnStateHandle()
@@ -586,14 +590,14 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget, &Setting::sysNameChanged, this, [=](const QString& sysName){
         const QString& programName = m_CurrentProgramNameAndPath.fileName;
 
-        QString name = sysName + "  " + programName;
+        QString name = sysName + "  " + tr("程式：") + programName;
         ui->labProgramName->setText(name);
     });
     connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, &ManualForm::reloadReferPoint);
     connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, [=](){
         const QString& programName = m_CurrentProgramNameAndPath.fileName;
 
-        QString name = m_SystemSet.sysName + "  " + programName;
+        QString name = m_SystemSet.sysName + "  "  + tr("程式：") + programName;
         ui->labProgramName->setText(name);
     });
 

@@ -286,6 +286,7 @@ void readIniPara()
     getStackFunc();
     getManualAxis();
     getProgramNameAndPath();//读取所有程序文件信息
+    m_CurrentProgramNameAndPath =  readPowerOnReadOneProInfo();
     getSystemSet();
     ::readPasswdFromConfig();
 }

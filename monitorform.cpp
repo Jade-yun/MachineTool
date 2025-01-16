@@ -980,6 +980,18 @@ void MonitorForm::setLedName(QLabel* label, uint8_t port,uint8_t type)
     }
 }
 
+//void MonitorForm::setLEDColor(QLabel* label, bool isOn)
+//{
+//    if (isOn)
+//    {
+//        label->setStyleSheet("QLabel { background-color : green; }");
+//    }
+//    else
+//    {
+//        label->setStyleSheet("QLabel { background-color : gray; }");
+//    }
+//}
+
 /*************************************************************************
 **  函数名：  SetHandControlName()
 **	输入参数：
@@ -1047,6 +1059,31 @@ void MonitorForm::SetHandControlName()
         ui->label_btn19text->setText(tr("手轮按键"));
     }
 }
+
+void MonitorForm::showSignalLEDStatus(uint8_t status)
+{
+    if(!this->isVisible() || !ui->tabhandControl->isVisible()
+            || ui->single_tabWidget->currentWidget() != ui->tabhandControl)
+    {
+        return;
+    }
+    static const std::array<QLabel*, 4> labLED = {
+            ui->label_btn15, ui->label_btn16, ui->label_btn17, ui->label_btn18
+        };
+
+        int numLEDs = labLED.size();
+
+        for (int i = 0; i < numLEDs; i++)
+        {
+            // 检查特定位是否为1
+            bool isOn = (status >> i) & 1;
+
+            int color = isOn ? 2 : 0;
+            setLED(labLED[i], color, 30);
+        }
+
+}
+
 void MonitorForm::InitAllLedName()
 {
     setLedName(ui->x1,1,0);

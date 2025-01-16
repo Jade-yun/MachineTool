@@ -11,6 +11,8 @@ ScrollLabel::ScrollLabel(QWidget *parent):QLabel(parent)
     //start_scroll = this->width();//保存了窗体最初的宽度，避免窗体变动就不滚动
 
     flag = 0;//默认不处理
+
+    content = "";
 }
 
 ScrollLabel::~ScrollLabel()
@@ -28,6 +30,8 @@ void ScrollLabel::setText(const QString &txt)
         flag = 1;
 
     QLabel::setText(txt);
+
+    content = txt;
     upateLabelRollingState();
 }
 
@@ -73,7 +77,7 @@ void ScrollLabel::upateLabelRollingState()
 
         #if QT_VERSION > QT_VERSION_CHECK(5,11,0)//根据官方文档说明，5.11后使用新的函数
         blank = " ";//空格
-        blank_wp = fm.horizontalAdvance(blank );//空格的像素宽度,方便后面计算是否到达末尾
+        blank_wp = fm.horizontalAdvance(blank);//空格的像素宽度,方便后面计算是否到达末尾
         #else
         blank = " ";//空格
         blank_wp = fm.width(blank );//空格的像素宽度
@@ -97,6 +101,7 @@ void ScrollLabel::upateLabelRollingState()
 
 }
 
+#if 0
 //定时改位移量，到末尾时改为开头  负责修改当前像素位移值
 void ScrollLabel::timerEvent(QTimerEvent *e)
 {
@@ -132,3 +137,47 @@ void ScrollLabel::paintEvent(QPaintEvent *e)
     rc.setLeft(rc.left() - left); //修改矩形 x轴, 由于left在不断变大，setLeft就在不断变小,(0,0)在左上角,固左移
     pen.drawText(rc,Qt::AlignVCenter, strText);//根据给定的矩形坐标，绘制标签
 }
+#else
+// 定时改位移量，到末尾时改为开头 负责修改当前像素位移值
+void ScrollLabel::timerEvent(QTimerEvent *e)
+{
+    if(e->timerId() == timerId && isVisible())
+    {
+        left += spixel; // 每次增加对应像素
+
+        update(); // 请求更新，让Qt安排下一次重绘
+    }
+
+    QLabel::timerEvent(e);
+}
+
+//重绘事件，根据位移量left显示文本
+void ScrollLabel::paintEvent(QPaintEvent *e)
+{
+    if(flag == 0){ // 不处理，直接调用标签的默认函数
+        QLabel::paintEvent(e);
+        return;
+    }
+
+    QPainter painter(this);
+    painter.setClipRect(rect()); // 确保只在label范围内绘制
+
+    // 获取当前label的矩形大小
+    QRect rc = rect();
+    rc.setHeight(rc.height());
+    rc.setWidth(rc.width());
+
+    QString strText = content;
+
+    // 计算两个位置来绘制文本
+    int offset = left % (text_wpixel + 4 * blank_wp); // 计算滚动的偏移量
+
+    // 绘制第一个文本副本
+    painter.drawText(QRect(-offset, 0, text_wpixel, rc.height()), Qt::AlignVCenter, content);
+
+    // 绘制第二个文本副本（从第一个文本的尾部开始）
+    if (offset > 0) {
+        painter.drawText(QRect(text_wpixel - offset + 4 * blank_wp, 0, text_wpixel, rc.height()), Qt::AlignVCenter, content);
+    }
+}
+#endif

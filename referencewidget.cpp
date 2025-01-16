@@ -256,7 +256,9 @@ void ReferenceWidget::updateReferPoints()
             int refIndex = i + 1;
             DraggableButton* btn = new DraggableButton(frameRerencePoint);
             QPoint btnPos(m_RefPoint[i].xPos, m_RefPoint[i].yPos);
-            ReferPointPara point = {refIndex, referName, btn, btnPos};
+            ReferPointPara point = {refIndex, referName, btn, btnPos,
+                                    {m_RefPoint[i].pos[0], m_RefPoint[i].pos[1], m_RefPoint[i].pos[2],
+                                     m_RefPoint[i].pos[3], m_RefPoint[i].pos[4],m_RefPoint[i].pos[5]}};
             referencePoints.push_back(point);
 
             connect(btn, &DraggableButton::pressed, this, [=]() {

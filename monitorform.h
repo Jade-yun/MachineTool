@@ -25,6 +25,9 @@ private:
     void setLedState(QLabel* label, uint8_t port,uint8_t type);
     void setLedName(QLabel* label, uint8_t port,uint8_t type);
     QTimer *RefreshLedTime = nullptr;
+
+//    void setLEDColor(QLabel* label, bool isOn);
+
 private slots:
     void on_btn1_cut_clicked();
     void on_btn1_add_clicked();
@@ -43,6 +46,8 @@ private slots:
 public slots:
     void monitor_hand_contril_handle(uint16_t code, int32_t value);
     void SetHandControlName();
+
+    void showSignalLEDStatus(uint8_t status);
 };
 
 #endif // MONITORFORM_H

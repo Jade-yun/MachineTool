@@ -12,6 +12,6 @@
             fsync(fd); \
             close(fd); \
         } \
-    } while (0)
+    } while (0);
 
 #endif // REFRESH_KERNEL_BUFFER_H

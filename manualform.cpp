@@ -8,6 +8,7 @@
 #include <QString>
 #include <QDebug>
 
+#include "cmd.h"
 #include "mainwindow.h"
 
 QString REFERPOINT_PIC = ":/images/referPoint.png";
@@ -542,6 +543,35 @@ void ManualForm::on_btnNewButtonReference_clicked()
     }
 }
 
+void ManualForm::on_btnRefresh_clicked()
+{
+    if (selectedButton[1])
+    {
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+
+        if (it != referencePoints.end())
+        {
+            const std::array<int, AXIS_TOTAL_NUM> curAxisPos = {
+                m_AxisCurPos.Pos_x, m_AxisCurPos.Pos_y, m_AxisCurPos.Pos_z,
+                m_AxisCurPos.Pos_c, m_AxisCurPos.Pos_y2, m_AxisCurPos.Pos_z2
+            };
+
+            bool paramChangedFlag = false;
+            for (int i = 0; i < AXIS_TOTAL_NUM; i++)
+            {
+                if (it->axisPos[i] != curAxisPos[i])
+                {
+                    it->axisPos[i] = curAxisPos[i];
+                    paramChangedFlag = true;
+                }
+            }
+            ui->btnSaveReference->setParaChangedFlag(paramChangedFlag);
+        }
+    }
+}
+
 void ManualForm::on_btnDeleteButtonReference_clicked()
 {
     if (!referencePoints.isEmpty())
@@ -849,7 +879,9 @@ void ManualForm::updateReferPointsList()
             int refIndex = i + 1;
             DraggableButton* btn = new DraggableButton(ui->frameRerencePoint);
             QPoint btnPos(m_RefPoint[i].xPos, m_RefPoint[i].yPos);
-            ReferPointPara point = {refIndex, referName, btn, btnPos};
+            ReferPointPara point = {refIndex, referName, btn, btnPos,
+                                    {m_RefPoint[i].pos[0], m_RefPoint[i].pos[1], m_RefPoint[i].pos[2],
+                                     m_RefPoint[i].pos[3], m_RefPoint[i].pos[4],m_RefPoint[i].pos[5]}};
             referencePoints.push_back(point);
 
             btn->setCheckable(true);
@@ -1394,11 +1426,16 @@ void ManualForm::on_btnSaveReference_clicked()
         m_RefPoint[arrayIndex].refName = referencePoints.at(i).name;
         m_RefPoint[arrayIndex].xPos = referencePoints.at(i).pointPos.x();
         m_RefPoint[arrayIndex].yPos = referencePoints.at(i).pointPos.y();
+//     need to save axis position to corresponding program file.
+//     TO DO...
+
+        for (int j = 0; j < AXIS_TOTAL_NUM; j++)
+        {
+            m_RefPoint[arrayIndex].pos[j] = referencePoints.at(i).axisPos[j];
+        }
     }
 
     ::writeReferenceInfo();
-    // need to save axis position to corresponding program file.
-    // TO DO...
 
     ui->btnSaveReference->setParaChangedFlag(false);
 }
@@ -1514,3 +1551,4 @@ void ManualForm::StateButtonInit()
 //    setbuttonIcon(ui->btnReserveY9Break,tr("Y9自动门1开断"),false);
 //    setbuttonIcon(ui->btnReserveY20Break,tr("Y20卡盘1夹紧断"),false);
 }
+

@@ -275,16 +275,6 @@ Setting::Setting(QWidget *parent) :
         progressDialog.exec();
     });
 
-    connect(ui->btnImportPortDef, &QPushButton::clicked, [=](){
-        if (UsbDisk::instance()->isInserted() == false)
-        {
-            ErrorTipDialog tip(this);
-            tip.setMessage(tr("请插入U盘！"));
-            tip.exec();
-            return;
-        }
-//       UsbDisk::instance()->copyFromUsb("test.sh", "/root/test.sh");
-    });
     connect(ui->btnSaveTime, &QPushButton::clicked, [=](){
 
         ErrorTipDialog tip(tr("确定修改系统时间？"), this);
@@ -473,11 +463,7 @@ Setting::Setting(QWidget *parent) :
     });
 
     //PXC_240914
-    showPortDefine();
-    connect(ui->btnSavePort,&QPushButton::clicked,this,&Setting::savePortDefine);
-    connect(ui->tableWgtPortDef,&QTableWidget::cellClicked,[=](int row, int column){
-        modifyPort(row, column);
-    });
+    setupPortDefine();
     /***************************升级与备份-信号槽连接**********************************/
     connect(ui->btnUpdateHandcontroller, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(HANDHELD);});
     connect(ui->btnUpdateIOBoard, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(IOBOARD);});
@@ -991,6 +977,236 @@ void Setting::initWidgets()
 
 }
 
+void Setting::setupPortDefine()
+{
+
+#if 0
+    for(int i=0;i<INPUT_TOTAL_NUM;i++)
+    {
+        QTableWidgetItem* item1=new QTableWidgetItem(m_Port_X[i].definePort);
+        ui->tableWgtPortDef->setItem(i,0,item1);
+        if(m_Port_X[i].functionSet == 1)
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].defineName);
+            ui->tableWgtPortDef->setItem(i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].modifyName);
+            ui->tableWgtPortDef->setItem(i,2,item3);
+        }
+        else
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].ResDefineName);
+            ui->tableWgtPortDef->setItem(i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].ResModifyName);
+            ui->tableWgtPortDef->setItem(i,2,item3);
+        }
+        QTableWidgetItem* item4=new QTableWidgetItem(m_Port_X[i].modifyPort);
+        ui->tableWgtPortDef->setItem(i,3,item4);
+    }
+    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
+    {
+
+        QTableWidgetItem* item1=new QTableWidgetItem(m_Port_Y[i].definePort);
+        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,0,item1);
+        if(m_Port_Y[i].functionSet == 1)
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].defineName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].modifyName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
+        }
+        else
+        {
+            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].ResDefineName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
+            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].ResModifyName);
+            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
+        }
+        QTableWidgetItem* item4=new QTableWidgetItem(m_Port_Y[i].modifyPort);
+        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,3,item4);
+    }
+#else
+    for (int i = 0; i < INPUT_TOTAL_NUM; i++) {
+        QTableWidgetItem* item1 = new QTableWidgetItem(m_Port_X[i].definePort);
+        item1->setData(Qt::UserRole, m_Port_X[i].portNum);
+        ui->tableWgtPortDef->setItem(i, 0, item1);
+
+        QTableWidgetItem* item2;
+        QTableWidgetItem* item3;
+
+        if (m_Port_X[i].functionSet == 1) {
+            item2 = new QTableWidgetItem(m_Port_X[i].defineName);
+            item3 = new QTableWidgetItem(m_Port_X[i].modifyName);
+        } else {
+            item2 = new QTableWidgetItem(m_Port_X[i].ResDefineName);
+            item3 = new QTableWidgetItem(m_Port_X[i].ResModifyName);
+        }
+
+        item3->setData(Qt::UserRole, m_Port_X[i].actualPortNum);  // 设置附加数据
+
+        ui->tableWgtPortDef->setItem(i, 1, item2);
+        ui->tableWgtPortDef->setItem(i, 2, item3);
+
+        QTableWidgetItem* item4 = new QTableWidgetItem(m_Port_X[i].modifyPort);
+        ui->tableWgtPortDef->setItem(i, 3, item4);
+    }
+
+    for (int i = 0; i < OUTPUT_TOTAL_NUM; i++) {
+        QTableWidgetItem* item1 = new QTableWidgetItem(m_Port_Y[i].definePort);
+        item1->setData(Qt::UserRole, m_Port_Y[i].portNum);  // 设置附加数据
+        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 0, item1);
+
+        QTableWidgetItem* item2;
+        QTableWidgetItem* item3;
+
+        if (m_Port_Y[i].functionSet == 1) {
+            item2 = new QTableWidgetItem(m_Port_Y[i].defineName);
+            item3 = new QTableWidgetItem(m_Port_Y[i].modifyName);
+        } else {
+            item2 = new QTableWidgetItem(m_Port_Y[i].ResDefineName);
+            item3 = new QTableWidgetItem(m_Port_Y[i].ResModifyName);
+        }
+
+        item3->setData(Qt::UserRole, m_Port_Y[i].actualPortNum);  // 设置附加数据
+
+        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 1, item2);
+        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 2, item3);
+
+        QTableWidgetItem* item4 = new QTableWidgetItem(m_Port_Y[i].modifyPort);
+        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 3, item4);
+    }
+#endif
+
+    connect(ui->btnSavePort,&QPushButton::clicked, [=](){
+        if (!ui->btnSavePort->isParaChanged()) return;
+
+        for (int i = 0; i < ui->tableWgtPortDef->rowCount(); i++)
+        {
+            auto revisedPortItem = ui->tableWgtPortDef->item(i, 3);
+            if (revisedPortItem) {
+                // 从 UserRole 获取暂存的 portNum
+                int revisedPortNum = revisedPortItem->data(Qt::UserRole).toUInt();
+
+                if (i < INPUT_TOTAL_NUM) {
+                    m_Port_X[i].actualPortNum = revisedPortNum;
+                } else {
+                    m_Port_Y[i - INPUT_TOTAL_NUM].actualPortNum = revisedPortNum;
+                }
+            }
+        }
+
+        this->savePortDefine();
+
+        ui->btnSavePort->setParaChangedFlag(false);
+
+    });
+    connect(ui->tableWgtPortDef,&QTableWidget::cellClicked,[=](int row, int column){
+        auto res = modifyPort(row, column);
+
+        ui->btnSavePort->setParaChangedFlag(res);
+    });
+
+    connect(ui->btnRestoreNameOnePortDef, &QPushButton::clicked, [=](){
+        int curRow = ui->tableWgtPortDef->currentRow();
+        if (curRow < 0) return;
+
+        auto defaultNameItem = ui->tableWgtPortDef->item(curRow, 1);
+        auto revisedNameItem = ui->tableWgtPortDef->item(curRow, 2);
+
+        if (defaultNameItem && revisedNameItem)
+        {
+            revisedNameItem->setText(defaultNameItem->text());
+            ui->btnSavePort->setParaChangedFlag(true);
+        }
+    });
+    connect(ui->btnRestoreNameAllPortDef, &QPushButton::clicked, [=](){
+        for (int row = 0; row < ui->tableWgtPortDef->rowCount(); row++)
+        {
+            auto defaultNameItem = ui->tableWgtPortDef->item(row, 1);
+            auto revisedNameItem = ui->tableWgtPortDef->item(row, 2);
+
+            if (defaultNameItem && revisedNameItem)
+            {
+                revisedNameItem->setText(defaultNameItem->text());
+            }
+        }
+        ui->btnSavePort->setParaChangedFlag(true);
+    });
+    connect(ui->btnRestorePortOnePortDef, &QPushButton::clicked, [=](){
+
+        int curRow = ui->tableWgtPortDef->currentRow();
+        if (curRow < 0) return;
+
+//        auto defaultPortItem = ui->tableWgtPortDef->item(curRow, 0);
+        auto revisedPortItem = ui->tableWgtPortDef->item(curRow, 3);
+
+        if (revisedPortItem)
+        {
+            revisedPortItem->setText("0");
+
+            if(curRow < INPUT_TOTAL_NUM)
+            {
+                revisedPortItem->setData(Qt::UserRole, m_Port_X[curRow].portNum);
+            }
+            else
+            {
+                revisedPortItem->setData(Qt::UserRole, m_Port_Y[curRow - INPUT_TOTAL_NUM].portNum);
+            }
+            ui->btnSavePort->setParaChangedFlag(true);
+        }
+    });
+    connect(ui->btnRestorePortAllPortDef, &QPushButton::clicked, [=](){
+
+        for (int i = 0; i < ui->tableWgtPortDef->rowCount(); i++)
+        {
+            auto revisedPortItem = ui->tableWgtPortDef->item(i, 3);
+
+            if (revisedPortItem)
+            {
+                revisedPortItem->setText("0");
+
+                if(i < INPUT_TOTAL_NUM)
+                {
+                    revisedPortItem->setData(Qt::UserRole, m_Port_X[i].portNum);
+                }
+                else
+                {
+                    revisedPortItem->setData(Qt::UserRole, m_Port_Y[i - INPUT_TOTAL_NUM].portNum);
+                }
+            }
+        }
+        ui->btnSavePort->setParaChangedFlag(true);
+    });
+
+    connect(ui->btnImportPortDef, &QPushButton::clicked, this, [=](){
+        if (!UsbDisk::instance()->isInserted())
+        {
+            MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"), TipMode::ONLY_OK);
+            return;
+        }
+
+    });
+    connect(ui->btnExportPortDef, &QPushButton::clicked, [=](){
+        if (!UsbDisk::instance()->isInserted())
+        {
+            MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"), TipMode::ONLY_OK);
+            return;
+        }
+        auto res = UsbDisk::instance()->copyToUsb(m_configPortXYNamePath, "HMI/");
+        res = res && UsbDisk::instance()->copyToUsb(m_configPortXYNameIniPath, "HMI/");
+
+        ::sync();
+
+        if (res)
+        {
+            ErrorTipDialog tip(tr("导出成功!"), TipMode::ONLY_OK, nullptr);
+            QTimer::singleShot(1000, [&](){
+                tip.accept();
+            });
+            tip.exec();
+        }
+    });
+}
+
 void Setting::setupNameDefine()
 {
     // 计算总行数
@@ -1059,14 +1275,61 @@ void Setting::setupNameDefine()
             keyboard->setText(originText);
             keyboard->setCurrentEditObj(nullptr);
             keyboard->exec();
-            item->setText(keyboard->getInputText());
+            auto inputText = keyboard->getInputText();
+            if (originText != inputText)
+            {
+                item->setText(inputText);
+                ui->btnSaveNameDef->setParaChangedFlag(true);
+            }
         }
     });
 
     connect(ui->btnSaveNameDef, &QPushButton::clicked, this, [=](){
+        if (!ui->btnSaveNameDef->isParaChanged()) return;
+
+        int index = 0;
+        m_NameDefine[1].adminName = tableNameDef->item(index++, 1)->text();
+        m_NameDefine[1].operatorName = tableNameDef->item(index++, 1)->text();
+        for (int i = 0; i < 8; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].subProgName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].axisName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].varName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].stackName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].followStackName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].timerName[i] = item->text();
+            ++index;
+        }
         ::writeNameDefine();
         // to fresh all name display in every windows.
+        emit coboxVarSelectVarPreOpItemSet_signal();
 
+        ui->btnSaveNameDef->setParaChangedFlag(false);
     });
     connect(ui->btnExportNameDef, &QPushButton::clicked, this, [=](){
        if (!UsbDisk::instance()->isInserted())
@@ -1074,7 +1337,18 @@ void Setting::setupNameDefine()
            MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"), TipMode::ONLY_OK);
            return;
        }
-       //       UsbDisk::instance()->copyToUsb()
+       auto res = UsbDisk::instance()->copyToUsb(CustomizeNameDefPath, "HMI/");
+       ::sync();
+
+       if (res)
+       {
+           ErrorTipDialog tip(tr("导出成功!"), TipMode::ONLY_OK, nullptr);
+           QTimer::singleShot(1000, [&](){
+              tip.accept();
+           });
+           tip.exec();
+       }
+
     });
     connect(ui->btnImportNameDef, &QPushButton::clicked, this, [=](){
        if (!UsbDisk::instance()->isInserted())
@@ -1082,8 +1356,79 @@ void Setting::setupNameDefine()
            MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"), TipMode::ONLY_OK);
            return;
        }
+       QFileInfo fileInfo(CustomizeNameDefPath);
+       auto res = UsbDisk::instance()->copyFromUsb("HMI/" + fileInfo.fileName(), fileInfo.path());
+       ::sync();
 
+       ::readNameDefine();
+
+       // fresh dispaly
+       for (int col = 0; col < 2; col++)
+       {
+           int index = 0;
+           tableNameDef->item(index++, col)->setText(m_NameDefine[col].adminName);
+
+           tableNameDef->item(index++, col)->setText(m_NameDefine[col].operatorName);
+
+           for (int i = 0; i < 8; ++i) {
+               auto item = tableNameDef->item(index, col);
+               item->setText(m_NameDefine[col].subProgName[i]);
+               ++index;
+           }
+
+           for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
+               auto item = tableNameDef->item(index, col);
+               item->setText(m_NameDefine[col].axisName[i]);
+               ++index;
+           }
+
+           for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
+               auto item = tableNameDef->item(index, col);
+               item->setText(m_NameDefine[col].varName[i]);
+               ++index;
+           }
+
+           for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
+               auto item = tableNameDef->item(index, col);
+               item->setText(m_NameDefine[col].stackName[i]);
+               ++index;
+           }
+
+           for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
+               auto item = tableNameDef->item(index, col);
+               item->setText(m_NameDefine[col].followStackName[i]);
+               ++index;
+           }
+
+           for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
+               auto item = tableNameDef->item(index, col);
+               item->setText(m_NameDefine[col].timerName[i]);
+               ++index;
+           }
+       }
+
+       if (res)
+       {
+           ErrorTipDialog tip(tr("导入成功!"), TipMode::ONLY_OK, nullptr);
+           QTimer::singleShot(1000, [&](){
+               tip.accept();
+           });
+           tip.exec();
+       }
     });
+    connect(ui->btnRestoreNameOneNameDef, &QPushButton::clicked, this, [=](){
+        int curRow = ui->tableWgtNameDef->currentRow();
+        if (curRow < 0) return;
+
+        auto itemRevised = ui->tableWgtNameDef->item(curRow, 1);
+        auto itemDefault = ui->tableWgtNameDef->item(curRow, 0);
+        if (itemRevised && itemDefault)
+        {
+            itemRevised->setText(itemDefault->text());
+            ui->btnSaveNameDef->setParaChangedFlag(true);
+        }
+    });
+
     connect(ui->btnRestoreNameAllNameDef, &QPushButton::clicked, this, [=](){
 
         int totalRows = 8 + AXIS_TOTAL_NUM + VAR_TOTAL_NUM + STACK_TOTAL_NUM + FOLLOW_STACK_NUM + TIME_TOTAL_NUM;
@@ -1091,46 +1436,59 @@ void Setting::setupNameDefine()
             tableNameDef->setRowCount(totalRows);
         }
 
-        // 按顺序写入数据
-        int index = 0;
-        tableNameDef->item(index++, 1)->setText(m_NameDefine->adminName);
-
-        tableNameDef->item(index++, 1)->setText(m_NameDefine->operatorName);
-
-        for (int i = 0; i < 8; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            item->setText(m_NameDefine[0].subProgName[i]);
-            ++index;
+        bool flag = false;
+        for (int i = 0; i < ui->tableWgtNameDef->rowCount(); i++)
+        {
+            auto defaultItem = ui->tableWgtNameDef->item(i, 0);
+            auto revisedItem = ui->tableWgtNameDef->item(i, 1);
+            auto defaultName = defaultItem->text();
+            auto revisedName = defaultItem->text();
+            if (revisedName != defaultName)
+            {
+                revisedItem->setText(defaultName);
+                flag = true;
+            }
         }
+        ui->btnSaveNameDef->setParaChangedFlag(flag);
+    });
 
-        for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            item->setText(m_NameDefine[0].axisName[i]);
-            ++index;
-        }
+    connect(ui->coboxGroupSelectNameDef, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
+        auto findAndScrollToItem = [this](const QString& targetName) {
+            for (int row = 0; row < ui->tableWgtNameDef->rowCount(); ++row) {
+                QTableWidgetItem* item = ui->tableWgtNameDef->item(row, 0);
+                if (item && item->text() == targetName) {
+                    ui->tableWgtNameDef->setCurrentItem(item);
+                    ui->tableWgtNameDef->scrollToItem(item, QAbstractItemView::PositionAtTop);
+                    return true;
+                }
+            }
+            return false;
+        };
 
-        for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            item->setText(m_NameDefine[0].varName[i]);
-            ++index;
-        }
-
-        for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            item->setText(m_NameDefine[0].stackName[i]);
-            ++index;
-        }
-
-        for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            item->setText(m_NameDefine[0].followStackName[i]);
-            ++index;
-        }
-
-        for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            item->setText(m_NameDefine[0].timerName[i]);
-            ++index;
+        switch (index) {
+        case 0: // 登陆权限
+            findAndScrollToItem(m_NameDefine[0].adminName);
+            break;
+        case 1: // 子程序
+            findAndScrollToItem(m_NameDefine[0].subProgName[0]);
+            break;
+        case 2: // 轴
+            findAndScrollToItem(m_NameDefine[0].axisName[0]);
+            break;
+        case 3: // 变量
+            findAndScrollToItem(m_NameDefine[0].varName[0]);
+            break;
+        case 4: // 堆叠
+            findAndScrollToItem(m_NameDefine[0].stackName[0]);
+            break;
+        case 5: // 放料跟随
+            findAndScrollToItem(m_NameDefine[0].followStackName[0]);
+            break;
+        case 6: // 定时器
+            findAndScrollToItem(m_NameDefine[0].timerName[0]);
+            break;
+        default:
+            break;
         }
     });
 
@@ -2190,7 +2548,7 @@ void Setting::pageSwitchInit()
         {
             QString newTitle = ui->editNoteTitle->text().trimmed();
 
-            QRegularExpression illegalChars("[<>:\"/\\|?*]");
+            QRegularExpression illegalChars("[<>:\"/\\\\|?*.]");
             if (newTitle.isEmpty())
             {
                 MainWindow::pMainWindow->showErrorTip(tr("标题不能为空！"), TipMode::ONLY_OK);
@@ -3443,53 +3801,6 @@ void Setting::saveMachineAllPara(int index)
 
 }
 
-//端口自定义显示
-void Setting::showPortDefine()
-{
-    for(int i=0;i<INPUT_TOTAL_NUM;i++)
-    {
-        QTableWidgetItem* item1=new QTableWidgetItem(m_Port_X[i].definePort);
-        ui->tableWgtPortDef->setItem(i,0,item1);
-        if(m_Port_X[i].functionSet == 1)
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].defineName);
-            ui->tableWgtPortDef->setItem(i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].modifyName);
-            ui->tableWgtPortDef->setItem(i,2,item3);
-        }
-        else
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].ResDefineName);
-            ui->tableWgtPortDef->setItem(i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].ResModifyName);
-            ui->tableWgtPortDef->setItem(i,2,item3);
-        }
-        QTableWidgetItem* item4=new QTableWidgetItem(m_Port_X[i].modifyPort);
-        ui->tableWgtPortDef->setItem(i,3,item4);
-    }
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
-    {
-
-        QTableWidgetItem* item1=new QTableWidgetItem(m_Port_Y[i].definePort);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,0,item1);
-        if(m_Port_Y[i].functionSet == 1)
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].defineName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].modifyName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
-        }
-        else
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].ResDefineName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].ResModifyName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
-        }
-        QTableWidgetItem* item4=new QTableWidgetItem(m_Port_Y[i].modifyPort);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,3,item4);
-    }
-}
 //端口自定义刷新
 void Setting::RefreshPortDefine()
 {
@@ -3610,13 +3921,8 @@ void Setting::savePortDefine()
     emit monitor_port_refreash();
     emit WidgetNameRefresh_signal();
 }
-//保存名称自定义
-void Setting::saveNameDefine()
-{
 
-}
-
-void Setting::modifyPort(int row, int column)
+bool Setting::modifyPort(int row, int column)
 {
     if(column == 2)
     {
@@ -3626,7 +3932,12 @@ void Setting::modifyPort(int row, int column)
         keyboard->setText(originText);
         keyboard->setCurrentEditObj(nullptr);
         keyboard->exec();
-        item->setText(keyboard->getInputText());
+        auto inputText = keyboard->getInputText();
+        if (originText != inputText)
+        {
+            item->setText(inputText);
+            return true;
+        }
     }
     else if(column == 3)
     {
@@ -3635,9 +3946,18 @@ void Setting::modifyPort(int row, int column)
             IOPortDialog dialog(nullptr, IOPortMode::IN);
             if (dialog.exec() == QDialog::Accepted)
             {
-                QString text = dialog.getIOOnlineIn();
-                m_Port_X[row].actualPortNum = static_cast<uint8_t>(dialog.getInputPort());
-                ui->tableWgtPortDef->item(row, column)->setText(text);
+//                QString text = dialog.getIOOnlineIn();
+//                m_Port_X[row].actualPortNum = static_cast<uint8_t>(dialog.getInputPort());
+//                ui->tableWgtPortDef->item(row, column)->setText(text);
+                QString portName = dialog.getIOOnlineIn();
+                auto portNum = static_cast<uint8_t>(dialog.getInputPort());
+                auto item = ui->tableWgtPortDef->item(row, column);
+                if (portName != item->text())
+                {
+                    item->setText(portName);
+                    item->setData(Qt::UserRole, portNum);
+                    return true;
+                }
             }
         }
         else
@@ -3646,12 +3966,22 @@ void Setting::modifyPort(int row, int column)
             if (dialog.exec() == QDialog::Accepted)
             {
                 QString text = dialog.getIOOnlineOut();
-                m_Port_Y[row-INPUT_TOTAL_NUM].actualPortNum = static_cast<uint8_t>(dialog.getOutputPort());
-                ui->tableWgtPortDef->item(row, column)->setText(text);
+//                m_Port_Y[row-INPUT_TOTAL_NUM].actualPortNum = static_cast<uint8_t>(dialog.getOutputPort());
+//                ui->tableWgtPortDef->item(row, column)->setText(text);
+
+                QString portName = dialog.getIOOnlineOut();
+                auto portNum = static_cast<uint8_t>(dialog.getOutputPort());
+                auto item = ui->tableWgtPortDef->item(row, column);
+                if (portName != item->text())
+                {
+                    item->setText(portName);
+                    item->setData(Qt::UserRole, portNum);
+                    return true;
+                }
             }
         }
     }
-
+    return false;
 }
 
 //替换logo处理

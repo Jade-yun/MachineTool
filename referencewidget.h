@@ -20,6 +20,8 @@ struct ReferPointPara
     DraggableButton* button; // 直接绑定按钮对象
 
     QPoint pointPos; // 参考点在ui上的位置
+
+    int axisPos[6];
 };
 
 class ReferenceWidget : public QDialog

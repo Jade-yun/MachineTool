@@ -8,8 +8,6 @@
 #include <QGroupBox>
 
 #include "draggablebutton.h"
-#include "customkeyboard.h"
-#include "cmd.h"
 #include "referencewidget.h"
 #include "logindialog.h"
 
@@ -63,6 +61,7 @@ private slots:
 
     void on_btnEditReference_clicked();
     void on_btnNewButtonReference_clicked();
+    void on_btnRefresh_clicked();
     void on_btnDeleteButtonReference_clicked();
     void on_checkBoxEditPosReference_stateChanged(int arg1);
     void on_btnImportPictureReference_clicked();
@@ -74,6 +73,7 @@ private slots:
     void onSaveKeyDef();
     void onCheckSavedGuide();
     void onCheckSavedReferPointPara();   
+
 private:
     void initVar();
     void updateReferPointsTable();

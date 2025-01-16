@@ -7,6 +7,9 @@
 
 
 extern QString m_configFileNamePath;
+extern const QString CustomizeNameDefPath;
+extern QString m_configPortXYNamePath;
+extern QString m_configPortXYNameIniPath;
 
 QString getValue(QString prefix, QString key, QString defaultV);
 void   setValue(QString prefix, QString key, QString value);
@@ -68,6 +71,15 @@ extern void getOutportInterlock(uint8_t defaultV = 0);
 extern void setOutportInterlock(uint8_t value[OUT_INTERLOCK_NUM][4]);
 //端口自定义
 extern void setPortDefineNameOrPortNum();
+
+/**
+ * @brief writePortDefInfo 仅写入修改名称和修改端口号
+ */
+void writePortDefInfo();
+/**
+ * @brief readPortDefInfo 读取默认和修改的端口相关信息
+ */
+void readPortDefInfo();
 
 // 名称自定义
 /**

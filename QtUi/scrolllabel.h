@@ -51,10 +51,11 @@ private:
 
     QString blank;//空格
     int blank_wp;//空格的像素宽度
-
     int start_scroll;
 
     uint8_t flag; //判断是否应该开启滚动 0否 1真
+
+    QString content; // 文本
 };
 
 #endif // SCROLLLABEL_H

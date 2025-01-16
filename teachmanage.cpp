@@ -59,13 +59,21 @@ TeachManage::~TeachManage()
 void TeachManage::on_btn_New_clicked()
 {
 
-    QString fileName = ui->lineEdit_NowFileName->text();
+    QString programName = ui->lineEdit_NowFileName->text().trimmed();
+    QRegularExpression illegalChars("[<>:\"/\\\\|?*.]");
 
-    auto res = newBuildProgram(fileName);
+    if (programName.contains(illegalChars))
+    {
+        ErrorTipDialog dlgTip;
+        dlgTip.setMessage(tr("程序名格式错误！"));
+        dlgTip.exec();
+        return;
+    }
+
+    auto res = newBuildProgram(programName);
 //    res = 0;
     if (res == 0)
     {
-        QString programName = ui->lineEdit_NowFileName->text();
         QString changeTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
 //        addOneRowToTable(ui->tableTeachManage);
         addNewRowToTable(programName, changeTime, 0);
@@ -556,6 +564,15 @@ void TeachManage::updateFilePermission(int index)
         QString progName = item->text();
 
         ::setProgramPermission(progName, index);
+
+        for (auto &progInfo : m_ProgramNameAndPath)
+        {
+            if (progInfo.fileName == progName)
+            {
+                progInfo.filePermission = index;
+                break;
+            }
+        }
     }
 }
 

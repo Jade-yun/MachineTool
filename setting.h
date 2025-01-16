@@ -79,6 +79,7 @@ private:
     void init();
     void initWidgets();
 
+    void setupPortDefine(); // 端口自定义
     void setupNameDefine();
     void setupMenuAuthority();
 //    void saveMenuState(const QList<MenuItem *> &menuItems);
@@ -99,7 +100,7 @@ private slots:
 
 public:
     void UpgradeHandle(int click_type);
-    void showPortDefine();          //显示端口自定义
+
 signals:
     void LOGO_Refresh();
     void monitor_port_refreash();
@@ -108,6 +109,7 @@ signals:
     void sysNameChanged(const QString& name);
     void updatemonitorhandcontrol();//更新监视界面手控器界面内容
     void WidgetNameRefresh_signal();//教导界面控件名称需要刷新信号
+    void coboxVarSelectVarPreOpItemSet_signal();//教导界面变量类型复选框刷新信号
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型
@@ -259,9 +261,8 @@ private slots:
    void saveMachineAllPara(int index);      //机器参数保存并下发
 
    void savePortDefine();    //保存端口自定义
-   void saveNameDefine();    //保存名称自定义（仅保存在配置文件中，不进行发送）
 
-   void modifyPort(int row, int column);           //端口自定义界面修改端口号
+   bool modifyPort(int row, int column);           //端口自定义界面修改端口号
    void on_btnLogoUpdate_clicked();
    // QObject interface
 public:

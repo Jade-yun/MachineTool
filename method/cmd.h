@@ -187,7 +187,7 @@ typedef struct
 {
     uint8_t  refFlag;							//参考点有效性，0无效 1有效
     uint8_t  ret[1];
-    int32_t pos[AXIS_TOTAL_NUM];	//参考点位置，精度0.01mm
+    int32_t pos[AXIS_TOTAL_NUM];	//参考点实际轴位置，精度0.01mm
 
 //    int index; // 标识参考点的指数 参考点3 index = 3;
     QString refName;

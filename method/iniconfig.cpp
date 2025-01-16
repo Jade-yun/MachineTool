@@ -5,6 +5,8 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include "RefreshKernelBuffer.h"
+
 extern QString m_ProgramPath;
 /*****************命令相关参数保存*****************/
 QString m_configCmdPath = "/root/Cmd_Description.txt";
@@ -1032,6 +1034,8 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
         settings.endGroup();
     }
     settings.sync();
+
+    REFRESH_KERNEL_BUFFER("/Settings/ProgramNameAndPathInfo.ini");
 }
 //保存开机加载程序信息
 void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
@@ -1048,16 +1052,16 @@ void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
 //读取开机加载程序信息
 D_ProgramNameAndPathStruct readPowerOnReadOneProInfo()
 {
-    D_ProgramNameAndPathStruct m_ProgramNameAndPath = {"","",0,0,""};
+    D_ProgramNameAndPathStruct temp = {"","",0,0,""};
     QSettings settings(PowerOnReadOneProPath, QSettings::IniFormat);
     settings.beginGroup("PowerOnFileInfo");
-    m_ProgramNameAndPath.fileName = settings.value("name").toString();
-    m_ProgramNameAndPath.filePath = settings.value("path").toString();
-    m_ProgramNameAndPath.index = settings.value("index").toUInt();
-    m_ProgramNameAndPath.filePermission = settings.value("Permission").toUInt();
-    m_ProgramNameAndPath.changeTime = settings.value("time").toString();
+    temp.fileName = settings.value("name").toString();
+    temp.filePath = settings.value("path").toString();
+    temp.index = settings.value("index").toUInt();
+    temp.filePermission = settings.value("Permission").toUInt();
+    temp.changeTime = settings.value("time").toString();
     settings.endGroup();
-    return m_ProgramNameAndPath;
+    return temp;
 }
 
 
@@ -1368,6 +1372,8 @@ void writeNameDefine()
     }
 
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(CustomizeNameDefPath.toLocal8Bit().data());
 }
 
 void writeReferenceInfo()
@@ -1396,6 +1402,7 @@ void writeReferenceInfo()
 
     // Refresh user buffer
     settings.sync();
+    REFRESH_KERNEL_BUFFER(filePath.toLocal8Bit().data());
 }
 
 void readReferenceInfo()
@@ -1425,9 +1432,12 @@ void readReferenceInfo()
 
 void setProgramPermission(const QString &programName, int permission)
 {
-    QSettings settings(m_ProgramPath + "/" + programName + ".progperm", QSettings::IniFormat);
+    const QString filePath = m_ProgramPath + "/" + programName + ".progperm";
+    QSettings settings(filePath, QSettings::IniFormat);
 
     settings.setValue("permission", permission);
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(filePath.toLocal8Bit().data());
 }
 
 int getProgramPermission(const QString &programName)
@@ -1436,4 +1446,74 @@ int getProgramPermission(const QString &programName)
     QSettings settings(m_ProgramPath + "/" + programName + ".progperm", QSettings::IniFormat);
     permission = settings.value("permission", 0).toUInt();
     return permission;
+}
+
+void writePortDefInfo()
+{
+    const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
+    QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
+    for (int i = 0; i < INPUT_TOTAL_NUM; ++i)
+    {
+        settings.beginGroup(QString("X%1").arg(i + 1));
+        settings.setValue("modifyName", m_Port_X[i].modifyName);
+        settings.setValue("modifyPortName", m_Port_X[i].modifyPort);
+        settings.setValue("modifyPortName_Res", m_Port_X[i].ResModifyName);
+        settings.setValue("modifyPortNum", m_Port_X[i].actualPortNum);
+
+        settings.endGroup();
+    }
+    for(int i = 0;i < OUTPUT_TOTAL_NUM; i++)
+    {
+        settings.beginGroup(QString("Y%1").arg(i + 1));
+        settings.setValue("modifyName", m_Port_Y[i].modifyName);
+        settings.setValue("modifyPortName", m_Port_Y[i].modifyPort);
+        settings.setValue("modifyPortName_Res", m_Port_Y[i].ResModifyName);
+        settings.setValue("modifyPortNum", m_Port_Y[i].actualPortNum);
+
+        settings.endGroup();
+    }
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(CustomizePortInfoPath.toLocal8Bit().data());
+}
+
+void readPortDefInfo()
+{
+    const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
+    QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
+
+    for (int i = 0; i < INPUT_TOTAL_NUM; ++i)
+    {
+        settings.beginGroup(QString("X%1").arg(i + 1));
+        {
+            m_Port_X[i].defineName = settings.value("defaultName").toString();
+            m_Port_X[i].definePort = settings.value("defaultPortName").toString();
+            m_Port_X[i].ResDefineName = settings.value("defaultPortName_Res").toString();
+            m_Port_X[i].portNum = settings.value("defaultPortNum").toUInt();
+
+            m_Port_X[i].modifyName = settings.value("modifyName").toString();
+            m_Port_X[i].modifyPort = settings.value("modifyPortName").toString();
+            m_Port_X[i].ResModifyName = settings.value("modifyPortName_Res").toString();
+            m_Port_X[i].actualPortNum = settings.value("modifyPortNum").toUInt();
+        }
+        settings.endGroup();
+    }
+
+    for (int i = 0; i < OUTPUT_TOTAL_NUM; ++i)
+    {
+        settings.beginGroup(QString("Y%1").arg(i + 1));
+        {
+            m_Port_Y[i].defineName = settings.value("defaultName").toString();
+            m_Port_Y[i].definePort = settings.value("defaultPortName").toString();
+            m_Port_Y[i].ResDefineName = settings.value("defaultPortName_Res").toString();
+            m_Port_Y[i].portNum = settings.value("defaultPortNum").toUInt();
+
+            m_Port_Y[i].modifyName = settings.value("modifyName").toString();
+            m_Port_Y[i].modifyPort = settings.value("modifyPortName").toString();
+            m_Port_Y[i].ResModifyName = settings.value("modifyPortName_Res").toString();
+            m_Port_Y[i].actualPortNum = settings.value("modifyPortNum").toUInt();
+        }
+        settings.endGroup();
+    }
 }

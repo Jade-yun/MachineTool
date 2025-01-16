@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>8</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -557,7 +557,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -3467,8 +3467,8 @@ QPushButton::released{
         <rect>
          <x>740</x>
          <y>60</y>
-         <width>271</width>
-         <height>91</height>
+         <width>261</width>
+         <height>111</height>
         </rect>
        </property>
        <property name="font">
@@ -3488,8 +3488,8 @@ QPushButton::released{
        <widget class="QPushButton" name="btnRestoreNameAllPortDef">
         <property name="geometry">
          <rect>
-          <x>143</x>
-          <y>30</y>
+          <x>140</x>
+          <y>40</y>
           <width>115</width>
           <height>48</height>
          </rect>
@@ -3533,8 +3533,8 @@ QPushButton::released{
        <widget class="QPushButton" name="btnRestoreNameOnePortDef">
         <property name="geometry">
          <rect>
-          <x>12</x>
-          <y>30</y>
+          <x>10</x>
+          <y>40</y>
           <width>115</width>
           <height>48</height>
          </rect>
@@ -3580,9 +3580,9 @@ QPushButton::released{
        <property name="geometry">
         <rect>
          <x>740</x>
-         <y>160</y>
-         <width>271</width>
-         <height>91</height>
+         <y>180</y>
+         <width>261</width>
+         <height>111</height>
         </rect>
        </property>
        <property name="font">
@@ -3602,8 +3602,8 @@ QPushButton::released{
        <widget class="QPushButton" name="btnRestorePortAllPortDef">
         <property name="geometry">
          <rect>
-          <x>143</x>
-          <y>30</y>
+          <x>140</x>
+          <y>40</y>
           <width>115</width>
           <height>48</height>
          </rect>
@@ -3647,8 +3647,8 @@ QPushButton::released{
        <widget class="QPushButton" name="btnRestorePortOnePortDef">
         <property name="geometry">
          <rect>
-          <x>12</x>
-          <y>30</y>
+          <x>10</x>
+          <y>40</y>
           <width>115</width>
           <height>48</height>
          </rect>
@@ -3693,8 +3693,8 @@ QPushButton::released{
       <widget class="QPushButton" name="btnExportPortDef">
        <property name="geometry">
         <rect>
-         <x>891</x>
-         <y>270</y>
+         <x>880</x>
+         <y>300</y>
          <width>115</width>
          <height>48</height>
         </rect>
@@ -3743,7 +3743,7 @@ QPushButton::released{
        <property name="geometry">
         <rect>
          <x>750</x>
-         <y>270</y>
+         <y>300</y>
          <width>115</width>
          <height>48</height>
         </rect>
@@ -3788,11 +3788,11 @@ QPushButton::released{
         </size>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnSavePort">
+      <widget class="SaveButton" name="btnSavePort">
        <property name="geometry">
         <rect>
          <x>750</x>
-         <y>340</y>
+         <y>370</y>
          <width>115</width>
          <height>48</height>
         </rect>
@@ -3847,8 +3847,8 @@ QPushButton::released{
         <rect>
          <x>740</x>
          <y>60</y>
-         <width>271</width>
-         <height>91</height>
+         <width>261</width>
+         <height>111</height>
         </rect>
        </property>
        <property name="font">
@@ -3868,8 +3868,8 @@ QPushButton::released{
        <widget class="QPushButton" name="btnRestoreNameAllNameDef">
         <property name="geometry">
          <rect>
-          <x>143</x>
-          <y>30</y>
+          <x>140</x>
+          <y>40</y>
           <width>115</width>
           <height>48</height>
          </rect>
@@ -3913,8 +3913,8 @@ QPushButton::released{
        <widget class="QPushButton" name="btnRestoreNameOneNameDef">
         <property name="geometry">
          <rect>
-          <x>12</x>
-          <y>30</y>
+          <x>10</x>
+          <y>40</y>
           <width>115</width>
           <height>48</height>
          </rect>
@@ -3956,11 +3956,11 @@ QPushButton::released{
         </property>
        </widget>
       </widget>
-      <widget class="QPushButton" name="btnSaveNameDef">
+      <widget class="SaveButton" name="btnSaveNameDef">
        <property name="geometry">
         <rect>
          <x>750</x>
-         <y>240</y>
+         <y>250</y>
          <width>115</width>
          <height>48</height>
         </rect>
@@ -4006,7 +4006,7 @@ QPushButton::released{
        <property name="geometry">
         <rect>
          <x>750</x>
-         <y>170</y>
+         <y>180</y>
          <width>115</width>
          <height>48</height>
         </rect>
@@ -4054,8 +4054,8 @@ QPushButton::released{
       <widget class="QPushButton" name="btnExportNameDef">
        <property name="geometry">
         <rect>
-         <x>891</x>
-         <y>170</y>
+         <x>880</x>
+         <y>180</y>
          <width>115</width>
          <height>48</height>
         </rect>
@@ -4339,6 +4339,11 @@ QPushButton::released{
        <item>
         <property name="text">
          <string>放料跟随</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>定时器</string>
         </property>
        </item>
       </widget>
@@ -37457,6 +37462,16 @@ border: 1px solid black;
    <header>customedit.h</header>
   </customwidget>
   <customwidget>
+   <class>KeyEdit</class>
+   <extends>QLineEdit</extends>
+   <header>keydefinedialog.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SaveButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">savebutton.h</header>
+  </customwidget>
+  <customwidget>
    <class>IOOnlineInEdit</class>
    <extends>QLineEdit</extends>
    <header>ioportdialog.h</header>
@@ -37465,11 +37480,6 @@ border: 1px solid black;
    <class>IOOnlineOutEdit</class>
    <extends>QLineEdit</extends>
    <header>ioportdialog.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KeyEdit</class>
-   <extends>QLineEdit</extends>
-   <header>keydefinedialog.h</header>
   </customwidget>
   <customwidget>
    <class>SigLEDEdit</class>

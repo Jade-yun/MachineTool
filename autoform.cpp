@@ -186,14 +186,6 @@ AutoForm::AutoForm(QWidget *parent) :
         }
     });
 
-    connect(ui->btnOperate, &QPushButton::clicked, [=]() {
-        QPoint pos = ui->btnOperate->mapToGlobal(QPoint(0, 0));
-        menu->exec(QPoint(pos.x(), pos.y() - menu->sizeHint().height()));
-        qDebug()<<"pos.x"<<pos.x()<<"pos.y-menu.height"<<pos.y() - menu->sizeHint().height();
-        qDebug()<<"menuHight"<<menu->sizeHint().height();
-        qDebug()<<"pos.y"<<pos.y();
-    });
-
 /**********************************************************************/
     // these slots are used to adjust global speed
     connect(ui->btnGlobalSpeedAdd, &QPushButton::clicked, [=](){
