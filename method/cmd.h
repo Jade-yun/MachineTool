@@ -76,14 +76,15 @@ enum HandControlKeyCode{
 #define	REFERENCE_TOTAL_NUM						100
 
 //变量总个数
-#define	VAR_TOTAL_NUM									8
+#define	VAR_TOTAL_NUM									16
 //定时器总个数
 #define	TIME_TOTAL_NUM								8
 //逻辑&变量的条件总个数
 #define	REQUIRE_TOTAL_NUM							2
 //搜索运动停止信号总个数
 #define	SEARCH_INPORT_TOTAL_NUM				2
-
+//总标签数
+#define LABEL_MAX_NUM                       100
 //信号设置
 #define OUT_PORT_TYPE_NUM							14		//输出类型个数，普通输出7个 扩展输出7个
 #define OUT_INTERLOCK_NUM							12		//输出互锁个数，普通输出6个 扩展输出6个
@@ -411,7 +412,7 @@ typedef struct
 typedef struct
 {//8Byte
     int32_t sufferOperValue;			//操作数为常量时的常量值；
-    uint8_t	varNum;								//变量编号，1-8
+    uint8_t	varNum;								//变量编号，1-16
     uint8_t	operMode;							//操作类型，0加 1减 2乘 3除 4赋值 5取余
     uint8_t  sufferOperType;				//操作数类型，0常量 1-20变量 21-40轴 101实际产量
     uint8_t  ret[1];
@@ -523,7 +524,6 @@ typedef struct
 
 
 extern P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM];                              //轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
-extern P_ClawActionStruct Temp_ClawActionStruct[3];
 extern P_MachineOutStruct Temp_MachineOutStruct[6];                                          //机床输出控制
 extern P_ReserveOutStruct Temp_ReserveOutStruct;                                             //教导界面预留输出调用
 extern P_WaitInMachineStruct Temp_WaitInMachineStruct;                                       //教导界面机床等待指令
@@ -996,27 +996,29 @@ extern uint16_t m_AxisCurTorque;                                //当前扭矩�
 //机器运行状态宏定义
 #define MAC_STA_STOP_INVALID									0				//停止-无效状态(未回原)
 #define MAC_STA_STOP_STANDBY									1				//停止-待机中(回原完成)
-#define MAC_STA_STOP_TEST											2				//停止-程序调试中
+#define MAC_STA_STOP_TEST										2				//停止-程序调试中
 
 #define MAC_STA_BACK_ORIGIN										10				//机器回原中
-#define MAC_STA_ALARM													11				//报警中
-#define MAC_STA_RESET_ORDER										12			//复位中，按回原点顺序复位
+#define MAC_STA_ALARM											11				//报警中
+#define MAC_STA_RESET_ORDER										12			    //复位中，按回原点顺序复位
 
-#define MAC_STA_MANUAL_INVALID								20				//手动-无效状态(未回原)
-#define MAC_STA_MANUAL_STANDBY								21				//手动-待机中(回原完成)
+#define MAC_STA_MANUAL_INVALID                                  20				//手动-无效状态(未回原)
+#define MAC_STA_MANUAL_STANDBY                                  21				//手动-待机中(回原完成)
 #define MAC_STA_MANUAL_TEST										22				//手动测试中(进入手动测试状态)
-#define MAC_STA_MANUAL_PRO_DEBUG							23				//手动-程序调试中
+#define MAC_STA_MANUAL_PRO_DEBUG                                23				//手动-程序调试中
 
 #define MAC_STA_AUTO_INVALID									30				//自动-无效状态(未回原)
 #define MAC_STA_AUTO_STANDBY									31				//自动-待机中(回原完成)
-#define MAC_STA_RESET													32			//自动-机器复位中
-#define MAC_STA_RUN														33			//自动-运行中
-#define MAC_STA_PAUSE													34			//自动-暂停中
+#define MAC_STA_RESET                                           32			    //自动-机器复位中
+#define MAC_STA_RUN                                             33			    //自动-运行中
+#define MAC_STA_PAUSE                                           34			    //自动-暂停中
 
-#define ALARM_MAX_SIZE 100          // 报警信息最大条数
+#define ALARM_MAX_SIZE                                          100             // 报警信息最大条数
 
 extern uint8_t m_RobotRunSta;															//机器运行状态
 extern uint8_t m_RobotWorkMode;														//机器工作模式
+extern uint8_t m_RobotResetState;                                                             //复位状态 0-未复位 1-复位中 2-复位完成
+extern uint8_t m_RobotOriginState;                                                             //回零状态 0-未回零 1-回零中 2-回零完成
 extern uint16_t m_AlarmNum;																//报警编号，0无故障 1-99紧急停止(急停，重新回原) 100-499急停报警(急停，不需要回原)
                                                                                                             //500-999普通报警(停止) 1000-1499提示报警(暂停) 1500-1999提示(运行状态不变化)
 struct AlarmInfo {
@@ -1046,9 +1048,10 @@ extern P_ProInfoStruct m_ProRunInfo;									//运行信息--当前行号
 extern D_RunInfoStruct m_RunInfo;											//运行信息
 extern D_RunParStruct m_RunPar;												//运行参数
 extern uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM];				//当前每个堆叠组的堆叠计数
+extern uint8_t m_VariableTypeLod[VAR_TOTAL_NUM];                //上一次变量的小数类型 0-整数 1-一位小数 2-两位小数
 extern uint8_t m_VariableType[VAR_TOTAL_NUM];                   //当前变量的小数类型 0-整数 1-一位小数 2-两位小数
 extern uint32_t m_VariableCurValue[VAR_TOTAL_NUM];                       //当前每个变量的变量值
-extern uint32_t m_TimeCurValue[VAR_TOTAL_NUM];					//当前每个定时器的计数值
+extern uint32_t m_TimeCurValue[TIME_TOTAL_NUM];					//当前每个定时器的计数值
 extern uint8_t  m_BackOriginStep[AXIS_TOTAL_NUM];					//回零流程步骤号
 extern uint8_t  m_BackOriginFinishFlag[AXIS_TOTAL_NUM];		//回零完成标志
 extern uint8_t  m_BackOriginOrderCnt;											//回零顺序计数器

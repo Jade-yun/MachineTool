@@ -19,7 +19,7 @@
      <x>0</x>
      <y>50</y>
      <width>641</width>
-     <height>351</height>
+     <height>341</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -59,7 +59,7 @@
          <rect>
           <x>30</x>
           <y>50</y>
-          <width>512</width>
+          <width>542</width>
           <height>102</height>
          </rect>
         </property>
@@ -71,7 +71,7 @@
           <widget class="QComboBox" name="coboxMainBoardIn0">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -222,7 +222,7 @@
           <widget class="QComboBox" name="coboxMainBoardIn1">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -298,7 +298,7 @@
           <widget class="QComboBox" name="coboxMainBoardInExtend1">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -424,7 +424,7 @@
           <widget class="QComboBox" name="coboxMainBoardIn2">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -500,7 +500,7 @@
           <widget class="QComboBox" name="coboxMainBoardInExtend0">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -612,7 +612,7 @@
          <rect>
           <x>30</x>
           <y>50</y>
-          <width>512</width>
+          <width>542</width>
           <height>102</height>
          </rect>
         </property>
@@ -624,7 +624,7 @@
           <widget class="QComboBox" name="coboxMainBoardOut0">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -705,7 +705,7 @@
           <widget class="QComboBox" name="coboxMainBoardOut1">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -786,7 +786,7 @@
           <widget class="QComboBox" name="coboxMainBoardOut2">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -867,7 +867,7 @@
           <widget class="QComboBox" name="coboxMainBoardOutExtend0">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -948,7 +948,7 @@
           <widget class="QComboBox" name="coboxMainBoardOutExtend1">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -1054,7 +1054,7 @@
           <widget class="QComboBox" name="coboxMainBoardOutExtend2">
            <property name="minimumSize">
             <size>
-             <width>110</width>
+             <width>120</width>
              <height>40</height>
             </size>
            </property>
@@ -1092,6 +1092,729 @@
      </widget>
     </widget>
    </widget>
+   <widget class="QWidget" name="pageAxisSearch">
+    <widget class="QWidget" name="layoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>60</y>
+       <width>561</width>
+       <height>172</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <property name="topMargin">
+       <number>6</number>
+      </property>
+      <property name="bottomMargin">
+       <number>6</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>20</number>
+      </property>
+      <item row="0" column="4">
+       <widget class="StateButton" name="AxisSearchIn1button">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>通</string>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>300</number>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="chboxAxisSearchIn2">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5">
+       <widget class="QComboBox" name="coboxAxisSearchIn1">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>101</width>
+          <height>40</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>X13</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X14</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X15</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X16</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X17</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X18</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X19</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X20</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X21</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X22</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X23</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X24</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="StateButton" name="AxisSearchIn2button">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>通</string>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>300</number>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="chboxAxisSearchIn0">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QCheckBox" name="chboxAxisSearchIn1">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QComboBox" name="coboxAxisSearchIn0">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>101</width>
+          <height>40</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>X1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X10</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X12</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="StateButton" name="AxisSearchIn0button">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>通</string>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>300</number>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="chboxAxisSearchExIn1">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QComboBox" name="coboxAxisSearchExIn1">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>101</width>
+          <height>40</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>EX13</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX14</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX15</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX16</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX17</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX18</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX19</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX20</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX21</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX22</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX23</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX24</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="StateButton" name="AxisSearchExIn1button">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>通</string>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>300</number>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QCheckBox" name="chboxAxisSearchExIn0">
+        <property name="minimumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>40</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="autoExclusive">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="StateButton" name="AxisSearchExIn0button">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>80</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>SimSun</family>
+         </font>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::LeftToRight</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>通</string>
+        </property>
+        <property name="autoRepeatDelay">
+         <number>300</number>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QComboBox" name="coboxAxisSearchExIn0">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>101</width>
+          <height>40</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>EX1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX8</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX10</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>EX12</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QComboBox" name="coboxAxisSearchIn2">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>101</width>
+          <height>40</height>
+         </size>
+        </property>
+        <item>
+         <property name="text">
+          <string>X25</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X26</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X27</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X28</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X29</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X30</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X31</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X32</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X33</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X34</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X35</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X36</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
   </widget>
   <widget class="QPushButton" name="btnCancel">
    <property name="geometry">
@@ -1120,6 +1843,13 @@
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>StateButton</class>
+   <extends>QPushButton</extends>
+   <header>statebutton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

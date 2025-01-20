@@ -96,18 +96,18 @@ private:
 private slots:
     void onMenuStateChanged(MenuState newState);
     void updateAppFont();
-
 public:
     void UpgradeHandle(int click_type);
     void showPortDefine();          //显示端口自定义
 signals:
     void LOGO_Refresh();
     void monitor_port_refreash();
-    void RefreshPortDefineSignals();
+    void RefreshPortDefineSignals();//端口自定义界面刷新
     void refreshManualReserve();
     void sysNameChanged(const QString& name);
     void updatemonitorhandcontrol();//更新监视界面手控器界面内容
     void WidgetNameRefresh_signal();//教导界面控件名称需要刷新信号
+    void coboxVarSelectVarPreOpItemSet_signal();//教导界面变量类型复选框刷新信号
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型
@@ -225,9 +225,9 @@ private:
         QComboBox* originDir;					//原点方向，0正向 1反向
         QComboBox* backOriginOrder;		//回原点顺序，0不回原点 1-6回原点顺序
 
-        IOOnlineInEdit* limitMin;               //最小限位信号
-        IOOnlineInEdit* limitMax;               //最大限位信号
-        IOOnlineInEdit* originSignal;               //原点信号
+        IOInEdit* limitMin;               //最小限位信号
+        IOInEdit* limitMax;               //最大限位信号
+        IOInEdit* originSignal;               //原点信号
     };
    std::array<MachineParaWidget, 6> machineParaWidgets;
 

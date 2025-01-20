@@ -26,6 +26,7 @@ VarTypeDialog::VarTypeDialog(QWidget *parent) :
                     ui->coboxVarType5, ui->coboxVarType6, ui->coboxVarType7, ui->coboxVarType8,
                     ui->coboxVarType9, ui->coboxVarType10, ui->coboxVarType11, ui->coboxVarType12,
                     ui->coboxVarType13, ui->coboxVarType14, ui->coboxVarType15, ui->coboxVarType16};
+
 #endif
 
 #if VAR_TOTAL_NUM != 16
@@ -48,7 +49,7 @@ VarTypeDialog::VarTypeDialog(QWidget *parent) :
         coboxVarType[i]->setView(new QListView(coboxVarType[i]));
         coboxVarType[i]->setFocusPolicy(Qt::NoFocus);
     }
-
+    setVariabText();
 }
 
 VarTypeDialog::~VarTypeDialog()
@@ -61,7 +62,8 @@ void VarTypeDialog::saveVariableType()
 
     for (int i = 0; i < VAR_TOTAL_NUM; i++)
     {
-         m_VariableType[i] = coboxVarType[i]->currentIndex();
+        m_VariableTypeLod[i] = m_VariableType[i];
+        m_VariableType[i] = coboxVarType[i]->currentIndex();
     }
     this->accept();
 }
@@ -72,4 +74,35 @@ void VarTypeDialog::Refresh_VarTypeDialog()
     {
         coboxVarType[i]->setCurrentIndex(m_VariableType[i]);
     }
+}
+//设置变量名称显示
+void VarTypeDialog::setVariabText()
+{
+    #if VAR_TOTAL_NUM == 8
+    ui->label_var1->setText(m_NameDefine[1].varName[0]);
+    ui->label_var2->setText(m_NameDefine[1].varName[1]);
+    ui->label_var3->setText(m_NameDefine[1].varName[2]);
+    ui->label_var4->setText(m_NameDefine[1].varName[3]);
+    ui->label_var5->setText(m_NameDefine[1].varName[4]);
+    ui->label_var6->setText(m_NameDefine[1].varName[5]);
+    ui->label_var7->setText(m_NameDefine[1].varName[6]);
+    ui->label_var8->setText(m_NameDefine[1].varName[7]);
+    #elif VAR_TOTAL_NUM == 16
+    ui->label_var1->setText(m_NameDefine[1].varName[0]);
+    ui->label_var2->setText(m_NameDefine[1].varName[1]);
+    ui->label_var3->setText(m_NameDefine[1].varName[2]);
+    ui->label_var4->setText(m_NameDefine[1].varName[3]);
+    ui->label_var5->setText(m_NameDefine[1].varName[4]);
+    ui->label_var6->setText(m_NameDefine[1].varName[5]);
+    ui->label_var7->setText(m_NameDefine[1].varName[6]);
+    ui->label_var8->setText(m_NameDefine[1].varName[7]);
+    ui->label_var9->setText(m_NameDefine[1].varName[8]);
+    ui->label_var10->setText(m_NameDefine[1].varName[9]);
+    ui->label_var11->setText(m_NameDefine[1].varName[10]);
+    ui->label_var12->setText(m_NameDefine[1].varName[11]);
+    ui->label_var13->setText(m_NameDefine[1].varName[12]);
+    ui->label_var14->setText(m_NameDefine[1].varName[13]);
+    ui->label_var15->setText(m_NameDefine[1].varName[14]);
+    ui->label_var16->setText(m_NameDefine[1].varName[15]);
+    #endif
 }

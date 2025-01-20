@@ -997,16 +997,16 @@ void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
 //读取开机加载程序信息
 D_ProgramNameAndPathStruct readPowerOnReadOneProInfo()
 {
-    D_ProgramNameAndPathStruct m_ProgramNameAndPath = {"","",0,0,""};
+    D_ProgramNameAndPathStruct ProgramNameAndPath_Temp = {"","",0,0,""};
     QSettings settings(PowerOnReadOneProPath, QSettings::IniFormat);
     settings.beginGroup("PowerOnFileInfo");
-    m_ProgramNameAndPath.fileName = settings.value("name").toString();
-    m_ProgramNameAndPath.filePath = settings.value("path").toString();
-    m_ProgramNameAndPath.index = settings.value("index").toUInt();
-    m_ProgramNameAndPath.filePermission = settings.value("Permission").toUInt();
-    m_ProgramNameAndPath.changeTime = settings.value("time").toString();
+    ProgramNameAndPath_Temp.fileName = settings.value("name").toString();
+    ProgramNameAndPath_Temp.filePath = settings.value("path").toString();
+    ProgramNameAndPath_Temp.index = settings.value("index").toUInt();
+    ProgramNameAndPath_Temp.filePermission = settings.value("Permission").toUInt();
+    ProgramNameAndPath_Temp.changeTime = settings.value("time").toString();
     settings.endGroup();
-    return m_ProgramNameAndPath;
+    return ProgramNameAndPath_Temp;
 }
 
 

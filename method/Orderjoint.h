@@ -4,7 +4,9 @@
 #include "./method/cmd.h"
 
 extern void getOrderjoinIni();  //获取命令的内容拼接文件信息，用来拼接显示指令内容
-
+extern uint16_t getLabelOrderIndex();
+extern uint16_t ReturnLableListIndex(uint16_t lableNum);
+extern uint16_t ReturnLabelnum(QString LabelText);
 extern void CodeAndContInit(void);
 extern void LeaveBlankSpace(uint8_t size, uint8_t *value);
 extern QString JointStrDeal(P_ProOrderStruct OIS);

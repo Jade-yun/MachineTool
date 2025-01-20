@@ -22,7 +22,7 @@ public:
     void setState(bool state);
 
 private:
-    bool connected;  // 记录按钮的连接状态
+    bool connected = true;  // 记录按钮的连接状态
     QString objectText;
     QString connectedText;
     QString disconnectedText;

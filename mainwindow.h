@@ -62,6 +62,12 @@ private slots:
     void handleAlarm(uint16_t alarmNum);
 
     void updatelabProgramName();
+
+    void Widget_jump_Order_Need_Save_Handel();
+
+    void m_RobotStateRefreash();
+
+    void labProgramNameRollShow();
 public slots:
 
     void slotShowSubWindow();
@@ -76,6 +82,8 @@ signals:
     void alarmOccurred(int alarmNum);
     void Auto_File_List_Refresh_signal(uint8_t ProNum);//刷新自动运行界面列表信号
     void monitor_hand_contril(uint16_t code, int32_t value);//监视界面手控器界面刷新
+    void OrderSave_signal(bool SaveFlag);//发送保存程序指令 SaveFlag=false 不保存 SaveFlag = true 保存
+    void signal_TeachPageInit();//教导界面初始化信号
 private:
     Ui::MainWindow *ui;
 
@@ -101,7 +109,7 @@ private:
     TriMode curMode;
     EventScanner* scanner; // customize input event monitoring
     QTimer* checkParaTimer;
-
+    bool RobotResetPromptFlag=0;//复位弹窗标志 0-未弹窗 1-弹窗
 private:
     void initUI();
     void handleLoginModeChanged(LoginMode mode);
@@ -172,6 +180,40 @@ private:
     bool checked;
 
 
+};
+
+class TextTicker : public QLabel
+{
+    Q_OBJECT
+
+
+public:
+    TextTicker(QWidget *parent = nullptr);
+    ~TextTicker();
+
+
+protected:
+    void paintEvent(QPaintEvent *);
+    void updateIndex();
+
+private:
+    int m_charWidth; //字符串宽度
+    int m_curIndex;
+    QString m_showText; //需要显示的字符串
+    QString calculateVisibleText();
+public:
+
+    QString getText()
+    {
+        return  m_showText;
+    }
+    // 设置滚动文本的内容
+    void setText(const QString &text){
+        QLabel::setText(text); // 调用基类的setText方法设置文本
+        m_showText = text; // 更新内部存储的文本
+        m_charWidth = fontMetrics().averageCharWidth(); // 重新计算字符宽度
+        update(); // 触发重绘
+    }
 };
 
 #endif // MAINWINDOW_H

@@ -20,6 +20,7 @@ extern QStringList programInfoList;                        //程序信息
 extern QStringList referencePointList;                     //每个参考点表示
 extern QStringList LablePartList;
 extern QStringList LableNameList[PRO_NUM];                 //标签指令名字缓存
+extern QStringList CurrentLableNameList;                   //当前操作程序标签指令缓存
 extern QStringList Preview_LableNameList[PRO_NUM];         //浏览指令名字缓存
 extern QStringList programBasicCmdList;                    //基本命令
 

@@ -620,7 +620,7 @@
          </size>
         </property>
         <property name="value">
-         <number>24</number>
+         <number>50</number>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -729,7 +729,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page1AutoState">
       <widget class="QPushButton" name="btnMergeExpand">

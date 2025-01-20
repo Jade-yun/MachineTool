@@ -199,17 +199,17 @@ Teach::Teach(QWidget* parent) :
 
     ui->chboxConstantVarOp->setChecked(true);
     EditOperatorVarPreOp_handle();
-    ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
+    if(ui->coboxVarSelectVarPreOp->currentIndex()<=VAR_TOTAL_NUM)
+    {
+        ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
+    }
+    else
+    {
+        ui->coboxVarSelectVarPreOp->setCurrentIndex(0);
+        ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
+    }
     pageInit();
-    connect(ui->btnModify, &QPushButton::clicked, this, [=](){
-        // 根据当前选中的程序切换到相应的编辑页面
-        if (ui->btnModify->isChecked())
-        {
-            return;
-        }
-        ui->tabWidget_Teach->setCurrentIndex(2);//取消编辑时，自动切换到通用主界面
-        ui->stackedWidget_General->setCurrentWidget(ui->General_main_page);
-    });
+    connect(ui->btnSave,&QPushButton::clicked,this,&Teach::OrderSaveHandel);//保存按钮
 }
 
 Teach::~Teach()
@@ -226,25 +226,39 @@ Teach::~Teach()
 **************************************************************************/
 void Teach::EditOperatorVarPreOp_handle()
 {
-    uint8_t VarType = m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()];
-    if(VarType == 0)
-    {//整数
-       ui->EditOperatorVarPreOp->setText("整数");
-    }
-    else if(VarType == 1)
+    if(ui->coboxVarSelectVarPreOp->currentIndex()<=VAR_TOTAL_NUM)
     {
-        ui->EditOperatorVarPreOp->setText("一位小数");
-    }
-    else if(VarType == 2)
-    {
-        ui->EditOperatorVarPreOp->setText("两位小数");
-    }
+        uint8_t VarType = m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()];
+        if(VarType == 0)
+        {//整数
+            ui->EditOperatorVarPreOp->setText(tr("整数"));
+        }
+        else if(VarType == 1)
+        {
+            ui->EditOperatorVarPreOp->setText(tr("一位小数"));
+        }
+        else if(VarType == 2)
+        {
+            ui->EditOperatorVarPreOp->setText(tr("两位小数"));
+        }
 
-    if(ui->chboxVarSelectVarPreOp->isChecked())
-    {//修改小数位数
-        ui->editConstantVarPostOp->setDecimalPlaces(VarType);
+        if(ui->chboxVarSelectVarPreOp->isChecked())
+        {//修改小数位数
+            ui->editConstantVarPostOp->setDecimalPlaces(VarType);
+        }
+        for(int i=0;i<VAR_TOTAL_NUM;i++)
+        {
+            if(m_VariableTypeLod[i] != m_VariableType[i])
+            {
+                if(OrderNeedSaveFlag == false)
+                {
+                    Teach_timer->start();
+                    OrderNeedSaveFlag = true;
+                    SufferOperNeedRefreash = true;
+                }
+            }
+        }
     }
-    SufferOperNeedRefreash = true;
 }
 /*************************************************************************
 **  函数名：  Pro_AxisActOrderInit()
@@ -269,8 +283,6 @@ void Teach::Pro_AxisActOrderInit(void)
         Temp_AxisMoveOrder[i].advCSpeedFlag = 0;
         Temp_AxisMoveOrder[i].advCSpeedSpeed = 0;
         Temp_AxisMoveOrder[i].referPointNum = 0;
-
-        m_AxisPar[i].axisMaxPos = 0;
     }
 
     ui->cb_General_X1->setChecked(false);
@@ -309,18 +321,9 @@ void Teach::Pro_AxisActOrderInit(void)
 //卡爪动作指令参数初始化
 void Teach::Pro_ClawActionStructInit(void)
 {
-    ui->btn_Material_clamp_1->setText(m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName);
-    ui->btn_finish_product_1->setText(m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName);
-    ui->btn_Claw_roll_1->setText(m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName);
     ui->cb_finish_product_1->setChecked(false);
     ui->cb_Claw_roll_1->setChecked(false);
     ui->cb_Material_clamp_1->setChecked(false);
-    Temp_ClawActionStruct[0].type = 1;
-    Temp_ClawActionStruct[1].type = 1;
-    Temp_ClawActionStruct[2].type = 1;
-    Temp_ClawActionStruct[0].outportNum =  m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum;//实际端口
-    Temp_ClawActionStruct[1].outportNum =  m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum;//实际端口
-    Temp_ClawActionStruct[2].outportNum =  m_Port_Y[CLAW_CLAW_1_CLAMP].portNum;//实际端口
     WidgetNameRefresh();
 }
 //卡爪检测界面参数初始化
@@ -421,7 +424,7 @@ void Teach::Pro_ReserveOutStructInit(void)
     ui->lineEdit_Reserve_time->setText("0.00");
     ui->lineEdit_Reserve_num->setText("0");
     ui->Reserve_Pass_Button->setText("预留通");
-    Temp_ReserveOutStruct.type=0;
+    Temp_ReserveOutStruct.type=1;
     Temp_ReserveOutStruct.function = 0;
     Temp_ReserveOutStruct.interval = 0;
     Temp_ReserveOutStruct.outportNum = 0;
@@ -465,9 +468,9 @@ void Teach::Wait_Signal_Init(void)
         QStringList labelText;
         ui->coboxReturnLabe_box->clear();
         ui->coboxReturnLabe_box->addItem("无标签");
-        for(int i=0;i<LableNameList[m_OperateProNum].count();i++)
+        for(int i=0;i<CurrentLableNameList.count();i++)
         {
-            labelText = LableNameList[m_OperateProNum][i].split(signalSpace);
+            labelText = CurrentLableNameList[i].split(signalSpace);
             if(labelText.length()>1)
             {
                 ui->coboxReturnLabe_box->addItem(labelText[0]);
@@ -490,9 +493,9 @@ void Teach::Wait_Signal_Init(void)
         QStringList labelText;
         ui->coboxReturnLabe_box->clear();
         ui->coboxReturnLabe_box->addItem("无标签");
-        for(int i=0;i<LableNameList[m_OperateProNum].count();i++)
+        for(int i=0;i<CurrentLableNameList.count();i++)
         {
-            labelText = LableNameList[m_OperateProNum][i].split(signalSpace);
+            labelText = CurrentLableNameList[i].split(signalSpace);
             if(labelText.length()>1)
             {
                 ui->coboxReturnLabe_box->addItem(labelText[0]);
@@ -537,8 +540,8 @@ void Teach::Search_Init(void)
     Temp_SearchAxisMoveStruct.reachPosAlarmFlag = 0;
     Temp_SearchAxisMoveStruct.runSpeed = 50;
     Temp_SearchAxisMoveStruct.advCSpeed = 50;
-    memset(Temp_SearchAxisMoveStruct.inportNum,0,sizeof(Temp_SearchAxisMoveStruct.inportNum));
-    memset(Temp_SearchAxisMoveStruct.inporttype,0,sizeof(Temp_SearchAxisMoveStruct.inporttype));
+    memset(Temp_SearchAxisMoveStruct.inportNum,1,sizeof(Temp_SearchAxisMoveStruct.inportNum));
+    memset(Temp_SearchAxisMoveStruct.inporttype,1,sizeof(Temp_SearchAxisMoveStruct.inporttype));
     ui->chboxSearchAxisSelect->setChecked(false);
     ui->chboxResponseStop->setChecked(false);
     ui->coboxSearchAxisSelect->setCurrentIndex(0);
@@ -576,41 +579,48 @@ void Teach::Teach_File_List_Refresh(void)
     uint16_t i=0;
     //先清空表格并重新设置行数和列数
     uint16_t Old_CurrentSelectList = m_CurrentSelectProOrderList;
-    ui->tableWgtTeach->clearContents();
-    ui->tableWgtTeach->setRowCount(0);
-    ui->tableWgtTeach->setColumnCount(3);
-    for(i=0;i<m_OperateProOrderListNum;i++)
+    if(ui && ui->tableWgtTeach)
     {
-        QTableWidgetItem *Teach_File_List_NumItem = new QTableWidgetItem();
-        QTableWidgetItem *Teach_File_List_OrderItem = new QTableWidgetItem();
-        QTableWidgetItem *Teach_File_List_OrderColor = new QTableWidgetItem();
-        Teach_File_List_NumItem->setText(JointRunOrderNum(m_OperateProOrder[i]));
-        Teach_File_List_NumItem->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);//设置执行行号内容居中显示
-        Teach_File_List_OrderItem->setText(JointStrDeal(m_OperateProOrder[i]));//拼接显示内容
-        Teach_File_List_OrderItem->setData(Qt::TextAlignmentRole, Qt::AlignLeft);//内容左右对齐靠左显示
-        Teach_File_List_OrderItem->setData(Qt::TextAlignmentRole, Qt::AlignVCenter);//内容上下对齐居中对齐显示
-        Teach_File_List_OrderItem->setData(Qt::TextWordWrap,1);//设置内容自动换行显示
-        ui->tableWgtTeach->insertRow(i);
-        ui->tableWgtTeach->setItem(i,0,Teach_File_List_NumItem);   //显示命令执行序号
-        ui->tableWgtTeach->setItem(i,2,Teach_File_List_OrderItem);                 //显示命令内容
-        ui->tableWgtTeach->setItem(i,1,Teach_File_List_OrderColor);
-        if(m_OperateProOrder[i].noteFlag == 1)
-        {//屏蔽指令时行背景显示灰色
-            ui->tableWgtTeach->item(i,0)->setBackground(QColor(192, 191, 188));
-            ui->tableWgtTeach->item(i,1)->setBackground(QColor(192, 191, 188));
-            ui->tableWgtTeach->item(i,2)->setBackground(QColor(192, 191, 188));
+        ui->tableWgtTeach->clearContents();
+        ui->tableWgtTeach->setRowCount(0);
+        ui->tableWgtTeach->setColumnCount(3);
+        for(i=0;i<m_OperateProOrderListNum;i++)
+        {
+            QTableWidgetItem *Teach_File_List_NumItem = new QTableWidgetItem();
+            QTableWidgetItem *Teach_File_List_OrderItem = new QTableWidgetItem();
+            QTableWidgetItem *Teach_File_List_OrderColor = new QTableWidgetItem();
+            Teach_File_List_NumItem->setText(JointRunOrderNum(m_OperateProOrder[i]));
+            Teach_File_List_NumItem->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);//设置执行行号内容居中显示
+            Teach_File_List_OrderItem->setText(JointStrDeal(m_OperateProOrder[i]));//拼接显示内容
+            Teach_File_List_OrderItem->setData(Qt::TextAlignmentRole, Qt::AlignLeft);//内容左右对齐靠左显示
+            Teach_File_List_OrderItem->setData(Qt::TextAlignmentRole, Qt::AlignVCenter);//内容上下对齐居中对齐显示
+            Teach_File_List_OrderItem->setData(Qt::TextWordWrap,1);//设置内容自动换行显示
+            ui->tableWgtTeach->insertRow(i);
+            ui->tableWgtTeach->setItem(i,0,Teach_File_List_NumItem);   //显示命令执行序号
+            ui->tableWgtTeach->setItem(i,2,Teach_File_List_OrderItem);                 //显示命令内容
+            ui->tableWgtTeach->setItem(i,1,Teach_File_List_OrderColor);
+            if(m_OperateProOrder[i].noteFlag == 1)
+            {//屏蔽指令时行背景显示灰色
+                ui->tableWgtTeach->item(i,0)->setBackground(QColor(192, 191, 188));
+                ui->tableWgtTeach->item(i,1)->setBackground(QColor(192, 191, 188));
+                ui->tableWgtTeach->item(i,2)->setBackground(QColor(192, 191, 188));
+            }
         }
-
-//        if(m_OperateProOrder[i].cmd == C_LABEL)
-//        {
-//            randomColor = QColor::fromRgb(QRandomGenerator::global()->bounded(256),
-//                                         QRandomGenerator::global()->bounded(256),
-//                                         QRandomGenerator::global()->bounded(256));
-//        }
-//        ui->tableWgtTeach->item(i,1)->setBackground(randomColor);
+        m_CurrentSelectProOrderList = Old_CurrentSelectList;
+        if(m_CurrentSelectProOrderList<=ui->tableWgtTeach->rowCount())
+        {
+            ui->tableWgtTeach->selectRow(m_CurrentSelectProOrderList);
+        }
+        else
+        {
+            qDebug()<<"m_CurrentSelectProOrderList > tableWgtTeach.count";
+        }
     }
-    m_CurrentSelectProOrderList = Old_CurrentSelectList;
-    ui->tableWgtTeach->selectRow(m_CurrentSelectProOrderList);
+    else
+    {
+        qDebug() << "Error: ui or tableWgtTeach is nullptr!";
+    }
+
 }
 //指令行第二列颜色处理
 void Teach::OrderColorShow_Handle()
@@ -631,20 +641,20 @@ void Teach::Refresh_listWgtJumpto()
     {
         if(m_OperateProNum==0)
         {
-            ui->chboxComment->setText("标签"+QString::number(LableNameList[m_OperateProNum].count()+1));
+            ui->chboxComment->setText("标签"+QString::number(getLabelOrderIndex()));
         }
         else if(m_OperateProNum>0&&m_OperateProNum<PRO_NUM)
         {
-            ui->chboxComment->setText("子"+QString::number(m_OperateProNum)+"标签"+QString::number(LableNameList[m_OperateProNum].count()+1));
+            ui->chboxComment->setText("子"+QString::number(m_OperateProNum)+"标签"+QString::number(getLabelOrderIndex()));
         }
         ui->listWgtJumpto->clear();
-        for(int i=0; i<LableNameList[m_OperateProNum].count();i++)
+        for(int i=0; i<CurrentLableNameList.count();i++)
         {
             QListWidgetItem *item = new QListWidgetItem();
             QCheckBox *checkbox = new QCheckBox();
             checkbox->setChecked(false);
             checkbox->setAutoExclusive(true);//check为互斥
-            checkbox->setText(LableNameList[m_OperateProNum][i]);
+            checkbox->setText(CurrentLableNameList[i]);
             checkbox->setFixedSize(ui->listWgtJumpto->width(),37);
             ui->listWgtJumpto->addItem(item);
             ui->listWgtJumpto->setItemWidget(item,checkbox);
@@ -657,13 +667,13 @@ void Teach::Refresh_listWgtJumpto()
     if(ui->tabWidget_Teach->currentWidget() == ui->tabMainPro && ui->stkWgtProgram->currentWidget() == ui->pageLabelEdit)
     {
         ui->listWidget_LabelEdit->clear();
-        for(int i=0; i<LableNameList[m_OperateProNum].count();i++)
+        for(int i=0; i<CurrentLableNameList.count();i++)
         {
             QListWidgetItem *item = new QListWidgetItem();
             QCheckBox *checkbox = new QCheckBox();
             checkbox->setChecked(false);
             checkbox->setAutoExclusive(true);//check为互斥
-            checkbox->setText(LableNameList[m_OperateProNum][i]);
+            checkbox->setText(CurrentLableNameList[i]);
             checkbox->setFixedSize(ui->listWidget_LabelEdit->width(),37);
             ui->listWidget_LabelEdit->addItem(item);
             ui->listWidget_LabelEdit->setItemWidget(item,checkbox);
@@ -944,25 +954,43 @@ void Teach::on_btnDelete_clicked()
     int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除所选动作？"));
     if (reply == QDialog::Accepted)
     {
-        if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) == 0)
+        if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_LABEL)
         {
-            if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_LABEL)
+            P_LabelStruct* LabelStruct = (P_LabelStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            if(LabelStruct->labelNum>0)
             {
-                P_LabelStruct* LabelStruct = (P_LabelStruct*) m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-                if(LabelStruct->labelNum>0)
+                uint16_t temp_labelNum = LabelStruct->labelNum;
+                if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) == 0)
                 {
-                    LableNameList[m_OperateProNum].removeAt(LabelStruct->labelNum-1);
+                    temp_labelNum = ReturnLableListIndex(temp_labelNum);
+                    if(temp_labelNum>0)
+                    {
+                        CurrentLableNameList.removeAt(temp_labelNum);
+                    }
+                    else
+                    {
+                        MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+                        return;
+                    }
+                }
+                 else
+                {
+                    MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+                    return;
                 }
             }
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,1,0);
-            Teach_File_List_Refresh();//刷新程序列表
-            OrderNeedSaveFlag = true;
-            Teach_timer->start();
         }
         else
         {
-            MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+            if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
+            {
+                MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+            }
         }
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,1,0);
+        Teach_File_List_Refresh();//刷新程序列表
+        OrderNeedSaveFlag = true;
+        Teach_timer->start();
     }
 }
 //教导界面-分解按钮处理函数
@@ -1004,6 +1032,8 @@ void Teach::on_btnMoveUp_clicked()
     g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,4,1);//每次上移一行
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,4,1);
     Teach_File_List_Refresh();//刷新程序列表
+    OrderNeedSaveFlag = true;
+    Teach_timer->start();
 }
 //教导界面-下移按钮处理函数
 void Teach::on_btnMoveDown_clicked()
@@ -1092,20 +1122,20 @@ void Teach::on_btnInset_clicked()
                 data_Temp[6] = 0;
                 if(ui->cb_finish_product_1->isChecked())
                 {//成品1夹紧
-                    data_Temp[9] = Temp_ClawActionStruct[1].outportNum;//输出端口号
-                    data_Temp[10] = Temp_ClawActionStruct[1].type;
+                    data_Temp[9] = m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum;//输出端口号
+                    data_Temp[10] = ui->btn_finish_product_1->getState();//控制类型
                     g_InsertProOrder(data_Temp);
                 }
                 else if(ui->cb_Claw_roll_1->isChecked())
-                {//卡爪1夹紧
-                    data_Temp[9] = Temp_ClawActionStruct[2].outportNum;//输出端口号
-                    data_Temp[10] = Temp_ClawActionStruct[2].type;
+                {//卡爪1正转
+                    data_Temp[9] = m_Port_Y[CLAW_CLAW_1_CLAMP].portNum;//输出端口号
+                    data_Temp[10] = ui->btn_Claw_roll_1->getState();//控制类型
                     g_InsertProOrder(data_Temp);
                 }
                 else if(ui->cb_Material_clamp_1->isChecked())
                 {//原料1夹紧
-                    data_Temp[9] = Temp_ClawActionStruct[0].outportNum;//输出端口号
-                    data_Temp[10] = Temp_ClawActionStruct[0].type;
+                    data_Temp[9] = m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum;//输出端口号
+                    data_Temp[10] = ui->btn_Material_clamp_1->getState();//控制类型
                     g_InsertProOrder(data_Temp);
                 }
                 Teach_File_List_Refresh();//刷新程序列表
@@ -1139,15 +1169,15 @@ void Teach::on_btnInset_clicked()
                     }
                     else if(ui->cb_General_PassStop->isChecked())
                     {//夹紧检测结束
-                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
+                        if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].portNum;
                         }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
+                        else if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].portNum;
                         }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
+                        else if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].portNum;
                         }
@@ -1156,15 +1186,15 @@ void Teach::on_btnInset_clicked()
                     }
                     else if(ui->cb_General_PineStart->isChecked())
                     {//松开检测开始
-                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                        if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
                         }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                        else if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
                         }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                        else if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
                         }
@@ -1173,15 +1203,15 @@ void Teach::on_btnInset_clicked()
                     }
                     else if(ui->cb_General_PineEnd->isChecked())
                     {//松开检测结束
-                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                        if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
                         }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                        else if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
                         }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                        else if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
                         {
                             data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
                         }
@@ -1256,7 +1286,7 @@ void Teach::on_btnInset_clicked()
                     }
                     else if(Temp_MachineOutStruct[3].type == 0)
                     {//自动门关
-                        data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].portNum;
+                        data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
                     }
                     data_Temp[10] = Temp_MachineOutStruct[3].type;
                     g_InsertProOrder(data_Temp);
@@ -1275,7 +1305,7 @@ void Teach::on_btnInset_clicked()
                     data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
                     if(Temp_MachineOutStruct[5].type == 0)
                     {//卡盘1松开
-                        data_Temp[9] = m_Port_Y[MACHINE_CHUCK_1_LOOSENED].portNum;
+                        data_Temp[9] = m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum;
                     }
                     else if(Temp_MachineOutStruct[5].type == 1)
                     {//卡盘1夹紧
@@ -1445,6 +1475,7 @@ void Teach::on_btnInset_clicked()
             data_Temp[13] = Temp_ReserveOutStruct.type;
             if(Temp_ReserveOutStruct.function == 0)
             {
+                data_Temp[13] = ui->Reserve_Pass_Button->getState();
                 Temp_ReserveOutStruct.outportNum = ui->lineEdit_Reserve_Pass_Button->getCurrentPort();
                 data_Temp[11] = Temp_ReserveOutStruct.outportNum;
                 if(ui->lineEdit_Reserve_Pass_Button->text()!="")
@@ -1485,13 +1516,17 @@ void Teach::on_btnInset_clicked()
                 if(ui->Wait_machine_signal_box->isChecked())
                 {
                     Temp_WaitInMachineStruct.inportSta = 1;//默认有信号
-                    if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].modifyName)
+                    if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].modifyName)
                     {
                         Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].portNum;
                     }
                     else if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].modifyName)
                     {
                         Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].portNum;
+                    }
+                    else if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_KNIFE_SEAT_ORIGIN_1].modifyName)
+                    {
+                        Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_KNIFE_SEAT_ORIGIN_1].portNum;
                     }
                     data_Temp[5] = C_WAIT_IN_MACHINE;
                     data_Temp[9] = Temp_WaitInMachineStruct.backListNum;
@@ -1504,6 +1539,7 @@ void Teach::on_btnInset_clicked()
                 }
                 break;
             case 1://等待卡爪界面
+            {
                 if(ui->Wait_clamp_on_chbox->isChecked())
                 {
                     if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].modifyName)
@@ -1579,7 +1615,8 @@ void Teach::on_btnInset_clicked()
                         Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_CHUCK_1_CLAMP].portNum;
                     }
                 }
-                Temp_WaitInClawStruct.label = ui->coboxReturnLabe_box->currentIndex();
+                uint16_t labelnum = ReturnLabelnum(ui->coboxReturnLabe_box->currentText());
+                Temp_WaitInClawStruct.label = labelnum;
                 Temp_WaitInClawStruct.backListNum = ui->editReturnStepNum->text().toInt();
                 data_Temp[5] = C_WAIT_IN_CLAW;
                 data_Temp[9] = Temp_WaitInClawStruct.backListNum;
@@ -1606,8 +1643,11 @@ void Teach::on_btnInset_clicked()
                     g_InsertProOrder(data_Temp);
                 }
                 break;
+            }
             case 2://等待预留界面
-                Temp_WaitInReserveStruct.label = ui->coboxReturnLabe_box->currentIndex();
+            {
+                uint16_t labelnum = ReturnLabelnum(ui->coboxReturnLabe_box->currentText());
+                Temp_WaitInReserveStruct.label = labelnum;
                 Temp_WaitInReserveStruct.backListNum = ui->editReturnStepNum->text().toInt();
                 data_Temp[5] = C_WAIT_IN_RESERVE;
                 data_Temp[9] = Temp_WaitInReserveStruct.backListNum;
@@ -1671,6 +1711,7 @@ void Teach::on_btnInset_clicked()
                     }
                 }
                 break;
+            }
             default:
                 break;
             }
@@ -1781,6 +1822,8 @@ void Teach::on_btnInset_clicked()
                 {
                     Temp_SearchAxisMoveStruct.inportNum[0] = ui->editSigStop->getCurrentPort();//获取停止通道
                     Temp_SearchAxisMoveStruct.inportNum[1] = ui->editSigStop->getCurrentPort();//获取停止通道
+                    Temp_SearchAxisMoveStruct.inporttype[0] = ui->editSigStop->getPortSetState();
+                    Temp_SearchAxisMoveStruct.inporttype[1] = ui->editSigStop->getPortSetState();
                     data_Temp[29] = Temp_SearchAxisMoveStruct.inportNum[0];
                     data_Temp[30] = Temp_SearchAxisMoveStruct.inportNum[1];
                     data_Temp[31] = Temp_SearchAxisMoveStruct.inporttype[0];
@@ -2056,39 +2099,42 @@ void Teach::on_btnInset_clicked()
             data_Temp[5] = C_LABEL;
             if(ui->chboxComment->isChecked())
             {
-                uint16_t LableIndex = LableNameList[m_OperateProNum].count()+1;
-                QString chboxCommentName = "";//标签插入复选框
-                QString Lable_Name = "";//插入标签名称
-                if(m_OperateProNum == 0)
+                uint16_t LableIndex = getLabelOrderIndex();
+                if(LableIndex>0)
                 {
-                    chboxCommentName = "标签"+QString::number(LableIndex);
-                    ui->chboxComment->setText(chboxCommentName);
+                    QString chboxCommentName = "";//标签插入复选框
+                    QString Lable_Name = "";//插入标签名称
+                    if(m_OperateProNum == 0)
+                    {
+                        chboxCommentName = "标签"+QString::number(LableIndex);
+                        ui->chboxComment->setText(chboxCommentName);
+                    }
+                    else
+                    {
+                        chboxCommentName = "子"+QString::number(m_OperateProNum)+"标签"+QString::number(LableIndex);
+                        ui->chboxComment->setText(chboxCommentName);
+                    }
+                    Lable_Name = chboxCommentName+" "+ui->txt_label->text();
+                    CurrentLableNameList.append(QString(Lable_Name));
+
+                    QListWidgetItem *item = new QListWidgetItem();
+                    QCheckBox *checkbox = new QCheckBox();
+                    checkbox->setChecked(false);
+                    checkbox->setAutoExclusive(true);//check为互斥
+                    checkbox->setText(Lable_Name);
+                    checkbox->setFixedSize(ui->listWgtJumpto->width(),37);
+                    ui->listWgtJumpto->addItem(item);
+                    ui->listWgtJumpto->setItemWidget(item,checkbox);
+
+                    connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
+                                    onCheckBoxToggled(checkbox, checked);
+                                });
+
+                    data_Temp[9] = LableIndex;
+                    data_Temp[10] = LableIndex>>8;
+                    data_Temp[11] = 0;//插入一个新标签
+                    g_InsertProOrder(data_Temp);
                 }
-                else
-                {
-                    chboxCommentName = "子"+QString::number(m_OperateProNum)+"标签"+QString::number(LableIndex);
-                    ui->chboxComment->setText(chboxCommentName);
-                }
-                Lable_Name = chboxCommentName+" "+ui->txt_label->text();
-                LableNameList[m_OperateProNum].append(QString(Lable_Name));
-
-                QListWidgetItem *item = new QListWidgetItem();
-                QCheckBox *checkbox = new QCheckBox();
-                checkbox->setChecked(false);
-                checkbox->setAutoExclusive(true);//check为互斥
-                checkbox->setText(Lable_Name);
-                checkbox->setFixedSize(ui->listWgtJumpto->width(),37);
-                ui->listWgtJumpto->addItem(item);
-                ui->listWgtJumpto->setItemWidget(item,checkbox);
-
-                connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
-                                onCheckBoxToggled(checkbox, checked);
-                            });
-
-                data_Temp[9] = LableIndex;
-                data_Temp[10] = LableIndex>>8;
-                data_Temp[11] = 0;//插入一个新标签
-                g_InsertProOrder(data_Temp);
             }
             else if(listWgtJumptoLabelIndex > 0)
             {
@@ -2103,9 +2149,33 @@ void Teach::on_btnInset_clicked()
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,0);
     Teach_timer->start();
 }
-
-//教导界面-保存按钮处理函数
-void Teach::on_btnSave_clicked()
+//主界面切换指令提示保存处理
+void Teach::widgetSwitchOrderSaveHandel(bool SaveFlag)
+{
+    if(SaveFlag == true)
+    {
+        OrderSaveHandel();
+    }
+    else
+    {
+        m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
+        g_TotalProCopy(m_OperateProOrder,m_ProOrder[m_OperateProNum]);
+        CurrentLableNameList = LableNameList[m_OperateProNum];
+        saveProgram(m_CurrentProgramNameAndPath);
+        if(SufferOperNeedRefreash == true)
+        {//变量类型发生改变时，下发更新变量类型
+            std::copy(std::begin(m_VariableTypeLod),std::end(m_VariableTypeLod),std::begin(m_VariableType));//将老的变量类型赋值给新的
+            SufferOperNeedRefreash = false;
+        }
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,1);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,1);
+        Teach_File_List_Refresh();//刷新程序列表
+        OrderNeedSaveFlag = false;
+    }
+}
+//指令保存处理函数
+void Teach::OrderSaveHandel()
 {
     if(m_OperateProOrderListNum == 0)
     {//如果未载入程序，直接返回
@@ -2115,7 +2185,9 @@ void Teach::on_btnSave_clicked()
     {
         if (ui->stkWgtProgram->currentWidget() == ui->pageAxisAction)
         {
+
             Edit_AxisMove_Save_handle();
+
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageClawAction)
         {
@@ -2193,12 +2265,12 @@ void Teach::on_btnSave_clicked()
                 if(ui->checkBox_fault_num->isChecked())
                 {
                     OtherAlarmCust->type = 4;
-                    OtherAlarmCust->alarmNum = ui->lineEdit_edit_fault_num->text().toUInt();
+                    OtherAlarmCust->alarmNum = Temp_OtherAlarmCustStruct.alarmNum;
                 }
                 else if(ui->checkBox_tips_num->isChecked())
                 {
                     OtherAlarmCust->type = 5;
-                    OtherAlarmCust->alarmNum = ui->lineEdit_edit_tips_num->text().toUInt();
+                    OtherAlarmCust->alarmNum = Temp_OtherAlarmCustStruct.alarmNum;
                 }
             }
         }
@@ -2409,11 +2481,16 @@ void Teach::on_btnSave_clicked()
                 if(LabelStruct->type == 0)
                 {//替换标签内容
                     // 找到第一个空格的位置
-                    int spaceIndex = LableNameList[m_OperateProNum][LabelStruct->labelNum-1].indexOf(' ');
-                    if (spaceIndex != -1) { // 如果找到了空格
-                        // 替换空格之后的内容
-                        QString revise_Text = ui->label_Edit->text();
-                        LableNameList[m_OperateProNum][LabelStruct->labelNum-1].replace(spaceIndex + 1, revise_Text.length(), revise_Text);
+                    uint16_t LabelIndex = ReturnLableListIndex(LabelStruct->labelNum);
+                    if(LabelIndex>0)
+                    {
+                        int spaceIndex = CurrentLableNameList[LabelIndex].indexOf(' ');
+                        if (spaceIndex != -1) { // 如果找到了空格
+                            // 替换空格之后的内容
+                            QString revise_Text = ui->label_Edit->text();
+                            QString clearedText = CurrentLableNameList[LabelIndex].left(spaceIndex + 1); // 保留包括空格在内的左侧部分
+                            CurrentLableNameList[LabelIndex]=clearedText+revise_Text;
+                        }
                     }
                 }
                 else if(LabelStruct->type == 1)
@@ -2494,6 +2571,7 @@ void Teach::on_btnSave_clicked()
             m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_OtherDelay->text().toDouble()*100;
         }
     }
+
     bool isSpeedTeach = true;
     if(ui->tabWidget_Teach->currentWidget() == ui->tabUniversal)
     {//速度教导界面参数保存
@@ -2503,23 +2581,26 @@ void Teach::on_btnSave_clicked()
             Save_Speed_Educat();
         }
     }
-    g_TotalProCopy(m_ProOrder[m_OperateProNum],m_OperateProOrder);
-    saveProgram(m_CurrentProgramNameAndPath);
-
     if(isSpeedTeach)
     {
+        if(SufferOperNeedRefreash == true)
+        {//变量类型发生改变时，下发更新变量类型
+            SufferOperUpdata_Handel();
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_STA_VAR_TYPE,1,0);
+            SufferOperNeedRefreash = false;
+        }
+        g_TotalProCopy(m_ProOrder[m_OperateProNum],m_OperateProOrder);
+        saveProgram(m_CurrentProgramNameAndPath);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,1);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,1);
-        if(SufferOperNeedRefreash == true)
-        {//变量类型发生改变时，下发更新变量类型
-            g_Usart->ExtendSendParDeal(CMD_MAIN_PRO,CMD_SUN_STA_VAR_TYPE,1,0);
-            SufferOperNeedRefreash = false;
-        }
+
     }
     Teach_File_List_Refresh();//刷新程序列表
+    qDebug() << "save Refresh end";
     OrderNeedSaveFlag = false;
 }
+
 //变量类型更新函数
 void Teach::SufferOperUpdata_Handel()
 {
@@ -2529,17 +2610,138 @@ void Teach::SufferOperUpdata_Handel()
         {
             for(int j=0;j<m_ProInfo.proNum[i];j++)
             {
-                if(m_ProOrder[i][j].cmd == )
+                if(m_ProOrder[i][j].cmd == C_LOGIC_IF)
+                {
+                    P_LogicIfStruct* LogicIfStruct =(P_LogicIfStruct*)m_ProOrder[i][j].pData;
+                    if(LogicIfStruct->reqSelectFlag[0] == 0)
+                    {
+                        IfOrderSufferOperUpdata(LogicIfStruct,0);
+                    }
+                    else
+                    {
+                        IfOrderSufferOperUpdata(LogicIfStruct,0);
+                        IfOrderSufferOperUpdata(LogicIfStruct,1);
+                    }
+                }
+                if(m_ProOrder[i][j].cmd == C_LOGIC_VAR)
+                {
+                    P_LogicVarStruct* LogicVarStruct =(P_LogicVarStruct*)m_ProOrder[i][j].pData;
+                    LogicVar_SufferOperUpdata(LogicVarStruct);
+                }
             }
         }
         else
         {
             for(int j=0;j<m_ProInfo.proNum[m_OperateProNum];j++)
             {
-
+                if(m_OperateProOrder[j].cmd == C_LOGIC_IF)
+                {
+                    P_LogicIfStruct* LogicIfStruct =(P_LogicIfStruct*)m_OperateProOrder[j].pData;
+                    if(LogicIfStruct->reqSelectFlag[0] == 0)
+                    {
+                        IfOrderSufferOperUpdata(LogicIfStruct,0);
+                    }
+                    else
+                    {
+                        IfOrderSufferOperUpdata(LogicIfStruct,0);
+                        IfOrderSufferOperUpdata(LogicIfStruct,1);
+                    }
+                }
+                if(m_OperateProOrder[j].cmd == C_LOGIC_VAR)
+                {
+                    P_LogicVarStruct* LogicVarStruct =(P_LogicVarStruct*)m_OperateProOrder[j].pData;
+                    LogicVar_SufferOperUpdata(LogicVarStruct);
+                }
             }
         }
-
+    }
+}
+//逻辑&变量-变量-变量命令-变量类型发生改变时调用处理函数
+void Teach::LogicVar_SufferOperUpdata(P_LogicVarStruct* LogicVarStruct)
+{
+    uint8_t VariableTypeIndex = LogicVarStruct->varNum-1;
+    if(m_VariableTypeLod[VariableTypeIndex] != m_VariableType[VariableTypeIndex])
+    {
+        if(LogicVarStruct->sufferOperType == 0)
+        {
+            if(m_VariableType[VariableTypeIndex] == 0)
+            {
+                if(m_VariableTypeLod[VariableTypeIndex] == 1)
+                {
+                    LogicVarStruct->sufferOperValue=LogicVarStruct->sufferOperValue/10;
+                }
+                else if(m_VariableTypeLod[VariableTypeIndex] == 2)
+                {
+                    LogicVarStruct->sufferOperValue=LogicVarStruct->sufferOperValue/100;
+                }
+            }
+            else if(m_VariableType[VariableTypeIndex] == 1)
+            {
+                if(m_VariableTypeLod[VariableTypeIndex] == 0)
+                {
+                    LogicVarStruct->sufferOperValue=LogicVarStruct->sufferOperValue*10;
+                }
+                else if(m_VariableTypeLod[VariableTypeIndex] == 2)
+                {
+                    LogicVarStruct->sufferOperValue=LogicVarStruct->sufferOperValue/10;
+                }
+            }
+            else if(m_VariableType[VariableTypeIndex] == 2)
+            {
+                if(m_VariableTypeLod[VariableTypeIndex] == 0)
+                {
+                    LogicVarStruct->sufferOperValue=LogicVarStruct->sufferOperValue*100;
+                }
+                else if(m_VariableTypeLod[VariableTypeIndex] == 1)
+                {
+                    LogicVarStruct->sufferOperValue=LogicVarStruct->sufferOperValue*10;
+                }
+            }
+        }
+    }
+}
+//if条件指令变量类型修改时调用处理函数
+void Teach::IfOrderSufferOperUpdata(P_LogicIfStruct* LogicIfStruct,uint8_t index)
+{
+    if(LogicIfStruct->cmpType[index]>=1 && LogicIfStruct->cmpType[index]<=20 && LogicIfStruct->sufferCmpType[index]==0)
+    {//比较类型为常量
+        uint8_t VariableTypeIndex = LogicIfStruct->cmpType[index]-1;
+        if(m_VariableTypeLod[VariableTypeIndex] != m_VariableType[VariableTypeIndex])
+        {
+            if(m_VariableType[VariableTypeIndex] == 0)
+            {
+                if(m_VariableTypeLod[VariableTypeIndex] == 1)
+                {
+                    LogicIfStruct->sufferCmpValue[index]=LogicIfStruct->sufferCmpValue[index]/10;
+                }
+                else if(m_VariableTypeLod[VariableTypeIndex] == 2)
+                {
+                    LogicIfStruct->sufferCmpValue[index]=LogicIfStruct->sufferCmpValue[index]/100;
+                }
+            }
+            else if(m_VariableType[VariableTypeIndex] == 1)
+            {
+                if(m_VariableTypeLod[VariableTypeIndex] == 0)
+                {
+                    LogicIfStruct->sufferCmpValue[index]=LogicIfStruct->sufferCmpValue[index]*10;
+                }
+                else if(m_VariableTypeLod[VariableTypeIndex] == 2)
+                {
+                    LogicIfStruct->sufferCmpValue[index]=LogicIfStruct->sufferCmpValue[index]/10;
+                }
+            }
+            else if(m_VariableType[VariableTypeIndex] == 2)
+            {
+                if(m_VariableTypeLod[VariableTypeIndex] == 0)
+                {
+                    LogicIfStruct->sufferCmpValue[index]=LogicIfStruct->sufferCmpValue[index]*100;
+                }
+                else if(m_VariableTypeLod[VariableTypeIndex] == 1)
+                {
+                    LogicIfStruct->sufferCmpValue[index]=LogicIfStruct->sufferCmpValue[index]*10;
+                }
+            }
+        }
     }
 }
 //赋值速度教导界面的轴速度
@@ -3065,6 +3267,7 @@ void Teach::on_lineEdit_General_Position_X1_editingFinished()
     {
         ui->lineEdit_General_Position_X1->setText(QString::number((float)(Temp_AxisMoveOrder[X1_AXIS].pos)/100));
         //可添加提示超出最大范围
+        MainWindow::pMainWindow->showErrorTip("X1轴超出最大范围",TipMode::ONLY_OK);
     }
 }
 
@@ -3076,8 +3279,9 @@ void Teach::on_lineEdit_General_Position_Y1_editingFinished()
     }
     else
     {
-//        ui->lineEdit_General_Position_Y1->setText(QString::number((float)(Temp_AxisMoveOrder[Y1_AXIS].pos)/100));
+        ui->lineEdit_General_Position_Y1->setText(QString::number((float)(Temp_AxisMoveOrder[Y1_AXIS].pos)/100));
         //可添加提示超出最大范围
+        MainWindow::pMainWindow->showErrorTip("Y1轴超出最大范围",TipMode::ONLY_OK);
     }
 }
 
@@ -3089,8 +3293,9 @@ void Teach::on_lineEdit_General_Position_Z1_editingFinished()
     }
     else
     {
-//        ui->lineEdit_General_Position_Z1->setText(QString::number((float)(Temp_AxisMoveOrder[Z1_AXIS].pos)/100));
+        ui->lineEdit_General_Position_Z1->setText(QString::number((float)(Temp_AxisMoveOrder[Z1_AXIS].pos)/100));
         //可添加提示超出最大范围
+        MainWindow::pMainWindow->showErrorTip("Z1轴超出最大范围",TipMode::ONLY_OK);
     }
 }
 
@@ -3103,8 +3308,9 @@ void Teach::on_lineEdit_General_Position_Y2_editingFinished()
     }
     else
     {
-//        ui->lineEdit_General_Position_Y2->setText(QString::number((float)(Temp_AxisMoveOrder[Y2_AXIS].pos)/100));
-//        //可添加提示超出最大范围
+        ui->lineEdit_General_Position_Y2->setText(QString::number((float)(Temp_AxisMoveOrder[Y2_AXIS].pos)/100));
+        //可添加提示超出最大范围
+        MainWindow::pMainWindow->showErrorTip("Y2轴超出最大范围",TipMode::ONLY_OK);
     }
 }
 
@@ -3116,54 +3322,46 @@ void Teach::on_lineEdit_General_Position_Z2_editingFinished()
     }
     else
     {
-//        ui->lineEdit_General_Position_Z2->setText(QString::number((float)(Temp_AxisMoveOrder[Z2_AXIS].pos)/100));
+        ui->lineEdit_General_Position_Z2->setText(QString::number((float)(Temp_AxisMoveOrder[Z2_AXIS].pos)/100));
         //可添加提示超出最大范围
+        MainWindow::pMainWindow->showErrorTip("Z2轴超出最大范围",TipMode::ONLY_OK);
     }
 }
 
 //原料1松开/夹紧
 void Teach::on_btn_Material_clamp_1_clicked()
 {
-    Temp_ClawActionStruct[0].type = !Temp_ClawActionStruct[0].type;
-    if(Temp_ClawActionStruct[0].type == 0)
+    if(ui->btn_Material_clamp_1->getState() == false)
     {
         ui->btn_Material_clamp_1->setText(m_Port_Y[CLAW_METERIAL_1_LOOSENED].modifyName);//原料1松开
-        Temp_ClawActionStruct[0].outportNum =  m_Port_Y[CLAW_METERIAL_1_LOOSENED].portNum;//实际端口
     }
     else
     {
         ui->btn_Material_clamp_1->setText(m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName);//原料1夹紧
-        Temp_ClawActionStruct[0].outportNum =  m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum;//实际端口
     }
 }
 //成品1松开/夹紧
 void Teach::on_btn_finish_product_1_clicked()
 {
-    Temp_ClawActionStruct[1].type = !Temp_ClawActionStruct[1].type;
-    if(Temp_ClawActionStruct[1].type == 0)
+    if(ui->btn_finish_product_1->getState() == false)
     {
         ui->btn_finish_product_1->setText(m_Port_Y[CLAW_PRODUCT_1_LOOSENED].modifyName);
-        Temp_ClawActionStruct[1].outportNum =  m_Port_Y[CLAW_PRODUCT_1_LOOSENED].portNum;//实际端口
     }
     else
     {
         ui->btn_finish_product_1->setText(m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName);
-        Temp_ClawActionStruct[1].outportNum =  m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum;//实际端口
     }
 }
 //卡爪正转/反转
 void Teach::on_btn_Claw_roll_1_clicked()
 {
-    Temp_ClawActionStruct[2].type = !Temp_ClawActionStruct[2].type;
-    if(Temp_ClawActionStruct[2].type == 0)
+    if(ui->btn_Claw_roll_1->getState() == false)
     {
         ui->btn_Claw_roll_1->setText(m_Port_Y[CLAW_CLAW_1_LOOSENED].modifyName);//卡爪1正转
-        Temp_ClawActionStruct[2].outportNum = m_Port_Y[CLAW_CLAW_1_LOOSENED].portNum;//实际端口
     }
     else
     {
         ui->btn_Claw_roll_1->setText(m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName);//卡爪1反转
-        Temp_ClawActionStruct[2].outportNum = m_Port_Y[CLAW_CLAW_1_CLAMP].portNum;//实际端口
     }
 }
 //切换信号检测子界面显示
@@ -3227,12 +3425,10 @@ void Teach::on_Auto_Door_button_clicked()
     if(Temp_MachineOutStruct[3].type == 1)
     {
         ui->Auto_Door_button->setText(m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].modifyName);//自动门1开
-        Temp_MachineOutStruct[3].outportNum = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
     }
     else if(Temp_MachineOutStruct[3].type == 0)
     {
         ui->Auto_Door_button->setText(m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].modifyName);//自动门1关
-        Temp_MachineOutStruct[3].outportNum = m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].portNum;
     }
 }
 //吹气1通/断
@@ -3256,12 +3452,10 @@ void Teach::on_Chuck_button_clicked()
     if(Temp_MachineOutStruct[5].type == 0)
     {
         ui->Chuck_button->setText(m_Port_Y[MACHINE_CHUCK_1_LOOSENED].modifyName);//卡盘1松开
-        Temp_MachineOutStruct[5].outportNum = m_Port_Y[MACHINE_CHUCK_1_LOOSENED].portNum;
     }
     else if(Temp_MachineOutStruct[5].type == 1)
     {
         ui->Chuck_button->setText(m_Port_Y[MACHINE_CHUCK_1_CLAMP].modifyName);//卡盘1夹紧
-        Temp_MachineOutStruct[5].outportNum = m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum;
     }
 }
 
@@ -3703,7 +3897,15 @@ void Teach::pageInit()
 
             ui->chboxConstantVarOp->setChecked(true);
             //修改小数位数
-            ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
+            if(ui->coboxVarSelectVarPreOp->currentIndex()<=VAR_TOTAL_NUM)
+            {
+                ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
+            }
+            else
+            {
+                ui->coboxVarSelectVarPreOp->setCurrentIndex(0);
+                ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
+            }
         }
     });
 
@@ -3807,14 +4009,13 @@ void Teach::pageInit()
             ui->editReturnStepNum->show();
         }
     });
-
+    coboxVarSelectVarPreOpItemSet();
 }
 
 //预留通按钮
 void Teach::on_Reserve_Pass_Button_clicked()
 {
-    Temp_ReserveOutStruct.type =~Temp_ReserveOutStruct.type;
-    if(Temp_ReserveOutStruct.type == 0)
+    if(ui->Reserve_Pass_Button->getState() == 1)
     {
         ui->Reserve_Pass_Button->setText("预留通");
     }
@@ -3851,7 +4052,7 @@ void Teach::on_Reserve_OutTime_Box_clicked()
         ui->Reserve_OutTime_Box->setChecked(true);
     }
     Temp_ReserveOutStruct.function = 1;//输出功能-预留同时
-    Temp_ReserveOutStruct.type = 0;//达到预留通设定的时间后自动断开
+    Temp_ReserveOutStruct.type = 1;//达到预留通设定的时间后自动断开
 }
 //预留翻转复选框
 void Teach::on_Reserve_Overturn_Box_clicked()
@@ -4149,12 +4350,34 @@ void Teach::on_combo_SubroutineAll_currentIndexChanged(int index)
 //高级-伺服停止-轴编号选择框
 void Teach::on_combo_ServoStop_AxisAll_currentIndexChanged(int index)
 {
-    Temp_AxisStopStruct.axis = index;
+    if(index<=3)
+    {
+        Temp_AxisStopStruct.axis = index;
+    }
+    if(index==4 || index==6)
+    {
+        Temp_AxisStopStruct.axis = 4;
+    }
+    if(index==5 || index==7)
+    {
+        Temp_AxisStopStruct.axis = 5;
+    }
 }
 //高级-转矩保护-轴编号选择框
 void Teach::on_combo_LowSpeedTorque_AxisAll_currentIndexChanged(int index)
 {
-    Temp_TorqueGardStruct.axis = index;
+    if(index<=3)
+    {
+        Temp_TorqueGardStruct.axis = index;
+    }
+    if(index==4 || index==6)
+    {
+        Temp_TorqueGardStruct.axis = 4;
+    }
+    if(index==5 || index==7)
+    {
+        Temp_TorqueGardStruct.axis = 5;
+    }
 }
 //高级-转矩保护-转矩百分比输入
 void Teach::on_lineEdit_LowSpeedTorque_delay_editingFinished()
@@ -4164,7 +4387,18 @@ void Teach::on_lineEdit_LowSpeedTorque_delay_editingFinished()
 //高级-偏移-轴编号选择框
 void Teach::on_combo_Shift_AxisAll_currentIndexChanged(int index)
 {
-    Temp_OffsetAxisStruct.axis = index;
+    if(index<=3)
+    {
+        Temp_OffsetAxisStruct.axis = index;
+    }
+    if(index==4 || index==6)
+    {
+        Temp_OffsetAxisStruct.axis = 4;
+    }
+    if(index==5 || index==7)
+    {
+        Temp_OffsetAxisStruct.axis = 5;
+    }
 }
 
 void Teach::on_lineEdit_Shift_Position_editingFinished()
@@ -4193,7 +4427,7 @@ void Teach::on_tabWidget_logic_tabBarClicked(int index)
     case 0://如果page
         Temp_LogicIfStruct.sufferCmpValue[0]=0;
         Temp_LogicIfStruct.sufferCmpType[0]=0;
-        Temp_LogicIfStruct.cmpType[0]=1;
+        Temp_LogicIfStruct.cmpType[0]=0;
         Temp_LogicIfStruct.reqSelectFlag[0] = 0;
         Temp_LogicIfStruct.inportNum[0]=0;
         Temp_LogicIfStruct.inportType[0]=0;
@@ -4201,7 +4435,7 @@ void Teach::on_tabWidget_logic_tabBarClicked(int index)
 
         Temp_LogicIfStruct.sufferCmpValue[1]=0;
         Temp_LogicIfStruct.sufferCmpType[1]=0;
-        Temp_LogicIfStruct.cmpType[1]=1;
+        Temp_LogicIfStruct.cmpType[1]=0;
         Temp_LogicIfStruct.reqSelectFlag[1] = 0;
         Temp_LogicIfStruct.inportNum[1]=0;
         Temp_LogicIfStruct.inportType[1]=0;
@@ -4212,9 +4446,10 @@ void Teach::on_tabWidget_logic_tabBarClicked(int index)
         ui->editLoopNum->setText("1");
         break;
     case 2://变量page
+    {
         Temp_LogicVarStruct.sufferOperType=0;
         Temp_LogicVarStruct.sufferOperValue=0;
-        Temp_LogicVarStruct.varNum=0;
+        Temp_LogicVarStruct.varNum=1;
         Temp_LogicVarStruct.operMode=0;
 
         Temp_LogicAxisStruct.sufferOperType=0;
@@ -4231,8 +4466,25 @@ void Teach::on_tabWidget_logic_tabBarClicked(int index)
         Temp_LogicCurProductNumStruct.sufferOperValue=0;
         Temp_LogicCurProductNumStruct.productNum=1;
         Temp_LogicCurProductNumStruct.operMode=0;
-
+        ui->coboxVarSelectVarPreOp->setCurrentIndex(0);
+        ui->coboxAxisSelectVarPreOp->setCurrentIndex(0);
+        ui->coboxStackSelectVarPreOp->setCurrentIndex(0);
+        QString VariableText = "";
+        if(m_VariableType[0]==0)
+        {
+            VariableText = "整数";
+        }
+        else if(m_VariableType[0] == 1)
+        {
+            VariableText = "一位小数";
+        }
+        else if(m_VariableType[0] == 2)
+        {
+            VariableText = "两位小数";
+        }
+        ui->EditOperatorVarPreOp->setText(VariableText);
         break;
+    }
     case 3://定时器page
         Temp_LogicTimeStruct.timeNum=1;
         Temp_LogicTimeStruct.operMode=0;
@@ -4244,12 +4496,20 @@ void Teach::on_tabWidget_logic_tabBarClicked(int index)
 //编辑按钮
 void Teach::on_btnModify_clicked()
 {
-    if(m_OperateProOrderListNum == 0)
-    {//如果未载入程序，直接返回
-        return;
+    if(ui->btnModify->isChecked())
+    {
+        if(m_OperateProOrderListNum == 0)
+        {//如果未载入程序，直接返回
+            return;
+        }
+        ui->tabWidget_Teach->setCurrentIndex(0);
+        OrderEdit_Handle();
     }
-    ui->tabWidget_Teach->setCurrentIndex(0);
-    OrderEdit_Handle();
+    else
+    {
+        ui->tabWidget_Teach->setCurrentIndex(2);//取消编辑时，自动切换到通用主界面
+        ui->stackedWidget_General->setCurrentWidget(ui->General_main_page);
+    }
 }
 
 /*************************************************************************
@@ -4358,7 +4618,11 @@ void Teach::Stack_Edit_Handle(uint8_t AxisIndex)
 //指令编辑处理函数
 void Teach::OrderEdit_Handle()
 {
-    ui->tableWgtTeach->setCurrentCell(m_CurrentSelectProOrderList,0);
+//    ui->tableWgtTeach->setCurrentCell(m_CurrentSelectProOrderList,0);
+    if(m_CurrentSelectProOrderList<=ui->tableWgtTeach->rowCount())
+    {
+        ui->tableWgtTeach->selectRow(m_CurrentSelectProOrderList);
+    }
     switch(m_OperateProOrder[m_CurrentSelectProOrderList].cmd)
     {
     case C_AXIS_MOVE:
@@ -4491,9 +4755,9 @@ void Teach::OrderEdit_Handle()
         QStringList labelText;
         ui->comboBox_Edit_Wait_label->clear();
         ui->comboBox_Edit_Wait_label->addItem("无标签");
-        for(int i=0;i<LableNameList[m_OperateProNum].count();i++)
+        for(int i=0;i<CurrentLableNameList.count();i++)
         {
-            labelText = LableNameList[m_OperateProNum][i].split(signalSpace);
+            labelText = CurrentLableNameList[i].split(signalSpace);
             if(labelText.length()>1)
             {
                 ui->comboBox_Edit_Wait_label->addItem(labelText[0]);
@@ -4522,9 +4786,9 @@ void Teach::OrderEdit_Handle()
         QStringList labelText;
         ui->comboBox_Edit_Wait_label_2->clear();
         ui->comboBox_Edit_Wait_label_2->addItem("无标签");
-        for(int i=0;i<LableNameList[m_OperateProNum].count();i++)
+        for(int i=0;i<CurrentLableNameList.count();i++)
         {
-            labelText = LableNameList[m_OperateProNum][i].split(signalSpace);
+            labelText = CurrentLableNameList[i].split(signalSpace);
             if(labelText.length()>1)
             {
                 ui->comboBox_Edit_Wait_label_2->addItem(labelText[0]);
@@ -4594,13 +4858,17 @@ void Teach::OrderEdit_Handle()
             ui->label_Edit->show();
             if(LabelStruct->labelNum>0)
             {
-
-                QStringList labelText = LableNameList[m_OperateProNum][LabelStruct->labelNum-1].split(signalSpace);
-                if(labelText.length()>1)
+                uint16_t ListIndex = ReturnLableListIndex(LabelStruct->labelNum);
+                if(ListIndex>0)
                 {
-                    ui->label_Edit->setText(labelText[1]);
-                    ui->labCommentName->setText(labelText[0]);
+                    QStringList labelText = CurrentLableNameList[ListIndex].split(signalSpace);
+                    if(labelText.length()>1)
+                    {
+                        ui->label_Edit->setText(labelText[1]);
+                        ui->labCommentName->setText(labelText[0]);
+                    }
                 }
+
             }
         }
         else if(LabelStruct->type == 1)
@@ -4611,13 +4879,13 @@ void Teach::OrderEdit_Handle()
             ui->label_Edit->hide();
 //            Refresh_listWgtJumpto();
             ui->listWidget_LabelEdit->clear();
-            for(int i=0; i<LableNameList[m_OperateProNum].count();i++)
+            for(int i=0; i<CurrentLableNameList.count();i++)
             {
                 QListWidgetItem *item = new QListWidgetItem();
                 QCheckBox *checkbox = new QCheckBox();
                 checkbox->setChecked(false);
                 checkbox->setAutoExclusive(true);//check为互斥
-                checkbox->setText(LableNameList[m_OperateProNum][i]);
+                checkbox->setText(CurrentLableNameList[i]);
                 checkbox->setFixedSize(ui->listWidget_LabelEdit->width(),37);
                 ui->listWidget_LabelEdit->addItem(item);
                 ui->listWidget_LabelEdit->setItemWidget(item,checkbox);
@@ -4751,7 +5019,7 @@ void Teach::OrderEdit_Handle()
             ui->comboBox_Edit_Axis_Oper->setEnabled(true);
             ui->lineEdit_Edit_Axis_const->show();
             ui->comboBox_Edit_Axis_Var->hide();
-            ui->lineEdit_Edit_Axis_const->setDecimalPlaces(2);//后续根据变量小数位数进行设置
+            ui->lineEdit_Edit_Axis_const->setDecimalPlaces(2);
             double sufferOperValue = LogicAxis->sufferOperValue;
             ui->lineEdit_Edit_Axis_const->setText(QString::number(sufferOperValue/100,'f',2));
         }
@@ -4840,7 +5108,9 @@ void Teach::OrderEdit_Handle()
         ui->lineEdit_Search_AdvPos->setText(QString::number(advpos/100,'f',2));
         ui->lineEdit_Search_Adv_speed->setText(QString::number(SearchAxisMove->advCSpeed));
         ui->lineEdit_Search_offseet_pos->setText(QString::number(offseet_pos/100,'f',2));
-        ui->lineEdit_Search_stop->setText("X"+QString::number(SearchAxisMove->inportNum[0]));//需要修改
+        QString SearchAxisText =Get_XYPort_Name(m_OperateProOrder[m_CurrentSelectProOrderList]);
+        ui->lineEdit_Search_stop->setText(SearchAxisText);
+        ui->lineEdit_Search_stop->setCurrentPort(SearchAxisMove->inportNum[0]);
         if(SearchAxisMove->posStoreFlag == 1)
         {
             ui->checkBox_PosMemory->setChecked(true);
@@ -5058,6 +5328,10 @@ void Teach::Edit_ifOrder_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex)
             ui->coboxVarStack->hide();
             ui->coboxVarRealProductNum->setCurrentIndex(LogicIf->sufferCmpType[IfIndex]-102);
         }
+        if(ui->coboxVarDisplay->currentIndex()>VAR_TOTAL_NUM)
+        {//防止溢出
+            ui->coboxVarDisplay->setCurrentIndex(0);
+        }
         ui->editVarIf->setDecimalPlaces(m_VariableType[ui->coboxVarDisplay->currentIndex()]);//根据变量类型设置控件小数位数
     }
     else if(LogicIf->cmpType[IfIndex]>=21 && LogicIf->cmpType[IfIndex] <= 60)
@@ -5211,6 +5485,10 @@ void Teach::LogicVar_handle()
         ui->comboBox_Edit_Var_Var->hide();
         ui->comboBox_Edit_Var_Axis->hide();
         ui->comboBox_Edit_Var_Prod->hide();
+        if(ui->comboBox_Edit_Var->currentIndex()>VAR_TOTAL_NUM)
+        {
+            ui->comboBox_Edit_Var->setCurrentIndex(0);
+        }
         ui->lineEdit_Edit_Var_const->setDecimalPlaces(m_VariableType[ui->comboBox_Edit_Var->currentIndex()]);
     }
     else if(ui->Edit_Var_var->isChecked())
@@ -5297,16 +5575,22 @@ void Teach::LogicProt_handle()
 //点击或滑动行时编辑指令处理
 void Teach::on_tableWgtTeach_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    m_CurrentSelectProOrderList = currentRow;
-    if(m_OperateProOrderListNum == 0)
-    {//如果未载入程序，直接返回
-        return;
+    if(currentRow>=0 && currentRow <= m_OperateProOrderListNum)
+    {
+        m_CurrentSelectProOrderList = currentRow;
+        if(m_OperateProOrderListNum == 0)
+        {//如果未载入程序，直接返回
+            return;
+        }
+        if(ui->btnModify->isChecked())
+        {//如果编辑按钮按下
+            OrderEdit_Handle();
+        }
     }
-    if(ui->btnModify->isChecked())
-    {//如果编辑按钮按下
-        OrderEdit_Handle();
+    else
+    {
+        qDebug()<<"currentRow error:"<<currentRow;
     }
-
 }
 //试行触发操作处理
 void Teach::on_btnPilot_clicked()
@@ -5507,6 +5791,7 @@ void Teach::on_btn_Refresh_clicked()
             break;
         }
         ui->editSearchPosition->setText(QString::number(AxisCurPos/100,'f',2));
+        Temp_SearchAxisMoveStruct.maxPos = ui->editSearchPosition->text().toDouble()*100;
     }
 }
 
@@ -5630,7 +5915,7 @@ void Teach::WidgetNameRefresh()
     //原料1松开/夹紧
     if(m_Port_Y[CLAW_METERIAL_1_CLAMP].functionSet == 1)
     {
-        ui->cb_Material_clamp_1->setEnabled(true);
+        ui->cb_Material_clamp_1->setCheckable(true);
         ui->btn_Material_clamp_1->setEnabled(true);
         if(ui->btn_Material_clamp_1->text() != m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName)
         {
@@ -5639,14 +5924,13 @@ void Teach::WidgetNameRefresh()
     }
     else
     {
-        ui->cb_Material_clamp_1->setEnabled(false);
-        ui->cb_Material_clamp_1->setChecked(false);
+        ui->cb_Material_clamp_1->setCheckable(false);
         ui->btn_Material_clamp_1->setEnabled(false);
     }
     //成品1松开/夹紧
     if(m_Port_Y[CLAW_PRODUCT_1_CLAMP].functionSet == 1)
     {
-        ui->cb_finish_product_1->setEnabled(true);
+        ui->cb_finish_product_1->setCheckable(true);
         ui->btn_finish_product_1->setEnabled(true);
         if(ui->btn_finish_product_1->text() != m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName)
         {
@@ -5655,14 +5939,14 @@ void Teach::WidgetNameRefresh()
     }
     else
     {
-        ui->cb_finish_product_1->setEnabled(false);
+        ui->cb_finish_product_1->setCheckable(false);
         ui->btn_finish_product_1->setEnabled(false);
-        ui->cb_finish_product_1->setChecked(false);
+
     }
     //卡爪1正转/反转
     if(m_Port_Y[CLAW_CLAW_1_CLAMP].functionSet == 1)
     {
-        ui->cb_Claw_roll_1->setEnabled(true);
+        ui->cb_Claw_roll_1->setCheckable(true);
         ui->btn_Claw_roll_1->setEnabled(true);
         if(ui->btn_Claw_roll_1->text() != m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName)
         {
@@ -5671,9 +5955,8 @@ void Teach::WidgetNameRefresh()
     }
     else
     {
-        ui->cb_Claw_roll_1->setEnabled(false);
+        ui->cb_Claw_roll_1->setCheckable(false);
         ui->btn_Claw_roll_1->setEnabled(false);
-        ui->cb_Claw_roll_1->setChecked(false);
     }
     //报警灯和报警声
     if(m_SeniorFunc.alarmLight == 1)
@@ -5966,4 +6249,67 @@ void Teach::WidgetNameRefresh()
         ui->Wait_release_off_comboBox->setEnabled(false);
         ui->Wait_pos_cor_comboBox->setEnabled(false);
     }
+}
+
+//变量类型个数填充下拉列表框初始化
+void Teach::coboxVarSelectVarPreOpItemSet()
+{
+    ui->coboxVarSelectVarPreOp->clear();
+    ui->coboxVarSelectPostOp->clear();
+    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    {
+        ui->coboxVarSelectVarPreOp->addItem(m_NameDefine[1].varName[i]);
+        ui->coboxVarSelectPostOp->addItem(m_NameDefine[1].varName[i]);
+    }
+}
+//故障编号输入
+void Teach::on_lineEdit_edit_fault_num_textChanged(const QString &arg1)
+{
+    uint16_t alarmnum=arg1.toUInt();
+    if(alarmnum>=1450 && alarmnum<=1499)
+    {
+        Temp_OtherAlarmCustStruct.alarmNum = alarmnum;
+    }
+    else
+    {
+        MainWindow::pMainWindow->showErrorTip(tr("输入值的范围不能超过1450～1499,请重新输入。"),TipMode::ONLY_OK);
+        ui->lineEdit_edit_fault_num->setText(QString::number(Temp_OtherAlarmCustStruct.alarmNum));
+    }
+}
+//提示编号输入
+void Teach::on_lineEdit_edit_tips_num_textChanged(const QString &arg1)
+{
+    uint16_t alarmnum=arg1.toUInt();
+    if(alarmnum>=1950 && alarmnum<=1999)
+    {
+        Temp_OtherAlarmCustStruct.alarmNum = alarmnum;
+    }
+    else
+    {
+        MainWindow::pMainWindow->showErrorTip(tr("输入值的范围不能超过1450～1499,请重新输入。"),TipMode::ONLY_OK);
+        ui->lineEdit_edit_tips_num->setText(QString::number(Temp_OtherAlarmCustStruct.alarmNum));
+    }
+}
+//轴搜索指令轴编号选择
+void Teach::on_coboxSearchAxisSelect_currentIndexChanged(int index)
+{
+    if(index<=3)
+    {
+        Temp_SearchAxisMoveStruct.axis=index;
+    }
+    if(index==4 || index == 6)
+    {
+        Temp_SearchAxisMoveStruct.axis=4;
+    }
+    if(index==5 || index == 7)
+    {
+        Temp_SearchAxisMoveStruct.axis=4;
+    }
+}
+
+//从其他界面切换到教导界面时界面初始化
+void Teach::SwitchPageInit()
+{
+    ui->tabWidget_Teach->setCurrentWidget(ui->tabUniversal);
+    ui->btnModify->setChecked(false);//切换界面时关闭编辑状态
 }

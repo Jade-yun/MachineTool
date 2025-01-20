@@ -12,6 +12,7 @@ QStringList programInfoList;                        //程序信息
 QStringList referencePointList;                     //每个参考点表示
 QStringList LablePartList;                          //标签指令节点
 QStringList LableNameList[PRO_NUM];                 //标签指令名字缓存
+QStringList CurrentLableNameList;                   //当前操作程序标签指令缓存
 QStringList Preview_LableNameList[PRO_NUM];         //浏览指令名字缓存
 QStringList programBasicCmdList;                    //基本命令
 
@@ -257,6 +258,11 @@ bool writeBasicProgram(D_ProgramNameAndPathStruct pro_temp)
         out << signalSpace << QString(programBasicCmdList[4]).arg("0.00");
         out << lineFeed;
     }
+    out << fileSectionList[11] << lineFeed;//变量
+    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    {
+        out << m_NameDefine[0].varName[i]<< "=0" << lineFeed;//采用默认变量名存储，新建文件或载入文件时，之改变变量的类型
+    }
     for(int i=0;i<PRO_NUM;i++)
     {
         out << LablePartList[i] << lineFeed;
@@ -461,7 +467,7 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
                 for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
                 {
                     out << signalSpace << QString(logicIfCmdList[0]).arg(QString::number(m)).
-                            arg(QString::number(((P_LogicIfStruct*)m_ProOrder[i][j].pData)->sufferCmpValue[m]*PRECISION_001, 'f', 2));
+                            arg(QString::number(((P_LogicIfStruct*)m_ProOrder[i][j].pData)->sufferCmpValue[m]));
                 }
                 for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
                 {
@@ -507,7 +513,7 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
 
                 break;
             case C_LOGIC_VAR:
-                out << signalSpace << QString(logicVarCmdList[0]).arg(QString::number(((P_LogicVarStruct*)m_ProOrder[i][j].pData)->sufferOperValue*PRECISION_001, 'f', 2));
+                out << signalSpace << QString(logicVarCmdList[0]).arg(QString::number(((P_LogicVarStruct*)m_ProOrder[i][j].pData)->sufferOperValue));
                 out << signalSpace << QString(logicVarCmdList[1]).arg(QString::number(((P_LogicVarStruct*)m_ProOrder[i][j].pData)->varNum));
                 out << signalSpace << QString(logicVarCmdList[2]).arg(QString::number(((P_LogicVarStruct*)m_ProOrder[i][j].pData)->operMode));
                 out << signalSpace << QString(logicVarCmdList[3]).arg(QString::number(((P_LogicVarStruct*)m_ProOrder[i][j].pData)->sufferOperType));
@@ -588,6 +594,13 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
         }
         out << lineFeed;
     }
+    //变量类型存储
+    out << fileSectionList[11] << lineFeed;
+    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    {
+        out << m_NameDefine[0].varName[i] << "=" << m_VariableType[i] << lineFeed;//保存变量小数类型
+    }
+    LableNameList[m_OperateProNum] = CurrentLableNameList;
     for(int i=0;i<PRO_NUM;i++)
     {//存储标签指令名称
         out << LablePartList[i] << lineFeed;
@@ -721,7 +734,8 @@ bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
             LableNameList[i].append(tempList[0]+ " " +tempList[1]);
         }
     }
-
+    CurrentLableNameList.clear();
+    CurrentLableNameList = LableNameList[m_OperateProNum];
 }
 /*************************************************************************
 **  函数名：  readProgram()
@@ -744,6 +758,7 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
     QStringList programInfoList;
     QStringList refList;
     QStringList P_List[9];
+    QStringList Var_List;
 
     int intFlag=0;              //设置一个标志位，区分当前读到什么程序了
     while(!in.atEnd())
@@ -808,6 +823,11 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
             intFlag=10;
             continue;
         }
+        else if(line.compare(fileSectionList[11])==0)
+        {
+            intFlag=11;
+            continue;
+        }
         else if(line.compare(LablePartList[0])==0 || line.compare(LablePartList[1])==0||line.compare(LablePartList[2])==0||line.compare(LablePartList[3])==0
                 ||line.compare(LablePartList[4])==0 || line.compare(LablePartList[5])==0||line.compare(LablePartList[6])==0||line.compare(LablePartList[7])==0)
         {//标签部分暂不读取
@@ -848,6 +868,9 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
         case 10:
             P_List[8].append(line);
         break;
+        case 11:
+            Var_List.append(line);
+            break;
         default:
         break;
         }
@@ -1216,7 +1239,7 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
                 P_LogicIfStruct temp_C_LOGIC_IF;
                 for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
                 {
-                    temp_C_LOGIC_IF.sufferCmpValue[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                    temp_C_LOGIC_IF.sufferCmpValue[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble());
                     index++;
                 }
                 for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
@@ -1480,7 +1503,16 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
             }
         }
     }
+    //变量读取
+    if(Var_List.count() == VAR_TOTAL_NUM)
+    {
+        for(int i=0;i<VAR_TOTAL_NUM;i++)
+        {
 
+            m_VariableType[i] = (uint8_t)(Var_List[i].mid(Var_List[i].indexOf("=")+1).toUInt());
+        }
+        std::copy(std::begin(m_VariableType),std::end(m_VariableType),std::begin(m_VariableTypeLod));
+    }
     return true;
 }
 #endif
@@ -2008,7 +2040,7 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
             P_LogicIfStruct temp_C_LOGIC_IF;
             for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
             {
-                temp_C_LOGIC_IF.sufferCmpValue[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble()/PRECISION_001);
+                temp_C_LOGIC_IF.sufferCmpValue[m]=(int32_t)(tempList[index].mid(tempList[index].indexOf("=")+1).toDouble());
                 index++;
             }
             for(int m=0;m<REQUIRE_TOTAL_NUM;m++)
@@ -2314,7 +2346,9 @@ bool Load_Program_Handle(QString fileName)
         readProgram(m_CurrentProgramNameAndPath);//读取当前程序指令
         readLableOrderName(m_CurrentProgramNameAndPath);//读取当前程序中标签名称列表
         m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
-        memcpy(&m_OperateProOrder,&m_ProOrder,sizeof(P_ProOrderStruct)*m_OperateProOrderListNum);//将读取的程序赋给当前操作程序
+
+        g_TotalProCopy(m_OperateProOrder,m_ProOrder[m_OperateProNum]);//将读取的程序赋给当前操作程序
+        CurrentLableNameList = LableNameList[m_OperateProNum];
         savePowerOnReadOneProInfo(m_CurrentProgramNameAndPath);
     }
     m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
@@ -2328,6 +2362,7 @@ bool Load_Program_Handle(QString fileName)
         }
     }
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_STA_VAR_TYPE,0,0);
     return true;
 }
 

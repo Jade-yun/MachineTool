@@ -942,16 +942,6 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             sendDataBuf[len+1] = (uint8_t)(m_RunPar.breakPointList>>8);
             len+=1;
         }
-        else if(sunCmd == CMD_SUN_STA_VAR_TYPE)
-        {
-            len=0;
-            sendDataBuf[len]= (uint8_t)parNum;
-            for(int i=0;i<VAR_TOTAL_NUM;i++)
-            {
-                sendDataBuf[i+1] = m_VariableType[i];
-                len+=1;
-            }
-        }
     }
 
     ExtendSendParProReadAnswer(mainCmd, sunCmd, sendDataBuf, len);
@@ -1291,11 +1281,11 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             break;
         case CMD_SUN_STA_MAC://控制器状态读取
             index = 0;
-            m_RobotRunSta = (uint8_t)recDataBuf[index];
+            m_RobotRunSta = (uint8_t)recDataBuf[index];//机器状态
             index = 1;
             m_AlarmNum = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);//报警编号
             index = 3;
-            //存放复位状态
+            m_RobotResetState = (uint8_t)recDataBuf[index];//复位状态
             index = 4;
             m_ProRunInfo.proNum[0] = ((uint16_t)recDataBuf[index])  | ((uint16_t)recDataBuf[index+1]<<8);
             index = 6;
@@ -1303,10 +1293,17 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             {
                 m_ProRunInfo.proNum[i] = (uint8_t)recDataBuf[index + i - 1];
             }
+            emit robotstaRefreshsignal();
             break;
         case CMD_SUN_STA_INFO://运行信息读取
             index = 0;
             m_RunInfo.runTime = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
+            index = 4;
+            m_RunInfo.preShootCyc = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
+            index = 6;
+            m_RunInfo.takeShapeCyc = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
+            index = 8;
+            m_RunInfo.fetchTime = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
             index = 10;
             m_RunInfo.actualProductNum = (uint32_t)recDataBuf[index] + ((uint32_t)recDataBuf[index+1]<<8) + ((uint32_t)recDataBuf[index+2]<<16) + ((uint32_t)recDataBuf[index+3]<<24);
             index += 4;
@@ -1386,7 +1383,7 @@ void Usart::ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             len = index;
             break;
         case CMD_SUN_PRO_ORDER://命令行读写
-            GetProData1(parNum, parNum2, sendDataBuf, len,PRO_FLAG_CMDLINE_03);
+            GetProData(parNum, parNum2, sendDataBuf, len,PRO_FLAG_CMDLINE_03);
             break;
         case CMD_SUN_PRO_INSERT://命令行插入、修改
             GetProData1(parNum, parNum2, sendDataBuf, len,PRO_FLAG_CMDLINE_04,parNum3);
@@ -1436,6 +1433,14 @@ void Usart::ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             sendDataBuf[index++] = (uint8_t)parNum2;
             len = index;
             break;
+        case CMD_SUN_STA_VAR_TYPE:
+            len=0;
+            sendDataBuf[len]= (uint8_t)parNum;
+            for(int i=0;i<VAR_TOTAL_NUM;i++)
+            {
+                sendDataBuf[i+1] = m_VariableType[i];
+                len+=1;
+            }
         default:
             break;
 
@@ -2004,16 +2009,16 @@ void Usart::GetProData(uint16_t parNum, uint16_t parNum2, uint8_t* sendDataBuf, 
         break;
     }
     sendDataBuf[index++] = (uint8_t)parNum;
-    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum]->list;
-    sendDataBuf[index++] = (uint8_t)(m_ProOrder[parNum]->list>>8);
-    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum]->runOrderNum;
-    sendDataBuf[index++] = (uint8_t)(m_ProOrder[parNum]->runOrderNum>>8);
-    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum]->cmd;
-    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum]->noteFlag;
-    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum]->delay;
-    sendDataBuf[index++] = (uint8_t)(m_ProOrder[parNum]->delay>>8);
+    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum][parNum2].list;
+    sendDataBuf[index++] = (uint8_t)(m_ProOrder[parNum][parNum2].list>>8);
+    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum][parNum2].runOrderNum;
+    sendDataBuf[index++] = (uint8_t)(m_ProOrder[parNum][parNum2].runOrderNum>>8);
+    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum][parNum2].cmd;
+    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum][parNum2].noteFlag;
+    sendDataBuf[index++]=(uint8_t)m_ProOrder[parNum][parNum2].delay;
+    sendDataBuf[index++] = (uint8_t)(m_ProOrder[parNum][parNum2].delay>>8);
 
-    switch (m_ProOrder[parNum]->cmd)
+    switch (m_ProOrder[parNum][parNum2].cmd)
     {
     case C_AXIS_MOVE:
         sendDataBuf[index++] = (uint8_t)((P_AxisMoveStruct*)m_ProOrder[parNum][parNum2].pData)->pos;

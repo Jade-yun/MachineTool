@@ -353,27 +353,6 @@ Setting::Setting(QWidget *parent) :
         // 不使用
         if (index == 0)
         {
-            m_Port_X[18].functionSet = 0;
-        }
-        else
-        {
-            m_Port_X[18].functionSet = 1;
-        }
-    });
-    connect(ui->coboxLimitNegX1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-        // 不使用
-        if (index == 0)
-        {
-            m_Port_X[16].functionSet = 0;
-        }
-        else
-        {
-            m_Port_X[16].functionSet = 1;
-        }
-    });
-    connect(ui->coboxLimitPosY1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-        if (index == 0)
-        {
             m_Port_X[13].functionSet = 0;
         }
         else
@@ -381,57 +360,18 @@ Setting::Setting(QWidget *parent) :
             m_Port_X[13].functionSet = 1;
         }
     });
-    connect(ui->coboxLimitNegY1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+    connect(ui->coboxLimitNegX1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        // 不使用
         if (index == 0)
         {
-            m_Port_X[18].functionSet = 0;
+            m_Port_X[19].functionSet = 0;
         }
         else
         {
-            m_Port_X[18].functionSet = 1;
+            m_Port_X[19].functionSet = 1;
         }
     });
-    connect(ui->coboxLimitPosZ1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-        if (index == 0)
-        {
-            m_Port_X[12].functionSet = 0;
-        }
-        else
-        {
-            m_Port_X[12].functionSet = 1;
-        }
-    });
-    connect(ui->coboxLimitNegZ1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-        if (index == 0)
-        {
-            m_Port_X[17].functionSet = 0;
-        }
-        else
-        {
-            m_Port_X[17].functionSet = 1;
-        }
-    });
-//    connect(ui->coboxLimitPosC, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-//        if (index == 0)
-//        {
-//            m_Port_X[17].functionSet = 0;
-//        }
-//        else
-//        {
-//            m_Port_X[17].functionSet = 1;
-//        }
-//    });
-//    connect(ui->coboxLimitNegC, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-//        if (index == 0)
-//        {
-//            m_Port_X[17].functionSet = 0;
-//        }
-//        else
-//        {
-//            m_Port_X[17].functionSet = 1;
-//        }
-//    });
-    connect(ui->coboxLimitPosY2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+    connect(ui->coboxLimitPosY1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
         if (index == 0)
         {
             m_Port_X[14].functionSet = 0;
@@ -441,7 +381,27 @@ Setting::Setting(QWidget *parent) :
             m_Port_X[14].functionSet = 1;
         }
     });
-    connect(ui->coboxLimitNegY2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+    connect(ui->coboxLimitNegY1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[20].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[20].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitPosZ1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[15].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[15].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegZ1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
         if (index == 0)
         {
             m_Port_X[21].functionSet = 0;
@@ -451,7 +411,17 @@ Setting::Setting(QWidget *parent) :
             m_Port_X[21].functionSet = 1;
         }
     });
-    connect(ui->coboxLimitPosZ2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+    connect(ui->coboxLimitPosC, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[16].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[16].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegC, QOverload<int>::of(&QComboBox::activated), [=](int index) {
         if (index == 0)
         {
             m_Port_X[22].functionSet = 0;
@@ -461,14 +431,44 @@ Setting::Setting(QWidget *parent) :
             m_Port_X[22].functionSet = 1;
         }
     });
-    connect(ui->coboxLimitNegZ2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+    connect(ui->coboxLimitPosY2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
         if (index == 0)
         {
-            m_Port_X[20].functionSet = 0;
+            m_Port_X[17].functionSet = 0;
         }
         else
         {
-            m_Port_X[20].functionSet = 1;
+            m_Port_X[17].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegY2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[29].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[29].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitPosZ2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[18].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[18].functionSet = 1;
+        }
+    });
+    connect(ui->coboxLimitNegZ2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+        if (index == 0)
+        {
+            m_Port_X[30].functionSet = 0;
+        }
+        else
+        {
+            m_Port_X[30].functionSet = 1;
         }
     });
 
@@ -1064,9 +1064,47 @@ void Setting::setupNameDefine()
     });
 
     connect(ui->btnSaveNameDef, &QPushButton::clicked, this, [=](){
+        int index = 0;
+        m_NameDefine[1].adminName = tableNameDef->item(index++, 1)->text();
+        m_NameDefine[1].operatorName = tableNameDef->item(index++, 1)->text();
+        for (int i = 0; i < 8; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].subProgName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].axisName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].varName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].stackName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].followStackName[i] = item->text();
+            ++index;
+        }
+
+        for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, 1);
+            m_NameDefine[1].timerName[i] = item->text();
+            ++index;
+        }
         ::writeNameDefine();
         // to fresh all name display in every windows.
-
+        emit coboxVarSelectVarPreOpItemSet_signal();
     });
     connect(ui->btnExportNameDef, &QPushButton::clicked, this, [=](){
        if (!UsbDisk::instance()->isInserted())
@@ -1093,9 +1131,9 @@ void Setting::setupNameDefine()
 
         // 按顺序写入数据
         int index = 0;
-        tableNameDef->item(index++, 1)->setText(m_NameDefine->adminName);
+        tableNameDef->item(index++, 1)->setText(m_NameDefine[0].adminName);
 
-        tableNameDef->item(index++, 1)->setText(m_NameDefine->operatorName);
+        tableNameDef->item(index++, 1)->setText(m_NameDefine[0].operatorName);
 
         for (int i = 0; i < 8; ++i) {
             auto item = tableNameDef->item(index, 1);
@@ -1132,6 +1170,7 @@ void Setting::setupNameDefine()
             item->setText(m_NameDefine[0].timerName[i]);
             ++index;
         }
+
     });
 
 
@@ -2940,10 +2979,10 @@ void Setting::SeniorFuncPortSet()
     //输入端口
     m_Port_X[6].functionSet = m_SeniorFunc.stackSaveIn1Check;
     m_Port_X[7].functionSet = m_SeniorFunc.emergencyStopCheck;
-    m_Port_X[12].functionSet = m_SeniorFunc.remoteAuto;
-    m_Port_X[13].functionSet = m_SeniorFunc.remoteStop;
-    m_Port_X[14].functionSet = m_SeniorFunc.manualChuckIn1;
-    m_Port_X[15].functionSet = m_SeniorFunc.pressureCheck;
+    m_Port_X[12].functionSet = m_SeniorFunc.pressureCheck;
+//    m_Port_X[14].functionSet = m_SeniorFunc.remoteStop;//这几个IO与轴限位功能相冲突，暂时不明确需求
+//    m_Port_X[15].functionSet = m_SeniorFunc.remoteAuto;
+//    m_Port_X[17].functionSet = m_SeniorFunc.manualChuckIn1;
     m_Port_X[31].functionSet = m_SeniorFunc.processFinish1;
     m_Port_X[32].functionSet = m_SeniorFunc.locateFinish1;
     m_Port_X[33].functionSet = m_SeniorFunc.knifeOrigin1Check;
@@ -2975,7 +3014,6 @@ void Setting::SeniorFuncPortSet()
     m_Port_Y[16].functionSet = m_SeniorFunc.startProduct1;
     m_Port_Y[17].functionSet = m_SeniorFunc.mainAxisLocate1;
     m_Port_Y[18].functionSet = m_SeniorFunc.processSave1;
-    // m_Port_Y[19] -> Y20 卡盘1夹紧
     m_Port_Y[20].functionSet = m_SeniorFunc.mainAxisRotate1;
 
 
@@ -2986,7 +3024,8 @@ void Setting::SeniorFuncPortSet()
     m_Port_Y[OUTPUT_NUM + 17].functionSet = m_SeniorFunc.mainAxisLocate2;
     m_Port_Y[OUTPUT_NUM + 18].functionSet = m_SeniorFunc.processSave2;
     emit RefreshPortDefineSignals();
-
+    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
+    emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
 //    const std::vector<QComboBox*> coboxs = {
 //        ui->coboxAutoLigth, ui->coboxAlarmLight, ui->coboxAutoDoorCtl1,ui->coboxBlow1,
 //        ui->coboxEmergenceStopOutput, ui->coboxLubricationPump, ui->coboxAlarmBuzzer, ui->coboxPauseLight,
@@ -3306,7 +3345,9 @@ void Setting::saveMachinePara()
     writeLimitSigDescription(0, tempStr[0]);    // 最大限位
     writeLimitSigDescription(1, tempStr[1]);    // 最小限位
     writeLimitSigDescription(2, tempStr[2]);    // 原点信号
-
+    emit RefreshPortDefineSignals();//端口自定义界面刷新
+    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
+    emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
 }
 
 void Setting::saveMachineAllPara(int index)
@@ -3805,4 +3846,3 @@ bool Setting::eventFilter(QObject *watched, QEvent *event)
 
     return QWidget::eventFilter(watched, event);
 }
-

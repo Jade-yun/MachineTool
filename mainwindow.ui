@@ -1076,7 +1076,7 @@ border: 1px solid black;
     <property name="title">
      <string/>
     </property>
-    <widget class="ClickableLabel" name="labProgramName">
+    <widget class="TextTicker" name="labProgramName">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -1100,7 +1100,7 @@ border: 1px solid black;
       <string>展晖机床机械手控制系统</string>
      </property>
      <property name="alignment">
-      <set>Qt::AlignCenter</set>
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
     </widget>
    </widget>
@@ -1397,9 +1397,9 @@ QPushButton::pressed {
  </widget>
  <customwidgets>
   <customwidget>
-   <class>ClickableLabel</class>
+   <class>TextTicker</class>
    <extends>QLabel</extends>
-   <header>mainwindow.h</header>
+   <header location="global">mainwindow.h</header>
   </customwidget>
  </customwidgets>
  <resources>

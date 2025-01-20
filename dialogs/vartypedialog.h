@@ -20,6 +20,8 @@ public:
 public slots:
     void saveVariableType();
     void Refresh_VarTypeDialog();
+private slots:
+    void setVariabText();
 private:
     Ui::VarTypeDialog *ui;
 

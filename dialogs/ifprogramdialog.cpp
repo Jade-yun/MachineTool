@@ -72,6 +72,7 @@ IfProgramDialog::IfProgramDialog(QWidget *parent) :
     {
         cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     }
+    SetVarCoboxItem();
 }
 
 IfProgramDialog::~IfProgramDialog()
@@ -553,5 +554,20 @@ void IfProgramDialog::setLogicStructPar(uint8_t page_index,uint8_t CondIndex)
     }
     default:
         break;
+    }
+}
+//设置变量控件选项
+void IfProgramDialog::SetVarCoboxItem()
+{
+    ui->coboxVarSelectPreOp->clear();
+    ui->coboxVarSelectPostOp1->clear();
+    ui->coboxVarSelectPostOp2->clear();
+    ui->coboxPosVarSelectPostOp->clear();
+    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    {
+        ui->coboxVarSelectPreOp->addItem(m_NameDefine[1].varName[i]);
+        ui->coboxVarSelectPostOp1->addItem(m_NameDefine[1].varName[i]);
+        ui->coboxVarSelectPostOp2->addItem(m_NameDefine[1].varName[i]);
+        ui->coboxPosVarSelectPostOp->addItem(m_NameDefine[1].varName[i]);
     }
 }

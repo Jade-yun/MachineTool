@@ -7,7 +7,7 @@
 #include "program_save.h"
 #include <QRegularExpression>
 #include "file_preview.h"
-
+#include "QDebug"
 QStringList axisMoveOrderjointList;                         //轴动作命令
 QStringList clawActionOrderjointList;                         //卡爪动作命令
 QStringList clawCheckOrderjointList;                         //信号检测-卡爪检测命令
@@ -300,6 +300,7 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
     case C_CLAW_ACTION:
     {
         P_ClawActionStruct* ClawAction = (P_ClawActionStruct*) OIS.pData;
+#if 0
         for(uint16_t i=0;i<OUTPUT_TOTAL_NUM;i++)
         {
             if(m_Port_Y[i].portNum == ClawAction->outportNum)
@@ -308,6 +309,41 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
                 break;
             }
         }
+#else
+        if(ClawAction->outportNum == m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum)
+        {
+            if(ClawAction->type == 1)
+            {
+                NameStr = m_Port_Y[CLAW_METERIAL_1_CLAMP].modifyName;
+            }
+            else
+            {
+                NameStr = m_Port_Y[CLAW_METERIAL_1_LOOSENED].modifyName;
+            }
+        }
+        else if(ClawAction->outportNum ==m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum)
+        {
+            if(ClawAction->type == 1)
+            {
+                NameStr = m_Port_Y[CLAW_PRODUCT_1_CLAMP].modifyName;
+            }
+            else
+            {
+                NameStr = m_Port_Y[CLAW_PRODUCT_1_LOOSENED].modifyName;
+            }
+        }
+        else if(ClawAction->outportNum ==m_Port_Y[CLAW_CLAW_1_CLAMP].portNum)
+        {
+            if(ClawAction->type == 1)
+            {
+                NameStr = m_Port_Y[CLAW_CLAW_1_CLAMP].modifyName;
+            }
+            else
+            {
+                NameStr = m_Port_Y[CLAW_CLAW_1_LOOSENED].modifyName;
+            }
+        }
+#endif
         break;
     }
     case C_CLAW_CHECK:
@@ -326,6 +362,7 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
     case C_RESERVE_CHECK:
     {
         P_ReserveCheckStruct* ReserveCheck = (P_ReserveCheckStruct*) OIS.pData;
+        #if 0
         if(ReserveCheck->inportNum>=1 && ReserveCheck->inportNum<=36)
         {
             NameStr = "X"+QString::number(ReserveCheck->inportNum);
@@ -334,10 +371,17 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
         {
             NameStr = "EX"+QString::number(ReserveCheck->inportNum-36);
         }
+        #else
+        if(ReserveCheck->inportNum>=1 && ReserveCheck->inportNum<=60)
+        {
+            NameStr = m_Port_X[ReserveCheck->inportNum-1].ResModifyName;
+        }
+        #endif
         break;
     }
     case C_MACHINE_OUT:
     {
+#if 0
         P_MachineOutStruct* MachineOut = (P_MachineOutStruct*) OIS.pData;
         for(uint16_t i=0;i<OUTPUT_TOTAL_NUM;i++)
         {
@@ -358,12 +402,57 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
                 break;
             }
         }
-
+#else
+        P_MachineOutStruct* MachineOut = (P_MachineOutStruct*) OIS.pData;
+        if(MachineOut->outportNum == m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum)
+        {
+            if(MachineOut->type == 1)
+            {
+                NameStr = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].modifyName;
+            }
+            else
+            {
+                NameStr = m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].modifyName;
+            }
+        }
+        else if(MachineOut->outportNum == m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum)
+        {
+            if(MachineOut->type == 1)
+            {
+                NameStr = m_Port_Y[MACHINE_CHUCK_1_CLAMP].modifyName;
+            }
+            else
+            {
+                NameStr = m_Port_Y[MACHINE_CHUCK_1_LOOSENED].modifyName;
+            }
+        }
+        else
+        {
+            for(uint16_t i=0;i<OUTPUT_TOTAL_NUM;i++)
+            {
+                if(m_Port_Y[i].portNum == MachineOut->outportNum)
+                {
+                    NameStr = m_Port_Y[i].modifyName;
+                    if(MachineOut->type == 1)
+                    {
+                        NameStr = NameStr+"通";
+                    }
+                    else if(MachineOut->type == 0)
+                    {
+                        NameStr = NameStr+"断";
+                    }
+                    break;
+                }
+            }
+        }
+#endif
         break;
     }
     case C_RESERVE_OUT:
     {
         P_ReserveOutStruct* ReserveOut = (P_ReserveOutStruct*) OIS.pData;
+
+        #if 0
         if(ReserveOut->outportNum>=1 && ReserveOut->outportNum<=24)
         {
             NameStr = "Y"+QString::number(ReserveOut->outportNum);
@@ -372,6 +461,12 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
         {
             NameStr = "EY"+QString::number(ReserveOut->outportNum-24);
         }
+        #else
+        if(ReserveOut->outportNum>=1 && ReserveOut->outportNum<=44)
+        {
+            NameStr = m_Port_Y[ReserveOut->outportNum-1].ResModifyName;
+        }
+        #endif
         break;
     }
     case C_WAIT_IN_MACHINE:
@@ -439,6 +534,14 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
         {
             NameStr = "EX"+QString::number(SearchAxisMove->inportNum[0]-36);
         }
+        if(SearchAxisMove->inporttype[0]==1)
+        {
+            NameStr = NameStr+"通";
+        }
+        else
+        {
+            NameStr = NameStr+"断";
+        }
         break;
     }
     default:
@@ -493,13 +596,13 @@ QString ReserveCheckJoint(P_ProOrderStruct OIS)
     QString modifyName =Get_XYPort_Name(OIS);
     switch(pClawCheck->type)
     {
-    case 0://通检测开始
+    case 1://通检测开始
         contStr = QString(reserveCheckOrderjointList.at(0)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
         break;
-    case 1://断检测开始
+    case 2://断检测开始
          contStr = QString(reserveCheckOrderjointList.at(1)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
         break;
-    case 2://检测结束
+    case 0://检测结束
          contStr = QString(reserveCheckOrderjointList.at(2)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
         break;
     default:
@@ -701,10 +804,30 @@ QString WaitInClawJoint(P_ProOrderStruct OIS)
     {
         if(WaitInClaw->label>0)
         {
-            QStringList labelText = LableNameList[m_OperateProNum][WaitInClaw->label-1].split(signalSpace);
-            if(labelText.length()>1)
+            if(CurrentLableNameList.count()>0)
             {
-                contStr = contStr + " 返回 ["+labelText[0]+"]";
+                QString labelText ="";
+                QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+                QRegularExpressionMatch match;
+                int LabelIndex = 0;
+                for(int i=0;i<CurrentLableNameList.count();i++)
+                {
+                    labelText = CurrentLableNameList[i];
+                    match = re.match(labelText);
+                    if (match.hasMatch()) {
+                        LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
+                    }
+                    if(LabelIndex == WaitInClaw->label)
+                    {
+                        QStringList labelParts = CurrentLableNameList[i].split(signalSpace);
+                        if(labelParts.length()>1)
+                        {
+                            contStr= contStr + " 返回 [" + labelParts[0] + "]";
+                        }
+                        return contStr;
+                        break;
+                    }
+                }
             }
         }
     }
@@ -752,10 +875,30 @@ QString WaitInReserveJoint(P_ProOrderStruct OIS)
     {
         if(WaitInReserve->label>0)
         {
-            QStringList labelText = LableNameList[m_OperateProNum][WaitInReserve->label-1].split(signalSpace);
-            if(labelText.length()>1)
+            if(CurrentLableNameList.count()>0)
             {
-                contStr = contStr + " 返回 ["+labelText[0]+"]";
+                QString labelText ="";
+                QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+                QRegularExpressionMatch match;
+                int LabelIndex = 0;
+                for(int i=0;i<CurrentLableNameList.count();i++)
+                {
+                    labelText = CurrentLableNameList[i];
+                    match = re.match(labelText);
+                    if (match.hasMatch()) {
+                        LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
+                    }
+                    if(LabelIndex == WaitInReserve->label)
+                    {
+                        QStringList labelParts = CurrentLableNameList[i].split(signalSpace);
+                        if(labelParts.length()>1)
+                        {
+                            contStr = contStr + " 返回 [" + labelParts[0] + "]";
+                        }
+                        return contStr;
+                        break;
+                    }
+                }
             }
         }
     }
@@ -979,14 +1122,14 @@ QString SearchAxisJoint(P_ProOrderStruct OIS)
     {
         P_SearchAxisMoveStruct* SearchAxis = (P_SearchAxisMoveStruct*)OIS.pData;
         QString SearchinportNum =Get_XYPort_Name(OIS);
-        double OffsetPos = SearchAxis->offsetDis;
+        double maxPos = SearchAxis->maxPos;
         double advCDis = SearchAxis->advCDis;//提前位置
 #if USE_REFATOR_NAMEDEFINE
         QString SearchAxisStr = m_NameDefine[1].axisName[SearchAxis->axis];
 #else
         QString SearchAxisStr = m_NameDefine[10+SearchAxis->axis].modifyName;
 #endif
-        contStr = QString(searchAxisMoveOrderjointList.at(0)).arg("搜索"+QString::number(SearchAxis->searchNum)).arg(SearchAxisStr).arg(QString::number(OffsetPos/100,'f',2)).arg(SearchAxis->runSpeed).arg(QString::number(advCDis/100,'f',2)).arg(QString::number(delay/100,'f',2)).arg(SearchinportNum);
+        contStr = QString(searchAxisMoveOrderjointList.at(0)).arg("搜索"+QString::number(SearchAxis->searchNum)).arg(SearchAxisStr).arg(QString::number(maxPos/100,'f',2)).arg(SearchAxis->runSpeed).arg(QString::number(advCDis/100,'f',2)).arg(QString::number(delay/100,'f',2)).arg(SearchinportNum);
     }
     else
     {
@@ -1565,24 +1708,99 @@ QString LabelJoint(P_ProOrderStruct OIS)
     }
     else
     {
-        if(LableNameList[m_OperateProNum].count()>0)
+        if(CurrentLableNameList.count()>0)
         {
-            QString Itemtext = LableNameList[m_OperateProNum][LabelStruct->labelNum-1];
+            QString Itemtext = "";
             QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
-            QRegularExpressionMatch match = re.match(Itemtext);
-            if (match.hasMatch()) {
-                LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
-            }
-            QStringList labeltext = LableNameList[m_OperateProNum][LabelIndex-1].split(signalSpace);
-            if(labeltext.length()>1)
+            QRegularExpressionMatch match;
+            for(int i=0;i<CurrentLableNameList.count();i++)
             {
-                contStr= "[" + labeltext[0] +"] "+labeltext[1];
-            }
-            if(LabelStruct->type == 1)
-            {
-                contStr = "跳转到 "+contStr;
+                Itemtext = CurrentLableNameList[i];
+                match = re.match(Itemtext);
+                if (match.hasMatch()) {
+                    LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
+                }
+                if(LabelIndex == LabelStruct->labelNum)
+                {
+                    QStringList labeltext = CurrentLableNameList[i].split(signalSpace);
+                    if(labeltext.length()>1)
+                    {
+                        contStr= "[" + labeltext[0] +"] "+labeltext[1];
+                    }
+                    if(LabelStruct->type == 1)
+                    {
+                        contStr = "跳转到 "+contStr;
+                    }
+                    break;
+                }
             }
         }
     }
     return contStr;
+}
+
+//获取下一个标签索引值,如果标签号不连续，则返回第一个不连续的标签号，如果连续，则返回最大值
+uint16_t getLabelOrderIndex()
+{
+    QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+    QRegularExpressionMatch match;
+    QList<uint16_t> LableIndex; // 存储匹配到的标签索引
+
+    // 遍历 CurrentLableNameList，匹配并存储标签索引
+    for (const QString &itemText : CurrentLableNameList) {
+        match = re.match(itemText);
+        if (match.hasMatch()) {
+            uint16_t index = match.captured(1).toUInt();
+            LableIndex.append(index);
+        }
+    }
+
+    // 对数字进行排序
+    std::sort(LableIndex.begin(), LableIndex.end());
+
+    // 检查第一个不连续的值
+    for (int i = 0; i < LableIndex.size(); ++i) {
+        // 检查是否从 1 开始，并且是否是连续的
+        if (LableIndex[i] != i + 1) {
+            return i + 1; // 直接返回第一个不连续的值
+        }
+    }
+
+    // 如果所有值都是连续的，则返回最大连续值加 1
+    return LableIndex.isEmpty() ? 1 : LableIndex.back() + 1;
+}
+
+//根据标签号返回标签所在索引
+uint16_t ReturnLableListIndex(uint16_t lableNum)
+{
+    QString Itemtext = "";
+    QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+    QRegularExpressionMatch match;
+    uint16_t LabelIndex = 0;
+    for(int i=0;i<CurrentLableNameList.count();i++)
+    {
+        Itemtext = CurrentLableNameList[i];
+        match = re.match(Itemtext);
+        if (match.hasMatch()) {
+            LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
+        }
+        if(LabelIndex == lableNum)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+//根据标签名称返回标签号
+uint16_t ReturnLabelnum(QString LabelText)
+{
+    QString Itemtext = "";
+    QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+    QRegularExpressionMatch match;
+    uint16_t lableNum = 0;
+    match = re.match(LabelText);
+    if (match.hasMatch()) {
+        lableNum = match.captured(1).toUInt(); // 提取匹配到的数字
+    }
+    return lableNum;
 }

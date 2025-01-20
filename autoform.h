@@ -27,8 +27,6 @@ signals:
     void Send_planProductNum_Signal();//计划产品个数下发信号
 private slots:
 
-    void on_btnEdit_pressed();
-
     void on_btnAimedProduct_clicked();
 
     void on_btnEdit_toggled(bool checked);

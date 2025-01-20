@@ -16,7 +16,6 @@ AutoInforRefresh m_AutoInforRefresh; //自动界面信息刷新标志
 Sync_Data MySync_Data; //参数同步结构体
 
 P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM] = {0};                                 //教导界面轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
-P_ClawActionStruct Temp_ClawActionStruct[3] = {0};                                          //教导界面卡爪动作结构体
 P_MachineOutStruct Temp_MachineOutStruct[6] = {0};                                          //教导界面机床输出控制
 P_ReserveOutStruct Temp_ReserveOutStruct = {0};                                             //教导界面预留输出调用
 P_WaitInMachineStruct Temp_WaitInMachineStruct = {0};                                       //教导界面机床等待指令
@@ -83,7 +82,9 @@ uint16_t m_AxisCurTorque = 0;                                                   
 
 uint8_t m_RobotRunSta = 0;																							//机器运行状态
 uint8_t m_RobotWorkMode = 0;																						//机器工作模式
-uint16_t m_AlarmNum = 0;																								//报警编号，0无故障 1-99紧急停止(急停，重新回原) 100-499急停报警(急停，不需要回原)                                                                                                                                 //500-999普通报警(停止) 1000-1499提示报警(暂停) 1500-1999提示(运行状态不变化)
+uint8_t m_RobotResetState = 0;                                                              //复位状态 0-未复位 1-复位中 2-复位完成
+uint8_t m_RobotOriginState = 0;                                                             //回零状态 0-未回零 1-回零中 2-回零完成
+uint16_t m_AlarmNum = 0;																	//报警编号，0无故障 1-99紧急停止(急停，重新回原) 100-499急停报警(急停，不需要回原)                                                                                                                                 //500-999普通报警(停止) 1000-1499提示报警(暂停) 1500-1999提示(运行状态不变化)
 
 QQueue<AlarmInfo> alarmInfoQueue;
 
@@ -104,7 +105,8 @@ P_ProInfoStruct m_ProRunInfo = {0};																//运行信息--当前行号
 D_RunInfoStruct m_RunInfo = {0};																	//运行信息
 D_RunParStruct m_RunPar = {0};																		//运行参数
 uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM] = {0};													//当前每个堆叠组的堆叠计数
-uint8_t m_VariableType[VAR_TOTAL_NUM] = {0};
+uint8_t m_VariableTypeLod[VAR_TOTAL_NUM] = {0};                //上一次变量的小数类型 0-整数 1-一位小数 2-两位小数
+uint8_t m_VariableType[VAR_TOTAL_NUM] = {0};             //当前变量的小数类型 0-整数 1-一位小数 2-两位小数
 uint32_t m_VariableCurValue[VAR_TOTAL_NUM] = {0};											//当前每个变量的变量值
 uint32_t m_TimeCurValue[TIME_TOTAL_NUM] = {0};													//当前每个定时器的计数值
 
@@ -510,6 +512,47 @@ uint8_t g_GetProOrderData(uint8_t *data, uint8_t writeMode)
 uint8_t g_ProOrderDataCopy(P_ProOrderStruct *proOrder_New, P_ProOrderStruct *proOrder_Old)
 {
     uint16_t len = 0;
+    P_ProOrderStruct proOrder_New_Temp = {0,0,0,0,0,nullptr};
+    if(proOrder_Old->pData == NULL)
+    {//被拷贝的命令数据指针为空，返回
+        return 1;
+    }
+    len = g_GetProOrderDataLen(proOrder_Old);									//获取命令长度
+    proOrder_New_Temp.pData = (void*)malloc(len);									//申请内存大小
+    if(proOrder_New_Temp.pData == NULL)
+    {
+        return 2;
+    }
+    proOrder_New_Temp.list = proOrder_Old->list;
+    proOrder_New_Temp.runOrderNum = proOrder_Old->runOrderNum;
+    proOrder_New_Temp.cmd = proOrder_Old->cmd;
+    proOrder_New_Temp.noteFlag = proOrder_Old->noteFlag;
+    proOrder_New_Temp.delay = proOrder_Old->delay;
+    memcpy(proOrder_New_Temp.pData, proOrder_Old->pData, len);		//复制命令数据
+    //如果当前行命令参数指针指向有效地址，需要先释放
+    if(proOrder_New->cmd != proOrder_New_Temp.cmd)
+    {
+        g_FreeProOrder(proOrder_New);
+    }
+    proOrder_New->list = proOrder_New_Temp.list;
+    proOrder_New->runOrderNum = proOrder_New_Temp.runOrderNum;
+    proOrder_New->cmd = proOrder_New_Temp.cmd;
+    proOrder_New->noteFlag = proOrder_New_Temp.noteFlag;
+    proOrder_New->delay = proOrder_New_Temp.delay;
+
+    if(proOrder_New->pData == NULL)
+    {
+        proOrder_New->pData = (void*)malloc(len);									//申请内存大小
+        if(proOrder_New->pData == NULL)
+        {
+            g_FreeProOrder(&proOrder_New_Temp);;//释放临时结构体的PDate内存
+            return 3;
+        }
+    }
+    memcpy(proOrder_New->pData, proOrder_New_Temp.pData, len);		//复制命令数据
+    g_FreeProOrder(&proOrder_New_Temp);;//释放临时结构体的PDate内存
+#if 0
+    uint16_t len = 0;
     P_ProOrderStruct* proOrder_New_Temp = new P_ProOrderStruct;
     if(proOrder_Old->pData == NULL)
     {//被拷贝的命令数据指针为空，返回
@@ -542,6 +585,8 @@ uint8_t g_ProOrderDataCopy(P_ProOrderStruct *proOrder_New, P_ProOrderStruct *pro
     {
         //qDebug() <<__FUNCTION__<<"   malloc errol:"<<__LINE__;
     }
+#endif
+
     return 0;
 }
 
@@ -550,6 +595,7 @@ void g_ProOrderSwap(P_ProOrderStruct *proOrder_Old, P_ProOrderStruct *proOrder_N
 {
     P_ProOrderStruct proOrder;
 
+//    if(proOrder_Old->pData == NULL || )
     proOrder.list = proOrder_New->list;
     proOrder.runOrderNum = proOrder_New->runOrderNum;
     proOrder.cmd = proOrder_New->cmd;
@@ -1150,7 +1196,7 @@ uint8_t g_TotalProCopy(P_ProOrderStruct *proOrder_Old, P_ProOrderStruct *proOrde
     {//程序号异常
         return 1;
     }
-    else if(m_OperateProOrderListNum == 0 && m_OperateProOrderListNum > PRO_LINE_MAIN)
+    else if(m_OperateProOrderListNum == 0 || m_OperateProOrderListNum > PRO_LINE_MAIN)
     {//程序行数异常
         return 2;
     }
