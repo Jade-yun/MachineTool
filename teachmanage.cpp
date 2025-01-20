@@ -186,11 +186,10 @@ void TeachManage::on_btn_Load_clicked()
         return;
     }
     QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
-    if (Load_Program_Handle(fileName))
-    {
-        emit programLoaded();
-        m_RunPar.startRunLineNum = 1;//加载程序时起始行号设置为1
-    }
+    Load_Program_Handle(fileName);
+    m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
+    emit labProgramNameChangeSignal();
+
 }
 
 void TeachManage::on_btn_Preview_clicked()

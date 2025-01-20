@@ -294,14 +294,26 @@ AutoForm::~AutoForm()
 //自动界面程序列表滑动或点击时处理函数
 void AutoForm::on_Auto_file_List_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    if(ui->Auto_file_List->rowCount() && m_AutoInforRefresh.Program_Follow_Flog == 0)
+    if(currentRow>=0 && currentRow <= m_OperateProOrderListNum)
     {
-        m_CurrentSelectProOrderList = ui->Auto_file_List->currentIndex().row();
-        if(ui->btnEdit->isChecked())
-        {//如果编辑按钮按下
-            OrderEditHandel();
+        if(m_OperateProOrderListNum == 0)
+        {//如果未载入程序，直接返回
+            return;
+        }
+        if(ui->Auto_file_List->rowCount() && m_AutoInforRefresh.Program_Follow_Flog == 0)
+        {
+            m_CurrentSelectProOrderList = currentRow;
+            if(ui->btnEdit->isChecked())
+            {//如果编辑按钮按下
+                OrderEditHandel();
+            }
         }
     }
+    else
+    {
+        qDebug()<<"currentRow error:"<<currentRow;
+    }
+
 }
 //设置自动运行界面操作中的自动运行，断点设置，断点清除图标处理函数
 void AutoForm::SetAutoRunParIcon(uint8_t type)
@@ -334,7 +346,7 @@ void AutoForm::SetAutoRunParIcon(uint8_t type)
             {
                 //为目标行设置新的图标和文本
                 m_RunPar.breakPointFlag = true;
-                m_RunPar.breakPointList = m_CurrentSelectProOrderList;
+                m_RunPar.breakPointList = m_CurrentSelectProOrderList+1;
                 m_RunPar.breakPointProNum = m_OperateProNum;
                 if(m_RunPar.startRunLineFlag == true && m_RunPar.startRunLineNum == m_RunPar.breakPointList && m_RunPar.startRunLineProNum == m_RunPar.breakPointProNum)
                 {
@@ -355,7 +367,7 @@ void AutoForm::SetAutoRunParIcon(uint8_t type)
     case 2://断点清除
     {
         m_RunPar.breakPointFlag = false;
-        m_RunPar.breakPointList = 0;
+        m_RunPar.breakPointList = 1;
         m_RunPar.breakPointProNum = false;
         m_RunPar.startRunLineFlag = 0;
         m_RunPar.startRunLineNum = 1;
@@ -384,13 +396,16 @@ void AutoForm::SetAutoRunIcon()
         //为目标行设置新的图标和文本
         QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.breakPointList].runOrderNum));
         QIcon icon(":/images/autoPageImages/breakpoint.png");
-        ui->Auto_file_List->setItem(m_RunPar.breakPointList,0,item);
-        item->setIcon(icon);
-        item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
+        if(m_RunPar.breakPointList>0)
+        {
+            ui->Auto_file_List->setItem(m_RunPar.breakPointList-1,0,item);
+            item->setIcon(icon);
+            item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
+        }
 
         ui->labBreakPointPos0->show();
         ui->labBreakPointPos->show();
-        ui->labBreakPointPos->setText(QString("主程序第%1步").arg(m_CurrentSelectProOrderList+1));
+        ui->labBreakPointPos->setText(QString("主程序第%1步").arg(m_RunPar.breakPointList));
     }
     else
     {
@@ -403,9 +418,12 @@ void AutoForm::SetAutoRunIcon()
         //为目标行设置新的图标和文本
         QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.startRunLineNum].runOrderNum));
         QIcon icon(":/images/autoPageImages/continue.png");
-        ui->Auto_file_List->setItem(m_RunPar.startRunLineNum,0,item);
-        item->setIcon(icon);
-        item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
+        if(m_RunPar.startRunLineNum>0)
+        {
+            ui->Auto_file_List->setItem(m_RunPar.startRunLineNum-1,0,item);
+            item->setIcon(icon);
+            item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
+        }
 
         ui->labStartStep->show();
         ui->labStartStep0->show();
@@ -573,268 +591,270 @@ void AutoForm::OrderEditSaveHandel()
 **************************************************************************/
 void AutoForm::OrderEditHandel()
 {
-    switch(m_OperateProOrder[m_CurrentSelectProOrderList].cmd)
+    if(m_CurrentSelectProOrderList<=m_OperateProOrderListNum)
     {
-    case C_AXIS_MOVE:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
-        ui->AutoEditSavebtn->show();
-        P_AxisMoveStruct* AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        double AxisPos = 0.00;
-        double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
-        ui->AutoEditAxisPos->setText(QString::number(AxisPos));
-        ui->AutoEditAxisSpeed->setText(QString::number(AxisMove->speed));
-        ui->AutoEditAxisDelay->setText(QString::number(AxisMove_delay/100,'f',2));
-        break;
-    }
-    case C_SEARCH_AXIS_MOVE:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
-        ui->AutoEditSavebtn->show();
-        P_SearchAxisMoveStruct* SearchAxisMove = (P_SearchAxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        double AxisPos = 0.00;
-        double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
-        ui->AutoEditAxisPos->setText(QString::number(AxisPos));
-        ui->AutoEditAxisSpeed->setText(QString::number(SearchAxisMove->runSpeed));
-        ui->AutoEditAxisDelay->setText(QString::number(AxisMove_delay/100,'f',2));
-        break;
-    }
-    case C_OFFSET_AXIS:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
-        ui->AutoEditSavebtn->show();
-        P_OffsetAxisStruct* OffsetAxis =(P_OffsetAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        double AxisPos = 0.00;
-        double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
-        ui->AutoEditAxisPos->setText(QString::number(AxisPos));
-        ui->AutoEditAxisSpeed->setText(QString::number(OffsetAxis->speed));
-        ui->AutoEditAxisDelay->setText(QString::number(AxisMove_delay/100,'f',2));
-        break;
-    }
-    case C_CLAW_ACTION:
-    case C_RESERVE_OUT:
-    case C_WAIT_IN_MACHINE:
-    case C_WAIT_IN_CLAW:
-    case C_WAIT_IN_RESERVE:
-    case C_STACK_RESET_ZERO:
-    case C_CLAW_CHECK:
-    case C_RESERVE_CHECK:
-    case C_MACHINE_OUT:
-    case C_OTHER_DELAY:
-    case C_OTHER_ALARM_LAMP:
-    case C_OTHER_ALARM_SOUND:
-    case C_AXIS_STOP:
-    case C_SEARCH_STOP:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditDelaypage);
-        ui->AutoEditSavebtn->show();
-        double ClawAction_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
-        ui->AutoEditdelay->setText(QString::number(ClawAction_delay/100,'f',2));
-        break;
-    }
-    case C_STACK_MOVE:
-    case C_STACK_FOLLOW:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditStack);
-        ui->AutoEditSavebtn->show();
-        ui->AutoEditStackX1btn->setChecked(true);
-        double ClawAction_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
-        ui->AutoEditStackdelay->setText(QString::number(ClawAction_delay/100,'f',2));
-        break;
-    }
-    case C_OTHER_ALARM_CUST:
-    case C_OTHER_CYC_STOP:
-    case C_LABEL:
-    case C_PRO_END:
-    case C_LOGIC_WHILE_END:
-    case C_LOGIC_TIME:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->NoParModpage);
-        break;
-    }
-    case C_LOGIC_IF:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
-        ui->AutoEditSavebtn->show();
-        ui->AutoEditchboxIfCondition1->setChecked(true);
-        AutoFromIfOrderEditHandle(0);
-        break;
-    }
-    case C_LOGIC_ELSE:
-    case C_LOGIC_END:
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
-        ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
-        ui->AutoEditSavebtn->hide();//隐藏保存按钮
-        ui->AutoEditchboxIfCondition1->setChecked(true);
-        ui->AutoEditchboxIfCondition2->setEnabled(false);
-        break;
-    case C_LOGIC_WHILE_START:
-    {
-        ui->AutoEditSavebtn->show();//保存按钮
-        P_LogicWhileStartStruct* LogicWhileStart =(P_LogicWhileStartStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        ui->AutoEditchboxIfCondition1->setEnabled(true);
-        ui->AutoEditchboxIfCondition2->setEnabled(false);
-        if(ui->AutoEditchboxIfCondition1->isChecked()==false)
+        switch(m_OperateProOrder[m_CurrentSelectProOrderList].cmd)
         {
+        case C_AXIS_MOVE:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
+            ui->AutoEditSavebtn->show();
+            P_AxisMoveStruct* AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            double AxisPos = 0.00;
+            double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
+            ui->AutoEditAxisPos->setText(QString::number(AxisPos));
+            ui->AutoEditAxisSpeed->setText(QString::number(AxisMove->speed));
+            ui->AutoEditAxisDelay->setText(QString::number(AxisMove_delay/100,'f',2));
+            break;
+        }
+        case C_SEARCH_AXIS_MOVE:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
+            ui->AutoEditSavebtn->show();
+            P_SearchAxisMoveStruct* SearchAxisMove = (P_SearchAxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            double AxisPos = 0.00;
+            double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
+            ui->AutoEditAxisPos->setText(QString::number(AxisPos));
+            ui->AutoEditAxisSpeed->setText(QString::number(SearchAxisMove->runSpeed));
+            ui->AutoEditAxisDelay->setText(QString::number(AxisMove_delay/100,'f',2));
+            break;
+        }
+        case C_OFFSET_AXIS:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoPageAxisEditpage);
+            ui->AutoEditSavebtn->show();
+            P_OffsetAxisStruct* OffsetAxis =(P_OffsetAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            double AxisPos = 0.00;
+            double AxisMove_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
+            ui->AutoEditAxisPos->setText(QString::number(AxisPos));
+            ui->AutoEditAxisSpeed->setText(QString::number(OffsetAxis->speed));
+            ui->AutoEditAxisDelay->setText(QString::number(AxisMove_delay/100,'f',2));
+            break;
+        }
+        case C_CLAW_ACTION:
+        case C_RESERVE_OUT:
+        case C_WAIT_IN_MACHINE:
+        case C_WAIT_IN_CLAW:
+        case C_WAIT_IN_RESERVE:
+        case C_STACK_RESET_ZERO:
+        case C_CLAW_CHECK:
+        case C_RESERVE_CHECK:
+        case C_MACHINE_OUT:
+        case C_OTHER_DELAY:
+        case C_OTHER_ALARM_LAMP:
+        case C_OTHER_ALARM_SOUND:
+        case C_AXIS_STOP:
+        case C_SEARCH_STOP:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditDelaypage);
+            ui->AutoEditSavebtn->show();
+            double ClawAction_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
+            ui->AutoEditdelay->setText(QString::number(ClawAction_delay/100,'f',2));
+            break;
+        }
+        case C_STACK_MOVE:
+        case C_STACK_FOLLOW:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditStack);
+            ui->AutoEditSavebtn->show();
+            ui->AutoEditStackX1btn->setChecked(true);
+            double ClawAction_delay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
+            ui->AutoEditStackdelay->setText(QString::number(ClawAction_delay/100,'f',2));
+            break;
+        }
+        case C_OTHER_ALARM_CUST:
+        case C_OTHER_CYC_STOP:
+        case C_LABEL:
+        case C_PRO_END:
+        case C_LOGIC_WHILE_END:
+        case C_LOGIC_TIME:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->NoParModpage);
+            break;
+        }
+        case C_LOGIC_IF:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
+            ui->AutoEditSavebtn->show();
             ui->AutoEditchboxIfCondition1->setChecked(true);
+            AutoFromIfOrderEditHandle(0);
+            break;
         }
-        ui->Autoedloopnum->setDecimalPlaces(0);
-        ui->Autoedloopnum->setText(QString::number(LogicWhileStart->cycNum,'f',0));
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
-        ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditLoopnumpage);
-        break;
-    }
-    case C_LOGIC_VAR:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
-        ui->AutoEditchboxIfCondition1->setEnabled(true);
-        ui->AutoEditchboxIfCondition2->setEnabled(false);
-        if(ui->AutoEditchboxIfCondition1->isChecked()==false)
-        {
-            ui->AutoEditchboxIfCondition1->setChecked(true);
-        }
-        ui->AutoEditOperandSecond->hide();//隐藏单位
-        ui->AutoEditSavebtn->show();//保存按钮
-        P_LogicVarStruct* LogicVar =(P_LogicVarStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        if(LogicVar->sufferOperType == 0)
-        {
-            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
-            if(m_VariableType[LogicVar->varNum] == 0)
-            {//整数
-                ui->AutoeditIfOperand->setDecimalPlaces(0);//根据变量小数位数进行设置
-                ui->AutoeditIfOperand->setText(QString::number(LogicVar->sufferOperValue,'f',0));
-            }
-            else if(m_VariableType[LogicVar->varNum] == 1)
-            {//一位小数
-                ui->AutoeditIfOperand->setDecimalPlaces(1);//根据变量小数位数进行设置
-                ui->AutoeditIfOperand->setText(QString::number(((double)LogicVar->sufferOperValue)/10,'f',1));
-            }
-            else if(m_VariableType[LogicVar->varNum] == 2)
-            {//两位小数
-                ui->AutoeditIfOperand->setDecimalPlaces(2);//根据变量小数位数进行设置
-                ui->AutoeditIfOperand->setText(QString::number(((double)LogicVar->sufferOperValue)/100,'f',2));
-            }
-        }
-        else
-        {
+        case C_LOGIC_ELSE:
+        case C_LOGIC_END:
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
             ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
             ui->AutoEditSavebtn->hide();//隐藏保存按钮
-        }
-        break;
-    }
-    case C_LOGIC_AXIS:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
-        ui->AutoEditchboxIfCondition1->setEnabled(true);
-        ui->AutoEditchboxIfCondition2->setEnabled(false);
-        if(ui->AutoEditchboxIfCondition1->isChecked()==false)
-        {
             ui->AutoEditchboxIfCondition1->setChecked(true);
-        }
-        ui->AutoEditOperandSecond->hide();//隐藏单位
-        ui->AutoEditSavebtn->show();//保存按钮
-        P_LogicAxisStruct* LogicAxis =(P_LogicAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        if(LogicAxis->sufferOperType == 0)
+            ui->AutoEditchboxIfCondition2->setEnabled(false);
+            break;
+        case C_LOGIC_WHILE_START:
         {
-            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
-            //两位小数
-            ui->AutoeditIfOperand->setDecimalPlaces(2);//根据变量小数位数进行设置
-            ui->AutoeditIfOperand->setText(QString::number(((double)LogicAxis->sufferOperValue)/100,'f',2));
-        }
-        else
-        {
-            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
-            ui->AutoEditSavebtn->hide();//隐藏保存按钮
-        }
-        break;
-    }
-    case C_LOGIC_STACK:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
-        ui->AutoEditchboxIfCondition1->setEnabled(true);
-        ui->AutoEditchboxIfCondition2->setEnabled(false);
-        if(ui->AutoEditchboxIfCondition1->isChecked()==false)
-        {
-            ui->AutoEditchboxIfCondition1->setChecked(true);
-        }
-        ui->AutoEditOperandSecond->hide();//隐藏单位
-        ui->AutoEditSavebtn->show();//保存按钮
-        P_LogicStackStruct* LogicStack =(P_LogicStackStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        if(LogicStack->sufferOperType == 0)
-        {
-            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
-            ui->AutoeditIfOperand->setDecimalPlaces(0);
-            ui->AutoeditIfOperand->setText(QString::number(LogicStack->sufferOperValue,'f',0));
-        }
-        else
-        {
-            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
-            ui->AutoEditSavebtn->hide();//隐藏保存按钮
-        }
-        break;
-    }
-    case C_LOGIC_PRODUCT:
-    {
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
-        ui->AutoEditchboxIfCondition1->setEnabled(true);
-        ui->AutoEditchboxIfCondition2->setEnabled(false);
-        if(ui->AutoEditchboxIfCondition1->isChecked()==false)
-        {
-            ui->AutoEditchboxIfCondition1->setChecked(true);
-        }
-        ui->AutoEditOperandSecond->hide();//隐藏单位
-        ui->AutoEditSavebtn->show();//保存按钮
-        P_LogicCurProductNumStruct* LogicCurProductNum =(P_LogicCurProductNumStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        if(LogicCurProductNum->sufferOperType == 0)
-        {
-            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
-            ui->AutoeditIfOperand->setDecimalPlaces(0);
-            ui->AutoeditIfOperand->setText(QString::number(LogicCurProductNum->sufferOperValue,'f',0));
-        }
-        else
-        {
-            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
-            ui->AutoEditSavebtn->hide();//隐藏保存按钮
-        }
-        break;
-    }
-    case C_TORQUE_GARD:
-    {
-        ui->AutoEditchboxIfCondition1->setEnabled(true);
-        ui->AutoEditchboxIfCondition2->setEnabled(false);
-        if(ui->AutoEditchboxIfCondition1->isChecked()==false)
-        {
-            ui->AutoEditchboxIfCondition1->setChecked(true);
-        }
-        ui->AutoEditTorque->setDecimalPlaces(0);
-        ui->stkWgtEdit->setCurrentWidget(ui->AutoEditTorquepage);
-        P_TorqueGardStruct* TorqueGard =(P_TorqueGardStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        ui->AutoEditTorque->setText(QString::number(TorqueGard->torqueValue));
-        ui->AutoEditSavebtn->show();//保存按钮
-        break;
-    }
-    case C_SUN_PRO:
-    {
-        P_SunProStruct* SunPro =(P_SunProStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        if(SunPro->oprMode == 3)
-        {
-            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditTimeLimitpage);
-            ui->TimeLimitdelay->setDecimalPlaces(2);
-            double OtherDelay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
-            ui->TimeLimitdelay->setText(QString::number(OtherDelay/100,'f',2));
             ui->AutoEditSavebtn->show();//保存按钮
+            P_LogicWhileStartStruct* LogicWhileStart =(P_LogicWhileStartStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            ui->AutoEditchboxIfCondition1->setEnabled(true);
+            ui->AutoEditchboxIfCondition2->setEnabled(false);
+            if(ui->AutoEditchboxIfCondition1->isChecked()==false)
+            {
+                ui->AutoEditchboxIfCondition1->setChecked(true);
+            }
+            ui->Autoedloopnum->setDecimalPlaces(0);
+            ui->Autoedloopnum->setText(QString::number(LogicWhileStart->cycNum,'f',0));
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
+            ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditLoopnumpage);
+            break;
         }
-        else
+        case C_LOGIC_VAR:
         {
-            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfNoModifypage);
-            ui->AutoEditSavebtn->hide();//隐藏保存按钮
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
+            ui->AutoEditchboxIfCondition1->setEnabled(true);
+            ui->AutoEditchboxIfCondition2->setEnabled(false);
+            if(ui->AutoEditchboxIfCondition1->isChecked()==false)
+            {
+                ui->AutoEditchboxIfCondition1->setChecked(true);
+            }
+            ui->AutoEditOperandSecond->hide();//隐藏单位
+            ui->AutoEditSavebtn->show();//保存按钮
+            P_LogicVarStruct* LogicVar =(P_LogicVarStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            if(LogicVar->sufferOperType == 0)
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
+                if(m_VariableType[LogicVar->varNum] == 0)
+                {//整数
+                    ui->AutoeditIfOperand->setDecimalPlaces(0);//根据变量小数位数进行设置
+                    ui->AutoeditIfOperand->setText(QString::number(LogicVar->sufferOperValue,'f',0));
+                }
+                else if(m_VariableType[LogicVar->varNum] == 1)
+                {//一位小数
+                    ui->AutoeditIfOperand->setDecimalPlaces(1);//根据变量小数位数进行设置
+                    ui->AutoeditIfOperand->setText(QString::number(((double)LogicVar->sufferOperValue)/10,'f',1));
+                }
+                else if(m_VariableType[LogicVar->varNum] == 2)
+                {//两位小数
+                    ui->AutoeditIfOperand->setDecimalPlaces(2);//根据变量小数位数进行设置
+                    ui->AutoeditIfOperand->setText(QString::number(((double)LogicVar->sufferOperValue)/100,'f',2));
+                }
+            }
+            else
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
+                ui->AutoEditSavebtn->hide();//隐藏保存按钮
+            }
+            break;
         }
-        break;
+        case C_LOGIC_AXIS:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
+            ui->AutoEditchboxIfCondition1->setEnabled(true);
+            ui->AutoEditchboxIfCondition2->setEnabled(false);
+            if(ui->AutoEditchboxIfCondition1->isChecked()==false)
+            {
+                ui->AutoEditchboxIfCondition1->setChecked(true);
+            }
+            ui->AutoEditOperandSecond->hide();//隐藏单位
+            ui->AutoEditSavebtn->show();//保存按钮
+            P_LogicAxisStruct* LogicAxis =(P_LogicAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            if(LogicAxis->sufferOperType == 0)
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
+                //两位小数
+                ui->AutoeditIfOperand->setDecimalPlaces(2);//根据变量小数位数进行设置
+                ui->AutoeditIfOperand->setText(QString::number(((double)LogicAxis->sufferOperValue)/100,'f',2));
+            }
+            else
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
+                ui->AutoEditSavebtn->hide();//隐藏保存按钮
+            }
+            break;
+        }
+        case C_LOGIC_STACK:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
+            ui->AutoEditchboxIfCondition1->setEnabled(true);
+            ui->AutoEditchboxIfCondition2->setEnabled(false);
+            if(ui->AutoEditchboxIfCondition1->isChecked()==false)
+            {
+                ui->AutoEditchboxIfCondition1->setChecked(true);
+            }
+            ui->AutoEditOperandSecond->hide();//隐藏单位
+            ui->AutoEditSavebtn->show();//保存按钮
+            P_LogicStackStruct* LogicStack =(P_LogicStackStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            if(LogicStack->sufferOperType == 0)
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
+                ui->AutoeditIfOperand->setDecimalPlaces(0);
+                ui->AutoeditIfOperand->setText(QString::number(LogicStack->sufferOperValue,'f',0));
+            }
+            else
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
+                ui->AutoEditSavebtn->hide();//隐藏保存按钮
+            }
+            break;
+        }
+        case C_LOGIC_PRODUCT:
+        {
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfpage);
+            ui->AutoEditchboxIfCondition1->setEnabled(true);
+            ui->AutoEditchboxIfCondition2->setEnabled(false);
+            if(ui->AutoEditchboxIfCondition1->isChecked()==false)
+            {
+                ui->AutoEditchboxIfCondition1->setChecked(true);
+            }
+            ui->AutoEditOperandSecond->hide();//隐藏单位
+            ui->AutoEditSavebtn->show();//保存按钮
+            P_LogicCurProductNumStruct* LogicCurProductNum =(P_LogicCurProductNumStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            if(LogicCurProductNum->sufferOperType == 0)
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfOperandpage);
+                ui->AutoeditIfOperand->setDecimalPlaces(0);
+                ui->AutoeditIfOperand->setText(QString::number(LogicCurProductNum->sufferOperValue,'f',0));
+            }
+            else
+            {
+                ui->AutoEditIfSunPage->setCurrentWidget(ui->AutoEditIfNoModifypage);
+                ui->AutoEditSavebtn->hide();//隐藏保存按钮
+            }
+            break;
+        }
+        case C_TORQUE_GARD:
+        {
+            ui->AutoEditchboxIfCondition1->setEnabled(true);
+            ui->AutoEditchboxIfCondition2->setEnabled(false);
+            if(ui->AutoEditchboxIfCondition1->isChecked()==false)
+            {
+                ui->AutoEditchboxIfCondition1->setChecked(true);
+            }
+            ui->AutoEditTorque->setDecimalPlaces(0);
+            ui->stkWgtEdit->setCurrentWidget(ui->AutoEditTorquepage);
+            P_TorqueGardStruct* TorqueGard =(P_TorqueGardStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            ui->AutoEditTorque->setText(QString::number(TorqueGard->torqueValue));
+            ui->AutoEditSavebtn->show();//保存按钮
+            break;
+        }
+        case C_SUN_PRO:
+        {
+            P_SunProStruct* SunPro =(P_SunProStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+            if(SunPro->oprMode == 3)
+            {
+                ui->stkWgtEdit->setCurrentWidget(ui->AutoEditTimeLimitpage);
+                ui->TimeLimitdelay->setDecimalPlaces(2);
+                double OtherDelay = m_OperateProOrder[m_CurrentSelectProOrderList].delay;
+                ui->TimeLimitdelay->setText(QString::number(OtherDelay/100,'f',2));
+                ui->AutoEditSavebtn->show();//保存按钮
+            }
+            else
+            {
+                ui->stkWgtEdit->setCurrentWidget(ui->AutoEditIfNoModifypage);
+                ui->AutoEditSavebtn->hide();//隐藏保存按钮
+            }
+            break;
+        }
+        default:
+            break;
+        }
     }
-    default:
-        break;
-    }
-
 }
 //自动界面IF指令编辑处理
 void AutoForm::AutoFromIfOrderEditHandle(uint8_t IfIndex)
@@ -1053,7 +1073,7 @@ void AutoForm::Auto_State_Refresh()
     ui->labFormingCycle->setText(QString::number(((double)m_RunInfo.takeShapeCyc),'f',1)+"s");//成型周期
     ui->labFetchTime->setText(QString::number(((double)m_RunInfo.fetchTime),'f',2)+"s"); //取物时间
     ui->labActualProd->setText(QString::number(m_RunInfo.actualProductNum));             //实际产品
-    ui->labCurrentStepNumber->setText(QString::number(m_ProRunInfo.proNum[m_OperateProNum]));//当前步号
+    ui->labCurrentStepNumber->setText(QString::number(m_ProRunInfo.proNum[m_OperateProNum]+1));//当前步号
 }
 /*************************************************************************
 **  函数名：  Auto_CurStep_Refresh()
@@ -1203,6 +1223,7 @@ void AutoForm::Auto_File_List_Refresh(uint8_t ProNum)
     }
     //界面初始化
     ui->stkWgtOuter->setCurrentWidget(ui->pageState);//界面切到自动状态界面
+    ui->stkWgtState->setCurrentWidget(ui->page1AutoState);
     ui->btnEdit->setChecked(false);//编辑按钮默认关闭
 
 }
@@ -1243,12 +1264,6 @@ void AutoForm::callNumKeyBoard(QObject* obj)
     }
 }
 
-//自动运行界面编辑按钮
-void AutoForm::on_btnEdit_pressed()
-{
-
-}
-
 
 void AutoForm::on_btnAimedProduct_clicked()
 {
@@ -1272,6 +1287,7 @@ void AutoForm::on_btnEdit_toggled(bool checked)
     else
     {
         ui->stkWgtOuter->setCurrentWidget(ui->pageState);
+        ui->stkWgtState->setCurrentWidget(ui->page1AutoState);
     }
 
 }

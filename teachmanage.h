@@ -60,7 +60,8 @@ private:
     int getFilePermission(QWidget *lab) const;
 
     void updateFilePermission(int index);
-
+signals:
+    void labProgramNameChangeSignal();//主界面名称刷新信号
 private:
     // 当前选中文件权限 0 允许    1 时间/位置允许   2 时间允许  3 禁止
     int filePermission;

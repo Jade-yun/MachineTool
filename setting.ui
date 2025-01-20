@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+       <number>1</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -19096,7 +19096,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -33744,7 +33744,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="5" column="5">
-         <widget class="IOOnlineInEdit" name="editOriginSignalY2">
+         <widget class="IOInEdit" name="editOriginSignalY2">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -33760,7 +33760,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="2" column="3">
-         <widget class="IOOnlineInEdit" name="editMinLimitSignalY1">
+         <widget class="IOInEdit" name="editMinLimitSignalY1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -33776,7 +33776,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="5" column="4">
-         <widget class="IOOnlineInEdit" name="editMaxLimitSignalY2">
+         <widget class="IOInEdit" name="editMaxLimitSignalY2">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -33792,7 +33792,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="4" column="3">
-         <widget class="IOOnlineInEdit" name="editMinLimitSignalC">
+         <widget class="IOInEdit" name="editMinLimitSignalC">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -33930,7 +33930,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="1" column="3">
-         <widget class="IOOnlineInEdit" name="editMinLimitSignalX1">
+         <widget class="IOInEdit" name="editMinLimitSignalX1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -33990,7 +33990,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="5" column="3">
-         <widget class="IOOnlineInEdit" name="editMinLimitSignalY2">
+         <widget class="IOInEdit" name="editMinLimitSignalY2">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34045,7 +34045,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="4" column="5">
-         <widget class="IOOnlineInEdit" name="editOriginSignalC">
+         <widget class="IOInEdit" name="editOriginSignalC">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34083,7 +34083,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="1" column="5">
-         <widget class="IOOnlineInEdit" name="editOriginSignalX1">
+         <widget class="IOInEdit" name="editOriginSignalX1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34138,7 +34138,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="2" column="5">
-         <widget class="IOOnlineInEdit" name="editOriginSignalY1">
+         <widget class="IOInEdit" name="editOriginSignalY1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34215,7 +34215,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="3" column="3">
-         <widget class="IOOnlineInEdit" name="editMinLimitSignalZ1">
+         <widget class="IOInEdit" name="editMinLimitSignalZ1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34231,7 +34231,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="3" column="5">
-         <widget class="IOOnlineInEdit" name="editOriginSignalZ1">
+         <widget class="IOInEdit" name="editOriginSignalZ1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34247,7 +34247,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="3" column="4">
-         <widget class="IOOnlineInEdit" name="editMaxLimitSignalZ1">
+         <widget class="IOInEdit" name="editMaxLimitSignalZ1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34419,7 +34419,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="2" column="4">
-         <widget class="IOOnlineInEdit" name="editMaxLimitSignalY1">
+         <widget class="IOInEdit" name="editMaxLimitSignalY1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34474,7 +34474,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="6" column="3">
-         <widget class="IOOnlineInEdit" name="editMinLimitSignalZ2">
+         <widget class="IOInEdit" name="editMinLimitSignalZ2">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34534,7 +34534,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="6" column="4">
-         <widget class="IOOnlineInEdit" name="editMaxLimitSignalZ2">
+         <widget class="IOInEdit" name="editMaxLimitSignalZ2">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34655,7 +34655,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="6" column="5">
-         <widget class="IOOnlineInEdit" name="editOriginSignalZ2">
+         <widget class="IOInEdit" name="editOriginSignalZ2">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34671,7 +34671,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="4" column="4">
-         <widget class="IOOnlineInEdit" name="editMaxLimitSignalC">
+         <widget class="IOInEdit" name="editMaxLimitSignalC">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -34687,7 +34687,7 @@ border: 1px solid black;
          </widget>
         </item>
         <item row="1" column="4">
-         <widget class="IOOnlineInEdit" name="editMaxLimitSignalX1">
+         <widget class="IOInEdit" name="editMaxLimitSignalX1">
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -37485,6 +37485,11 @@ border: 1px solid black;
    <class>SigLEDEdit</class>
    <extends>QLineEdit</extends>
    <header>sigdefinedialog.h</header>
+  </customwidget>
+  <customwidget>
+   <class>IOInEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">ioportdialog.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -35,6 +35,7 @@
 
 #define SIGNAL_WAITING_PROCESS_COMPLETE_1        31            //信号等待——加工完成1（输入）
 #define SIGNAL_WAITING_FIXED_POS_COMPLETE_1        32            //信号等待——定位完成1（输入）
+#define SIGNAL_WAITING_KNIFE_SEAT_ORIGIN_1         33            //信号等待——刀座原点1（输入）
 #define SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT           0            //信号等待——原料1夹紧限（输入）
 #define SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT         1            //信号等待——原料1松开限（输入）
 #define SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT           2            //信号等待——成品1夹紧限（输入）

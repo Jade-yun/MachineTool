@@ -26,6 +26,8 @@ private:
     Ui::Teach *ui;
     uint16_t listWgtJumptoLabelIndex = 0;//标签列表中有跳转标签序号 0-未选中，
 public slots:
+    void SwitchPageInit();
+    void widgetSwitchOrderSaveHandel(bool SaveFlag);
     void OrderColorShow_Handle();
     void Edit_ifOrder_Save_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex);
     void Edit_ifOrder_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex);
@@ -73,7 +75,14 @@ public slots:
     void EditOperatorVarPreOp_handle();
 
     void WidgetNameRefresh();
+
+    void coboxVarSelectVarPreOpItemSet();
 private slots:
+    void OrderSaveHandel();
+    void LogicVar_SufferOperUpdata(P_LogicVarStruct* LogicVarStruct);
+
+    void IfOrderSufferOperUpdata(P_LogicIfStruct* LogicIfStruct,uint8_t index);
+
     void SufferOperUpdata_Handel();
 
     void Save_Speed_Educat();
@@ -113,8 +122,6 @@ private slots:
     void on_btnShield_clicked();
 
     void on_btnInset_clicked();
-
-    void on_btnSave_clicked();
 
     void on_cb_General_X1_clicked(bool checked);
 
@@ -334,6 +341,12 @@ private slots:
     void on_AxisEditRefresh_clicked();
 
     void on_Edit_AxisMove_Refresh_clicked();
+
+    void on_lineEdit_edit_fault_num_textChanged(const QString &arg1);
+
+    void on_lineEdit_edit_tips_num_textChanged(const QString &arg1);
+
+    void on_coboxSearchAxisSelect_currentIndexChanged(int index);
 
 private:
     void pageInit();

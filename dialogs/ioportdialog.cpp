@@ -14,12 +14,46 @@ IOPortDialog::IOPortDialog(QWidget *parent, IOPortMode mode) :
     if (mode == IOPortMode::IN)
     {
         ui->stkWgt->setCurrentIndex(0);
-        setchboxMainBoardInItem();
     }
     else if (mode == IOPortMode::OUT)
     {
         ui->stkWgt->setCurrentIndex(1);
-        setchboxMainBoardOutItem();
+    }
+
+    for (auto cobox : findChildren<QComboBox*>())
+    {
+        auto listView = new QListView(cobox);
+        cobox->setView(listView);
+
+        cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    }
+
+    connect(ui->btnOK, &QPushButton::clicked, this, &IOPortDialog::accept);
+    connect(ui->btnCancel, &QPushButton::clicked, this, &IOPortDialog::reject);
+}
+
+IOPortDialog::IOPortDialog(QWidget *parent, IOPortMode mode, bool TeachTrigger) :
+    BaseWindow(parent),
+    ui(new Ui::IOPortDialog)
+{
+    ui->setupUi(this);
+    this->update();
+
+    setModal(true);
+    if (mode == IOPortMode::IN)
+    {
+        ui->stkWgt->setCurrentIndex(0);
+        if(TeachTrigger) setchboxMainBoardInItem();
+
+    }
+    else if (mode == IOPortMode::OUT)
+    {
+        ui->stkWgt->setCurrentIndex(1);
+        if(TeachTrigger) setchboxMainBoardOutItem();
+    }
+    else if(mode == IOPortMode::SearchIN)
+    {
+        ui->stkWgt->setCurrentIndex(2);
     }
 
     for (auto cobox : findChildren<QComboBox*>())
@@ -55,6 +89,74 @@ QString IOPortDialog::getIOOnlineOut() const
         return getMainBoardOut();
     }
     return QString();
+}
+
+QString IOPortDialog::getIOOnlineSearchStopIn() const
+{
+    if (ui->stkWgt->currentIndex() == 2)
+    {
+        return getSearchStopIN();
+    }
+    return QString();
+}
+unsigned int IOPortDialog::get_IOInEdit_InPort() const
+{
+    if (ui->chboxMainBoardIn0->isChecked())
+        {
+            int index = ui->coboxMainBoardIn0->currentIndex();
+            return index + 1;
+        }
+        if (ui->chboxMainBoardIn1->isChecked())
+        {
+           int index = ui->coboxMainBoardIn1->currentIndex();
+           return index + 12 * 1 + 1;
+        }
+        if (ui->chboxMainBoardIn2->isChecked())
+        {
+            int index =  ui->coboxMainBoardIn2->currentIndex();
+            return index + 12 * 2 + 1;
+        }
+        if (ui->chboxMainBoardInExtend0->isChecked())
+        {
+            int index  = ui->coboxMainBoardInExtend0->currentIndex();
+            return index + 12 * 3 + 1;
+        }
+        if (ui->chboxMainBoardInExtend1->isChecked())
+        {
+            int index  = ui->coboxMainBoardInExtend1->currentIndex();
+            return index + 12 * 4 + 1;
+        }
+        return 0;
+}
+
+unsigned int IOPortDialog::get_IOInEdit_OutPort() const
+{
+    if (ui->chboxMainBoardOut0->isChecked()) {
+           int index  = ui->coboxMainBoardOut0->currentIndex();
+           return index + 1;
+       }
+       if (ui->chboxMainBoardOut1->isChecked()) {
+           int index = ui->coboxMainBoardOut1->currentIndex();
+           return index + 8*1 + 1;
+       }
+       if (ui->chboxMainBoardOut2->isChecked()) {
+
+           int index = ui->coboxMainBoardOut2->currentIndex();
+           return index + 8*2 + 1;
+       }
+       if (ui->chboxMainBoardOutExtend0->isChecked()) {
+           int index = ui->coboxMainBoardOutExtend0->currentIndex();
+           return index + 8*3 + 1;
+       }
+       if (ui->chboxMainBoardOutExtend1->isChecked()) {
+           int index = ui->coboxMainBoardOutExtend1->currentIndex();
+           return index + 8*4 + 1;
+       }
+       if (ui->chboxMainBoardOutExtend2->isChecked()) {
+           int index = ui->coboxMainBoardOutExtend2->currentIndex();
+           return index + 8*5 + 1;
+       }
+       return 0;
 }
 
 unsigned int IOPortDialog::getInputPort() const
@@ -189,6 +291,45 @@ unsigned int IOPortDialog::getOutputPort() const
     return index;
 }
 
+unsigned int IOPortDialog::getSearchStopInPort() const
+{
+    if (ui->chboxAxisSearchIn0->isChecked())
+    {
+        int index = ui->coboxAxisSearchIn0->currentIndex();
+        return index + 1;
+    }
+    if (ui->chboxAxisSearchIn1->isChecked())
+    {
+       int index = ui->coboxAxisSearchIn1->currentIndex();
+       return index + 12 * 1 + 1;
+    }
+    if (ui->chboxAxisSearchIn2->isChecked())
+    {
+        int index =  ui->coboxAxisSearchIn2->currentIndex();
+        return index + 12 * 2 + 1;
+    }
+    if (ui->chboxAxisSearchExIn0->isChecked())
+    {
+        int index  = ui->coboxAxisSearchExIn0->currentIndex();
+        return index + 12 * 3 + 1;
+    }
+    if (ui->chboxAxisSearchExIn1->isChecked())
+    {
+        int index  = ui->coboxAxisSearchExIn1->currentIndex();
+        return index + 12 * 4 + 1;
+    }
+    return 0;
+}
+
+bool IOPortDialog::getSearchStopPortState() const
+{
+    if (ui->chboxAxisSearchIn0->isChecked()) return ui->AxisSearchIn0button->getState();
+    if (ui->chboxAxisSearchIn1->isChecked()) return ui->AxisSearchIn1button->getState();
+    if (ui->chboxAxisSearchIn2->isChecked()) return ui->AxisSearchIn2button->getState();
+    if (ui->chboxAxisSearchExIn0->isChecked()) return ui->AxisSearchExIn0button->getState();
+    if (ui->chboxAxisSearchExIn1->isChecked()) return ui->AxisSearchExIn1button->getState();
+    return true;
+}
 QString IOPortDialog::getMainBoardIn() const
 {
     if (ui->chboxMainBoardIn0->isChecked()) return ui->coboxMainBoardIn0->currentText();
@@ -196,7 +337,7 @@ QString IOPortDialog::getMainBoardIn() const
     if (ui->chboxMainBoardIn2->isChecked()) return ui->coboxMainBoardIn2->currentText();
     if (ui->chboxMainBoardInExtend0->isChecked()) return ui->coboxMainBoardInExtend0->currentText();
     if (ui->chboxMainBoardInExtend1->isChecked()) return ui->coboxMainBoardInExtend1->currentText();
-    return QString("null");
+    return QString("0");
 }
 
 QString IOPortDialog::getMainBoardOut() const
@@ -207,9 +348,17 @@ QString IOPortDialog::getMainBoardOut() const
     if (ui->chboxMainBoardOutExtend0->isChecked()) return ui->coboxMainBoardOutExtend0->currentText();
     if (ui->chboxMainBoardOutExtend1->isChecked()) return ui->coboxMainBoardOutExtend1->currentText();
     if (ui->chboxMainBoardOutExtend2->isChecked()) return ui->coboxMainBoardOutExtend2->currentText();
-    return QString("null");
+    return QString("0");
 }
-
+QString IOPortDialog::getSearchStopIN() const
+{
+    if (ui->chboxAxisSearchIn0->isChecked()) return ui->coboxAxisSearchIn0->currentText()+ui->AxisSearchIn0button->text();
+    if (ui->chboxAxisSearchIn1->isChecked()) return ui->coboxAxisSearchIn1->currentText()+ui->AxisSearchIn1button->text();
+    if (ui->chboxAxisSearchIn2->isChecked()) return ui->coboxAxisSearchIn2->currentText()+ui->AxisSearchIn2button->text();
+    if (ui->chboxAxisSearchExIn0->isChecked()) return ui->coboxAxisSearchExIn0->currentText()+ui->AxisSearchExIn0button->text();
+    if (ui->chboxAxisSearchExIn1->isChecked()) return ui->coboxAxisSearchExIn1->currentText()+ui->AxisSearchExIn1button->text();
+    return QString("0");
+}
 //设置输入IO每个复选框可供选择项
 void IOPortDialog::setchboxMainBoardInItem()
 {
@@ -771,7 +920,6 @@ void IOPortDialog::setchboxMainBoardOutItem()
     }
 }
 
-
 IOOnlineInEdit::IOOnlineInEdit(QWidget *parent)
     : QLineEdit(parent),
       port(0)
@@ -793,7 +941,7 @@ void IOOnlineInEdit::setCurrentPort(uint8_t portIndex)
 void IOOnlineInEdit::mouseReleaseEvent(QMouseEvent *event)
 {
     QLineEdit::mouseReleaseEvent(event);
-    IOPortDialog dialog(nullptr, IOPortMode::IN);
+    IOPortDialog dialog(nullptr, IOPortMode::IN,true);
     if (dialog.exec() == QDialog::Accepted)
     {
         QString text = dialog.getIOOnlineIn();
@@ -822,11 +970,107 @@ void IOOnlineOutEdit::setCurrentPort(uint8_t portIndex)
 void IOOnlineOutEdit::mouseReleaseEvent(QMouseEvent *event)
 {
     QLineEdit::mouseReleaseEvent(event);
-    IOPortDialog dialog(nullptr, IOPortMode::OUT);
+    IOPortDialog dialog(nullptr, IOPortMode::OUT,true);
     if (dialog.exec() == QDialog::Accepted)
     {
         QString text = dialog.getIOOnlineOut();
         port = static_cast<uint8_t>(dialog.getOutputPort());
+        this->setText(text);
+    }
+}
+
+
+IOInEdit::IOInEdit(QWidget *parent)
+    : QLineEdit(parent),
+      port(0)
+{
+
+}
+
+uint8_t IOInEdit::getCurrentPort() const
+{
+    return port;
+
+}
+
+void IOInEdit::setCurrentPort(uint8_t portIndex)
+{
+    port = portIndex;
+}
+
+void IOInEdit::mouseReleaseEvent(QMouseEvent *event)
+{
+    QLineEdit::mouseReleaseEvent(event);
+    IOPortDialog dialog(nullptr, IOPortMode::IN);
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        QString text = dialog.getIOOnlineIn();
+        port = static_cast<uint8_t>(dialog.get_IOInEdit_InPort());
+        this->setText(text);
+    }
+}
+
+IOOutEdit::IOOutEdit(QWidget *parent)
+    : QLineEdit(parent),
+      port(0)
+{
+
+}
+
+uint8_t IOOutEdit::getCurrentPort() const
+{
+    return port;
+}
+
+void IOOutEdit::setCurrentPort(uint8_t portIndex)
+{
+    port = portIndex;
+}
+
+void IOOutEdit::mouseReleaseEvent(QMouseEvent *event)
+{
+    QLineEdit::mouseReleaseEvent(event);
+    IOPortDialog dialog(nullptr, IOPortMode::OUT);
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        QString text = dialog.getIOOnlineOut();
+        port = static_cast<uint8_t>(dialog.get_IOInEdit_OutPort());
+        this->setText(text);
+    }
+}
+
+
+IOOnlineSearchStopEdit::IOOnlineSearchStopEdit(QWidget *parent)
+    : QLineEdit(parent),
+      port(0)
+{
+
+}
+
+uint8_t IOOnlineSearchStopEdit::getCurrentPort() const
+{
+    return port;
+}
+
+uint8_t IOOnlineSearchStopEdit::getPortSetState() const
+{
+    return portState;
+}
+
+void IOOnlineSearchStopEdit::setCurrentPort(uint8_t portIndex)
+{
+    port = portIndex;
+}
+
+void IOOnlineSearchStopEdit::mouseReleaseEvent(QMouseEvent *event)
+{
+    QLineEdit::mouseReleaseEvent(event);
+    IOPortDialog dialog(nullptr, IOPortMode::SearchIN,true);
+    if (dialog.exec() == QDialog::Accepted)
+    {
+        QString text = dialog.getIOOnlineSearchStopIn();
+        port = static_cast<uint8_t>(dialog.getSearchStopInPort());
+        portState = static_cast<uint8_t>(dialog.getSearchStopPortState());
         this->setText(text);
     }
 }

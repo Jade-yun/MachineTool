@@ -198,6 +198,7 @@ signals:
     void DataSycStateSignal(uint8_t SysSend_Index);
     void SysNextDataSignal();
     void posflashsignal(AxisCurPos data);
+    void robotstaRefreshsignal();//机器状态参数更新
 public slots:
     void onReadyRead();
     void onHandleError(QSerialPort::SerialPortError error);

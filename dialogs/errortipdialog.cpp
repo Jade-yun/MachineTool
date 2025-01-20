@@ -63,13 +63,13 @@ void ErrorTipDialog::setMode(TipMode mode)
     if (mode == TipMode::NORMAL)
     {
         ui->btnCancel->show();
-//        ui->btnOk->show();
+        ui->btnOk->show();
         ui->btnOk->setGeometry(100, 280, btnSize.width(), btnSize.height());
     }
     else if (mode == TipMode::ONLY_OK)
     {
         ui->btnCancel->hide();
-//        ui->btnOk->show();
+        ui->btnOk->show();
         ui->btnOk->setGeometry(200, 280, btnSize.width(), btnSize.height());
     }
     else if(mode == TipMode::NULL_BUTTON)

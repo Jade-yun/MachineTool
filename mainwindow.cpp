@@ -15,7 +15,7 @@
 #include "Orderjoint.h"
 #include "program_save.h"
 #include "port_setting.h"
-
+#include <QPainter>
 #include "ifprogramdialog.h"
 #include <QStyleFactory>
 #include <QEasingCurve>
@@ -336,7 +336,6 @@ void MainWindow::handleLoginModeChanged(LoginMode mode)
 void MainWindow::onCheckPara()
 {
     static int lastAlarmNum = 0;
-
     if (lastAlarmNum != m_AlarmNum)
     {
         lastAlarmNum = m_AlarmNum;
@@ -438,6 +437,8 @@ void MainWindow::slotShowSubWindow()
         handWheel->exec();
     });
 
+    labProgramNameRollShow();
+
     QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
 
     for (auto edit : lineEdits)
@@ -463,7 +464,7 @@ void MainWindow::slotShowSubWindow()
     emit signal_sync_data();
 
     checkParaTimer->start();
-
+    m_RunPar.globalSpeed = 50;//开机全局速度默认50%
     initUI();
 }
 
@@ -491,7 +492,6 @@ void MainWindow::on_Btn_ManualHome_clicked()
     {
         ui->Btn_ManualHome->setText(tr("停止页面"));
         ui->stkWidget->setCurrentWidget(ui->Init_page);
-//        flag = 1;
     }
     // set to manual mode
     else if (curMode == TriMode::MANUAL)
@@ -499,17 +499,15 @@ void MainWindow::on_Btn_ManualHome_clicked()
         ui->Btn_ManualHome->setText(tr("手动页面"));
         ui->labRotateSpeed->setNum(10);
         ui->stkWidget->setCurrentWidget(manualWidget);
-//        flag = 2;
     }
     // set to auto mode
     else if (curMode == TriMode::AUTO)
     {
-//        flag = 0;
         ui->Btn_ManualHome->setText(tr("自动页面"));
         ui->stkWidget->setCurrentWidget(autoWidget);
         emit Auto_File_List_Refresh_signal(0);//切换到自动界面时默认显示主程序
     }
-
+    Widget_jump_Order_Need_Save_Handel();
 }
 
 void MainWindow::on_Btn_SetHome_clicked()
@@ -517,13 +515,14 @@ void MainWindow::on_Btn_SetHome_clicked()
     emit sigSettingHome();
 //    qDebug()<< "emit sigSettingHome";
     ui->stkWidget->setCurrentWidget(setWidget);
+    Widget_jump_Order_Need_Save_Handel();
 }
 
 void MainWindow::on_Btn_MonitorHome_clicked()
 {
     // jump to monitor page
     ui->stkWidget->setCurrentWidget(monitorWidget);
-
+    Widget_jump_Order_Need_Save_Handel();
 }
 
 void MainWindow::on_Btn_TeachHome_clicked()
@@ -533,6 +532,7 @@ void MainWindow::on_Btn_TeachHome_clicked()
     {
         ui->stkWidget->setCurrentWidget(teachWidget);
         emit signal_refresh_TeachList();//发送刷新教导界面列表信号
+        emit signal_TeachPageInit();//教导界面初始化信号
     }
     else
     {
@@ -542,14 +542,13 @@ void MainWindow::on_Btn_TeachHome_clicked()
 
 void MainWindow::on_Btn_AlarmHome_clicked()
 {
-
     // jump to alarm page
     ui->stkWidget->setCurrentWidget(alarmWidget);
+    Widget_jump_Order_Need_Save_Handel();
 }
 
 int MainWindow::showErrorTip(const QString &message, TipMode mode)
 {
-
     dlgErrorTip->setMode(mode);
     dlgErrorTip->setMessage(message);
     return dlgErrorTip->exec();
@@ -587,32 +586,28 @@ void MainWindow::connectAllSignalsAndSlots()
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
-    connect(setWidget, &Setting::sysNameChanged, this, [=](const QString& sysName){
-        const QString& programName = m_CurrentProgramNameAndPath.fileName;
-
-        QString name = sysName + "  " + tr("程式：") + programName;
-        ui->labProgramName->setText(name);
-    });
+    connect(setWidget, &Setting::sysNameChanged, this,&MainWindow::updatelabProgramName);//设置中修改了系统名称触发
+    connect(teachManageWidget,&TeachManage::labProgramNameChangeSignal,this,&MainWindow::updatelabProgramName);//加载新的程序时触发
     connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, &ManualForm::reloadReferPoint);
-    connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, [=](){
-        const QString& programName = m_CurrentProgramNameAndPath.fileName;
-
-        QString name = m_SystemSet.sysName + "  "  + tr("程式：") + programName;
-        ui->labProgramName->setText(name);
-    });
-
 
     connect(g_Usart,&Usart::posflashsignal,this,&MainWindow::posflashhandle);//当前坐标实时刷新
+    connect(g_Usart,&Usart::robotstaRefreshsignal,this,&MainWindow::m_RobotStateRefreash);//机器状态参数实时更新
     connect(this,&MainWindow::Auto_File_List_Refresh_signal,autoWidget,&AutoForm::Auto_File_List_Refresh);//自动运行界面列表刷新
     connect(autoWidget,&AutoForm::Switch_ProNum_Signal,teachWidget,&Teach::Switch_Pro_ReadOrder);//自动界面切换程序编号
     connect(this,&MainWindow::monitor_hand_contril,monitorWidget,&MonitorForm::monitor_hand_contril_handle);//监视界面手控器界面状态刷新
     connect(setWidget,&Setting::updatemonitorhandcontrol,monitorWidget,&MonitorForm::SetHandControlName);//刷新监视界面手持器界面内容显示
     connect(setWidget,&Setting::WidgetNameRefresh_signal,teachWidget,&Teach::WidgetNameRefresh);//监视界面控件名称需要刷新
+    connect(this,&MainWindow::OrderSave_signal,teachWidget,&Teach::widgetSwitchOrderSaveHandel);//需要更新指令保存槽
+    connect(setWidget,&Setting::coboxVarSelectVarPreOpItemSet_signal,teachWidget,&Teach::coboxVarSelectVarPreOpItemSet);//教导界面变量类型名称需要刷新
+    connect(this,&MainWindow::signal_TeachPageInit,teachWidget,&Teach::SwitchPageInit);//教导界面初始化信号
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, [&]() {
         static int timer_number = 0;
-        if(timer_number == 10)
+        static int alarm_number = 0;
+        alarm_number++;
+        timer_number++;
+        if(timer_number >= 10)
         {//每1s刷新一次
             // 获取当前时间
             QDateTime sysTime = QDateTime::currentDateTime();
@@ -622,6 +617,29 @@ void MainWindow::connectAllSignalsAndSlots()
             // 设置label显示的文本
             ui->labDateTime->setText(timeStr1);
             ui->labDateTime_2->setText(timeStr2);
+            timer_number=0;
+        }
+        if(alarm_number>=5)
+        {
+            if(m_RobotRunSta == MAC_STA_ALARM)
+            {//报警中
+                static bool btnAlarmIconState = false;
+                btnAlarmIconState = !btnAlarmIconState;
+                if(btnAlarmIconState == false)
+                {
+                    ui->btnAlarm->setIcon(QIcon(":/images/alarm_red.png"));
+                    Beeper::instance()->beep();
+                }
+                else
+                {
+                    ui->btnAlarm->setIcon(QIcon(""));
+                }
+            }
+            else
+            {
+                ui->btnAlarm->setIcon(QIcon(":/images/alarm_red.png"));
+            }
+            alarm_number=0;
         }
         ui->labSpeed->setText(QString::number(m_RunPar.globalSpeed)+"%");
         ui->labRotateSpeed->setText(QString::number((double)m_AxisCurSpeed)+"rpm");
@@ -800,7 +818,29 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+            if(m_RobotRunSta == MAC_STA_ALARM)
+            {
+                MainWindow::pMainWindow->showErrorTip(tr("请先解决报警再启动！"),TipMode::ONLY_OK);
+            }
+            else if((m_RobotRunSta == MAC_STA_STOP_STANDBY || m_RobotRunSta == MAC_STA_MANUAL_STANDBY))
+            {//回零完成，但不在自动状态
+                MainWindow::pMainWindow->showErrorTip(tr("请将三档开关切换到自动档再启动"),TipMode::ONLY_OK);
+            }
+            else if(m_RobotRunSta == MAC_STA_AUTO_STANDBY)
+            {//回零完成，在自动状态
+                if(m_RobotResetState != 2)
+                {//未复位完成
+                    MainWindow::pMainWindow->showErrorTip(tr("机器未复位"),TipMode::ONLY_OK);
+                }
+                else
+                {
+                    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+                }
+            }
+            else
+            {//机器未回零
+                MainWindow::pMainWindow->showErrorTip(tr("机器未回零"),TipMode::ONLY_OK);
+            }
         }
 
         break;
@@ -809,33 +849,57 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,m_RunPar.startRunLineNum,0);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
         }
-
         break;
     }
     case HandControlKeyCode::ORIGIN://原点
     {
         if(value == 1)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,3,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
-            int reply = showErrorTip(tr("回原点中..."),TipMode::NORMAL);
-            if (reply == QDialog::Rejected)
+            if(m_RobotRunSta == MAC_STA_ALARM)
             {
-
+                MainWindow::pMainWindow->showErrorTip(tr("请先解决报警再回原！"),TipMode::ONLY_OK);
+            }
+            else if(m_RobotRunSta != MAC_STA_RUN && m_RobotRunSta != MAC_STA_PAUSE)
+            {
+                int reply =  MainWindow::pMainWindow->showErrorTip(tr("是否现在回原点？"));
+                if (reply == QDialog::Accepted)
+                {
+                    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,3,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+                    m_RobotOriginState = 1;
+                }
             }
         }
-
         break;
     }
     case HandControlKeyCode::RETURN://复归
     {
         if(value == 1)
         {
-            int reply = showErrorTip(tr("是否现在复归?"),TipMode::NORMAL);
-            if (reply == QDialog::Accepted)
+            if(m_RobotRunSta == MAC_STA_ALARM)
             {
-                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+                MainWindow::pMainWindow->showErrorTip(tr("请先解决报警再复位！"),TipMode::ONLY_OK);
+            }
+            else if(m_RobotOriginState == 2)
+            {//回零完成
+                if(m_RobotRunSta == MAC_STA_AUTO_STANDBY)
+                {
+                    int reply =  MainWindow::pMainWindow->showErrorTip(tr("是否现在复归?"));
+                    if (reply == QDialog::Accepted)
+                    {
+                        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+                        RobotResetPromptFlag = true;
+                    }
+                }
+                else
+                {
+                    MainWindow::pMainWindow->showErrorTip(tr("请先将三档开关切换到自动档"),TipMode::ONLY_OK);
+                }
+            }
+            else
+            {
+                MainWindow::pMainWindow->showErrorTip(tr("请先回原点"),TipMode::NORMAL);
             }
         }
 
@@ -964,6 +1028,56 @@ void ClickableLabel::mousePressEvent(QMouseEvent *event)
     }
 
 }
+
+
+TextTicker::TextTicker(QWidget *parent)
+    : QLabel(parent)
+{
+    m_curIndex = 0;//当前文字下标值
+    QTimer *timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &TextTicker::updateIndex);
+    timer->start(500);
+}
+
+
+TextTicker::~TextTicker()
+{
+
+}
+
+void TextTicker::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    int textHeight = fontMetrics().height();
+    int ascent = fontMetrics().ascent();
+
+    int x = 0;
+    int y = (height() - textHeight) / 2 + ascent;
+
+    QString textToShow = calculateVisibleText();
+    painter.drawText(x, y, textToShow);
+}
+
+
+void TextTicker::updateIndex()
+{
+    m_curIndex = (m_curIndex + 1) % m_showText.length();
+    // 请求重绘
+    update();
+}
+
+QString TextTicker::calculateVisibleText() {
+    QFontMetrics fm(font());
+    int visibleWidth = width();
+
+    int textLengthToShow = 0;
+    while (textLengthToShow < m_showText.length() &&
+           fm.horizontalAdvance(m_showText.mid(m_curIndex, textLengthToShow + 1)) <= visibleWidth) {
+        ++textLengthToShow;
+    }
+    // 如果文本太长无法完全显示，则只显示可见部分
+    return m_showText.mid(m_curIndex, textLengthToShow);
+}
 //开机同步参数处理函数，SysIndex:同步到那一步
 void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 {
@@ -990,7 +1104,9 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         ui->Progress_bar->hide();
         ui->Progress_num->hide();
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
+
         manualWidget->reloadReferPoint();
+        ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
     }
     else
     {
@@ -1005,6 +1121,73 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         }
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
         manualWidget->reloadReferPoint();
+        ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
     }
 
 }
+//刷新系统名称显示
+void MainWindow::updatelabProgramName()
+{
+    ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
+}
+//系统名称标签框滚动显示
+void MainWindow::labProgramNameRollShow()
+{
+    QFont font;
+    font.setPointSize(16);
+    ui->labProgramName->setFont(font);
+    updatelabProgramName();
+}
+//界面跳转时程序需要保存处理函数
+void MainWindow::Widget_jump_Order_Need_Save_Handel()
+{
+    if(OrderNeedSaveFlag == true)
+    {
+        int reply =  MainWindow::pMainWindow->showErrorTip(tr("教导参数有修改，是否需要保存？"));
+        if (reply == QDialog::Accepted)
+        {
+            emit OrderSave_signal(true);
+        }
+        else if(reply == QDialog::Rejected)
+        {
+            emit OrderSave_signal(false);
+        }
+        emit Auto_File_List_Refresh_signal(0);//切换到自动界面时默认显示主程序
+    }
+}
+
+//机器状态检测处理函数
+void MainWindow::m_RobotStateRefreash()
+{
+
+    //回原点状态处理
+    if(m_RobotRunSta == MAC_STA_BACK_ORIGIN && m_RobotOriginState == 1)
+    {
+        if(!dlgErrorTip->isVisible())
+        {
+            MainWindow::pMainWindow->showErrorTip(tr("回原点中..."));
+        }
+    }
+    if((m_RobotRunSta == MAC_STA_STOP_STANDBY || m_RobotRunSta == MAC_STA_MANUAL_STANDBY || m_RobotRunSta == MAC_STA_AUTO_STANDBY) && m_RobotOriginState == 1)
+    {
+        if(dlgErrorTip->isVisible())
+        {
+            dlgErrorTip->reject();
+        }
+        m_RobotOriginState = 2;
+    }
+    //复位状态处理
+    if(m_RobotResetState != 2 && m_RobotOriginState == 2 && RobotResetPromptFlag == true)
+    {
+        if(!dlgErrorTip->isVisible())
+        {
+            MainWindow::pMainWindow->showErrorTip(tr("复位中..."));
+        }
+    }
+    if(m_RobotOriginState == 2 && m_RobotResetState == 2 && RobotResetPromptFlag == true)
+    {
+        RobotResetPromptFlag = false;
+        dlgErrorTip->reject();
+    }
+}
+

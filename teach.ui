@@ -578,7 +578,7 @@
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>2</number>
    </property>
    <property name="iconSize">
     <size>
@@ -623,7 +623,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>12</number>
+      <number>8</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">
@@ -3828,6 +3828,9 @@
        </property>
       </widget>
       <widget class="QCheckBox" name="checkBox_Edit_Wait_001s">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>120</x>
@@ -3859,6 +3862,9 @@
        </property>
       </widget>
       <widget class="QCheckBox" name="checkBox_Edit_Wait_01s">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>240</x>
@@ -8550,7 +8556,7 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="IOOnlineInEdit" name="lineEdit_Search_stop">
+         <widget class="IOOnlineSearchStopEdit" name="lineEdit_Search_stop">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -11308,7 +11314,7 @@
           </widget>
          </item>
          <item row="2" column="3">
-          <widget class="IOOnlineInEdit" name="editSigStop">
+          <widget class="IOOnlineSearchStopEdit" name="editSigStop">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -12093,7 +12099,7 @@ QGroupBox::title { subcontrol-origin: margin;
       </rect>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">
@@ -12697,7 +12703,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">
@@ -15283,7 +15289,7 @@ font: 20pt ;</string>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QPushButton" name="Reserve_Pass_Button">
+          <widget class="StateButton" name="Reserve_Pass_Button">
            <property name="minimumSize">
             <size>
              <width>120</width>
@@ -16120,7 +16126,7 @@ font: 20pt ;</string>
         </font>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <property name="iconSize">
         <size>
@@ -16926,12 +16932,17 @@ font: 20pt ;</string>
   <customwidget>
    <class>StateButton</class>
    <extends>QPushButton</extends>
-   <header location="global">statebutton.h</header>
+   <header>statebutton.h</header>
   </customwidget>
   <customwidget>
    <class>RefPointEdit</class>
    <extends>QLineEdit</extends>
-   <header location="global">referpointdialog.h</header>
+   <header>referpointdialog.h</header>
+  </customwidget>
+  <customwidget>
+   <class>IOOnlineSearchStopEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">ioportdialog.h</header>
   </customwidget>
  </customwidgets>
  <resources>
