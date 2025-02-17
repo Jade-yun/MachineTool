@@ -72,19 +72,13 @@ void BaseWindow::onButtonMaxClicked()
 void BaseWindow::onButtonCloseClicked()
 {
     close();
-    StackEditBaseInit_flash = false;
 }
 
 void BaseWindow::StackEditBaseInit()
 {
-    if(StackEditBaseInit_flash==false)
-    {
-        m_titleBar->saveRestoreInfo(this->pos(), QSize(this->width(), (this->height()+50)));
-
-        QPoint windowPos;
-        QSize windowSize;
-        m_titleBar->getRestoreInfo(windowPos, windowSize);
-        this->setGeometry(QRect(windowPos, windowSize));
-        StackEditBaseInit_flash = true;
-    }
+    m_titleBar->saveRestoreInfo(this->pos(), QSize(this->width(), (this->height()+50)));
+    QPoint windowPos;
+    QSize windowSize;
+    m_titleBar->getRestoreInfo(windowPos, windowSize);
+    this->setGeometry(QRect(windowPos, windowSize));
 }

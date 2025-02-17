@@ -122,8 +122,6 @@ public:
     int showErrorTip(const QString& message, TipMode mode = TipMode::NORMAL);
 //    void showErrorTip(const QString &message, bool onlyOK);
 
-    void setSysProgramName(const QString& name);
-
     void keyAxisCommandSend(uint16_t code, int32_t value);              //按键指令分类发送
 
     void keyFunctCommandSend(uint16_t code,int32_t value);

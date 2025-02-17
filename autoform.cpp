@@ -1248,7 +1248,6 @@ void AutoForm::updateLabelState(int index)
         ui->labelState->setText(states.at(index));
         ui->btnClear->setText(btnTexts.at(index));
     }
-
 }
 
 void AutoForm::callNumKeyBoard(QObject* obj)

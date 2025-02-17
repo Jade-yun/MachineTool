@@ -78,7 +78,6 @@ extern AxisCurPos m_AxisCurPos;
 #define CMD_SUN_READ_PAR_WR									0x03      	//写参数、控制、Flash写入命令应答
 #define CMD_SUN_READ_FLASH									0x04      	//读FLASH命令
 #define CMD_SUN_READ_FLASH_ANSWER						0x05      	//读FLASH命令应答
-#define CMD_SUN_SYSDATA_FINISH                          0x06        //开机参数同步完成下发
 //参数读写-信号设置
 #define CMD_MAIN_SIGNAL											0x01      	//信号设置
 #define CMD_SUN_SIGNAL_OUT_TYPE							0x01      	//输出类型
@@ -140,6 +139,7 @@ extern AxisCurPos m_AxisCurPos;
 #define CMD_SUN_STA_STACK										0x06      	//堆叠实时参数读写
 #define CMD_SUN_STA_VAR											0x07      	//变量值读写
 #define CMD_SUN_STA_TIME										0x08      	//定时器读写
+#define CMD_SUN_STA_UPGRADE_STATE                               0x0D        //控制器升级状态读取
 
 //手动操作
 #define CMD_MAIN_MANUAL											0x11      	//手动操作
@@ -149,7 +149,9 @@ extern AxisCurPos m_AxisCurPos;
 #define CMD_SUN_MANUAL_HAND_WHEEL						0x04      	//手轮
 #define CMD_SUN_MANUAL_INCREMENT						0x05      	//增量
 #define CMD_SUN_MANUAL_STACK								0x06      	//移至堆叠点
-
+#define CMD_SUN_MANUAL_UPGRADE_CONTROL                          0x07        //主控板升级控制指令
+#define CMD_SUN_MANUAL_UPGRADE_DATE                              0x08        //主控板升级数据指令
+#define CMD_SUN_SYSDATA_FINISH                                   0x09        //开机参数同步完成下发
 //程序编辑
 #define CMD_MAIN_PRO												0x15      	//程序编辑
 #define CMD_SUN_PRO_INFO										0x01      	//程序信息读写
@@ -204,7 +206,6 @@ public slots:
     void onHandleError(QSerialPort::SerialPortError error);
     void APP_Uart_SendData(const QByteArray &data);
     void ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDataBuf,int dataLen);                   //解析参数处理函数
-
 public:
    void ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum = 0, uint16_t parNum2 = 0);     //下发参数处理函数
 
@@ -217,9 +218,6 @@ public:
 
    uint8_t  DataSyc();
    void sync_data_handle(void);
-
-private:
-    QElapsedTimer timer;
 public:
 
     uint16_t SUM_CHK(uint8_t *data, uint16_t len, uint8_t sum);

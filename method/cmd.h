@@ -5,7 +5,7 @@
 #include "usart.h"
 #include <QPoint>
 #include <QQueue>
-
+#include <QElapsedTimer>
 class cmd
 {
 public:
@@ -36,6 +36,8 @@ enum HandControlKeyCode{
 
 #define PRECISION_001                       0.01                               //0.01精度
 
+#define UPGRADE_ONE_FRAME_LENGTH            64             //每帧升级数据长度
+#define AGAIN_SEND_DATE_MAX_NUM             3              //一帧数据重发3次后都失败，则返回升级失败
 //轴个数及编号
 #define AXIS_TOTAL_NUM                                      6			//轴总个数
 #define X1_AXIS												0			//X1轴
@@ -103,7 +105,7 @@ enum HandControlKeyCode{
 #define SAVE_Z_AXIS										2			//安全区Z轴
 
 // 密码
-extern uint32_t passwd[3]; // 0-管理员密码 1-超级管理密码 2-菜单密码
+extern uint32_t passwd[4]; // 0-管理员密码 1-超级管理密码 2-菜单密码 3-恢复出场设置密码
 
 /***********************程序相关变量定义*******************************/
 //命令--cmd
@@ -914,6 +916,28 @@ typedef struct
     uint16_t    startRunLineNum;        //从此行运行程序行号
 }D_RunParStruct;
 
+/*主控板升级结构体*/
+typedef struct
+{
+    uint8_t     Control_Status;             //控制器状态，1-控制器正在运行 boot 2-控制器正运行 APP
+    uint8_t     Upgrade_Status;             //升级状态 0-未升级 1-等待升级 2-升级中 3-升级完成 4-升级失败 5-当前帧数据写入完成 6-当前帧数据写入失败
+    uint32_t    Upgrade_Ver_Code;           //升级校验编码，读取升级文件最后四位作为该值
+    uint32_t    Upgrade_Frame_Rate;         //已经升级帧数
+    uint32_t    Upgrade_all_Rate;           //升级总帧数
+
+    uint8_t Upgrade_command;                //升级命令  1-控制板开始升级 2-控制板升级完成 3-控制板停止升级 4-控制板升级异常
+    uint8_t Upgrade_Communication_Mode;     //升级方式  1-串口升级 2-USB升级 3-网口升级
+    uint32_t Upgrade_Start_Rate;            //开始升级的帧编号
+
+    uint32_t Current_Upgrade_Rate;               //当前要升级的帧编号
+    uint8_t Upgrade_Date[UPGRADE_ONE_FRAME_LENGTH];                 //升级数据
+    uint32_t Current_Rate_Len;             //当前升级帧数据长度
+    bool Upgrade_Thread_Run_Flag;          //升级线程继续执行标志 0-结束线程 1-继续执行
+    uint8_t Again_SendDate_MaxNum;         //重新发送当前帧数据最大次数
+    bool SendDateReturn_State;             //发送数据后是否接收到反馈
+
+}MainUpdateStruct;
+
 /*参数同步结构体*/
 typedef struct
 {
@@ -946,17 +970,20 @@ typedef struct
     uint8_t mac_origin;
     uint8_t stack_par;
     uint8_t stack_point;
+    uint8_t stack_axisIndex = 0;//要下发的堆叠轴编号
     uint8_t stack_set;
     uint8_t SysDataFlag;          //同步参数标志
     uint8_t SendDataStep;
     uint8_t SendData_flag;
+    uint8_t TestSendFeedBackFlag = 0;//检测发送反馈标志，每次发送数据后，置为1 ，开始检测是否有反馈
     uint8_t sysdatafinish;
     int sendDataOutTime;
     int OutTimenum;
     uint8_t sendDataNum;//发送次数，同一参数下发5次未收到反馈，说明通信异常，返回同步失败
 }Sync_Data;
 
-extern Sync_Data MySync_Data;
+extern MainUpdateStruct M_MainUpdate;//主控板升级结构体
+extern Sync_Data MySync_Data;       //参数同步结构体
 /**********************************变量定义********************************/
 extern D_KeyFuncStruct m_KeyFunc[OPR_KEY_NUM];				//按键功能
 extern D_LedFuncStruct m_LedFunc[OPR_LED_NUM];				//LED功能
@@ -1159,6 +1186,7 @@ extern D_PortDefineStruct m_Port_Y[OUTPUT_TOTAL_NUM];                           
 extern D_PortDefineStruct m_ResPort_Y[OUTPUT_TOTAL_NUM];                               //输出端口作预留时存储默认名称和修改名称
 class  Usart;
 //串口通信
+
 extern Usart *g_Usart;
 extern QSerialPort *m_serialPort;
 //发送数据队列

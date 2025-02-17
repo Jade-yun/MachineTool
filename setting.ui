@@ -19091,7 +19091,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -32969,7 +32969,7 @@ border: 1px solid black;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>8</number>
+      <number>7</number>
      </property>
      <property name="iconSize">
       <size>

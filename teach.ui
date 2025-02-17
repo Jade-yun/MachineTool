@@ -12099,7 +12099,7 @@ QGroupBox::title { subcontrol-origin: margin;
       </rect>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">
@@ -14864,21 +14864,6 @@ font: 20pt ;</string>
        </item>
        <item>
         <property name="text">
-         <string>堆叠9组</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>堆叠10组</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>堆叠11组</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>放料跟随堆叠1组</string>
         </property>
        </item>
@@ -14924,6 +14909,9 @@ font: 20pt ;</string>
        </property>
       </widget>
       <widget class="QCheckBox" name="Stack_group_9">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>195</x>
@@ -14968,6 +14956,9 @@ font: 20pt ;</string>
        </property>
       </widget>
       <widget class="QCheckBox" name="Stack_group_10">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>195</x>
@@ -15012,6 +15003,9 @@ font: 20pt ;</string>
        </property>
       </widget>
       <widget class="QCheckBox" name="Stack_group_11">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
          <x>195</x>

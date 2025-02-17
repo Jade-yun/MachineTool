@@ -179,3 +179,28 @@ QString UsbDisk::getUsbMountPoint() const
     return QString();
 }
 
+//遍历U盘中是否有某个文件
+QString UsbDisk::findFileAndGetDirectory(const QString &usbPath, const QString &fileName) {
+    QDir dir(usbPath);
+
+    if (!dir.exists()) {
+        qWarning() << "USB directory does not exist:" << usbPath;
+        return QString();
+    }
+
+    QStringList entries = dir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot, QDir::DirsFirst);
+
+    for (const QString &entry : entries) {
+        QFileInfo fileInfo(dir.absoluteFilePath(entry));
+
+        if (fileInfo.isFile() && fileInfo.fileName() == fileName) {
+            return fileInfo.absolutePath()+"/"+fileName;
+        } else if (fileInfo.isDir()) {
+            QString result = findFileAndGetDirectory(fileInfo.absoluteFilePath(), fileName);
+            if (!result.isEmpty()) {
+                return result;
+            }
+        }
+    }
+    return QString();
+}

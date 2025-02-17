@@ -548,15 +548,8 @@ int MainWindow::showErrorTip(const QString &message, TipMode mode)
     return dlgErrorTip->exec();
 }
 
-void MainWindow::setSysProgramName(const QString &name)
-{
-    ui->labProgramName->setText(name);
-}
-
 void MainWindow::connectAllSignalsAndSlots()
 {
-
-
     ui->wgtHelp->hide();
     connect(ui->btnHelp, &QPushButton::clicked, this, [=](){
         ui->wgtHelp->show();
@@ -579,6 +572,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");});
     connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
     connect(setWidget,&Setting::RefreshPortDefineSignals,setWidget,&Setting::RefreshPortDefine);
+    connect(setWidget,&Setting::updateManualformButtonName_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
     connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
     connect(autoWidget,&AutoForm::Send_planProductNum_Signal,this,[=](){//计划产品个数下发
@@ -1027,7 +1021,7 @@ void ClickableLabel::mousePressEvent(QMouseEvent *event)
 
 }
 
-
+/******TextTicker start************/
 TextTicker::TextTicker(QWidget *parent)
     : QLabel(parent)
 {
@@ -1076,6 +1070,9 @@ QString TextTicker::calculateVisibleText() {
     // 如果文本太长无法完全显示，则只显示可见部分
     return m_showText.mid(m_curIndex, textLengthToShow);
 }
+
+/******TextTicker end************/
+
 //开机同步参数处理函数，SysIndex:同步到那一步
 void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 {
@@ -1102,7 +1099,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         ui->Progress_bar->hide();
         ui->Progress_num->hide();
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
-        ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
+        updatelabProgramName();
     }
     else
     {
@@ -1116,14 +1113,14 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
             dlgErrorTip->reject();
         }
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
-        ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
+        updatelabProgramName();
     }
 
 }
 //刷新系统名称显示
 void MainWindow::updatelabProgramName()
 {
-    ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
+    ui->labProgramName->setText(m_SystemSet.sysName + " " + "程式：" + m_CurrentProgramNameAndPath.fileName);
 }
 //系统名称标签框滚动显示
 void MainWindow::labProgramNameRollShow()

@@ -5,7 +5,7 @@
 
 #include "errortipdialog.h"
 
-extern uint32_t passwd[3]; // 0-管理员密码 1-超级管理密码 2-菜单密码
+extern uint32_t passwd[4]; // 0-管理员密码 1-超级管理密码 2-菜单密码,3-恢复出场设置密码
 LoginMode LoginDialog::mode = LoginMode::Operator;
 
 LoginDialog::LoginDialog(QWidget *parent) :

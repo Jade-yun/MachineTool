@@ -52,7 +52,7 @@ Teach::Teach(QWidget* parent) :
     stack_Dialog->setModal(true);
     connect(this,&Teach::StackEditBaseInit_signal,stack_Dialog,&BaseWindow::StackEditBaseInit);
     connect(stack_Temp, &StackEdit::closeStackEditDialogSignal, stack_Dialog, &QDialog::close);// 连接StackEdit的关闭信号到QDialog的close槽
-
+    connect(stack_Temp,&StackEdit::stackParRefreshSignal,this,[=](){Stack_Edit_Handle(STACK_X_AXIS);});//刷新堆叠指令参数
     connect(ui->coboxVarSelectVarPreOp,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&Teach::EditOperatorVarPreOp_handle);
 
     ui->listWgtJumpto->setSelectionMode(QAbstractItemView::NoSelection);//禁用选择
@@ -4504,6 +4504,10 @@ void Teach::on_btnModify_clicked()
         }
         ui->tabWidget_Teach->setCurrentIndex(0);
         OrderEdit_Handle();
+        if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_STACK_MOVE)
+        {
+            Stack_Dialog_show();
+        }
     }
     else
     {
@@ -4512,6 +4516,44 @@ void Teach::on_btnModify_clicked()
     }
 }
 
+/*************************************************************************
+**  函数名：  Stack_Dialog_show()
+**	输入参数：
+**	输出参数：
+**	函数功能：堆叠指令编辑弹窗处理函数
+**  作者：    wukui
+**  开发日期：2024/9/30
+**************************************************************************/
+void Teach::Stack_Dialog_show()
+{
+    P_StackMoveStruct* StackMove =(P_StackMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+    if(m_StackFunc.siloType == 0)
+    {//料仓类型-0平板式料仓
+        if(m_StackFunc.stackType == 0)
+        {//堆叠方式-3点式
+            stack_Temp->switchStackWay(StackMode::TEACH_THREE_POINT);
+        }
+        else if(m_StackFunc.stackType == 1)
+        {
+            stack_Temp->switchStackWay(StackMode::TEACH_FOUR_POINT);
+        }
+        else if(m_StackFunc.stackType == 2)
+        {
+            stack_Temp->switchStackWay(StackMode::NORMAL);
+        }
+        stack_Temp->updateGroupIndex(StackMove->stackNum-1);
+        stack_Temp->syncParaToUI();
+        stack_Dialog->setGeometry(5,120,stack_Temp->width(),stack_Temp->height());//设置显示其实位置和大小
+        stack_Temp->show();
+        stack_Dialog->show();
+        emit StackEditBaseInit_signal();
+    }
+    ui->Stack_Edit_btnAxisX1->setStyleSheet("border-style:outset;\
+                                            background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/\
+                                            border-width:1px;\
+                                            border-color:#0055ff;\
+                                            border-radius:5px;");
+}
 /*************************************************************************
 **  函数名：  Stack_Edit_Handle(uint8_t AxisIndex)
 **	输入参数：AxisIndex 轴编号0-x 1-y 2-z
@@ -4681,34 +4723,7 @@ void Teach::OrderEdit_Handle()
     }
     case C_STACK_MOVE:
     {
-        P_StackMoveStruct* StackMove =(P_StackMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         Stack_Edit_Handle(STACK_X_AXIS);
-        if(m_StackFunc.siloType == 0)
-        {//料仓类型-0平板式料仓
-            if(m_StackFunc.stackType == 0)
-            {//堆叠方式-3点式
-                stack_Temp->switchStackWay(StackMode::TEACH_THREE_POINT);
-            }
-            else if(m_StackFunc.stackType == 1)
-            {
-                stack_Temp->switchStackWay(StackMode::TEACH_FOUR_POINT);
-            }
-            else if(m_StackFunc.stackType == 2)
-            {
-                stack_Temp->switchStackWay(StackMode::NORMAL);
-            }
-            stack_Temp->updateGroupIndex(StackMove->stackNum-1);
-            stack_Dialog->setGeometry(5,120,stack_Temp->width(),stack_Temp->height());//设置显示其实位置和大小
-            stack_Temp->show();
-            stack_Dialog->show();
-            emit StackEditBaseInit_signal();
-        }
-        ui->Stack_Edit_btnAxisX1->setStyleSheet("border-style:outset;\
-                                                background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/\
-                                                border-width:1px;\
-                                                border-color:#0055ff;\
-                                                border-radius:5px;");
-
         break;
     }
     case C_STACK_FOLLOW:

@@ -1,6 +1,6 @@
 ﻿#include "setting.h"
 #include "ui_setting.h"
-
+#include <QProcess>
 #include <QMovie>
 #include <QPair>
 #include <QPropertyAnimation>
@@ -316,8 +316,6 @@ Setting::Setting(QWidget *parent) :
 
         TimeSetter::instance()->setTime(t);
     });
-
-
     connect(ui->coboxStackWay, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
         auto mode = (StackMode)(index);
         for (int i = 0; i < 8; i++)
@@ -332,7 +330,7 @@ Setting::Setting(QWidget *parent) :
 //            auto mode = (StackMode)(index);
 //            stack[i]->switchStackWay();
             //emit ui->coboxStackWay->currentIndexChanged(ui->coboxStackWay->currentIndex());
-            auto mode = (StackMode)(index);
+            auto mode = (StackMode)(m_StackFunc.stackType);
             for (int i = 0; i < 8; i++)
             {
                 stack[i]->switchStackWay(mode);
@@ -477,6 +475,15 @@ Setting::Setting(QWidget *parent) :
     connect(ui->btnSavePort,&QPushButton::clicked,this,&Setting::savePortDefine);
     connect(ui->tableWgtPortDef,&QTableWidget::cellClicked,[=](int row, int column){
         modifyPort(row, column);
+    });
+    //触摸屏校准按钮
+    connect(ui->btnTouchCalibration,&QPushButton::clicked,this,[=]() {
+        int reply =  MainWindow::pMainWindow->showErrorTip(tr("触摸校准会重启系统，请确认是否校准？"));
+        if (reply == QDialog::Accepted)
+        {
+            QProcess_execute("rm",QStringList() <<"/etc/pointercal");
+            QProcess_execute("reboot",QStringList());
+        }
     });
     /***************************升级与备份-信号槽连接**********************************/
     connect(ui->btnUpdateHandcontroller, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(HANDHELD);});
@@ -1779,6 +1786,7 @@ void Setting::syncParaToUI()
     for (int i = 0; i < 8; i++)
     {
         stack[i]->syncParaToUI();
+//        stack[i]->switchStackWay((StackMode)m_StackFunc.stackType);
     }
 
     stackCoboxs.at(0)->setCurrentIndex(m_StackFunc.stackType);
@@ -2106,6 +2114,9 @@ void Setting::pageSwitchInit()
     });
     connect(ui->btnStackSet, &QPushButton::clicked, this, [=](){
         ui->stackedWidget->setCurrentWidget(ui->pageStack);
+        ui->tabWidgetStack->setCurrentIndex(0);
+        stack[0]->updateGroupIndex(0);
+        stack[0]->syncParaToUI();
     });
      /******************************************************************************/
     connect(ui->btnLastAdvance, &QPushButton::clicked, this, [=](){
@@ -2649,7 +2660,6 @@ void Setting::setupCommunicationConnections()
             saveKeyAndLEDFuncDefine();
             writeKeySetStrToConfig(i, text);
             keyFunDesription[i]=text;
-            emit updatemonitorhandcontrol();
         });
     }
 
@@ -2659,7 +2669,6 @@ void Setting::setupCommunicationConnections()
             saveKeyAndLEDFuncDefine();
             writeSigSetStrToConfig(i, text);
             sigSetDesription[i]=text;
-            emit updatemonitorhandcontrol();
         });
     }
 
@@ -2795,7 +2804,6 @@ void Setting::setupCommunicationConnections()
     connect(ui->editRotateSiloPlaceNum,&NumberEdit::textChanged,[=](const QString &){
         saveStackFunc();
     });
-
     for (int i = 0; i < 8; i++)
     {
         stack[i]->saveInfoConnections();
@@ -3650,6 +3658,8 @@ void Setting::savePortDefine()
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
     emit monitor_port_refreash();
     emit WidgetNameRefresh_signal();
+    emit updatemonitorhandcontrol();
+    emit updateManualformButtonName_Signal();//更新手动界面按钮显示
 }
 //保存名称自定义
 void Setting::saveNameDefine()
@@ -3698,18 +3708,66 @@ void Setting::modifyPort(int row, int column)
 //替换logo处理
 void Setting::on_btnLogoUpdate_clicked()
 {
+    uint8_t update_error = 0;
     if(Is_Udisk_In())
     {
-        QProcess_execute("mount",QStringList() <<"/dev/mmcblk0p1"<< "/mnt/");
-        QProcess_execute("cp",QStringList() << "/run/media/sda1/bootlogo.bmp" <<"/mnt/bootlogo.bmp");
-        QProcess_execute("cp",QStringList() << "/run/media/sda1/stop.jpg" <<"/root/stop.jpg");
-        QProcess_execute("sync",QStringList());
-        QProcess_execute("umount",QStringList() <<"/dev/mmcblk0p1");
-        emit LOGO_Refresh();
+        QString mountPoint = UsbDisk::instance()->getUsbMountPoint();
+        QString bootlogoName = "bootlogo.bmp";
+        QString stoplogoName = "stop.jpg";
+        if(mountPoint != "")
+        {
+
+            QString result = UsbDisk::instance()->findFileAndGetDirectory(mountPoint, bootlogoName);
+            if (result.isEmpty()) {
+                qDebug()<<"no found file:"<<bootlogoName;
+                update_error = 1;
+            }
+            else
+            {
+                QProcess_execute("mount",QStringList() <<"/dev/mmcblk0p1"<< "/mnt/");
+                QProcess_execute("cp",QStringList() << result <<"/mnt/bootlogo.bmp");
+                QProcess_execute("sync",QStringList());
+                QProcess_execute("umount",QStringList() <<"/dev/mmcblk0p1");
+            }
+
+            QString result1 = UsbDisk::instance()->findFileAndGetDirectory(mountPoint, stoplogoName);
+            if (result1.isEmpty()) {
+                qDebug()<<"no found file:"<<stoplogoName;
+                if(update_error == 0)
+                {
+                    update_error = 2;
+                }
+                else
+                {
+                    update_error = 3;
+                }
+            }
+            else
+            {
+                QProcess_execute("cp",QStringList() << result1 <<"/root/");
+                QProcess_execute("sync",QStringList());
+                emit LOGO_Refresh();
+            }
+            if(update_error == 1)
+            {
+                MainWindow::pMainWindow->showErrorTip("未检测到bootlogo.bmp文件");
+                update_error = 0;
+            }
+            else if(update_error == 2)
+            {
+                MainWindow::pMainWindow->showErrorTip("未检测到stop.jpg文件");
+                update_error = 0;
+            }
+            else if(update_error == 3)
+            {
+                MainWindow::pMainWindow->showErrorTip("未检测到bootlogo.bmp和stop.jpg文件");
+                update_error = 0;
+            }
+        }
     }
     else
     {//提示u盘未插入
-//        MainWindow::pMainWindow->showErrorTip("未插入U盘！");
+        MainWindow::pMainWindow->showErrorTip("未插入U盘！");
     }
 }
 /*************************************************************************
@@ -3722,7 +3780,7 @@ void Setting::on_btnLogoUpdate_clicked()
 **/
 void Setting::UpgradeHandle(int click_type)
 {
-    if(Is_Udisk_In())
+    if(Is_Udisk_In() || click_type == RESTSETTING)
     {
         UpgradeDialog = new upgradedialog(click_type);
         UpgradeDialog->setStyleSheet(this->styleSheet());
@@ -3806,9 +3864,9 @@ void Setting::UpgradeHandle(int click_type)
             this->update();
             QCoreApplication::processEvents();//调用该函数处理事件循环,立即显示
         });
+        connect(UpgradeDialog,&upgradedialog::Upgrade_Main_State_signal,this,&Setting::Upgrade_Main_State_handle);
         connect(ui->Progress_bar,SIGNAL(valueChanged(int)),ui->Progress_num,SLOT(setValue(int)));
         connect(UpgradeDialog,&upgradedialog::UpProgressRefreshSignal,this,[=](){
-
             ui->Progress_bar->setValue(UpgradeDialog->Upgrade_Progress);
             this->update();
             QCoreApplication::processEvents();
@@ -3817,6 +3875,26 @@ void Setting::UpgradeHandle(int click_type)
     else
     {
         MainWindow::pMainWindow->showErrorTip("未插入U盘！");
+    }
+
+}
+//主控板升级状态处理函数
+void Setting::Upgrade_Main_State_handle(uint8_t state)
+{
+    UpgradeDialog->close();
+    ui->updata_widget->hide();
+    static bool execute_status = false;
+    if(state == 3 && execute_status == false)
+    {
+        execute_status = true;
+        MainWindow::pMainWindow->showErrorTip(tr("升级成功！等待重启"));
+        system("reboot");
+    }
+    else if(state == 4 && execute_status== false)
+    {
+        execute_status = true;
+        MainWindow::pMainWindow->showErrorTip(tr("升级失败，请重启机器再次升级！"),TipMode::NULL_BUTTON);
+        ui->updata_widget->hide();
     }
 
 }
@@ -3845,4 +3923,13 @@ bool Setting::eventFilter(QObject *watched, QEvent *event)
     }
 
     return QWidget::eventFilter(watched, event);
+}
+//堆叠界面切换堆叠组
+void Setting::on_tabWidgetStack_currentChanged(int index)
+{
+    if(index<8)
+    {
+        stack[index]->updateGroupIndex(index);
+        stack[index]->syncParaToUI();
+    }
 }

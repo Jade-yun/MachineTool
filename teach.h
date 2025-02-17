@@ -77,6 +77,8 @@ public slots:
     void WidgetNameRefresh();
 
     void coboxVarSelectVarPreOpItemSet();
+
+    void Stack_Dialog_show();
 private slots:
     void OrderSaveHandel();
     void LogicVar_SufferOperUpdata(P_LogicVarStruct* LogicVarStruct);
