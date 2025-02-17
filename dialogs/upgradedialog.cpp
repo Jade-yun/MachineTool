@@ -7,7 +7,7 @@
 #include <QCryptographicHash>
 #include <QProcess>
 #include "program_save.h"
-
+#include "iniconfig.h"
 #define COPYS "-副本"
 #define DECOLLATOR '/'
 #define ARROWS ">"
@@ -25,6 +25,7 @@ upgradedialog::upgradedialog(const uint8_t &upgradetype, QWidget *parent) :
     ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
     connect(ui->upgradeno, &QPushButton::clicked,this,[=](){this->close();});
     connect(ui->cancel_button,&QPushButton::clicked,this,[=](){this->close();});
+    connect(ui->ResSettNO,&QPushButton::clicked,this,[=](){this->close();});
     connect(ui->upgreadok,&QPushButton::clicked,this,&upgradedialog::upgreadok_handle);
     dlgErrorTip = new ErrorTipDialog(this);
     dlgErrorTip->move(this->geometry().center()-dlgErrorTip->rect().center());
@@ -234,6 +235,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
         ui->Reserve_Other_checkbox->setChecked(true);
         ui->ResSettInput_password->setDecimalPlaces(0);
         ui->ResSettInput_password->setText("");
+        sure_handle_type = RESTSETTING;
     }
     default:
         break;
@@ -580,16 +582,57 @@ void upgradedialog::on_ok_button_clicked()
         {
             UpFilePath = FileSystemModel->filePath(ui->file_listView->currentIndex());
             Upgrade_Progress_send(5);
-            QThread *UpdataThread = new QThread();
-            connect(UpdataThread,&QThread::started,this,&upgradedialog::Updata_handle);
+            QThread *UpdataThread_hand = new QThread();
+            connect(UpdataThread_hand,&QThread::started,this,&upgradedialog::Updata_handle);
             this->hide();
             emit updataWidgetShowSignal();
-            UpdataThread->start();
+            UpdataThread_hand->start();
         }
         break;
     }
     case MAINBOARD:
     {
+        if (currentIndex.isValid() && FileSystemModel->isDir(currentIndex))
+        { // 检查索引是否有效并且当前选中是否为目录
+            ui->file_listView->setRootIndex(currentIndex); // 设置文件列表视图的根索引为该目录
+            updatePath(currentIndex);                      // 更新路径显示
+        }
+        else
+        {
+            QModelIndex currentIndex = ui->file_listView->currentIndex();
+            if (currentIndex.isValid()) {
+                QFileInfo fileInfo = FileSystemModel->fileInfo(currentIndex);
+                QString fileName = fileInfo.fileName();
+
+                // 定义正则表达式，匹配以"M_V"开头，后跟一个数字，再跟"_"，然后是另一个数字，最后以".bin"结尾的文件名
+                QRegularExpression re("M_V\\d+_\\d+\\.bin");
+
+                // 使用正则表达式进行匹配
+                QRegularExpressionMatch match = re.match(fileName);
+
+                if (match.hasMatch()) {
+                    // 文件名符合"M_Vx_x.bin"的格式
+                    UpFilePath = FileSystemModel->filePath(ui->file_listView->currentIndex());
+                    Upgrade_Progress_send(0);
+//                    QThread *UpdataThread_main = new QThread();
+                    M_MainUpdate.Upgrade_Thread_Run_Flag = true;
+                    UpgradeTimer = new QTimer(this);
+                    UpgradeTimer->start(1);
+                    timer1->restart();
+                    connect(UpgradeTimer,&QTimer::timeout,this,&upgradedialog::Updata_mian);
+//                    connect(UpdataThread_main,&QThread::started,this,&upgradedialog::Updata_mian);
+                    this->hide();
+                    emit updataWidgetShowSignal();
+//                    UpdataThread_main->start();
+                } else {
+                    // 文件名不符合所需格式
+                    MainWindow::pMainWindow->showErrorTip("升级文件类型异常！请选择类型为M_VX_X.bin类型的文件进行升级");
+                }
+            } else {
+                // 没有选中任何文件
+                MainWindow::pMainWindow->showErrorTip("未选中升级文件！");
+            }
+        }
         break;
     }
     case IOBOARD:
@@ -754,6 +797,152 @@ void upgradedialog::Updata_handle() {
     }
 }
 
+
+// 控制器升级文件拷贝函数，适用于后台线程
+void upgradedialog::Updata_mian()
+{
+    QTimer timer(this);
+    static bool isTimerStart = false;
+    connect(&timer,&QTimer::timeout,this,[](){
+        M_MainUpdate.Again_SendDate_MaxNum++;
+        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_UPGRADE_DATE);
+    });
+//    while(M_MainUpdate.Upgrade_Thread_Run_Flag)
+    {
+        if(M_MainUpdate.Upgrade_Status == 0 && M_MainUpdate.SendDateReturn_State == false)
+        {//升级状态未升级
+            M_MainUpdate.Upgrade_command = 1;  //控制板开始升级
+            M_MainUpdate.Upgrade_Communication_Mode = 1;//升级通信方式：串口升级
+            M_MainUpdate.Upgrade_Ver_Code = (uint32_t)GetUpgradeFileLastFourBytes(UpFilePath).toUInt();//升级校验编码
+            M_MainUpdate.Upgrade_all_Rate = GetUpgradeFileAllRate(UpFilePath);//升级总帧数
+            M_MainUpdate.Upgrade_Start_Rate = 1;//开始升级的帧编号
+            M_MainUpdate.Current_Upgrade_Rate = 1;//当前要升级i的帧编号
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_UPGRADE_CONTROL);
+            isTimerStart = false;
+//            QThread::msleep(50);
+            M_MainUpdate.SendDateReturn_State = true;
+        }
+        if(M_MainUpdate.Upgrade_Status == 1 || M_MainUpdate.Upgrade_Status == 2 || M_MainUpdate.Upgrade_Status == 5)
+        {//如果控制器升级状态是升级中，或者当前帧数据写入完成，下发数据帧
+            if(M_MainUpdate.Upgrade_Frame_Rate<=M_MainUpdate.Upgrade_all_Rate && ((M_MainUpdate.Upgrade_Frame_Rate+1 != M_MainUpdate.Current_Upgrade_Rate) || M_MainUpdate.Upgrade_Frame_Rate == 0))
+            {//如果已经升级的帧数小于总帧数，,并且已经升级的帧数不等于当前要升级的帧编号，则继续升级
+                M_MainUpdate.Current_Upgrade_Rate = M_MainUpdate.Upgrade_Frame_Rate+1;
+                GetUpgradeFileOneRateDate(UpFilePath,M_MainUpdate.Current_Upgrade_Rate);
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_UPGRADE_DATE);
+                qDebug() << "Upgrade_Frame_Rate_time:" << timer1->elapsed() << "毫秒";
+            }
+        }
+        else if(M_MainUpdate.Upgrade_Status == 6)
+        {//如果升级状态为当前帧数据写入失败，重新下发这帧数据
+//            GetUpgradeFileOneRateDate(UpFilePath,M_MainUpdate.Current_Upgrade_Rate);
+            if(isTimerStart == false)
+            {
+                timer.start(50);
+                isTimerStart = true;
+            }
+            if(M_MainUpdate.Again_SendDate_MaxNum > 3 && M_MainUpdate.Upgrade_command != 4)
+            {//连续发送3次都写入失败，
+                M_MainUpdate.Upgrade_command = 4;//主控板升级异常
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_UPGRADE_CONTROL);
+                timer.stop();
+            }
+        }
+        else if(M_MainUpdate.Upgrade_Status == 3 || M_MainUpdate.Upgrade_Status == 4)
+        {
+
+            if(M_MainUpdate.Upgrade_Status == 3)
+            {
+                M_MainUpdate.Upgrade_command = 2;  //控制板升级完成
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_UPGRADE_CONTROL);
+                emit Upgrade_Main_State_signal(M_MainUpdate.Upgrade_Status);
+            }
+            else if(M_MainUpdate.Upgrade_Status == 4)
+            {
+                M_MainUpdate.Upgrade_command = 4;  //控制板升级异常
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_UPGRADE_CONTROL);
+                emit Upgrade_Main_State_signal(M_MainUpdate.Upgrade_Status);
+            }
+//            UpgradeTimer->stop();
+        }
+//        Upgrade_Progress_send((static_cast<double>(M_MainUpdate.Current_Upgrade_Rate)/static_cast<double>(M_MainUpdate.Upgrade_all_Rate))*100.0);//显示升级进度
+    }
+}
+
+//获取升级文件最后四位值作为校验编码
+QByteArray upgradedialog::GetUpgradeFileLastFourBytes(QString filePath)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "无法打开文件:" << file.errorString();
+        return 0;
+    }
+
+    // 获取文件大小
+    qint64 fileSize = file.size();
+    if (fileSize < 4) {
+        qDebug() << "文件太小，无法读取最后四个字节";
+        file.close();
+        return 0;
+    }
+
+    // 将文件指针移动到文件末尾向前4个字节的位置
+    if (!file.seek(fileSize - 4)) {
+        qDebug() << "无法移动到文件末尾向前4个字节的位置:" << file.errorString();
+        file.close();
+        return 0;
+    }
+
+    // 读取最后四个字节
+    QByteArray lastFourBytes = file.read(4);
+    if (lastFourBytes.size() != 4) {
+        qDebug() << "读取的字节数不正确";
+        return 0;
+    } else {
+        // 输出最后四个字节（以十六进制显示）
+        qDebug() << "最后四个字节是:" << lastFourBytes.toHex();
+        return lastFourBytes;
+    }
+
+    // 关闭文件
+    file.close();
+}
+
+//获取升级文件总帧数
+uint32_t upgradedialog::GetUpgradeFileAllRate(QString filePath)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "无法打开文件:" << file.errorString();
+        return 0;
+    }
+
+    // 获取文件大小
+    int fileSize = file.size();
+    file.close();
+
+    return (fileSize+63)/64;//向上取整，不足64字节的算一帧数据
+}
+
+//发送升级文件当前要发送帧数据,Rate_Index表示发送第几帧数据
+void upgradedialog::GetUpgradeFileOneRateDate(QString filePath,uint32_t Rate_Index)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "文件打开失败:" << file.errorString();
+        return;
+    }
+    // 将文件指针移动到指定偏移位置
+    if (!file.seek((Rate_Index-1)*UPGRADE_ONE_FRAME_LENGTH)) {
+        qDebug() << "文件指针移动失败:" << file.errorString();
+        file.close();
+        return;
+    }
+    memset(M_MainUpdate.Upgrade_Date,0XFF,UPGRADE_ONE_FRAME_LENGTH);//先全赋值为0xff
+    M_MainUpdate.Current_Rate_Len = file.read(reinterpret_cast<char*>(M_MainUpdate.Upgrade_Date), UPGRADE_ONE_FRAME_LENGTH);
+    file.close();
+}
+
+
 bool upgradedialog::verifyHash(const QString &filePath, const QByteArray &expectedHash) {
         QFile file(filePath);
         if (!file.open(QIODevice::ReadOnly)) {
@@ -774,3 +963,72 @@ void upgradedialog::Upgrade_Progress_send(uint8_t progress)
     emit UpProgressRefreshSignal();
 }
 
+//恢复出场设置弹窗确认按钮
+void upgradedialog::on_ResSettOK_clicked()
+{
+    if(ui->ResSettInput_password->text().toUInt() == passwd[3])
+    {//如果输入密码正确
+        if(RESTSETTING == sure_handle_type)
+        {//恢复出场设置
+            QFile file(m_defaultConfigFileNamePath);
+            if(file.exists())
+            {
+                if(cpStateReturn(m_defaultConfigFileNamePath,m_configFileNamePath))
+                {
+                    if(cpStateReturn(m_defaultconfigPortXYNameIniPath,m_configPortXYNameIniPath))
+                    {
+                        if(cpStateReturn(m_defaultconfigPortSettingPath,m_configPortSettingPath))
+                        {
+                             system("reboot");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                showTip("未发现恢复出场设置文件！");
+            }
+
+            if(!ui->Reserve_teach_checkbox->isChecked())
+            {//保存教导程序未选中，清除所有程序
+
+            }
+
+            if(!ui->Reserve_Other_checkbox->isChecked())
+            {//保留每转距离等数据不选择时处理
+
+            }
+        }
+        emit ImplementFinishSignal();
+    }
+    else
+    {
+        ui->ResSettInput_password->setStyleSheet("QLineEdit { border: 2px solid red; }");
+    }
+}
+//cp是否成功反馈
+bool upgradedialog::cpStateReturn(QString CopyFilePath , QString TargetFilePath)
+{
+    bool state = 0;
+    QProcess process;
+    QStringList arguments;
+    arguments << CopyFilePath << TargetFilePath;
+    process.start("cp", arguments);
+    if (!process.waitForStarted()) {
+        showTip("无法启动cp命令！");
+    } else {
+        if (!process.waitForFinished()) {
+            showTip("cp命令执行未完成！");
+        } else {
+            // 检查cp命令的退出状态
+            if (process.exitCode() == 0) {
+                // cp命令成功执行
+                state = 1;
+            } else {
+                // cp命令执行失败
+                showTip(QString("cp命令执行失败！退出码：%1").arg(process.exitCode()));
+            }
+        }
+    }
+    return state;
+}

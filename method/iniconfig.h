@@ -10,6 +10,13 @@ extern QString m_configFileNamePath;
 extern const QString CustomizeNameDefPath;
 extern QString m_configPortXYNamePath;
 extern QString m_configPortXYNameIniPath;
+extern QString m_defaultConfigFileNamePath;
+
+extern QString m_configPortXYNameIniPath;             //输入输出、名称定义配置文件（99）
+extern QString m_defaultconfigPortXYNameIniPath;             //输入输出、名称定义配置文件（99）
+
+extern QString m_defaultconfigPortSettingPath;
+extern QString m_configPortSettingPath;
 
 QString getValue(QString prefix, QString key, QString defaultV);
 void   setValue(QString prefix, QString key, QString value);

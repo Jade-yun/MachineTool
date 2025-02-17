@@ -109,6 +109,7 @@ signals:
     void updatemonitorhandcontrol();//更新监视界面手控器界面内容
     void WidgetNameRefresh_signal();//教导界面控件名称需要刷新信号
     void coboxVarSelectVarPreOpItemSet_signal();//教导界面变量类型复选框刷新信号
+    void updateManualformButtonName_Signal();//更新手动界面按钮名称显示信号
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型
@@ -264,6 +265,9 @@ private slots:
    bool modifyPort(int row, int column);           //端口自定义界面修改端口号
    void on_btnLogoUpdate_clicked();
    // QObject interface
+   void on_tabWidgetStack_currentChanged(int index);
+
+   void Upgrade_Main_State_handle(uint8_t state);
 public:
    bool eventFilter(QObject *watched, QEvent *event);
    void RefreshPortDefine();//端口自定义刷新

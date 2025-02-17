@@ -250,6 +250,8 @@ void StackEdit::saveStackInfo1()
 
     }
     g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,groupIndex+1);
+    QThread::msleep(10);
+    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_SET);
     setStackInfo(m_StackInfo[groupIndex],groupIndex);
 }
 void StackEdit::saveStackInfo(int index)
@@ -405,8 +407,11 @@ StackEdit::StackEdit(QWidget *parent) :
     ui->stkWgtStackWay->setCurrentIndex(0);
 
     connect(ui->btnOK, &QPushButton::clicked, [=](){
+        saveStackInfo1();//保存参数
+        saveStackInfo(groupIndex);
         this->close();
         emit closeStackEditDialogSignal();
+        emit stackParRefreshSignal();
     });
     connect(ui->btnCancel, &QPushButton::clicked, [=](){
         this->close();
@@ -581,9 +586,9 @@ void StackEdit::saveInfoConnections()
         saveStackInfo1();
     });
     connect(ui->coboxLeaveBlank, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
-//            saveStackInfo();
+        saveStackInfo1();
     });
-//    connect(ui->checkBoxTriAxisUnion, &QCheckBox::clicked, this, &StackEdit::saveStackInfo);
+    connect(ui->checkBoxTriAxisUnion, &QCheckBox::clicked, this, &StackEdit::saveStackInfo1);
     connect(ui->coboxStackDirect, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
         saveStackInfo1();
     });

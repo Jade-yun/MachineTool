@@ -17,18 +17,22 @@ QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //�
 
 QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //输入输出、名称定义配置文件（99）
 
+QString m_defaultconfigPortXYNameIniPath="/root/Ini_Port_XY_Name_default.txt";             //输入输出、名称定义出场配置文件（99）
+QString m_defaultconfigPortSettingPath = "/root/Port_Setting_default.txt";
+
 QSettings ConfigPortDefine(m_configPortXYNameIniPath,QSettings::IniFormat);
 
 //配置文件相对路径
 QString m_configFileNamePath="/root/Ini_Para.txt";
+QString m_defaultConfigFileNamePath="/root/Ini_Para_default.txt";//默认设置参数配置文件，恢复出场设置时调用
 
 const QString SysSetConfigPath = "/Settings/systemset.ini";
 const QString PasswdConfigPath = "/Settings/passwd.ini";
 const QString KeyAndSignalDescriptionPath = "/Settings/key_signal_str.ini";
 const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
 
-const QString GuideInfoPath = "/Settings/guide_info.ini";
 const QString CustomizeNameDefPath = "/Settings/NameDef_Customize_CN.ini";
+const QString GuideInfoPath = "/Settings/guide_info.ini";
 //开机自动加载程序信息
 const QString PowerOnReadOneProPath = "/Settings/PowerOnReadOneProInfo.ini";
 
@@ -1143,6 +1147,7 @@ void readPasswdFromConfig()
     {
         passwd[i] = settings.value(QString("Authority_%1").arg(i), 12345).toUInt();
     }
+    passwd[3] = settings.value(QString("Restore_Passwd").arg(3), 12345).toUInt();
     settings.endGroup();
 }
 

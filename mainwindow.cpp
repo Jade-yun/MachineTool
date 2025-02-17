@@ -160,7 +160,7 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug() << "can not open serialport ";
     }
     startAllThread();
-	Refresh_Progress_bar(10);
+    Refresh_Progress_bar(10);
 
     // 输入事件扫描 放在最后 app彻底启动完成
     const QVector<QString> devices = {
@@ -248,12 +248,10 @@ MainWindow::MainWindow(QWidget *parent)
 //    alarmBar->setAttribute(Qt::WA_ShowWithoutActivating);
     alarmBar->hide();
     connect(ui->btnAlarm, &QPushButton::clicked, this, [=](){
-        if (!alarmInfoQueue.isEmpty())
+        if(!alarmInfoQueue.isEmpty())
         {
             alarmBar->setGeometry(5, 640, 1014, 60);
-
             int newAlarmNum = alarmInfoQueue.back().alarmNum;
-
             QSettings alarmInfoSettings(alarmInfoMappingPath, QSettings::IniFormat);
             alarmInfoSettings.setIniCodec("utf-8");
             alarmInfoSettings.beginGroup(QString::number(newAlarmNum));
@@ -317,10 +315,6 @@ void MainWindow::initUI()
 
     ui->Btn_TeachHome->setText(tr("教导管理"));
     ui->Btn_ManualHome->setText(tr("停止页面"));
-
-    const QString& programName = m_CurrentProgramNameAndPath.fileName;
-    QString name = m_SystemSet.sysName + "  "  + tr("程式：") + programName;
-    ui->labProgramName->setText(name);
 }
 
 void MainWindow::handleLoginModeChanged(LoginMode mode)
@@ -366,7 +360,7 @@ void MainWindow::onCheckPara()
     }
 
     LEDController::instance()->updateLEDStatus(&ledStatus);
-    monitorWidget->showSignalLEDStatus(ledStatus);
+
 }
 
 void MainWindow::PowerOnStateHandle()
@@ -556,8 +550,6 @@ int MainWindow::showErrorTip(const QString &message, TipMode mode)
 
 void MainWindow::connectAllSignalsAndSlots()
 {
-
-
     ui->wgtHelp->hide();
     connect(ui->btnHelp, &QPushButton::clicked, this, [=](){
         ui->wgtHelp->show();
@@ -580,6 +572,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");});
     connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
     connect(setWidget,&Setting::RefreshPortDefineSignals,setWidget,&Setting::RefreshPortDefine);
+    connect(setWidget,&Setting::updateManualformButtonName_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
     connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
     connect(autoWidget,&AutoForm::Send_planProductNum_Signal,this,[=](){//计划产品个数下发
@@ -588,7 +581,6 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
     connect(setWidget, &Setting::sysNameChanged, this,&MainWindow::updatelabProgramName);//设置中修改了系统名称触发
     connect(teachManageWidget,&TeachManage::labProgramNameChangeSignal,this,&MainWindow::updatelabProgramName);//加载新的程序时触发
-    connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, &ManualForm::reloadReferPoint);
 
     connect(g_Usart,&Usart::posflashsignal,this,&MainWindow::posflashhandle);//当前坐标实时刷新
     connect(g_Usart,&Usart::robotstaRefreshsignal,this,&MainWindow::m_RobotStateRefreash);//机器状态参数实时更新
@@ -602,7 +594,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(this,&MainWindow::signal_TeachPageInit,teachWidget,&Teach::SwitchPageInit);//教导界面初始化信号
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
-	connect(timer, &QTimer::timeout, [&]() {
+    connect(timer, &QTimer::timeout, [&]() {
         static int timer_number = 0;
         static int alarm_number = 0;
         alarm_number++;
@@ -1029,7 +1021,7 @@ void ClickableLabel::mousePressEvent(QMouseEvent *event)
 
 }
 
-
+/******TextTicker start************/
 TextTicker::TextTicker(QWidget *parent)
     : QLabel(parent)
 {
@@ -1078,6 +1070,9 @@ QString TextTicker::calculateVisibleText() {
     // 如果文本太长无法完全显示，则只显示可见部分
     return m_showText.mid(m_curIndex, textLengthToShow);
 }
+
+/******TextTicker end************/
+
 //开机同步参数处理函数，SysIndex:同步到那一步
 void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 {
@@ -1104,9 +1099,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         ui->Progress_bar->hide();
         ui->Progress_num->hide();
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
-
-        manualWidget->reloadReferPoint();
-        ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
+        updatelabProgramName();
     }
     else
     {
@@ -1120,15 +1113,14 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
             dlgErrorTip->reject();
         }
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
-        manualWidget->reloadReferPoint();
-        ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
+        updatelabProgramName();
     }
 
 }
 //刷新系统名称显示
 void MainWindow::updatelabProgramName()
 {
-    ui->labProgramName->setText(m_SystemSet.sysName + " " + m_CurrentProgramNameAndPath.fileName);
+    ui->labProgramName->setText(m_SystemSet.sysName + " " + "程式：" + m_CurrentProgramNameAndPath.fileName);
 }
 //系统名称标签框滚动显示
 void MainWindow::labProgramNameRollShow()
@@ -1190,4 +1182,3 @@ void MainWindow::m_RobotStateRefreash()
         dlgErrorTip->reject();
     }
 }
-

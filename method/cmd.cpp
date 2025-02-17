@@ -1,5 +1,4 @@
 #include "cmd.h"
-#include <QElapsedTimer>
 #include "dirent.h"
 #include <QProcess>
 cmd::cmd()
@@ -9,11 +8,12 @@ cmd::cmd()
 
 std::vector<QString> keyFunDesription;
 std::vector<QString> sigSetDesription;
-uint32_t passwd[3] = {12345, 12345, 12345};
+uint32_t passwd[4] = {12345, 12345, 12345,12345};
 
 bool SufferOperNeedRefreash = false;//变量类型是否需要刷新标志
 AutoInforRefresh m_AutoInforRefresh; //自动界面信息刷新标志
 Sync_Data MySync_Data; //参数同步结构体
+MainUpdateStruct M_MainUpdate;//主控板升级机构体
 
 P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM] = {0};                                 //教导界面轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
 P_MachineOutStruct Temp_MachineOutStruct[6] = {0};                                          //教导界面机床输出控制
@@ -141,7 +141,6 @@ D_PortDefineStruct m_ResPort_Y[OUTPUT_TOTAL_NUM];                               
 //输出自定义
 
 Usart *g_Usart = NULL;
-
 QSerialPort *m_serialPort = NULL;
 QQueue<QByteArray> m_sendCmdQueue;
 

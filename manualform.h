@@ -100,7 +100,7 @@ public:
 
 public slots:
     void updateReserveButtonState(); // 更新端口对应按钮的可见性和文本
-
+    void update_Button_Name_Handel();
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];

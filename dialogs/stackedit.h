@@ -87,6 +87,7 @@ private:
     int groupIndex;
 signals:
     void closeStackEditDialogSignal(); // 定义关闭对话框的信号
+    void stackParRefreshSignal();
 private slots:
     void on_coboxStackOrder_currentIndexChanged(int index);
 };

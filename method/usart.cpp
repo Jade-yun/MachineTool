@@ -1,6 +1,7 @@
 #include "usart.h"
 #include <QThread>
 #include <QDebug>
+
 int dataLen = 0;                           //数据长度（命令+所有数据）
 uint8_t* sumCheckData = new uint8_t[1];                           //校验和数据
 uint8_t* recDataBuf = new uint8_t[1024];        //Data数据
@@ -127,7 +128,6 @@ uint16_t Usart::ExtendSendDataDeal(uint8_t *data, uint16_t len)
     QByteArray byteArray((const char*)sendData,totalLen);
 //    APP_Uart_SendData(byteArray);
     m_sendCmdQueue.enqueue(byteArray);
-
     return 0;
 }
 
@@ -215,6 +215,54 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
             break;
         case CMD_SUN_MANUAL_STACK://移至堆叠点
 
+            break;
+        case CMD_SUN_MANUAL_UPGRADE_CONTROL://控制板升级控制指令
+            sendDataBuf[len] = M_MainUpdate.Upgrade_command;
+            len += 1;
+            sendDataBuf[len] = M_MainUpdate.Upgrade_Communication_Mode;
+            len += 1;
+            sendDataBuf[len] = (uint8_t)M_MainUpdate.Upgrade_Ver_Code;
+            sendDataBuf[len+1] = (uint8_t)(M_MainUpdate.Upgrade_Ver_Code>>8);
+            sendDataBuf[len+2] = (uint8_t)(M_MainUpdate.Upgrade_Ver_Code>>16);
+            sendDataBuf[len+3] = (uint8_t)(M_MainUpdate.Upgrade_Ver_Code>>24);
+            len += 4;
+            sendDataBuf[len] = (uint8_t)M_MainUpdate.Upgrade_all_Rate;
+            sendDataBuf[len+1] = (uint8_t)(M_MainUpdate.Upgrade_all_Rate>>8);
+            sendDataBuf[len+2] = (uint8_t)(M_MainUpdate.Upgrade_all_Rate>>16);
+            sendDataBuf[len+3] = (uint8_t)(M_MainUpdate.Upgrade_all_Rate>>24);
+            len += 4;
+            sendDataBuf[len] = (uint8_t)M_MainUpdate.Upgrade_Start_Rate;
+            sendDataBuf[len+1] = (uint8_t)(M_MainUpdate.Upgrade_Start_Rate>>8);
+            sendDataBuf[len+2] = (uint8_t)(M_MainUpdate.Upgrade_Start_Rate>>16);
+            sendDataBuf[len+3] = (uint8_t)(M_MainUpdate.Upgrade_Start_Rate>>24);
+            len += 4;
+            break;
+         case CMD_SUN_MANUAL_UPGRADE_DATE://控制板升级数据指令
+            len = 0;
+            sendDataBuf[len] = (uint8_t)M_MainUpdate.Current_Upgrade_Rate;
+            sendDataBuf[len+1] = (uint8_t)(M_MainUpdate.Current_Upgrade_Rate>>8);
+            sendDataBuf[len+2] = (uint8_t)(M_MainUpdate.Current_Upgrade_Rate>>16);
+            sendDataBuf[len+3] = (uint8_t)(M_MainUpdate.Current_Upgrade_Rate>>24);
+            len += 4;
+            sendDataBuf[len] = (uint8_t)M_MainUpdate.Current_Rate_Len;
+            len += 1;
+            for(int i=0;i<UPGRADE_ONE_FRAME_LENGTH;i++)
+            {
+                sendDataBuf[len+i] = M_MainUpdate.Upgrade_Date[i];
+            }
+            len += UPGRADE_ONE_FRAME_LENGTH;
+            break;
+        case CMD_SUN_SYSDATA_FINISH:
+            {
+                len=0;
+                sendDataBuf[len] = 0;//随机数暂时不要设置，默认发送0
+                sendDataBuf[len+1] = 0;
+                sendDataBuf[len+2] = 0;
+                sendDataBuf[len+3] = 0;
+                len+=4;
+                break;
+            }
+        default:
             break;
         }
     }
@@ -914,14 +962,6 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             break;
         }
     }
-    else if(mainCmd == CMD_MAIN_READ)
-    {
-        if(sunCmd == CMD_SUN_SYSDATA_FINISH)
-        {
-            sendDataBuf[0]=0;
-        }
-
-    }
     else if(mainCmd == CMD_MAIN_STA)
     {
         if(sunCmd == CMD_SUN_STA_PAR)
@@ -1130,8 +1170,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 case CMD_SUN_MAC_AXIS:
                     if(MySync_Data.SysDataFlag == 1)
                     {
-                        MySync_Data.mac_aixs++;
-
+                        MySync_Data.mac_aixs = MySync_Data.SendData_flag;
                     }
                     break;
                 case CMD_SUN_MAC_LIMIT_SWT:
@@ -1172,10 +1211,8 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                     }
                     break;
                 case CMD_SUN_STACK_POINT:
-                    if(MySync_Data.SysDataFlag == 1)
-                    {
-                        MySync_Data.stack_point++;
-                    }
+                    MySync_Data.stack_axisIndex++;
+                    MySync_Data.TestSendFeedBackFlag = 0;
                     break;
                 case CMD_SUN_STACK_SET:
                     if(MySync_Data.SysDataFlag == 1)
@@ -1183,23 +1220,26 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                         MySync_Data.stack_set = true;
                     }
                     break;
-
                 default:
                     break;
+                }
+                break;
+             case CMD_MAIN_MANUAL:
+                if(recDataBuf[1] == CMD_SUN_SYSDATA_FINISH)
+                {
+                    if(MySync_Data.SysDataFlag == 1)
+                    {
+                        MySync_Data.sysdatafinish = true;
+                    }
                 }
                 break;
             default:
                 break;
             }
         }
-        else if(sunCmd == CMD_SUN_SYSDATA_FINISH)
-        {
-            if(MySync_Data.SysDataFlag == 1)
-            {
-                MySync_Data.sysdatafinish = true;
-            }
-        }
+
     }
+
     ExtendReadStaDeal(mainCmd,sunCmd,recDataBuf);
 }
 
@@ -1277,7 +1317,6 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             m_AxisCurSpeed=(uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
             index=26;
             m_AxisCurTorque=(uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);
-
             break;
         case CMD_SUN_STA_MAC://控制器状态读取
             index = 0;
@@ -1342,6 +1381,18 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             }
             index = TIME_TOTAL_NUM * 4;
             break;
+        case CMD_SUN_STA_UPGRADE_STATE://控制器升级状态读写
+            M_MainUpdate.Control_Status = (uint8_t)recDataBuf[0];
+            M_MainUpdate.Upgrade_Status = (uint8_t)recDataBuf[1];
+            M_MainUpdate.Upgrade_Ver_Code = (uint32_t)recDataBuf[2] + ((uint32_t)recDataBuf[3]<<8) + ((uint32_t)recDataBuf[4]<<16) + ((uint32_t)recDataBuf[5]<<24);
+            M_MainUpdate.Upgrade_Frame_Rate = (uint32_t)recDataBuf[6] + ((uint32_t)recDataBuf[7]<<8) + ((uint32_t)recDataBuf[8]<<16) + ((uint32_t)recDataBuf[9]<<24);
+            M_MainUpdate.Upgrade_all_Rate = (uint32_t)recDataBuf[10] + ((uint32_t)recDataBuf[11]<<8) + ((uint32_t)recDataBuf[12]<<16) + ((uint32_t)recDataBuf[13]<<24);
+//            if(M_MainUpdate.Upgrade_Status == 3 || M_MainUpdate.Upgrade_Status ==4)
+//            {//如果状态不是等待升级或者升级中，则结束升级线程
+//                M_MainUpdate.Upgrade_Thread_Run_Flag = false;
+//            }
+            M_MainUpdate.SendDateReturn_State = false;
+            qDebug()<<"M_MainUpdate.Upgrade_Frame_Rate:"<<M_MainUpdate.Upgrade_Frame_Rate;
         default:
             break;
         }
@@ -1449,7 +1500,6 @@ void Usart::ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
     ExtendSendParProReadAnswer(mainCmd, sunCmd, sendDataBuf, len);
 
 }
-
 
 //写入程序命令内容----外部调用
 /**********************************************************
@@ -3457,8 +3507,6 @@ uint8_t Usart::DataSyc()
             MySync_Data.out_type_State = false;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_TYPE);
             MySync_Data.SendData_flag = 1;
-            timer.restart();
-            qDebug() << "addWidget(setWidget)：" << timer.elapsed() << "毫秒";
         }
         if(MySync_Data.out_type_State == true)
         {
@@ -3471,7 +3519,6 @@ uint8_t Usart::DataSyc()
             MySync_Data.sendDataOutTime++;//一次5ms
             if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {//超过1s未接收到反馈重新发送
-                qDebug() << "addWidget(setWidget)：" << timer.elapsed() << "毫秒";
                MySync_Data.sendDataNum++;
                 if(MySync_Data.sendDataNum>=5)
                 {
@@ -4330,39 +4377,50 @@ uint8_t Usart::DataSyc()
             MySync_Data.mac_aixs = false;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,1);
             MySync_Data.SendData_flag = 1;
+            qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
         }
 
-        if(MySync_Data.mac_aixs == 1)
+        if(MySync_Data.mac_aixs == 1 && MySync_Data.SendData_flag == 1)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,2);
+            MySync_Data.SendData_flag= 2;
+            qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
         }
-        else if(MySync_Data.mac_aixs == 2)
+        else if(MySync_Data.mac_aixs == 2 && MySync_Data.SendData_flag == 2)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,3);
+            MySync_Data.SendData_flag =3;
+            qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
         }
-        else if(MySync_Data.mac_aixs == 3)
+        else if(MySync_Data.mac_aixs == 3 && MySync_Data.SendData_flag == 3)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,4);
+            MySync_Data.SendData_flag = 4;
+            qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
         }
-        else if(MySync_Data.mac_aixs == 4)
+        else if(MySync_Data.mac_aixs == 4 && MySync_Data.SendData_flag == 4)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,5);
+            MySync_Data.SendData_flag = 5;
+            qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
         }
-        else if(MySync_Data.mac_aixs == 5)
+        else if(MySync_Data.mac_aixs == 5 && MySync_Data.SendData_flag == 5)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,6);
+            MySync_Data.SendData_flag = 6;
+            qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
         }
-        else if(MySync_Data.mac_aixs == 6)
+        else if(MySync_Data.mac_aixs == 6 && MySync_Data.SendData_flag == 6)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
@@ -4380,7 +4438,10 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    if(MySync_Data.SendData_flag > 0)
+                    {
+                        MySync_Data.SendData_flag = MySync_Data.mac_aixs;
+                    }
                 }
             }
         }
@@ -4537,8 +4598,9 @@ uint8_t Usart::DataSyc()
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.stack_par = false;
-            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,1);
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,MySync_Data.stack_par+1);
             MySync_Data.SendData_flag = 1;
+            qDebug()<<"MySync_Data.stack_par:"<<MySync_Data.stack_par;
         }
 
         if((MySync_Data.stack_par>0) && (MySync_Data.stack_par < 8) && SendOldIndex != MySync_Data.stack_par)
@@ -4546,7 +4608,8 @@ uint8_t Usart::DataSyc()
             SendOldIndex = MySync_Data.stack_par;
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
-            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,MySync_Data.stack_par);
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,MySync_Data.stack_par+1);
+            qDebug()<<"MySync_Data.stack_par:"<<MySync_Data.stack_par;
         }
         if(MySync_Data.stack_par == 8)
         {
@@ -4575,20 +4638,40 @@ uint8_t Usart::DataSyc()
     case SysSendIndex::CMD_STACK_POINT:
     {
         static uint8_t SendOldIndex = 0;
-        if(MySync_Data.SendData_flag == 0)
+        if(MySync_Data.SendData_flag == 0 && MySync_Data.TestSendFeedBackFlag==0)
         {
-            MySync_Data.sendDataOutTime = 0;
-            MySync_Data.stack_point = false;
-            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,1);
-            MySync_Data.SendData_flag = 1;
-        }
+            if(MySync_Data.stack_axisIndex>=3)
+            {
+                MySync_Data.stack_axisIndex = 0;
+                MySync_Data.stack_point++;
+                MySync_Data.SendData_flag = 1;
+            }
+            else
+            {
+                MySync_Data.sendDataOutTime = 0;
+                MySync_Data.stack_point = 0;
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point+1,MySync_Data.stack_axisIndex);
+                MySync_Data.TestSendFeedBackFlag = 1;
+                qDebug()<<"堆叠点位-组号:"<<MySync_Data.stack_point+1<<"堆叠轴号:"<<MySync_Data.stack_axisIndex;
+            }
 
-        if((MySync_Data.stack_point >0) && (MySync_Data.stack_point < 8) && SendOldIndex != MySync_Data.stack_point)
+        }
+        else if((MySync_Data.stack_point > 0) && (MySync_Data.stack_point < 8) && SendOldIndex != MySync_Data.stack_point && MySync_Data.TestSendFeedBackFlag==0)
         {
-            SendOldIndex = MySync_Data.stack_point;
-            MySync_Data.sendDataOutTime = 0;
-            MySync_Data.sendDataNum=0;
-            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point);
+            if(MySync_Data.stack_axisIndex>=3)
+            {
+                SendOldIndex = MySync_Data.stack_point;
+                MySync_Data.stack_axisIndex = 0;
+                MySync_Data.stack_point++;
+            }
+            else
+            {
+                MySync_Data.sendDataOutTime = 0;
+                MySync_Data.sendDataNum=0;
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point+1,MySync_Data.stack_axisIndex);
+                MySync_Data.TestSendFeedBackFlag = 1;
+                qDebug()<<"堆叠点位-组号:"<<MySync_Data.stack_point+1<<"堆叠轴号:"<<MySync_Data.stack_axisIndex;
+            }
         }
         else if(MySync_Data.stack_point == 8)
         {
@@ -4596,7 +4679,8 @@ uint8_t Usart::DataSyc()
             MySync_Data.SendDataStep++;
             MySync_Data.sendDataNum=0;
         }
-        else
+
+        if(MySync_Data.TestSendFeedBackFlag==1)
         {
             MySync_Data.sendDataOutTime++;
             if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
@@ -4608,7 +4692,8 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+//                    MySync_Data.SendData_flag = 0;
+                    MySync_Data.TestSendFeedBackFlag = 0;
                 }
             }
         }
@@ -4654,7 +4739,7 @@ uint8_t Usart::DataSyc()
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sysdatafinish = false;
-            g_Usart->ExtendSendParDeal(CMD_MAIN_READ,CMD_SUN_SYSDATA_FINISH);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_SYSDATA_FINISH);
             MySync_Data.SendData_flag = 1;
         }
 
@@ -4670,7 +4755,7 @@ uint8_t Usart::DataSyc()
             if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
             {
                 MySync_Data.sendDataNum++;
-                if(MySync_Data.sendDataNum>=5)
+                if(MySync_Data.sendDataNum>=10)
                 {
                     MySync_Data.SendDataStep=SysSendIndex::CMD_SENDERROR;
                 }
@@ -4714,7 +4799,6 @@ uint8_t Usart::DataSyc()
 void Usart::sync_data_handle(void)
 {
     UsartTimer->start(20);
-    timer.start();
     MySync_Data.SendDataStep = 0;
     MySync_Data.SendData_flag = 0;
     MySync_Data.sendDataOutTime = 0;

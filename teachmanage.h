@@ -60,6 +60,7 @@ private:
     int getFilePermission(QWidget *lab) const;
 
     void updateFilePermission(int index);
+
 signals:
     void labProgramNameChangeSignal();//主界面名称刷新信号
 private:

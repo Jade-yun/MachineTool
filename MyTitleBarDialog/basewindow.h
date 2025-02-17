@@ -24,7 +24,6 @@ protected:
     QVBoxLayout* mylayout;
 private:
     void initTitleBar();
-    bool StackEditBaseInit_flash = false;
     void paintEvent(QPaintEvent *event);
 private slots:
     void onButtonMinClicked();
