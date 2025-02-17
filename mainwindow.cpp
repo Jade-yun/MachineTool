@@ -315,6 +315,10 @@ void MainWindow::initUI()
 
     ui->Btn_TeachHome->setText(tr("教导管理"));
     ui->Btn_ManualHome->setText(tr("停止页面"));
+
+//    const QString& programName = m_CurrentProgramNameAndPath.fileName;
+//    QString name = m_SystemSet.sysName + "  "  + tr("程式：") + programName;
+//   ui->labProgramName->setText(name);
 }
 
 void MainWindow::handleLoginModeChanged(LoginMode mode)
@@ -360,7 +364,7 @@ void MainWindow::onCheckPara()
     }
 
     LEDController::instance()->updateLEDStatus(&ledStatus);
-
+    monitorWidget->showSignalLEDStatus(ledStatus);
 }
 
 void MainWindow::PowerOnStateHandle()
@@ -581,6 +585,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
     connect(setWidget, &Setting::sysNameChanged, this,&MainWindow::updatelabProgramName);//设置中修改了系统名称触发
     connect(teachManageWidget,&TeachManage::labProgramNameChangeSignal,this,&MainWindow::updatelabProgramName);//加载新的程序时触发
+    connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, &ManualForm::reloadReferPoint);
 
     connect(g_Usart,&Usart::posflashsignal,this,&MainWindow::posflashhandle);//当前坐标实时刷新
     connect(g_Usart,&Usart::robotstaRefreshsignal,this,&MainWindow::m_RobotStateRefreash);//机器状态参数实时更新
@@ -1099,6 +1104,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         ui->Progress_bar->hide();
         ui->Progress_num->hide();
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
+        manualWidget->reloadReferPoint();
         updatelabProgramName();
     }
     else
@@ -1113,6 +1119,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
             dlgErrorTip->reject();
         }
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
+        manualWidget->reloadReferPoint();
         updatelabProgramName();
     }
 
@@ -1120,7 +1127,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 //刷新系统名称显示
 void MainWindow::updatelabProgramName()
 {
-    ui->labProgramName->setText(m_SystemSet.sysName + " " + "程式：" + m_CurrentProgramNameAndPath.fileName);
+    ui->labProgramName->setText(m_SystemSet.sysName + "  " + "程式：" + m_CurrentProgramNameAndPath.fileName);
 }
 //系统名称标签框滚动显示
 void MainWindow::labProgramNameRollShow()

@@ -462,10 +462,6 @@ Setting::Setting(QWidget *parent) :
 
     //PXC_240914
     setupPortDefine();
-    connect(ui->btnSavePort,&QPushButton::clicked,this,&Setting::savePortDefine);
-    connect(ui->tableWgtPortDef,&QTableWidget::cellClicked,[=](int row, int column){
-        modifyPort(row, column);
-    });
     //触摸屏校准按钮
     connect(ui->btnTouchCalibration,&QPushButton::clicked,this,[=]() {
         int reply =  MainWindow::pMainWindow->showErrorTip(tr("触摸校准会重启系统，请确认是否校准？"));
@@ -1202,8 +1198,10 @@ void Setting::setupPortDefine()
             MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"), TipMode::ONLY_OK);
             return;
         }
-        auto res = UsbDisk::instance()->copyToUsb(m_configPortXYNamePath, "HMI/");
-        res = res && UsbDisk::instance()->copyToUsb(m_configPortXYNameIniPath, "HMI/");
+//        auto res = UsbDisk::instance()->copyToUsb(m_configPortXYNamePath, "HMI/");
+//        res = res && UsbDisk::instance()->copyToUsb(m_configPortXYNameIniPath, "HMI/");
+        const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
+        auto res = UsbDisk::instance()->copyToUsb(CustomizePortInfoPath, "HMI/");
 
         ::sync();
 

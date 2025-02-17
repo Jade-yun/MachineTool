@@ -1147,7 +1147,7 @@ void readPasswdFromConfig()
     {
         passwd[i] = settings.value(QString("Authority_%1").arg(i), 12345).toUInt();
     }
-    passwd[3] = settings.value(QString("Restore_Passwd").arg(3), 12345).toUInt();
+    passwd[3] = settings.value(QString("Restore_Passwd"), 12345).toUInt();
     settings.endGroup();
 }
 
