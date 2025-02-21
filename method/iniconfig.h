@@ -7,10 +7,11 @@
 
 
 extern QString m_configFileNamePath;
-extern const QString CustomizeNameDefPath;
 extern QString m_configPortXYNamePath;
-extern QString m_configPortXYNameIniPath;
 extern QString m_defaultConfigFileNamePath;
+
+extern QString CustomizeNameDefPath;
+extern QString CustomizePortInfoPath;
 
 extern QString m_configPortXYNameIniPath;             //输入输出、名称定义配置文件（99）
 extern QString m_defaultconfigPortXYNameIniPath;             //输入输出、名称定义配置文件（99）
@@ -76,8 +77,6 @@ extern void setOutPortType(uint8_t value[OUT_PORT_TYPE_NUM][2]);
 //互锁设置
 extern void getOutportInterlock(uint8_t defaultV = 0);
 extern void setOutportInterlock(uint8_t value[OUT_INTERLOCK_NUM][4]);
-//端口自定义
-extern void setPortDefineNameOrPortNum();
 
 /**
  * @brief writePortDefInfo 仅写入修改名称和修改端口号

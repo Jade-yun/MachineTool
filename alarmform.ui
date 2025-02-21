@@ -614,8 +614,8 @@
       <rect>
        <x>470</x>
        <y>470</y>
-       <width>540</width>
-       <height>52</height>
+       <width>542</width>
+       <height>54</height>
       </rect>
      </property>
      <property name="minimumSize">
@@ -625,6 +625,18 @@
       </size>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="leftMargin">
+       <number>2</number>
+      </property>
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="rightMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
       <item>
        <widget class="QPushButton" name="btnEditMaintainInfo">
         <property name="minimumSize">

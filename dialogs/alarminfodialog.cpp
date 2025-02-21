@@ -17,6 +17,8 @@ AlarmInfoDialog::AlarmInfoDialog(QWidget *parent) :
     framless->setWidget(this);
     framless->setResizeEnable(false);
 
+    this->setModal(true);
+
     ui->labAlarmContent->setWordWrap(true);
     ui->labAlarmContent->setAlignment(Qt::AlignVCenter);
     ui->labAlarmReason->setWordWrap(true);

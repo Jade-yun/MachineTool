@@ -49,7 +49,7 @@ AlarmBar::~AlarmBar()
 void AlarmBar::showAlarm(int alarmNum, const QString& alarmContent)
 {
     // 设置报警信息
-    ui->labAlarm->setText(QString("报警编号：%1 - %2").arg(alarmNum).arg(alarmContent));
+    ui->labAlarm->setText(tr("报警编号：") + QString::number(alarmNum) + "—" + alarmContent);
     this->show();
 
 //    QRect startGeometry = geometry();

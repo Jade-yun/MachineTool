@@ -20,7 +20,8 @@ QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //�
 QString m_defaultconfigPortXYNameIniPath="/root/Ini_Port_XY_Name_default.txt";             //输入输出、名称定义出场配置文件（99）
 QString m_defaultconfigPortSettingPath = "/root/Port_Setting_default.txt";
 
-QSettings ConfigPortDefine(m_configPortXYNameIniPath,QSettings::IniFormat);
+QString CustomizeNameDefPath = "/Settings/NameDef_Customize_CN.ini"; // 名称自定义配置文件
+QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini"; // 端口自定义配置文件
 
 //配置文件相对路径
 QString m_configFileNamePath="/root/Ini_Para.txt";
@@ -31,7 +32,6 @@ const QString PasswdConfigPath = "/Settings/passwd.ini";
 const QString KeyAndSignalDescriptionPath = "/Settings/key_signal_str.ini";
 const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
 
-const QString CustomizeNameDefPath = "/Settings/NameDef_Customize_CN.ini";
 const QString GuideInfoPath = "/Settings/guide_info.ini";
 //开机自动加载程序信息
 const QString PowerOnReadOneProPath = "/Settings/PowerOnReadOneProInfo.ini";
@@ -902,35 +902,7 @@ void setManualAxis(D_ManualAxis value)
     setValue("ManualAxis","multiply",value.multiply);
     setValue("ManualAxis","handwheelAxis",value.handwheelAxis);
 }
-//设置端口自定义界面修改端口名称和修改端口号
-void setPortDefineNameOrPortNum()
-{
-    ConfigPortDefine.setIniCodec("UTF-8");
-    for(int i=0;i<INPUT_TOTAL_NUM;i++)
-    {
-        ConfigPortDefine.beginGroup("Port_X_Name_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].modifyName);
-        ConfigPortDefine.endGroup();
 
-        ConfigPortDefine.beginGroup("Port_X_Number_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].modifyPort);
-        ConfigPortDefine.endGroup();
-    }
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
-    {
-        ConfigPortDefine.beginGroup("Port_Y_Name_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].modifyName);
-        ConfigPortDefine.endGroup();
-
-        ConfigPortDefine.beginGroup("Port_Y_Number_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].modifyPort);
-        ConfigPortDefine.endGroup();
-
-        ConfigPortDefine.beginGroup("Port_Y_functionset");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].functionSet);
-        ConfigPortDefine.endGroup();
-    }
-}
 /**********************************
 ***********程序存储*****************
 ***********************************/
@@ -1084,12 +1056,12 @@ QStringList getIniValues(uint8_t type, QString node)
     case 2:
         configPathTemp=m_configOrderjinitPath;
         break;
-    case 3:
-        configPathTemp=m_configPortXYNamePath;
-        break;
+//    case 3:
+//        configPathTemp=m_configPortXYNamePath;
+//        break;
     case 99:
-        configPathTemp=m_configPortXYNameIniPath;
-        break;
+//        configPathTemp=m_configPortXYNameIniPath;
+//        break;
     default:
         return valueList;
         break;
@@ -1455,7 +1427,6 @@ int getProgramPermission(const QString &programName)
 
 void writePortDefInfo()
 {
-    const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
     QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
     settings.setIniCodec("UTF-8");
     for (int i = 0; i < INPUT_TOTAL_NUM; ++i)
@@ -1484,7 +1455,6 @@ void writePortDefInfo()
 
 void readPortDefInfo()
 {
-    const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
     QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
     settings.setIniCodec("UTF-8");
 

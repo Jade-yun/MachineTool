@@ -42,6 +42,8 @@ AutoForm::AutoForm(QWidget *parent) :
 
     // init some members;
     stackSet = new StackSetDialog(this);
+    clearDialog = new ClearDialog(this->parentWidget());
+    clearDialog->hide();
 
     // 初始化关闭 framGlobalSpeed
     ui->frameGlobalSpeed->close();
@@ -244,6 +246,21 @@ AutoForm::AutoForm(QWidget *parent) :
     });
 /**********************************************************************/
 
+    connect(ui->btnClear, &QPushButton::clicked, [=](){
+        int index = ui->stkWgtState->currentIndex();
+
+        if (index == 0)
+        {
+            clearDialog->setMode(ClearDialog::AutoState);
+            clearDialog->exec();
+        }
+        if (index == 1)
+        {
+            clearDialog->setMode(ClearDialog::VarState);
+            clearDialog->exec();
+        }
+    });
+
     connect(ui->btnMergeExpand, &QPushButton::toggled, this, [=](bool checked){
         if (checked)
         {
@@ -359,7 +376,7 @@ void AutoForm::SetAutoRunParIcon(uint8_t type)
             }
             else
             {
-                MainWindow::pMainWindow->showErrorTip("最后一步不允许设为断点！",TipMode::ONLY_OK);
+                MainWindow::pMainWindow->showErrorTip(tr("最后一步不允许设为断点！"),TipMode::ONLY_OK);
             }
         }
         break;
@@ -1346,7 +1363,7 @@ void AutoForm::on_AutoEditAxisPos_textChanged(const QString &arg1)
         P_AxisMoveStruct* AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         if(AxisMove->pos+ui->AutoEditAxisPos->text().toDouble()*100 > AxisMove->pos+500 || AxisMove->pos+ui->AutoEditAxisPos->text().toDouble()*100 < AxisMove->pos-500)
         {
-            MainWindow::pMainWindow->showErrorTip("输入值的范围不能超过-5.00～5.00,请重新输入。",TipMode::ONLY_OK);
+            MainWindow::pMainWindow->showErrorTip(tr("输入值的范围不能超过-5.00～5.00,请重新输入。"),TipMode::ONLY_OK);
             ui->AutoEditAxisPos->setText(QString::number(0.00));
         }
     }
@@ -1355,7 +1372,7 @@ void AutoForm::on_AutoEditAxisPos_textChanged(const QString &arg1)
         P_SearchAxisMoveStruct* SearchAxisMove = (P_SearchAxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         if(SearchAxisMove->maxPos+ui->AutoEditAxisPos->text().toDouble()*100 > SearchAxisMove->maxPos+500 || SearchAxisMove->maxPos+ui->AutoEditAxisPos->text().toDouble()*100 < SearchAxisMove->maxPos-500)
         {
-            MainWindow::pMainWindow->showErrorTip("输入值的范围不能超过-5.00～5.00,请重新输入。",TipMode::ONLY_OK);
+            MainWindow::pMainWindow->showErrorTip(tr("输入值的范围不能超过-5.00～5.00,请重新输入。"),TipMode::ONLY_OK);
             ui->AutoEditAxisPos->setText(QString::number(0.00));
         }
     }
@@ -1364,7 +1381,7 @@ void AutoForm::on_AutoEditAxisPos_textChanged(const QString &arg1)
         P_OffsetAxisStruct* OffsetAxis = (P_OffsetAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         if(OffsetAxis->offsetPos+ui->AutoEditAxisPos->text().toDouble()*100 > OffsetAxis->offsetPos+500 || OffsetAxis->offsetPos+ui->AutoEditAxisPos->text().toDouble()*100 < OffsetAxis->offsetPos-500)
         {
-            MainWindow::pMainWindow->showErrorTip("输入值的范围不能超过-5.00～5.00,请重新输入。",TipMode::ONLY_OK);
+            MainWindow::pMainWindow->showErrorTip(tr("输入值的范围不能超过-5.00～5.00,请重新输入。"),TipMode::ONLY_OK);
             ui->AutoEditAxisPos->setText(QString::number(0.00));
         }
     }

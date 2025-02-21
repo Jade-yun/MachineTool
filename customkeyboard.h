@@ -71,7 +71,7 @@ public:
 protected:
     void showEvent(QShowEvent *event) override{
         BaseWindow::showEvent(event);
-        textInput->setFocus();//将光标移动到输入框
+        textInput->setFocus();
     }
 public:
     ~NumKeyboard();

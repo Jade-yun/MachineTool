@@ -71,7 +71,6 @@ FullKeyboard::FullKeyboard(QWidget* parent)
     textInput = new QLineEdit(keyboard);
 //    setWindowTitle(tr("键盘"));
     setFixedSize(850, 430);
-    setModal(true);
 //    setAcceptDrops(true);
 //    setWindowModality(Qt::WindowModal);
 //    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);

@@ -23,6 +23,8 @@ void readSigSetPara()
     QStringList tempList18=getIniValues(99,"ResPort_X_Name_Modify");
     QStringList tempList19=getIniValues(99,"Port_X_functionset");
 
+#define USE_REFACTOR_PORTDEFINE_VERSION
+#if !defined (USE_REFACTOR_PORTDEFINE_VERSION)
     for(int i=0;i<INPUT_TOTAL_NUM;i++)
     {
         if(i<INPUT_NUM)
@@ -124,8 +126,55 @@ void readSigSetPara()
         //读取每个端口是否设置了指定功能
         m_Port_Y[i].functionSet = (uint8_t)tempList16[i].toUInt();
     }
+#else
+    ::readPortDefInfo();
 
+    for(int i = 0;i < INPUT_TOTAL_NUM;i++)
+    {
+        m_Port_X[i].isReserve = !(i < INPUT_NUM);
 
+        // 如果存的是0，则表示名称没有修改，为默认名称
+        if (m_Port_X[i].modifyName == "0")
+        {
+            m_Port_X[i].modifyName = m_Port_X[i].defineName;
+        }
+
+        if (m_Port_X[i].modifyPort == "0")
+        {
+            m_Port_X[i].actualPortNum = m_Port_X[i].portNum;
+        }
+
+        if (m_Port_X[i].ResModifyName == "0")
+        {
+            m_Port_X[i].ResModifyName = m_Port_X[i].ResDefineName;
+        }
+    }
+
+    //Y
+    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
+    {
+
+        m_Port_X[i].isReserve = !(i < OUTPUT_NUM);
+
+        // 如果存的是0，则表示名称没有修改，为默认名称
+        if (m_Port_Y[i].modifyName == "0")
+        {
+            m_Port_Y[i].modifyName = m_Port_Y[i].defineName;
+        }
+
+        if (m_Port_Y[i].modifyPort == "0")
+        {
+            m_Port_Y[i].actualPortNum = m_Port_Y[i].portNum;
+        }
+
+        if (m_Port_Y[i].ResModifyName == "0")
+        {
+            m_Port_Y[i].ResModifyName = m_Port_Y[i].ResDefineName;
+        }
+    }
+    //
+
+#endif
     //名称自定义
     ::readNameDefine();
 
@@ -249,6 +298,58 @@ void readSigSetPara()
     m_SeniorFuncPort.res3[1]=tempList11[index++].toUInt();
     m_SeniorFuncPort.res3[2]=tempList11[index++].toUInt();
     m_SeniorFuncPort.res3[3]=tempList11[index++].toUInt();
+
+#if defined (USE_REFACTOR_PORTDEFINE_VERSION)
+
+    m_Port_X[6].functionSet = m_SeniorFunc.stackSaveIn1Check;
+    m_Port_X[7].functionSet = m_SeniorFunc.emergencyStopCheck;
+    m_Port_X[12].functionSet = m_SeniorFunc.pressureCheck;
+//    m_Port_X[14].functionSet = m_SeniorFunc.remoteStop;//这几个IO与轴限位功能相冲突，暂时不明确需求
+//    m_Port_X[15].functionSet = m_SeniorFunc.remoteAuto;
+//    m_Port_X[17].functionSet = m_SeniorFunc.manualChuckIn1;
+    m_Port_X[31].functionSet = m_SeniorFunc.processFinish1;
+    m_Port_X[32].functionSet = m_SeniorFunc.locateFinish1;
+    m_Port_X[33].functionSet = m_SeniorFunc.knifeOrigin1Check;
+    m_Port_X[34].functionSet = m_SeniorFunc.alarmIn1Check;
+    m_Port_X[35].functionSet = m_SeniorFunc.pauseStopCheck;
+    m_Port_X[42].functionSet = m_SeniorFunc.stackSaveIn2Check;
+    m_Port_X[43].functionSet = m_SeniorFunc.manualChuckIn2;
+    m_Port_X[52].functionSet = m_SeniorFunc.processFinish2;
+    m_Port_X[53].functionSet = m_SeniorFunc.locateFinish2;
+    m_Port_X[54].functionSet = m_SeniorFunc.knifeOrigin2Check;
+    m_Port_X[55].functionSet = m_SeniorFunc.alarmIn2Check;
+
+    //输出端口
+    // m_Port_Y[0] -> Y1 原料1夹紧
+    // m_Port_Y[1] -> Y2 原料1夹紧
+    // m_Port_Y[2] -> Y3 成品1夹紧
+    // m_Port_Y[3] -> Y4 成品1夹紧
+    // m_Port_Y[4] -> Y5 卡爪1夹紧
+    // m_Port_Y[5] -> Y6 卡爪1夹紧
+    m_Port_Y[6].functionSet = m_SeniorFunc.autoLight;//根据某个端口功能是否使用，置端口预留标志位
+    m_Port_Y[7].functionSet = m_SeniorFunc.alarmLight;
+    m_Port_Y[8].functionSet = m_SeniorFunc.autoDoorCot1;
+    m_Port_Y[9].functionSet = m_SeniorFunc.autoDoorCot1;
+    m_Port_Y[10].functionSet = m_SeniorFunc.biowAir1;
+    m_Port_Y[12].functionSet = m_SeniorFunc.emergencyStopOut;
+    m_Port_Y[13].functionSet = m_SeniorFunc.lubPump;
+    m_Port_Y[14].functionSet = m_SeniorFunc.alarmBuzzer;
+    m_Port_Y[15].functionSet = m_SeniorFunc.pauseLight;
+    m_Port_Y[16].functionSet = m_SeniorFunc.startProduct1;
+    m_Port_Y[17].functionSet = m_SeniorFunc.mainAxisLocate1;
+    m_Port_Y[18].functionSet = m_SeniorFunc.processSave1;
+    m_Port_Y[20].functionSet = m_SeniorFunc.mainAxisRotate1;
+
+
+    m_Port_Y[OUTPUT_NUM +  7].functionSet = m_SeniorFunc.biowAir2;
+    m_Port_Y[OUTPUT_NUM +  8].functionSet = m_SeniorFunc.autoDoorCot2;
+    m_Port_Y[OUTPUT_NUM +  9].functionSet = m_SeniorFunc.autoDoorCot2;
+    m_Port_Y[OUTPUT_NUM + 16].functionSet = m_SeniorFunc.startProduct2;
+    m_Port_Y[OUTPUT_NUM + 17].functionSet = m_SeniorFunc.mainAxisLocate2;
+    m_Port_Y[OUTPUT_NUM + 18].functionSet = m_SeniorFunc.processSave2;
+#endif
+
+
 #endif
 }
 
@@ -286,7 +387,6 @@ void readIniPara()
     getStackFunc();
     getManualAxis();
     getProgramNameAndPath();//读取所有程序文件信息
-    m_CurrentProgramNameAndPath =  readPowerOnReadOneProInfo();
     getSystemSet();
     ::readPasswdFromConfig();
 }

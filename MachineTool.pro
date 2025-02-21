@@ -71,7 +71,6 @@ SOURCES += \
     dialogs/logindialog.cpp \
     dialogs/handwheeldialog.cpp \
     dialogs/keydefinedialog.cpp \
-    dialogs/clearvardialog.cpp \
     dialogs/stackedit.cpp \
     dialogs/sigdefinedialog.cpp \
     dialogs/autocorrectposdialog.cpp \
@@ -117,7 +116,6 @@ HEADERS += \
     dialogs/logindialog.h \
     dialogs/handwheeldialog.h \
     dialogs/keydefinedialog.h \
-    dialogs/clearvardialog.h \
     dialogs/stackedit.h \
     dialogs/sigdefinedialog.h \
     dialogs/autocorrectposdialog.h \
@@ -149,7 +147,6 @@ FORMS += \
     dialogs/logindialog.ui \
     dialogs/handwheeldialog.ui \
     dialogs/keydefinedialog.ui \
-    dialogs/clearvardialog.ui \
     dialogs/stackedit.ui \
     dialogs/sigdefinedialog.ui \
     dialogs/autocorrectposdialog.ui \

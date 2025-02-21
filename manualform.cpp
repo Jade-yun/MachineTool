@@ -306,7 +306,7 @@ void ManualForm::on_btnDeleteButton_clicked()
     if (selectedButton[0] && guidePoints.contains(selectedButton[0]))
     {
         QString guideName = guidePoints.value(selectedButton[0]).guideName;
-        int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除：%1").arg(guideName));
+        int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除：") + guideName);
         if (reply == QDialog::Accepted)
         {
            // Remove the button and corresponding GuidePara
@@ -401,7 +401,7 @@ void ManualForm::on_btnDeleteButtonReference_clicked()
             if (it != referencePoints.end())
             {
                 QString referName = it->name;
-                int reply = MainWindow::pMainWindow->showErrorTip(tr("确定删除：%1").arg(referName));
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("确定删除：") + referName);
                 if (reply == QDialog::Accepted)
                 {
                     removeReferencePoint();
@@ -532,6 +532,8 @@ void ManualForm::tableReferenceInit()
             selectedButton[1] = btn;
             QString name = it->name;
             ui->textReferPointName->setText(name);
+
+            refreshPosTable();
         }
     });
 
@@ -722,7 +724,11 @@ void ManualForm::updateReferPointsList()
             });
 
             connect(btn, &DraggableButton::pressed, this, [=]() {
+                if (selectedButton[1] == btn) return;
+
                 selectedButton[1] = btn;
+
+                refreshPosTable();
 
                 int index = 0;
                 auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& p) {
@@ -756,6 +762,31 @@ void ManualForm::updateReferPointsList()
     }
 
     updateReferPointsTable();
+
+}
+
+void ManualForm::refreshPosTable()
+{
+    static const QStringList axisNames = {
+        "X1", "Y1", "Z1", "X2", "Y2", "Z2"
+    };
+
+    ui->tableWgtAxisPos->setRowCount(6);
+    ui->tableWgtAxisPos->setVerticalHeaderLabels(axisNames);
+
+    auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+        return point.button == selectedButton[1];
+    });
+    if (it != referencePoints.end())
+    {
+        ui->tableWgtAxisPos->clearContents();  // 清除旧数据
+
+        for (size_t i = 0; i < AXIS_TOTAL_NUM; i++)
+        {
+            auto item = new QTableWidgetItem(QString::number(it->axisPos[i] / 100.0, 'f', 2));
+            ui->tableWgtAxisPos->setItem(i, 0, item);
+        }
+    }
 
 }
 
@@ -964,7 +995,11 @@ void ManualForm::addReferencePoint()
     });
 
     connect(btn, &DraggableButton::pressed, this, [=]() {
+        if (selectedButton[1] == btn) return;
+
         selectedButton[1] = btn;
+
+        refreshPosTable();
 
         int index = 0;
         auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {

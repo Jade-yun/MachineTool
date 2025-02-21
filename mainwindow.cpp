@@ -770,8 +770,9 @@ void MainWindow::callFullKeyboard(QObject *watched)
     //        keyboard->show();
     //        keyboard->raise();
     //        keyboard->activateWindow();
-    keyboard->open();
-    keyboard->raise();
+//    keyboard->open();
+//    keyboard->raise();
+    keyboard->exec();
 
 }
 
@@ -1127,7 +1128,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 //刷新系统名称显示
 void MainWindow::updatelabProgramName()
 {
-    ui->labProgramName->setText(m_SystemSet.sysName + "  " + "程式：" + m_CurrentProgramNameAndPath.fileName);
+    ui->labProgramName->setText(m_SystemSet.sysName + "  " + tr("程式：") + m_CurrentProgramNameAndPath.fileName);
 }
 //系统名称标签框滚动显示
 void MainWindow::labProgramNameRollShow()
