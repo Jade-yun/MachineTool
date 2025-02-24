@@ -5615,7 +5615,7 @@ void Teach::on_btnPilot_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DEBUG,m_OperateProNum,m_CurrentSelectProOrderList+1);//运行行号从1开始，为当前选中行序号+1
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DEBUG,m_OperateProNum,m_CurrentSelectProOrderList+1,m_RunPar.globalSpeed);//运行行号从1开始，为当前选中行序号+1
 }
 //标签指令复选框处理函数
 void Teach::on_chboxComment_clicked()

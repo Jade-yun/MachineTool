@@ -43,7 +43,6 @@ private:
 public:
     QString getKeyDefineStr() const;
     KeyFunc getKeyFuncDefine();
-
 };
 
 class KeyEdit : public QLineEdit

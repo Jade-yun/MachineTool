@@ -783,6 +783,9 @@ void Setting::init()
             ui->coboxOriginTypeZ2, ui->editFindOriginSpeedZ2, ui->editLeaveOriginSpeedZ2, ui->editOriginOffsetZ2,
             ui->coboxBackOriginDirectZ2, ui->coboxBackOriginOrderZ2,
             ui->editMinLimitSignalZ2,ui->editMaxLimitSignalZ2,ui->editOriginSignalZ2};
+    HandwheelParaWidgets=HandwheelParaWidget{
+            ui->editAccTimeHandwheel, ui->editDecTimeHandwheel,
+            ui->editAccAccHandwheel, ui->editDecDecHandwheel};
 #if 1
     //输出类型
     outputTypeList={ui->coboxOutPortType0,ui->coboxOutPortType1,ui->coboxOutPortType2,ui->coboxOutPortType3
@@ -1984,9 +1987,6 @@ void Setting::syncParaToUI()
     servoPara.at(7)->setCurrentIndex(m_ServoPar.torqueLimitFlag);
 
     /****************************机器参数********************************************/
-    std::vector<QString> minLimitStrs;
-    std::vector<QString> maxLimitStrs;
-    std::vector<QString> originSigStrs;
 
     readLimitSigDescription(0, minLimitStrs);
     readLimitSigDescription(1, maxLimitStrs);
@@ -2023,7 +2023,10 @@ void Setting::syncParaToUI()
         machineParaWidgets.at(i).originSignal->setText(originSigStrs[i]);
 
     }
-
+    HandwheelParaWidgets.accTime->setText(QString::number(m_HandwheelPar.accTime / 100.0, 'f', 2));
+    HandwheelParaWidgets.decTime->setText(QString::number(m_HandwheelPar.decTime / 100.0, 'f', 2));
+    HandwheelParaWidgets.accAcc->setText(QString::number(m_HandwheelPar.accAcc));
+    HandwheelParaWidgets.decDec->setText(QString::number(m_HandwheelPar.decDec));
     /****************************安全区********************************************/
     for (int index = 0; index < SAVE_AREA_NUM; index++)
     {
@@ -3065,6 +3068,8 @@ void Setting::setupCommunicationConnections()
 //    }
     for(int i=0;i<AXIS_TOTAL_NUM+1;i++)
     {
+        accAccList[i]->setDecimalPlaces(0);
+        decDecList[i]->setDecimalPlaces(0);
         connect(accTimeList[i],&NumberEdit::textChanged,[=](const QString &){
             saveAccDecTimeSpeed(i);
         });
@@ -3649,7 +3654,8 @@ void Setting::saveMachinePara()
         m_AxisPar[i].limitPosSwt = machineParaWidgets.at(i).limitPosSwt->currentIndex();
         m_AxisPar[i].limitNegSwt = machineParaWidgets.at(i).limitNegSwt->currentIndex();
         m_AxisPar[i].coordDir = machineParaWidgets.at(i).coordDir->currentIndex();
-        setAxisPar(m_AxisPar[i],i);        
+        setAxisPar(m_AxisPar[i],i);
+
     }
     setServoPar(m_ServoPar);
 
@@ -3671,6 +3677,7 @@ void Setting::saveMachinePara()
     emit RefreshPortDefineSignals();//端口自定义界面刷新
     emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
+    emit ManualDebugMachineRefresh_Signal(0);
 }
 
 void Setting::saveMachineAllPara(int index)
@@ -4219,4 +4226,35 @@ void Setting::on_tabWidgetStack_currentChanged(int index)
         stack[index]->updateGroupIndex(index);
         stack[index]->syncParaToUI();
     }
+}
+//轴参数界面参数刷新
+void Setting::AxisParRefresh(uint8_t index)
+{
+    machineParaWidgets.at(index).axisType->setCurrentIndex(m_AxisPar[index].axisType);
+    machineParaWidgets.at(index).axisMoveMade->setCurrentIndex(m_AxisPar[index].axisMoveMade);
+    machineParaWidgets.at(index).accTime->setText(QString::number(m_AxisPar[index].accTime / 100.0, 'f', 2));
+    machineParaWidgets.at(index).decTime->setText(QString::number(m_AxisPar[index].decTime / 100.0, 'f', 2));
+    machineParaWidgets.at(index).accAcc->setText(QString::number(m_AxisPar[index].accAcc));
+    machineParaWidgets.at(index).decDec->setText(QString::number(m_AxisPar[index].decDec));
+    machineParaWidgets.at(index).maxSpeed->setText(QString::number(m_AxisPar[index].maxSpeed));
+    machineParaWidgets.at(index).axisMinPos->setText(QString::number(m_AxisPar[index].axisMinPos / 100.0, 'f', 2));
+    machineParaWidgets.at(index).axisMaxPos->setText(QString::number(m_AxisPar[index].axisMaxPos / 100.0, 'f', 2));
+    machineParaWidgets.at(index).limitMin->setCurrentPort(m_AxisPar[index].minPosSignal);
+    machineParaWidgets.at(index).limitMax->setCurrentPort(m_AxisPar[index].maxPosSignal);
+    machineParaWidgets.at(index).circlePluseNum->setText(QString::number(m_AxisPar[index].circlePluseNum));
+    machineParaWidgets.at(index).circleDis->setText(QString::number(m_AxisPar[index].circleDis / 100.0, 'f', 2));
+    machineParaWidgets.at(index).findOriginSpeed->setText(QString::number(m_AxisPar[index].findOriginSpeed));
+    machineParaWidgets.at(index).leaveOriginSpeed->setText(QString::number(m_AxisPar[index].leaveOriginSpeed));
+    machineParaWidgets.at(index).originOffset->setText(QString::number(m_AxisPar[index].originOffset / 100.0, 'f', 2));
+    machineParaWidgets.at(index).originDir->setCurrentIndex(m_AxisPar[index].originDir);
+    machineParaWidgets.at(index).originSignal->setCurrentPort(m_AxisPar[index].originSignal);
+    machineParaWidgets.at(index).backOriginOrder->setCurrentIndex(m_AxisPar[index].backOriginOrder);
+    machineParaWidgets.at(index).originType->setCurrentIndex(m_AxisPar[index].originType);
+    machineParaWidgets.at(index).limitPosSwt->setCurrentIndex(m_AxisPar[index].limitPosSwt);
+    machineParaWidgets.at(index).limitNegSwt->setCurrentIndex(m_AxisPar[index].limitNegSwt);
+    machineParaWidgets.at(index).coordDir->setCurrentIndex(m_AxisPar[index].coordDir);
+
+    machineParaWidgets.at(index).limitMin->setText(minLimitStrs[index]);
+    machineParaWidgets.at(index).limitMax->setText(maxLimitStrs[index]);
+    machineParaWidgets.at(index).originSignal->setText(originSigStrs[index]);
 }

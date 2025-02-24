@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>5</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -557,7 +557,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -10982,7 +10982,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -17918,7 +17918,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -19096,7 +19096,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -24314,6 +24314,9 @@ border: 1px solid black;
    </widget>
    <widget class="QWidget" name="pageServoPara">
     <widget class="QTabWidget" name="tabWgtServoPara">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>5</x>
@@ -24340,7 +24343,7 @@ border: 1px solid black;
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -24352,6 +24355,9 @@ border: 1px solid black;
       <bool>false</bool>
      </property>
      <widget class="QWidget" name="tabServo">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <attribute name="title">
        <string>伺服</string>
       </attribute>
@@ -32974,7 +32980,7 @@ border: 1px solid black;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>

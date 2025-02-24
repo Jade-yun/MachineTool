@@ -524,7 +524,15 @@ typedef struct
     uint8_t  res[4];
 }P_ProEndStruct;
 
+/*移动至堆叠点/跟随点结构体*/
+typedef struct
+{
+    uint8_t Stack_Index;
+    uint8_t Stack_Type;
+    uint8_t Stack_Point[3];
+}MoveStackStruct;
 
+extern MoveStackStruct MoveStackFollowPoint;
 extern P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM];                              //轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
 extern P_MachineOutStruct Temp_MachineOutStruct[6];                                          //机床输出控制
 extern P_ReserveOutStruct Temp_ReserveOutStruct;                                             //教导界面预留输出调用
@@ -914,6 +922,7 @@ typedef struct
     uint8_t     startRunLineFlag;       //从此运行开关，0不使用 1使用
     uint8_t     startRunLineProNum;     //从此行运行所在程序，0-主程序 1-8子程序
     uint16_t    startRunLineNum;        //从此行运行程序行号
+    uint8_t     allow_globalSpeed;      //是否允许调速标志0-不允许调速 1-允许调速
 }D_RunParStruct;
 
 /*主控板升级结构体*/
@@ -1227,6 +1236,7 @@ typedef struct
     uint8_t     handwheelMode;    //手轮模式
     uint8_t     multiply;         //手轮倍率
     uint8_t     handwheelAxis;    //手轮轴选择
+    uint8_t     runDir;           //运动方向 1-反向 2-正向
 }D_ManualAxis;
 /*轴动作手动参数——调机*/
 typedef struct

@@ -13,13 +13,13 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>30</x>
      <y>70</y>
-     <width>492</width>
-     <height>352</height>
+     <width>498</width>
+     <height>358</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
@@ -37,25 +37,6 @@
       <layout class="QFormLayout" name="formLayout_2">
        <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="1">
-          <widget class="QCheckBox" name="chboxY1">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>110</width>
-             <height>40</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>Y1轴</string>
-           </property>
-          </widget>
-         </item>
          <item row="1" column="1">
           <widget class="QCheckBox" name="chboxB">
            <property name="sizePolicy">
@@ -75,8 +56,8 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="0">
-          <widget class="QCheckBox" name="chboxX1">
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="chboxY1">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -90,7 +71,26 @@
             </size>
            </property>
            <property name="text">
-            <string>X1轴</string>
+            <string>Y1轴</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="chboxZ1">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>110</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Z1轴</string>
            </property>
           </widget>
          </item>
@@ -132,8 +132,11 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
-          <widget class="QCheckBox" name="chboxZ1">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="chboxX1">
+           <property name="enabled">
+            <bool>true</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -147,9 +150,22 @@
             </size>
            </property>
            <property name="text">
-            <string>Z1轴</string>
+            <string>X1轴</string>
            </property>
           </widget>
+         </item>
+         <item row="2" column="1">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
@@ -301,7 +317,7 @@
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QCheckBox" name="chboxMode">
+     <widget class="QCheckBox" name="chboxHandWhellMode">
       <property name="minimumSize">
        <size>
         <width>0</width>

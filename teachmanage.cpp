@@ -189,6 +189,7 @@ void TeachManage::on_btn_Load_clicked()
     Load_Program_Handle(fileName);
     m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
     emit labProgramNameChangeSignal();
+    emit programLoaded();
 }
 
 void TeachManage::on_btn_Preview_clicked()

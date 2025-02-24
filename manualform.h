@@ -47,7 +47,7 @@ public:
 
 signals:
     void sigShowStackPage();
-
+    void AxisParRefreshSignal(uint8_t Index);
 private slots:
     void StateButtonInit();
     void setbuttonIcon(QPushButton *button, const QString &ButtonText, uint8_t state);
@@ -68,12 +68,14 @@ private slots:
     void on_btnSaveReference_clicked();
 
     void on_cb_axisActionAxis_currentIndexChanged(int index);
-private slots:
     void onTabChanged(int index);
     void onSaveKeyDef();
     void onCheckSavedGuide();
     void onCheckSavedReferPointPara();   
+    void on_coboxAdjustMachineAxis_currentIndexChanged(int index);
 
+public slots:
+    void InitAdjustMachine(uint8_t AxisIndex);//初始化调机界面参数
 private:
     void initVar();
     void updateReferPointsTable();

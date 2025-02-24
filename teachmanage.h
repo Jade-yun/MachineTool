@@ -27,7 +27,7 @@ private:
     QFileDialog* fileDialog;
 
 signals:
-    void programLoaded();
+    void programLoaded();//刷新新程序参考点信号
 
 private slots:
     void on_btn_New_clicked();

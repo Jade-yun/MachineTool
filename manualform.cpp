@@ -40,12 +40,13 @@ ManualForm::ManualForm(QWidget *parent) :
         cobox->setFocusPolicy(Qt::NoFocus);
     }
 
-    ui->editAxisActionSpeed->setDecimalPlaces(1);
+    ui->AdjustMachineInternalPulse->setDecimalPlaces(0);
+    ui->editAxisActionSpeed->setDecimalPlaces(0);
     ui->editPositionAdd->setDecimalPlaces(2);
     ui->editPositionSub->setDecimalPlaces(2);
     connect(ui->editAxisActionSpeed,&NumberEdit::textChanged,[=](const QString &){
         m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toDouble() * 10;
+        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
         m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
@@ -53,7 +54,7 @@ ManualForm::ManualForm(QWidget *parent) :
     });
     connect(ui->editPositionAdd,&NumberEdit::textChanged,[=](const QString &){
         m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toDouble() * 10;
+        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
         m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
@@ -61,14 +62,14 @@ ManualForm::ManualForm(QWidget *parent) :
     });
     connect(ui->editPositionSub,&NumberEdit::textChanged,[=](const QString &){
         m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toDouble() * 10;
+        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
         m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
     });
     connect(ui->chbZAxisDesend, QOverload<int>::of(&QCheckBox::stateChanged), [=](int){
         m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toDouble() * 10;
+        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
         m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
@@ -231,30 +232,82 @@ ManualForm::ManualForm(QWidget *parent) :
     });
     /*********************************轴动作********************************************/
     connect(ui->btnAdjustFunc, &QPushButton::clicked, this, [=](){
-        TipPasswdDialog tip(tr("请输入高级管理员密码"), nullptr);
-        int reply = tip.exec();
-        if (reply == QDialog::Rejected)
-        {
-            return;
+        if(m_RobotOriginState == 0)
+        {//如果未回零点
+            ErrorTipDialog tip(tr("当前未找原点"),nullptr);
+            tip.exec();
         }
-        else if (reply == QDialog::Accepted)
+        else
         {
-            uint advancePasswd = tip.getPasswd();
-
-            if (advancePasswd == passwd[1])
+            TipPasswdDialog tip(tr("请输入高级管理员密码"), nullptr);
+            int reply = tip.exec();
+            if (reply == QDialog::Rejected)
             {
-                ui->stkWgtAdjustMachine->setCurrentIndex(1);
+                return;
+            }
+            else if (reply == QDialog::Accepted)
+            {
+                uint advancePasswd = tip.getPasswd();
+
+                if (advancePasswd == passwd[1])
+                {
+                    ui->stkWgtAdjustMachine->setCurrentIndex(1);
+                    ui->coboxAdjustMachineAxis->clear();
+                    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+                    {
+                        if(m_AxisPar[i].axisType == 1)
+                        {
+                           ui->coboxAdjustMachineAxis->addItem(m_NameDefine[1].axisName[i]);
+                        }
+                    }
+                    InitAdjustMachine(0);
+                }
             }
         }
     });
-    connect(ui->chboxUseAdjustMachine, &QCheckBox::stateChanged, this, [=](int state){
+    connect(ui->chboxUseAdjustMachine, &QCheckBox::clicked, this, [=](int state){
         if (!state)
         {
             ui->stkWgtAdjustMachine->setCurrentIndex(0);
             ui->chboxUseAdjustMachine->setChecked(true);
         }
     });
-
+    connect(ui->AdjustMachineSpace,&NumberEdit::finishedInput, this,[=](){//每转距离
+        for(int i=0;i<AXIS_TOTAL_NUM;i++)
+        {
+            if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
+            {
+                m_AxisPar[i].circleDis = (int32_t)(ui->AdjustMachineSpace->text().toDouble()*100);
+                setAxisPar(m_AxisPar[i],i);
+                emit AxisParRefreshSignal(i);
+            }
+        }
+    });
+    connect(ui->AdjustMachineInternalPulse,&NumberEdit::finishedInput, this,[=](){//内部脉冲
+        for(int i=0;i<AXIS_TOTAL_NUM;i++)
+        {
+            if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
+            {
+                m_AxisPar[i].circlePluseNum = (int32_t)(ui->AdjustMachineInternalPulse->text().toInt());
+                setAxisPar(m_AxisPar[i],i);
+                emit AxisParRefreshSignal(i);
+            }
+        }
+    });
+    connect(ui->AdjustMachineForward,&QPushButton::clicked,this,[=](){//电机正转1圈
+        uint16_t AdjustMachineAxisIndex = ui->coboxAdjustMachineAxis->currentIndex();
+        if(AdjustMachineAxisIndex<AXIS_TOTAL_NUM)
+        {
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,AdjustMachineAxisIndex+1,4);
+        }
+    });
+    connect(ui->AdjustMachineReversal,&QPushButton::clicked,this,[=](){//电机反转1圈
+        uint16_t AdjustMachineAxisIndex = ui->coboxAdjustMachineAxis->currentIndex();
+        if(AdjustMachineAxisIndex<AXIS_TOTAL_NUM)
+        {
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,AdjustMachineAxisIndex+1,5);
+        }
+    });
 }
 
 ManualForm::~ManualForm()
@@ -263,10 +316,35 @@ ManualForm::~ManualForm()
     qDeleteAll(guidePoints.keys());
 }
 
+
+//手动界面-调机功能-轴选择复选框
+void ManualForm::on_coboxAdjustMachineAxis_currentIndexChanged(int index)
+{
+    InitAdjustMachine(index);
+}
+
+//初始化调机界面参数
+void ManualForm::InitAdjustMachine(uint8_t AxisIndex)
+{
+    if(ui->coboxAdjustMachineAxis->count()>0 && ui->coboxAdjustMachineAxis->count()>=AxisIndex)
+    {
+        ui->coboxAdjustMachineAxis->setCurrentIndex(AxisIndex);//默认为伺服第一个可使用轴
+        for(int i=0;i<AXIS_TOTAL_NUM;i++)
+        {
+            if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
+            {
+                ui->AdjustMachineSpace->setText(QString::number((double)(m_AxisPar[i].circleDis)/100,'f',2));//每转距离
+                ui->AdjustMachineEncoderPulse->setText(QString::number(0));//编码器脉冲
+                ui->AdjustMachineInternalPulse->setText(QString::number(m_AxisPar[i].circlePluseNum));//内部脉冲
+            }
+        }
+    }
+}
+
 void ManualForm::initControls()
 {
     ui->cb_axisActionAxis->setCurrentIndex(m_manualAxis.axis);
-    ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed/10.0));
+    ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed));
     ui->editPositionAdd->setText(QString::number(m_manualAxis.pos_pos/100.0));
     ui->editPositionSub->setText(QString::number(m_manualAxis.sub_pos/100.0));
     ui->chbZAxisDesend->setChecked(m_manualAxis.ZDrop);

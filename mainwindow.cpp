@@ -162,6 +162,7 @@ MainWindow::MainWindow(QWidget *parent)
     startAllThread();
     Refresh_Progress_bar(10);
 
+
     // 输入事件扫描 放在最后 app彻底启动完成
     const QVector<QString> devices = {
         "/dev/input/event4",
@@ -171,27 +172,40 @@ MainWindow::MainWindow(QWidget *parent)
         "/dev/input/event9"
     };
     scanner = new EventScanner(devices);
-
-    connect(scanner, &EventScanner::eventRotaryEncoder, [](uint16_t code, int32_t value) {
+    connect(scanner, &EventScanner::eventRotaryEncoder, [=](uint16_t code, int32_t value) {
         qDebug() << "Rotary Encoder event:" << code << value;
         // 顺时针旋转
         if (code == 0 && value == 1)
         {
             //to do...
-            if (m_manualAxis.handwheelMode)
+            if (m_manualAxis.handwheelMode && curMode == TriMode::MANUAL)
             {
-                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,2);
+                m_manualAxis.runDir = 2;//正向
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_HAND_WHEEL);
             }
-
         }
         // 逆时针旋转
-        else if (code == 0 && value == -1)
+        else if (code == 0 && value == -1 && curMode == TriMode::MANUAL)
         {
             // to do...
             if (m_manualAxis.handwheelMode)
             {
-                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,1);
+                m_manualAxis.runDir = 1;//反向
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_HAND_WHEEL);
             }
+        }
+        //手轮按键
+        else if(code == 141 && value == 1 && curMode == TriMode::MANUAL)
+        {//手轮按键按下
+            if(m_manualAxis.handwheelMode)
+            {
+                m_manualAxis.handwheelMode = 0;
+            }
+            else
+            {
+                m_manualAxis.handwheelMode = 1;
+            }
+            emit HandWheelButtonClick_Signal();
         }
     });
     connect(scanner, &EventScanner::eventTrimodeSwitch, [this](uint16_t code, int32_t value) {
@@ -421,7 +435,7 @@ void MainWindow::slotShowSubWindow()
     qDebug() << "ManualForm：" << timer.elapsed() << "毫秒";
 
     timer.restart();
-    connectAllSignalsAndSlots();
+
 
     FullKeyboard::instance(this)->hide();
     qDebug() << "FullKeyboard：" << timer.elapsed() << "毫秒";
@@ -430,12 +444,21 @@ void MainWindow::slotShowSubWindow()
     dlgErrorTip = new ErrorTipDialog(this);
 
     handWheel = new HandWheelDialog(this);
-    handWheel->hide();
+    QRect mainWindowGeometry = this->geometry();
+    QPoint centerPoint = mainWindowGeometry.center();
+    handWheel->move(centerPoint - handWheel->rect().center());
+    connect(this,&MainWindow::RefreshHandWheel_Signal,handWheel,&HandWheelDialog::RefreshHandWheel_handle);
     connect(ui->btnHandWheel, &QPushButton::clicked, handWheel, [=](){
-        handWheel->exec();
+        if(curMode == TriMode::MANUAL)
+        {
+            emit RefreshHandWheel_Signal();
+            handWheel->exec();
+        }
     });
 
     labProgramNameRollShow();
+
+    connectAllSignalsAndSlots();
 
     QList<QLineEdit*> lineEdits = findChildren<QLineEdit*>();
 
@@ -463,6 +486,7 @@ void MainWindow::slotShowSubWindow()
 
     checkParaTimer->start();
     m_RunPar.globalSpeed = 50;//开机全局速度默认50%
+    g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);//发送全局速度等参数
     initUI();
 }
 
@@ -549,6 +573,7 @@ int MainWindow::showErrorTip(const QString &message, TipMode mode)
 {
     dlgErrorTip->setMode(mode);
     dlgErrorTip->setMessage(message);
+    dlgErrorTip->raise();
     return dlgErrorTip->exec();
 }
 
@@ -597,6 +622,19 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(this,&MainWindow::OrderSave_signal,teachWidget,&Teach::widgetSwitchOrderSaveHandel);//需要更新指令保存槽
     connect(setWidget,&Setting::coboxVarSelectVarPreOpItemSet_signal,teachWidget,&Teach::coboxVarSelectVarPreOpItemSet);//教导界面变量类型名称需要刷新
     connect(this,&MainWindow::signal_TeachPageInit,teachWidget,&Teach::SwitchPageInit);//教导界面初始化信号
+    connect(manualWidget,&ManualForm::AxisParRefreshSignal,setWidget,&Setting::AxisParRefresh);//手动界面-调机界面改变轴参数保存刷新
+    connect(setWidget,&Setting::ManualDebugMachineRefresh_Signal,manualWidget,&ManualForm::InitAdjustMachine);//手动界面-调机界面改变轴参数保存刷新
+    connect(this,&MainWindow::HandWheelButtonClick_Signal,handWheel,&HandWheelDialog::HandWheelButtonClickHandel);//手轮按钮按下时触发
+    connect(handWheel,&HandWheelDialog::HandWheelModeChange_Signal,this,[=](bool state){//手轮模式发生改变时处理
+        if(state == true){
+            ui->btnHandWheel->setIcon(QIcon(":/images/roller.png"));
+        }
+        else{
+            ui->btnHandWheel->setIcon(QIcon(":/images/shoulun.png"));
+        }
+    });
+    connect(softKey,&SoftKeyWidget::SoftKeyWidgetButtonClickSignal,this,&MainWindow::keyFunctCommandSend);//右上角弹出左侧按键软键盘按下处理函数
+    connect(this,&MainWindow::Refresh_globalSpeedShow_Signal,autoWidget,&AutoForm::Refresh_globalSpeedShowHandel);
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, [&]() {
@@ -834,9 +872,16 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
                     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
                 }
             }
+//            else if(m_RobotRunSta == MAC_STA_RUN)
+//            {//在运行中时按启动，变成暂停
+//                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,2,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+//            }
             else
             {//机器未回零
-                MainWindow::pMainWindow->showErrorTip(tr("机器未回零"),TipMode::ONLY_OK);
+                if(m_RobotRunSta != MAC_STA_RUN)
+                {
+                    MainWindow::pMainWindow->showErrorTip(tr("机器未回零"),TipMode::ONLY_OK);
+                }
             }
         }
 
@@ -902,83 +947,158 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
 
         break;
     }
-    case HandControlKeyCode::UP://ok
+    case HandControlKeyCode::UP://
     {
-//        showErrorTip(tr("参数同步中...."),TipMode::NORMAL);
-//        emit signal_sync_data();
+        if (curMode == TriMode::MANUAL && value == 1)
+        {//如果在手动界面，按上下按键进行速度加减
+            AdjustSpeedHandel(1);
+        }
+        else if (curMode == TriMode::AUTO && value == 1)
+        {
+            if(m_RunPar.allow_globalSpeed == 1)
+            {
+                AdjustSpeedHandel(1);
+            }
+        }
         break;
     }
     case HandControlKeyCode::DOWN://EXIT
     {
+        if (curMode == TriMode::MANUAL && value == 1)
+        {
+            AdjustSpeedHandel(0);
+        }
+        else if (curMode == TriMode::AUTO && value == 1)
+        {
+            if(m_RunPar.allow_globalSpeed == 1)
+            {
+                AdjustSpeedHandel(0);
+            }
+        }
         break;
     }
     default:
         break;
     }
 }
-
+//调数处理函数
+void MainWindow::AdjustSpeedHandel(uint8_t AdjustType)
+{
+    if(AdjustType == 0)
+    {//减速
+        if(m_RunPar.globalSpeed<=10 && m_RunPar.globalSpeed>1)
+        {//1-100
+            m_RunPar.globalSpeed-=1;
+        }
+        else if(m_RunPar.globalSpeed>10 && m_RunPar.globalSpeed<=30)
+        {
+            m_RunPar.globalSpeed-=5;
+        }
+        else if(m_RunPar.globalSpeed>30)
+        {
+            m_RunPar.globalSpeed-=10;
+        }
+        if(m_RunPar.globalSpeed<=0)
+        {
+            m_RunPar.globalSpeed=1;
+        }
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);//发送全局速度等参数
+    }
+    else if(AdjustType == 1)
+    {//加速
+        if(m_RunPar.globalSpeed<10)
+        {
+            m_RunPar.globalSpeed+=1;
+        }
+        else if(m_RunPar.globalSpeed>=10 && m_RunPar.globalSpeed<30)
+        {
+            m_RunPar.globalSpeed+=5;
+        }
+        else if(m_RunPar.globalSpeed<=100)
+        {
+            m_RunPar.globalSpeed+=10;
+        }
+        if(m_RunPar.globalSpeed>100)
+        {
+            m_RunPar.globalSpeed=100;
+        }
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);//发送全局速度等参数
+    }
+    emit Refresh_globalSpeedShow_Signal();//在自动界面时，通过按键修改速度时，发送刷新自动界面速度显示
+}
 //按键膜按键按下并发送按下指令，
 void MainWindow::keyAxisCommandSend(uint16_t code, int32_t value)
 {
-    uint16_t axisNum = 0;
-    uint16_t direction = 0;
+    uint8_t KeyIndex = 0;//对应按键/信号界面的名称
+    uint8_t dirction = 0;//如果按键功能是轴移动，用来控制正转，反转或停止
     switch (code)
     {
     case HandControlKeyCode::RIGHT_KEY1:
-        axisNum=2;
-        direction=1;
+        KeyIndex = 2;
+        dirction = 1;
         break;
     case HandControlKeyCode::RIGHT_KEY2:
-        axisNum=2;
-        direction=2;
+        KeyIndex = 3;
+        dirction = 2;
         break;
     case HandControlKeyCode::RIGHT_KEY3:
-        axisNum=1;
-        direction=1;
+        KeyIndex = 0;
+        dirction = 1;
         break;
     case HandControlKeyCode::RIGHT_KEY4:
-        axisNum=1;
-        direction=2;
+        KeyIndex = 1;
+        dirction = 2;
         break;
     case HandControlKeyCode::RIGHT_KEY5:
-        axisNum=3;
-        direction=1;
+        KeyIndex = 4;
+        dirction = 1;
         break;
     case HandControlKeyCode::RIGHT_KEY6:
-        axisNum=3;
-        direction=2;
+        KeyIndex = 5;
+        dirction = 2;
         break;
     case HandControlKeyCode::RIGHT_KEY7:
-        axisNum=4;
-        direction=1;
+        KeyIndex = 6;
+        dirction = 1;
         break;
     case HandControlKeyCode::RIGHT_KEY8:
-        axisNum=4;
-        direction=2;
+        KeyIndex = 7;
+        dirction = 2;
         break;
     case HandControlKeyCode::RIGHT_KEY9:
-        axisNum=5;
-        direction=1;
+        KeyIndex = 10;
+        dirction = 1;
         break;
     case HandControlKeyCode::RIGHT_KEY10:
-        axisNum=5;
-        direction=2;
+        KeyIndex = 11;
+        dirction = 2;
         break;
     case HandControlKeyCode::RIGHT_KEY11:
-        axisNum=6;
-        direction=1;
+        KeyIndex = 8;
+        dirction = 1;
         break;
     case HandControlKeyCode::RIGHT_KEY12:
-        axisNum=6;
-        direction=2;
+        KeyIndex = 9;
+        dirction = 2;
+        break;
+    default:
         break;
     }
     if(value == 0)
     {
-        direction=0;
+        dirction = 0;
     }
-    g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,axisNum,direction);
-
+    if(m_KeyFunc[KeyIndex].keyType == 0)
+    {//输出
+        if(value)
+        {
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT, m_KeyFunc[KeyIndex].funcNum, m_KeyFunc[KeyIndex].oprMode);
+        }
+    }
+    else if(m_KeyFunc[KeyIndex].keyType == 2)
+    {//轴
+        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, m_KeyFunc[KeyIndex].funcNum, dirction);
+    }
 }
 
 
@@ -1093,7 +1213,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
     }
     else if(SysIndex==SysSendIndex::CMD_SENDERROR)
     {
-        QString errorText = tr("参数同步失败，同步失败编号：")+QString::number(MySync_Data.SendDataStep);
+        QString errorText = tr("参数同步失败!");//+QString::number(MySync_Data.SendDataStep);
         dlgErrorTip->setMessage(errorText);
         if(!dlgErrorTip->isVisible())
         {

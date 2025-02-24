@@ -14,6 +14,7 @@ bool SufferOperNeedRefreash = false;//变量类型是否需要刷新标志
 AutoInforRefresh m_AutoInforRefresh; //自动界面信息刷新标志
 Sync_Data MySync_Data; //参数同步结构体
 MainUpdateStruct M_MainUpdate;//主控板升级机构体
+MoveStackStruct MoveStackFollowPoint={0,0,{0,0,0}};//移动至堆叠点/堆叠点
 
 P_AxisMoveStruct Temp_AxisMoveOrder[AXIS_TOTAL_NUM] = {0};                                 //教导界面轴编号，0-X1，1-Y1，2-Z1，3-C，4-Y2，5-Z2，6-无效
 P_MachineOutStruct Temp_MachineOutStruct[6] = {0};                                          //教导界面机床输出控制

@@ -3,7 +3,7 @@
 QString m_ProgramPath="/Program";
 
 const QString SUFFIX_PROGRAM = ".ZHpro";
-
+const QString SUFFIX_REFER = ".ref";
 QString signalSpace = " ";
 QString doubleSpace = "  ";
 QString lineFeed = "\n";
@@ -168,6 +168,14 @@ uint8_t newBuildProgram(const QString& fileName)
     else
     {
         setProgramNameAndPath(m_ProgramNameAndPath);//新建文件成功，存储所有文件信息
+        const QString filePath = m_ProgramPath+"/"+fileName + SUFFIX_REFER;
+        QFile file(filePath);
+        // 尝试以写模式打开文件（这将创建文件，如果它不存在的话）
+        if (!file.open(QIODevice::WriteOnly)) {
+            return -1; // 或者其他错误处理
+        }
+        // 文件现在已经创建（并且是空的），可以关闭它了
+        file.close();
     }
     return 0;
 }
@@ -2338,7 +2346,7 @@ bool Load_Program_Handle(QString fileName)
         return false;
     }
     else
-    {//如果选择的文件不是当前程序，进行载入
+    {
         for(int i=0;i<PRO_NUM;i++)
         {
             for(int j=0;j<PRO_LINE_MAIN;j++)

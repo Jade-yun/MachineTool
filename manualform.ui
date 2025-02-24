@@ -46,7 +46,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <property name="iconSize">
     <size>
@@ -937,7 +937,7 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLineEdit" name="lineEdit">
+            <widget class="NumberEdit" name="AdjustMachineSpace">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -968,11 +968,6 @@
              <property name="styleSheet">
               <string notr="true"/>
              </property>
-             <item>
-              <property name="text">
-               <string>禁止</string>
-              </property>
-             </item>
              <item>
               <property name="text">
                <string>X1</string>
@@ -1019,7 +1014,10 @@
             </widget>
            </item>
            <item row="3" column="1">
-            <widget class="QLineEdit" name="lineEdit_2">
+            <widget class="NumberEdit" name="AdjustMachineEncoderPulse">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -1119,7 +1117,7 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit_3">
+            <widget class="NumberEdit" name="AdjustMachineInternalPulse">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -1133,7 +1131,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QPushButton" name="handPosAdd_2">
+            <widget class="QPushButton" name="AdjustMachineForward">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -1178,7 +1176,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="HandPosDown_2">
+            <widget class="QPushButton" name="AdjustMachineReversal">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -1223,7 +1221,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="HandPosDown_3">
+            <widget class="QPushButton" name="AdjustMachineClear">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                <horstretch>0</horstretch>

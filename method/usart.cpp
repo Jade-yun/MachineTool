@@ -181,12 +181,13 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
 
             break;
         case CMD_SUN_MANUAL_HAND_WHEEL://手轮
+            len=0;
             sendDataBuf[len] = (uint8_t)m_manualAxis.handwheelAxis;
-            sendDataBuf[len+1] = (uint8_t)parNum;
-            sendDataBuf[len+2] = m_manualAxis.multiply;
+            sendDataBuf[len+1] = (uint8_t)m_manualAxis.runDir;
+            sendDataBuf[len+2] = (uint8_t)m_manualAxis.multiply;
             sendDataBuf[len+3] = (uint8_t)m_manualAxis.speed;
             sendDataBuf[len+4] = (uint8_t)(m_manualAxis.speed>>8);
-            sendDataBuf[len+5] = m_manualAxis.ZDrop;
+            sendDataBuf[len+5] = (uint8_t)m_manualAxis.ZDrop;
             len += 6;
             break;
         case CMD_SUN_MANUAL_INCREMENT://增量
@@ -213,8 +214,18 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
             sendDataBuf[len] = m_manualAxis.ZDrop;
             len += 1;
             break;
-        case CMD_SUN_MANUAL_STACK://移至堆叠点
-
+        case CMD_SUN_MANUAL_STACK://移至堆叠点/跟随点
+            len = 0;
+            sendDataBuf[len] = MoveStackFollowPoint.Stack_Index;
+            len += 1;
+            sendDataBuf[len] = MoveStackFollowPoint.Stack_Type;
+            len += 1;
+            sendDataBuf[len] = MoveStackFollowPoint.Stack_Point[X1_AXIS];
+            len += 1;
+            sendDataBuf[len] = MoveStackFollowPoint.Stack_Point[Y1_AXIS];;
+            len += 1;
+            sendDataBuf[len] = MoveStackFollowPoint.Stack_Point[Z1_AXIS];;
+            len += 1;
             break;
         case CMD_SUN_MANUAL_UPGRADE_CONTROL://控制板升级控制指令
             sendDataBuf[len] = M_MainUpdate.Upgrade_command;
@@ -1464,8 +1475,7 @@ void Usart::ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             sendDataBuf[index++] = (uint8_t)parNum;
             sendDataBuf[index++] = (uint8_t)parNum2;
             sendDataBuf[index++] = (uint8_t)(parNum2>>8);
-            sendDataBuf[index++] = (uint8_t)parNum3;
-            sendDataBuf[index++] = m_RunPar.globalSpeed;//全局速度，在自动运行界面设置
+            sendDataBuf[index++] = (uint8_t)parNum3;//全局速度，在自动运行界面设置
             len = index;
             break;
         case CMD_SUN_PRO_START://程序启停控制
@@ -4650,11 +4660,10 @@ uint8_t Usart::DataSyc()
             {
                 MySync_Data.sendDataOutTime = 0;
                 MySync_Data.stack_point = 0;
-                g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point+1,MySync_Data.stack_axisIndex);
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point+1,MySync_Data.stack_axisIndex+1);
                 MySync_Data.TestSendFeedBackFlag = 1;
                 qDebug()<<"堆叠点位-组号:"<<MySync_Data.stack_point+1<<"堆叠轴号:"<<MySync_Data.stack_axisIndex;
             }
-
         }
         else if((MySync_Data.stack_point > 0) && (MySync_Data.stack_point < 8) && SendOldIndex != MySync_Data.stack_point && MySync_Data.TestSendFeedBackFlag==0)
         {
@@ -4668,7 +4677,7 @@ uint8_t Usart::DataSyc()
             {
                 MySync_Data.sendDataOutTime = 0;
                 MySync_Data.sendDataNum=0;
-                g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point+1,MySync_Data.stack_axisIndex);
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,MySync_Data.stack_point+1,MySync_Data.stack_axisIndex+1);
                 MySync_Data.TestSendFeedBackFlag = 1;
                 qDebug()<<"堆叠点位-组号:"<<MySync_Data.stack_point+1<<"堆叠轴号:"<<MySync_Data.stack_axisIndex;
             }

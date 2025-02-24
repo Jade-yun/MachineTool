@@ -41,6 +41,8 @@ private slots:
 
     void on_AutoEditchboxIfCondition2_clicked(bool checked);
 
+public slots:
+    void Refresh_globalSpeedShowHandel();
 private:
     void updateLabelState(int index);
     void Program_Follow_Refresh();

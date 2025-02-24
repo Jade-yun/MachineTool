@@ -90,26 +90,22 @@ SoftKeyWidget::SoftKeyWidget(QWidget *parent) :
 //    this->installEventFilter(this);
 
     connect(ui->btnStart, &QPushButton::clicked, [=](){
-
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 1, m_RunPar.startRunLineNum, 10);
-
+        emit SoftKeyWidgetButtonClickSignal(HandControlKeyCode::START,1);
     });
     connect(ui->btnStop, &QPushButton::clicked, [=](){
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 0, m_RunPar.startRunLineNum, 0);
-
+        emit SoftKeyWidgetButtonClickSignal(HandControlKeyCode::STOP,1);
     });
     connect(ui->btnOrigin, &QPushButton::clicked, [=](){
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 3, m_RunPar.startRunLineNum, 50);
-
+        emit SoftKeyWidgetButtonClickSignal(HandControlKeyCode::ORIGIN,1);
     });
     connect(ui->btnRevert, &QPushButton::clicked, [=](){
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_START, 4, m_RunPar.startRunLineNum, 50);
+        emit SoftKeyWidgetButtonClickSignal(HandControlKeyCode::RETURN,1);
     });
     connect(ui->btnLast, &QPushButton::clicked, [=](){
-
+        emit SoftKeyWidgetButtonClickSignal(HandControlKeyCode::UP,1);
     });
     connect(ui->btnNext, &QPushButton::clicked, [=](){
-
+        emit SoftKeyWidgetButtonClickSignal(HandControlKeyCode::DOWN,1);
     });
 }
 

@@ -16,7 +16,9 @@ NumberEdit::NumberEdit(QWidget *parent)
 
     connect(this, &NumberEdit::finishedInput, this, &NumberEdit::validateInput);
     connect(this, &NumberEdit::showRangeError, [=](const QString& message){
-        MainWindow::pMainWindow->showErrorTip(message);
+        ErrorTipDialog tip(message, TipMode::ONLY_OK);
+        tip.exec();
+//        MainWindow::pMainWindow->showErrorTip(message);
     });
 }
 

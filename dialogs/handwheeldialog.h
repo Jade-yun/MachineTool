@@ -14,7 +14,9 @@ class HandWheelDialog : public QDialog
 public:
     explicit HandWheelDialog(QWidget *parent = nullptr);
     ~HandWheelDialog();
-
+public slots:
+   void HandWheelButtonClickHandel();//手轮按键按下后触发处理函数
+   void RefreshHandWheel_handle();//刷新手轮界面参数处理函数
 private:
     Ui::HandWheelDialog *ui;
 
@@ -24,7 +26,8 @@ private:
 private:
     QVector<QCheckBox*> handWheelScale;         //手轮刻度
     QVector<QCheckBox*> handWheelAxis;          //手轮轴
-
+signals:
+    void HandWheelModeChange_Signal(bool state);//手轮模式状态改变信号
 protected:
     void showEvent(QShowEvent *event);
 };

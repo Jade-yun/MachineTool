@@ -5,8 +5,7 @@
 #include <QListView>
 #include <QDebug>
 #include <QThread>
-
-
+#include "mainwindow.h"
 QPointer<StackEdit> stack[8] = {nullptr};
 
 void StackEdit::initStackPara(QTableWidget* tableWidget)
@@ -42,13 +41,12 @@ void StackEdit::initStackPara(QTableWidget* tableWidget)
         startPosDischage[i] = new NumberEdit(this);
 
         speed[i]->setDecimalPlaces(0);
-        speedDischage[i]->setDecimalPlaces(0);
         pointNum[i]->setDecimalPlaces(0);
         startPosA[i]->setDecimalPlaces(2);
         endPosB_X[i]->setDecimalPlaces(2);
         endPosC_Y[i]->setDecimalPlaces(2);
         posD[i]->setDecimalPlaces(2);
-        speedDischage[i]->setDecimalPlaces(2);
+        speedDischage[i]->setDecimalPlaces(0);
         startPosDischage[i]->setDecimalPlaces(2);
 
         tableWidget->setCellWidget(0, i, axisSelect[i]);
@@ -246,8 +244,7 @@ void StackEdit::saveStackInfo1()
         m_StackInfo[groupIndex].axisSpeed[i] = speed[i]->text().toInt();
         m_StackInfo[groupIndex].stackPointNum[i] = pointNum[i]->text().toInt();
         m_StackInfo[groupIndex].stackDir[i] = stackDirect[i]->currentIndex();
-        m_StackInfo[groupIndex].dischangeSpeed[i] = speedDischage[i]->text().toDouble()*100;
-
+        m_StackInfo[groupIndex].dischangeSpeed[i] = (uint8_t)(speedDischage[i]->text().toUInt());
     }
     g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,groupIndex+1);
     QThread::msleep(10);
@@ -299,8 +296,8 @@ void StackEdit::saveStackInfo(int index)
         m_StackInfo[groupIndex].axisSpeed[i] = speed[i]->text().toInt();
         m_StackInfo[groupIndex].stackPointNum[i] = pointNum[i]->text().toInt();
         m_StackInfo[groupIndex].stackDir[i] = stackDirect[i]->currentIndex();
-        m_StackInfo[groupIndex].dischangeSpeed[i] = speedDischage[i]->text().toDouble()*100;
-        m_StackInfo[groupIndex].stackStartPos[i] = startPosA[i]->text().toDouble()*100;
+        m_StackInfo[groupIndex].dischangeSpeed[i] = speedDischage[i]->text().toInt();
+        m_StackInfo[groupIndex].stackStartPos[i] = startPosA[i]->text().toInt();
         m_StackInfo[groupIndex].stack_X_EndPos[i] = endPosB_X[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stack_Y_EndPos[i] = endPosC_Y[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stackDiagonalPos[i] = posD[i]->text().toDouble()*100;
@@ -320,6 +317,7 @@ void StackEdit::updateGroupIndex(int index)
     if (index > -1 && index < 8)
     {
         groupIndex = index;
+        MoveStackFollowPoint.Stack_Index = groupIndex+1;
     }
 }
 
@@ -369,14 +367,14 @@ void StackEdit::syncParaToUI()
         speed[i]->setText(QString::number(m_StackInfo[groupIndex].axisSpeed[i]));
         pointNum[i]->setText(QString::number(m_StackInfo[groupIndex].stackPointNum[i]));
         stackDirect[i]->setCurrentIndex(m_StackInfo[groupIndex].stackDir[i]);
-        speedDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeSpeed[i] / 100.0, 'f', 2));
-        startPosA[i]->setText(QString::number(m_StackInfo[groupIndex].stackStartPos[i] / 100.0, 'f', 2));
-        endPosB_X[i]->setText(QString::number(m_StackInfo[groupIndex].stack_X_EndPos[i] / 100.0, 'f', 2));
-        endPosC_Y[i]->setText(QString::number(m_StackInfo[groupIndex].stack_Y_EndPos[i] / 100.0, 'f', 2));
-        posD[i]->setText(QString::number(m_StackInfo[groupIndex].stackDiagonalPos[i] / 100.0, 'f', 2));
-        startPosDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeStartPos[i] / 100.0, 'f', 2));
-        intervalDis[i]->setText(QString::number(m_StackInfo[groupIndex].intevalDis[i] / 100.0, 'f', 2));
-        offset[i]->setText(QString::number(m_StackInfo[groupIndex].offsetDis[i] / 100.0, 'f', 2));
+        speedDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeSpeed[i]));
+        startPosA[i]->setText(QString::number((double)m_StackInfo[groupIndex].stackStartPos[i] / 100, 'f', 2));
+        endPosB_X[i]->setText(QString::number((double)m_StackInfo[groupIndex].stack_X_EndPos[i] / 100, 'f', 2));
+        endPosC_Y[i]->setText(QString::number((double)m_StackInfo[groupIndex].stack_Y_EndPos[i] / 100, 'f', 2));
+        posD[i]->setText(QString::number((double)m_StackInfo[groupIndex].stackDiagonalPos[i] / 100, 'f', 2));
+        startPosDischage[i]->setText(QString::number((double)m_StackInfo[groupIndex].dischangeStartPos[i] / 100, 'f', 2));
+        intervalDis[i]->setText(QString::number((double)m_StackInfo[groupIndex].intevalDis[i] / 100, 'f', 2));
+        offset[i]->setText(QString::number((double)m_StackInfo[groupIndex].offsetDis[i] / 100, 'f', 2));
     }
 }
 
@@ -419,16 +417,24 @@ StackEdit::StackEdit(QWidget *parent) :
     });
 
 
-    moveStack = new StackFollow(this);
-    moveFollow = new StackFollow(this);
+    moveStack = new StackFollow;
+    moveFollow = new StackFollow;
 
-//    connect(moveStack->moveButton, &QPushButton::clicked, this, [=](){
-//        qDebug() << "moveStack->moveButton clicked" ;
-//    });
+//    connect(ui->btnMoveToStack, &QPushButton::clicked, moveStack, &StackFollow::exec);
+//    connect(ui->btnMoveToFollow, &QPushButton::clicked, moveFollow, &StackFollow::exec);
 
-    connect(ui->btnMoveToStack, &QPushButton::clicked, moveStack, &StackFollow::exec);
-    connect(ui->btnMoveToFollow, &QPushButton::clicked, moveFollow, &StackFollow::exec);
-
+    connect(ui->btnMoveToStack, &QPushButton::clicked, moveStack,[=](){
+        MoveStackFollowPoint.Stack_Type = 1;//移至堆叠点
+        emit StackFollowRefreshSignal();
+        moveStack->exec();
+    });
+    connect(ui->btnMoveToFollow, &QPushButton::clicked, moveFollow,[=](){
+        MoveStackFollowPoint.Stack_Type = 2;//移至跟随点
+        emit StackFollowRefreshSignal();
+        moveFollow->exec();
+    });
+    connect(this,&StackEdit::emit StackFollowRefreshSignal,moveStack,&StackFollow::StackFollowInit);
+    connect(this,&StackEdit::emit StackFollowRefreshSignal,moveFollow,&StackFollow::StackFollowInit);
     logicSigsSlots();
 //    saveInfoConnections();
 
@@ -442,6 +448,8 @@ StackEdit::StackEdit(QWidget *parent) :
 StackEdit::~StackEdit()
 {
     delete ui;
+    delete moveStack;
+    delete moveFollow;
 }
 
 void StackEdit::loadAndPlayGif(const QString& path)
@@ -681,18 +689,59 @@ StackFollow::StackFollow(QWidget *parent)
         nums[i] = new NumberEdit();
         nums[i]->setFixedHeight(40);
         nums[i]->setDecimalPlaces(0);
-//        num->setInputRange();
 
         table->setCellWidget(i, 0, nums[i]);
-
         objPos[i] = new QTableWidgetItem("");
         table->setItem(i, 1, objPos[i]);
+        connect(nums[i],&NumberEdit::finishedInput, this,[=](){
+            if(MoveStackFollowPoint.Stack_Index>0)
+            {
+                if(nums[i]->text().toUInt()<1 || nums[i]->text().toUInt()>m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[i])
+                {
+                    auto tip_text = QString(tr("输入值的范围不能超过%1～%2,请重新输入！")).arg(1).arg(m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[i]);
+                    this->hide();
+                    int reply = MainWindow::pMainWindow->showErrorTip(tip_text,TipMode::ONLY_OK);
+                    if (reply == QDialog::Accepted || reply == QDialog::Rejected)
+                    {
+                        nums[i]->setText(QString::number(MoveStackFollowPoint.Stack_Point[i]));
+                    }
+                }
+                else
+                {
+                    MoveStackFollowPoint.Stack_Point[i] = (uint8_t)nums[i]->text().toUInt();
+                }
+            }
+        });
     }
-
+    StackFollowInit();//初始化参数
     moveButton = new QPushButton(tr("移动"), this);
     moveButton->setFixedHeight(45);
     moveButton->setFixedWidth(110);
+    connect(moveButton,&QPushButton::clicked,this,[=](){//点击移动按钮时，下发移动至堆叠点数据
+        if(MoveStackFollowPoint.Stack_Index>0)
+        {
+            if(m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[0]>0 && m_AxisPar[X1_AXIS].axisType != 1)
+            {
+                this->close();
+                MainWindow::pMainWindow->showErrorTip(tr("X1轴伺服未开启，请把轴的堆叠点数设为0"),TipMode::ONLY_OK);
+            }
+            else if(m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[1]>0 && m_AxisPar[Y1_AXIS].axisType != 1)
+            {
+                this->close();
+                MainWindow::pMainWindow->showErrorTip(tr("Y1轴伺服未开启，请把轴的堆叠点数设为0"),TipMode::ONLY_OK);
+            }
+            else if(m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[2]>0 && m_AxisPar[Z1_AXIS].axisType != 1)
+            {
+                this->close();
+                MainWindow::pMainWindow->showErrorTip(tr("Z1轴伺服未开启，请把轴的堆叠点数设为0"),TipMode::ONLY_OK);
+            }
+            else
+            {
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_STACK);
+            }
+        }
 
+    });
     closeButton = new QPushButton(tr("关闭"), this);
     closeButton->setFixedHeight(45);
     closeButton->setFixedWidth(110);
@@ -712,7 +761,29 @@ StackFollow::StackFollow(QWidget *parent)
     setFixedSize(450, 300);
 
 }
+//界面参数初始化
+void StackFollow::StackFollowInit()
+{
+    if(MoveStackFollowPoint.Stack_Index>0)
+    {
+        for(int index=0;index<3;index++)
+        {
+            if(m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[index]>0)
+            {//根据堆叠点数设置个数卡框是否可以输入
+                nums[index]->setEnabled(true);
+                MoveStackFollowPoint.Stack_Point[index] = 1;
+                nums[index]->setText(QString::number(MoveStackFollowPoint.Stack_Point[index]));
+            }
+            else
+            {
+                nums[index]->setEnabled(false);
+                MoveStackFollowPoint.Stack_Point[index] = 0;
+                nums[index]->setText(QString::number(MoveStackFollowPoint.Stack_Point[index]));
+            }
+        }
+    }
 
+}
 void StackFollow::updateVerticalHeader(int index, const QString &text)
 {
     QStringList headers = table->verticalHeader()->model()->headerData(index, Qt::Vertical).toStringList();

@@ -190,26 +190,26 @@ AutoForm::AutoForm(QWidget *parent) :
     // these slots are used to adjust global speed
     connect(ui->btnGlobalSpeedAdd, &QPushButton::clicked, [=](){
         int value = ui->proBarGlobalSpeed->value();
-        if (value <= 100 && value >= 0 && ui->btnAdjustSpeed->isChecked())
+        if (value <= 100 && value >= 1 && m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(++value);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btnGlobalSpeedSub, &QPushButton::clicked, [=](){
         int value = ui->proBarGlobalSpeed->value();
-        if (value <= 100 && value >= 0 && ui->btnAdjustSpeed->isChecked())
+        if (value <= 100 && value > 1 && m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(--value);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn10percent, &QPushButton::clicked, [=](){
-        if (ui->btnAdjustSpeed->isChecked())
+        if (m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(10);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn20percent, &QPushButton::clicked, [=](){
-        if (ui->btnAdjustSpeed->isChecked())
+        if (m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(20);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
@@ -219,28 +219,35 @@ AutoForm::AutoForm(QWidget *parent) :
 //            ui->proBarGlobalSpeed->setValue(20);
 //    });
     connect(ui->btn40percent, &QPushButton::clicked, [=](){
-        if (ui->btnAdjustSpeed->isChecked())
+        if (m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(40);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn60percent, &QPushButton::clicked, [=](){
-        if (ui->btnAdjustSpeed->isChecked())
+        if (m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(60);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn80percent, &QPushButton::clicked, [=](){
-        if (ui->btnAdjustSpeed->isChecked())
+        if (m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(80);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
     connect(ui->btn100percent, &QPushButton::clicked, [=](){
-        if (ui->btnAdjustSpeed->isChecked())
+        if (m_RunPar.allow_globalSpeed == 1)
             ui->proBarGlobalSpeed->setValue(100);
         m_RunPar.globalSpeed = ui->proBarGlobalSpeed->value();
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+    });
+    connect(ui->btnAdjustSpeed,&QPushButton::clicked,this,[=](){
+        if(ui->btnAdjustSpeed->isChecked()) {
+            m_RunPar.allow_globalSpeed = 1;
+        }else {
+            m_RunPar.allow_globalSpeed = 0;
+        }
     });
 /**********************************************************************/
 
@@ -276,7 +283,7 @@ AutoForm::AutoForm(QWidget *parent) :
             return;
         }
         m_CurrentSelectProOrderList = ui->Auto_file_List->currentIndex().row();
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DEBUG,m_OperateProNum,m_CurrentSelectProOrderList+1);//运行行号从1开始，为当前选中行序号+1
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DEBUG,m_OperateProNum,m_CurrentSelectProOrderList+1,m_RunPar.globalSpeed);//运行行号从1开始，为当前选中行序号+1
     });
     connect(ui->coboxProgram, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index) {//自动运行界面程序编号切换
         emit Switch_ProNum_Signal(index);//发送切换程序编号信号，刷新教导界面列表
@@ -290,6 +297,12 @@ AutoForm::AutoForm(QWidget *parent) :
 AutoForm::~AutoForm()
 {
     delete ui;
+}
+
+//刷新速度显示相关控件
+void AutoForm::Refresh_globalSpeedShowHandel()
+{
+    ui->proBarGlobalSpeed->setValue(m_RunPar.globalSpeed);
 }
 //自动界面程序列表滑动或点击时处理函数
 void AutoForm::on_Auto_file_List_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)

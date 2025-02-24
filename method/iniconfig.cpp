@@ -1,7 +1,7 @@
 #include "iniconfig.h"
 #include <QCoreApplication>
 #include <QTextCodec>
-
+#include "program_save.h"
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -233,9 +233,9 @@ void setKeyFunc(D_KeyFuncStruct* value)
 {
     for(int i=0;i<OPR_KEY_NUM;i++)
     {
-        getValue("KeyFunc",QString("V%1_keyType").arg(i),value[i].keyType);
-        getValue("KeyFunc",QString("V%1_funcNum").arg(i),value[i].funcNum);
-        getValue("KeyFunc",QString("V%1_oprMode").arg(i),value[i].oprMode);
+        setValue("KeyFunc",QString("V%1_keyType").arg(i),value[i].keyType);
+        setValue("KeyFunc",QString("V%1_funcNum").arg(i),value[i].funcNum);
+        setValue("KeyFunc",QString("V%1_oprMode").arg(i),value[i].oprMode);
     }
 }
 //LED功能
@@ -887,7 +887,7 @@ void getManualAxis(uint8_t defaultV)
     m_manualAxis.pos_pos = getValue("ManualAxis","pos_pos",(uint32_t)defaultV);
     m_manualAxis.sub_pos = getValue("ManualAxis","sub_pos",(uint32_t)defaultV);
     m_manualAxis.ZDrop = getValue("ManualAxis","ZDrop",defaultV);
-    m_manualAxis.handwheelMode = getValue("ManualAxis","handwheelMode",defaultV);
+//    m_manualAxis.handwheelMode = getValue("ManualAxis","handwheelMode",defaultV);
     m_manualAxis.multiply = getValue("ManualAxis","multiply",defaultV);
     m_manualAxis.handwheelAxis = getValue("ManualAxis","handwheelAxis",defaultV);
 }
@@ -898,7 +898,7 @@ void setManualAxis(D_ManualAxis value)
     setValue("ManualAxis","pos_pos",value.pos_pos);
     setValue("ManualAxis","sub_pos",value.sub_pos);
     setValue("ManualAxis","ZDrop",value.ZDrop);
-    setValue("ManualAxis","handwheelMode",value.handwheelMode);
+//    setValue("ManualAxis","handwheelMode",value.handwheelMode);//手轮模式是否使用不存
     setValue("ManualAxis","multiply",value.multiply);
     setValue("ManualAxis","handwheelAxis",value.handwheelAxis);
 }
@@ -1383,7 +1383,7 @@ void writeNameDefine()
 
 void writeReferenceInfo()
 {
-    const QString filePath = m_CurrentProgramNameAndPath.filePath.split(".").first() + ".ref";
+    const QString filePath = m_CurrentProgramNameAndPath.filePath.split(".").first() + SUFFIX_REFER;
     QSettings settings(filePath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
@@ -1412,7 +1412,7 @@ void writeReferenceInfo()
 
 void readReferenceInfo()
 {
-    const QString filePath = m_CurrentProgramNameAndPath.filePath.split(".").first() + ".ref";
+    const QString filePath = m_CurrentProgramNameAndPath.filePath.split(".").first() + SUFFIX_REFER;
     QSettings settings(filePath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 

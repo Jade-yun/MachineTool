@@ -63,7 +63,7 @@ public slots:
     void slotSettingHome();
     void ShowStackPage();
     void handleLoginModeChanged(LoginMode mode);
-
+    void AxisParRefresh(uint8_t index);//轴参数界面参数刷新
 private:
     Ui::Setting *ui;
     upgradedialog *UpgradeDialog;
@@ -110,6 +110,7 @@ signals:
     void WidgetNameRefresh_signal();//教导界面控件名称需要刷新信号
     void coboxVarSelectVarPreOpItemSet_signal();//教导界面变量类型复选框刷新信号
     void updateManualformButtonName_Signal();//更新手动界面按钮名称显示信号
+    void ManualDebugMachineRefresh_Signal(uint8_t Index);//刷新手动-调机界面参数刷新信号
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型
@@ -231,8 +232,17 @@ private:
         IOInEdit* limitMax;               //最大限位信号
         IOInEdit* originSignal;               //原点信号
     };
-   std::array<MachineParaWidget, 6> machineParaWidgets;
-
+    struct HandwheelParaWidget{
+        NumberEdit* accTime;						//加速时间，精度0.01s
+        NumberEdit* decTime;						//减速时间，精度0.01s
+        NumberEdit* accAcc;							//加加速，精度1
+        NumberEdit* decDec;							//减减速，精度1
+    };
+    HandwheelParaWidget HandwheelParaWidgets;//轴数度界面-手轮控件
+    std::array<MachineParaWidget, 6> machineParaWidgets;
+    std::vector<QString> minLimitStrs;
+    std::vector<QString> maxLimitStrs;
+    std::vector<QString> originSigStrs;
 
 private slots:
    void outputTypeSlots();

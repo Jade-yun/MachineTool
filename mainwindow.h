@@ -84,6 +84,9 @@ signals:
     void monitor_hand_contril(uint16_t code, int32_t value);//监视界面手控器界面刷新
     void OrderSave_signal(bool SaveFlag);//发送保存程序指令 SaveFlag=false 不保存 SaveFlag = true 保存
     void signal_TeachPageInit();//教导界面初始化信号
+    void HandWheelButtonClick_Signal();//手轮按钮按下触发更新手轮界面-手轮模式控件信号
+    void RefreshHandWheel_Signal();//刷新手轮界面信号
+    void Refresh_globalSpeedShow_Signal();//在自动界面时，通过按键修改速度时，发送刷新自动界面速度显示
 private:
     Ui::MainWindow *ui;
 
@@ -114,7 +117,7 @@ private:
     void initUI();
     void handleLoginModeChanged(LoginMode mode);
     void onCheckPara();
-
+    void AdjustSpeedHandel(uint8_t AdjustType);
 public:
     static MainWindow* pMainWindow;
 

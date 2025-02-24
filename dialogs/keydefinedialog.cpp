@@ -102,7 +102,7 @@ int KeyDefineDialog::getValveOutputPort() const
         case 0: // 原料1夹紧
             return 0 + 1;
         case 1: // 成品1夹紧
-            return 1 + 1;
+            return 2 + 1;
         case 2: // 原料2夹紧
             return 24 + 1;
         case 3: // 成品2夹紧

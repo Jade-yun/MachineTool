@@ -88,6 +88,7 @@ private:
 signals:
     void closeStackEditDialogSignal(); // 定义关闭对话框的信号
     void stackParRefreshSignal();
+    void StackFollowRefreshSignal(); //移至堆叠点/跟随点界面参数刷新信号
 private slots:
     void on_coboxStackOrder_currentIndexChanged(int index);
 };
@@ -100,7 +101,7 @@ public:
 
 public slots:
     void updateVerticalHeader(int index, const QString& text);
-
+    void StackFollowInit();
 private:
     QTableWidget *table;
     std::array<NumberEdit*, 3> nums; // 个数
