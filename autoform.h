@@ -8,6 +8,7 @@
 #include "customkeyboard.h"
 #include "autocorrectposdialog.h"
 #include "referencewidget.h"
+#include "cleardialog.h"
 
 namespace Ui {
 class AutoForm;
@@ -60,9 +61,10 @@ public:
 private:
     Ui::AutoForm *ui;
     ReferenceWidget* referEditDialog;
+    StackSetDialog* stackSet; // 堆叠指定
+    ClearDialog* clearDialog;
 
 private:
-    StackSetDialog* stackSet; // 堆叠指定
     void callNumKeyBoard(QObject* obj);
 };
 

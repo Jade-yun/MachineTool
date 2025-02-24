@@ -90,6 +90,8 @@ private:
     void setupGuidePointConnections(DraggableButton* btn);
     void updateReferPointsList();
 
+    void refreshPosTable();
+
     void setupReserveWidgets();
     void updateGroupBoxVisibility(const std::vector<std::pair<std::vector<QPushButton *>, QGroupBox *> > &buttonGroups);
 

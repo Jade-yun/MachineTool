@@ -45,8 +45,8 @@ constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
     {-1, -1, -1, -1}                                                // 预留2
 };
 
-const QString noteDirPath = "/Settings/notepad/";
-const QString menuStateConfigPath = "/Settings/menustate_config.ini";
+const QString noteDirPath = "/opt/MachineTool/docs/notepad/";
+const QString menuStateConfigPath = "/opt/MachineTool/configs/menustate_config.ini";
 
 QVector<QString> registerCode;
 
@@ -185,10 +185,10 @@ Setting::Setting(QWidget *parent) :
     connect(ui->btnSaveColor, &QPushButton::clicked, [=]() {
         static const std::vector<QString> styles = {
             ":/styleSheets/style.qss",                // 默认
-            "/Settings/style/style_orange_color.qss", // 橙色
-            "/Settings/style/style_yellow_color.qss", // 黄色
-            "/Settings/style/style_green_color.qss",  // 绿色
-            "/Settings/style/style_brown_color.qss"   // 棕色
+            "/opt/MachineTool/configs/style/style_orange_color.qss", // 橙色
+            "/opt/MachineTool/configs/style/style_yellow_color.qss", // 黄色
+            "/opt/MachineTool/configs/style/style_green_color.qss",  // 绿色
+            "/opt/MachineTool/configs/style/style_brown_color.qss"   // 棕色
         };
 
         const std::vector<QCheckBox*> colorCheckBoxes = {
@@ -277,7 +277,7 @@ Setting::Setting(QWidget *parent) :
 
     connect(ui->btnSaveTime, &QPushButton::clicked, [=](){
 
-        ErrorTipDialog tip(tr("确定修改系统时间？"), this);
+        ErrorTipDialog tip(tr("确定修改系统时间？"), nullptr);
         if (tip.exec() == QDialog::Rejected) return;
 
         int year = ui->editYear->text().toInt();
@@ -290,7 +290,7 @@ Setting::Setting(QWidget *parent) :
         QDate date(year, month, 1);
          int daysInMonth = date.daysInMonth();
          if (day < 1 || day > daysInMonth) {
-             ErrorTipDialog tip(tr("时间格式错误！"), TipMode::ONLY_OK, this);
+             ErrorTipDialog tip(tr("时间格式错误！"), TipMode::ONLY_OK, nullptr);
              tip.exec();
              return;
          }
@@ -989,102 +989,52 @@ void Setting::initWidgets()
 
 void Setting::setupPortDefine()
 {
-
-#if 0
-    for(int i=0;i<INPUT_TOTAL_NUM;i++)
+    auto updatePortDefTableRow = [&](int row, const D_PortDefineStruct& portInfo)
     {
-        QTableWidgetItem* item1=new QTableWidgetItem(m_Port_X[i].definePort);
-        ui->tableWgtPortDef->setItem(i,0,item1);
-        if(m_Port_X[i].functionSet == 1)
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].defineName);
-            ui->tableWgtPortDef->setItem(i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].modifyName);
-            ui->tableWgtPortDef->setItem(i,2,item3);
+        QTableWidgetItem* item1 = ui->tableWgtPortDef->item(row, 0);
+        if (!item1) {
+            item1 = new QTableWidgetItem();
+            ui->tableWgtPortDef->setItem(row, 0, item1);
         }
-        else
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_X[i].ResDefineName);
-            ui->tableWgtPortDef->setItem(i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_X[i].ResModifyName);
-            ui->tableWgtPortDef->setItem(i,2,item3);
-        }
-        QTableWidgetItem* item4=new QTableWidgetItem(m_Port_X[i].modifyPort);
-        ui->tableWgtPortDef->setItem(i,3,item4);
-    }
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
-    {
+        item1->setText(portInfo.definePort);
 
-        QTableWidgetItem* item1=new QTableWidgetItem(m_Port_Y[i].definePort);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,0,item1);
-        if(m_Port_Y[i].functionSet == 1)
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].defineName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].modifyName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
+        QTableWidgetItem* item2 = ui->tableWgtPortDef->item(row, 1);
+        QTableWidgetItem* item3 = ui->tableWgtPortDef->item(row, 2);
+        if (!item2) {
+            item2 = new QTableWidgetItem();
+            ui->tableWgtPortDef->setItem(row, 1, item2);
         }
-        else
-        {
-            QTableWidgetItem* item2=new QTableWidgetItem(m_Port_Y[i].ResDefineName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,1,item2);
-            QTableWidgetItem* item3=new QTableWidgetItem(m_Port_Y[i].ResModifyName);
-            ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,2,item3);
+        if (!item3) {
+            item3 = new QTableWidgetItem();
+            ui->tableWgtPortDef->setItem(row, 2, item3);
         }
-        QTableWidgetItem* item4=new QTableWidgetItem(m_Port_Y[i].modifyPort);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM+i,3,item4);
-    }
-#else
+
+        if (portInfo.functionSet == 1) {
+            item2->setText(portInfo.defineName);
+            item3->setText(portInfo.modifyName);
+        } else {
+            item2->setText(portInfo.ResDefineName);
+            item3->setText(portInfo.ResModifyName);
+        }
+
+        QTableWidgetItem* item4 = ui->tableWgtPortDef->item(row, 3);
+        if (!item4) {
+            item4 = new QTableWidgetItem();
+            ui->tableWgtPortDef->setItem(row, 3, item4);
+        }
+        item4->setText(portInfo.modifyPort);
+        item4->setData(Qt::UserRole, portInfo.actualPortNum); // 设置附加数据
+    };
+
+    // 遍历输入端口
     for (int i = 0; i < INPUT_TOTAL_NUM; i++) {
-        QTableWidgetItem* item1 = new QTableWidgetItem(m_Port_X[i].definePort);
-        item1->setData(Qt::UserRole, m_Port_X[i].portNum);
-        ui->tableWgtPortDef->setItem(i, 0, item1);
-
-        QTableWidgetItem* item2;
-        QTableWidgetItem* item3;
-
-        if (m_Port_X[i].functionSet == 1) {
-            item2 = new QTableWidgetItem(m_Port_X[i].defineName);
-            item3 = new QTableWidgetItem(m_Port_X[i].modifyName);
-        } else {
-            item2 = new QTableWidgetItem(m_Port_X[i].ResDefineName);
-            item3 = new QTableWidgetItem(m_Port_X[i].ResModifyName);
-        }
-
-        item3->setData(Qt::UserRole, m_Port_X[i].actualPortNum);  // 设置附加数据
-
-        ui->tableWgtPortDef->setItem(i, 1, item2);
-        ui->tableWgtPortDef->setItem(i, 2, item3);
-
-        QTableWidgetItem* item4 = new QTableWidgetItem(m_Port_X[i].modifyPort);
-        ui->tableWgtPortDef->setItem(i, 3, item4);
+        updatePortDefTableRow(i, m_Port_X[i]);
     }
 
+    // 遍历输出端口
     for (int i = 0; i < OUTPUT_TOTAL_NUM; i++) {
-        QTableWidgetItem* item1 = new QTableWidgetItem(m_Port_Y[i].definePort);
-        item1->setData(Qt::UserRole, m_Port_Y[i].portNum);  // 设置附加数据
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 0, item1);
-
-        QTableWidgetItem* item2;
-        QTableWidgetItem* item3;
-
-        if (m_Port_Y[i].functionSet == 1) {
-            item2 = new QTableWidgetItem(m_Port_Y[i].defineName);
-            item3 = new QTableWidgetItem(m_Port_Y[i].modifyName);
-        } else {
-            item2 = new QTableWidgetItem(m_Port_Y[i].ResDefineName);
-            item3 = new QTableWidgetItem(m_Port_Y[i].ResModifyName);
-        }
-
-        item3->setData(Qt::UserRole, m_Port_Y[i].actualPortNum);  // 设置附加数据
-
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 1, item2);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 2, item3);
-
-        QTableWidgetItem* item4 = new QTableWidgetItem(m_Port_Y[i].modifyPort);
-        ui->tableWgtPortDef->setItem(INPUT_TOTAL_NUM + i, 3, item4);
+        updatePortDefTableRow(INPUT_TOTAL_NUM + i, m_Port_Y[i]);
     }
-#endif
 
     connect(ui->btnSavePort,&QPushButton::clicked, [=](){
         if (!ui->btnSavePort->isParaChanged()) return;
@@ -1105,6 +1055,12 @@ void Setting::setupPortDefine()
         }
 
         this->savePortDefine();
+        g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
+        g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
+        emit monitor_port_refreash();
+        emit WidgetNameRefresh_signal();
+        emit updatemonitorhandcontrol();
+        emit updateManualformButtonName_Signal();//更新手动界面按钮显示
 
         ui->btnSavePort->setParaChangedFlag(false);
 
@@ -1194,6 +1150,49 @@ void Setting::setupPortDefine()
             return;
         }
 
+        QFileInfo fileInfo(CustomizePortInfoPath);
+        auto res = UsbDisk::instance()->copyFromUsb("HMI/" + fileInfo.fileName(), fileInfo.path());
+        ::sync();
+
+        if (res)
+        {
+            ErrorTipDialog tip(tr("导入成功!"), TipMode::ONLY_OK, nullptr);
+            QTimer::singleShot(1000, [&](){
+                tip.accept();
+            });
+            tip.exec();
+        }
+
+        QProgressDialog loadingTip(tr("数据处理中，请稍候..."), tr("取消"), 0, 0, this);
+        loadingTip.setFixedSize(500, 300);
+        loadingTip.setWindowModality(Qt::ApplicationModal);
+        loadingTip.setCancelButton(nullptr);
+        QCoreApplication::processEvents(); // 处理事件循环，确保对话框显示
+
+        QTimer::singleShot(10, [&]() {
+            // 读取导入数据并处理
+            readPortDefInfo();
+
+            for (int i = 0; i < INPUT_TOTAL_NUM; i++) {
+                updatePortDefTableRow(i, m_Port_X[i]);
+            }
+
+            for (int i = 0; i < OUTPUT_TOTAL_NUM; i++) {
+                updatePortDefTableRow(INPUT_TOTAL_NUM + i, m_Port_Y[i]);
+            }
+
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL, CMD_SUN_SIGNAL_IN_FUNC_DEF);
+            g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL, CMD_SUN_SIGNAL_OUT_FUNC_DEF);
+            emit monitor_port_refreash();
+            emit WidgetNameRefresh_signal();
+            emit updatemonitorhandcontrol();
+            emit updateManualformButtonName_Signal();
+
+            loadingTip.accept();
+        });
+
+        loadingTip.exec();
+
     });
     connect(ui->btnExportPortDef, &QPushButton::clicked, [=](){
         if (!UsbDisk::instance()->isInserted())
@@ -1203,7 +1202,7 @@ void Setting::setupPortDefine()
         }
 //        auto res = UsbDisk::instance()->copyToUsb(m_configPortXYNamePath, "HMI/");
 //        res = res && UsbDisk::instance()->copyToUsb(m_configPortXYNameIniPath, "HMI/");
-        const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
+
         auto res = UsbDisk::instance()->copyToUsb(CustomizePortInfoPath, "HMI/");
 
         ::sync();
@@ -1216,6 +1215,25 @@ void Setting::setupPortDefine()
             });
             tip.exec();
         }
+    });
+
+    connect(ui->coboxGroupSelectPortDef, QOverload<int>::of(&QComboBox::activated), [=](int index){
+        auto findAndScrollToItem = [this](const QString& targetName) {
+            for (int row = 0; row < ui->tableWgtPortDef->rowCount(); ++row) {
+                QTableWidgetItem* item = ui->tableWgtPortDef->item(row, 0);
+                if (item && item->text() == targetName) {
+                    ui->tableWgtPortDef->setCurrentItem(item);
+                    ui->tableWgtPortDef->scrollToItem(item, QAbstractItemView::PositionAtTop);
+                    return true;
+                }
+            }
+            return false;
+        };
+        const QString portGroupName[] = {
+            "X1", "EX1", "Y1", "EY1"
+        };
+
+        findAndScrollToItem(portGroupName[index]);
     });
 }
 
@@ -1423,6 +1441,8 @@ void Setting::setupNameDefine()
            });
            tip.exec();
        }
+
+       emit coboxVarSelectVarPreOpItemSet_signal();
     });
     connect(ui->btnRestoreNameOneNameDef, &QPushButton::clicked, this, [=](){
         int curRow = ui->tableWgtNameDef->currentRow();
@@ -3206,7 +3226,6 @@ void Setting::outportInterlockSlots()
         m_Port_X[group.reverseDetectPort].functionSet = useForwardValue && reverseCheck;
     }
 
-    setPortDefineNameOrPortNum();
     emit RefreshPortDefineSignals();
     emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
@@ -3928,13 +3947,8 @@ void Setting::savePortDefine()
         }
         m_OutportFuncDefine[i] = m_Port_Y[i].actualPortNum;
     }
-    setPortDefineNameOrPortNum();
-    g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
-    g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
-    emit monitor_port_refreash();
-    emit WidgetNameRefresh_signal();
-    emit updatemonitorhandcontrol();
-    emit updateManualformButtonName_Signal();//更新手动界面按钮显示
+//    setPortDefineNameOrPortNum();
+    ::writePortDefInfo();
 }
 
 bool Setting::modifyPort(int row, int column)
@@ -3965,7 +3979,7 @@ bool Setting::modifyPort(int row, int column)
 //                m_Port_X[row].actualPortNum = static_cast<uint8_t>(dialog.getInputPort());
 //                ui->tableWgtPortDef->item(row, column)->setText(text);
                 QString portName = dialog.getIOOnlineIn();
-                auto portNum = static_cast<uint8_t>(dialog.getInputPort());
+                auto portNum = static_cast<uint8_t>(dialog.get_IOInEdit_InPort());
                 auto item = ui->tableWgtPortDef->item(row, column);
                 if (portName != item->text())
                 {
@@ -3985,7 +3999,7 @@ bool Setting::modifyPort(int row, int column)
 //                ui->tableWgtPortDef->item(row, column)->setText(text);
 
                 QString portName = dialog.getIOOnlineOut();
-                auto portNum = static_cast<uint8_t>(dialog.getOutputPort());
+                auto portNum = static_cast<uint8_t>(dialog.get_IOInEdit_OutPort());
                 auto item = ui->tableWgtPortDef->item(row, column);
                 if (portName != item->text())
                 {
@@ -4044,24 +4058,24 @@ void Setting::on_btnLogoUpdate_clicked()
             }
             if(update_error == 1)
             {
-                MainWindow::pMainWindow->showErrorTip("未检测到bootlogo.bmp文件");
+                MainWindow::pMainWindow->showErrorTip(tr("未检测到bootlogo.bmp文件"));
                 update_error = 0;
             }
             else if(update_error == 2)
             {
-                MainWindow::pMainWindow->showErrorTip("未检测到stop.jpg文件");
+                MainWindow::pMainWindow->showErrorTip(tr("未检测到stop.jpg文件"));
                 update_error = 0;
             }
             else if(update_error == 3)
             {
-                MainWindow::pMainWindow->showErrorTip("未检测到bootlogo.bmp和stop.jpg文件");
+                MainWindow::pMainWindow->showErrorTip(tr("未检测到bootlogo.bmp和stop.jpg文件"));
                 update_error = 0;
             }
         }
     }
     else
     {//提示u盘未插入
-        MainWindow::pMainWindow->showErrorTip("未插入U盘！");
+        MainWindow::pMainWindow->showErrorTip(tr("未插入U盘！"));
     }
 }
 /*************************************************************************
@@ -4085,32 +4099,32 @@ void Setting::UpgradeHandle(int click_type)
             switch(UpgradeDialog->sure_handle_type){
             case HANDHELD:
             {
-                MainWindow::pMainWindow->showErrorTip("手持器升级完成,正在重启中...",TipMode::ONLY_OK);
+                MainWindow::pMainWindow->showErrorTip(tr("手持器升级完成,正在重启中..."),TipMode::ONLY_OK);
                 break;
             }
             case MAINBOARD:
             {
-                MainWindow::pMainWindow->showErrorTip("主板升级完成,正在重启中...",TipMode::ONLY_OK);
+                MainWindow::pMainWindow->showErrorTip(tr("主板升级完成,正在重启中..."),TipMode::ONLY_OK);
                 break;
             }
             case IOBOARD:
             {
-                MainWindow::pMainWindow->showErrorTip("IO板升级完成,正在重启中...",TipMode::ONLY_OK);
+                MainWindow::pMainWindow->showErrorTip(tr("IO板升级完成,正在重启中..."),TipMode::ONLY_OK);
                 break;
             }
             case SERVO:
             {
-                MainWindow::pMainWindow->showErrorTip("伺服升级完成,正在重启中...",TipMode::ONLY_OK);
+                MainWindow::pMainWindow->showErrorTip(tr("伺服升级完成,正在重启中..."),TipMode::ONLY_OK);
                 break;
             }
             case SYSTEM_DATA_COPY:
             {
-                MainWindow::pMainWindow->showErrorTip("数据备份成功!",TipMode::ONLY_OK);
+                MainWindow::pMainWindow->showErrorTip(tr("数据备份成功!"),TipMode::ONLY_OK);
                 break;
             }
             case COPY_DATA_REST:
             {
-                MainWindow::pMainWindow->showErrorTip("数据还原成功!",TipMode::ONLY_OK);
+                MainWindow::pMainWindow->showErrorTip(tr("数据还原成功!"),TipMode::ONLY_OK);
                 break;
             }
             default:
@@ -4123,32 +4137,32 @@ void Setting::UpgradeHandle(int click_type)
             switch(UpgradeDialog->sure_handle_type){
             case HANDHELD:
             {
-                ui->updata_label->setText("提示 : 手持器升级中,切勿断电,请等待自动重启!");
+                ui->updata_label->setText(tr("提示 : 手持器升级中,切勿断电,请等待自动重启!"));
                 break;
             }
             case MAINBOARD:
             {
-                ui->updata_label->setText("提示 : 主板升级中,切勿断电,请等待自动重启!");
+                ui->updata_label->setText(tr("提示 : 主板升级中,切勿断电,请等待自动重启!"));
                 break;
             }
             case IOBOARD:
             {
-                ui->updata_label->setText("提示 : IO板升级中,切勿断电,请等待自动重启!");
+                ui->updata_label->setText(tr("提示 : IO板升级中,切勿断电,请等待自动重启!"));
                 break;
             }
             case SERVO:
             {
-                ui->updata_label->setText("提示 : 伺服升级中,切勿断电,请等待自动重启!");
+                ui->updata_label->setText(tr("提示 : 伺服升级中,切勿断电,请等待自动重启!"));
                 break;
             }
             case SYSTEM_DATA_COPY:
             {
-                ui->updata_label->setText("提示 : 数据备份中,切勿断电!");
+                ui->updata_label->setText(tr("提示 : 数据备份中,切勿断电!"));
                 break;
             }
             case COPY_DATA_REST:
             {
-                ui->updata_label->setText("提示 : 数据还原中,切勿断电!");
+                ui->updata_label->setText(tr("提示 : 数据还原中,切勿断电!"));
                 break;
             }
             default:
@@ -4168,7 +4182,7 @@ void Setting::UpgradeHandle(int click_type)
     }
     else
     {
-        MainWindow::pMainWindow->showErrorTip("未插入U盘！");
+        MainWindow::pMainWindow->showErrorTip(tr("未插入U盘！"));
     }
 
 }

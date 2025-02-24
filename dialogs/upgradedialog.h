@@ -1,6 +1,6 @@
 #ifndef UPGRADEDIALOG_H
 #define UPGRADEDIALOG_H
-#include "customkeyboard.h"
+
 #include <QDialog>
 #include "basewindow.h"
 #include <QFileSystemModel>
@@ -60,7 +60,6 @@ private:
     uint8_t UpgradeType = HANDHELD;
     Ui::upgradedialog *ui;
 private:
-    FullKeyboard* keyboard;
     ErrorTipDialog* dlgErrorTip;
     QStringList listOfFilesToCopy;
     QFileSystemModel *FileSystemModel;

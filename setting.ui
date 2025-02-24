@@ -3435,11 +3435,6 @@ QPushButton::released{
        </item>
        <item>
         <property name="text">
-         <string>机械手入3</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>机械手出1</string>
         </property>
        </item>

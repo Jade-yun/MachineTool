@@ -3267,7 +3267,7 @@ void Teach::on_lineEdit_General_Position_X1_editingFinished()
     {
         ui->lineEdit_General_Position_X1->setText(QString::number((float)(Temp_AxisMoveOrder[X1_AXIS].pos)/100));
         //可添加提示超出最大范围
-        MainWindow::pMainWindow->showErrorTip("X1轴超出最大范围",TipMode::ONLY_OK);
+        MainWindow::pMainWindow->showErrorTip(tr("X1轴超出最大范围"),TipMode::ONLY_OK);
     }
 }
 
@@ -3281,7 +3281,7 @@ void Teach::on_lineEdit_General_Position_Y1_editingFinished()
     {
         ui->lineEdit_General_Position_Y1->setText(QString::number((float)(Temp_AxisMoveOrder[Y1_AXIS].pos)/100));
         //可添加提示超出最大范围
-        MainWindow::pMainWindow->showErrorTip("Y1轴超出最大范围",TipMode::ONLY_OK);
+        MainWindow::pMainWindow->showErrorTip(tr("Y1轴超出最大范围"),TipMode::ONLY_OK);
     }
 }
 
@@ -3295,7 +3295,7 @@ void Teach::on_lineEdit_General_Position_Z1_editingFinished()
     {
         ui->lineEdit_General_Position_Z1->setText(QString::number((float)(Temp_AxisMoveOrder[Z1_AXIS].pos)/100));
         //可添加提示超出最大范围
-        MainWindow::pMainWindow->showErrorTip("Z1轴超出最大范围",TipMode::ONLY_OK);
+        MainWindow::pMainWindow->showErrorTip(tr("Z1轴超出最大范围"),TipMode::ONLY_OK);
     }
 }
 
@@ -3310,7 +3310,7 @@ void Teach::on_lineEdit_General_Position_Y2_editingFinished()
     {
         ui->lineEdit_General_Position_Y2->setText(QString::number((float)(Temp_AxisMoveOrder[Y2_AXIS].pos)/100));
         //可添加提示超出最大范围
-        MainWindow::pMainWindow->showErrorTip("Y2轴超出最大范围",TipMode::ONLY_OK);
+        MainWindow::pMainWindow->showErrorTip(tr("Y2轴超出最大范围"),TipMode::ONLY_OK);
     }
 }
 
@@ -3324,7 +3324,7 @@ void Teach::on_lineEdit_General_Position_Z2_editingFinished()
     {
         ui->lineEdit_General_Position_Z2->setText(QString::number((float)(Temp_AxisMoveOrder[Z2_AXIS].pos)/100));
         //可添加提示超出最大范围
-        MainWindow::pMainWindow->showErrorTip("Z2轴超出最大范围",TipMode::ONLY_OK);
+        MainWindow::pMainWindow->showErrorTip(tr("Z2轴超出最大范围"),TipMode::ONLY_OK);
     }
 }
 

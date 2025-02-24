@@ -42,6 +42,7 @@ public:
     bool copy(const QString& sourceFile, const QString &destPath);
 
     QString getUsbMountPoint() const;
+    QString findFile(const QString& fileName) const;
     QString findFileAndGetDirectory(const QString &usbPath, const QString &fileName);
 private:
     QString m_mountPoint;

@@ -55,19 +55,25 @@ ReferenceWidget::ReferenceWidget(QWidget *parent)
 
             if (it != referencePoints.end())
             {
-                static FullKeyboard keyboard(this);
+//                static FullKeyboard keyboard(this);
 
-                keyboard.setText(it->name);
-                keyboard.setCurrentEditObj(textReferPointName);
-                keyboard.exec(); // must use exec here, using open cannot ensure to save the name.
+//                keyboard.setText(it->name);
+//                keyboard.setCurrentEditObj(textReferPointName);
+//                keyboard.exec(); // must use exec here, using open cannot ensure to save the name.
 
-                QString text = keyboard.getInputText();
+//                QString text = keyboard.getInputText();
 
-//                keyboard->setText(it->name);
-//                keyboard->setCurrentEditObj(textReferPointName);
-//                keyboard->exec(); // must use exec here, using open cannot ensure to save the name.
+                static FullKeyboard* keyboard = nullptr;
+                if (!keyboard)
+                {
+                    keyboard = new FullKeyboard(this);
+                }
 
-//                QString text = keyboard->getInputText();
+                keyboard->setText(it->name);
+                keyboard->setCurrentEditObj(textReferPointName);
+                keyboard->exec(); // must use exec here, using open cannot ensure to save the name.
+
+                QString text = keyboard->getInputText();
 
 
                 if (it->name != text )

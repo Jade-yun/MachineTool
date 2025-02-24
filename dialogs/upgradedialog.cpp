@@ -8,6 +8,9 @@
 #include <QProcess>
 #include "program_save.h"
 #include "iniconfig.h"
+
+#include <unistd.h>
+
 #define COPYS "-副本"
 #define DECOLLATOR '/'
 #define ARROWS ">"
@@ -88,7 +91,7 @@ void upgradedialog::upgreadok_handle()
     }
     case SYSTEM_DATA_COPY:
     {
-        int reply = showTip("请确认: [手持器]---->[U盘]");
+        int reply = showTip(tr("请确认: [手持器]---->[U盘]"));
         if(reply == QDialog::Accepted)
         {
             this->hide();
@@ -118,12 +121,12 @@ void upgradedialog::upgreadok_handle()
     }
     case COPY_DATA_REST:
     {
-        int reply = showTip("请确认: [U盘]---->[手持器]");
+        int reply = showTip(tr("请确认: [U盘]---->[手持器]"));
         if(reply == QDialog::Accepted)
         {
             if(hasDuplicateFileNames(TargetPath,m_ProgramPath))
             {//if存在同名文件
-                int reply = showTip("存在相同文件,请确认是否覆盖?确认(覆盖同名文件);取消(不恢复同名文件)");
+                int reply = showTip(tr("存在相同文件,请确认是否覆盖?确认(覆盖同名文件);取消(不恢复同名文件)"));
                 if(reply == QDialog::Accepted)
                 {
                     Cover_SameNameFile = true;
@@ -626,11 +629,11 @@ void upgradedialog::on_ok_button_clicked()
 //                    UpdataThread_main->start();
                 } else {
                     // 文件名不符合所需格式
-                    MainWindow::pMainWindow->showErrorTip("升级文件类型异常！请选择类型为M_VX_X.bin类型的文件进行升级");
+                    MainWindow::pMainWindow->showErrorTip(tr("升级文件类型异常！请选择类型为M_VX_X.bin类型的文件进行升级"));
                 }
             } else {
                 // 没有选中任何文件
-                MainWindow::pMainWindow->showErrorTip("未选中升级文件！");
+                MainWindow::pMainWindow->showErrorTip(tr("未选中升级文件！"));
             }
         }
         break;
@@ -742,7 +745,7 @@ void upgradedialog::Updata_handle() {
     QString fileName = fileInfo.fileName();
     if(fileName != "MachineTool")
     {
-        MainWindow::pMainWindow->showErrorTip("请选择文件名为MachineTool的升级文件进行升级");
+        MainWindow::pMainWindow->showErrorTip(tr("请选择文件名为MachineTool的升级文件进行升级"));
         this->close();
         return;
     }
@@ -969,7 +972,9 @@ void upgradedialog::on_ResSettOK_clicked()
     if(ui->ResSettInput_password->text().toUInt() == passwd[3])
     {//如果输入密码正确
         if(RESTSETTING == sure_handle_type)
-        {//恢复出场设置
+        {
+#if 0
+            //恢复出场设置
             QFile file(m_defaultConfigFileNamePath);
             if(file.exists())
             {
@@ -986,9 +991,32 @@ void upgradedialog::on_ResSettOK_clicked()
             }
             else
             {
-                showTip("未发现恢复出场设置文件！");
+                showTip(tr("未发现恢复出场设置文件！"));
+            }
+#else
+            QString defaultConfigDir = "/opt/MachineTool/default_configs";  // 默认配置文件目录
+            QString targetDir = "/Settings";  // app运行配置文件目录
+            QDir dir(defaultConfigDir);
+
+            if (!dir.exists()) {
+                qWarning() << "Failed to restore factory settings";
+                return;
             }
 
+
+//            auto res = cpStateReturn(m_defaultConfigFileNamePath, m_configFileNamePath);
+//            res = res && cpStateReturn(m_defaultconfigPortSettingPath, m_configPortSettingPath);
+
+            QString command = QString("cp -rf %1/* %2/").arg(defaultConfigDir, targetDir);
+            int result = system(command.toStdString().c_str());
+
+            if (result != 0) {
+                qDebug() << "Failed to copy configuration files!";
+            }
+
+            ::sync();
+            system("reboot");
+#endif
             if(!ui->Reserve_teach_checkbox->isChecked())
             {//保存教导程序未选中，清除所有程序
 
@@ -1004,6 +1032,11 @@ void upgradedialog::on_ResSettOK_clicked()
     else
     {
         ui->ResSettInput_password->setStyleSheet("QLineEdit { border: 2px solid red; }");
+        ErrorTipDialog tip(tr("密码错误！"), TipMode::ONLY_OK, nullptr);
+        QTimer::singleShot(1000, this, [&](){
+            tip.accept();
+        });
+        tip.exec();
     }
 }
 //cp是否成功反馈
@@ -1015,10 +1048,10 @@ bool upgradedialog::cpStateReturn(QString CopyFilePath , QString TargetFilePath)
     arguments << CopyFilePath << TargetFilePath;
     process.start("cp", arguments);
     if (!process.waitForStarted()) {
-        showTip("无法启动cp命令！");
+        showTip(tr("无法启动cp命令！"));
     } else {
         if (!process.waitForFinished()) {
-            showTip("cp命令执行未完成！");
+            showTip(tr("cp命令执行未完成！"));
         } else {
             // 检查cp命令的退出状态
             if (process.exitCode() == 0) {
@@ -1026,7 +1059,7 @@ bool upgradedialog::cpStateReturn(QString CopyFilePath , QString TargetFilePath)
                 state = 1;
             } else {
                 // cp命令执行失败
-                showTip(QString("cp命令执行失败！退出码：%1").arg(process.exitCode()));
+                showTip(tr("cp命令执行失败！退出码：") + QString::number(process.exitCode()));
             }
         }
     }

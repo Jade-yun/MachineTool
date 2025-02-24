@@ -9,10 +9,6 @@
 
 #include "customkeyboard.h"
 
-const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
-const QString alarmInfoDataPath = "/Settings/AlarmInfoData.ini";
-const QString maintainInfoDataPath = "/Settings/MaintainInfoData.ini";
-
 AlarmForm::AlarmForm(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AlarmForm)

@@ -4,6 +4,7 @@
 #include <QRegularExpression>
 #include <QStorageInfo>
 #include <QProcess>
+#include <QDirIterator>
 
 UsbDisk::UsbDisk(QObject *parent) : QObject(parent)
 {
@@ -176,6 +177,27 @@ QString UsbDisk::getUsbMountPoint() const
 
     // 如果未找到匹配的设备，则返回空字符串或其他指示未找到的标记
     qDebug() << "No USB device found.";
+    return QString();
+}
+
+QString UsbDisk::findFile(const QString &fileName) const
+{
+    const QString rootPath = getUsbMountPoint();
+
+    if (rootPath.isEmpty() || !QDir(rootPath).exists()) {
+        qWarning() << "USB directory does not exist:" << rootPath;
+        return QString();
+    }
+
+    QDirIterator it(rootPath, QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+
+    while (it.hasNext()) {
+        QString filePath = it.next();
+        if (QFileInfo(filePath).fileName() == fileName) {
+            return filePath;
+        }
+    }
+
     return QString();
 }
 

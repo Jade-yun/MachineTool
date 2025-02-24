@@ -5,7 +5,7 @@
 
 #include <QSettings>
 
-const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
+extern const QString alarmInfoMappingPath;
 
 AlarmInfoDialog::AlarmInfoDialog(QWidget *parent) :
     QDialog(parent),
@@ -16,6 +16,8 @@ AlarmInfoDialog::AlarmInfoDialog(QWidget *parent) :
     FramelessWidget2 *framless = new FramelessWidget2(this);
     framless->setWidget(this);
     framless->setResizeEnable(false);
+
+    this->setModal(true);
 
     ui->labAlarmContent->setWordWrap(true);
     ui->labAlarmContent->setAlignment(Qt::AlignVCenter);

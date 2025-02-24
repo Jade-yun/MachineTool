@@ -27,7 +27,7 @@
 #include <unistd.h>
 #include <linux/input.h>
 
-const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
+extern const QString alarmInfoMappingPath;
 
 MainWindow* MainWindow::pMainWindow = nullptr;
 
@@ -73,10 +73,10 @@ MainWindow::MainWindow(QWidget *parent)
     // after reading all init parameters, set the style for whole app.
     const std::vector<QString> styles = {
         ":/styleSheets/style.qss",
-        "/Settings/style/style_orange_color.qss",
-        "/Settings/style/style_yellow_color.qss",
-        "/Settings/style/style_green_color.qss",
-        "/Settings/style/style_brown_color.qss"
+        "/opt/MachineTool/configs/style/style_orange_color.qss",
+        "/opt/MachineTool/configs/style/style_yellow_color.qss",
+        "/opt/MachineTool/configs/style/style_green_color.qss",
+        "/opt/MachineTool/configs/style/style_brown_color.qss"
     };
 
     if (m_SystemSet.sysColor < styles.size())
@@ -307,6 +307,7 @@ void MainWindow::handleAlarm(uint16_t alarmNum)
 
     alarmWidget->handleAlarm(alarmNum);
 
+    alarmBar->showAlarm(alarmNum);
 }
 //设置主界面控件状态控制
 void MainWindow::MainWindow_SetControl_Stake(bool state)
@@ -808,8 +809,9 @@ void MainWindow::callFullKeyboard(QObject *watched)
     //        keyboard->show();
     //        keyboard->raise();
     //        keyboard->activateWindow();
-    keyboard->open();
-    keyboard->raise();
+//    keyboard->open();
+//    keyboard->raise();
+    keyboard->exec();
 
 }
 
@@ -1247,7 +1249,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 //刷新系统名称显示
 void MainWindow::updatelabProgramName()
 {
-    ui->labProgramName->setText(m_SystemSet.sysName + "  " + "程式：" + m_CurrentProgramNameAndPath.fileName);
+    ui->labProgramName->setText(m_SystemSet.sysName + "  " + tr("程式：") + m_CurrentProgramNameAndPath.fileName);
 }
 //系统名称标签框滚动显示
 void MainWindow::labProgramNameRollShow()

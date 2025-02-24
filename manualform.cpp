@@ -10,8 +10,10 @@
 
 #include "cmd.h"
 #include "mainwindow.h"
+#include "RefreshKernelBuffer.h"
 
-QString REFERPOINT_PIC = ":/images/referPoint.png";
+QString REFERPOINT_PIC = "/opt/MachineTool/resources/pics/referPoint.png";
+const QString GuidePicPath = "/opt/MachineTool/resources/pics/guide.png";
 
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
@@ -384,7 +386,7 @@ void ManualForm::on_btnDeleteButton_clicked()
     if (selectedButton[0] && guidePoints.contains(selectedButton[0]))
     {
         QString guideName = guidePoints.value(selectedButton[0]).guideName;
-        int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除：%1").arg(guideName));
+        int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除：") + guideName);
         if (reply == QDialog::Accepted)
         {
            // Remove the button and corresponding GuidePara
@@ -479,7 +481,7 @@ void ManualForm::on_btnDeleteButtonReference_clicked()
             if (it != referencePoints.end())
             {
                 QString referName = it->name;
-                int reply = MainWindow::pMainWindow->showErrorTip(tr("确定删除：%1").arg(referName));
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("确定删除：") + referName);
                 if (reply == QDialog::Accepted)
                 {
                     removeReferencePoint();
@@ -610,6 +612,8 @@ void ManualForm::tableReferenceInit()
             selectedButton[1] = btn;
             QString name = it->name;
             ui->textReferPointName->setText(name);
+
+            refreshPosTable();
         }
     });
 
@@ -629,12 +633,11 @@ void ManualForm::pageInit()
 
     ui->tableWgtAxisPos->setHorizontalHeaderLabels({tr("轴位置")});
 
-    ui->labelGuideBackgroud->setPixmap(QPixmap(""));
     QPixmap picReferPoint(REFERPOINT_PIC);
     picReferPoint.scaled(ui->labReferPointBackGround->size());
     ui->labReferPointBackGround->setPixmap(picReferPoint);
 
-    ui->labelGuideBackgroud->setPixmap(QPixmap(":/images/guide.png"));
+    ui->labelGuideBackgroud->setPixmap(QPixmap(GuidePicPath));
 
     ui->btnAutoGate1Close->setEnabled(true);
     ui->btnStartProcess1Break->setEnabled(false);
@@ -800,7 +803,11 @@ void ManualForm::updateReferPointsList()
             });
 
             connect(btn, &DraggableButton::pressed, this, [=]() {
+                if (selectedButton[1] == btn) return;
+
                 selectedButton[1] = btn;
+
+                refreshPosTable();
 
                 int index = 0;
                 auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& p) {
@@ -834,6 +841,31 @@ void ManualForm::updateReferPointsList()
     }
 
     updateReferPointsTable();
+
+}
+
+void ManualForm::refreshPosTable()
+{
+    static const QStringList axisNames = {
+        "X1", "Y1", "Z1", "X2", "Y2", "Z2"
+    };
+
+    ui->tableWgtAxisPos->setRowCount(6);
+    ui->tableWgtAxisPos->setVerticalHeaderLabels(axisNames);
+
+    auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+        return point.button == selectedButton[1];
+    });
+    if (it != referencePoints.end())
+    {
+        ui->tableWgtAxisPos->clearContents();  // 清除旧数据
+
+        for (size_t i = 0; i < AXIS_TOTAL_NUM; i++)
+        {
+            auto item = new QTableWidgetItem(QString::number(it->axisPos[i] / 100.0, 'f', 2));
+            ui->tableWgtAxisPos->setItem(i, 0, item);
+        }
+    }
 
 }
 
@@ -1042,7 +1074,11 @@ void ManualForm::addReferencePoint()
     });
 
     connect(btn, &DraggableButton::pressed, this, [=]() {
+        if (selectedButton[1] == btn) return;
+
         selectedButton[1] = btn;
+
+        refreshPosTable();
 
         int index = 0;
         auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
@@ -1357,28 +1393,47 @@ void ManualForm::onTabChanged(int index)
 void ManualForm::on_btnImportPictureGuide_clicked()
 {
     bool useDefultPic = false;
-    QPixmap pic("./guide.png");
-    if (pic.isNull())
+
+    auto filePath = UsbDisk::instance()->findFile("guide.png");
+
+    if (filePath.isNull())
     {
         int res = MainWindow::pMainWindow->showErrorTip(tr("未找到图片：guide.png，图片像素: 1001×450px。是否使用默认图片？"));
         useDefultPic = res == QDialog::Accepted;
 
         if (useDefultPic)
         {
-            pic = QPixmap(":/images/guide.png");
-        }
-        else {
-            pic = QPixmap("./guide.png");
+            filePath = "/opt/MachineTool/resources/pics/guide_default.png";
         }
     }
-    ui->labelGuideBackgroud->setPixmap(pic);
+
+    QString targetPath = GuidePicPath;
+
+    if (QFile::exists(targetPath)) {
+        QFile::remove(targetPath);
+    }
+    if (!QFile::copy(filePath, targetPath)) {
+        qWarning() << "Failed to copy file:" << filePath;
+    }
+    REFRESH_KERNEL_BUFFER(targetPath.toStdString().c_str())
+
+    QPixmap pic(filePath);
+    if (!pic.isNull()) {
+        QPixmap scaledPic = pic.scaled(QSize(1001, 450), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui->labelGuideBackgroud->setPixmap(scaledPic);
+    }
+    else {
+        ui->labelGuideBackgroud->setPixmap(pic);
+    }
 }
 
 void ManualForm::on_btnImportPictureReference_clicked()
 {
     bool useDefultPic = false;
-    QPixmap pic("./referPoint.png");
-    if (pic.isNull())
+
+    auto filePath = UsbDisk::instance()->findFile("referPoint.png");
+
+    if (filePath.isNull())
     {
         int res = MainWindow::pMainWindow->showErrorTip(
                     tr("未找到图片: referPoint.png，图片像素: 760×480px。是否使用默认图片？"));
@@ -1386,15 +1441,29 @@ void ManualForm::on_btnImportPictureReference_clicked()
 
         if (useDefultPic)
         {
-            REFERPOINT_PIC = ":/images/referPoint.png";
-            pic = QPixmap(":/images/referPoint.png");
-        }
-        else {
-            REFERPOINT_PIC = "./referPoint.png";
-            pic = QPixmap("./referPoint.png");
+            filePath = "/opt/MachineTool/resources/pics/referPoint_default.png";
         }
     }
-    ui->labReferPointBackGround->setPixmap(pic);
+
+    QString targetPath = REFERPOINT_PIC;
+
+    if (QFile::exists(targetPath)) {
+        QFile::remove(targetPath);
+    }
+    if (!QFile::copy(filePath, targetPath)) {
+        qWarning() << "Failed to copy file:" << filePath;
+    }
+    REFRESH_KERNEL_BUFFER(targetPath.toUtf8().constData());
+
+
+    QPixmap pic(filePath);
+    if (!pic.isNull()) {
+        QPixmap scaledPic = pic.scaled(QSize(760, 480), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui->labReferPointBackGround->setPixmap(scaledPic);
+    }
+    else {
+        ui->labReferPointBackGround->setPixmap(pic);
+    }
 }
 
 void ManualForm::on_cb_axisActionAxis_currentIndexChanged(int index)

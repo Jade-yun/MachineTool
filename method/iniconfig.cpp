@@ -8,33 +8,41 @@
 #include "RefreshKernelBuffer.h"
 
 extern QString m_ProgramPath;
+
+const QString AllExistingProgramInfoPath = "/opt/MachineTool/configs/ProgramNameAndPathInfo.ini";
+
 /*****************命令相关参数保存*****************/
 QString m_configCmdPath = "/root/Cmd_Description.txt";
-QString m_configPortSettingPath = "/root/Port_Setting.txt";
+//QString m_configPortSettingPath = "/root/Port_Setting.txt";
+QString m_configPortSettingPath = "/opt/MachineTool/configs/Port_Setting.ini";
 QString m_configOrderjinitPath = "/root/Pro_Teach.txt";
 
-QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //输入输出、名称定义（3）
+//QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //输入输出、名称定义（3）
 
-QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //输入输出、名称定义配置文件（99）
+//QString m_configPortXYNameIniPath="/root/Ini_Port_XY_Name.txt";             //输入输出、名称定义配置文件（99）
 
-QString m_defaultconfigPortXYNameIniPath="/root/Ini_Port_XY_Name_default.txt";             //输入输出、名称定义出场配置文件（99）
-QString m_defaultconfigPortSettingPath = "/root/Port_Setting_default.txt";
+//QString m_defaultconfigPortXYNameIniPath="/root/Ini_Port_XY_Name_default.txt";             //输入输出、名称定义出场配置文件（99）
+//QString m_defaultconfigPortSettingPath = "/opt/MachineTool/default_configs/Port_Setting_default.txt";
 
-QSettings ConfigPortDefine(m_configPortXYNameIniPath,QSettings::IniFormat);
+QString CustomizeNameDefPath = "/opt/MachineTool/configs/NameDef_Customize_CN.ini"; // 名称自定义配置文件
+QString CustomizePortInfoPath = "/opt/MachineTool/configs/PortInfo_Customize_CN.ini"; // 端口自定义配置文件
+
+const QString alarmInfoMappingPath = "/opt/MachineTool/configs/AlarmInfoMapping.ini";    // 报警查询映射文件
+const QString alarmInfoDataPath = "/opt/MachineTool/configs/AlarmInfoData.ini";          // 报警数据记录文件
+const QString maintainInfoDataPath = "/opt/MachineTool/configs/MaintainInfoData.ini";    // 保养信息记录文件
 
 //配置文件相对路径
-QString m_configFileNamePath="/root/Ini_Para.txt";
-QString m_defaultConfigFileNamePath="/root/Ini_Para_default.txt";//默认设置参数配置文件，恢复出场设置时调用
+QString m_configFileNamePath= "/opt/MachineTool/configs/Ini_Para.ini";
+//QString m_defaultConfigFileNamePath= "/opt/MachineTool/default_configs/Ini_Para.ini";//默认设置参数配置文件，恢复出场设置时调用
 
-const QString SysSetConfigPath = "/Settings/systemset.ini";
-const QString PasswdConfigPath = "/Settings/passwd.ini";
-const QString KeyAndSignalDescriptionPath = "/Settings/key_signal_str.ini";
-const QString IOPortDescriptionPath = "/Settings/IOport_describestr.ini";
+const QString SysSetConfigPath = "/opt/MachineTool/configs/systemset.ini";
+const QString PasswdConfigPath = "/opt/MachineTool/configs/systemset.ini";
+const QString KeyAndSignalDescriptionPath = "/opt/MachineTool/configs/key_signal_str.ini"; // 按键和信号编辑对应文本
+const QString IOPortDescriptionPath = "/opt/MachineTool/configs/IOport_describestr.ini"; // 设置部分需要IO窗口的文本
 
-const QString CustomizeNameDefPath = "/Settings/NameDef_Customize_CN.ini";
-const QString GuideInfoPath = "/Settings/guide_info.ini";
+const QString GuideInfoPath = "/opt/MachineTool/configs/guide_info.ini"; // 操作指引信息文件
 //开机自动加载程序信息
-const QString PowerOnReadOneProPath = "/Settings/PowerOnReadOneProInfo.ini";
+const QString PowerOnReadOneProPath = "/opt/MachineTool/configs/PowerOnReadOneProInfo.ini";
 
 QSettings Ini_Parasettings(m_configFileNamePath,QSettings::IniFormat);
 /*************************************************************************
@@ -902,35 +910,7 @@ void setManualAxis(D_ManualAxis value)
     setValue("ManualAxis","multiply",value.multiply);
     setValue("ManualAxis","handwheelAxis",value.handwheelAxis);
 }
-//设置端口自定义界面修改端口名称和修改端口号
-void setPortDefineNameOrPortNum()
-{
-    ConfigPortDefine.setIniCodec("UTF-8");
-    for(int i=0;i<INPUT_TOTAL_NUM;i++)
-    {
-        ConfigPortDefine.beginGroup("Port_X_Name_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].modifyName);
-        ConfigPortDefine.endGroup();
 
-        ConfigPortDefine.beginGroup("Port_X_Number_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_X[i].modifyPort);
-        ConfigPortDefine.endGroup();
-    }
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
-    {
-        ConfigPortDefine.beginGroup("Port_Y_Name_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].modifyName);
-        ConfigPortDefine.endGroup();
-
-        ConfigPortDefine.beginGroup("Port_Y_Number_Modify");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].modifyPort);
-        ConfigPortDefine.endGroup();
-
-        ConfigPortDefine.beginGroup("Port_Y_functionset");
-        ConfigPortDefine.setValue(QString("%1").arg(i),m_Port_Y[i].functionSet);
-        ConfigPortDefine.endGroup();
-    }
-}
 /**********************************
 ***********程序存储*****************
 ***********************************/
@@ -963,7 +943,7 @@ void getProgramNameAndPath()
 
     m_ProgramNameAndPath.clear();
 
-    QSettings settings("/Settings/ProgramNameAndPathInfo.ini", QSettings::IniFormat);
+    QSettings settings(AllExistingProgramInfoPath, QSettings::IniFormat);
     QStringList groups = settings.childGroups();
         for (const QString& group : qAsConst(groups))
         {
@@ -1023,7 +1003,7 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
     setValue("File","time",str_time);
 #endif
 
-    QSettings settings("/Settings/ProgramNameAndPathInfo.ini", QSettings::IniFormat);
+    QSettings settings(AllExistingProgramInfoPath, QSettings::IniFormat);
     settings.clear();
 
     int cnt = 0;
@@ -1039,7 +1019,7 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
     }
     settings.sync();
 
-    REFRESH_KERNEL_BUFFER("/Settings/ProgramNameAndPathInfo.ini");
+    REFRESH_KERNEL_BUFFER(AllExistingProgramInfoPath.toLocal8Bit().data());
 }
 //保存开机加载程序信息
 void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
@@ -1084,12 +1064,12 @@ QStringList getIniValues(uint8_t type, QString node)
     case 2:
         configPathTemp=m_configOrderjinitPath;
         break;
-    case 3:
-        configPathTemp=m_configPortXYNamePath;
-        break;
+//    case 3:
+//        configPathTemp=m_configPortXYNamePath;
+//        break;
     case 99:
-        configPathTemp=m_configPortXYNameIniPath;
-        break;
+//        configPathTemp=m_configPortXYNameIniPath;
+//        break;
     default:
         return valueList;
         break;
@@ -1455,7 +1435,6 @@ int getProgramPermission(const QString &programName)
 
 void writePortDefInfo()
 {
-    const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
     QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
     settings.setIniCodec("UTF-8");
     for (int i = 0; i < INPUT_TOTAL_NUM; ++i)
@@ -1484,7 +1463,6 @@ void writePortDefInfo()
 
 void readPortDefInfo()
 {
-    const QString CustomizePortInfoPath = "/Settings/PortInfo_Customize_CN.ini";
     QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
     settings.setIniCodec("UTF-8");
 
