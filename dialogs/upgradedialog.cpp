@@ -973,7 +973,7 @@ void upgradedialog::on_ResSettOK_clicked()
     {//如果输入密码正确
         if(RESTSETTING == sure_handle_type)
         {
-#if 1
+#if 0
             //恢复出场设置
             QFile file(m_defaultConfigFileNamePath);
             if(file.exists())
@@ -1003,20 +1003,15 @@ void upgradedialog::on_ResSettOK_clicked()
                 return;
             }
 
-            // 遍历源目录下的所有文件和子目录
-            QFileInfoList files = dir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot);
-            for (const QFileInfo &fileInfo : files) {
-                QString sourceFilePath = fileInfo.absoluteFilePath();
-                QString targetFilePath = targetDir + "/" + fileInfo.fileName();
 
-                QFile file(sourceFilePath);
-                if (file.exists()) {
-                    if (QFile::copy(sourceFilePath, targetFilePath)) {
-                        qDebug() << "Replaced file:" << fileInfo.fileName();
-                    } else {
-                        qDebug() << "Failed to copy file:" << fileInfo.fileName();
-                    }
-                }
+//            auto res = cpStateReturn(m_defaultConfigFileNamePath, m_configFileNamePath);
+//            res = res && cpStateReturn(m_defaultconfigPortSettingPath, m_configPortSettingPath);
+
+            QString command = QString("cp -rf %1/* %2/").arg(defaultConfigDir, targetDir);
+            int result = system(command.toStdString().c_str());
+
+            if (result != 0) {
+                qDebug() << "Failed to copy configuration files!";
             }
 
             ::sync();
@@ -1037,6 +1032,11 @@ void upgradedialog::on_ResSettOK_clicked()
     else
     {
         ui->ResSettInput_password->setStyleSheet("QLineEdit { border: 2px solid red; }");
+        ErrorTipDialog tip(tr("密码错误！"), TipMode::ONLY_OK, nullptr);
+        QTimer::singleShot(1000, this, [&](){
+            tip.accept();
+        });
+        tip.exec();
     }
 }
 //cp是否成功反馈

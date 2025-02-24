@@ -9,8 +9,8 @@
     do { \
         int fd = open((file_path), O_WRONLY); \
         if (fd != -1) { \
-            fsync(fd); \
-            close(fd); \
+            ::fsync(fd); \
+            ::close(fd); \
         } \
     } while (0);
 

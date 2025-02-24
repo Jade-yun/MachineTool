@@ -10,8 +10,10 @@
 
 #include "cmd.h"
 #include "mainwindow.h"
+#include "RefreshKernelBuffer.h"
 
-QString REFERPOINT_PIC = ":/images/referPoint.png";
+QString REFERPOINT_PIC = "/opt/MachineTool/resources/pics/referPoint.png";
+const QString GuidePicPath = "/opt/MachineTool/resources/pics/guide.png";
 
 ManualForm::ManualForm(QWidget *parent) :
     QWidget(parent),
@@ -553,12 +555,11 @@ void ManualForm::pageInit()
 
     ui->tableWgtAxisPos->setHorizontalHeaderLabels({tr("轴位置")});
 
-    ui->labelGuideBackgroud->setPixmap(QPixmap(""));
     QPixmap picReferPoint(REFERPOINT_PIC);
     picReferPoint.scaled(ui->labReferPointBackGround->size());
     ui->labReferPointBackGround->setPixmap(picReferPoint);
 
-    ui->labelGuideBackgroud->setPixmap(QPixmap(":/images/guide.png"));
+    ui->labelGuideBackgroud->setPixmap(QPixmap(GuidePicPath));
 
     ui->btnAutoGate1Close->setEnabled(true);
     ui->btnStartProcess1Break->setEnabled(false);
@@ -1314,28 +1315,47 @@ void ManualForm::onTabChanged(int index)
 void ManualForm::on_btnImportPictureGuide_clicked()
 {
     bool useDefultPic = false;
-    QPixmap pic("./guide.png");
-    if (pic.isNull())
+
+    auto filePath = UsbDisk::instance()->findFile("guide.png");
+
+    if (filePath.isNull())
     {
         int res = MainWindow::pMainWindow->showErrorTip(tr("未找到图片：guide.png，图片像素: 1001×450px。是否使用默认图片？"));
         useDefultPic = res == QDialog::Accepted;
 
         if (useDefultPic)
         {
-            pic = QPixmap(":/images/guide.png");
-        }
-        else {
-            pic = QPixmap("./guide.png");
+            filePath = "/opt/MachineTool/resources/pics/guide_default.png";
         }
     }
-    ui->labelGuideBackgroud->setPixmap(pic);
+
+    QString targetPath = GuidePicPath;
+
+    if (QFile::exists(targetPath)) {
+        QFile::remove(targetPath);
+    }
+    if (!QFile::copy(filePath, targetPath)) {
+        qWarning() << "Failed to copy file:" << filePath;
+    }
+    REFRESH_KERNEL_BUFFER(targetPath.toStdString().c_str())
+
+    QPixmap pic(filePath);
+    if (!pic.isNull()) {
+        QPixmap scaledPic = pic.scaled(QSize(1001, 450), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui->labelGuideBackgroud->setPixmap(scaledPic);
+    }
+    else {
+        ui->labelGuideBackgroud->setPixmap(pic);
+    }
 }
 
 void ManualForm::on_btnImportPictureReference_clicked()
 {
     bool useDefultPic = false;
-    QPixmap pic("./referPoint.png");
-    if (pic.isNull())
+
+    auto filePath = UsbDisk::instance()->findFile("referPoint.png");
+
+    if (filePath.isNull())
     {
         int res = MainWindow::pMainWindow->showErrorTip(
                     tr("未找到图片: referPoint.png，图片像素: 760×480px。是否使用默认图片？"));
@@ -1343,15 +1363,29 @@ void ManualForm::on_btnImportPictureReference_clicked()
 
         if (useDefultPic)
         {
-            REFERPOINT_PIC = ":/images/referPoint.png";
-            pic = QPixmap(":/images/referPoint.png");
-        }
-        else {
-            REFERPOINT_PIC = "./referPoint.png";
-            pic = QPixmap("./referPoint.png");
+            filePath = "/opt/MachineTool/resources/pics/referPoint_default.png";
         }
     }
-    ui->labReferPointBackGround->setPixmap(pic);
+
+    QString targetPath = REFERPOINT_PIC;
+
+    if (QFile::exists(targetPath)) {
+        QFile::remove(targetPath);
+    }
+    if (!QFile::copy(filePath, targetPath)) {
+        qWarning() << "Failed to copy file:" << filePath;
+    }
+    REFRESH_KERNEL_BUFFER(targetPath.toUtf8().constData());
+
+
+    QPixmap pic(filePath);
+    if (!pic.isNull()) {
+        QPixmap scaledPic = pic.scaled(QSize(760, 480), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ui->labReferPointBackGround->setPixmap(scaledPic);
+    }
+    else {
+        ui->labReferPointBackGround->setPixmap(pic);
+    }
 }
 
 void ManualForm::on_cb_axisActionAxis_currentIndexChanged(int index)

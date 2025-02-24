@@ -12,6 +12,9 @@
 #include <QScreen>
 #include <QElapsedTimer>
 #include <QButtonGroup>
+#include <QSettings>
+
+extern const QString alarmInfoMappingPath;
 
 AlarmBar::AlarmBar(QWidget* parent)
     : QDialog(parent),
@@ -61,7 +64,20 @@ void AlarmBar::showAlarm(int alarmNum, const QString& alarmContent)
 
 //    animation->setStartValue(startGeometry);
 //    animation->setEndValue(endGeometry);
-//    animation->start();
+    //    animation->start();
+}
+
+void AlarmBar::showAlarm(int alarmNum)
+{
+    this->setGeometry(5, 640, 1014, 60);
+
+    QSettings alarmInfoSettings(alarmInfoMappingPath, QSettings::IniFormat);
+    alarmInfoSettings.setIniCodec("utf-8");
+    alarmInfoSettings.beginGroup(QString::number(alarmNum));
+    QString alarmContent = alarmInfoSettings.value("AlarmContent").toString();
+    alarmInfoSettings.endGroup();
+
+    this->showAlarm(alarmNum, alarmContent);
 }
 
 void AlarmBar::hideAlarm()

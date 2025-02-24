@@ -21,6 +21,7 @@ public:
     ~AlarmBar();
 
     void showAlarm(int alarmNum, const QString& alarmContent); // 显示报警信息
+    void showAlarm(int alarmNum);
     void hideAlarm();                                       // 隐藏报警条
 
 protected:

@@ -1,8 +1,6 @@
 #include "cleardialog.h"
 #include "ui_cleardialog.h"
 
-#include "framelesswidget2.h"
-
 ClearDialog::ClearDialog(QWidget *parent) :
     BaseWindow(parent),
     ui(new Ui::ClearDialog)

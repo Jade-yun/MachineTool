@@ -27,7 +27,7 @@
 #include <unistd.h>
 #include <linux/input.h>
 
-const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
+extern const QString alarmInfoMappingPath;
 
 MainWindow* MainWindow::pMainWindow = nullptr;
 
@@ -73,10 +73,10 @@ MainWindow::MainWindow(QWidget *parent)
     // after reading all init parameters, set the style for whole app.
     const std::vector<QString> styles = {
         ":/styleSheets/style.qss",
-        "/Settings/style/style_orange_color.qss",
-        "/Settings/style/style_yellow_color.qss",
-        "/Settings/style/style_green_color.qss",
-        "/Settings/style/style_brown_color.qss"
+        "/opt/MachineTool/configs/style/style_orange_color.qss",
+        "/opt/MachineTool/configs/style/style_yellow_color.qss",
+        "/opt/MachineTool/configs/style/style_green_color.qss",
+        "/opt/MachineTool/configs/style/style_brown_color.qss"
     };
 
     if (m_SystemSet.sysColor < styles.size())
@@ -293,6 +293,7 @@ void MainWindow::handleAlarm(uint16_t alarmNum)
 
     alarmWidget->handleAlarm(alarmNum);
 
+    alarmBar->showAlarm(alarmNum);
 }
 //设置主界面控件状态控制
 void MainWindow::MainWindow_SetControl_Stake(bool state)

@@ -45,8 +45,8 @@ constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
     {-1, -1, -1, -1}                                                // 预留2
 };
 
-const QString noteDirPath = "/Settings/notepad/";
-const QString menuStateConfigPath = "/Settings/menustate_config.ini";
+const QString noteDirPath = "/opt/MachineTool/docs/notepad/";
+const QString menuStateConfigPath = "/opt/MachineTool/configs/menustate_config.ini";
 
 QVector<QString> registerCode;
 
@@ -185,10 +185,10 @@ Setting::Setting(QWidget *parent) :
     connect(ui->btnSaveColor, &QPushButton::clicked, [=]() {
         static const std::vector<QString> styles = {
             ":/styleSheets/style.qss",                // 默认
-            "/Settings/style/style_orange_color.qss", // 橙色
-            "/Settings/style/style_yellow_color.qss", // 黄色
-            "/Settings/style/style_green_color.qss",  // 绿色
-            "/Settings/style/style_brown_color.qss"   // 棕色
+            "/opt/MachineTool/configs/style/style_orange_color.qss", // 橙色
+            "/opt/MachineTool/configs/style/style_yellow_color.qss", // 黄色
+            "/opt/MachineTool/configs/style/style_green_color.qss",  // 绿色
+            "/opt/MachineTool/configs/style/style_brown_color.qss"   // 棕色
         };
 
         const std::vector<QCheckBox*> colorCheckBoxes = {
@@ -3221,7 +3221,6 @@ void Setting::outportInterlockSlots()
         m_Port_X[group.reverseDetectPort].functionSet = useForwardValue && reverseCheck;
     }
 
-    setPortDefineNameOrPortNum();
     emit RefreshPortDefineSignals();
     emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容

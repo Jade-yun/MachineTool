@@ -5,7 +5,7 @@
 
 #include <QSettings>
 
-const QString alarmInfoMappingPath = "/Settings/AlarmInfoMapping.ini";
+extern const QString alarmInfoMappingPath;
 
 AlarmInfoDialog::AlarmInfoDialog(QWidget *parent) :
     QDialog(parent),
