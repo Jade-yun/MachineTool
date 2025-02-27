@@ -36,11 +36,12 @@ public:
     void saveToConfigFile(const QString& fileName);
     void loadFromConfigFile(const QString& fileName);
 
+    void startPeriodicUpdate();
+
 private:
 
     void updateSingleMaintainInfo(int row);
     void updateAllMaintainInfo();
-    void startPeriodicUpdate();
 
 private:
     std::vector<MaintainInfo> m_data;

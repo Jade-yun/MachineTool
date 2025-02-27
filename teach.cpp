@@ -47,7 +47,7 @@ Teach::Teach(QWidget* parent) :
 
     /*堆叠编辑弹窗*/
     stack_Dialog = new BaseWindow();
-    stack_Temp = new StackEdit();
+    stack_Temp = new StackEdit(0, this);
     stack_Dialog->setStackEdit(stack_Temp);
     stack_Dialog->setModal(true);
     connect(this,&Teach::StackEditBaseInit_signal,stack_Dialog,&BaseWindow::StackEditBaseInit);

@@ -1,6 +1,7 @@
 INCLUDEPATH     += $$PWD
 
 HEADERS += \
+    $$PWD/alarmbutton.h \
     $$PWD/framelesswidget2.h \
     $$PWD/qtpixmapbutton.h \
     $$PWD/qtwidgetbase.h \
@@ -8,6 +9,7 @@ HEADERS += \
     $$PWD/scrolllabel.h \
     $$PWD/statebutton.h
 SOURCES += \
+    $$PWD/alarmbutton.cpp \
     $$PWD/framelesswidget2.cpp \
     $$PWD/qtpixmapbutton.cpp \
     $$PWD/qtwidgetbase.cpp \

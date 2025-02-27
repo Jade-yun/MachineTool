@@ -1,10 +1,13 @@
 ﻿#include "maintaininfomodel.h"
 
+#include <QDebug>
+
 // 构造函数
 MaintainInfoModel::MaintainInfoModel(QObject *parent) : QAbstractTableModel(parent)
   , m_headerData(4, QString())
 {
     timer = new QTimer(this);
+    connect(timer, &QTimer::timeout, this, &MaintainInfoModel::updateAllMaintainInfo);
 }
 
 // 必须实现的虚函数
@@ -26,7 +29,7 @@ QVariant MaintainInfoModel::data(const QModelIndex &index, int role) const {
     switch (index.column()) {
     case 0: return info.content;
     case 1: return info.cycle;
-    case 2: return QDate::currentDate().daysTo(info.nextMaintenance);
+    case 2: return info.remainingDays;
     case 3: return info.nextMaintenance.toString("yyyy-MM-dd");
     default: return {};
     }
@@ -163,6 +166,7 @@ void MaintainInfoModel::loadFromConfigFile(const QString& fileName) {
         QDate creationDate = QDate::fromString(settings.value("creationDate").toString(), "yyyy-MM-dd HH:mm:ss");
         QDate nextMaintenance = QDate::fromString(settings.value("nextMaintenance").toString(), "yyyy-MM-dd HH:mm:ss");
         int remainingDays = QDate::currentDate().daysTo(nextMaintenance);
+        remainingDays = remainingDays < 0 ? 0 : remainingDays;
 
         m_data.push_back({content, cycle, creationDate, nextMaintenance, remainingDays});
     }
@@ -174,16 +178,11 @@ void MaintainInfoModel::updateSingleMaintainInfo(int row) {
     QDate currentDate = QDate::currentDate();
     MaintainInfo &info = m_data[row];
 
-    int daysPassed = info.creationDate.daysTo(currentDate);
-    if (daysPassed >= 1) {
-        info.remainingDays -= daysPassed;
+    info.remainingDays = currentDate.daysTo(info.nextMaintenance);
         if (info.remainingDays < 0) {
-            info.remainingDays += info.cycle;
-            info.nextMaintenance = currentDate.addDays(info.remainingDays);
+            info.remainingDays = 0;
         }
-        info.creationDate = currentDate;
-        emit dataChanged(index(row, 0), index(row, 3));
-    }
+        emit dataChanged(index(row, 2), index(row, 2));
 }
 
 // 更新所有保养信息
@@ -191,10 +190,10 @@ void MaintainInfoModel::updateAllMaintainInfo() {
     for (int row = 0; row < m_data.size(); ++row) {
         updateSingleMaintainInfo(row);
     }
+    qDebug() << "update remainDays";
 }
 
 // 周期性更新
 void MaintainInfoModel::startPeriodicUpdate() {
-    connect(timer, &QTimer::timeout, this, &MaintainInfoModel::updateAllMaintainInfo);
     timer->start(60 * 60 * 1000); // 每小时触发一次
 }

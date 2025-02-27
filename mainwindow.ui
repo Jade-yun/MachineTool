@@ -1162,9 +1162,6 @@ border: 1px solid black;
        <height>71</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
      <property name="text">
       <string/>
      </property>
@@ -1174,8 +1171,8 @@ border: 1px solid black;
      </property>
      <property name="iconSize">
       <size>
-       <width>75</width>
-       <height>75</height>
+       <width>70</width>
+       <height>70</height>
       </size>
      </property>
     </widget>
@@ -1187,9 +1184,6 @@ border: 1px solid black;
        <width>81</width>
        <height>71</height>
       </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
@@ -1205,7 +1199,7 @@ border: 1px solid black;
       </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="btnAlarm">
+    <widget class="AlarmButton" name="btnAlarm">
      <property name="geometry">
       <rect>
        <x>90</x>
@@ -1214,20 +1208,13 @@ border: 1px solid black;
        <height>71</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
      <property name="text">
       <string/>
      </property>
-     <property name="icon">
-      <iconset resource="images.qrc">
-       <normaloff>:/images/alarm_red.png</normaloff>:/images/alarm_red.png</iconset>
-     </property>
      <property name="iconSize">
       <size>
-       <width>80</width>
-       <height>80</height>
+       <width>0</width>
+       <height>0</height>
       </size>
      </property>
     </widget>
@@ -1239,9 +1226,6 @@ border: 1px solid black;
        <width>81</width>
        <height>71</height>
       </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
      </property>
      <property name="text">
       <string/>
@@ -1440,6 +1424,11 @@ QPushButton::pressed {
    <class>ScrollLabel</class>
    <extends>QLabel</extends>
    <header>scrolllabel.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AlarmButton</class>
+   <extends>QPushButton</extends>
+   <header>alarmbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources>

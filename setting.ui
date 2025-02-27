@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>7</number>
+    <number>4</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -19091,7 +19091,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>8</number>
      </property>
      <property name="iconSize">
       <size>
@@ -24303,6 +24303,37 @@ border: 1px solid black;
          <string notr="true">1</string>
         </property>
        </column>
+      </widget>
+      <widget class="QPushButton" name="btnSaveMenuAuth">
+       <property name="geometry">
+        <rect>
+         <x>850</x>
+         <y>60</y>
+         <width>100</width>
+         <height>45</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>SimSun</family>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>保存</string>
+       </property>
+       <property name="icon">
+        <iconset resource="images.qrc">
+         <normaloff>:/images/teachpage_images/save.png</normaloff>:/images/teachpage_images/save.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
       </widget>
      </widget>
     </widget>

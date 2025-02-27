@@ -22,29 +22,6 @@
 #include "usbdisk.h"
 #include "timesetter.h"
 
-
-struct InterLockGroup {
-    int forwardValuePort;       // 正向操作端口号（如阀门开启）
-    int reverseValuePort;       // 反向操作端口号（如阀门关闭）
-    int forwardDetectPort;      // 正向检测端口号
-    int reverseDetectPort;      // 反向检测端口号
-};
-
-constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
-    {CLAW_METERIAL_1_CLAMP, CLAW_METERIAL_1_LOOSENED, 0, 1},        // 原料1
-    {CLAW_PRODUCT_1_CLAMP, CLAW_PRODUCT_1_LOOSENED, 2, 3},          // 成品1
-    {CLAW_CLAW_1_CLAMP, CLAW_CLAW_1_LOOSENED, 4, 5},                // 卡爪1
-    {MACHINE_AUTO_DOOR_1_OPEN, MACHINE_AUTO_DOOR_1_CLOSE, 8, 9},    // 自动门1
-    {MACHINE_CHUCK_1_CLAMP, MACHINE_CHUCK_1_LOOSENED, 10, 11},      // 卡盘1
-    {-1, -1, -1, -1},                                               // 预留1
-    {24, 25, 36, 37},                                               // 原料2
-    {26, 27, 38, 39},                                               // 成品2
-    {28, 29, 40, 41},                                               // 卡爪2
-    {32, 33, 44, 45},                                               // 自动门2
-    {34, 35, 46, 47},                                               // 卡盘2
-    {-1, -1, -1, -1}                                                // 预留2
-};
-
 const QString noteDirPath = "/opt/MachineTool/docs/notepad/";
 const QString menuStateConfigPath = "/opt/MachineTool/configs/menustate_config.ini";
 
@@ -62,8 +39,7 @@ Setting::Setting(QWidget *parent) :
     // this must be placed at beginning afer setupUI(this).
     for (int i = 0; i < 8; i++)
     {
-        stack[i] = new StackEdit(ui->tabWidgetStack->widget(i));
-        stack[i]->updateGroupIndex(i);
+        stack[i] = new StackEdit(i, ui->tabWidgetStack->widget(i));
         connect(this,&Setting::AxisTypeChange_Signal,stack[i],&StackEdit::StackAxisSelectQcomboboxRefresh);//当轴类型发生改变时，改变堆叠-轴选择复选框
     }
     init();
@@ -210,28 +186,24 @@ Setting::Setting(QWidget *parent) :
         if (m_SystemSet.sysColor == setColor) {
             return;
         }
+        ErrorTipDialog tip (tr("确认修改颜色？系统将重启！"), nullptr);
+        auto reply =  tip.exec();
+        if (reply == QDialog::Accepted)
+        {
+            m_SystemSet.sysColor = setColor;
+            ::setSystemSet(m_SystemSet);
 
-        m_SystemSet.sysColor = setColor;
-        ::setSystemSet(m_SystemSet);
+            ::sync();
+            ::system("reboot");
+        }
+
 
 #if 0
-        QDialog progressDialog(this);
-        progressDialog.setFixedSize(500, 300);
-        progressDialog.setStyleSheet("background-color: #24B4A5;"); // 设置背景颜色
-
-        QVBoxLayout layout(&progressDialog);
-        QLabel label(tr("Please wait, applying new color settings..."));
-        label.setAlignment(Qt::AlignCenter); // 居中显示文本
-        layout.addWidget(&label);
-        progressDialog.setLayout(&layout);
-        progressDialog.setModal(true);
-
-#else
-        static QProgressDialog progressDialog(this);
-        progressDialog.setLabelText(tr("Please wait, applying new color settings..."));
+        static QProgressDialog progressDialog(tr("Please wait, applying new color settings..."), tr("取消"), 0, 0, this);
         progressDialog.setCancelButton(nullptr);
-//        progressDialog.setWindowModality(Qt::WindowModal);
+        progressDialog.setWindowModality(Qt::WindowModal);
         progressDialog.setFixedSize(500, 300);
+        QCoreApplication::processEvents();
         progressDialog.setStyleSheet(
             "QProgressDialog {"
             "   background-color: #24B4A5;"
@@ -245,34 +217,17 @@ Setting::Setting(QWidget *parent) :
             "}"
         );
 
-//        QTimer* timer = new QTimer;
-//        int progress = 0;
-
-//        QObject::connect(timer, &QTimer::timeout, [&]() {
-//            progress += 1;
-//            progressDialog.setValue(progress);
-//            if (progress >= 99) {
-//                timer->stop();
-//                delete timer;
-//                return;
-//            }
-//        });
-//        timer->start(100);
-#endif
-
-        QTimer::singleShot(0, [setColor]() {
+        QTimer::singleShot(10, [setColor]() {
             QFile file(styles[setColor]);
             if (file.open(QIODevice::ReadOnly)) {
                 qApp->setStyleSheet(QString::fromLatin1(file.readAll()));
                 file.close();
-                qDebug() << "System color has changed to index:" << setColor;
-            } else {
-                qDebug() << "Fail to open stylesheet file:" << styles[setColor];
             }
             progressDialog.close();
         });
 
         progressDialog.exec();
+#endif
     });
 
     connect(ui->btnSaveTime, &QPushButton::clicked, [=](){
@@ -1314,6 +1269,8 @@ void Setting::setupNameDefine()
     });
 
     connect(ui->btnSaveNameDef, &QPushButton::clicked, this, [=](){
+        if (!ui->btnSaveNameDef->isParaChanged()) return;
+
         int index = 0;
         m_NameDefine[1].adminName = tableNameDef->item(index++, 1)->text();
         m_NameDefine[1].operatorName = tableNameDef->item(index++, 1)->text();
@@ -1355,6 +1312,8 @@ void Setting::setupNameDefine()
         ::writeNameDefine();
         // to fresh all name display in every windows.
         emit coboxVarSelectVarPreOpItemSet_signal();
+
+        ui->btnSaveNameDef->setParaChangedFlag(false);
     });
     connect(ui->btnExportNameDef, &QPushButton::clicked, this, [=](){
        if (!UsbDisk::instance()->isInserted())
@@ -1593,10 +1552,10 @@ void Setting::setupMenuAuthority()
         new MenuItem(24, {tr("联机安全")})
     };
     productSet->children = {
-        new MenuItem(35, {tr("产品")}),
-        new MenuItem(36, {tr("高级")}),
-        new MenuItem(37, {tr("物联网")}),
-        new MenuItem(38, {tr("联机安全")})
+        new MenuItem(31, {tr("产品")}),
+        new MenuItem(32, {tr("高级")}),
+        new MenuItem(33, {tr("物联网")}),
+        new MenuItem(34, {tr("联机安全")})
     };
 
     systemSet->children = {
@@ -1659,27 +1618,30 @@ void Setting::setupMenuAuthority()
 
     // 从配置文件中读取每个item的状态，将对应的按钮setChecked
     QSettings settings(menuStateConfigPath, QSettings::IniFormat);
-    QMap<MenuItem*, int> menuItemStateCache;
+    settings.setIniCodec("utf-8");
+//    QMap<MenuItem*, int> menuItemStateCache;
 
-    // 读取配置并缓存
+    // 读取 menuItem 相关配置
     for (auto menuItem : menuItems) {
         int savedState = settings.value(QString::number(menuItem->id) + "/state", static_cast<int>(MenuState::Operator)).toInt();
-        menuItemStateCache[menuItem] = savedState;
+//        menuItemStateCache[menuItem] = savedState;
+        menuItem->state = static_cast<MenuState>(savedState);
 
         menuStateMap[menuItem->id] = static_cast<MenuState>(savedState);
         tabNameMap[menuItem->id] = menuItem->name;
         // 子菜单项的状态
         for (auto& child : menuItem->children) {
             int savedChildState = settings.value(QString::number(child->id) + "/state", static_cast<int>(MenuState::Operator)).toInt();
-            menuItemStateCache[child] = savedChildState;
+//            menuItemStateCache[child] = savedChildState;
+            child->state = static_cast<MenuState>(savedChildState);
 
             menuStateMap[child->id] = static_cast<MenuState>(savedChildState);
             tabNameMap[child->id] = child->name;
         }
     }
 
-    // 配置文件没有系统设置 id = 4 的权限，设置为最高权限
-//    menuStateMap[4] = MenuState::Senior;
+    // 配置文件没有系统设置 id = 4 的权限和信息，设置为普通权限
+//    menuStateMap[4] = MenuState::Operator;
 
     // 遍历每个菜单项和子项，设置按钮组
     for (auto menuItem : menuItems) {
@@ -1697,7 +1659,9 @@ void Setting::setupMenuAuthority()
 
                 buttonGroup->addButton(button, i);
 
-                int savedState = menuItemStateCache.value(menuItem);
+//                int savedState = menuItemStateCache.value(menuItem);
+                int savedState = static_cast<int>(menuItem->state);
+
                 if (savedState == (i - 1)) {
                     button->setChecked(true);
                 }
@@ -1728,7 +1692,8 @@ void Setting::setupMenuAuthority()
 
                 buttonGroup->addButton(button, i);
 
-                int savedState = menuItemStateCache.value(menuItem);
+//                int savedState = menuItemStateCache.value(menuItem);
+                int savedState = static_cast<int>(child->state);
                 if (savedState == (i - 1)) {
                     button->setChecked(true); // 恢复选中状态
                 }
@@ -1752,6 +1717,12 @@ void Setting::setupMenuAuthority()
             connect(child, &MenuItem::stateChanged, this, &Setting::onMenuStateChanged);
         }
     }
+
+    connect(ui->btnSaveMenuAuth, &QPushButton::clicked, [=](){
+        handleLoginModeChanged(LoginDialog::getLoginMode());
+        ::sync();
+//        REFRESH_KERNEL_BUFFER(menuStateConfigPath.toStdString().c_str())
+    });
 }
 
 //void Setting::saveMenuState(const QList<MenuItem*>& menuItems)
@@ -2299,7 +2270,7 @@ void Setting::updateTabVisibility()
 
 //    tabNameMap need to be initialized
     // tab
-#if 1
+#if 0
     for (const auto& pair : menuStateMap) {
         int id = pair.first;
         MenuState tabState = pair.second;
@@ -2340,12 +2311,23 @@ void Setting::updateTabVisibility()
         int id = pair.first;
         MenuState tabState = pair.second;
 
-        int tabWidgetGroup = id / 10;  // 第一位表示 TabWidget 组
-        bool shouldShow = (tabState != MenuState::Invisible) && (currentLoginState >= tabState);
+        int tabWidgetGroupID = id / 10;  // 第一位表示 TabWidget 组
+        if (tabWidgetGroupID > 0 && tabWidgetGroupID < 9)
+        {
+            bool shouldShow = ((tabState != MenuState::Invisible) && (currentLoginState >= tabState));
 
-        if (shouldShow && tabContentMap.count(id)) {
-            groupTabs[tabWidgetGroup].push_back(id);
+            if (shouldShow && tabContentMap.count(id)) {
+                groupTabs[tabWidgetGroupID].push_back(id);
+            }
         }
+    }
+
+    // clear all tab for each tabWidget
+    for (size_t i = 1; i < tabWidgetMap.size() + 1; i++)
+    {
+        auto tabWidget = tabWidgetMap.at(i);
+        tabWidget->clear();
+        tabWidget->clearFocus();
     }
 
     for (auto& group : groupTabs) {
@@ -2357,36 +2339,30 @@ void Setting::updateTabVisibility()
 
         if (tabWidgetMap.count(groupId)) {
             QTabWidget* tabWidget = tabWidgetMap.at(groupId);
-            //            tabWidget->clear();  // 清空Tab
 
             // 按顺序插入Tab
-            for (int id : idsToShow) {
+            for (size_t i = 0; i < idsToShow.size(); ++i) {
+                int id = idsToShow[i];
                 if (tabContentMap.count(id)) {
                     QWidget* contentWidget = tabContentMap.at(id);
                     QString tabName = tabNameMap.at(id);
-//                    tabWidget->addTab(contentWidget, tabName);  // 插入新的Tab
 
-                    int tabIndex = id % 10 - 1;
-                    int currentTabIndex = tabWidget->indexOf(contentWidget);
+                    // 使用排序后的索引作为 tabIndex
+                    int tabIndex = static_cast<int>(i);
 
-                    // 检查是否已存在
-                    if (currentTabIndex == -1)
-                    {
-                        tabWidget->insertTab(tabIndex, contentWidget, tabName);
-                    }
-                    else {
-                        tabWidget->removeTab(currentTabIndex);
-                    }
+                    tabWidget->insertTab(tabIndex, contentWidget, tabName);
                 }
             }
         }
     }
+
+    ui->tabWidgetSystem->removeTab(ui->tabWidgetSystem->indexOf(ui->tabSystemInfo));
+    ui->tabWidgetSystem->addTab(ui->tabSystemInfo, tr("系统信息"));
+
 #endif
+    ui->tabWidgetSystem->removeTab(ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority));
     if (currentLoginState){
         ui->tabWidgetSystem->addTab(ui->tabMenuAuthority, tr("菜单权限"));
-    }
-    else {
-        ui->tabWidgetSystem->removeTab(ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority));
     }
 }
 
@@ -2398,12 +2374,15 @@ void Setting::onMenuStateChanged(MenuState newState)
 
     qDebug() << "ID:" << item->id << "," << item->name << " new state:" << newState;
 
-    menuStateMap[item->id] = newState;
-
-    QSettings settings(menuStateConfigPath, QSettings::IniFormat);
-    const QString prefix = QString::number(item->id);
-    settings.setValue(prefix + "/state", static_cast<int>(newState));
-    settings.setValue(prefix + "/name", item->name);
+    if (menuStateMap.count(item->id))
+    {
+        menuStateMap[item->id] = newState;
+        QSettings settings(menuStateConfigPath, QSettings::IniFormat);
+        settings.setIniCodec("utf-8");
+        const QString prefix = QString::number(item->id);
+        settings.setValue(prefix + "/state", static_cast<int>(newState));
+        settings.setValue(prefix + "/name", item->name);
+    }
 
 //    updateTabVisibility();
 //    handleLoginModeChanged(LoginDialog::getLoginMode());
@@ -2483,8 +2462,8 @@ void Setting::pageSwitchInit()
     connect(ui->btnStackSet, &QPushButton::clicked, this, [=](){
         ui->stackedWidget->setCurrentWidget(ui->pageStack);
         ui->tabWidgetStack->setCurrentIndex(0);
-        stack[0]->updateGroupIndex(0);
-        stack[0]->syncParaToUI();
+//        stack[0]->updateGroupIndex(0);
+//        stack[0]->syncParaToUI();
     });
      /******************************************************************************/
     connect(ui->btnLastAdvance, &QPushButton::clicked, this, [=](){
@@ -3211,21 +3190,22 @@ void Setting::outportInterlockSlots()
         {
             if(outportInterlockList[4*i+j]->isChecked())
             {
-                switch (j)
-                {
-                case 0:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
-                    break;
-                case 1:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
-                    break;
-                case 2:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
-                    break;
-                case 3:
-                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
-                    break;
-                }
+//                switch (j)
+//                {
+//                case 0:
+//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
+//                    break;
+//                case 1:
+//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
+//                    break;
+//                case 2:
+//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
+//                    break;
+//                case 3:
+//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
+//                    break;
+//                }
+                m_OutportInterlock[i][j] = 1;
             }
             else
             {
@@ -3237,23 +3217,7 @@ void Setting::outportInterlockSlots()
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_INTERLOCK);
     setOutportInterlock(m_OutportInterlock);
 
-    for (int i = 0; i < OUT_INTERLOCK_NUM; i++) {
-        bool useForwardValue = m_OutportInterlock[i][0] != 0;
-        bool useReverseValue = m_OutportInterlock[i][2] != 0;
-        bool forwardCheck = m_OutportInterlock[i][1] != 0;
-        bool reverseCheck = m_OutportInterlock[i][3] != 0;
-
-        const auto &group = interLockGroups[i];
-
-        // 如果是预留的组，跳过
-        if (group.forwardValuePort == -1) continue;
-
-        m_Port_Y[group.forwardValuePort].functionSet = useForwardValue;
-        m_Port_Y[group.reverseValuePort].functionSet = useForwardValue && useReverseValue;
-
-        m_Port_X[group.forwardDetectPort].functionSet = useForwardValue && forwardCheck;
-        m_Port_X[group.reverseDetectPort].functionSet = useForwardValue && reverseCheck;
-    }
+    ::updateInterLockPortFlag();
 
     emit RefreshPortDefineSignals();
     emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
@@ -3340,11 +3304,15 @@ void Setting::seniorFuncSlots()
     m_SeniorFunc.res3[3] = seniorFuncList[index++]->currentIndex();
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_SENIOR);
 //    _sleep(10);
-    QThread::msleep(10);
+//    QThread::msleep(10);
     g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_SENIOR_PORT);
 
     setSeniorFunc(m_SeniorFunc);
     SeniorFuncPortSet();
+
+    emit RefreshPortDefineSignals();
+    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
+    emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
 
     emit refreshManualReserve();
     emit WidgetNameRefresh_signal();
@@ -3399,19 +3367,6 @@ void Setting::SeniorFuncPortSet()
     m_Port_Y[OUTPUT_NUM + 16].functionSet = m_SeniorFunc.startProduct2;
     m_Port_Y[OUTPUT_NUM + 17].functionSet = m_SeniorFunc.mainAxisLocate2;
     m_Port_Y[OUTPUT_NUM + 18].functionSet = m_SeniorFunc.processSave2;
-    emit RefreshPortDefineSignals();
-    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
-    emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
-//    const std::vector<QComboBox*> coboxs = {
-//        ui->coboxAutoLigth, ui->coboxAlarmLight, ui->coboxAutoDoorCtl1,ui->coboxBlow1,
-//        ui->coboxEmergenceStopOutput, ui->coboxLubricationPump, ui->coboxAlarmBuzzer, ui->coboxPauseLight,
-//        ui->coboxStartProcess1, ui->coboxMainAxisLocate1, ui->coboxProcessSafe1, ui->coboxMainAxisRotate1,
-
-//        ui->coboxBlow2, ui->coboxAutoDoorCtl2, ui->coboxStartProcess2, ui->coboxMainAxisLocate2,
-//        ui->coboxProcessSafe2, ui->coboxMainAxisRotate2,
-//    };
-//    emit refreshManualReserve();
-
 }
 void Setting::saveKeyAndLEDFuncDefine()
 {
@@ -4259,6 +4214,17 @@ bool Setting::eventFilter(QObject *watched, QEvent *event)
         ui->editHour->setText(QString::number(hour));
         ui->editMinute->setText(QString::number(minute));
         ui->editSecond->setText(QString::number(second));
+
+        ui->editSystemName->setText(m_SystemSet.sysName);
+
+        const std::array<QCheckBox*, 5> chboxColor = {
+            ui->chboxColorDefault, ui->chboxColorOriange, ui->chboxColorYellow, ui->chboxColorGreen, ui->chboxBrown
+        };
+        auto index = m_SystemSet.sysColor;
+        if (index < chboxColor.size()) {
+            chboxColor[index]->setChecked(true);
+        }
+
         return true;
     }
 
@@ -4267,11 +4233,14 @@ bool Setting::eventFilter(QObject *watched, QEvent *event)
 //堆叠界面切换堆叠组
 void Setting::on_tabWidgetStack_currentChanged(int index)
 {
-    if(index<8)
-    {
-        stack[index]->updateGroupIndex(index);
-        stack[index]->syncParaToUI();
-    }
+    // 这样写不行，后面写不通。tabWidgetStack 改变时的 index（对应界面上的顺序）不一定是 stack[i] 中对应的 i
+    // 每个 stack[i] 中对应的 i 为它的成员变量 groupIndex，在初始化时已经赋值，后面不会修改
+    // stack[index]->syncParaToUI() 为什么要重复调用该函数？初始化时参数已经调用进行了同步。
+//    if(index<8)
+//    {
+//        stack[index]->updateGroupIndex(index);
+//        stack[index]->syncParaToUI();
+//    }
 }
 //轴参数界面参数刷新
 void Setting::AxisParRefresh(uint8_t index)

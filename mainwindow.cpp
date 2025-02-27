@@ -266,14 +266,13 @@ MainWindow::MainWindow(QWidget *parent)
         {
             alarmBar->setGeometry(5, 640, 1014, 60);
             int newAlarmNum = alarmInfoQueue.back().alarmNum;
-            QSettings alarmInfoSettings(alarmInfoMappingPath, QSettings::IniFormat);
-            alarmInfoSettings.setIniCodec("utf-8");
-            alarmInfoSettings.beginGroup(QString::number(newAlarmNum));
-            QString alarmContent = alarmInfoSettings.value("AlarmContent").toString();
-            alarmInfoSettings.endGroup();
 
-            alarmBar->showAlarm(newAlarmNum, alarmContent);
+            alarmBar->showAlarm(newAlarmNum);
         }
+    });
+    connect(ui->btnHandBook, &QPushButton::clicked, this, [=](){
+
+        ui->btnAlarm->startAlarm();
     });
 
 }
@@ -342,7 +341,7 @@ void MainWindow::handleLoginModeChanged(LoginMode mode)
 
     ui->Btn_TeachHome->setEnabled(enabled && (curMode != TriMode::AUTO));
 
-//    setWidget->handleLoginModeChanged(mode);
+    setWidget->handleLoginModeChanged(mode);
     manualWidget->handleLoginModeChanged(mode);
 }
 
@@ -356,12 +355,14 @@ void MainWindow::onCheckPara()
         if (lastAlarmNum)
         {
             emit alarmOccurred(lastAlarmNum);
-            ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+//            ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+            ui->btnAlarm->startAlarm();
         }
         // alarm release
         else
         {
-            ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+//            ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+            ui->btnAlarm->stopAlarm();
         }
     }
 
@@ -574,7 +575,7 @@ int MainWindow::showErrorTip(const QString &message, TipMode mode)
 {
     dlgErrorTip->setMode(mode);
     dlgErrorTip->setMessage(message);
-    dlgErrorTip->raise();
+//    dlgErrorTip->raise();
     return dlgErrorTip->exec();
 }
 
