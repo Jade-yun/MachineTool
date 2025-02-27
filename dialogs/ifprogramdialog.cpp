@@ -73,6 +73,7 @@ IfProgramDialog::IfProgramDialog(QWidget *parent) :
         cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     }
     SetVarCoboxItem();
+    SetCoboxAxisSelectItem();
 }
 
 IfProgramDialog::~IfProgramDialog()
@@ -513,24 +514,32 @@ void IfProgramDialog::setLogicStructPar(uint8_t page_index,uint8_t CondIndex)
     }
     case 2://位置
     {
+        int AxisSelectIndex = 0;
+        for(int i=0;i<AXIS_TOTAL_NUM;i++)
+        {
+            if(ui->coboxPosPreOpAxisSelect->currentText() == m_NameDefine[1].axisName[i])
+            {
+                AxisSelectIndex = i;
+            }
+        }
         if (ui->chboxConstantPos->isChecked())
         {
-            Temp_LogicIfStruct.cmpType[CondIndex] = 61+ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
+            Temp_LogicIfStruct.cmpType[CondIndex] = 61+AxisSelectIndex;//ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
             Temp_LogicIfStruct.cmpMode[CondIndex] = ui->coboxOperandPos->currentIndex();//比较方式
             Temp_LogicIfStruct.sufferCmpType[CondIndex] = 0;//被比较对象类型-常量
             Temp_LogicIfStruct.sufferCmpValue[CondIndex] = ui->editPosPostOp->text().toDouble()*100;//被比较对象值
         }
         else if (ui->chboxVariablePos->isChecked())
         {
-            Temp_LogicIfStruct.cmpType[CondIndex] = 61+ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
+            Temp_LogicIfStruct.cmpType[CondIndex] = 61+AxisSelectIndex;//ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
             Temp_LogicIfStruct.cmpMode[CondIndex] = ui->coboxOperandPos->currentIndex();//比较方式
             Temp_LogicIfStruct.sufferCmpType[CondIndex] = ui->coboxPosVarSelectPostOp->currentIndex()+1;//被比较对象类型-变量1-20
         }
         else
         {
-            Temp_LogicIfStruct.cmpType[CondIndex] = 61+ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
+            Temp_LogicIfStruct.cmpType[CondIndex] = 61+AxisSelectIndex;//ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
             Temp_LogicIfStruct.cmpMode[CondIndex] = ui->coboxOperandPos->currentIndex();//比较方式
-            Temp_LogicIfStruct.sufferCmpType[CondIndex] = 61+ui->coboxPosPostOpAxisSelect->currentIndex();//比较对象类型-61-80轴
+            Temp_LogicIfStruct.sufferCmpType[CondIndex] = 61+AxisSelectIndex;//ui->coboxPosPostOpAxisSelect->currentIndex();//比较对象类型-61-80轴
         }
 
         break;
@@ -569,5 +578,16 @@ void IfProgramDialog::SetVarCoboxItem()
         ui->coboxVarSelectPostOp1->addItem(m_NameDefine[1].varName[i]);
         ui->coboxVarSelectPostOp2->addItem(m_NameDefine[1].varName[i]);
         ui->coboxPosVarSelectPostOp->addItem(m_NameDefine[1].varName[i]);
+    }
+}
+//设置轴选择控件选项
+void IfProgramDialog::SetCoboxAxisSelectItem()
+{
+    ui->coboxPosPreOpAxisSelect->clear();
+    ui->coboxPosPostOpAxisSelect->clear();
+    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    {
+        ui->coboxPosPreOpAxisSelect->addItem(m_NameDefine[1].axisName[i]);
+        ui->coboxPosPostOpAxisSelect->addItem(m_NameDefine[1].axisName[i]);
     }
 }

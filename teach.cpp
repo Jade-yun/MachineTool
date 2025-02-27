@@ -94,9 +94,8 @@ Teach::Teach(QWidget* parent) :
     ui->lineEdit_General_Speed_Y1->setDecimalPlaces(0);
     ui->lineEdit_General_Speed_Z1->setDecimalPlaces(0);
     ui->lineEdit_General_Speed_Y2->setDecimalPlaces(0);
+    ui->lineEdit_General_Speed_Z2->setDecimalPlaces(0);
     ui->lineEdit_General_Speed_C->setDecimalPlaces(0);
-    ui->lineEdit_General_Speed_A->setDecimalPlaces(0);
-    ui->lineEdit_General_Speed_B->setDecimalPlaces(0);
     ui->lineEdit_Reserve_time->setDecimalPlaces(2);
     ui->lineEdit_Reserve_num->setDecimalPlaces(0);
     ui->editReturnStepNum->setDecimalPlaces(0);
@@ -148,6 +147,36 @@ Teach::Teach(QWidget* parent) :
     generalIconPath[1] = ":/images/teach_img/claw.png";
     generalIconPath[2] = ":/images/teach_img/signalCheck.png";
     generalIconPath[3] = ":/images/teach_img/machine.png";
+
+    SubroutineBtn[0] = ui->Subroutine1_button;
+    SubroutineBtn[1] = ui->Subroutine2_button;
+    SubroutineBtn[2] = ui->Subroutine3_button;
+    SubroutineBtn[3] = ui->Subroutine4_button;
+    SubroutineBtn[4] = ui->Subroutine5_button;
+    SubroutineBtn[5] = ui->Subroutine6_button;
+    SubroutineBtn[6] = ui->Subroutine7_button;
+    SubroutineBtn[7] = ui->Subroutine8_button;
+
+    for(auto i=0;i<8;i++)
+    {
+        connect(SubroutineBtn[i],&QPushButton::clicked,this,[=](){
+            if(OrderNeedSaveFlag == true)
+            {
+                int reply =  MainWindow::pMainWindow->showErrorTip(tr("教导参数有修改，是否需要保存？"));
+                if (reply == QDialog::Accepted)
+                {
+                    widgetSwitchOrderSaveHandel(true);
+                }
+                else
+                {
+                    widgetSwitchOrderSaveHandel(false);
+                }
+            }
+            Switch_Pro_ReadOrder(i+1);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
+        });
+    }
 
     ui->tableWgtTeach->setSelectionBehavior(QAbstractItemView::SelectRows); //设置选择行为时每次选择一行
     ui->tableWgtTeach->setEditTriggers(QAbstractItemView::NoEditTriggers); //设置不可编辑
@@ -291,8 +320,6 @@ void Teach::Pro_AxisActOrderInit(void)
     ui->cb_General_Y2->setChecked(false);
     ui->cb_General_Z2->setChecked(false);
     ui->cb_General_C->setChecked(false);
-    ui->cb_General_B->setChecked(false);
-    ui->cb_General_A->setChecked(false);
 
     ui->lineEdit_General_Position_X1->setText("0.00");
     ui->lineEdit_General_Speed_X1->setText("50");
@@ -312,11 +339,132 @@ void Teach::Pro_AxisActOrderInit(void)
     ui->lineEdit_General_Position_C->setText("0.00");
     ui->lineEdit_General_Speed_C->setText("50");
 
-    ui->lineEdit_General_Position_A->setText("0.00");
-    ui->lineEdit_General_Speed_A->setText("50");
+}
+//机器参数中轴类型改变后，教导界面相关控件处理
+void Teach::AxisTypeChangeTeachHandle()
+{
+    //轴运动指令界面和速度教导指令界面
+    if(m_AxisPar[X1_AXIS].axisType == 1)
+    {
+        ui->cb_General_X1->show();
+        ui->lineEdit_General_Position_X1->show();
+        ui->lineEdit_General_Speed_X1->show();
+        ui->chboxSpeedTeachX1->show();
+        ui->editSpeedTeachX1->show();
+    }
+    else
+    {
+        ui->cb_General_X1->hide();
+        ui->lineEdit_General_Position_X1->hide();
+        ui->lineEdit_General_Speed_X1->hide();
+        ui->chboxSpeedTeachX1->hide();
+        ui->editSpeedTeachX1->hide();
+    }
+    if(m_AxisPar[Y1_AXIS].axisType == 1)
+    {
+        ui->cb_General_Y1->show();
+        ui->lineEdit_General_Position_Y1->show();
+        ui->lineEdit_General_Speed_Y1->show();
+        ui->chboxSpeedTeachY1->show();
+        ui->editSpeedTeachY1->show();
+    }
+    else
+    {
+        ui->cb_General_Y1->hide();
+        ui->lineEdit_General_Position_Y1->hide();
+        ui->lineEdit_General_Speed_Y1->hide();
+        ui->chboxSpeedTeachY1->hide();
+        ui->editSpeedTeachY1->hide();
+    }
+    if(m_AxisPar[Z1_AXIS].axisType == 1)
+    {
+        ui->cb_General_Z1->show();
+        ui->lineEdit_General_Position_Z1->show();
+        ui->lineEdit_General_Speed_Z1->show();
+        ui->chboxSpeedTeachZ1->show();
+        ui->editSpeedTeachZ1->show();
+    }
+    else
+    {
+        ui->cb_General_Z1->hide();
+        ui->lineEdit_General_Position_Z1->hide();
+        ui->lineEdit_General_Speed_Z1->hide();
+        ui->chboxSpeedTeachZ1->hide();
+        ui->editSpeedTeachZ1->hide();
+    }
+    if(m_AxisPar[C_AXIS].axisType == 1)
+    {
+        ui->cb_General_C->show();
+        ui->lineEdit_General_Position_C->show();
+        ui->lineEdit_General_Speed_C->show();
+        ui->chboxSpeedTeachC->show();
+        ui->editSpeedTeachC->show();
+    }
+    else
+    {
+        ui->cb_General_C->hide();
+        ui->lineEdit_General_Position_C->hide();
+        ui->lineEdit_General_Speed_C->hide();
+        ui->chboxSpeedTeachC->hide();
+        ui->editSpeedTeachC->hide();
+    }
+    if(m_AxisPar[Y2_AXIS].axisType == 1)
+    {
+        ui->cb_General_Y2->show();
+        ui->lineEdit_General_Position_Y2->show();
+        ui->lineEdit_General_Speed_Y2->show();
+        ui->chboxSpeedTeachY2->show();
+        ui->editSpeedTeachY2->show();
+    }
+    else
+    {
+        ui->cb_General_Y2->hide();
+        ui->lineEdit_General_Position_Y2->hide();
+        ui->lineEdit_General_Speed_Y2->hide();
+        ui->chboxSpeedTeachY2->hide();
+        ui->editSpeedTeachY2->hide();
+    }
+    if(m_AxisPar[Z2_AXIS].axisType == 1)
+    {
+        ui->cb_General_Z2->show();
+        ui->lineEdit_General_Position_Z2->show();
+        ui->lineEdit_General_Speed_Z2->show();
+        ui->chboxSpeedTeachZ2->show();
+        ui->editSpeedTeachZ2->show();
+    }
+    else
+    {
+        ui->cb_General_Z2->hide();
+        ui->lineEdit_General_Position_Z2->hide();
+        ui->lineEdit_General_Speed_Z2->hide();
+        ui->chboxSpeedTeachZ2->hide();
+        ui->editSpeedTeachZ2->hide();
+    }
 
-    ui->lineEdit_General_Position_B->setText("0.00");
-    ui->lineEdit_General_Speed_B->setText("50");
+    ui->coboxSearchAxisSelect->clear();
+    ui->combo_Shift_AxisAll->clear();
+    ui->combo_LowSpeedTorque_AxisAll->clear();
+    ui->combo_ServoStop_AxisAll->clear();
+    ui->coboxAxisSelectVarPreOp->clear();
+    ui->coboxAxisSelectVarPostOp->clear();
+    ui->comboBox_Edit_torque_axis->clear();
+    ui->comboBox_Edit_Var_Axis->clear();
+    ui->comboBox_Edit_Axis->clear();
+    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        if(m_AxisPar[i].axisType == 1)
+        {
+            ui->coboxSearchAxisSelect->addItem(m_NameDefine[1].axisName[i]);//轴搜索指令界面-轴选择复选框
+            ui->combo_Shift_AxisAll->addItem(m_NameDefine[1].axisName[i]);//轴偏移指令界面-轴选择复选框
+            ui->combo_LowSpeedTorque_AxisAll->addItem(m_NameDefine[1].axisName[i]);//低速转矩指令界面-轴选择复选框
+            ui->combo_ServoStop_AxisAll->addItem(m_NameDefine[1].axisName[i]);//伺服停止指令界面-轴选择复选框
+            ui->coboxAxisSelectVarPreOp->addItem(m_NameDefine[1].axisName[i]);//变量指令界面-轴选择复选框
+            ui->coboxAxisSelectVarPostOp->addItem(m_NameDefine[1].axisName[i]);//变量指令界面操作数-轴选择复选框
+            ui->comboBox_Edit_torque_axis->addItem(m_NameDefine[1].axisName[i]);//低速转矩编辑-轴选择复选框
+            ui->comboBox_Edit_Var_Axis->addItem(m_NameDefine[1].axisName[i]);//变量指令编辑界面-轴选择复选框
+            ui->comboBox_Edit_Axis->addItem(m_NameDefine[1].axisName[i]);//变量指令编辑界面-轴选择复选框
+        }
+    }
 }
 //卡爪动作指令参数初始化
 void Teach::Pro_ClawActionStructInit(void)
@@ -439,8 +587,6 @@ void Teach::Pro_SpeedTeachInit(void)
     ui->editSpeedTeachY2->setText("50");
     ui->editSpeedTeachZ2->setText("50");
     ui->editSpeedTeachC->setText("50");
-    ui->editSpeedTeachB->setText("50");
-    ui->editSpeedTeachA->setText("50");
     for(uint8_t i=0;i<AXIS_TOTAL_NUM;i++)
     {
         Temp_AxisMoveOrder[i].speed = 50;
@@ -1972,7 +2118,15 @@ void Teach::on_btnInset_clicked()
                     }
                     else if(ui->chboxAxisVarOp->isChecked())
                     {//操作数类型-轴
-                        Temp_LogicVarStruct.sufferOperType = ui->coboxAxisSelectVarPostOp->currentIndex()+21;
+                        int i=0;
+                        for(i=0;i<AXIS_TOTAL_NUM;i++)
+                        {
+                            if(ui->coboxAxisSelectVarPostOp->currentText() == m_NameDefine[1].axisName[i])
+                            {
+                                break;
+                            }
+                        }
+                        Temp_LogicVarStruct.sufferOperType = i+21;
                     }
                     else if(ui->chboxProdNumVarOp->isChecked())
                     {//操作数类型-实际产量
@@ -1989,8 +2143,15 @@ void Teach::on_btnInset_clicked()
                 }
                 else if(ui->chboxAxisSelectVarPreOp->isChecked())
                 {//选择轴
+                    Temp_LogicAxisStruct.axisNum = 0;
                     data_Temp[5] = C_LOGIC_AXIS;
-                    Temp_LogicAxisStruct.axisNum = ui->coboxAxisSelectVarPreOp->currentIndex()+1;//变量编号1-6
+                    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+                    {
+                        if(ui->coboxAxisSelectVarPreOp->currentText() == m_NameDefine[1].axisName[i])
+                        {
+                            Temp_LogicAxisStruct.axisNum = i+1;
+                        }
+                    }
                     if(ui->chboxConstantVarOp->isChecked())
                     {//操作数类型-常量
                         Temp_LogicAxisStruct.sufferOperType = 0;
@@ -2288,7 +2449,13 @@ void Teach::OrderSaveHandel()
             {
                 P_TorqueGardStruct* TorqueGard =(P_TorqueGardStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
                 TorqueGard->torqueValue = ui->lineEdit_Edit_torque_value->text().toUInt();
-                TorqueGard->axis = ui->comboBox_Edit_torque_axis->currentIndex();
+                for(int i=0;i<AXIS_TOTAL_NUM;i++)
+                {
+                    if(ui->comboBox_Edit_torque_axis->currentText() == m_NameDefine[1].axisName[i] && m_AxisPar[i].axisType == 1)
+                    {
+                        TorqueGard->axis = i;
+                    }
+                }
             }
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageOffset)
@@ -2502,9 +2669,9 @@ void Teach::OrderSaveHandel()
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageStack)
         {//堆叠指令编辑界面
-            if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_STACK_MOVE||m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_STACK_FOLLOW||m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_STACK_RESET_ZERO)
+            if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_STACK_MOVE || m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_STACK_FOLLOW || m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_STACK_RESET_ZERO)
             {
-                P_StackMoveStruct* StackMove =(P_StackMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+                P_StackMoveStruct* StackMove = (P_StackMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
                 m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->Stack_Edit_Delay->text().toDouble()*100;
                 //x1轴参数
                 m_StackInfo[StackMove->stackNum-1].stackStartPos[0] = ui->Stack_Edit_Pos->text().toDouble()*100;
@@ -2754,8 +2921,6 @@ void Teach::Save_Speed_Educat()
         ui->chboxSpeedTeachC,
         ui->chboxSpeedTeachY2,
         ui->chboxSpeedTeachZ2,
-        ui->chboxSpeedTeachA,
-        ui->chboxSpeedTeachB
     };
 
     NumberEdit* Speed_EducatEdit[] = {
@@ -2765,8 +2930,6 @@ void Teach::Save_Speed_Educat()
         ui->editSpeedTeachC,
         ui->editSpeedTeachY2,
         ui->editSpeedTeachZ2,
-        ui->editSpeedTeachA,
-        ui->editSpeedTeachB
     };
 
     const int count = sizeof(Speed_EducatBoxes) / sizeof(QCheckBox*); // Number of elements in arrays
@@ -3057,36 +3220,36 @@ void Teach::Edit_ClawAction_handle()
     if(ui->ClawClamp->isChecked())
     {
         ClawAction->type = 1;
-        if(modPortIndex == CLAW_METERIAL_1_LOOSENED)
-        {
-            modPortIndex = CLAW_METERIAL_1_CLAMP;
-        }
-        else if(modPortIndex == CLAW_PRODUCT_1_LOOSENED)
-        {
-            modPortIndex = CLAW_PRODUCT_1_CLAMP;
-        }
-        else if(modPortIndex == CLAW_CLAW_1_LOOSENED)
-        {
-            modPortIndex = CLAW_CLAW_1_CLAMP;
-        }
-        ClawAction->outportNum = m_Port_Y[modPortIndex].portNum;//变成夹紧端口
+//        if(modPortIndex == CLAW_METERIAL_1_LOOSENED)
+//        {
+//            modPortIndex = CLAW_METERIAL_1_CLAMP;
+//        }
+//        else if(modPortIndex == CLAW_PRODUCT_1_LOOSENED)
+//        {
+//            modPortIndex = CLAW_PRODUCT_1_CLAMP;
+//        }
+//        else if(modPortIndex == CLAW_CLAW_1_LOOSENED)
+//        {
+//            modPortIndex = CLAW_CLAW_1_CLAMP;
+//        }
+//        ClawAction->outportNum = m_Port_Y[modPortIndex].portNum;//变成夹紧端口
     }
     else if(ui->ClawRelease->isChecked())
     {
         ClawAction->type = 0;
-        if(modPortIndex == CLAW_METERIAL_1_CLAMP)
-        {
-            modPortIndex = CLAW_METERIAL_1_LOOSENED;
-        }
-        else if(modPortIndex == CLAW_PRODUCT_1_CLAMP)
-        {
-            modPortIndex = CLAW_PRODUCT_1_LOOSENED;
-        }
-        else if(modPortIndex == CLAW_CLAW_1_CLAMP)
-        {
-            modPortIndex = CLAW_CLAW_1_LOOSENED;
-        }
-        ClawAction->outportNum = m_Port_Y[modPortIndex].portNum;//变成松开端口
+//        if(modPortIndex == CLAW_METERIAL_1_CLAMP)
+//        {
+//            modPortIndex = CLAW_METERIAL_1_LOOSENED;
+//        }
+//        else if(modPortIndex == CLAW_PRODUCT_1_CLAMP)
+//        {
+//            modPortIndex = CLAW_PRODUCT_1_LOOSENED;
+//        }
+//        else if(modPortIndex == CLAW_CLAW_1_CLAMP)
+//        {
+//            modPortIndex = CLAW_CLAW_1_LOOSENED;
+//        }
+//        ClawAction->outportNum = m_Port_Y[modPortIndex].portNum;//变成松开端口
     }
     m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->ClawDelay->text().toDouble()*100;
 }
@@ -3189,31 +3352,6 @@ void Teach::on_cb_General_Z2_clicked(bool checked)
         Temp_AxisMoveOrder[5].axis = 6;
     }
 }
-
-//轴动作-A轴复选框处理函数
-void Teach::on_cb_General_A_clicked(bool checked)
-{
-    if(checked == true)
-    {//如果选中主引拔A轴
-        Temp_AxisMoveOrder[4].axis = Y2_AXIS;
-    }
-    else if(checked == false)
-    {
-        Temp_AxisMoveOrder[4].axis = 6;
-    }
-}
-//轴动作-B轴复选框处理函数
-void Teach::on_cb_General_B_clicked(bool checked)
-{
-    if(checked == true)
-    {//如果选中主引拔B轴
-        Temp_AxisMoveOrder[5].axis = Z2_AXIS;
-    }
-    else if(checked == false)
-    {
-        Temp_AxisMoveOrder[5].axis = 6;
-    }
-}
 //X1-速度
 void Teach::on_lineEdit_General_Speed_X1_editingFinished()
 {
@@ -3238,16 +3376,6 @@ void Teach::on_lineEdit_General_Speed_Y2_editingFinished()
 void Teach::on_lineEdit_General_Speed_Z2_editingFinished()
 {
     Temp_AxisMoveOrder[Z2_AXIS].speed = ui->lineEdit_General_Speed_Z2->text().toInt();
-}
-//B-速度
-void Teach::on_lineEdit_General_Speed_B_editingFinished()
-{
-    Temp_AxisMoveOrder[Z2_AXIS].speed = ui->lineEdit_General_Speed_Z2->text().toInt();
-}
-//A-速度
-void Teach::on_lineEdit_General_Speed_A_editingFinished()
-{
-    Temp_AxisMoveOrder[Y2_AXIS].speed = ui->lineEdit_General_Speed_Y2->text().toInt();
 }
 //C-速度
 void Teach::on_lineEdit_General_Speed_C_editingFinished()
@@ -4010,6 +4138,7 @@ void Teach::pageInit()
         }
     });
     coboxVarSelectVarPreOpItemSet();
+    AxisTypeChangeTeachHandle();
 }
 
 //预留通按钮
@@ -4104,16 +4233,6 @@ void Teach::on_editSpeedTeachC_editingFinished()
 {
      Temp_AxisMoveOrder[C_AXIS].speed = ui->editSpeedTeachC->text().toUInt();
 }
-//速度教导-B速度输入
-void Teach::on_editSpeedTeachB_editingFinished()
-{
-     Temp_AxisMoveOrder[Z2_AXIS].speed = ui->editSpeedTeachB->text().toUInt();
-}
-//速度教导-A速度输入
-void Teach::on_editSpeedTeachA_editingFinished()
-{
-     Temp_AxisMoveOrder[Y2_AXIS].speed = ui->editSpeedTeachA->text().toUInt();
-}
 
 void Teach::on_chboxReturnLabel_clicked()
 {
@@ -4184,126 +4303,10 @@ void Teach::on_lineEdit_General_Position_C_editingFinished()
     }
 }
 
-void Teach::on_lineEdit_General_Position_B_editingFinished()
-{
-    if(ui->lineEdit_General_Position_B->text().toDouble()*100 <= m_AxisPar[Z2_AXIS].axisMaxPos)
-    {
-        Temp_AxisMoveOrder[Z2_AXIS].pos = ui->lineEdit_General_Position_B->text().toDouble()*100;
-    }
-    else
-    {
-        ui->lineEdit_General_Position_B->setText(QString::number((float)(Temp_AxisMoveOrder[Z2_AXIS].pos)/100));
-        //可添加提示超出最大范围
-    }
-}
-
-void Teach::on_lineEdit_General_Position_A_editingFinished()
-{
-    if(ui->lineEdit_General_Position_A->text().toDouble()*100 <= m_AxisPar[Y2_AXIS].axisMaxPos)
-    {
-        Temp_AxisMoveOrder[Y2_AXIS].pos = ui->lineEdit_General_Position_A->text().toDouble()*100;
-    }
-    else
-    {
-        ui->lineEdit_General_Position_A->setText(QString::number((float)(Temp_AxisMoveOrder[Y2_AXIS].pos)/100));
-        //可添加提示超出最大范围
-    }
-}
-void Teach::on_Subroutine1_button_clicked()
-{
-    Switch_Pro_ReadOrder(1);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
-void Teach::on_Subroutine2_button_clicked()
-{
-    Switch_Pro_ReadOrder(2);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
-void Teach::on_Subroutine3_button_clicked()
-{
-    Switch_Pro_ReadOrder(3);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
-void Teach::on_Subroutine4_button_clicked()
-{
-    Switch_Pro_ReadOrder(4);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
-void Teach::on_Subroutine5_button_clicked()
-{
-    Switch_Pro_ReadOrder(5);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
-void Teach::on_Subroutine6_button_clicked()
-{
-    Switch_Pro_ReadOrder(6);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
-void Teach::on_Subroutine7_button_clicked()
-{
-    Switch_Pro_ReadOrder(7);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
-void Teach::on_Subroutine8_button_clicked()
-{
-    Switch_Pro_ReadOrder(8);
-    int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-    if (reply == QDialog::Accepted)
-    {
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,2);
-    }
-}
-
 void Teach::on_tabWidget_Teach_tabBarClicked(int index)
 {
     if(index == 0)
     {
-        m_OperateProNum = 0;//切换程序编号到主程序
-        m_CurrentSelectProOrderList = 0;//当前操作行号
-        Switch_Pro_ReadOrder(m_OperateProNum);
         ui->Subroutine1_button->setText(m_NameDefine[1].subProgName[0]);
         ui->Subroutine2_button->setText(m_NameDefine[1].subProgName[1]);
         ui->Subroutine3_button->setText(m_NameDefine[1].subProgName[2]);
@@ -4312,12 +4315,21 @@ void Teach::on_tabWidget_Teach_tabBarClicked(int index)
         ui->Subroutine6_button->setText(m_NameDefine[1].subProgName[5]);
         ui->Subroutine7_button->setText(m_NameDefine[1].subProgName[6]);
         ui->Subroutine8_button->setText(m_NameDefine[1].subProgName[7]);
-        int reply =  MainWindow::pMainWindow->showErrorTip(m_ProgramChange);
-        if (reply == QDialog::Accepted)
+        if(OrderNeedSaveFlag == true)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
+            int reply =  MainWindow::pMainWindow->showErrorTip(tr("教导参数有修改，是否需要保存？"));
+            if (reply == QDialog::Accepted)
+            {
+                widgetSwitchOrderSaveHandel(true);
+            }
+            else
+            {
+                widgetSwitchOrderSaveHandel(false);
+            }
         }
+        Switch_Pro_ReadOrder(0);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
         Teach_File_List_Refresh();//刷新列表
     }
     ui->btnModify->setChecked(false);//切换界面时关闭编辑状态
@@ -4350,33 +4362,17 @@ void Teach::on_combo_SubroutineAll_currentIndexChanged(int index)
 //高级-伺服停止-轴编号选择框
 void Teach::on_combo_ServoStop_AxisAll_currentIndexChanged(int index)
 {
-    if(index<=3)
+    if(ui->combo_ServoStop_AxisAll->currentText() == m_NameDefine[1].axisName[index])
     {
         Temp_AxisStopStruct.axis = index;
-    }
-    if(index==4 || index==6)
-    {
-        Temp_AxisStopStruct.axis = 4;
-    }
-    if(index==5 || index==7)
-    {
-        Temp_AxisStopStruct.axis = 5;
     }
 }
 //高级-转矩保护-轴编号选择框
 void Teach::on_combo_LowSpeedTorque_AxisAll_currentIndexChanged(int index)
 {
-    if(index<=3)
+    if(ui->combo_LowSpeedTorque_AxisAll->currentText() == m_NameDefine[1].axisName[index])
     {
         Temp_TorqueGardStruct.axis = index;
-    }
-    if(index==4 || index==6)
-    {
-        Temp_TorqueGardStruct.axis = 4;
-    }
-    if(index==5 || index==7)
-    {
-        Temp_TorqueGardStruct.axis = 5;
     }
 }
 //高级-转矩保护-转矩百分比输入
@@ -4387,17 +4383,9 @@ void Teach::on_lineEdit_LowSpeedTorque_delay_editingFinished()
 //高级-偏移-轴编号选择框
 void Teach::on_combo_Shift_AxisAll_currentIndexChanged(int index)
 {
-    if(index<=3)
+    if(ui->combo_Shift_AxisAll->currentText() == m_NameDefine[1].axisName[index])
     {
         Temp_OffsetAxisStruct.axis = index;
-    }
-    if(index==4 || index==6)
-    {
-        Temp_OffsetAxisStruct.axis = 4;
-    }
-    if(index==5 || index==7)
-    {
-        Temp_OffsetAxisStruct.axis = 5;
     }
 }
 
@@ -4539,7 +4527,7 @@ void Teach::Stack_Dialog_show()
         }
         else if(m_StackFunc.stackType == 2)
         {
-            stack_Temp->switchStackWay(StackMode::NORMAL);
+            stack_Temp->switchStackWay(StackMode::TEACH_NOMAL);
         }
         stack_Temp->updateGroupIndex(StackMove->stackNum-1);
         stack_Temp->syncParaToUI();
@@ -5025,7 +5013,24 @@ void Teach::OrderEdit_Handle()
         ui->stkWgtProgram->setCurrentWidget(ui->pageVarOperation);
         ui->Var_page->setCurrentWidget(ui->Var_Axis_page);
         P_LogicAxisStruct* LogicAxis =(P_LogicAxisStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-        ui->comboBox_Edit_Axis->setCurrentIndex(LogicAxis->axisNum);
+        if(LogicAxis->axisNum>0)
+        {
+            if(m_AxisPar[LogicAxis->axisNum-1].axisType == 1)
+            {//m_NameDefine[1].axisName[i] &&
+                for(int i=0;i<ui->comboBox_Edit_Axis->count();i++)
+                {
+                    if(ui->comboBox_Edit_Axis->itemText(i) == m_NameDefine[1].axisName[LogicAxis->axisNum-1])
+                    {
+                        ui->comboBox_Edit_Axis->setCurrentIndex(i);
+                    }
+                }
+            }
+            else
+            {
+                ui->comboBox_Edit_Axis->setEditText(m_NameDefine[1].axisName[LogicAxis->axisNum-1]);
+            }
+        }
+//        ui->comboBox_Edit_Axis->setCurrentIndex(LogicAxis->axisNum);
         ui->comboBox_Edit_Axis->setEnabled(false);
         if(LogicAxis->sufferOperType == 0)
         {
@@ -5186,7 +5191,21 @@ void Teach::OrderEdit_Handle()
         ui->stkWgtProgram->setCurrentWidget(ui->pageTorqueProtect);
         P_TorqueGardStruct* TorqueGard =(P_TorqueGardStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
         ui->lineEdit_Edit_torque_value->setText(QString::number(TorqueGard->torqueValue));
-        ui->comboBox_Edit_torque_axis->setCurrentIndex(TorqueGard->axis);
+        if(m_AxisPar[TorqueGard->axis].axisType == 1)
+        {
+            for(int i=0;i<ui->comboBox_Edit_torque_axis->count();i++)
+            {
+                if(ui->comboBox_Edit_torque_axis->itemText(i) == m_NameDefine[1].axisName[TorqueGard->axis])
+                {
+                    ui->comboBox_Edit_torque_axis->setCurrentIndex(i);
+                }
+            }
+        }
+        else
+        {
+            ui->comboBox_Edit_torque_axis->setEditText(m_NameDefine[1].axisName[TorqueGard->axis]);
+        }
+
         break;
     }
     case C_SUN_PRO:
@@ -5746,13 +5765,6 @@ void Teach::on_btn_General_Refresh_clicked()
             {
                 ui->lineEdit_General_Position_Y2->setText(QString::number(AxisCurPos/100,'f',2));
             }
-            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
-            {
-                if(ui->cb_General_A->isChecked())
-                {
-                    ui->lineEdit_General_Position_A->setText(QString::number(AxisCurPos/100,'f',2));
-                }
-            }
             break;
         case Z2_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
@@ -5760,13 +5772,6 @@ void Teach::on_btn_General_Refresh_clicked()
             if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
             {
                 ui->lineEdit_General_Position_Z2->setText(QString::number(AxisCurPos/100,'f',2));
-            }
-            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
-            {
-                if(ui->cb_General_B->isChecked())
-                {
-                    ui->lineEdit_General_Position_B->setText(QString::number(AxisCurPos/100,'f',2));
-                }
             }
             break;
         default:
@@ -5777,8 +5782,15 @@ void Teach::on_btn_General_Refresh_clicked()
 //轴搜索指令界面刷新按钮处理
 void Teach::on_btn_Refresh_clicked()
 {
-    uint8_t Axis_Index = ui->coboxSearchAxisSelect->currentIndex();
+    uint8_t Axis_Index = 0;
     double AxisCurPos = 0;
+    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        if(ui->coboxSearchAxisSelect->currentText() == m_NameDefine[1].axisName[i])
+        {
+            Axis_Index = i;
+        }
+    }
     if(ui->chboxSearchAxisSelect->isChecked())
     {
         switch (Axis_Index) {
@@ -5897,26 +5909,12 @@ void Teach::on_Edit_AxisMove_Refresh_clicked()
             {
                 ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
             }
-            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
-            {
-                if(ui->cb_General_A->isChecked())
-                {
-                    ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
-                }
-            }
             break;
         case Z2_AXIS:
             AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
             if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page1)
             {
                 ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
-            }
-            else if(ui->stackedWidget_Axis->currentWidget() == ui->Axis_Move_page2)
-            {
-                if(ui->cb_General_B->isChecked())
-                {
-                    ui->lineEdit_Edit_AxisMove_pos->setText(QString::number(AxisCurPos/100,'f',2));
-                }
             }
             break;
         default:
@@ -6264,6 +6262,23 @@ void Teach::WidgetNameRefresh()
         ui->Wait_release_off_comboBox->setEnabled(false);
         ui->Wait_pos_cor_comboBox->setEnabled(false);
     }
+
+    ui->cb_General_X1->setText(m_NameDefine[1].axisName[X1_AXIS]);
+    ui->chboxSpeedTeachX1->setText(m_NameDefine[1].axisName[X1_AXIS]);
+    ui->cb_General_Y1->setText(m_NameDefine[1].axisName[Y1_AXIS]);
+    ui->chboxSpeedTeachY1->setText(m_NameDefine[1].axisName[Y1_AXIS]);
+    ui->cb_General_Z1->setText(m_NameDefine[1].axisName[Z1_AXIS]);
+    ui->chboxSpeedTeachZ1->setText(m_NameDefine[1].axisName[Z1_AXIS]);
+    ui->cb_General_C->setText(m_NameDefine[1].axisName[C_AXIS]);
+    ui->chboxSpeedTeachC->setText(m_NameDefine[1].axisName[C_AXIS]);
+    ui->cb_General_Y2->setText(m_NameDefine[1].axisName[Y2_AXIS]);
+    ui->chboxSpeedTeachY2->setText(m_NameDefine[1].axisName[Y2_AXIS]);
+    ui->cb_General_Z2->setText(m_NameDefine[1].axisName[Z2_AXIS]);
+    ui->chboxSpeedTeachZ2->setText(m_NameDefine[1].axisName[Z2_AXIS]);
+
+    ui->Stack_Edit_btnAxisX1->setText(m_NameDefine[1].axisName[X1_AXIS]);
+    ui->Stack_Edit_btnAxisY1->setText(m_NameDefine[1].axisName[Y1_AXIS]);
+    ui->Stack_Edit_btnAxisZ1->setText(m_NameDefine[1].axisName[Z1_AXIS]);
 }
 
 //变量类型个数填充下拉列表框初始化

@@ -989,6 +989,7 @@ typedef struct
     int sendDataOutTime;
     int OutTimenum;
     uint8_t sendDataNum;//发送次数，同一参数下发5次未收到反馈，说明通信异常，返回同步失败
+    int SyncStep;//用来记录到那一步了
 }Sync_Data;
 
 extern MainUpdateStruct M_MainUpdate;//主控板升级结构体

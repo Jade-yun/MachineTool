@@ -3540,6 +3540,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =1;
         break;
     }
     case SysSendIndex::CMD_INTERLOCK:
@@ -3575,6 +3576,7 @@ uint8_t Usart::DataSyc()
 
             }
         }
+        MySync_Data.SyncStep =2;
         break;
     }
     case SysSendIndex::CMD_IN_FUNC_DEF:
@@ -3609,6 +3611,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =3;
         break;
     }
     case SysSendIndex::CMD_OUT_FUNC_DEF:
@@ -3643,6 +3646,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =4;
         break;
     }
     case SysSendIndex::CMD_OUT_RELEVENCY:
@@ -3677,6 +3681,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =5;
         break;
     }
     case SysSendIndex::CMD_RELATE_OUT:
@@ -3711,6 +3716,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =6;
         break;
     }
     case SysSendIndex::CMD_KEY:
@@ -3745,6 +3751,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =7;
         break;
     }
     case SysSendIndex::CMD_SENIOR:
@@ -3779,6 +3786,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =8;
         break;
     }
     case SysSendIndex::CMD_SENIOR_PORT:
@@ -3813,6 +3821,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =9;
         break;
     }
     case SysSendIndex::CMD_SAVE_MACHINE:
@@ -3848,6 +3857,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =10;
         break;
     }
     case SysSendIndex::CMD_SAVE_STACK:
@@ -3882,6 +3892,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =11;
         break;
     }
     case SysSendIndex::CMD_SAVE_CALW:
@@ -3935,6 +3946,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =12;
         break;
     }
     case SysSendIndex::CMD_SAVE_ONLINE:
@@ -3987,6 +3999,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =13;
         break;
     }
     case SysSendIndex::CMD_PRODUCT_PAR:
@@ -4021,6 +4034,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =14;
         break;
     }
     case SysSendIndex::CMD_PRODUCT_SENIOR:
@@ -4055,6 +4069,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =15;
         break;
     }
     case SysSendIndex::CMD_PRODUCT_INTERNET:
@@ -4089,6 +4104,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =16;
         break;
     }
     case SysSendIndex::CMD_SERVO_ACC_DEC:
@@ -4159,6 +4175,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =17;
         break;
     }
     case SysSendIndex::CMD_SERVO_MAX_SPEED:
@@ -4193,6 +4210,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =18;
         break;
     }
     case SysSendIndex::CMD_SERVO_TOLERANCE:
@@ -4227,6 +4245,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =19;
         break;
     }
     case SysSendIndex::CMD_SP_AREA:
@@ -4279,6 +4298,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =20;
         break;
     }
     case SysSendIndex::CMD_SP_AXIS_LIMIT:
@@ -4343,6 +4363,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =21;
         break;
     }
     case SysSendIndex::CMD_SP_RAMPAGE_LIMIT:
@@ -4377,6 +4398,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =22;
         break;
     }
     case SysSendIndex::CMD_MAC_AXIS:
@@ -4455,6 +4477,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =23;
         break;
     }
     case SysSendIndex::CMD_MAC_LIMIT_SWT:
@@ -4489,6 +4512,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =24;
         break;
     }
     case SysSendIndex::CMD_MAC_STRUCT:
@@ -4523,6 +4547,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =25;
         break;
     }
     case SysSendIndex::CMD_MAC_SERVO:
@@ -4565,6 +4590,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =26;
         break;
     }
     case SysSendIndex::CMD_MAC_ORIGIN:
@@ -4599,6 +4625,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =27;
         break;
     }
     case SysSendIndex::CMD_STACK_PAR:
@@ -4643,6 +4670,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =28;
         break;
     }
     case SysSendIndex::CMD_STACK_POINT:
@@ -4706,6 +4734,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =29;
         break;
     }
     case SysSendIndex::CMD_STAC_SET:
@@ -4740,6 +4769,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
+        MySync_Data.SyncStep =30;
         break;
     }
     case SysSendIndex::CMD_END:
@@ -4774,7 +4804,7 @@ uint8_t Usart::DataSyc()
                 }
             }
         }
-
+        MySync_Data.SyncStep =31;
         break;
     }
     case SysSendIndex::CMD_SENDERROR:
@@ -4807,7 +4837,7 @@ uint8_t Usart::DataSyc()
 //参数同步处理函数
 void Usart::sync_data_handle(void)
 {
-    UsartTimer->start(20);
+    UsartTimer->start(60);
     MySync_Data.SendDataStep = 0;
     MySync_Data.SendData_flag = 0;
     MySync_Data.sendDataOutTime = 0;

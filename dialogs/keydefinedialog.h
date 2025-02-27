@@ -40,6 +40,10 @@ private:
     int getValveOutputPort() const;
     int getReserveOutStatus() const;
     int getMainBoardOutPort() const;
+    int GetAxisPortNum() const;
+
+    void AxisTypeQcomboboxSetItem() const;
+
 public:
     QString getKeyDefineStr() const;
     KeyFunc getKeyFuncDefine();

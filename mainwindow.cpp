@@ -330,7 +330,7 @@ void MainWindow::initUI()
 
     ui->Btn_TeachHome->setText(tr("教导管理"));
     ui->Btn_ManualHome->setText(tr("停止页面"));
-
+    AxisTypeChange_Handle();//刷新坐标轴显示
 //    const QString& programName = m_CurrentProgramNameAndPath.fileName;
 //    QString name = m_SystemSet.sysName + "  "  + tr("程式：") + programName;
 //   ui->labProgramName->setText(name);
@@ -636,6 +636,9 @@ void MainWindow::connectAllSignalsAndSlots()
     });
     connect(softKey,&SoftKeyWidget::SoftKeyWidgetButtonClickSignal,this,&MainWindow::keyFunctCommandSend);//右上角弹出左侧按键软键盘按下处理函数
     connect(this,&MainWindow::Refresh_globalSpeedShow_Signal,autoWidget,&AutoForm::Refresh_globalSpeedShowHandel);
+    connect(setWidget,&Setting::AxisTypeChange_Signal,this,&MainWindow::AxisTypeChange_Handle);//轴类型切换后更新主界面轴坐标显示
+    connect(setWidget,&Setting::AxisTypeChange_Signal,teachWidget,&Teach::AxisTypeChangeTeachHandle);//教导界面轴编号选择需要刷新
+    connect(setWidget,&Setting::AxisTypeChange_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, [&]() {
@@ -681,10 +684,73 @@ void MainWindow::connectAllSignalsAndSlots()
         ui->labRotateSpeed->setText(QString::number((double)m_AxisCurSpeed)+"rpm");
 
         /*自动界面内容刷新*/
-        autoWidget->AutoForm_Refresh();
+        if (curMode == TriMode::AUTO)
+        {
+            m_AutoInforRefresh.Old_Follow_ProNum = 0;
+            autoWidget->AutoForm_Refresh();
+        }
     });
     // 启动定时器，设置时间间隔为100毫秒
-    timer->start(100);
+    timer->start(50);
+}
+
+void MainWindow::AxisTypeChange_Handle()
+{
+    if(m_AxisPar[0].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->label_X1->show();
+        ui->X1_speed->show();
+    }
+    else {
+        ui->label_X1->hide();
+        ui->X1_speed->hide();
+    }
+    if(m_AxisPar[1].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->label_Y1->show();
+        ui->Y1_speed->show();
+    }
+    else {
+        ui->label_Y1->hide();
+        ui->Y1_speed->hide();
+    }
+    if(m_AxisPar[2].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->label_Z1->show();
+        ui->Z1_speed->show();
+    }
+    else {
+        ui->label_Z1->hide();
+        ui->Z1_speed->hide();
+    }
+    if(m_AxisPar[3].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->label_C->show();
+        ui->C_speed->show();
+    }
+    else {
+        ui->label_C->hide();
+        ui->C_speed->hide();
+    }
+    if(m_AxisPar[4].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->label_Y2->show();
+        ui->Y2_speed->show();
+    }
+    else {
+        ui->label_Y2->hide();
+        ui->Y2_speed->hide();
+    }
+    if(m_AxisPar[5].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->label_Z2->show();
+        ui->Z2_speed->show();
+    }
+    else
+    {
+        ui->label_Z2->hide();
+        ui->Z2_speed->hide();
+    }
 }
 //刷新实时坐标处理函数，通过信号传值的方式，避免发生线程访问安全
 void MainWindow::posflashhandle(AxisCurPos data)
@@ -1099,7 +1165,10 @@ void MainWindow::keyAxisCommandSend(uint16_t code, int32_t value)
     }
     else if(m_KeyFunc[KeyIndex].keyType == 2)
     {//轴
-        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, m_KeyFunc[KeyIndex].funcNum, dirction);
+        if(m_AxisPar[m_KeyFunc[KeyIndex].funcNum-1].axisType == 1)
+        {
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, m_KeyFunc[KeyIndex].funcNum, dirction);
+        }
     }
 }
 
@@ -1215,7 +1284,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
     }
     else if(SysIndex==SysSendIndex::CMD_SENDERROR)
     {
-        QString errorText = tr("参数同步失败!");//+QString::number(MySync_Data.SendDataStep);
+        QString errorText = tr("参数同步失败!")+QString::number(MySync_Data.SyncStep);
         dlgErrorTip->setMessage(errorText);
         if(!dlgErrorTip->isVisible())
         {
@@ -1286,7 +1355,7 @@ void MainWindow::m_RobotStateRefreash()
     {
         if(!dlgErrorTip->isVisible())
         {
-            MainWindow::pMainWindow->showErrorTip(tr("回原点中..."));
+            MainWindow::pMainWindow->showErrorTip(tr("回原点中..."),TipMode::NULL_BUTTON);
         }
     }
     if((m_RobotRunSta == MAC_STA_STOP_STANDBY || m_RobotRunSta == MAC_STA_MANUAL_STANDBY || m_RobotRunSta == MAC_STA_AUTO_STANDBY) && m_RobotOriginState == 1)
@@ -1302,7 +1371,7 @@ void MainWindow::m_RobotStateRefreash()
     {
         if(!dlgErrorTip->isVisible())
         {
-            MainWindow::pMainWindow->showErrorTip(tr("复位中..."));
+            MainWindow::pMainWindow->showErrorTip(tr("复位中..."),TipMode::NULL_BUTTON);
         }
     }
     if(m_RobotOriginState == 2 && m_RobotResetState == 2 && RobotResetPromptFlag == true)

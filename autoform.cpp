@@ -609,6 +609,8 @@ void AutoForm::OrderEditSaveHandel()
     g_TotalProCopy(m_ProOrder[m_OperateProNum],m_OperateProOrder);
     saveProgram(m_CurrentProgramNameAndPath);
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,1);
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,1);
     Auto_File_List_Refresh(m_OperateProNum);//刷新程序列表
 }
 /*************************************************************************
@@ -1154,7 +1156,8 @@ void AutoForm::Program_Follow_Refresh()
                 {
                     if(ui->Auto_file_List->item(row, 0)->text().toInt() == m_ProRunInfo.proNum[m_OperateProNum]+1)
                     {
-                         ui->Auto_file_List->scrollToItem(ui->Auto_file_List->item(row, 0));
+                        qDebug()<<"当前运行行号："<<m_ProRunInfo.proNum[m_OperateProNum];
+                         ui->Auto_file_List->scrollToItem(ui->Auto_file_List->item(row, 0));//若列表项在可视区域外，视图会自动滚动以确保该项可见。
                          for (int column = 0; column < ui->Auto_file_List->columnCount(); column++)
                          {
                              if (ui->Auto_file_List->item(row, column)) {

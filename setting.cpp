@@ -64,8 +64,8 @@ Setting::Setting(QWidget *parent) :
     {
         stack[i] = new StackEdit(ui->tabWidgetStack->widget(i));
         stack[i]->updateGroupIndex(i);
+        connect(this,&Setting::AxisTypeChange_Signal,stack[i],&StackEdit::StackAxisSelectQcomboboxRefresh);//当轴类型发生改变时，改变堆叠-轴选择复选框
     }
-
     init();
     initWidgets();
     setupNameDefine();
@@ -459,7 +459,6 @@ Setting::Setting(QWidget *parent) :
             m_Port_X[30].functionSet = 1;
         }
     });
-
     //PXC_240914
     setupPortDefine();
     //触摸屏校准按钮
@@ -1772,6 +1771,8 @@ void Setting::setupMenuAuthority()
 
 void Setting::syncParaToUI()
 {
+    SetWidgetAxisQcomboboxHandel();
+    emit AxisTypeChange_Signal();
     /****************************系统设置********************************************/
 //    m_SystemSet.lan;
 //    ui->coboxFonts->setCurrentIndex(m_SystemSet.typeFace);
@@ -1912,22 +1913,22 @@ void Setting::syncParaToUI()
         clawSafeWidgets.at(i).clawKeepoutSta->setCurrentIndex(m_ClawSave[i].clawKeepoutSta);
 
         int axisXItemIndex = 0;
-        if (m_ClawSave[i].axisSelect_X == X1_AXIS+1)
+        if (m_ClawSave[i].axisSelect_X == X1_AXIS+1 && m_AxisPar[X1_AXIS].axisType == 1)
         {
             axisXItemIndex = 1;
         }
         clawSafeWidgets.at(i).axisSelect_X->setCurrentIndex(axisXItemIndex);
 
         int axisZItemIndex = 0;
-        if(m_ClawSave[i].axisSelect_Z == Z1_AXIS + 1)
+        if(m_ClawSave[i].axisSelect_Z == Z1_AXIS + 1  && m_AxisPar[Z1_AXIS].axisType == 1)
         {
             axisZItemIndex = 1;
         }
-        else if (m_ClawSave[i].axisSelect_Z == Z2_AXIS + 1)
+        else if (m_ClawSave[i].axisSelect_Z == Z2_AXIS + 1  && m_AxisPar[Z2_AXIS].axisType == 1)
         {
             axisZItemIndex = 2;
         }
-        clawSafeWidgets.at(i).axisSelect_X->setCurrentIndex(axisZItemIndex);
+//        clawSafeWidgets.at(i).axisSelect_X->setCurrentIndex(axisZItemIndex);
 
         clawSafeWidgets.at(i).clawKeepoutMinX->setText(QString::number(m_ClawSave[i].clawKeepoutMinX / 100.0, 'f', 2));
         clawSafeWidgets.at(i).clawKeepoutMaxX->setText(QString::number(m_ClawSave[i].clawKeepoutMaxX / 100.0, 'f', 2));
@@ -2047,6 +2048,7 @@ void Setting::syncParaToUI()
     HandwheelParaWidgets.decTime->setText(QString::number(m_HandwheelPar.decTime / 100.0, 'f', 2));
     HandwheelParaWidgets.accAcc->setText(QString::number(m_HandwheelPar.accAcc));
     HandwheelParaWidgets.decDec->setText(QString::number(m_HandwheelPar.decDec));
+
     /****************************安全区********************************************/
     for (int index = 0; index < SAVE_AREA_NUM; index++)
     {
@@ -2055,30 +2057,59 @@ void Setting::syncParaToUI()
         servoPointSafeArea.at(index).processFinishNum->setCurrentIndex(m_SaveArea[index].processFinishNum);
 
         // X 轴
-        servoPointSafeArea.at(index).axisSelect[0]->setCurrentIndex(m_SaveArea[index].axisSelect[0]);
+        int xAxis = m_SaveArea[index].axisSelect[0];
+        if(xAxis == 0)
+        {
+            if(servoPointSafeArea.at(index).axisSelect[0]->count()>0)
+            {
+                servoPointSafeArea.at(index).axisSelect[0]->setCurrentIndex(0);
+            }
+        }
+        else if(m_AxisPar[0].axisType == 1 && servoPointSafeArea.at(index).axisSelect[0]->count()>1)
+        {
+            servoPointSafeArea.at(index).axisSelect[0]->setCurrentIndex(1);
+        }
 
         // Y 轴
         int yAxis = m_SaveArea[index].axisSelect[1];
         if (yAxis == 0) {
-            servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(0);
+            if(servoPointSafeArea.at(index).axisSelect[1]->count()>0)
+            {
+                servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(0);
+            }
         }
         else if (yAxis == 2) { // Y1轴
-            servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(1);
+            if(servoPointSafeArea.at(index).axisSelect[1]->count()>1)
+            {
+                servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(1);
+            }
         }
         else if (yAxis == 5) { // Y2轴
-            servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(2);
+            if(servoPointSafeArea.at(index).axisSelect[1]->count()>2)
+            {
+                servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(2);
+            }
         }
 
         // Z 轴
         int zAxis = m_SaveArea[index].axisSelect[2];
         if (zAxis == 0) {
-            servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(0);
+            if(servoPointSafeArea.at(index).axisSelect[2]->count()>0)
+            {
+                servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(0);
+            }
         }
         else if (zAxis == 3) {
-            servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(1);
+            if(servoPointSafeArea.at(index).axisSelect[2]->count()>1)
+            {
+                servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(1);
+            }
         }
         else if (zAxis == 6) {
-            servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(2);
+            if(servoPointSafeArea.at(index).axisSelect[2]->count()>2)
+            {
+                servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(2);
+            }
         }
 
         // 第三组用不上 默认传为0
@@ -2199,7 +2230,6 @@ void Setting::handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, co
     for (auto edit : edits) {
         edit->clear();
     }
-
 }
 
 void Setting::updateTabVisibility()
@@ -3148,7 +3178,6 @@ void Setting::setupCommunicationConnections()
     {
         stack[i]->saveInfoConnections();
     }
-
 //    QSignalMapper *outputTypeMapper = new QSignalMapper(this);
 //    for (int i=0;i<outputTypeList.count();i++)
 //    {
@@ -3425,28 +3454,22 @@ void Setting::saveStackBinSafePara()
 void Setting::saveClawSafePara(int index)
 {
     m_ClawSave[index].clawKeepoutSta = clawSafeWidgets.at(index).clawKeepoutSta->currentIndex();
-    int selectIndex = clawSafeWidgets.at(index).axisSelect_X->currentIndex();
-    if(selectIndex == 0)
+    int selectIndex_X = 0;
+    int selectIndex_Z = 0;
+    for(int i=0;i<AXIS_TOTAL_NUM;i++)
     {
-        m_ClawSave[index].axisSelect_X = 0;
+        if(clawSafeWidgets.at(index).axisSelect_X->currentText() == m_NameDefine[1].axisName[i])
+        {
+            selectIndex_X = i+1;
+        }
+        if(clawSafeWidgets.at(index).axisSelect_Z->currentText() == m_NameDefine[1].axisName[i])
+        {
+            selectIndex_Z = i+1;
+        }
     }
-    else
-    {
-        m_ClawSave[index].axisSelect_X = X1_AXIS+1;
-    }
-    selectIndex = clawSafeWidgets.at(index).axisSelect_Z->currentIndex();
-    if(selectIndex == 0)
-    {
-        m_ClawSave[index].axisSelect_Z = 0;
-    }
-    else if(selectIndex == 1)
-    {
-        m_ClawSave[index].axisSelect_Z = Z1_AXIS + 1;
-    }
-    else
-    {
-        m_ClawSave[index].axisSelect_Z = Z2_AXIS + 1;
-    }
+    m_ClawSave[index].axisSelect_X = selectIndex_X;
+    m_ClawSave[index].axisSelect_Z = selectIndex_Z;
+
     m_ClawSave[index].clawKeepoutMinX = clawSafeWidgets.at(index).clawKeepoutMinX->text().toFloat()*100;
     m_ClawSave[index].clawKeepoutMaxX = clawSafeWidgets.at(index).clawKeepoutMaxX->text().toFloat()*100;
     m_ClawSave[index].clawKeepoutHighZ = clawSafeWidgets.at(index).clawKeepoutHighZ->text().toFloat()*100;
@@ -3549,6 +3572,9 @@ void Setting::saveAccDecTimeSpeed(int index)
 void Setting::saveSafeAreaPara()
 {
     int index=ui->tabWgtServoSafePoint->currentIndex();
+    uint8_t AxisSelect_X=0;//选择的轴编号
+    uint8_t AxisSelect_Y=0;
+    uint8_t AxisSelect_Z=0;
     if(index>3)
     {
         saveTolerancePara();
@@ -3559,30 +3585,25 @@ void Setting::saveSafeAreaPara()
     m_SaveArea[index].saveAreaSwt = servoPointSafeArea.at(index).safeAreaSwt->currentIndex();
     m_SaveArea[index].processFinishNum = servoPointSafeArea.at(index).processFinishNum->currentIndex();
 
-    // X 轴
-    m_SaveArea[index].axisSelect[0] = servoPointSafeArea.at(index).axisSelect[0]->currentIndex();
-    // Y 轴
-    int indexY = servoPointSafeArea.at(index).axisSelect[1]->currentIndex() ;
-    if (indexY == 0){
-        m_SaveArea[index].axisSelect[1] = 0;
+    for(auto i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        if(m_NameDefine[1].axisName[i] == servoPointSafeArea.at(index).axisSelect[0]->currentText())
+        {
+            AxisSelect_X = i+1;
+        }
+        if(m_NameDefine[1].axisName[i] == servoPointSafeArea.at(index).axisSelect[1]->currentText())
+        {
+            AxisSelect_Y = i+1;
+        }
+        if(m_NameDefine[1].axisName[i] == servoPointSafeArea.at(index).axisSelect[2]->currentText())
+        {
+            AxisSelect_Z = i+1;
+        }
     }
-    else if (indexY == 1) { // Y1轴
-        m_SaveArea[index].axisSelect[1] = 2;
-    }
-    else if (indexY == 2) { // Y2轴
-        m_SaveArea[index].axisSelect[1] = 5;
-    }
-    // Z 轴
-    int indexZ = servoPointSafeArea.at(index).axisSelect[2]->currentIndex();
-    if (indexZ == 0){
-        m_SaveArea[index].axisSelect[2] = 0;
-    }
-    else if (indexZ == 1){
-        m_SaveArea[index].axisSelect[2] = 3;
-    }
-    else if (indexZ == 2){
-        m_SaveArea[index].axisSelect[2] = 6;
-    }
+    m_SaveArea[index].axisSelect[0] = AxisSelect_X;
+    m_SaveArea[index].axisSelect[1] = AxisSelect_Y;
+    m_SaveArea[index].axisSelect[2] = AxisSelect_Z;
+
     // 第三组用不上 默认传为0
     for (int i = 0; i < 2; i++)
     {
@@ -3697,6 +3718,8 @@ void Setting::saveMachinePara()
     emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
     emit ManualDebugMachineRefresh_Signal(0);
+    emit AxisTypeChange_Signal();
+    SetWidgetAxisQcomboboxHandel();
 }
 
 void Setting::saveMachineAllPara(int index)
@@ -3748,7 +3771,13 @@ void Setting::saveMachineAllPara(int index)
         uint16_t storageGroup=ui->editStorageGroup->text().toUInt();
         if (storageGroup <100)
         {
-            m_ServoCommPar[storageGroup].axis=ui->coboxAxisNum->currentIndex()+1;
+            for(int i=0;i<AXIS_TOTAL_NUM;i++)
+            {
+                if(m_NameDefine[1].axisName[i] == ui->coboxAxisNum->currentText())
+                {
+                    m_ServoCommPar[storageGroup].axis=i+1;
+                }
+            }
             m_ServoCommPar[storageGroup].index=ui->editParaIndex->text().toUInt();
             m_ServoCommPar[storageGroup].sunIndex=ui->editParaSunIndex->text().toUInt();
             m_ServoCommPar[storageGroup].parLen=ui->coboxParaLen->currentIndex()+1;
@@ -4195,8 +4224,11 @@ void Setting::Upgrade_Main_State_handle(uint8_t state)
     if(state == 3 && execute_status == false)
     {
         execute_status = true;
-        MainWindow::pMainWindow->showErrorTip(tr("升级成功！等待重启"));
-        system("reboot");
+        int reply = MainWindow::pMainWindow->showErrorTip(tr("升级成功！等待重启"));
+        if(reply ==  QDialog::Accepted)
+        {
+            system("reboot");
+        }
     }
     else if(state == 4 && execute_status== false)
     {
@@ -4271,4 +4303,125 @@ void Setting::AxisParRefresh(uint8_t index)
     machineParaWidgets.at(index).limitMin->setText(minLimitStrs[index]);
     machineParaWidgets.at(index).limitMax->setText(maxLimitStrs[index]);
     machineParaWidgets.at(index).originSignal->setText(originSigStrs[index]);
+}
+//设置界面轴编号选择控件处理函数
+void Setting::SetWidgetAxisQcomboboxHandel()
+{
+    ui->coboxAxisNum->clear();//机器参数界面-通信界面轴选择复选框
+    ui->coboxAxisXClawSafe->clear();//卡爪安全界面-卡爪安全1-轴选择复选框
+    ui->coboxAxisXClawSafe_2->clear();//卡爪安全界面-卡爪安全2-X轴选择复选框
+    ui->coboxAxisXClawSafe_3->clear();//卡爪安全界面-卡爪安全3-X轴选择复选框
+    ui->coboxAxisXClawSafe_4->clear();//卡爪安全界面-卡爪安全4-X轴选择复选框
+    ui->coboxAxisZClawSafe->clear();//卡爪安全界面-卡爪安全1-Z轴选择复选框
+    ui->coboxAxisZClawSafe_2->clear();//卡爪安全界面-卡爪安全2-Z轴选择复选框
+    ui->coboxAxisZClawSafe_3->clear();//卡爪安全界面-卡爪安全3-Z轴选择复选框
+    ui->coboxAxisZClawSafe_4->clear();//卡爪安全界面-卡爪安全4-Z轴选择复选框
+    ui->coboxOnlineAxis->clear();//联机安全-联机区域1-联机轴选择复选框
+    ui->coboxOnlineAxis_2->clear();//联机安全-联机区域2-联机轴选择复选框
+    ui->coboxOnlineAxis_3->clear();//联机安全-联机区域3-联机轴选择复选框
+    ui->coboxOnlineAxis_4->clear();//联机安全-联机区域4-联机轴选择复选框
+    ui->coboxAxisXSA1->clear();//伺服安全点-安全区1-X轴-轴选择复选框
+    ui->coboxAxisYSA1->clear();//伺服安全点-安全区1-Y轴-轴选择复选框
+    ui->coboxAxisZSA1->clear();//伺服安全点-安全区1-Z轴-轴选择复选框
+    ui->coboxAxisXSA1_2->clear();//伺服安全点-安全区2-X轴-轴选择复选框
+    ui->coboxAxisYSA1_2->clear();//伺服安全点-安全区2-Y轴-轴选择复选框
+    ui->coboxAxisZSA1_2->clear();//伺服安全点-安全区2-Z轴-轴选择复选框
+    ui->coboxAxisXSA1_3->clear();//伺服安全点-安全区3-X轴-轴选择复选框
+    ui->coboxAxisYSA1_3->clear();//伺服安全点-安全区3-Y轴-轴选择复选框
+    ui->coboxAxisZSA1_3->clear();//伺服安全点-安全区3-Z轴-轴选择复选框
+    ui->coboxAxisXSA1_4->clear();//伺服安全点-安全区4-X轴-轴选择复选框
+    ui->coboxAxisYSA1_4->clear();//伺服安全点-安全区4-Y轴-轴选择复选框
+    ui->coboxAxisZSA1_4->clear();//伺服安全点-安全区4-Z轴-轴选择复选框
+
+    ui->coboxAxisXClawSafe->addItem(tr("无"));
+    ui->coboxAxisXClawSafe_2->addItem(tr("无"));
+    ui->coboxAxisXClawSafe_3->addItem(tr("无"));
+    ui->coboxAxisXClawSafe_4->addItem(tr("无"));
+
+    ui->coboxAxisZClawSafe->addItem(tr("无"));
+    ui->coboxAxisZClawSafe_2->addItem(tr("无"));
+    ui->coboxAxisZClawSafe_3->addItem(tr("无"));
+    ui->coboxAxisZClawSafe_4->addItem(tr("无"));
+
+    ui->coboxOnlineAxis->addItem(tr("无"));
+    ui->coboxOnlineAxis_2->addItem(tr("无"));
+    ui->coboxOnlineAxis_3->addItem(tr("无"));
+    ui->coboxOnlineAxis_4->addItem(tr("无"));
+
+    ui->coboxAxisXSA1->addItem(tr("无"));
+    ui->coboxAxisYSA1->addItem(tr("无"));
+    ui->coboxAxisZSA1->addItem(tr("无"));
+    ui->coboxAxisXSA1_2->addItem(tr("无"));
+    ui->coboxAxisYSA1_2->addItem(tr("无"));
+    ui->coboxAxisZSA1_2->addItem(tr("无"));
+    ui->coboxAxisXSA1_3->addItem(tr("无"));
+    ui->coboxAxisYSA1_3->addItem(tr("无"));
+    ui->coboxAxisZSA1_3->addItem(tr("无"));
+    ui->coboxAxisXSA1_4->addItem(tr("无"));
+    ui->coboxAxisYSA1_4->addItem(tr("无"));
+    ui->coboxAxisZSA1_4->addItem(tr("无"));
+    if(m_AxisPar[0].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->coboxAxisXClawSafe->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxAxisXClawSafe_2->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxAxisXClawSafe_3->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxAxisXClawSafe_4->addItem(m_NameDefine[1].axisName[0]);
+
+        ui->coboxOnlineAxis->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxOnlineAxis_2->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxOnlineAxis_3->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxOnlineAxis_4->addItem(m_NameDefine[1].axisName[0]);
+
+        ui->coboxAxisXSA1->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxAxisXSA1_2->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxAxisXSA1_3->addItem(m_NameDefine[1].axisName[0]);
+        ui->coboxAxisXSA1_4->addItem(m_NameDefine[1].axisName[0]);
+
+        ui->coboxAxisNum->addItem(m_NameDefine[1].axisName[0]);
+    }
+    if(m_AxisPar[1].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->coboxAxisYSA1->addItem(m_NameDefine[1].axisName[1]);
+        ui->coboxAxisYSA1_2->addItem(m_NameDefine[1].axisName[1]);
+        ui->coboxAxisYSA1_3->addItem(m_NameDefine[1].axisName[1]);
+        ui->coboxAxisYSA1_4->addItem(m_NameDefine[1].axisName[1]);
+
+        ui->coboxAxisNum->addItem(m_NameDefine[1].axisName[1]);
+    }
+    if(m_AxisPar[2].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->coboxAxisZClawSafe->addItem(m_NameDefine[1].axisName[2]);
+        ui->coboxAxisZClawSafe_2->addItem(m_NameDefine[1].axisName[2]);
+        ui->coboxAxisZClawSafe_3->addItem(m_NameDefine[1].axisName[2]);
+        ui->coboxAxisZClawSafe_4->addItem(m_NameDefine[1].axisName[2]);
+
+        ui->coboxAxisZSA1->addItem(m_NameDefine[1].axisName[2]);
+        ui->coboxAxisZSA1_2->addItem(m_NameDefine[1].axisName[2]);
+        ui->coboxAxisZSA1_3->addItem(m_NameDefine[1].axisName[2]);
+        ui->coboxAxisZSA1_4->addItem(m_NameDefine[1].axisName[2]);
+
+        ui->coboxAxisNum->addItem(m_NameDefine[1].axisName[2]);
+    }
+    if(m_AxisPar[3].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->coboxAxisNum->addItem(m_NameDefine[1].axisName[3]);
+    }
+    if(m_AxisPar[4].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->coboxAxisNum->addItem(m_NameDefine[1].axisName[4]);
+    }
+    if(m_AxisPar[5].axisType == 1)
+    {//如果轴类型为伺服，则显示对应轴
+        ui->coboxAxisZClawSafe->addItem(m_NameDefine[1].axisName[5]);
+        ui->coboxAxisZClawSafe_2->addItem(m_NameDefine[1].axisName[5]);
+        ui->coboxAxisZClawSafe_3->addItem(m_NameDefine[1].axisName[5]);
+        ui->coboxAxisZClawSafe_4->addItem(m_NameDefine[1].axisName[5]);
+
+        ui->coboxAxisZSA1->addItem(m_NameDefine[1].axisName[5]);
+        ui->coboxAxisZSA1_2->addItem(m_NameDefine[1].axisName[5]);
+        ui->coboxAxisZSA1_3->addItem(m_NameDefine[1].axisName[5]);
+        ui->coboxAxisZSA1_4->addItem(m_NameDefine[1].axisName[5]);
+
+        ui->coboxAxisNum->addItem(m_NameDefine[1].axisName[5]);
+    }
 }

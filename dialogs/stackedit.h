@@ -19,7 +19,8 @@ enum StackMode : unsigned char {
     ROTATE_BIN,
     TEACH_THREE_POINT,
     TEACH_FOUR_POINT,
-    TEACH_NOMAL
+    TEACH_NOMAL,
+    TEACH_ROTATE_BIN
 };
 
 namespace Ui {
@@ -68,7 +69,7 @@ public slots:
     void saveStackInfo1();          //基础参数
     void saveStackInfo(int index);           //点位参数
     void updateGroupIndex(int index);
-
+    void StackAxisSelectQcomboboxRefresh();//堆叠轴选择框需要刷新
     void syncParaToUI();
 public:
     explicit StackEdit(QWidget *parent = nullptr);

@@ -49,6 +49,9 @@ void StackEdit::initStackPara(QTableWidget* tableWidget)
         speedDischage[i]->setDecimalPlaces(0);
         startPosDischage[i]->setDecimalPlaces(2);
 
+        speed[i]->setInputRange(0, 100);
+        speedDischage[i]->setInputRange(0, 100);
+
         tableWidget->setCellWidget(0, i, axisSelect[i]);
         tableWidget->setCellWidget(1, i, speed[i]);
         tableWidget->setCellWidget(2, i, pointNum[i]);
@@ -118,7 +121,7 @@ void StackEdit::switchStackWay(StackMode mode)
         ui->labOrder, ui->coboxStackOrder, ui->checkBoxTriAxisUnion
     };
 
-    if (mode == 0 || mode == 1)
+    if (mode == StackMode::THREE_POINT || mode == StackMode::FOUR_POINT)
     {
         ui->stkWgtStackWay->setCurrentIndex(0);
         ui->grboxAxisZPara->show();
@@ -139,7 +142,7 @@ void StackEdit::switchStackWay(StackMode mode)
             posD[i]->setEnabled(enabled);
         }
     }
-    else if (mode == 2)
+    else if (mode == StackMode::NORMAL)
     {
         ui->stkWgtStackWay->setCurrentIndex(1);
         ui->grboxAxisZPara->hide();
@@ -192,6 +195,40 @@ void StackEdit::switchStackWay(StackMode mode)
             posD[i]->setEnabled(enabled);
         }
     }
+    else if (mode == StackMode::TEACH_NOMAL)
+    {
+        ui->stkWgtStackWay->setCurrentIndex(1);
+        ui->grboxAxisZPara->hide();
+        ui->btnFresh->hide();
+        ui->btnMoveToStack->hide();
+        ui->btnMoveToFollow->hide();
+        ui->btnOK->show();
+        ui->btnCancel->show();
+
+        ui->labGif->show();
+
+        for (QWidget* widget : widgets)
+        {
+            widget->setEnabled(true);
+        }
+    }
+    else if (mode == StackMode::TEACH_ROTATE_BIN)
+    {
+        ui->stkWgtStackWay->setCurrentIndex(2);
+        ui->grboxAxisZPara->hide();
+        ui->btnFresh->hide();
+        ui->btnMoveToStack->hide();
+        ui->btnMoveToFollow->hide();
+        ui->btnOK->show();
+        ui->btnCancel->show();
+
+        ui->labGif->hide();
+
+        for (QWidget* widget : widgets)
+        {
+            widget->setEnabled(false);
+        }
+    }
 }
 
 void StackEdit::showOKandCancelButton(bool isVisible)
@@ -239,7 +276,6 @@ void StackEdit::saveStackInfo1()
                 m_StackInfo[groupIndex].axisSelect[i]=6;
             }
             break;
-
         }
         m_StackInfo[groupIndex].axisSpeed[i] = speed[i]->text().toInt();
         m_StackInfo[groupIndex].stackPointNum[i] = pointNum[i]->text().toInt();
@@ -297,7 +333,7 @@ void StackEdit::saveStackInfo(int index)
         m_StackInfo[groupIndex].stackPointNum[i] = pointNum[i]->text().toInt();
         m_StackInfo[groupIndex].stackDir[i] = stackDirect[i]->currentIndex();
         m_StackInfo[groupIndex].dischangeSpeed[i] = speedDischage[i]->text().toInt();
-        m_StackInfo[groupIndex].stackStartPos[i] = startPosA[i]->text().toInt();
+        m_StackInfo[groupIndex].stackStartPos[i] = startPosA[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stack_X_EndPos[i] = endPosB_X[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stack_Y_EndPos[i] = endPosC_Y[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stackDiagonalPos[i] = posD[i]->text().toDouble()*100;
@@ -321,6 +357,85 @@ void StackEdit::updateGroupIndex(int index)
     }
 }
 
+void StackEdit::StackAxisSelectQcomboboxRefresh()
+{
+    axisSelect[0]->clear();
+    axisSelect[1]->clear();
+    axisSelect[2]->clear();
+    for(auto i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        if(m_AxisPar[i].axisType == 1)
+        {
+            if(i==X1_AXIS)
+            {
+                axisSelect[0]->addItem(m_NameDefine[1].axisName[X1_AXIS]);
+            }
+            if(i==Y1_AXIS)
+            {
+                axisSelect[1]->addItem(m_NameDefine[1].axisName[Y1_AXIS]);
+            }
+            if(i==Z1_AXIS)
+            {
+                axisSelect[2]->addItem(m_NameDefine[1].axisName[Z1_AXIS]);
+            }
+            if(i==Y2_AXIS)
+            {
+                axisSelect[1]->addItem(m_NameDefine[1].axisName[Y2_AXIS]);
+            }
+            if(i==Z2_AXIS)
+            {
+                axisSelect[2]->addItem(m_NameDefine[1].axisName[Z2_AXIS]);
+            }
+        }
+    }
+    if(axisSelect[0]->count()>0)
+    {
+        axisSelect[0]->setCurrentIndex(0);
+    }
+
+    int axisYIndex = m_StackInfo[groupIndex].axisSelect[1];
+    int axisZIndex = m_StackInfo[groupIndex].axisSelect[2];
+    if (axisYIndex == 2 && m_AxisPar[Y1_AXIS].axisType == 1)
+    {
+        if(axisSelect[1]->count()>0)
+        {
+            axisSelect[1]->setCurrentIndex(0);
+        }
+    }
+    else if (axisYIndex == 5 && m_AxisPar[Y2_AXIS].axisType == 1)
+    {
+        if(axisSelect[1]->count()>1)
+        {
+            axisSelect[1]->setCurrentIndex(1);
+        }
+    }
+    else
+    {
+        axisSelect[1]->setCurrentIndex(0);
+        saveStackInfo1();
+    }
+
+    if (axisZIndex == 3 && m_AxisPar[Z1_AXIS].axisType == 1)
+    {
+        if(axisSelect[2]->count()>0)
+        {
+            axisSelect[2]->setCurrentIndex(0);
+        }
+    }
+    else if (axisZIndex == 6 && m_AxisPar[Z2_AXIS].axisType == 1)
+    {
+        if(axisSelect[2]->count()>1)
+        {
+            axisSelect[2]->setCurrentIndex(1);
+        }
+    }
+    else
+    {
+        axisSelect[2]->setCurrentIndex(0);
+        saveStackInfo1();
+    }
+
+}
 void StackEdit::syncParaToUI()
 {
     ui->coboxStackOrder->setCurrentIndex(m_StackInfo[groupIndex].stackOrder);
@@ -377,6 +492,7 @@ void StackEdit::syncParaToUI()
         offset[i]->setText(QString::number((double)m_StackInfo[groupIndex].offsetDis[i] / 100, 'f', 2));
     }
 }
+
 
 StackEdit::StackEdit(QWidget *parent) :
     QWidget(parent),

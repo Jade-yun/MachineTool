@@ -17,6 +17,8 @@ public:
     ~IfProgramDialog();
 
 private slots:
+    void SetCoboxAxisSelectItem();
+
     void SetVarCoboxItem();
 
     void Clear_Temp_LogicIfStruct(uint8_t CondIndex);

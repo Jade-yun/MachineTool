@@ -47,7 +47,18 @@ ManualForm::ManualForm(QWidget *parent) :
     ui->editPositionAdd->setDecimalPlaces(2);
     ui->editPositionSub->setDecimalPlaces(2);
     connect(ui->editAxisActionSpeed,&NumberEdit::textChanged,[=](const QString &){
-        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
+        if(ui->cb_axisActionAxis->count()>1)
+        {
+            for(int i=0;i<AXIS_TOTAL_NUM;i++)
+            {
+                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
+                {
+                    AxisIndex = i;
+                }
+            }
+        }
+        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
         m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
@@ -55,7 +66,18 @@ ManualForm::ManualForm(QWidget *parent) :
         setManualAxis(m_manualAxis);
     });
     connect(ui->editPositionAdd,&NumberEdit::textChanged,[=](const QString &){
-        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
+        if(ui->cb_axisActionAxis->count()>1)
+        {
+            for(int i=0;i<AXIS_TOTAL_NUM;i++)
+            {
+                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
+                {
+                    AxisIndex = i;
+                }
+            }
+        }
+        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
         m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
@@ -63,14 +85,36 @@ ManualForm::ManualForm(QWidget *parent) :
         setManualAxis(m_manualAxis);
     });
     connect(ui->editPositionSub,&NumberEdit::textChanged,[=](const QString &){
-        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
+        if(ui->cb_axisActionAxis->count()>1)
+        {
+            for(int i=0;i<AXIS_TOTAL_NUM;i++)
+            {
+                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
+                {
+                    AxisIndex = i;
+                }
+            }
+        }
+        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
         m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
         m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
     });
     connect(ui->chbZAxisDesend, QOverload<int>::of(&QCheckBox::stateChanged), [=](int){
-        m_manualAxis.axis=ui->cb_axisActionAxis->currentIndex();
+        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
+        if(ui->cb_axisActionAxis->count()>1)
+        {
+            for(int i=0;i<AXIS_TOTAL_NUM;i++)
+            {
+                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
+                {
+                    AxisIndex = i;
+                }
+            }
+        }
+        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
         m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
         m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
         m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
@@ -310,6 +354,7 @@ ManualForm::ManualForm(QWidget *parent) :
             g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,AdjustMachineAxisIndex+1,5);
         }
     });
+    update_Button_Name_Handel();
 }
 
 ManualForm::~ManualForm()
@@ -345,7 +390,20 @@ void ManualForm::InitAdjustMachine(uint8_t AxisIndex)
 
 void ManualForm::initControls()
 {
-    ui->cb_axisActionAxis->setCurrentIndex(m_manualAxis.axis);
+    if(m_manualAxis.axis>0)
+    {
+        for(auto i=0;i<ui->cb_axisActionAxis->count();i++)
+        {
+            if(ui->cb_axisActionAxis->itemText(i) == m_NameDefine[1].axisName[m_manualAxis.axis])
+            {
+                ui->cb_axisActionAxis->setCurrentIndex(i);
+            }
+        }
+    }
+    else
+    {
+        ui->cb_axisActionAxis->setCurrentIndex(m_manualAxis.axis);
+    }
     ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed));
     ui->editPositionAdd->setText(QString::number(m_manualAxis.pos_pos/100.0));
     ui->editPositionSub->setText(QString::number(m_manualAxis.sub_pos/100.0));
@@ -1599,6 +1657,15 @@ void ManualForm::update_Button_Name_Handel()
             setbuttonIcon(btn, portName + tr("通"), 1);
         }
     }
-
+    //轴选择，调机界面轴选择
+    ui->cb_axisActionAxis->clear();
+    ui->cb_axisActionAxis->addItem(tr("禁止"));
+    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        if(m_AxisPar[i].axisType == 1)
+        {
+            ui->cb_axisActionAxis->addItem(m_NameDefine[1].axisName[i]);
+        }
+    }
 }
 

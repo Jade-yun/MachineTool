@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>7</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -15177,7 +15177,7 @@ QPushButton::released{
         </rect>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_7">
         <attribute name="title">
@@ -15186,7 +15186,7 @@ QPushButton::released{
         <widget class="IOOnlineInEdit" name="editAreaInput">
          <property name="geometry">
           <rect>
-           <x>170</x>
+           <x>180</x>
            <y>142</y>
            <width>140</width>
            <height>40</height>
@@ -15211,7 +15211,7 @@ QPushButton::released{
         <widget class="QLabel" name="labAreaInput">
          <property name="geometry">
           <rect>
-           <x>13</x>
+           <x>23</x>
            <y>142</y>
            <width>150</width>
            <height>40</height>
@@ -15242,7 +15242,7 @@ QPushButton::released{
         <widget class="IOOnlineOutEdit" name="editAreaOutput">
          <property name="geometry">
           <rect>
-           <x>510</x>
+           <x>520</x>
            <y>142</y>
            <width>140</width>
            <height>40</height>
@@ -15267,7 +15267,7 @@ QPushButton::released{
         <widget class="QLabel" name="labAreaOutput">
          <property name="geometry">
           <rect>
-           <x>352</x>
+           <x>362</x>
            <y>142</y>
            <width>150</width>
            <height>40</height>
@@ -15301,7 +15301,7 @@ QPushButton::released{
          </property>
          <property name="geometry">
           <rect>
-           <x>510</x>
+           <x>520</x>
            <y>204</y>
            <width>140</width>
            <height>40</height>
@@ -15329,7 +15329,7 @@ QPushButton::released{
          </property>
          <property name="geometry">
           <rect>
-           <x>352</x>
+           <x>362</x>
            <y>204</y>
            <width>150</width>
            <height>40</height>
@@ -15360,7 +15360,7 @@ QPushButton::released{
         <widget class="IOOnlineInEdit" name="editRequestInput">
          <property name="geometry">
           <rect>
-           <x>170</x>
+           <x>180</x>
            <y>204</y>
            <width>140</width>
            <height>40</height>
@@ -15385,7 +15385,7 @@ QPushButton::released{
         <widget class="QLabel" name="labRequestInput">
          <property name="geometry">
           <rect>
-           <x>13</x>
+           <x>23</x>
            <y>204</y>
            <width>150</width>
            <height>40</height>
@@ -15416,7 +15416,7 @@ QPushButton::released{
         <widget class="QComboBox" name="coboxOnlineSelect">
          <property name="geometry">
           <rect>
-           <x>170</x>
+           <x>180</x>
            <y>80</y>
            <width>140</width>
            <height>40</height>
@@ -15456,7 +15456,7 @@ QPushButton::released{
         <widget class="QLabel" name="labOnlineSelect">
          <property name="geometry">
           <rect>
-           <x>13</x>
+           <x>23</x>
            <y>80</y>
            <width>150</width>
            <height>40</height>
@@ -15487,7 +15487,7 @@ QPushButton::released{
         <widget class="QComboBox" name="coboxOnlineAxis">
          <property name="geometry">
           <rect>
-           <x>510</x>
+           <x>520</x>
            <y>80</y>
            <width>140</width>
            <height>40</height>
@@ -15527,7 +15527,7 @@ QPushButton::released{
         <widget class="QLabel" name="labOnlineAxis">
          <property name="geometry">
           <rect>
-           <x>352</x>
+           <x>362</x>
            <y>80</y>
            <width>150</width>
            <height>40</height>
@@ -15558,7 +15558,7 @@ QPushButton::released{
         <widget class="QWidget" name="layoutWidget">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>20</x>
            <y>273</y>
            <width>551</width>
            <height>42</height>
@@ -15696,7 +15696,7 @@ QPushButton::released{
         <widget class="QLabel" name="labMasterSlaveMode">
          <property name="geometry">
           <rect>
-           <x>13</x>
+           <x>23</x>
            <y>21</y>
            <width>150</width>
            <height>40</height>
@@ -15727,7 +15727,7 @@ QPushButton::released{
         <widget class="QComboBox" name="coboxMasterSlaveMode">
          <property name="geometry">
           <rect>
-           <x>170</x>
+           <x>180</x>
            <y>21</y>
            <width>140</width>
            <height>40</height>
@@ -15767,7 +15767,7 @@ QPushButton::released{
         <widget class="QLabel" name="labPulseTime">
          <property name="geometry">
           <rect>
-           <x>350</x>
+           <x>360</x>
            <y>21</y>
            <width>150</width>
            <height>40</height>
@@ -15798,7 +15798,7 @@ QPushButton::released{
         <widget class="NumberEdit" name="editPulseTime">
          <property name="geometry">
           <rect>
-           <x>510</x>
+           <x>520</x>
            <y>21</y>
            <width>140</width>
            <height>40</height>

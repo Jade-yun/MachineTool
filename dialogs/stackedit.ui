@@ -221,7 +221,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page3Or4PointMode">
     <widget class="QTableWidget" name="tableStack">

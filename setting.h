@@ -111,6 +111,7 @@ signals:
     void coboxVarSelectVarPreOpItemSet_signal();//教导界面变量类型复选框刷新信号
     void updateManualformButtonName_Signal();//更新手动界面按钮名称显示信号
     void ManualDebugMachineRefresh_Signal(uint8_t Index);//刷新手动-调机界面参数刷新信号
+    void AxisTypeChange_Signal();//结构参数中轴类型发生改变
 private:
     //信号设置
     QVector<QComboBox*> outputTypeList;                 //输出类型
@@ -245,6 +246,7 @@ private:
     std::vector<QString> originSigStrs;
 
 private slots:
+   void SetWidgetAxisQcomboboxHandel();
    void outputTypeSlots();
    void outportInterlockSlots();
    void outportRelevancySlots();

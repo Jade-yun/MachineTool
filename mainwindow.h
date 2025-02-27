@@ -68,11 +68,14 @@ private slots:
     void m_RobotStateRefreash();
 
     void labProgramNameRollShow();
+
+    void AxisTypeChange_Handle();
 public slots:
 
     void slotShowSubWindow();
 
     void MainWindow_SetControl_Stake(bool state);
+
 signals:
     void sigSettingHome();
     void signal_refresh_TeachList();//刷新教导界面列表信号
@@ -179,7 +182,6 @@ protected:
 
 private:
     bool checked;
-
 
 };
 

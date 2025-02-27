@@ -20,7 +20,7 @@ KeyDefineDialog::KeyDefineDialog(QWidget *parent) :
 
         cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     }
-
+    AxisTypeQcomboboxSetItem();
     connect(ui->btnOK, &QPushButton::clicked, this, &KeyDefineDialog::accept);
     connect(ui->btnCancel, &QPushButton::clicked, this, &KeyDefineDialog::reject);
 }
@@ -213,6 +213,31 @@ QString KeyDefineDialog::getKeyDefineStr() const
     return text;
 }
 
+//伺服-轴选择框选项设置
+void KeyDefineDialog::AxisTypeQcomboboxSetItem() const
+{
+    ui->coboxAxisSelect->clear();
+    for(auto i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        if(m_AxisPar[i].axisType == 1)
+        {
+            ui->coboxAxisSelect->addItem(m_NameDefine[1].axisName[i]);
+        }
+    }
+}
+//获取轴选择复选框当前轴编号
+int KeyDefineDialog::GetAxisPortNum() const
+{
+    for(auto i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        if(m_NameDefine[1].axisName[i] == ui->coboxAxisSelect->currentText())
+        {
+            return i+1;
+        }
+    }
+    return 0;
+}
+
 KeyDefineDialog::KeyFunc KeyDefineDialog::getKeyFuncDefine()
 {
     switch (ui->tabWidget->currentIndex()) {
@@ -228,7 +253,7 @@ KeyDefineDialog::KeyFunc KeyDefineDialog::getKeyFuncDefine()
         break;
     case 2:
         m_KeyFunc.keyType = 2;
-        m_KeyFunc.portNum = ui->coboxAxisSelect->currentIndex() + 1;
+        m_KeyFunc.portNum = GetAxisPortNum();//ui->coboxAxisSelect->currentIndex() + 1;
         m_KeyFunc.funcStatus = ui->chboxAxisDirect0->isChecked() ? 0 : 1;
         break;
     default:

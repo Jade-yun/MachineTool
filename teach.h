@@ -26,6 +26,7 @@ private:
     Ui::Teach *ui;
     uint16_t listWgtJumptoLabelIndex = 0;//标签列表中有跳转标签序号 0-未选中，
 public slots:
+    void AxisTypeChangeTeachHandle();
     void SwitchPageInit();
     void widgetSwitchOrderSaveHandel(bool SaveFlag);
     void OrderColorShow_Handle();
@@ -137,10 +138,6 @@ private slots:
 
     void on_cb_General_C_clicked(bool checked);
 
-    void on_cb_General_A_clicked(bool checked);
-
-    void on_cb_General_B_clicked(bool checked);
-
     void on_lineEdit_General_Speed_X1_editingFinished();
 
     void on_lineEdit_General_Speed_Y1_editingFinished();
@@ -150,10 +147,6 @@ private slots:
     void on_lineEdit_General_Speed_Y2_editingFinished();
 
     void on_lineEdit_General_Speed_Z2_editingFinished();
-
-    void on_lineEdit_General_Speed_B_editingFinished();
-
-    void on_lineEdit_General_Speed_A_editingFinished();
 
     void on_lineEdit_General_Speed_C_editingFinished();
 
@@ -236,10 +229,6 @@ private slots:
 
     void on_editSpeedTeachC_editingFinished();
 
-    void on_editSpeedTeachA_editingFinished();
-
-    void on_editSpeedTeachB_editingFinished();
-
     void on_lineEdit_Reserve_num_editingFinished();
 
     void on_chboxReturnLabel_clicked();
@@ -257,26 +246,6 @@ private slots:
     void on_Blow_Air_button_clicked();
 
     void on_lineEdit_General_Position_C_editingFinished();
-
-    void on_lineEdit_General_Position_B_editingFinished();
-
-    void on_lineEdit_General_Position_A_editingFinished();
-
-    void on_Subroutine1_button_clicked();
-
-    void on_Subroutine2_button_clicked();
-
-    void on_Subroutine3_button_clicked();
-
-    void on_Subroutine4_button_clicked();
-
-    void on_Subroutine5_button_clicked();
-
-    void on_Subroutine6_button_clicked();
-
-    void on_Subroutine7_button_clicked();
-
-    void on_Subroutine8_button_clicked();
 
     void on_tabWidget_Teach_tabBarClicked(int index);
 
@@ -354,6 +323,7 @@ private:
     void pageInit();
 private:
 	QPushButton* generalBtn[4];
+    QPushButton* SubroutineBtn[8];
 	QString generalStr[4];
 	QString generalIconPath[4];
 	QStringList generalStrList;			//使用哪几个
