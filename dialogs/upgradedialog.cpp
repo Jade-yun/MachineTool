@@ -995,7 +995,7 @@ void upgradedialog::on_ResSettOK_clicked()
             }
 #else
             QString defaultConfigDir = "/opt/MachineTool/default_configs";  // 默认配置文件目录
-            QString targetDir = "/Settings";  // app运行配置文件目录
+            QString targetDir = "/opt/MachineTool/configs";  // app运行配置文件目录
             QDir dir(defaultConfigDir);
 
             if (!dir.exists()) {

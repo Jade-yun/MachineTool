@@ -312,12 +312,14 @@ void StackEdit::saveStackInfo(int index)
     setStackInfo(m_StackInfo[groupIndex],groupIndex);
 }
 
+// 这样写不行，后面写不通。需要换个方式来实现
+// MoveStackFollowPoint.Stack_Index 换个方式来实现获取 index
 void StackEdit::updateGroupIndex(int index)
 {
     if (index > -1 && index < 8)
     {
         groupIndex = index;
-        MoveStackFollowPoint.Stack_Index = groupIndex+1;
+//        MoveStackFollowPoint.Stack_Index = groupIndex+1;
     }
 }
 
@@ -378,10 +380,11 @@ void StackEdit::syncParaToUI()
     }
 }
 
-StackEdit::StackEdit(QWidget *parent) :
+StackEdit::StackEdit(int groupIndex, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::StackEdit),movie(nullptr),
-    groupIndex(0)
+    ui(new Ui::StackEdit),
+    movie(nullptr),
+    groupIndex(groupIndex)
 {
     ui->setupUi(this);
 
@@ -425,11 +428,13 @@ StackEdit::StackEdit(QWidget *parent) :
 
     connect(ui->btnMoveToStack, &QPushButton::clicked, moveStack,[=](){
         MoveStackFollowPoint.Stack_Type = 1;//移至堆叠点
+        MoveStackFollowPoint.Stack_Index = groupIndex + 1;
         emit StackFollowRefreshSignal();
         moveStack->exec();
     });
     connect(ui->btnMoveToFollow, &QPushButton::clicked, moveFollow,[=](){
         MoveStackFollowPoint.Stack_Type = 2;//移至跟随点
+        MoveStackFollowPoint.Stack_Index = groupIndex + 1;
         emit StackFollowRefreshSignal();
         moveFollow->exec();
     });

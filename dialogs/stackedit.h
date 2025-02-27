@@ -71,7 +71,7 @@ public slots:
 
     void syncParaToUI();
 public:
-    explicit StackEdit(QWidget *parent = nullptr);
+    explicit StackEdit(int groupIndex, QWidget *parent = nullptr);
     ~StackEdit();
 
 private:
@@ -82,8 +82,8 @@ private:
 
 private:
     Ui::StackEdit *ui;
-private:
     QMovie *movie;
+private:
     int groupIndex;
 signals:
     void closeStackEditDialogSignal(); // 定义关闭对话框的信号

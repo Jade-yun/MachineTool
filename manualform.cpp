@@ -1266,7 +1266,9 @@ void ManualForm::onCheckSavedGuide()
     if (ui->btnSaveGuide->isParaChanged() == false) {
         return;
     }
-    int reply =  MainWindow::pMainWindow->showErrorTip(tr("操作指引参数有修改，是否需要保存？"));
+
+    ErrorTipDialog tip(tr("操作指引参数有修改，是否需要保存？"));
+    int reply = tip.exec();
     if (reply == QDialog::Accepted)
     {
         on_btnSaveGuide_clicked();
@@ -1283,7 +1285,9 @@ void ManualForm::onCheckSavedReferPointPara()
     if (ui->btnSaveReference->isParaChanged() == false) {
         return;
     }
-    int reply =  MainWindow::pMainWindow->showErrorTip(tr("参考点参数有修改，是否需要保存？"));
+
+    ErrorTipDialog tip(tr("参考点参数有修改，是否需要保存？"));
+    int reply = tip.exec();
     if (reply == QDialog::Accepted)
     {
         on_btnSaveReference_clicked();

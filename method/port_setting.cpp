@@ -1,7 +1,30 @@
 #include "port_setting.h"
 
+struct InterLockGroup {
+    int forwardValuePort;       // 正向操作端口号（如阀门开启）
+    int reverseValuePort;       // 反向操作端口号（如阀门关闭）
+    int forwardDetectPort;      // 正向检测端口号
+    int reverseDetectPort;      // 反向检测端口号
+};
+
+// 互锁设置每一组对应的端口号
+constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
+    {CLAW_METERIAL_1_CLAMP, CLAW_METERIAL_1_LOOSENED, 0, 1},        // 原料1
+    {CLAW_PRODUCT_1_CLAMP, CLAW_PRODUCT_1_LOOSENED, 2, 3},          // 成品1
+    {CLAW_CLAW_1_CLAMP, CLAW_CLAW_1_LOOSENED, 4, 5},                // 卡爪1
+    {MACHINE_AUTO_DOOR_1_OPEN, MACHINE_AUTO_DOOR_1_CLOSE, 8, 9},    // 自动门1
+    {MACHINE_CHUCK_1_CLAMP, MACHINE_CHUCK_1_LOOSENED, 10, 11},      // 卡盘1
+    {-1, -1, -1, -1},                                               // 预留1
+    {24, 25, 36, 37},                                               // 原料2
+    {26, 27, 38, 39},                                               // 成品2
+    {28, 29, 40, 41},                                               // 卡爪2
+    {32, 33, 44, 45},                                               // 自动门2
+    {34, 35, 46, 47},                                               // 卡盘2
+    {-1, -1, -1, -1}                                                // 预留2
+};
+
 //若没有对应端口号的，则索引定为99
-uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置,存储的实际端口号
+//uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置,存储的实际端口号
 
 /*************************************************************************
 **  函数名：  readSigSetPara()
@@ -13,141 +36,39 @@ uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁
 **************************************************************************/
 void readSigSetPara()
 {
-#if 1
-    //X
-    QStringList tempList11=getIniValues(3,"Port_X");
-    QStringList tempList12=getIniValues(99,"Port_X_Name_Modify");
-    QStringList tempList13=getIniValues(99,"Port_X_Number_Modify");             //仅为显示
+    getOutPortType();
+    getOutportInterlock();
+    getOutportRelevancy();
+    getReleteOut();
+    getKeyFunc();
+    getLedFunc();
+    getSeniorFunc();
 
-    QStringList tempList17=getIniValues(3,"ResPort_X");
-    QStringList tempList18=getIniValues(99,"ResPort_X_Name_Modify");
-    QStringList tempList19=getIniValues(99,"Port_X_functionset");
-
-#define USE_REFACTOR_PORTDEFINE_VERSION
-#if !defined (USE_REFACTOR_PORTDEFINE_VERSION)
-    for(int i=0;i<INPUT_TOTAL_NUM;i++)
-    {
-        if(i<INPUT_NUM)
-        {
-            m_Port_X[i].definePort=QString("X%1").arg(i+1);
-            m_Port_X[i].isReserve=false;
-        }
-        else
-        {
-            m_Port_X[i].definePort=QString("EX%1").arg(i-INPUT_NUM+1);
-            m_Port_X[i].isReserve=true;
-        }
-
-        m_Port_X[i].defineName=tempList11[i];
-        if(tempList12[i].compare("0")==0)       //如果存的是0，则表示名称没有修改，为默认名称
-        {
-            m_Port_X[i].modifyName=tempList11[i];
-        }
-        else
-        {
-            m_Port_X[i].modifyName=tempList12[i];
-        }
-        m_Port_X[i].modifyPort=tempList13[i];
-        //由于如果没改的话，配置文件里面存的是0，需要将0转化为实际的端口号
-        m_Port_X[i].portNum=i+1;
-        if(tempList13[i].compare("0")==0)       //如果存的是0，则表示端口号没有修改
-        {
-            m_Port_X[i].actualPortNum=i+1;
-        }
-        else
-        {
-            m_Port_X[i].actualPortNum=tempList13[i].mid(1).toUInt();
-        }
-        //读取输入端口做预留功能时的名称
-        m_Port_X[i].ResDefineName=tempList17[i];
-        if(tempList18[i].compare("0")==0)
-        {
-            m_Port_X[i].ResModifyName=tempList17[i];
-        }
-        else
-        {
-            m_Port_X[i].ResModifyName=tempList18[i];
-        }
-        //读取每个端口是否设置了指定功能
-        m_Port_X[i].functionSet = (uint8_t)tempList19[i].toUInt();
-    }
-
-    //Y
-    tempList11=getIniValues(3,"Port_Y");
-    tempList12=getIniValues(99,"Port_Y_Name_Modify");
-    tempList13=getIniValues(99,"Port_Y_Number_Modify");             //仅为显示
-
-    QStringList tempList14=getIniValues(3,"ResPort_Y");
-    QStringList tempList15=getIniValues(99,"ResPort_Y_Name_Modify");
-    QStringList tempList16=getIniValues(99,"Port_Y_functionset");
-
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
-    {
-        if(i<OUTPUT_NUM)
-        {
-            m_Port_Y[i].definePort=QString("Y%1").arg(i+1);
-            m_Port_Y[i].isReserve=false;
-        }
-        else
-        {
-            m_Port_Y[i].definePort=QString("EY%1").arg(i-OUTPUT_NUM+1);
-            m_Port_Y[i].isReserve=true;
-        }
-
-        m_Port_Y[i].defineName=tempList11[i];
-        if(tempList12[i].compare("0")==0)       //如果存的是0，则表示名称没有修改，为默认名称
-        {
-            m_Port_Y[i].modifyName=tempList11[i];
-        }
-        else
-        {
-            m_Port_Y[i].modifyName=tempList12[i];
-        }
-        m_Port_Y[i].modifyPort=tempList13[i];
-        m_Port_Y[i].portNum=i+1;
-        if(tempList13[i].compare("0")==0)       //如果存的是0，则表示端口号没有修改
-        {
-            m_Port_Y[i].actualPortNum=i+1;
-        }
-        else
-        {
-            m_Port_Y[i].actualPortNum=tempList13[i].mid(1).toUInt();
-        }
-        //读取输出端口做预留功能时的名称
-        m_Port_Y[i].ResDefineName=tempList14[i];
-        if(tempList15[i].compare("0")==0)
-        {
-            m_Port_Y[i].ResModifyName=tempList14[i];
-        }
-        else
-        {
-            m_Port_Y[i].ResModifyName=tempList15[i];
-        }
-        //读取每个端口是否设置了指定功能
-        m_Port_Y[i].functionSet = (uint8_t)tempList16[i].toUInt();
-    }
-#else
+    // 端口自定义
     ::readPortDefInfo();
+    //名称自定义
+    ::readNameDefine();
+
 
     for(int i = 0;i < INPUT_TOTAL_NUM;i++)
     {
         m_Port_X[i].isReserve = !(i < INPUT_NUM);
 
-        // 如果存的是0，则表示名称没有修改，为默认名称
-        if (m_Port_X[i].modifyName == "0")
-        {
-            m_Port_X[i].modifyName = m_Port_X[i].defineName;
-        }
+//        // 如果存的是0，则表示名称没有修改，为默认名称
+//        if (m_Port_X[i].modifyName == "0")
+//        {
+//            m_Port_X[i].modifyName = m_Port_X[i].defineName;
+//        }
 
-        if (m_Port_X[i].modifyPort == "0")
-        {
-            m_Port_X[i].actualPortNum = m_Port_X[i].portNum;
-        }
+//        if (m_Port_X[i].modifyPort == "0")
+//        {
+//            m_Port_X[i].actualPortNum = m_Port_X[i].portNum;
+//        }
 
-        if (m_Port_X[i].ResModifyName == "0")
-        {
-            m_Port_X[i].ResModifyName = m_Port_X[i].ResDefineName;
-        }
+//        if (m_Port_X[i].ResModifyName == "0")
+//        {
+//            m_Port_X[i].ResModifyName = m_Port_X[i].ResDefineName;
+//        }
     }
 
     //Y
@@ -156,201 +77,25 @@ void readSigSetPara()
 
         m_Port_X[i].isReserve = !(i < OUTPUT_NUM);
 
-        // 如果存的是0，则表示名称没有修改，为默认名称
-        if (m_Port_Y[i].modifyName == "0")
-        {
-            m_Port_Y[i].modifyName = m_Port_Y[i].defineName;
-        }
+//        // 如果存的是0，则表示名称没有修改，为默认名称
+//        if (m_Port_Y[i].modifyName == "0")
+//        {
+//            m_Port_Y[i].modifyName = m_Port_Y[i].defineName;
+//        }
 
-        if (m_Port_Y[i].modifyPort == "0")
-        {
-            m_Port_Y[i].actualPortNum = m_Port_Y[i].portNum;
-        }
+//        if (m_Port_Y[i].modifyPort == "0")
+//        {
+//            m_Port_Y[i].actualPortNum = m_Port_Y[i].portNum;
+//        }
 
-        if (m_Port_Y[i].ResModifyName == "0")
-        {
-            m_Port_Y[i].ResModifyName = m_Port_Y[i].ResDefineName;
-        }
+//        if (m_Port_Y[i].ResModifyName == "0")
+//        {
+//            m_Port_Y[i].ResModifyName = m_Port_Y[i].ResDefineName;
+//        }
     }
-    //
 
-#endif
-    //名称自定义
-    ::readNameDefine();
-
-    uint8_t tempIndex=0;
-    //输出类型
-    tempList11=getIniValues(1,"OutPortType");
-    for(int i=0;i<OUT_PORT_TYPE_NUM;i++)
-    {
-        tempIndex=tempList11[i].toUInt();
-        if(tempIndex==0)
-        {
-            m_OutPortType[i][0]=0;
-        }
-        else
-        {
-            m_OutPortType[i][0]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
-        }
-
-    }
-    //互锁设置
-    tempList11=getIniValues(1,"OutportInterlock");
-    for(int i=0;i<OUT_INTERLOCK_NUM;i++)
-    {
-        for(int j=0;j<4;j++)
-        {
-            tempIndex=tempList11[4*i+j].toUInt();
-            if(tempIndex==0)
-            {
-                outportInterlockIndex[i][j]=0;
-            }
-            else
-            {
-                outportInterlockIndex[i][j]=tempIndex;
-            }
-        }
-    }
-    //预留关联
-    tempList11=getIniValues(1,"OutputRelevancy");
-    for(int i=0;i<OUT_PORT_RELEVANCY_NUM;i++)
-    {
-        for(int j=0;j<2;j++)
-        {
-            tempIndex=tempList11[2*i+j].toUInt();
-            if(tempIndex==0)
-            {
-                m_OutportRelevancy[i][j]=0;
-            }
-            else
-            {
-                m_OutportRelevancy[i][j]=tempIndex;
-            }
-        }
-    }
-    //预留出类型
-    tempList11=getIniValues(1,"OutputReleteOut");
-    for(int i=0;i<OUT_PORT_RELEOUT_NUM;i++)
-    {
-        tempIndex=tempList11[i].toUInt();
-        if(tempIndex==0)
-        {
-            m_OutportReleteOut[i][0]=0;
-        }
-        else
-        {
-            m_OutportReleteOut[i][0]=tempIndex;
-        }
-    }
-    //高级功能对应的端口号的定义
-    tempList11=getIniValues(1,"SeniorFunc");
-    uint8_t index=0;
-    m_SeniorFuncPort.knifeOrigin1CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.knifeOrigin2CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.chuckOriginCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.stackSaveIn1CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.stackSaveIn2CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.stackSaveOutCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmIn1CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmIn2CheckPort=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.emergencyStopCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.pauseStopCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.pressureCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.remoteAutoPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.remoteStopPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.bottomOilLimitPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.oilerSwtPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.lubPumpPort=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.processSave1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.processSave2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.emergencySnapMotorEnablePort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.emergencyStopOutPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.autoLightPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmLightPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmBuzzerPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.pauseLightPort=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.processFinish1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.processFinish2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.locateFinish1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.locateFinish2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.startProduct1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.startProduct2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res1[0]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res1[1]=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.mainAxisRotate1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.mainAxisRotate2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.mainAxisLocate1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.mainAxisLocate2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.biowAir1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.biowAir2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res2[0]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res2[1]=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.manualChuckIn1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.manualChuckIn2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.autoDoorCot1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.autoDoorCot2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[0]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[1]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[2]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[3]=tempList11[index++].toUInt();
-
-#if defined (USE_REFACTOR_PORTDEFINE_VERSION)
-
-    m_Port_X[6].functionSet = m_SeniorFunc.stackSaveIn1Check;
-    m_Port_X[7].functionSet = m_SeniorFunc.emergencyStopCheck;
-    m_Port_X[12].functionSet = m_SeniorFunc.pressureCheck;
-//    m_Port_X[14].functionSet = m_SeniorFunc.remoteStop;//这几个IO与轴限位功能相冲突，暂时不明确需求
-//    m_Port_X[15].functionSet = m_SeniorFunc.remoteAuto;
-//    m_Port_X[17].functionSet = m_SeniorFunc.manualChuckIn1;
-    m_Port_X[31].functionSet = m_SeniorFunc.processFinish1;
-    m_Port_X[32].functionSet = m_SeniorFunc.locateFinish1;
-    m_Port_X[33].functionSet = m_SeniorFunc.knifeOrigin1Check;
-    m_Port_X[34].functionSet = m_SeniorFunc.alarmIn1Check;
-    m_Port_X[35].functionSet = m_SeniorFunc.pauseStopCheck;
-    m_Port_X[42].functionSet = m_SeniorFunc.stackSaveIn2Check;
-    m_Port_X[43].functionSet = m_SeniorFunc.manualChuckIn2;
-    m_Port_X[52].functionSet = m_SeniorFunc.processFinish2;
-    m_Port_X[53].functionSet = m_SeniorFunc.locateFinish2;
-    m_Port_X[54].functionSet = m_SeniorFunc.knifeOrigin2Check;
-    m_Port_X[55].functionSet = m_SeniorFunc.alarmIn2Check;
-
-    //输出端口
-    // m_Port_Y[0] -> Y1 原料1夹紧
-    // m_Port_Y[1] -> Y2 原料1夹紧
-    // m_Port_Y[2] -> Y3 成品1夹紧
-    // m_Port_Y[3] -> Y4 成品1夹紧
-    // m_Port_Y[4] -> Y5 卡爪1夹紧
-    // m_Port_Y[5] -> Y6 卡爪1夹紧
-    m_Port_Y[6].functionSet = m_SeniorFunc.autoLight;//根据某个端口功能是否使用，置端口预留标志位
-    m_Port_Y[7].functionSet = m_SeniorFunc.alarmLight;
-    m_Port_Y[8].functionSet = m_SeniorFunc.autoDoorCot1;
-    m_Port_Y[9].functionSet = m_SeniorFunc.autoDoorCot1;
-    m_Port_Y[10].functionSet = m_SeniorFunc.biowAir1;
-    m_Port_Y[12].functionSet = m_SeniorFunc.emergencyStopOut;
-    m_Port_Y[13].functionSet = m_SeniorFunc.lubPump;
-    m_Port_Y[14].functionSet = m_SeniorFunc.alarmBuzzer;
-    m_Port_Y[15].functionSet = m_SeniorFunc.pauseLight;
-    m_Port_Y[16].functionSet = m_SeniorFunc.startProduct1;
-    m_Port_Y[17].functionSet = m_SeniorFunc.mainAxisLocate1;
-    m_Port_Y[18].functionSet = m_SeniorFunc.processSave1;
-    m_Port_Y[20].functionSet = m_SeniorFunc.mainAxisRotate1;
-
-
-    m_Port_Y[OUTPUT_NUM +  7].functionSet = m_SeniorFunc.biowAir2;
-    m_Port_Y[OUTPUT_NUM +  8].functionSet = m_SeniorFunc.autoDoorCot2;
-    m_Port_Y[OUTPUT_NUM +  9].functionSet = m_SeniorFunc.autoDoorCot2;
-    m_Port_Y[OUTPUT_NUM + 16].functionSet = m_SeniorFunc.startProduct2;
-    m_Port_Y[OUTPUT_NUM + 17].functionSet = m_SeniorFunc.mainAxisLocate2;
-    m_Port_Y[OUTPUT_NUM + 18].functionSet = m_SeniorFunc.processSave2;
-#endif
-
-
-#endif
+    updateAdvancedFuncPortFlag();
+    updateInterLockPortFlag();
 }
 
 /*************************************************************************
@@ -363,13 +108,6 @@ void readSigSetPara()
 **************************************************************************/
 void readIniPara()
 {
-    getOutPortType();
-    getOutportInterlock();
-    getOutportRelevancy();
-    getReleteOut();
-    getKeyFunc();
-    getLedFunc();
-    getSeniorFunc();
     getMachineSave();
     getStackSave();
     getClawSave();
@@ -389,4 +127,116 @@ void readIniPara()
     getProgramNameAndPath();//读取所有程序文件信息
     getSystemSet();
     ::readPasswdFromConfig();
+}
+
+void updateInterLockPortFlag()
+{
+    for (int i = 0; i < OUT_INTERLOCK_NUM; i++) {
+        bool useForwardValue = m_OutportInterlock[i][0] != 0;
+        bool useReverseValue = m_OutportInterlock[i][2] != 0;
+        bool forwardCheck = m_OutportInterlock[i][1] != 0;
+        bool reverseCheck = m_OutportInterlock[i][3] != 0;
+
+        const auto &group = interLockGroups[i];
+
+        // 如果是预留的组，跳过
+        if (group.forwardValuePort == -1) continue;
+
+        m_Port_Y[group.forwardValuePort].functionSet = useForwardValue;
+        m_Port_Y[group.reverseValuePort].functionSet = useForwardValue && useReverseValue;
+
+        m_Port_X[group.forwardDetectPort].functionSet = useForwardValue && forwardCheck;
+        m_Port_X[group.reverseDetectPort].functionSet = useForwardValue && reverseCheck;
+    }
+}
+
+void updateAdvancedFuncPortFlag()
+{
+    m_Port_X[6].functionSet = static_cast<bool>(m_SeniorFunc.stackSaveIn1Check);
+    m_Port_X[7].functionSet = static_cast<bool>(m_SeniorFunc.emergencyStopCheck);
+    m_Port_X[12].functionSet = static_cast<bool>(m_SeniorFunc.pressureCheck);
+//    m_Port_X[14].functionSet = static_cast<bool>(m_SeniorFunc.remoteStop);//这几个IO与轴限位功能相冲突，暂时不明确需求
+//    m_Port_X[15].functionSet = static_cast<bool>(m_SeniorFunc.remoteAuto);
+//    m_Port_X[17].functionSet = static_cast<bool>(m_SeniorFunc.manualChuckIn1);
+    m_Port_X[31].functionSet = static_cast<bool>(m_SeniorFunc.processFinish1);
+    m_Port_X[32].functionSet = static_cast<bool>(m_SeniorFunc.locateFinish1);
+    m_Port_X[33].functionSet = static_cast<bool>(m_SeniorFunc.knifeOrigin1Check);
+    m_Port_X[34].functionSet = static_cast<bool>(m_SeniorFunc.alarmIn1Check);
+    m_Port_X[35].functionSet = static_cast<bool>(m_SeniorFunc.pauseStopCheck);
+
+//    m_Port_X[36].functionSet
+//    m_Port_X[37].functionSet
+//    m_Port_X[38].functionSet
+//    m_Port_X[39].functionSet
+//    m_Port_X[40].functionSet
+//    m_Port_X[41].functionSet
+
+    m_Port_X[42].functionSet = static_cast<bool>(m_SeniorFunc.stackSaveIn2Check);
+    m_Port_X[43].functionSet = static_cast<bool>(m_SeniorFunc.manualChuckIn2);
+
+    //    m_Port_X[44].functionSet
+    //    m_Port_X[45].functionSet
+    //    m_Port_X[46].functionSet
+    //    m_Port_X[47].functionSet
+    //    m_Port_X[48].functionSet
+    //    m_Port_X[49].functionSet
+    //    m_Port_X[50].functionSet
+    //    m_Port_X[51].functionSet
+
+    m_Port_X[52].functionSet = static_cast<bool>(m_SeniorFunc.processFinish2);
+    m_Port_X[53].functionSet = static_cast<bool>(m_SeniorFunc.locateFinish2);
+    m_Port_X[54].functionSet = static_cast<bool>(m_SeniorFunc.knifeOrigin2Check);
+    m_Port_X[55].functionSet = static_cast<bool>(m_SeniorFunc.alarmIn2Check);
+
+    //    m_Port_X[56].functionSet
+    //    m_Port_X[57].functionSet
+    //    m_Port_X[58].functionSet
+    //    m_Port_X[59].functionSet
+
+    //输出端口
+    // m_Port_Y[0]  -> Y1   原料1夹紧
+    // m_Port_Y[1]  -> Y2   原料1夹紧
+    // m_Port_Y[2]  -> Y3   成品1夹紧
+    // m_Port_Y[3]  -> Y4   成品1夹紧
+    // m_Port_Y[4]  -> Y5   卡爪1夹紧
+    // m_Port_Y[5]  -> Y6   卡爪1夹紧
+    // m_Port_Y[8]  -> Y9   自动门1开 | 自动门控制1 冲突
+    // m_Port_Y[9]  -> Y10  自动门1开 冲突
+    // m_Port_Y[32] -> EY9  自动门2开 冲突
+    // m_Port_Y[33] -> EY10 自动门2开 冲突
+    m_Port_Y[6].functionSet = static_cast<bool>(m_SeniorFunc.autoLight);//根据某个端口功能是否使用，置端口预留标志位
+    m_Port_Y[7].functionSet = static_cast<bool>(m_SeniorFunc.alarmLight);
+    m_Port_Y[8].functionSet = static_cast<bool>(m_SeniorFunc.autoDoorCot1);
+    m_Port_Y[9].functionSet = static_cast<bool>(m_SeniorFunc.autoDoorCot1);
+    m_Port_Y[10].functionSet = static_cast<bool>(m_SeniorFunc.biowAir1);
+    m_Port_Y[12].functionSet = static_cast<bool>(m_SeniorFunc.emergencyStopOut);
+    m_Port_Y[13].functionSet = static_cast<bool>(m_SeniorFunc.lubPump);
+    m_Port_Y[14].functionSet = static_cast<bool>(m_SeniorFunc.alarmBuzzer);
+    m_Port_Y[15].functionSet = static_cast<bool>(m_SeniorFunc.pauseLight);
+    m_Port_Y[16].functionSet = static_cast<bool>(m_SeniorFunc.startProduct1);
+    m_Port_Y[17].functionSet = static_cast<bool>(m_SeniorFunc.mainAxisLocate1);
+    m_Port_Y[18].functionSet = static_cast<bool>(m_SeniorFunc.processSave1);
+    m_Port_Y[20].functionSet = static_cast<bool>(m_SeniorFunc.mainAxisRotate1);
+
+//    m_Port_Y[21].functionSet = m_SeniorFunc.;
+//    m_Port_Y[22].functionSet = m_SeniorFunc.;
+//    m_Port_Y[23].functionSet = m_SeniorFunc.;
+
+
+    m_Port_Y[OUTPUT_NUM +  7].functionSet = (m_SeniorFunc.biowAir2) ? 1 : 0;
+    m_Port_Y[OUTPUT_NUM +  8].functionSet = (m_SeniorFunc.autoDoorCot2) ? 1 : 0;
+    m_Port_Y[OUTPUT_NUM +  9].functionSet = (m_SeniorFunc.autoDoorCot2) ? 1 : 0;
+
+//    m_Port_Y[OUTPUT_NUM + 10].functionSet = ;
+//    m_Port_Y[OUTPUT_NUM + 11].functionSet = ;
+//    m_Port_Y[OUTPUT_NUM + 12].functionSet = ;
+//    m_Port_Y[OUTPUT_NUM + 13].functionSet = ;
+//    m_Port_Y[OUTPUT_NUM + 14].functionSet = ;
+//    m_Port_Y[OUTPUT_NUM + 15].functionSet = ;
+
+    m_Port_Y[OUTPUT_NUM + 16].functionSet = (m_SeniorFunc.startProduct2) ? 1 : 0;
+    m_Port_Y[OUTPUT_NUM + 17].functionSet = (m_SeniorFunc.mainAxisLocate2) ? 1 : 0;
+    m_Port_Y[OUTPUT_NUM + 18].functionSet = (m_SeniorFunc.processSave2) ? 1 : 0;
+
+//    m_Port_Y[OUTPUT_NUM + 19].functionSet = ;
 }

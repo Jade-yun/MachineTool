@@ -155,6 +155,8 @@ void AlarmForm::setupMaintainInfo()
 {
     m_maintainModel = new MaintainInfoModel(this);
     ui->tableMaintainInfo->setModel(m_maintainModel);
+    m_maintainModel->loadFromConfigFile(maintainInfoDataPath);
+    m_maintainModel->startPeriodicUpdate();
 
     QStringList headers = {tr("维护内容"), tr("维护周期"), tr("剩余天数"), tr("下次保养时间")};
     for (int i = 0; i < headers.size(); ++i) {
@@ -186,7 +188,7 @@ void AlarmForm::setupMaintainInfo()
 
     connect(ui->btnEditMaintainInfo, &QPushButton::clicked, this, [this]() {
         auto index = ui->tableMaintainInfo->currentIndex();
-        int curRow = ui->tableMaintainInfo->currentIndex().row();
+//        int curRow = ui->tableMaintainInfo->currentIndex().row();
         int curCol = ui->tableMaintainInfo->currentIndex().column();
         if (curCol == 0)
         {
@@ -230,8 +232,6 @@ void AlarmForm::setupMaintainInfo()
 
         m_maintainModel->saveToConfigFile(maintainInfoDataPath);
     });
-
-    m_maintainModel->loadFromConfigFile(maintainInfoDataPath);
 }
 
 

@@ -172,14 +172,15 @@ void getOutportInterlock(uint8_t defaultV)
     {
         for(int j=0;j<4;j++)
         {
-            if(getValue("OutportInterlock",QString("V%1_%2").arg(i).arg(j),defaultV) == 0)
-            {
-                m_OutportInterlock[i][j] = 0;
-            }
-            else
-            {
-                m_OutportInterlock[i][j] = outportInterlockIndex[i][j];
-            }
+//            if(getValue("OutportInterlock",QString("V%1_%2").arg(i).arg(j),defaultV) == 0)
+//            {
+//                m_OutportInterlock[i][j] = 0;
+//            }
+//            else
+//            {
+//                m_OutportInterlock[i][j] = outportInterlockIndex[i][j];
+//            }
+            m_OutportInterlock[i][j] = getValue("OutportInterlock",QString("V%1_%2").arg(i).arg(j),defaultV);
         }
     }
 }
