@@ -183,6 +183,8 @@ void TeachManage::on_btn_Load_clicked()
     int curRow = ui->tableTeachManage->currentIndex().row();
     if(curRow < 0)
     {
+        ErrorTipDialog tip(tr("请选择一个要加载的程序！"), TipMode::ONLY_OK);
+        tip.exec();
         return;
     }
     QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
@@ -198,7 +200,9 @@ void TeachManage::on_btn_Preview_clicked()
     int curRow = ui->tableTeachManage->currentIndex().row();
     if(curRow<0)
     {
-        curRow = 0;
+        ErrorTipDialog tip(tr("请选择一个要预览的程序！"), TipMode::ONLY_OK);
+        tip.exec();
+        return;
     }
     QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
 
@@ -232,6 +236,12 @@ void TeachManage::on_btn_Del_clicked()
 //    deleteOneRowFromTable(ui->tableTeachManage);
 
         int curRow = ui->tableTeachManage->currentRow();
+        if(curRow<0)
+        {
+            ErrorTipDialog tip(tr("请选择一个要删除的程序！"), TipMode::ONLY_OK);
+            tip.exec();
+            return;
+        }
         QString programName = ui->tableTeachManage->item(curRow, 2)->text();
         // juge whether the program can been deleted
         // to do...

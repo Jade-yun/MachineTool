@@ -692,7 +692,7 @@ void MainWindow::connectAllSignalsAndSlots()
         }
     });
     // 启动定时器，设置时间间隔为100毫秒
-    timer->start(50);
+    timer->start(100);
 }
 
 void MainWindow::AxisTypeChange_Handle()

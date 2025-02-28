@@ -1217,1098 +1217,1107 @@ void Teach::on_btnInset_clicked()
         return;
     }
     m_CurrentSelectProOrderList=ui->tableWgtTeach->currentIndex().row();
-    uint8_t data_Temp[64] = {0};
-    memset(data_Temp,0,sizeof(data_Temp));
-    if(ui->tabWidget_Teach->currentWidget() == ui->tabUniversal){//通用指令界面
-        if(ui->stackedWidget_General->currentWidget() == ui->Axis_Claw_Test_Mach_page)
-        {
-            if(ui->stackedWidget_Four->currentWidget() == ui->Axis_Move_main_page)
-            {//如果当前界面在轴动作指令界面
-                for(uint8_t i=AXIS_TOTAL_NUM; i>0; i--)
-                {
-                    if(Temp_AxisMoveOrder[i-1].axis < AXIS_TOTAL_NUM)
-                    {//选中轴
-                        data_Temp[0] = m_OperateProNum;  //程序编号
-                        data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                        data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                        data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                        data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                        data_Temp[5] = C_AXIS_MOVE;
-                        data_Temp[6] = 0;
-                        data_Temp[9] = Temp_AxisMoveOrder[i-1].pos;
-                        data_Temp[10] = Temp_AxisMoveOrder[i-1].pos>>8;
-                        data_Temp[11] = Temp_AxisMoveOrder[i-1].pos>>16;
-                        data_Temp[12] = Temp_AxisMoveOrder[i-1].pos>>24;
-                        data_Temp[13] = Temp_AxisMoveOrder[i-1].advEndDis;
-                        data_Temp[14] = Temp_AxisMoveOrder[i-1].advEndDis>>8;
-                        data_Temp[15] = Temp_AxisMoveOrder[i-1].advEndDis>>16;
-                        data_Temp[16] = Temp_AxisMoveOrder[i-1].advEndDis>>24;
-                        data_Temp[17] = Temp_AxisMoveOrder[i-1].advCSpeedDis;
-                        data_Temp[18] = Temp_AxisMoveOrder[i-1].advCSpeedDis>>8;
-                        data_Temp[19] = Temp_AxisMoveOrder[i-1].advCSpeedDis>>16;
-                        data_Temp[20] = Temp_AxisMoveOrder[i-1].advCSpeedDis>>24;
-                        data_Temp[21] = Temp_AxisMoveOrder[i-1].axis;
-                        data_Temp[22] = Temp_AxisMoveOrder[i-1].speed;
-                        data_Temp[23] = Temp_AxisMoveOrder[i-1].advEndFlag;
-                        data_Temp[24] = Temp_AxisMoveOrder[i-1].advCSpeedFlag;
-                        data_Temp[25] = Temp_AxisMoveOrder[i-1].advCSpeedSpeed;
-                        data_Temp[26] = Temp_AxisMoveOrder[i-1].referPointNum;
-                        g_InsertProOrder(data_Temp);
-                        Teach_File_List_Refresh();//刷新程序列表
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
+    {
+        uint8_t data_Temp[64] = {0};
+        memset(data_Temp,0,sizeof(data_Temp));
+        if(ui->tabWidget_Teach->currentWidget() == ui->tabUniversal){//通用指令界面
+            if(ui->stackedWidget_General->currentWidget() == ui->Axis_Claw_Test_Mach_page)
+            {
+                if(ui->stackedWidget_Four->currentWidget() == ui->Axis_Move_main_page)
+                {//如果当前界面在轴动作指令界面
+                    for(uint8_t i=AXIS_TOTAL_NUM; i>0; i--)
+                    {
+                        if(Temp_AxisMoveOrder[i-1].axis < AXIS_TOTAL_NUM)
+                        {//选中轴
+                            data_Temp[0] = m_OperateProNum;  //程序编号
+                            data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                            data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                            data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                            data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                            data_Temp[5] = C_AXIS_MOVE;
+                            data_Temp[6] = 0;
+                            data_Temp[9] = Temp_AxisMoveOrder[i-1].pos;
+                            data_Temp[10] = Temp_AxisMoveOrder[i-1].pos>>8;
+                            data_Temp[11] = Temp_AxisMoveOrder[i-1].pos>>16;
+                            data_Temp[12] = Temp_AxisMoveOrder[i-1].pos>>24;
+                            data_Temp[13] = Temp_AxisMoveOrder[i-1].advEndDis;
+                            data_Temp[14] = Temp_AxisMoveOrder[i-1].advEndDis>>8;
+                            data_Temp[15] = Temp_AxisMoveOrder[i-1].advEndDis>>16;
+                            data_Temp[16] = Temp_AxisMoveOrder[i-1].advEndDis>>24;
+                            data_Temp[17] = Temp_AxisMoveOrder[i-1].advCSpeedDis;
+                            data_Temp[18] = Temp_AxisMoveOrder[i-1].advCSpeedDis>>8;
+                            data_Temp[19] = Temp_AxisMoveOrder[i-1].advCSpeedDis>>16;
+                            data_Temp[20] = Temp_AxisMoveOrder[i-1].advCSpeedDis>>24;
+                            data_Temp[21] = Temp_AxisMoveOrder[i-1].axis;
+                            data_Temp[22] = Temp_AxisMoveOrder[i-1].speed;
+                            data_Temp[23] = Temp_AxisMoveOrder[i-1].advEndFlag;
+                            data_Temp[24] = Temp_AxisMoveOrder[i-1].advCSpeedFlag;
+                            data_Temp[25] = Temp_AxisMoveOrder[i-1].advCSpeedSpeed;
+                            data_Temp[26] = Temp_AxisMoveOrder[i-1].referPointNum;
+                            g_InsertProOrder(data_Temp);
+                            Teach_File_List_Refresh();//刷新程序列表
+                        }
                     }
                 }
-            }
-            else if(ui->stackedWidget_Four->currentWidget() == ui->Claw_page){//卡爪界面
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[5] = C_CLAW_ACTION;
-                data_Temp[6] = 0;
-                if(ui->cb_finish_product_1->isChecked())
-                {//成品1夹紧
-                    data_Temp[9] = m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum;//输出端口号
-                    data_Temp[10] = ui->btn_finish_product_1->getState();//控制类型
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->cb_Claw_roll_1->isChecked())
-                {//卡爪1正转
-                    data_Temp[9] = m_Port_Y[CLAW_CLAW_1_CLAMP].portNum;//输出端口号
-                    data_Temp[10] = ui->btn_Claw_roll_1->getState();//控制类型
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->cb_Material_clamp_1->isChecked())
-                {//原料1夹紧
-                    data_Temp[9] = m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum;//输出端口号
-                    data_Temp[10] = ui->btn_Material_clamp_1->getState();//控制类型
-                    g_InsertProOrder(data_Temp);
-                }
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-            else if(ui->stackedWidget_Four->currentWidget() == ui->Signal_detect_page){//信号检测界面
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = 0;
-                if(ui->tabWidget_Reserve->currentWidget() == ui->tabDoubleValve)
-                {//卡爪检测界面
-                    data_Temp[5] = C_CLAW_CHECK;
-                    if(ui->cb_General_PassStart->isChecked())
-                    {//夹紧检测开始
-                        if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].portNum;
-                        }
-                        data_Temp[10] = 1;
+                else if(ui->stackedWidget_Four->currentWidget() == ui->Claw_page){//卡爪界面
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[5] = C_CLAW_ACTION;
+                    data_Temp[6] = 0;
+                    if(ui->cb_finish_product_1->isChecked())
+                    {//成品1夹紧
+                        data_Temp[9] = m_Port_Y[CLAW_PRODUCT_1_CLAMP].portNum;//输出端口号
+                        data_Temp[10] = ui->btn_finish_product_1->getState();//控制类型
                         g_InsertProOrder(data_Temp);
                     }
-                    else if(ui->cb_General_PassStop->isChecked())
-                    {//夹紧检测结束
-                        if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].portNum;
-                        }
-                        data_Temp[10] = 0;
+                    else if(ui->cb_Claw_roll_1->isChecked())
+                    {//卡爪1正转
+                        data_Temp[9] = m_Port_Y[CLAW_CLAW_1_CLAMP].portNum;//输出端口号
+                        data_Temp[10] = ui->btn_Claw_roll_1->getState();//控制类型
                         g_InsertProOrder(data_Temp);
                     }
-                    else if(ui->cb_General_PineStart->isChecked())
-                    {//松开检测开始
-                        if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
-                        }
-                        data_Temp[10] = 2;
+                    else if(ui->cb_Material_clamp_1->isChecked())
+                    {//原料1夹紧
+                        data_Temp[9] = m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum;//输出端口号
+                        data_Temp[10] = ui->btn_Material_clamp_1->getState();//控制类型
                         g_InsertProOrder(data_Temp);
                     }
-                    else if(ui->cb_General_PineEnd->isChecked())
-                    {//松开检测结束
-                        if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
-                        }
-                        else if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
-                        {
-                            data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
-                        }
-                        data_Temp[10] = 0;
-                        g_InsertProOrder(data_Temp);
-                    }
+                    Teach_File_List_Refresh();//刷新程序列表
                 }
-                else if(ui->tabWidget_Reserve->currentWidget() == ui->tabOutputType)
-                {//预留检测界面
-                    data_Temp[5] = C_RESERVE_CHECK;
-                    if(ui->cb_General_ReserveOn->isChecked())
-                    {//预留检测ON
-                        data_Temp[9] = ui->lineEdit_ReserveOn->getCurrentPort();
-                        data_Temp[10] = 1;
-                        g_InsertProOrder(data_Temp);
-                    }
-                    else if(ui->cb_General_ReserveOff->isChecked())
-                    {//预留检测OFF
-                        data_Temp[9] = ui->lineEdit_ReserveOff->getCurrentPort();
-                        data_Temp[10] = 2;
-                        g_InsertProOrder(data_Temp);
-                    }
-                    else if(ui->cb_General_ReserveEnd->isChecked())
-                    {//预留检测END
-                        data_Temp[9] = ui->lineEdit_ReserveEnd->getCurrentPort();
-                        data_Temp[10] = 0;
-                        g_InsertProOrder(data_Temp);
-                    }
-                }
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-            else if(ui->stackedWidget_Four->currentWidget() == ui->Machine_action_page){//机床动作界面
-                double MachineDelay = 0;
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[5] = C_MACHINE_OUT;
-                data_Temp[6] = 0;
-                if(ui->Start_Up_Mach_chbox->isChecked()){//启动加工1通/断-选中
-                    MachineDelay = ui->lineEdit_Start_Up_Mach->text().toDouble();
-                    data_Temp[7] = (uint16_t)(MachineDelay*100);
-                    data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
-                    data_Temp[9] = m_Port_Y[MACHINE_START_PROCESS_1].portNum;
-                    data_Temp[10] = Temp_MachineOutStruct[0].type;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->Main_Axis_Rotate_chbox->isChecked()){//主轴旋转1通/断-选中
-                    MachineDelay = ui->lineEdit_Main_Axis_Rotate->text().toDouble();
-                    data_Temp[7] = (uint16_t)(MachineDelay*100);
-                    data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
-                    data_Temp[9] = m_Port_Y[MACHINE_SPINDLE_ROTATE_1].portNum;
-                    data_Temp[10] = Temp_MachineOutStruct[1].type;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->Main_Axis_locat_chbox->isChecked()){//主轴定位1通/断-选中
-                    MachineDelay = ui->lineEdit_Main_Axis_locat->text().toDouble();
-                    data_Temp[7] = (uint16_t)(MachineDelay*100);
-                    data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
-                    data_Temp[9] = m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].portNum;
-                    data_Temp[10] = Temp_MachineOutStruct[2].type;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->Auto_Door_chbox->isChecked()){//自动门1开/关-选中
-                    MachineDelay = ui->lineEdit_Auto_Door->text().toDouble();
-                    data_Temp[7] = (uint16_t)(MachineDelay*100);
-                    data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
-                    if(Temp_MachineOutStruct[3].type == 1)
-                    {//自动门开
-                        data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
-                    }
-                    else if(Temp_MachineOutStruct[3].type == 0)
-                    {//自动门关
-                        data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
-                    }
-                    data_Temp[10] = Temp_MachineOutStruct[3].type;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->Blow_Air_chbox->isChecked()){//吹气1通/断-选中
-                    MachineDelay = ui->lineEdit_Blow_Air->text().toDouble();
-                    data_Temp[7] = (uint16_t)(MachineDelay*100);
-                    data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
-                    data_Temp[9] = m_Port_Y[MACHINE_GASS_1_LOOSENED].portNum;
-                    data_Temp[10] = Temp_MachineOutStruct[4].type;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->Chuck_chbox->isChecked()){//卡盘1夹紧/松开-选中
-                    MachineDelay = ui->lineEdit_Chuck->text().toDouble();
-                    data_Temp[7] = (uint16_t)(MachineDelay*100);
-                    data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
-                    if(Temp_MachineOutStruct[5].type == 0)
-                    {//卡盘1松开
-                        data_Temp[9] = m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum;
-                    }
-                    else if(Temp_MachineOutStruct[5].type == 1)
-                    {//卡盘1夹紧
-                        data_Temp[9] = m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum;
-                    }
-                    data_Temp[10] = Temp_MachineOutStruct[5].type;
-                    g_InsertProOrder(data_Temp);
-                }
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-            else if(ui->stackedWidget_Four->currentWidget() == ui->Other_Order_page){//其他指令动作界面
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = 0;
-                if(ui->AlarmDelay_chbox->isChecked())
-                {//报警延时
-                    data_Temp[5] = C_OTHER_DELAY;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->AlarmCust_chbox->isChecked())
-                {//报警自定义
-                    data_Temp[5] = C_OTHER_ALARM_CUST;
-                    data_Temp[9] = Temp_OtherAlarmCustStruct.alarmNum;
-                    data_Temp[10] = Temp_OtherAlarmCustStruct.alarmNum>>8;
-                    data_Temp[11] = Temp_OtherAlarmCustStruct.type;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->CycStop_chbox->isChecked())
-                {//周期停止
-                    data_Temp[5] = C_OTHER_CYC_STOP;
-                    data_Temp[9] = Temp_OtherCycStopCustStruct.cycleNum;
-                    data_Temp[10] = Temp_OtherCycStopCustStruct.cycleNum>>8;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->AlarmLamp_chbox->isChecked())
-                {//报警灯
-                    data_Temp[5] = C_OTHER_ALARM_LAMP;
-                    data_Temp[9] = Temp_OtherAlarmLampStruct.outportNum;
-                    data_Temp[10] = Temp_OtherAlarmLampStruct.type;
-
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->AlarmSound_chbox->isChecked())
-                {//报警声
-                    data_Temp[5] = C_OTHER_ALARM_SOUND;
-                    data_Temp[9] = Temp_OtherAlarmSoundStruct.outportNum;
-                    data_Temp[10] = Temp_OtherAlarmSoundStruct.type;
-                    g_InsertProOrder(data_Temp);
-                }
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-        }
-        else if(ui->stackedWidget_General->currentWidget() == ui->Stack_page){//堆叠界面
-            data_Temp[0] = m_OperateProNum;  //程序编号
-            data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-            data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-            data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-            data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[5] = C_STACK_MOVE;
-            data_Temp[6] = 0;
-            if(ui->Stack_group_1->isChecked())
-            {
-                data_Temp[33] = 1;//堆叠组号，1-11
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_2->isChecked())
-            {
-                data_Temp[33] = 2;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_3->isChecked())
-            {
-                data_Temp[33] = 3;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_4->isChecked())
-            {
-                data_Temp[33] = 4;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_5->isChecked())
-            {
-                data_Temp[33] = 5;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_6->isChecked())
-            {
-                data_Temp[33] = 6;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_7->isChecked())
-            {
-                data_Temp[33] = 7;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_8->isChecked())
-            {
-                data_Temp[33] = 8;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_9->isChecked())
-            {
-                data_Temp[33] = 9;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_10->isChecked())
-            {
-                data_Temp[33] = 10;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_group_11->isChecked())
-            {
-                data_Temp[33] = 11;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Follow_Stack_group_1->isChecked())
-            {
-                data_Temp[5] = C_STACK_FOLLOW;
-                data_Temp[33] = 1;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Follow_Stack_group_2->isChecked())
-            {
-                data_Temp[5] = C_STACK_FOLLOW;
-                data_Temp[33] = 2;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Follow_Stack_group_3->isChecked())
-            {
-                data_Temp[5] = C_STACK_FOLLOW;
-                data_Temp[33] = 3;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Follow_Stack_group_4->isChecked())
-            {
-                data_Temp[5] = C_STACK_FOLLOW;
-                data_Temp[33] = 4;
-                g_InsertProOrder(data_Temp);
-            }
-            else if(ui->Stack_reset->isChecked())
-            {
-                data_Temp[5] = C_STACK_RESET_ZERO;
-                data_Temp[11] = ui->Stack_reset_select_box->currentIndex()+1;
-                g_InsertProOrder(data_Temp);
-            }
-            Teach_File_List_Refresh();//刷新程序列表
-        }
-        else if(ui->stackedWidget_General->currentWidget() == ui->Reserve_Out_page){//预留输出
-
-            data_Temp[0] = m_OperateProNum;  //程序编号
-            data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-            data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-            data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-            data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[5] = C_RESERVE_OUT;
-            data_Temp[6] = 0;
-            Temp_ReserveOutStruct.interval = ui->lineEdit_Reserve_num->text().toUInt();
-            double Reserve_time = ui->lineEdit_Reserve_time->text().toDouble();
-            data_Temp[7] = (uint16_t)(Reserve_time*100);
-            data_Temp[8] = (uint16_t)(Reserve_time*100)>>8;
-            data_Temp[9] = Temp_ReserveOutStruct.interval;
-            data_Temp[10] = Temp_ReserveOutStruct.interval>>8;
-            data_Temp[12] = Temp_ReserveOutStruct.function;
-            data_Temp[13] = Temp_ReserveOutStruct.type;
-            if(Temp_ReserveOutStruct.function == 0)
-            {
-                data_Temp[13] = ui->Reserve_Pass_Button->getState();
-                Temp_ReserveOutStruct.outportNum = ui->lineEdit_Reserve_Pass_Button->getCurrentPort();
-                data_Temp[11] = Temp_ReserveOutStruct.outportNum;
-                if(ui->lineEdit_Reserve_Pass_Button->text()!="")
-                {
-                    g_InsertProOrder(data_Temp);
-                }
-            }
-            else if(Temp_ReserveOutStruct.function == 1)
-            {
-                Temp_ReserveOutStruct.outportNum = ui->lineEdit_Reserve_OutTime->getCurrentPort();
-                data_Temp[11] = Temp_ReserveOutStruct.outportNum;
-                if(ui->lineEdit_Reserve_OutTime->text()!="")
-                {
-                    g_InsertProOrder(data_Temp);
-                }
-            }
-            else if(Temp_ReserveOutStruct.function == 2)
-            {
-                Temp_ReserveOutStruct.outportNum = ui->lineEdit_Reserve_Overturn->getCurrentPort();
-                data_Temp[11] = Temp_ReserveOutStruct.outportNum;
-                if(ui->lineEdit_Reserve_Overturn->text()!="")
-                {
-                    g_InsertProOrder(data_Temp);
-                }
-            }
-            Teach_File_List_Refresh();//刷新程序列表
-        }
-        else if(ui->stackedWidget_General->currentWidget()  == ui->Signal_wait_page){//信号等待界面
-            data_Temp[0] = m_OperateProNum;  //程序编号
-            data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-            data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-            data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-            data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[6] = 0;
-            switch(ui->tabWgtSigWait->currentIndex())
-            {
-            case 0://等待机床界面
-                if(ui->Wait_machine_signal_box->isChecked())
-                {
-                    Temp_WaitInMachineStruct.inportSta = 1;//默认有信号
-                    if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].modifyName)
-                    {
-                        Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].portNum;
-                    }
-                    else if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].modifyName)
-                    {
-                        Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].portNum;
-                    }
-                    else if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_KNIFE_SEAT_ORIGIN_1].modifyName)
-                    {
-                        Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_KNIFE_SEAT_ORIGIN_1].portNum;
-                    }
-                    data_Temp[5] = C_WAIT_IN_MACHINE;
-                    data_Temp[9] = Temp_WaitInMachineStruct.backListNum;
-                    data_Temp[10] = Temp_WaitInMachineStruct.backListNum>>8;
-                    data_Temp[11] = Temp_WaitInMachineStruct.inportNum;
-                    data_Temp[12] = Temp_WaitInMachineStruct.inportSta;
-                    data_Temp[13] = Temp_WaitInMachineStruct.type;
-                    data_Temp[14] = Temp_WaitInMachineStruct.label;
-                    g_InsertProOrder(data_Temp);
-                }
-                break;
-            case 1://等待卡爪界面
-            {
-                if(ui->Wait_clamp_on_chbox->isChecked())
-                {
-                    if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].portNum;
-                    }
-                }
-                else if(ui->Wait_release_on_chbox->isChecked())
-                {
-                    if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].portNum;
-                    }
-                }
-                else if(ui->Wait_clamp_off_chbox->isChecked())
-                {
-                    if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].portNum;
-                    }
-                }
-                else if(ui->Wait_release_off_chbox->isChecked())
-                {
-                    if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].portNum;
-                    }
-                    else if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].portNum;
-                    }
-                }
-                else if(ui->Wait_pos_cor_chbox->isChecked())
-                {
-                    if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_METERIAL_1_CLAMP].portNum;
-                    }
-                    else if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_PRODUCT_1_CLAMP].portNum;
-                    }
-                    else if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP].modifyName)
-                    {
-                        Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_CHUCK_1_CLAMP].portNum;
-                    }
-                }
-                uint16_t labelnum = ReturnLabelnum(ui->coboxReturnLabe_box->currentText());
-                Temp_WaitInClawStruct.label = labelnum;
-                Temp_WaitInClawStruct.backListNum = ui->editReturnStepNum->text().toInt();
-                data_Temp[5] = C_WAIT_IN_CLAW;
-                data_Temp[9] = Temp_WaitInClawStruct.backListNum;
-                data_Temp[10] = Temp_WaitInClawStruct.backListNum>>8;
-                data_Temp[11] = Temp_WaitInClawStruct.inportNum;
-                data_Temp[13] = Temp_WaitInClawStruct.type;
-                data_Temp[14] = Temp_WaitInClawStruct.label;
-                if(ui->Wait_clamp_on_chbox->isChecked() || ui->Wait_release_on_chbox->isChecked())
-                {
-                    Temp_WaitInClawStruct.inportSta = 1;
-                    data_Temp[12] = Temp_WaitInClawStruct.inportSta;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->Wait_clamp_off_chbox->isChecked() || ui->Wait_release_off_chbox->isChecked())
-                {
-                    Temp_WaitInClawStruct.inportSta = 0;
-                    data_Temp[12] = Temp_WaitInClawStruct.inportSta;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->Wait_pos_cor_chbox->isChecked())
-                {
-                    Temp_WaitInClawStruct.inportSta = 2;
-                    data_Temp[12] = Temp_WaitInClawStruct.inportSta;
-                    g_InsertProOrder(data_Temp);
-                }
-                break;
-            }
-            case 2://等待预留界面
-            {
-                uint16_t labelnum = ReturnLabelnum(ui->coboxReturnLabe_box->currentText());
-                Temp_WaitInReserveStruct.label = labelnum;
-                Temp_WaitInReserveStruct.backListNum = ui->editReturnStepNum->text().toInt();
-                data_Temp[5] = C_WAIT_IN_RESERVE;
-                data_Temp[9] = Temp_WaitInReserveStruct.backListNum;
-                data_Temp[10] = Temp_WaitInReserveStruct.backListNum>>8;
-                data_Temp[13] = Temp_WaitInReserveStruct.type;
-                data_Temp[14] = Temp_WaitInReserveStruct.label;
-                if(ui->Wait_Reserve_on_chbox->isChecked())
-                {
-                    Temp_WaitInReserveStruct.inportSta = 1;
-                    Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveOn->getCurrentPort();
-                    data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
-                    data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
-                    if(ui->lineEdit_Wait_ReserveOn->text()!="")
-                    {
-                        g_InsertProOrder(data_Temp);
-                    }
-                }
-                else if(ui->Wait_Reserve_off_chbox->isChecked())
-                {
-                    Temp_WaitInReserveStruct.inportSta = 0;
-                    Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveOFF->getCurrentPort();
-                    data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
-                    data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
-                    if(ui->lineEdit_Wait_ReserveOFF->text()!="")
-                    {
-                        g_InsertProOrder(data_Temp);
-                    }
-                }
-                else if(ui->Wait_Reserve_up_chbox->isChecked())
-                {
-                    Temp_WaitInReserveStruct.inportSta = 2;
-                    Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveUp->getCurrentPort();
-                    data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
-                    data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
-                    if(ui->lineEdit_Wait_ReserveUp->text()!="")
-                    {
-                        g_InsertProOrder(data_Temp);
-                    }
-
-                }
-                else if(ui->Wait_Reserve_down_chbox->isChecked())
-                {
-                    Temp_WaitInReserveStruct.inportSta = 3;
-                    Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveDown->getCurrentPort();
-                    data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
-                    data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
-                    if(ui->lineEdit_Wait_ReserveDown->text()!="")
-                    {
-                        g_InsertProOrder(data_Temp);
-                    }
-                }
-                else if(ui->Wait_Reserve_Jump_chbox->isChecked())
-                {
-                    Temp_WaitInReserveStruct.inportSta = 4;
-                    Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveJump->getCurrentPort();
-                    data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
-                    data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
-                    if(ui->lineEdit_Wait_ReserveJump->text()!="")
-                    {
-                        g_InsertProOrder(data_Temp);
-                    }
-                }
-                break;
-            }
-            default:
-                break;
-            }
-            Teach_File_List_Refresh();//刷新程序列表
-        }
-    }
-    else if(ui->tabWidget_Teach->currentWidget() == ui->tabAdvance){//高级指令界面
-        if(ui->stackedWidget_Senior->currentWidget() == ui->SunPro_page){//子程序指令
-            data_Temp[0] = m_OperateProNum;  //程序编号
-            data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-            data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-            data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-            data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[5] = C_SUN_PRO;
-            data_Temp[6] = 0;
-            data_Temp[9] = Temp_SunProStruct.sunProNum;
-            data_Temp[10] = Temp_SunProStruct.oprMode;
-            g_InsertProOrder(data_Temp);
-            Teach_File_List_Refresh();//刷新程序列表
-        }
-        else if(ui->stackedWidget_Senior->currentWidget() == ui->ServoStop_page){//伺服停止指令
-            if(ui->cb_ServoStop_AxisAll->isChecked())
-            {
-                double delay = ui->lineEdit_ServoStop_delay->text().toDouble();
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[5] = C_AXIS_STOP;
-                data_Temp[6] = 0;
-                data_Temp[7] = (uint16_t)(delay*100);
-                data_Temp[8] = (uint16_t)(delay*100)>>8;
-                data_Temp[9] = Temp_AxisStopStruct.axis;
-                g_InsertProOrder(data_Temp);
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-        }
-        else if(ui->stackedWidget_Senior->currentWidget() == ui->LowSpeedTorquw_page){//转矩保护指令
-            if(ui->cb_LowSpeedTorque_AxisAll->isChecked())
-            {
-                uint16_t delay = ui->lineEdit_LowSpeedTorque_delay->text().toUInt();
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[5] = C_TORQUE_GARD;
-                data_Temp[6] = 0;
-                data_Temp[7] = 0/*(delay*100)*/;
-                data_Temp[8] = 0/*(delay*100)>>8*/;
-                data_Temp[9] = Temp_TorqueGardStruct.axis;
-                data_Temp[10] = Temp_TorqueGardStruct.torqueValue;
-                g_InsertProOrder(data_Temp);
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-        }
-        else if(ui->stackedWidget_Senior->currentWidget() == ui->OffsetAxis_page){//偏移指令
-            if(ui->cb_Shift_AxisAll->isChecked())
-            {
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[5] = C_OFFSET_AXIS;
-                data_Temp[6] = 0;
-                data_Temp[9] = Temp_OffsetAxisStruct.offsetPos;
-                data_Temp[10] = Temp_OffsetAxisStruct.offsetPos>>8;
-                data_Temp[11] = Temp_OffsetAxisStruct.offsetPos>>16;
-                data_Temp[12] = Temp_OffsetAxisStruct.offsetPos>>24;
-                data_Temp[21] = Temp_OffsetAxisStruct.axis;
-                data_Temp[22] = Temp_OffsetAxisStruct.speed;
-                g_InsertProOrder(data_Temp);
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-        }
-        else if(ui->stackedWidget_Senior->currentWidget() == ui->Search_page){//搜索指令界面
-            data_Temp[0] = m_OperateProNum;  //程序编号
-            data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-            data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-            data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-            data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[6] = 0;
-            if(ui->chboxSearchAxisSelect->isChecked())
-            {
-                Temp_SearchAxisMoveStruct.searchNum = ui->coboxSearchNum->currentIndex()+1;
-                data_Temp[5] = C_SEARCH_AXIS_MOVE;
-                data_Temp[9] = Temp_SearchAxisMoveStruct.maxPos;
-                data_Temp[10] = Temp_SearchAxisMoveStruct.maxPos>>8;
-                data_Temp[11] = Temp_SearchAxisMoveStruct.maxPos>>16;
-                data_Temp[12] = Temp_SearchAxisMoveStruct.maxPos>>24;
-                data_Temp[13] = Temp_SearchAxisMoveStruct.advCDis;
-                data_Temp[14] = Temp_SearchAxisMoveStruct.advCDis>>8;
-                data_Temp[15] = Temp_SearchAxisMoveStruct.advCDis>>16;
-                data_Temp[16] = Temp_SearchAxisMoveStruct.advCDis>>24;
-                data_Temp[17] = Temp_SearchAxisMoveStruct.offsetDis;
-                data_Temp[18] = Temp_SearchAxisMoveStruct.offsetDis>>8;
-                data_Temp[19] = Temp_SearchAxisMoveStruct.offsetDis>>16;
-                data_Temp[20] = Temp_SearchAxisMoveStruct.offsetDis>>24;
-                data_Temp[21] = Temp_SearchAxisMoveStruct.axis;
-                data_Temp[22] = Temp_SearchAxisMoveStruct.posStoreFlag;
-                data_Temp[23] = Temp_SearchAxisMoveStruct.reachPosAlarmFlag;
-                data_Temp[24] = Temp_SearchAxisMoveStruct.runSpeed;
-                data_Temp[25] = Temp_SearchAxisMoveStruct.advCSpeed;
-                data_Temp[26] = Temp_SearchAxisMoveStruct.searchNum;
-                if(ui->editSigStop->text() != "")
-                {
-                    Temp_SearchAxisMoveStruct.inportNum[0] = ui->editSigStop->getCurrentPort();//获取停止通道
-                    Temp_SearchAxisMoveStruct.inportNum[1] = ui->editSigStop->getCurrentPort();//获取停止通道
-                    Temp_SearchAxisMoveStruct.inporttype[0] = ui->editSigStop->getPortSetState();
-                    Temp_SearchAxisMoveStruct.inporttype[1] = ui->editSigStop->getPortSetState();
-                    data_Temp[29] = Temp_SearchAxisMoveStruct.inportNum[0];
-                    data_Temp[30] = Temp_SearchAxisMoveStruct.inportNum[1];
-                    data_Temp[31] = Temp_SearchAxisMoveStruct.inporttype[0];
-                    data_Temp[32] = Temp_SearchAxisMoveStruct.inporttype[1];
-                    g_InsertProOrder(data_Temp);
-                }
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-            else if(ui->chboxResponseStop->isChecked())
-            {//感应停止
-                data_Temp[5] = C_SEARCH_STOP;
-                g_InsertProOrder(data_Temp);
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-        }
-        else if(ui->stackedWidget_Senior->currentWidget() == ui->Logical_var_page){//逻辑&变量指令
-            if(ui->tabWidget_logic->currentWidget() == ui->tab_if){//逻辑&变量指令-如果指令
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = 0;
-
-                if(ui->chboxIfCondition1->isChecked())
-                {//选择了 条件1
-                    Temp_LogicIfStruct.reqSelectFlag[0] = 0;
-                    if(ui->chboxAnd->isChecked())
-                    {//选择了 并且
-                        Temp_LogicIfStruct.reqSelectFlag[0] = 1;
-                    }
-                    else if(ui->chboxOr->isChecked())
-                    {//选择了 或者
-                        Temp_LogicIfStruct.reqSelectFlag[0] = 2;
-                    }
-                    data_Temp[5] = C_LOGIC_IF;
-                    data_Temp[9] = Temp_LogicIfStruct.sufferCmpValue[0];
-                    data_Temp[10] = Temp_LogicIfStruct.sufferCmpValue[0]>>8;
-                    data_Temp[11] = Temp_LogicIfStruct.sufferCmpValue[0]>>16;
-                    data_Temp[12] = Temp_LogicIfStruct.sufferCmpValue[0]>>24;
-                    data_Temp[13] = Temp_LogicIfStruct.sufferCmpValue[1];
-                    data_Temp[14] = Temp_LogicIfStruct.sufferCmpValue[1]>>8;
-                    data_Temp[15] = Temp_LogicIfStruct.sufferCmpValue[1]>>16;
-                    data_Temp[16] = Temp_LogicIfStruct.sufferCmpValue[1]>>24;
-                    data_Temp[17] = Temp_LogicIfStruct.reqSelectFlag[0];
-                    data_Temp[18] = Temp_LogicIfStruct.reqSelectFlag[1];
-                    data_Temp[19] = Temp_LogicIfStruct.cmpType[0];
-                    data_Temp[20] = Temp_LogicIfStruct.cmpType[1];
-                    data_Temp[21] = Temp_LogicIfStruct.inportNum[0];
-                    data_Temp[22] = Temp_LogicIfStruct.inportNum[1];
-                    data_Temp[23] = Temp_LogicIfStruct.inportType[0];
-                    data_Temp[24] = Temp_LogicIfStruct.inportType[1];
-                    data_Temp[25] = Temp_LogicIfStruct.cmpMode[0];
-                    data_Temp[26] = Temp_LogicIfStruct.cmpMode[1];
-                    data_Temp[27] = Temp_LogicIfStruct.sufferCmpType[0];
-                    data_Temp[28] = Temp_LogicIfStruct.sufferCmpType[1];
-                    if(ui->editIfVar1Set->text()!="" && Temp_LogicIfStruct.reqSelectFlag[0] == 0)
-                    {
-                        g_InsertProOrder(data_Temp);
-                    }
-                    else if(ui->editIfVar1Set->text()!="" && ui->editIfVar2Set->text()!="" && Temp_LogicIfStruct.reqSelectFlag[0] != 0)
-                    {
-                        g_InsertProOrder(data_Temp);
-                    }
-                }
-                else if(ui->chboxElseCondition1->isChecked())
-                {//如果选择-否则
-                    data_Temp[5] = C_LOGIC_ELSE;
-                    data_Temp[9] = 0;
-                    data_Temp[10] =0;
-                    data_Temp[11] =0;
-                    data_Temp[12] =0;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->chboxEndIf->isChecked())
-                {//结束如果
-                    data_Temp[5] = C_LOGIC_END;
-                    data_Temp[9] = 0;
-                    data_Temp[10] =0;
-                    data_Temp[11] =0;
-                    data_Temp[12] =0;
-                    g_InsertProOrder(data_Temp);
-                }
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-            else if(ui->tabWidget_logic->currentWidget() == ui->tab_Circulate){//逻辑&变量指令-循环指令
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = 0;
-                if(ui->chboxLoopStart->isChecked())
-                {//选中循环开始
-                    Temp_LogicWhileStartStruct.cycNum = ui->editLoopNum->text().toUInt();
-                    data_Temp[5] = C_LOGIC_WHILE_START;
-                    data_Temp[9] = Temp_LogicWhileStartStruct.cycNum;
-                    data_Temp[10] = Temp_LogicWhileStartStruct.cycNum>>8;
-                    data_Temp[11] = Temp_LogicWhileStartStruct.cycNum>>16;
-                    data_Temp[12] = Temp_LogicWhileStartStruct.cycNum>>24;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->chboxLoopEnd->isChecked())
-                {//循环结束
-                    data_Temp[5] = C_LOGIC_WHILE_END;
-                    g_InsertProOrder(data_Temp);
-                }
-                Teach_File_List_Refresh();//刷新程序列表
-            }
-            else if(ui->tabWidget_logic->currentWidget() == ui->tab_variable){//逻辑&变量指令-变量界面
-                data_Temp[0] = m_OperateProNum;  //程序编号
-                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-                data_Temp[6] = 0;
-                Temp_LogicVarStruct.operMode = ui->coboxVarOperand->currentIndex(); // + - * / ==
-                Temp_LogicAxisStruct.operMode = ui->coboxVarOperand->currentIndex(); // + - * / ==
-                Temp_LogicStackStruct.operMode  = ui->coboxVarOperand->currentIndex(); // + - * / ==
-                Temp_LogicCurProductNumStruct.operMode  = ui->coboxVarOperand->currentIndex(); // + - * / ==
-                if(ui->chboxVarSelectVarPreOp->isChecked())
-                {//选择变量
-                    data_Temp[5] = C_LOGIC_VAR;
-                    Temp_LogicVarStruct.varNum = ui->coboxVarSelectVarPreOp->currentIndex()+1;//变量编号1-16
-                    if(ui->chboxConstantVarOp->isChecked())
-                    {//操作数类型-常量
-                        Temp_LogicVarStruct.sufferOperType = 0;
-                        int32_t sufferOperValue = 0;
-                        if(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]==0)
-                        {
-                            sufferOperValue = ui->editConstantVarPostOp->text().toInt();
-                        }
-                        else if(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]==1)
-                        {
-                            sufferOperValue = ui->editConstantVarPostOp->text().toDouble()*10;
-                        }
-                        else if(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]==2)
-                        {
-                            sufferOperValue = ui->editConstantVarPostOp->text().toDouble()*100;
-                        }
-                        Temp_LogicVarStruct.sufferOperValue = sufferOperValue;//ui->editConstantVarPostOp->text().toDouble();
-                    }
-                    else if(ui->chboxVariableVarOp->isChecked())
-                    {//操作数类型-变量
-                        Temp_LogicVarStruct.sufferOperType = ui->coboxVarSelectPostOp->currentIndex()+1;
-                    }
-                    else if(ui->chboxAxisVarOp->isChecked())
-                    {//操作数类型-轴
-                        int i=0;
-                        for(i=0;i<AXIS_TOTAL_NUM;i++)
-                        {
-                            if(ui->coboxAxisSelectVarPostOp->currentText() == m_NameDefine[1].axisName[i])
+                else if(ui->stackedWidget_Four->currentWidget() == ui->Signal_detect_page){//信号检测界面
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[6] = 0;
+                    if(ui->tabWidget_Reserve->currentWidget() == ui->tabDoubleValve)
+                    {//卡爪检测界面
+                        data_Temp[5] = C_CLAW_CHECK;
+                        if(ui->cb_General_PassStart->isChecked())
+                        {//夹紧检测开始
+                            if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
                             {
-                                break;
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PassStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].portNum;
+                            }
+                            data_Temp[10] = 1;
+                            g_InsertProOrder(data_Temp);
+                        }
+                        else if(ui->cb_General_PassStop->isChecked())
+                        {//夹紧检测结束
+                            if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_CLAMP_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_CLAMP_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PassStop->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_CLAMP_LIMIT].portNum;
+                            }
+                            data_Temp[10] = 0;
+                            g_InsertProOrder(data_Temp);
+                        }
+                        else if(ui->cb_General_PineStart->isChecked())
+                        {//松开检测开始
+                            if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PineStart->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
+                            }
+                            data_Temp[10] = 2;
+                            g_InsertProOrder(data_Temp);
+                        }
+                        else if(ui->cb_General_PineEnd->isChecked())
+                        {//松开检测结束
+                            if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_METERIAL_1_LOOSENED_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_PRODUCT_1_LOOSENED_LIMIT].portNum;
+                            }
+                            else if(ui->combo_General_PineEnd->currentText() == m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                            {
+                                data_Temp[9] = m_Port_X[SIGNAL_DETECTION_CHUCK_1_LOOSENED_LIMIT].portNum;
+                            }
+                            data_Temp[10] = 0;
+                            g_InsertProOrder(data_Temp);
+                        }
+                    }
+                    else if(ui->tabWidget_Reserve->currentWidget() == ui->tabOutputType)
+                    {//预留检测界面
+                        data_Temp[5] = C_RESERVE_CHECK;
+                        if(ui->cb_General_ReserveOn->isChecked())
+                        {//预留检测ON
+                            data_Temp[9] = ui->lineEdit_ReserveOn->getCurrentPort();
+                            data_Temp[10] = 1;
+                            g_InsertProOrder(data_Temp);
+                        }
+                        else if(ui->cb_General_ReserveOff->isChecked())
+                        {//预留检测OFF
+                            data_Temp[9] = ui->lineEdit_ReserveOff->getCurrentPort();
+                            data_Temp[10] = 2;
+                            g_InsertProOrder(data_Temp);
+                        }
+                        else if(ui->cb_General_ReserveEnd->isChecked())
+                        {//预留检测END
+                            data_Temp[9] = ui->lineEdit_ReserveEnd->getCurrentPort();
+                            data_Temp[10] = 0;
+                            g_InsertProOrder(data_Temp);
+                        }
+                    }
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+                else if(ui->stackedWidget_Four->currentWidget() == ui->Machine_action_page){//机床动作界面
+                    double MachineDelay = 0;
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[5] = C_MACHINE_OUT;
+                    data_Temp[6] = 0;
+                    if(ui->Start_Up_Mach_chbox->isChecked()){//启动加工1通/断-选中
+                        MachineDelay = ui->lineEdit_Start_Up_Mach->text().toDouble();
+                        data_Temp[7] = (uint16_t)(MachineDelay*100);
+                        data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
+                        data_Temp[9] = m_Port_Y[MACHINE_START_PROCESS_1].portNum;
+                        data_Temp[10] = Temp_MachineOutStruct[0].type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->Main_Axis_Rotate_chbox->isChecked()){//主轴旋转1通/断-选中
+                        MachineDelay = ui->lineEdit_Main_Axis_Rotate->text().toDouble();
+                        data_Temp[7] = (uint16_t)(MachineDelay*100);
+                        data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
+                        data_Temp[9] = m_Port_Y[MACHINE_SPINDLE_ROTATE_1].portNum;
+                        data_Temp[10] = Temp_MachineOutStruct[1].type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->Main_Axis_locat_chbox->isChecked()){//主轴定位1通/断-选中
+                        MachineDelay = ui->lineEdit_Main_Axis_locat->text().toDouble();
+                        data_Temp[7] = (uint16_t)(MachineDelay*100);
+                        data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
+                        data_Temp[9] = m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].portNum;
+                        data_Temp[10] = Temp_MachineOutStruct[2].type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->Auto_Door_chbox->isChecked()){//自动门1开/关-选中
+                        MachineDelay = ui->lineEdit_Auto_Door->text().toDouble();
+                        data_Temp[7] = (uint16_t)(MachineDelay*100);
+                        data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
+                        if(Temp_MachineOutStruct[3].type == 1)
+                        {//自动门开
+                            data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
+                        }
+                        else if(Temp_MachineOutStruct[3].type == 0)
+                        {//自动门关
+                            data_Temp[9] = m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum;
+                        }
+                        data_Temp[10] = Temp_MachineOutStruct[3].type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->Blow_Air_chbox->isChecked()){//吹气1通/断-选中
+                        MachineDelay = ui->lineEdit_Blow_Air->text().toDouble();
+                        data_Temp[7] = (uint16_t)(MachineDelay*100);
+                        data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
+                        data_Temp[9] = m_Port_Y[MACHINE_GASS_1_LOOSENED].portNum;
+                        data_Temp[10] = Temp_MachineOutStruct[4].type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->Chuck_chbox->isChecked()){//卡盘1夹紧/松开-选中
+                        MachineDelay = ui->lineEdit_Chuck->text().toDouble();
+                        data_Temp[7] = (uint16_t)(MachineDelay*100);
+                        data_Temp[8] = (uint16_t)(MachineDelay*100)>>8;
+                        if(Temp_MachineOutStruct[5].type == 0)
+                        {//卡盘1松开
+                            data_Temp[9] = m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum;
+                        }
+                        else if(Temp_MachineOutStruct[5].type == 1)
+                        {//卡盘1夹紧
+                            data_Temp[9] = m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum;
+                        }
+                        data_Temp[10] = Temp_MachineOutStruct[5].type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+                else if(ui->stackedWidget_Four->currentWidget() == ui->Other_Order_page){//其他指令动作界面
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[6] = 0;
+                    if(ui->AlarmDelay_chbox->isChecked())
+                    {//报警延时
+                        data_Temp[5] = C_OTHER_DELAY;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->AlarmCust_chbox->isChecked())
+                    {//报警自定义
+                        data_Temp[5] = C_OTHER_ALARM_CUST;
+                        data_Temp[9] = Temp_OtherAlarmCustStruct.alarmNum;
+                        data_Temp[10] = Temp_OtherAlarmCustStruct.alarmNum>>8;
+                        data_Temp[11] = Temp_OtherAlarmCustStruct.type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->CycStop_chbox->isChecked())
+                    {//周期停止
+                        data_Temp[5] = C_OTHER_CYC_STOP;
+                        data_Temp[9] = Temp_OtherCycStopCustStruct.cycleNum;
+                        data_Temp[10] = Temp_OtherCycStopCustStruct.cycleNum>>8;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->AlarmLamp_chbox->isChecked())
+                    {//报警灯
+                        data_Temp[5] = C_OTHER_ALARM_LAMP;
+                        data_Temp[9] = Temp_OtherAlarmLampStruct.outportNum;
+                        data_Temp[10] = Temp_OtherAlarmLampStruct.type;
+
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->AlarmSound_chbox->isChecked())
+                    {//报警声
+                        data_Temp[5] = C_OTHER_ALARM_SOUND;
+                        data_Temp[9] = Temp_OtherAlarmSoundStruct.outportNum;
+                        data_Temp[10] = Temp_OtherAlarmSoundStruct.type;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+            }
+            else if(ui->stackedWidget_General->currentWidget() == ui->Stack_page){//堆叠界面
+                data_Temp[0] = m_OperateProNum;  //程序编号
+                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                data_Temp[5] = C_STACK_MOVE;
+                data_Temp[6] = 0;
+                if(ui->Stack_group_1->isChecked())
+                {
+                    data_Temp[33] = 1;//堆叠组号，1-11
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_2->isChecked())
+                {
+                    data_Temp[33] = 2;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_3->isChecked())
+                {
+                    data_Temp[33] = 3;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_4->isChecked())
+                {
+                    data_Temp[33] = 4;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_5->isChecked())
+                {
+                    data_Temp[33] = 5;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_6->isChecked())
+                {
+                    data_Temp[33] = 6;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_7->isChecked())
+                {
+                    data_Temp[33] = 7;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_8->isChecked())
+                {
+                    data_Temp[33] = 8;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_9->isChecked())
+                {
+                    data_Temp[33] = 9;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_10->isChecked())
+                {
+                    data_Temp[33] = 10;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_group_11->isChecked())
+                {
+                    data_Temp[33] = 11;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Follow_Stack_group_1->isChecked())
+                {
+                    data_Temp[5] = C_STACK_FOLLOW;
+                    data_Temp[33] = 1;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Follow_Stack_group_2->isChecked())
+                {
+                    data_Temp[5] = C_STACK_FOLLOW;
+                    data_Temp[33] = 2;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Follow_Stack_group_3->isChecked())
+                {
+                    data_Temp[5] = C_STACK_FOLLOW;
+                    data_Temp[33] = 3;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Follow_Stack_group_4->isChecked())
+                {
+                    data_Temp[5] = C_STACK_FOLLOW;
+                    data_Temp[33] = 4;
+                    g_InsertProOrder(data_Temp);
+                }
+                else if(ui->Stack_reset->isChecked())
+                {
+                    data_Temp[5] = C_STACK_RESET_ZERO;
+                    data_Temp[11] = ui->Stack_reset_select_box->currentIndex()+1;
+                    g_InsertProOrder(data_Temp);
+                }
+                Teach_File_List_Refresh();//刷新程序列表
+            }
+            else if(ui->stackedWidget_General->currentWidget() == ui->Reserve_Out_page){//预留输出
+
+                data_Temp[0] = m_OperateProNum;  //程序编号
+                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                data_Temp[5] = C_RESERVE_OUT;
+                data_Temp[6] = 0;
+                Temp_ReserveOutStruct.interval = ui->lineEdit_Reserve_num->text().toUInt();
+                double Reserve_time = ui->lineEdit_Reserve_time->text().toDouble();
+                data_Temp[7] = (uint16_t)(Reserve_time*100);
+                data_Temp[8] = (uint16_t)(Reserve_time*100)>>8;
+                data_Temp[9] = Temp_ReserveOutStruct.interval;
+                data_Temp[10] = Temp_ReserveOutStruct.interval>>8;
+                data_Temp[12] = Temp_ReserveOutStruct.function;
+                data_Temp[13] = Temp_ReserveOutStruct.type;
+                if(Temp_ReserveOutStruct.function == 0)
+                {
+                    data_Temp[13] = ui->Reserve_Pass_Button->getState();
+                    Temp_ReserveOutStruct.outportNum = ui->lineEdit_Reserve_Pass_Button->getCurrentPort();
+                    data_Temp[11] = Temp_ReserveOutStruct.outportNum;
+                    if(ui->lineEdit_Reserve_Pass_Button->text()!="")
+                    {
+                        g_InsertProOrder(data_Temp);
+                    }
+                }
+                else if(Temp_ReserveOutStruct.function == 1)
+                {
+                    Temp_ReserveOutStruct.outportNum = ui->lineEdit_Reserve_OutTime->getCurrentPort();
+                    data_Temp[11] = Temp_ReserveOutStruct.outportNum;
+                    if(ui->lineEdit_Reserve_OutTime->text()!="")
+                    {
+                        g_InsertProOrder(data_Temp);
+                    }
+                }
+                else if(Temp_ReserveOutStruct.function == 2)
+                {
+                    Temp_ReserveOutStruct.outportNum = ui->lineEdit_Reserve_Overturn->getCurrentPort();
+                    data_Temp[11] = Temp_ReserveOutStruct.outportNum;
+                    if(ui->lineEdit_Reserve_Overturn->text()!="")
+                    {
+                        g_InsertProOrder(data_Temp);
+                    }
+                }
+                Teach_File_List_Refresh();//刷新程序列表
+            }
+            else if(ui->stackedWidget_General->currentWidget()  == ui->Signal_wait_page){//信号等待界面
+                data_Temp[0] = m_OperateProNum;  //程序编号
+                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                data_Temp[6] = 0;
+                switch(ui->tabWgtSigWait->currentIndex())
+                {
+                case 0://等待机床界面
+                    if(ui->Wait_machine_signal_box->isChecked())
+                    {
+                        Temp_WaitInMachineStruct.inportSta = 1;//默认有信号
+                        if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].modifyName)
+                        {
+                            Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_PROCESS_COMPLETE_1].portNum;
+                        }
+                        else if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].modifyName)
+                        {
+                            Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_FIXED_POS_COMPLETE_1].portNum;
+                        }
+                        else if(ui->Wait_machine_signal_port->currentText() == m_Port_X[SIGNAL_WAITING_KNIFE_SEAT_ORIGIN_1].modifyName)
+                        {
+                            Temp_WaitInMachineStruct.inportNum = m_Port_X[SIGNAL_WAITING_KNIFE_SEAT_ORIGIN_1].portNum;
+                        }
+                        data_Temp[5] = C_WAIT_IN_MACHINE;
+                        data_Temp[9] = Temp_WaitInMachineStruct.backListNum;
+                        data_Temp[10] = Temp_WaitInMachineStruct.backListNum>>8;
+                        data_Temp[11] = Temp_WaitInMachineStruct.inportNum;
+                        data_Temp[12] = Temp_WaitInMachineStruct.inportSta;
+                        data_Temp[13] = Temp_WaitInMachineStruct.type;
+                        data_Temp[14] = Temp_WaitInMachineStruct.label;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    break;
+                case 1://等待卡爪界面
+                {
+                    if(ui->Wait_clamp_on_chbox->isChecked())
+                    {
+                        if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_clamp_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].portNum;
+                        }
+                    }
+                    else if(ui->Wait_release_on_chbox->isChecked())
+                    {
+                        if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_release_on_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].portNum;
+                        }
+                    }
+                    else if(ui->Wait_clamp_off_chbox->isChecked())
+                    {
+                        if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_clamp_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP_LIMIT].portNum;
+                        }
+                    }
+                    else if(ui->Wait_release_off_chbox->isChecked())
+                    {
+                        if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_METERIAL_1_LOOSENED_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_PRODUCT_1_LOOSENED_LIMIT].portNum;
+                        }
+                        else if(ui->Wait_release_off_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_X[SIGNAL_WAITING_CHUCK_1_LOOSENED_LIMIT].portNum;
+                        }
+                    }
+                    else if(ui->Wait_pos_cor_chbox->isChecked())
+                    {
+                        if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_METERIAL_1_CLAMP].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_METERIAL_1_CLAMP].portNum;
+                        }
+                        else if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_PRODUCT_1_CLAMP].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_PRODUCT_1_CLAMP].portNum;
+                        }
+                        else if(ui->Wait_pos_cor_comboBox->currentText() == m_Port_X[SIGNAL_WAITING_CHUCK_1_CLAMP].modifyName)
+                        {
+                            Temp_WaitInClawStruct.inportNum =  m_Port_Y[SIGNAL_WAITING_CHUCK_1_CLAMP].portNum;
+                        }
+                    }
+                    uint16_t labelnum = ReturnLabelnum(ui->coboxReturnLabe_box->currentText());
+                    Temp_WaitInClawStruct.label = labelnum;
+                    Temp_WaitInClawStruct.backListNum = ui->editReturnStepNum->text().toInt();
+                    data_Temp[5] = C_WAIT_IN_CLAW;
+                    data_Temp[9] = Temp_WaitInClawStruct.backListNum;
+                    data_Temp[10] = Temp_WaitInClawStruct.backListNum>>8;
+                    data_Temp[11] = Temp_WaitInClawStruct.inportNum;
+                    data_Temp[13] = Temp_WaitInClawStruct.type;
+                    data_Temp[14] = Temp_WaitInClawStruct.label;
+                    if(ui->Wait_clamp_on_chbox->isChecked() || ui->Wait_release_on_chbox->isChecked())
+                    {
+                        Temp_WaitInClawStruct.inportSta = 1;
+                        data_Temp[12] = Temp_WaitInClawStruct.inportSta;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->Wait_clamp_off_chbox->isChecked() || ui->Wait_release_off_chbox->isChecked())
+                    {
+                        Temp_WaitInClawStruct.inportSta = 0;
+                        data_Temp[12] = Temp_WaitInClawStruct.inportSta;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->Wait_pos_cor_chbox->isChecked())
+                    {
+                        Temp_WaitInClawStruct.inportSta = 2;
+                        data_Temp[12] = Temp_WaitInClawStruct.inportSta;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    break;
+                }
+                case 2://等待预留界面
+                {
+                    uint16_t labelnum = ReturnLabelnum(ui->coboxReturnLabe_box->currentText());
+                    Temp_WaitInReserveStruct.label = labelnum;
+                    Temp_WaitInReserveStruct.backListNum = ui->editReturnStepNum->text().toInt();
+                    data_Temp[5] = C_WAIT_IN_RESERVE;
+                    data_Temp[9] = Temp_WaitInReserveStruct.backListNum;
+                    data_Temp[10] = Temp_WaitInReserveStruct.backListNum>>8;
+                    data_Temp[13] = Temp_WaitInReserveStruct.type;
+                    data_Temp[14] = Temp_WaitInReserveStruct.label;
+                    if(ui->Wait_Reserve_on_chbox->isChecked())
+                    {
+                        Temp_WaitInReserveStruct.inportSta = 1;
+                        Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveOn->getCurrentPort();
+                        data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
+                        data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
+                        if(ui->lineEdit_Wait_ReserveOn->text()!="")
+                        {
+                            g_InsertProOrder(data_Temp);
+                        }
+                    }
+                    else if(ui->Wait_Reserve_off_chbox->isChecked())
+                    {
+                        Temp_WaitInReserveStruct.inportSta = 0;
+                        Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveOFF->getCurrentPort();
+                        data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
+                        data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
+                        if(ui->lineEdit_Wait_ReserveOFF->text()!="")
+                        {
+                            g_InsertProOrder(data_Temp);
+                        }
+                    }
+                    else if(ui->Wait_Reserve_up_chbox->isChecked())
+                    {
+                        Temp_WaitInReserveStruct.inportSta = 2;
+                        Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveUp->getCurrentPort();
+                        data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
+                        data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
+                        if(ui->lineEdit_Wait_ReserveUp->text()!="")
+                        {
+                            g_InsertProOrder(data_Temp);
+                        }
+
+                    }
+                    else if(ui->Wait_Reserve_down_chbox->isChecked())
+                    {
+                        Temp_WaitInReserveStruct.inportSta = 3;
+                        Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveDown->getCurrentPort();
+                        data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
+                        data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
+                        if(ui->lineEdit_Wait_ReserveDown->text()!="")
+                        {
+                            g_InsertProOrder(data_Temp);
+                        }
+                    }
+                    else if(ui->Wait_Reserve_Jump_chbox->isChecked())
+                    {
+                        Temp_WaitInReserveStruct.inportSta = 4;
+                        Temp_WaitInReserveStruct.inportNum = ui->lineEdit_Wait_ReserveJump->getCurrentPort();
+                        data_Temp[11] = Temp_WaitInReserveStruct.inportNum;
+                        data_Temp[12] = Temp_WaitInReserveStruct.inportSta;
+                        if(ui->lineEdit_Wait_ReserveJump->text()!="")
+                        {
+                            g_InsertProOrder(data_Temp);
+                        }
+                    }
+                    break;
+                }
+                default:
+                    break;
+                }
+                Teach_File_List_Refresh();//刷新程序列表
+            }
+        }
+        else if(ui->tabWidget_Teach->currentWidget() == ui->tabAdvance){//高级指令界面
+            if(ui->stackedWidget_Senior->currentWidget() == ui->SunPro_page){//子程序指令
+                data_Temp[0] = m_OperateProNum;  //程序编号
+                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                data_Temp[5] = C_SUN_PRO;
+                data_Temp[6] = 0;
+                data_Temp[9] = Temp_SunProStruct.sunProNum;
+                data_Temp[10] = Temp_SunProStruct.oprMode;
+                g_InsertProOrder(data_Temp);
+                Teach_File_List_Refresh();//刷新程序列表
+            }
+            else if(ui->stackedWidget_Senior->currentWidget() == ui->ServoStop_page){//伺服停止指令
+                if(ui->cb_ServoStop_AxisAll->isChecked())
+                {
+                    double delay = ui->lineEdit_ServoStop_delay->text().toDouble();
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[5] = C_AXIS_STOP;
+                    data_Temp[6] = 0;
+                    data_Temp[7] = (uint16_t)(delay*100);
+                    data_Temp[8] = (uint16_t)(delay*100)>>8;
+                    data_Temp[9] = Temp_AxisStopStruct.axis;
+                    g_InsertProOrder(data_Temp);
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+            }
+            else if(ui->stackedWidget_Senior->currentWidget() == ui->LowSpeedTorquw_page){//转矩保护指令
+                if(ui->cb_LowSpeedTorque_AxisAll->isChecked())
+                {
+                    uint16_t delay = ui->lineEdit_LowSpeedTorque_delay->text().toUInt();
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[5] = C_TORQUE_GARD;
+                    data_Temp[6] = 0;
+                    data_Temp[7] = 0/*(delay*100)*/;
+                    data_Temp[8] = 0/*(delay*100)>>8*/;
+                    data_Temp[9] = Temp_TorqueGardStruct.axis;
+                    data_Temp[10] = Temp_TorqueGardStruct.torqueValue;
+                    g_InsertProOrder(data_Temp);
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+            }
+            else if(ui->stackedWidget_Senior->currentWidget() == ui->OffsetAxis_page){//偏移指令
+                if(ui->cb_Shift_AxisAll->isChecked())
+                {
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[5] = C_OFFSET_AXIS;
+                    data_Temp[6] = 0;
+                    data_Temp[9] = Temp_OffsetAxisStruct.offsetPos;
+                    data_Temp[10] = Temp_OffsetAxisStruct.offsetPos>>8;
+                    data_Temp[11] = Temp_OffsetAxisStruct.offsetPos>>16;
+                    data_Temp[12] = Temp_OffsetAxisStruct.offsetPos>>24;
+                    data_Temp[21] = Temp_OffsetAxisStruct.axis;
+                    data_Temp[22] = Temp_OffsetAxisStruct.speed;
+                    g_InsertProOrder(data_Temp);
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+            }
+            else if(ui->stackedWidget_Senior->currentWidget() == ui->Search_page){//搜索指令界面
+                data_Temp[0] = m_OperateProNum;  //程序编号
+                data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                data_Temp[6] = 0;
+                if(ui->chboxSearchAxisSelect->isChecked())
+                {
+                    Temp_SearchAxisMoveStruct.searchNum = ui->coboxSearchNum->currentIndex()+1;
+                    data_Temp[5] = C_SEARCH_AXIS_MOVE;
+                    data_Temp[9] = Temp_SearchAxisMoveStruct.maxPos;
+                    data_Temp[10] = Temp_SearchAxisMoveStruct.maxPos>>8;
+                    data_Temp[11] = Temp_SearchAxisMoveStruct.maxPos>>16;
+                    data_Temp[12] = Temp_SearchAxisMoveStruct.maxPos>>24;
+                    data_Temp[13] = Temp_SearchAxisMoveStruct.advCDis;
+                    data_Temp[14] = Temp_SearchAxisMoveStruct.advCDis>>8;
+                    data_Temp[15] = Temp_SearchAxisMoveStruct.advCDis>>16;
+                    data_Temp[16] = Temp_SearchAxisMoveStruct.advCDis>>24;
+                    data_Temp[17] = Temp_SearchAxisMoveStruct.offsetDis;
+                    data_Temp[18] = Temp_SearchAxisMoveStruct.offsetDis>>8;
+                    data_Temp[19] = Temp_SearchAxisMoveStruct.offsetDis>>16;
+                    data_Temp[20] = Temp_SearchAxisMoveStruct.offsetDis>>24;
+                    data_Temp[21] = Temp_SearchAxisMoveStruct.axis;
+                    data_Temp[22] = Temp_SearchAxisMoveStruct.posStoreFlag;
+                    data_Temp[23] = Temp_SearchAxisMoveStruct.reachPosAlarmFlag;
+                    data_Temp[24] = Temp_SearchAxisMoveStruct.runSpeed;
+                    data_Temp[25] = Temp_SearchAxisMoveStruct.advCSpeed;
+                    data_Temp[26] = Temp_SearchAxisMoveStruct.searchNum;
+                    if(ui->editSigStop->text() != "")
+                    {
+                        Temp_SearchAxisMoveStruct.inportNum[0] = ui->editSigStop->getCurrentPort();//获取停止通道
+                        Temp_SearchAxisMoveStruct.inportNum[1] = ui->editSigStop->getCurrentPort();//获取停止通道
+                        Temp_SearchAxisMoveStruct.inporttype[0] = ui->editSigStop->getPortSetState();
+                        Temp_SearchAxisMoveStruct.inporttype[1] = ui->editSigStop->getPortSetState();
+                        data_Temp[29] = Temp_SearchAxisMoveStruct.inportNum[0];
+                        data_Temp[30] = Temp_SearchAxisMoveStruct.inportNum[1];
+                        data_Temp[31] = Temp_SearchAxisMoveStruct.inporttype[0];
+                        data_Temp[32] = Temp_SearchAxisMoveStruct.inporttype[1];
+                        g_InsertProOrder(data_Temp);
+                    }
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+                else if(ui->chboxResponseStop->isChecked())
+                {//感应停止
+                    data_Temp[5] = C_SEARCH_STOP;
+                    g_InsertProOrder(data_Temp);
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+            }
+            else if(ui->stackedWidget_Senior->currentWidget() == ui->Logical_var_page){//逻辑&变量指令
+                if(ui->tabWidget_logic->currentWidget() == ui->tab_if){//逻辑&变量指令-如果指令
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[6] = 0;
+
+                    if(ui->chboxIfCondition1->isChecked())
+                    {//选择了 条件1
+                        Temp_LogicIfStruct.reqSelectFlag[0] = 0;
+                        if(ui->chboxAnd->isChecked())
+                        {//选择了 并且
+                            Temp_LogicIfStruct.reqSelectFlag[0] = 1;
+                        }
+                        else if(ui->chboxOr->isChecked())
+                        {//选择了 或者
+                            Temp_LogicIfStruct.reqSelectFlag[0] = 2;
+                        }
+                        data_Temp[5] = C_LOGIC_IF;
+                        data_Temp[9] = Temp_LogicIfStruct.sufferCmpValue[0];
+                        data_Temp[10] = Temp_LogicIfStruct.sufferCmpValue[0]>>8;
+                        data_Temp[11] = Temp_LogicIfStruct.sufferCmpValue[0]>>16;
+                        data_Temp[12] = Temp_LogicIfStruct.sufferCmpValue[0]>>24;
+                        data_Temp[13] = Temp_LogicIfStruct.sufferCmpValue[1];
+                        data_Temp[14] = Temp_LogicIfStruct.sufferCmpValue[1]>>8;
+                        data_Temp[15] = Temp_LogicIfStruct.sufferCmpValue[1]>>16;
+                        data_Temp[16] = Temp_LogicIfStruct.sufferCmpValue[1]>>24;
+                        data_Temp[17] = Temp_LogicIfStruct.reqSelectFlag[0];
+                        data_Temp[18] = Temp_LogicIfStruct.reqSelectFlag[1];
+                        data_Temp[19] = Temp_LogicIfStruct.cmpType[0];
+                        data_Temp[20] = Temp_LogicIfStruct.cmpType[1];
+                        data_Temp[21] = Temp_LogicIfStruct.inportNum[0];
+                        data_Temp[22] = Temp_LogicIfStruct.inportNum[1];
+                        data_Temp[23] = Temp_LogicIfStruct.inportType[0];
+                        data_Temp[24] = Temp_LogicIfStruct.inportType[1];
+                        data_Temp[25] = Temp_LogicIfStruct.cmpMode[0];
+                        data_Temp[26] = Temp_LogicIfStruct.cmpMode[1];
+                        data_Temp[27] = Temp_LogicIfStruct.sufferCmpType[0];
+                        data_Temp[28] = Temp_LogicIfStruct.sufferCmpType[1];
+                        if(ui->editIfVar1Set->text()!="" && Temp_LogicIfStruct.reqSelectFlag[0] == 0)
+                        {
+                            g_InsertProOrder(data_Temp);
+                        }
+                        else if(ui->editIfVar1Set->text()!="" && ui->editIfVar2Set->text()!="" && Temp_LogicIfStruct.reqSelectFlag[0] != 0)
+                        {
+                            g_InsertProOrder(data_Temp);
+                        }
+                    }
+                    else if(ui->chboxElseCondition1->isChecked())
+                    {//如果选择-否则
+                        data_Temp[5] = C_LOGIC_ELSE;
+                        data_Temp[9] = 0;
+                        data_Temp[10] =0;
+                        data_Temp[11] =0;
+                        data_Temp[12] =0;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->chboxEndIf->isChecked())
+                    {//结束如果
+                        data_Temp[5] = C_LOGIC_END;
+                        data_Temp[9] = 0;
+                        data_Temp[10] =0;
+                        data_Temp[11] =0;
+                        data_Temp[12] =0;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+                else if(ui->tabWidget_logic->currentWidget() == ui->tab_Circulate){//逻辑&变量指令-循环指令
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[6] = 0;
+                    if(ui->chboxLoopStart->isChecked())
+                    {//选中循环开始
+                        Temp_LogicWhileStartStruct.cycNum = ui->editLoopNum->text().toUInt();
+                        data_Temp[5] = C_LOGIC_WHILE_START;
+                        data_Temp[9] = Temp_LogicWhileStartStruct.cycNum;
+                        data_Temp[10] = Temp_LogicWhileStartStruct.cycNum>>8;
+                        data_Temp[11] = Temp_LogicWhileStartStruct.cycNum>>16;
+                        data_Temp[12] = Temp_LogicWhileStartStruct.cycNum>>24;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->chboxLoopEnd->isChecked())
+                    {//循环结束
+                        data_Temp[5] = C_LOGIC_WHILE_END;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    Teach_File_List_Refresh();//刷新程序列表
+                }
+                else if(ui->tabWidget_logic->currentWidget() == ui->tab_variable){//逻辑&变量指令-变量界面
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[6] = 0;
+                    Temp_LogicVarStruct.operMode = ui->coboxVarOperand->currentIndex(); // + - * / ==
+                    Temp_LogicAxisStruct.operMode = ui->coboxVarOperand->currentIndex(); // + - * / ==
+                    Temp_LogicStackStruct.operMode  = ui->coboxVarOperand->currentIndex(); // + - * / ==
+                    Temp_LogicCurProductNumStruct.operMode  = ui->coboxVarOperand->currentIndex(); // + - * / ==
+                    if(ui->chboxVarSelectVarPreOp->isChecked())
+                    {//选择变量
+                        data_Temp[5] = C_LOGIC_VAR;
+                        Temp_LogicVarStruct.varNum = ui->coboxVarSelectVarPreOp->currentIndex()+1;//变量编号1-16
+                        if(ui->chboxConstantVarOp->isChecked())
+                        {//操作数类型-常量
+                            Temp_LogicVarStruct.sufferOperType = 0;
+                            int32_t sufferOperValue = 0;
+                            if(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]==0)
+                            {
+                                sufferOperValue = ui->editConstantVarPostOp->text().toInt();
+                            }
+                            else if(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]==1)
+                            {
+                                sufferOperValue = ui->editConstantVarPostOp->text().toDouble()*10;
+                            }
+                            else if(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]==2)
+                            {
+                                sufferOperValue = ui->editConstantVarPostOp->text().toDouble()*100;
+                            }
+                            Temp_LogicVarStruct.sufferOperValue = sufferOperValue;//ui->editConstantVarPostOp->text().toDouble();
+                        }
+                        else if(ui->chboxVariableVarOp->isChecked())
+                        {//操作数类型-变量
+                            Temp_LogicVarStruct.sufferOperType = ui->coboxVarSelectPostOp->currentIndex()+1;
+                        }
+                        else if(ui->chboxAxisVarOp->isChecked())
+                        {//操作数类型-轴
+                            int i=0;
+                            for(i=0;i<AXIS_TOTAL_NUM;i++)
+                            {
+                                if(ui->coboxAxisSelectVarPostOp->currentText() == m_NameDefine[1].axisName[i])
+                                {
+                                    break;
+                                }
+                            }
+                            Temp_LogicVarStruct.sufferOperType = i+21;
+                        }
+                        else if(ui->chboxProdNumVarOp->isChecked())
+                        {//操作数类型-实际产量
+                            Temp_LogicVarStruct.sufferOperType = 101;
+                        }
+                        data_Temp[9] = Temp_LogicVarStruct.sufferOperValue;
+                        data_Temp[10] = Temp_LogicVarStruct.sufferOperValue>>8;
+                        data_Temp[11] = Temp_LogicVarStruct.sufferOperValue>>16;
+                        data_Temp[12] = Temp_LogicVarStruct.sufferOperValue>>24;
+                        data_Temp[13] = Temp_LogicVarStruct.varNum;
+                        data_Temp[14] = Temp_LogicVarStruct.operMode;
+                        data_Temp[15] = Temp_LogicVarStruct.sufferOperType;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    else if(ui->chboxAxisSelectVarPreOp->isChecked())
+                    {//选择轴
+                        Temp_LogicAxisStruct.axisNum = 0;
+                        data_Temp[5] = C_LOGIC_AXIS;
+                        for(int i=0;i<AXIS_TOTAL_NUM;i++)
+                        {
+                            if(ui->coboxAxisSelectVarPreOp->currentText() == m_NameDefine[1].axisName[i])
+                            {
+                                Temp_LogicAxisStruct.axisNum = i+1;
                             }
                         }
-                        Temp_LogicVarStruct.sufferOperType = i+21;
-                    }
-                    else if(ui->chboxProdNumVarOp->isChecked())
-                    {//操作数类型-实际产量
-                        Temp_LogicVarStruct.sufferOperType = 101;
-                    }
-                    data_Temp[9] = Temp_LogicVarStruct.sufferOperValue;
-                    data_Temp[10] = Temp_LogicVarStruct.sufferOperValue>>8;
-                    data_Temp[11] = Temp_LogicVarStruct.sufferOperValue>>16;
-                    data_Temp[12] = Temp_LogicVarStruct.sufferOperValue>>24;
-                    data_Temp[13] = Temp_LogicVarStruct.varNum;
-                    data_Temp[14] = Temp_LogicVarStruct.operMode;
-                    data_Temp[15] = Temp_LogicVarStruct.sufferOperType;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->chboxAxisSelectVarPreOp->isChecked())
-                {//选择轴
-                    Temp_LogicAxisStruct.axisNum = 0;
-                    data_Temp[5] = C_LOGIC_AXIS;
-                    for(int i=0;i<AXIS_TOTAL_NUM;i++)
-                    {
-                        if(ui->coboxAxisSelectVarPreOp->currentText() == m_NameDefine[1].axisName[i])
-                        {
-                            Temp_LogicAxisStruct.axisNum = i+1;
+                        if(ui->chboxConstantVarOp->isChecked())
+                        {//操作数类型-常量
+                            Temp_LogicAxisStruct.sufferOperType = 0;
+                            Temp_LogicAxisStruct.sufferOperValue = ui->editConstantVarPostOp->text().toDouble()*100;
                         }
+                        else if(ui->chboxVariableVarOp->isChecked())
+                        {//操作数类型-变量
+                            Temp_LogicAxisStruct.sufferOperType = ui->coboxVarSelectPostOp->currentIndex()+1;
+                        }
+                        data_Temp[9] = Temp_LogicAxisStruct.sufferOperValue;
+                        data_Temp[10] = Temp_LogicAxisStruct.sufferOperValue>>8;
+                        data_Temp[11] = Temp_LogicAxisStruct.sufferOperValue>>16;
+                        data_Temp[12] = Temp_LogicAxisStruct.sufferOperValue>>24;
+                        data_Temp[13] = Temp_LogicAxisStruct.axisNum;
+                        data_Temp[14] = Temp_LogicAxisStruct.operMode;
+                        data_Temp[15] = Temp_LogicAxisStruct.sufferOperType;
+                        g_InsertProOrder(data_Temp);
                     }
-                    if(ui->chboxConstantVarOp->isChecked())
-                    {//操作数类型-常量
-                        Temp_LogicAxisStruct.sufferOperType = 0;
-                        Temp_LogicAxisStruct.sufferOperValue = ui->editConstantVarPostOp->text().toDouble()*100;
+                    else if(ui->chboxStackSelectVarPreOp->isChecked())
+                    {//选择堆叠
+                        data_Temp[5] = C_LOGIC_STACK;
+                        Temp_LogicStackStruct.stackNum = ui->coboxStackSelectVarPreOp->currentIndex()+1;//堆叠组号，1-8
+                        if(ui->chboxConstantVarOp->isChecked())
+                        {//操作数类型-常量
+                            Temp_LogicStackStruct.sufferOperType = 0;
+                            Temp_LogicStackStruct.sufferOperValue = ui->editConstantVarPostOp->text().toDouble();
+                        }
+                        else if(ui->chboxStackCntVarOp->isChecked())
+                        {//操作数类型-堆叠计数
+                            Temp_LogicStackStruct.sufferOperType = ui->coboxStackVarPostOp->currentIndex()+1;//堆叠计数1-20
+                        }
+                        data_Temp[9] = Temp_LogicStackStruct.sufferOperValue;
+                        data_Temp[10] = Temp_LogicStackStruct.sufferOperValue>>8;
+                        data_Temp[11] = Temp_LogicStackStruct.sufferOperValue>>16;
+                        data_Temp[12] = Temp_LogicStackStruct.sufferOperValue>>24;
+                        data_Temp[13] = Temp_LogicStackStruct.stackNum;
+                        data_Temp[14] = Temp_LogicStackStruct.operMode;
+                        data_Temp[15] = Temp_LogicStackStruct.sufferOperType;
+                        g_InsertProOrder(data_Temp);
                     }
-                    else if(ui->chboxVariableVarOp->isChecked())
-                    {//操作数类型-变量
-                        Temp_LogicAxisStruct.sufferOperType = ui->coboxVarSelectPostOp->currentIndex()+1;
+                    else if(ui->chboxRealProdNumPreOp->isChecked())
+                    {//实际产量
+                        data_Temp[5] = C_LOGIC_PRODUCT;
+                        Temp_LogicCurProductNumStruct.productNum = 1;//实际产量号
+                        if(ui->chboxConstantVarOp->isChecked())
+                        {//操作数类型-常量
+                            Temp_LogicCurProductNumStruct.sufferOperType = 0;
+                            Temp_LogicCurProductNumStruct.sufferOperValue = ui->editConstantVarPostOp->text().toInt();
+                        }
+                        else if(ui->chboxVariableVarOp->isChecked())
+                        {//操作数类型-变量
+                            Temp_LogicCurProductNumStruct.sufferOperType = ui->coboxVarSelectPostOp->currentIndex()+1;
+                        }
+                        data_Temp[9] = Temp_LogicCurProductNumStruct.sufferOperValue;
+                        data_Temp[10] = Temp_LogicCurProductNumStruct.sufferOperValue>>8;
+                        data_Temp[11] = Temp_LogicCurProductNumStruct.sufferOperValue>>16;
+                        data_Temp[12] = Temp_LogicCurProductNumStruct.sufferOperValue>>24;
+                        data_Temp[13] = Temp_LogicCurProductNumStruct.productNum;
+                        data_Temp[14] = Temp_LogicCurProductNumStruct.operMode;
+                        data_Temp[15] = Temp_LogicCurProductNumStruct.sufferOperType;
+                        g_InsertProOrder(data_Temp);
                     }
-                    data_Temp[9] = Temp_LogicAxisStruct.sufferOperValue;
-                    data_Temp[10] = Temp_LogicAxisStruct.sufferOperValue>>8;
-                    data_Temp[11] = Temp_LogicAxisStruct.sufferOperValue>>16;
-                    data_Temp[12] = Temp_LogicAxisStruct.sufferOperValue>>24;
-                    data_Temp[13] = Temp_LogicAxisStruct.axisNum;
-                    data_Temp[14] = Temp_LogicAxisStruct.operMode;
-                    data_Temp[15] = Temp_LogicAxisStruct.sufferOperType;
-                    g_InsertProOrder(data_Temp);
+                    Teach_File_List_Refresh();//刷新程序列表
                 }
-                else if(ui->chboxStackSelectVarPreOp->isChecked())
-                {//选择堆叠
-                    data_Temp[5] = C_LOGIC_STACK;
-                    Temp_LogicStackStruct.stackNum = ui->coboxStackSelectVarPreOp->currentIndex()+1;//堆叠组号，1-8
-                    if(ui->chboxConstantVarOp->isChecked())
-                    {//操作数类型-常量
-                        Temp_LogicStackStruct.sufferOperType = 0;
-                        Temp_LogicStackStruct.sufferOperValue = ui->editConstantVarPostOp->text().toDouble();
+                else if(ui->tabWidget_logic->currentWidget() == ui->tab_timer){//逻辑&变量指令-定时器界面
+                    data_Temp[0] = m_OperateProNum;  //程序编号
+                    data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
+                    data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
+                    data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
+                    data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
+                    data_Temp[6] = 0;
+                    data_Temp[5] = C_LOGIC_TIME;
+                    Temp_LogicTimeStruct.timeNum = ui->coboxTimerSelect->currentIndex()+1;
+                    if(ui->chboxTimerStart->isChecked())
+                    {//定时开始
+                        Temp_LogicTimeStruct.operMode = 0;
+                        data_Temp[9] = Temp_LogicTimeStruct.timeNum;
+                        data_Temp[10] = Temp_LogicTimeStruct.operMode;
+                        g_InsertProOrder(data_Temp);
                     }
-                    else if(ui->chboxStackCntVarOp->isChecked())
-                    {//操作数类型-堆叠计数
-                        Temp_LogicStackStruct.sufferOperType = ui->coboxStackVarPostOp->currentIndex()+1;//堆叠计数1-20
+                    else if(ui->chboxTimerStop->isChecked())
+                    {//定时结束
+                        Temp_LogicTimeStruct.operMode = 1;
+                        data_Temp[9] = Temp_LogicTimeStruct.timeNum;
+                        data_Temp[10] = Temp_LogicTimeStruct.operMode;
+                        g_InsertProOrder(data_Temp);
                     }
-                    data_Temp[9] = Temp_LogicStackStruct.sufferOperValue;
-                    data_Temp[10] = Temp_LogicStackStruct.sufferOperValue>>8;
-                    data_Temp[11] = Temp_LogicStackStruct.sufferOperValue>>16;
-                    data_Temp[12] = Temp_LogicStackStruct.sufferOperValue>>24;
-                    data_Temp[13] = Temp_LogicStackStruct.stackNum;
-                    data_Temp[14] = Temp_LogicStackStruct.operMode;
-                    data_Temp[15] = Temp_LogicStackStruct.sufferOperType;
-                    g_InsertProOrder(data_Temp);
+                    else if(ui->chboxTimerClear->isChecked())
+                    {//定时清零
+                        Temp_LogicTimeStruct.operMode = 2;
+                        data_Temp[9] = Temp_LogicTimeStruct.timeNum;
+                        data_Temp[10] = Temp_LogicTimeStruct.operMode;
+                        g_InsertProOrder(data_Temp);
+                    }
+                    Teach_File_List_Refresh();//刷新程序列表
                 }
-                else if(ui->chboxRealProdNumPreOp->isChecked())
-                {//实际产量
-                    data_Temp[5] = C_LOGIC_PRODUCT;
-                    Temp_LogicCurProductNumStruct.productNum = 1;//实际产量号
-                    if(ui->chboxConstantVarOp->isChecked())
-                    {//操作数类型-常量
-                        Temp_LogicCurProductNumStruct.sufferOperType = 0;
-                        Temp_LogicCurProductNumStruct.sufferOperValue = ui->editConstantVarPostOp->text().toInt();
-                    }
-                    else if(ui->chboxVariableVarOp->isChecked())
-                    {//操作数类型-变量
-                        Temp_LogicCurProductNumStruct.sufferOperType = ui->coboxVarSelectPostOp->currentIndex()+1;
-                    }
-                    data_Temp[9] = Temp_LogicCurProductNumStruct.sufferOperValue;
-                    data_Temp[10] = Temp_LogicCurProductNumStruct.sufferOperValue>>8;
-                    data_Temp[11] = Temp_LogicCurProductNumStruct.sufferOperValue>>16;
-                    data_Temp[12] = Temp_LogicCurProductNumStruct.sufferOperValue>>24;
-                    data_Temp[13] = Temp_LogicCurProductNumStruct.productNum;
-                    data_Temp[14] = Temp_LogicCurProductNumStruct.operMode;
-                    data_Temp[15] = Temp_LogicCurProductNumStruct.sufferOperType;
-                    g_InsertProOrder(data_Temp);
-                }
-                Teach_File_List_Refresh();//刷新程序列表
             }
-            else if(ui->tabWidget_logic->currentWidget() == ui->tab_timer){//逻辑&变量指令-定时器界面
+            else if(ui->stackedWidget_Senior->currentWidget() == ui->label_page)
+            {//标签界面
                 data_Temp[0] = m_OperateProNum;  //程序编号
                 data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
                 data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
                 data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
                 data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
                 data_Temp[6] = 0;
-                data_Temp[5] = C_LOGIC_TIME;
-                Temp_LogicTimeStruct.timeNum = ui->coboxTimerSelect->currentIndex()+1;
-                if(ui->chboxTimerStart->isChecked())
-                {//定时开始
-                    Temp_LogicTimeStruct.operMode = 0;
-                    data_Temp[9] = Temp_LogicTimeStruct.timeNum;
-                    data_Temp[10] = Temp_LogicTimeStruct.operMode;
-                    g_InsertProOrder(data_Temp);
+                data_Temp[5] = C_LABEL;
+                if(ui->chboxComment->isChecked())
+                {
+                    uint16_t LableIndex = getLabelOrderIndex();
+                    if(LableIndex>0)
+                    {
+                        QString chboxCommentName = "";//标签插入复选框
+                        QString Lable_Name = "";//插入标签名称
+                        if(m_OperateProNum == 0)
+                        {
+                            chboxCommentName = "标签"+QString::number(LableIndex);
+                            ui->chboxComment->setText(chboxCommentName);
+                        }
+                        else
+                        {
+                            chboxCommentName = "子"+QString::number(m_OperateProNum)+"标签"+QString::number(LableIndex);
+                            ui->chboxComment->setText(chboxCommentName);
+                        }
+                        Lable_Name = chboxCommentName+" "+ui->txt_label->text();
+                        CurrentLableNameList.append(QString(Lable_Name));
+
+                        QListWidgetItem *item = new QListWidgetItem();
+                        QCheckBox *checkbox = new QCheckBox();
+                        checkbox->setChecked(false);
+                        checkbox->setAutoExclusive(true);//check为互斥
+                        checkbox->setText(Lable_Name);
+                        checkbox->setFixedSize(ui->listWgtJumpto->width(),37);
+                        ui->listWgtJumpto->addItem(item);
+                        ui->listWgtJumpto->setItemWidget(item,checkbox);
+
+                        connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
+                                        onCheckBoxToggled(checkbox, checked);
+                                    });
+
+                        data_Temp[9] = LableIndex;
+                        data_Temp[10] = LableIndex>>8;
+                        data_Temp[11] = 0;//插入一个新标签
+                        g_InsertProOrder(data_Temp);
+                    }
                 }
-                else if(ui->chboxTimerStop->isChecked())
-                {//定时结束
-                    Temp_LogicTimeStruct.operMode = 1;
-                    data_Temp[9] = Temp_LogicTimeStruct.timeNum;
-                    data_Temp[10] = Temp_LogicTimeStruct.operMode;
-                    g_InsertProOrder(data_Temp);
-                }
-                else if(ui->chboxTimerClear->isChecked())
-                {//定时清零
-                    Temp_LogicTimeStruct.operMode = 2;
-                    data_Temp[9] = Temp_LogicTimeStruct.timeNum;
-                    data_Temp[10] = Temp_LogicTimeStruct.operMode;
+                else if(listWgtJumptoLabelIndex > 0)
+                {
+                    data_Temp[9] = listWgtJumptoLabelIndex;
+                    data_Temp[10] = listWgtJumptoLabelIndex>>8;
+                    data_Temp[11] = 1;//插入一个跳转标签指令
                     g_InsertProOrder(data_Temp);
                 }
                 Teach_File_List_Refresh();//刷新程序列表
             }
         }
-        else if(ui->stackedWidget_Senior->currentWidget() == ui->label_page)
-        {//标签界面
-            data_Temp[0] = m_OperateProNum;  //程序编号
-            data_Temp[1] = m_OperateProOrder[m_CurrentSelectProOrderList].list;
-            data_Temp[2] = m_OperateProOrder[m_CurrentSelectProOrderList].list>>8;
-            data_Temp[3] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum;
-            data_Temp[4] = m_OperateProOrder[m_CurrentSelectProOrderList].runOrderNum>>8;
-            data_Temp[6] = 0;
-            data_Temp[5] = C_LABEL;
-            if(ui->chboxComment->isChecked())
-            {
-                uint16_t LableIndex = getLabelOrderIndex();
-                if(LableIndex>0)
-                {
-                    QString chboxCommentName = "";//标签插入复选框
-                    QString Lable_Name = "";//插入标签名称
-                    if(m_OperateProNum == 0)
-                    {
-                        chboxCommentName = "标签"+QString::number(LableIndex);
-                        ui->chboxComment->setText(chboxCommentName);
-                    }
-                    else
-                    {
-                        chboxCommentName = "子"+QString::number(m_OperateProNum)+"标签"+QString::number(LableIndex);
-                        ui->chboxComment->setText(chboxCommentName);
-                    }
-                    Lable_Name = chboxCommentName+" "+ui->txt_label->text();
-                    CurrentLableNameList.append(QString(Lable_Name));
-
-                    QListWidgetItem *item = new QListWidgetItem();
-                    QCheckBox *checkbox = new QCheckBox();
-                    checkbox->setChecked(false);
-                    checkbox->setAutoExclusive(true);//check为互斥
-                    checkbox->setText(Lable_Name);
-                    checkbox->setFixedSize(ui->listWgtJumpto->width(),37);
-                    ui->listWgtJumpto->addItem(item);
-                    ui->listWgtJumpto->setItemWidget(item,checkbox);
-
-                    connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
-                                    onCheckBoxToggled(checkbox, checked);
-                                });
-
-                    data_Temp[9] = LableIndex;
-                    data_Temp[10] = LableIndex>>8;
-                    data_Temp[11] = 0;//插入一个新标签
-                    g_InsertProOrder(data_Temp);
-                }
-            }
-            else if(listWgtJumptoLabelIndex > 0)
-            {
-                data_Temp[9] = listWgtJumptoLabelIndex;
-                data_Temp[10] = listWgtJumptoLabelIndex>>8;
-                data_Temp[11] = 1;//插入一个跳转标签指令
-                g_InsertProOrder(data_Temp);
-            }
-            Teach_File_List_Refresh();//刷新程序列表
-        }
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,0);
+        Teach_timer->start();
     }
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,0);
-    Teach_timer->start();
+    else
+    {
+        m_CurrentSelectProOrderList =0;
+        ui->tableWgtTeach->selectRow(m_CurrentSelectProOrderList);
+    }
+
 }
 //主界面切换指令提示保存处理
 void Teach::widgetSwitchOrderSaveHandel(bool SaveFlag)
@@ -6341,5 +6350,6 @@ void Teach::on_coboxSearchAxisSelect_currentIndexChanged(int index)
 void Teach::SwitchPageInit()
 {
     ui->tabWidget_Teach->setCurrentWidget(ui->tabUniversal);
+    ui->stackedWidget_General->setCurrentWidget(ui->General_main_page);//切换到通用主界面
     ui->btnModify->setChecked(false);//切换界面时关闭编辑状态
 }

@@ -259,7 +259,10 @@ AutoForm::AutoForm(QWidget *parent) :
         if (index == 0)
         {
             clearDialog->setMode(ClearDialog::AutoState);
-            clearDialog->exec();
+            if(clearDialog->exec() == QDialog::Accepted)
+            {
+
+            }
         }
         if (index == 1)
         {
@@ -309,6 +312,7 @@ AutoForm::AutoForm(QWidget *parent) :
         Auto_File_List_Refresh(index);//刷新自动界面列表
     });
     connect(ui->AutoEditSavebtn, &QPushButton::clicked,this,&AutoForm::OrderEditSaveHandel);//指令编辑保存
+
 }
 
 AutoForm::~AutoForm()
@@ -1418,4 +1422,3 @@ void AutoForm::on_AutoEditchboxIfCondition2_clicked(bool checked)
         AutoFromIfOrderEditHandle(1);//条件1复选框选中
     }
 }
-

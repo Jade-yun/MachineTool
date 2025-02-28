@@ -1211,6 +1211,10 @@ border: 1px solid black;
      <property name="text">
       <string/>
      </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/alarm_red.png</normaloff>:/images/alarm_red.png</iconset>
+     </property>
      <property name="iconSize">
       <size>
        <width>0</width>

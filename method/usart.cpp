@@ -1333,7 +1333,7 @@ void Usart::ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataB
             index = 0;
             m_RobotRunSta = (uint8_t)recDataBuf[index];//机器状态
             index = 1;
-            m_AlarmNum = (uint16_t)recDataBuf[index] + ((uint16_t)recDataBuf[index+1]<<8);//报警编号
+            m_AlarmNum = (uint16_t)recDataBuf[index] | ((uint16_t)recDataBuf[index+1]<<8);//报警编号
             index = 3;
             m_RobotResetState = (uint8_t)recDataBuf[index];//复位状态
             index = 4;
