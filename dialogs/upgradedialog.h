@@ -100,6 +100,7 @@ signals:
     void UpProgressRefreshSignal();//更新进度信号
     void ImplementFinishSignal();//操作执行完成信号
     void Upgrade_Main_State_signal(uint8_t state);//主控板升级状态信号
+    void Upgrade_Main_Progress_RefreshSignal();//主控版升级进度刷新信号
 };
 
 #endif // UPGRADEDIALOG_H

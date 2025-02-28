@@ -6353,3 +6353,5 @@ void Teach::SwitchPageInit()
     ui->stackedWidget_General->setCurrentWidget(ui->General_main_page);//切换到通用主界面
     ui->btnModify->setChecked(false);//切换界面时关闭编辑状态
 }
+
+//文件操作权限

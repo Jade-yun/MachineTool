@@ -4163,6 +4163,13 @@ void Setting::UpgradeHandle(int click_type)
             this->update();
             QCoreApplication::processEvents();
         });
+        connect(UpgradeDialog,&upgradedialog::Upgrade_Main_Progress_RefreshSignal,this,[=](){
+            QTimer *ProgressTime = new QTimer();
+            ProgressTime->start(100);
+            connect(ProgressTime,&QTimer::timeout,this,[=](){
+                ui->Progress_bar->setValue((static_cast<double>(M_MainUpdate.Current_Upgrade_Rate)/static_cast<double>(M_MainUpdate.Upgrade_all_Rate))*100.0);
+            });
+        });
     }
     else
     {

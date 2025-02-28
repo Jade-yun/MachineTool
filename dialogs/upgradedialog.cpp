@@ -626,6 +626,7 @@ void upgradedialog::on_ok_button_clicked()
 //                    connect(UpdataThread_main,&QThread::started,this,&upgradedialog::Updata_mian);
                     this->hide();
                     emit updataWidgetShowSignal();
+                    emit Upgrade_Main_Progress_RefreshSignal();
 //                    UpdataThread_main->start();
                 } else {
                     // 文件名不符合所需格式
