@@ -18,15 +18,13 @@ private:
     AeaQt::Keyboard* keyboard;
     QObject* editObj;
 #if USE_INSTANCE
-    static FullKeyboard* _instance;
-    static QMutex mutex;
 protected:
     void showEvent(QShowEvent *event) override{
         BaseWindow::showEvent(event);
         textInput->setFocus();
     }
 public:
-    static FullKeyboard* instance(QWidget* parent = nullptr);
+    static FullKeyboard* instance();
 private:
 //    FullKeyboard(QWidget* parent = nullptr);
 #else

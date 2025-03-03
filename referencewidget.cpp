@@ -55,7 +55,7 @@ ReferenceWidget::ReferenceWidget(QWidget *parent)
 
             if (it != referencePoints.end())
             {
-//                static FullKeyboard keyboard(this);
+                auto keyboard = FullKeyboard::instance();
 
 //                keyboard.setText(it->name);
 //                keyboard.setCurrentEditObj(textReferPointName);
@@ -63,11 +63,11 @@ ReferenceWidget::ReferenceWidget(QWidget *parent)
 
 //                QString text = keyboard.getInputText();
 
-                static FullKeyboard* keyboard = nullptr;
-                if (!keyboard)
-                {
-                    keyboard = new FullKeyboard(this);
-                }
+//                static FullKeyboard* keyboard = nullptr;
+//                if (!keyboard)
+//                {
+//                    keyboard = new FullKeyboard(this);
+//                }
 
                 keyboard->setText(it->name);
                 keyboard->setCurrentEditObj(textReferPointName);

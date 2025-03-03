@@ -318,7 +318,7 @@ void MainWindow::MainWindow_SetControl_Stake(bool state)
     ui->Btn_ManualHome->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
 
     ui->btnAdmin->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
-    ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
+//    ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
     ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
     ui->btnHelp->setAttribute(Qt::WA_TransparentForMouseEvents, !state);
 }
@@ -440,7 +440,7 @@ void MainWindow::slotShowSubWindow()
     timer.restart();
 
 
-    FullKeyboard::instance(this)->hide();
+//    FullKeyboard::instance(this)->hide();
     qDebug() << "FullKeyboard：" << timer.elapsed() << "毫秒";
     timer.restart();
     qDebug() << "APP启动耗时：" << timer1.elapsed() << "毫秒";

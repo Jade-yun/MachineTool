@@ -8,6 +8,8 @@ MonitorForm::MonitorForm(QWidget* parent) :
 {
 	ui->setupUi(this);
 
+    initVariable();
+
 	ui->stackedWidget_main->setCurrentIndex(0);
 
     ui->left_tabWidget->setCurrentIndex(0);
@@ -32,7 +34,7 @@ MonitorForm::MonitorForm(QWidget* parent) :
     InitAllLedName();//设置所有led灯的名称
     SetHandControlName();
     RefreshLedTime = new QTimer;
-    RefreshLedTime->setInterval(100);//100毫秒刷新一次
+    RefreshLedTime->setInterval(200);//100毫秒刷新一次
     connect(RefreshLedTime,&QTimer::timeout,this,&MonitorForm::RefreshLedState);
     RefreshLedTime->start();
 }
@@ -980,17 +982,94 @@ void MonitorForm::setLedName(QLabel* label, uint8_t port,uint8_t type)
     }
 }
 
-//void MonitorForm::setLEDColor(QLabel* label, bool isOn)
-//{
-//    if (isOn)
-//    {
-//        label->setStyleSheet("QLabel { background-color : green; }");
-//    }
-//    else
-//    {
-//        label->setStyleSheet("QLabel { background-color : gray; }");
-//    }
-//}
+void MonitorForm::initVariable()
+{
+    labsInputPort = {{
+        {
+            ui->x1, ui->x2, ui->x3, ui->x4, ui->x5, ui->x6, ui->x7, ui->x8,
+            ui->x9, ui->x10, ui->x11, ui->x12, ui->x13, ui->x14, ui->x15, ui->x16,
+            ui->x17, ui->x18, ui->x19, ui->x20, ui->x21, ui->x22, ui->x23, ui->x24,
+            ui->x25, ui->x26, ui->x27, ui->x28, ui->x29, ui->x30, ui->x31, ui->x32,
+            ui->x33, ui->x34, ui->x35, ui->x36,
+            ui->ex1, ui->ex2, ui->ex3, ui->ex4, ui->ex5, ui->ex6, ui->ex7, ui->ex8,
+            ui->ex9, ui->ex10, ui->ex11, ui->ex12, ui->ex13, ui->ex14, ui->ex15, ui->ex16,
+            ui->ex17, ui->ex18, ui->ex19, ui->ex20, ui->ex21, ui->ex22, ui->ex23, ui->ex24
+        },
+        {
+            ui->x1_2, ui->x2_2, ui->x3_2, ui->x4_2, ui->x5_2, ui->x6_2, ui->x7_2, ui->x8_2,
+            ui->x9_2, ui->x10_2, ui->x11_2, ui->x12_2, ui->x13_2, ui->x14_2, ui->x15_2, ui->x16_2,
+            ui->x17_2, ui->x18_2, ui->x19_2, ui->x20_2, ui->x21_2, ui->x22_2, ui->x23_2, ui->x24_2,
+            ui->x25_2, ui->x26_2, ui->x27_2, ui->x28_2, ui->x29_2, ui->x30_2, ui->x31_2, ui->x32_2,
+            ui->x33_2, ui->x34_2, ui->x35_2, ui->x36_2,
+            ui->ex1_2, ui->ex2_2, ui->ex3_2, ui->ex4_2, ui->ex5_2, ui->ex6_2, ui->ex7_2, ui->ex8_2,
+            ui->ex9_2, ui->ex10_2, ui->ex11_2, ui->ex12_2, ui->ex13_2, ui->ex14_2, ui->ex15_2, ui->ex16_2,
+            ui->ex17_2, ui->ex18_2, ui->ex19_2, ui->ex20_2, ui->ex21_2, ui->ex22_2, ui->ex23_2, ui->ex24_2
+        },
+        {
+            ui->x1_3, ui->x2_3, ui->x3_3, ui->x4_3, ui->x5_3, ui->x6_3, ui->x7_3, ui->x8_3,
+            ui->x9_3, ui->x10_3, ui->x11_3, ui->x12_3, ui->x13_3, ui->x14_3, ui->x15_3, ui->x16_3,
+            ui->x17_3, ui->x18_3, ui->x19_3, ui->x20_3, ui->x21_3, ui->x22_3, ui->x23_3, ui->x24_3,
+            ui->x25_3, ui->x26_3, ui->x27_3, ui->x28_3, ui->x29_3, ui->x30_3, ui->x31_3, ui->x32_3,
+            ui->x33_3, ui->x34_3, ui->x35_3, ui->x36_3,
+            ui->ex1_3, ui->ex2_3, ui->ex3_3, ui->ex4_3, ui->ex5_3, ui->ex6_3, ui->ex7_3, ui->ex8_3,
+            ui->ex9_3, ui->ex10_3, ui->ex11_3, ui->ex12_3, ui->ex13_3, ui->ex14_3, ui->ex15_3, ui->ex16_3,
+            ui->ex17_3, ui->ex18_3, ui->ex19_3, ui->ex20_3, ui->ex21_3, ui->ex22_3, ui->ex23_3, ui->ex24_3
+        }
+    }};
+
+    labsOutputPort = {{
+        {
+            ui->Y1, ui->Y2, ui->Y3, ui->Y4, ui->Y5, ui->Y6, ui->Y7, ui->Y8,
+            ui->Y9, ui->Y10, ui->Y11, ui->Y12, ui->Y13, ui->Y14, ui->Y15, ui->Y16,
+            ui->Y17, ui->Y18, ui->Y19, ui->Y20, ui->Y21, ui->Y22, ui->Y23, ui->Y24,
+            ui->EY1, ui->EY2, ui->EY3, ui->EY4, ui->EY5, ui->EY6, ui->EY7, ui->EY8,
+            ui->EY9, ui->EY10, ui->EY11, ui->EY12, ui->EY13, ui->EY14, ui->EY15, ui->EY16,
+            ui->EY17, ui->EY18, ui->EY19, ui->EY20
+        },
+        {
+            ui->Y1_2, ui->Y2_2, ui->Y3_2, ui->Y4_2, ui->Y5_2, ui->Y6_2, ui->Y7_2, ui->Y8_2,
+            ui->Y9_2, ui->Y10_2, ui->Y11_2, ui->Y12_2, ui->Y13_2, ui->Y14_2, ui->Y15_2, ui->Y16_2,
+            ui->Y17_2, ui->Y18_2, ui->Y19_2, ui->Y20_2, ui->Y21_2, ui->Y22_2, ui->Y23_2, ui->Y24_2,
+            ui->EY1_2, ui->EY2_2, ui->EY3_2, ui->EY4_2, ui->EY5_2, ui->EY6_2, ui->EY7_2, ui->EY8_2,
+            ui->EY9_2, ui->EY10_2, ui->EY11_2, ui->EY12_2, ui->EY13_2, ui->EY14_2, ui->EY15_2, ui->EY16_2,
+            ui->EY17_2, ui->EY18_2, ui->EY19_2, ui->EY20_2
+        },
+        {
+            ui->Y1_3, ui->Y2_3, ui->Y3_3, ui->Y4_3, ui->Y5_3, ui->Y6_3, ui->Y7_3, ui->Y8_3,
+            ui->Y9_3, ui->Y10_3, ui->Y11_3, ui->Y12_3, ui->Y13_3, ui->Y14_3, ui->Y15_3, ui->Y16_3,
+            ui->Y17_3, ui->Y18_3, ui->Y19_3, ui->Y20_3, ui->Y21_3, ui->Y22_3, ui->Y23_3, ui->Y24_3,
+            ui->EY1_3, ui->EY2_3, ui->EY3_3, ui->EY4_3, ui->EY5_3, ui->EY6_3, ui->EY7_3, ui->EY8_3,
+            ui->EY9_3, ui->EY10_3, ui->EY11_3, ui->EY12_3, ui->EY13_3, ui->EY14_3, ui->EY15_3, ui->EY16_3,
+            ui->EY17_3, ui->EY18_3, ui->EY19_3, ui->EY20_3
+        }
+    }};
+
+}
+
+void MonitorForm::refeshPortLableName()
+{
+    for (int i = 0; i < INPUT_TOTAL_NUM; i++)
+    {
+        const auto& port = m_Port_X[i];
+
+        QString portName = port.functionSet ? port.modifyName : port.ResModifyName;
+        for (int j = 0; j < 3; j++)
+        {
+            labsInputPort.at(j).at(i)->setText(portName);
+        }
+    }
+    for (int i = 0; i < OUTPUT_TOTAL_NUM; i++)
+    {
+        const auto& port = m_Port_Y[i];
+
+        QString portName = port.functionSet ? port.modifyName : port.ResModifyName;
+
+        for (size_t j = 0; j < labsOutputPort.size(); j++)
+        {
+            labsOutputPort.at(j).at(i)->setText(portName);
+        }
+    }
+}
 
 /*************************************************************************
 **  函数名：  SetHandControlName()
@@ -1082,6 +1161,23 @@ void MonitorForm::showSignalLEDStatus(uint8_t status)
             setLED(labLED[i], color, 30);
         }
 
+}
+
+void MonitorForm::showEvent(QShowEvent *event)
+{
+    RefreshLedTime->start();
+
+    refeshPortLableName();
+
+    QWidget::showEvent(event);
+}
+
+void MonitorForm::hideEvent(QHideEvent *event)
+{
+    if (RefreshLedTime->isActive())
+        RefreshLedTime->stop();
+
+    QWidget::hideEvent(event);
 }
 
 void MonitorForm::InitAllLedName()

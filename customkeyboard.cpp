@@ -19,21 +19,12 @@
 //                            ";
 
 #if USE_INSTANCE
-FullKeyboard* FullKeyboard::instance(QWidget* parent)
+FullKeyboard* FullKeyboard::instance()
 {
-    if (_instance == nullptr)
-    {
-        QMutexLocker locker(&mutex);
-        if (_instance == nullptr)
-            _instance = new FullKeyboard(parent);
-    }
-    return _instance;
+    static FullKeyboard _instance;
+    return &_instance;
 
 }
-FullKeyboard* FullKeyboard::_instance = nullptr;
-QMutex FullKeyboard::mutex;
-
-#else
 
 #endif
 

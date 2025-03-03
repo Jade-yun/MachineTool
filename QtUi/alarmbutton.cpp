@@ -45,8 +45,8 @@ void AlarmButton::stopAlarm() {
         alarmActive = false;
         iconLabel->setPixmap(alarmPixmap);
 
-        this->setAttribute(Qt::WA_TransparentForMouseEvents, true);
     }
+    this->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 }
 
 void AlarmButton::toggleAlarmIcon() {

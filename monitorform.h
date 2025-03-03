@@ -26,7 +26,11 @@ private:
     void setLedName(QLabel* label, uint8_t port,uint8_t type);
     QTimer *RefreshLedTime = nullptr;
 
-//    void setLEDColor(QLabel* label, bool isOn);
+    void initVariable();
+    void refeshPortLableName();
+private:
+    std::array<std::vector<QLabel*>, 3> labsInputPort;
+    std::array<std::vector<QLabel*>, 3> labsOutputPort;
 
 private slots:
     void on_btn1_cut_clicked();
@@ -48,6 +52,10 @@ public slots:
     void SetHandControlName();
 
     void showSignalLEDStatus(uint8_t status);
+
+protected:
+    void showEvent(QShowEvent *event) override;
+    void hideEvent(QHideEvent *event) override;
 };
 
 #endif // MONITORFORM_H
