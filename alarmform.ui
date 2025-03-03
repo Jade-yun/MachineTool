@@ -70,9 +70,6 @@
        <height>471</height>
       </rect>
      </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
      <property name="lineWidth">
       <number>1</number>
      </property>
@@ -104,7 +101,7 @@
       <number>0</number>
      </property>
      <property name="columnCount">
-      <number>3</number>
+      <number>0</number>
      </property>
      <attribute name="horizontalHeaderVisible">
       <bool>false</bool>
@@ -148,21 +145,6 @@
      <attribute name="verticalHeaderStretchLastSection">
       <bool>false</bool>
      </attribute>
-     <column>
-      <property name="text">
-       <string>报警编号</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>报警内容</string>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>报警时间</string>
-      </property>
-     </column>
     </widget>
     <widget class="QPushButton" name="btnDelete_25">
      <property name="geometry">

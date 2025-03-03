@@ -363,6 +363,7 @@ void MainWindow::onCheckPara()
         {
 //            ui->btnAlarm->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             ui->btnAlarm->stopAlarm();
+            alarmBar->hide();
         }
     }
 

@@ -421,7 +421,7 @@ Setting::Setting(QWidget *parent) :
                 25, 26, 27, 28, 29, 30
             };
             int portNum = originTypeInputPortMaping[i];
-            m_Port_X[portNum - 1].functionSet = index ? 1 : 0;
+            m_Port_X[portNum].functionSet = index ? 1 : 0;
         });
     }
 

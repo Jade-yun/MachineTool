@@ -31,12 +31,12 @@ struct AxisParaInputPortGroup {
 
 // 各个轴 正限位 负限位 原点类型 对应的数组索引
 constexpr AxisParaInputPortGroup axisParaPortMaping[AXIS_TOTAL_NUM] = {
-    {13, 19, 24},
-    {14, 20, 25},
-    {15, 21, 26},
-    {16, 22, 27},
-    {17, 23, 28},
-    {18, 24, 29}
+    {13, 19, 25},
+    {14, 20, 26},
+    {15, 21, 27},
+    {16, 22, 28},
+    {17, 23, 29},
+    {18, 24, 30}
 };
 
 
@@ -45,7 +45,6 @@ uint8_t outputTypeIndex[OUT_PORT_TYPE_NUM]={0};                    //输出类�
 uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置
 uint8_t outputRelevancyIndex[OUT_PORT_RELEVANCY_NUM][2]={0};                //预留关联
 uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM]={0};                    //预留出类型
-uint8_t seniorFuncIndex[SENIOR_NUM]={0};                    //预留出类型
 
 /*************************************************************************
 **  函数名：  readSigSetPara()

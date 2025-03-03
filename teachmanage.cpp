@@ -230,22 +230,10 @@ void TeachManage::on_btn_Preview_clicked()
 
 void TeachManage::on_btn_Del_clicked()
 {
-    ErrorTipDialog tip(tr("确认删除文件？"));
-    if (tip.exec() == QDialog::Accepted)
-    {
-//    deleteOneRowFromTable(ui->tableTeachManage);
+    int curRow = ui->tableTeachManage->currentRow();
+    if (curRow < 0) return;
 
-        int curRow = ui->tableTeachManage->currentRow();
-        if(curRow<0)
-        {
-            ErrorTipDialog tip(tr("请选择一个要删除的程序！"), TipMode::ONLY_OK);
-            tip.exec();
-            return;
-        }
-        QString programName = ui->tableTeachManage->item(curRow, 2)->text();
-        // juge whether the program can been deleted
-        // to do...
-//        if ()
+    QString programName = ui->tableTeachManage->item(curRow, 2)->text();
 
     int selectedProgramIndex = -1;
     for(int i = 0; i < m_ProgramNameAndPath.count(); i++)

@@ -16,8 +16,6 @@ AlarmForm::AlarmForm(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    loadAlarmQueueFromConfig();
-
     setupAlarmInfo();
     setupMaintainInfo();
 
@@ -102,7 +100,12 @@ void AlarmForm::loadAlarmQueueFromConfig()
 
 void AlarmForm::setupAlarmInfo()
 {
+    loadAlarmQueueFromConfig();
+
     // style set, which is supposed to encapsulate
+    ui->tableAlarmInfo->setColumnCount(3);
+    ui->tableAlarmInfo->setRowCount(alarmInfoQueue.size());
+
     ui->tableAlarmInfo->horizontalHeader()->setVisible(true);
     ui->tableAlarmInfo->verticalHeader()->setVisible(true);
     ui->tableAlarmInfo->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -112,7 +115,7 @@ void AlarmForm::setupAlarmInfo()
     ui->tableAlarmInfo->setColumnWidth(2, 300); // 第三列固定宽度
     ui->tableAlarmInfo->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 
-    ui->tableAlarmInfo->setRowCount(alarmInfoQueue.size());
+    ui->tableAlarmInfo->setHorizontalHeaderLabels({tr("报警编号"), tr("报警内容"), tr("报警时间")});
 
     if (!alarmInfoQueue.isEmpty())
     {
@@ -152,6 +155,7 @@ void AlarmForm::setupAlarmInfo()
     });
 
     connect(ui->btnClearAlarm, &QPushButton::clicked, [=](){
+        if (alarmInfoQueue.isEmpty()) return ;
 
         ErrorTipDialog tip(tr("确定清除报警？"), nullptr);
         int reply = tip.exec();
