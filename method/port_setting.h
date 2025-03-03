@@ -50,14 +50,15 @@
 #define OTHER_ALARM_SOUND                        14               //其他——报警声（输出）
 
 
-//extern uint8_t outputTypeIndex[OUT_PORT_TYPE_NUM];                    //输出类型对应的下标集合
-//extern uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4];                //互锁设置
-//extern uint8_t outputRelevancyIndex[OUT_PORT_RELEVANCY_NUM][2];                //预留关联
-//extern uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM];                    //预留出类型
-//extern uint8_t seniorFuncIndex[SENIOR_NUM];                    //高级功能
+extern uint8_t outputTypeIndex[OUT_PORT_TYPE_NUM];                    //输出类型对应的下标集合
+extern uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4];                //互锁设置
+extern uint8_t outputRelevancyIndex[OUT_PORT_RELEVANCY_NUM][2];                //预留关联
+extern uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM];                    //预留出类型
+extern uint8_t seniorFuncIndex[SENIOR_NUM];                    //高级功能
 
 void updateInterLockPortFlag();
 void updateAdvancedFuncPortFlag();
+void updateAxidParameterPortFlag();
 
 extern void readSigSetPara();
 

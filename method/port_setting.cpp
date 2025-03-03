@@ -1,13 +1,13 @@
 #include "port_setting.h"
 
 struct InterLockGroup {
-    int forwardValuePort;       // 正向操作端口号（如阀门开启）
-    int reverseValuePort;       // 反向操作端口号（如阀门关闭）
-    int forwardDetectPort;      // 正向检测端口号
-    int reverseDetectPort;      // 反向检测端口号
+    int forwardValuePort;       // 正向操作端口（如阀门开启）
+    int reverseValuePort;       // 反向操作端口（如阀门关闭）
+    int forwardDetectPort;      // 正向检测端口
+    int reverseDetectPort;      // 反向检测端口
 };
 
-// 互锁设置每一组对应的端口号
+// 互锁设置每一组对应的端口
 constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
     {CLAW_METERIAL_1_CLAMP, CLAW_METERIAL_1_LOOSENED, 0, 1},        // 原料1
     {CLAW_PRODUCT_1_CLAMP, CLAW_PRODUCT_1_LOOSENED, 2, 3},          // 成品1
@@ -23,8 +23,29 @@ constexpr InterLockGroup interLockGroups[OUT_INTERLOCK_NUM] = {
     {-1, -1, -1, -1}                                                // 预留2
 };
 
+struct AxisParaInputPortGroup {
+    int axisLimitPostive;       // 正限位
+    int axisLimitNegtive;       // 负限位
+    int axisOriginType;         // 原点类型
+};
+
+// 各个轴 正限位 负限位 原点类型 对应的数组索引
+constexpr AxisParaInputPortGroup axisParaPortMaping[AXIS_TOTAL_NUM] = {
+    {13, 19, 24},
+    {14, 20, 25},
+    {15, 21, 26},
+    {16, 22, 27},
+    {17, 23, 28},
+    {18, 24, 29}
+};
+
+
 //若没有对应端口号的，则索引定为99
-//uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置,存储的实际端口号
+uint8_t outputTypeIndex[OUT_PORT_TYPE_NUM]={0};                    //输出类型对应的下标集合
+uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置
+uint8_t outputRelevancyIndex[OUT_PORT_RELEVANCY_NUM][2]={0};                //预留关联
+uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM]={0};                    //预留出类型
+uint8_t seniorFuncIndex[SENIOR_NUM]={0};                    //预留出类型
 
 /*************************************************************************
 **  函数名：  readSigSetPara()
@@ -53,49 +74,159 @@ void readSigSetPara()
     for(int i = 0;i < INPUT_TOTAL_NUM;i++)
     {
         m_Port_X[i].isReserve = !(i < INPUT_NUM);
-
-//        // 如果存的是0，则表示名称没有修改，为默认名称
-//        if (m_Port_X[i].modifyName == "0")
-//        {
-//            m_Port_X[i].modifyName = m_Port_X[i].defineName;
-//        }
-
-//        if (m_Port_X[i].modifyPort == "0")
-//        {
-//            m_Port_X[i].actualPortNum = m_Port_X[i].portNum;
-//        }
-
-//        if (m_Port_X[i].ResModifyName == "0")
-//        {
-//            m_Port_X[i].ResModifyName = m_Port_X[i].ResDefineName;
-//        }
     }
 
     //Y
     for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
     {
-
         m_Port_X[i].isReserve = !(i < OUTPUT_NUM);
-
-//        // 如果存的是0，则表示名称没有修改，为默认名称
-//        if (m_Port_Y[i].modifyName == "0")
-//        {
-//            m_Port_Y[i].modifyName = m_Port_Y[i].defineName;
-//        }
-
-//        if (m_Port_Y[i].modifyPort == "0")
-//        {
-//            m_Port_Y[i].actualPortNum = m_Port_Y[i].portNum;
-//        }
-
-//        if (m_Port_Y[i].ResModifyName == "0")
-//        {
-//            m_Port_Y[i].ResModifyName = m_Port_Y[i].ResDefineName;
-//        }
     }
 
-    updateAdvancedFuncPortFlag();
-    updateInterLockPortFlag();
+
+    uint8_t tempIndex=0;
+    //输出类型
+    auto tempList11=getIniValues(1,"OutPortType");
+    for(int i=0;i<OUT_PORT_TYPE_NUM;i++)
+    {
+        tempIndex=tempList11[i].toUInt();
+        if(tempIndex==0)
+        {
+            outputTypeIndex[i]=99;
+            m_OutPortType[i][0]=0;
+        }
+        else
+        {
+            outputTypeIndex[i]=tempIndex-1;
+            m_OutPortType[i][0]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+        }
+
+    }
+    //互锁设置
+    tempList11=getIniValues(1,"OutportInterlock");
+    for(int i=0;i<OUT_INTERLOCK_NUM;i++)
+    {
+        for(int j=0;j<4;j++)
+        {
+            tempIndex=tempList11[4*i+j].toUInt();
+            if(tempIndex==0)
+            {
+                outportInterlockIndex[i][j]=99;
+                m_OutportInterlock[i][j]=0;
+            }
+            else
+            {
+                outportInterlockIndex[i][j]=tempIndex-1;
+                switch (j)
+                {
+                case 0:
+                    m_OutportInterlock[i][j]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+                    break;
+                case 1:
+                    m_OutportInterlock[i][j]=tempIndex/*m_Port_X[tempIndex-1].portNum*/;
+                    break;
+                case 2:
+                    m_OutportInterlock[i][j]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+                    break;
+                case 3:
+                    m_OutportInterlock[i][j]=tempIndex/*m_Port_X[tempIndex-1].portNum*/;
+                    break;
+                }
+            }
+        }
+    }
+    //预留关联
+    tempList11=getIniValues(1,"OutputRelevancy");
+    for(int i=0;i<OUT_PORT_RELEVANCY_NUM;i++)
+    {
+        for(int j=0;j<2;j++)
+        {
+            tempIndex=tempList11[2*i+j].toUInt();
+            if(tempIndex==0)
+            {
+                outputRelevancyIndex[i][j]=99;
+                m_OutportRelevancy[i][j]=0;
+            }
+            else
+            {
+                outputRelevancyIndex[i][j]=tempIndex-1;
+                m_OutportRelevancy[i][j]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+            }
+        }
+    }
+    //预留出类型
+    tempList11=getIniValues(1,"OutputReleteOut");
+    for(int i=0;i<OUT_PORT_RELEOUT_NUM;i++)
+    {
+        tempIndex=tempList11[i].toUInt();
+        if(tempIndex==0)
+        {
+            outputReleteOutIndex[i]=99;
+            m_OutportReleteOut[i][0]=0;
+        }
+        else
+        {
+            outputReleteOutIndex[i]=tempIndex-1;
+            m_OutportReleteOut[i][0]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+        }
+    }
+
+    //高级功能对应的端口号的定义
+    tempList11=getIniValues(1,"SeniorFunc");
+
+    uint8_t index=0;
+    m_SeniorFuncPort.knifeOrigin1CheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.knifeOrigin2CheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.chuckOriginCheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.stackSaveIn1CheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.stackSaveIn2CheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.stackSaveOutCheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.alarmIn1CheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.alarmIn2CheckPort=tempList11[index++].toUInt();
+
+    m_SeniorFuncPort.emergencyStopCheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.pauseStopCheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.pressureCheckPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.remoteAutoPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.remoteStopPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.bottomOilLimitPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.oilerSwtPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.lubPumpPort=tempList11[index++].toUInt();
+
+    m_SeniorFuncPort.processSave1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.processSave2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.emergencySnapMotorEnablePort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.emergencyStopOutPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.autoLightPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.alarmLightPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.alarmBuzzerPort=tempList11[index++].toUInt();
+    m_SeniorFuncPort.pauseLightPort=tempList11[index++].toUInt();
+
+    m_SeniorFuncPort.processFinish1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.processFinish2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.locateFinish1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.locateFinish2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.startProduct1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.startProduct2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res1[0]=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res1[1]=tempList11[index++].toUInt();
+
+    m_SeniorFuncPort.mainAxisRotate1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.mainAxisRotate2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.mainAxisLocate1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.mainAxisLocate2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.biowAir1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.biowAir2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res2[0]=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res2[1]=tempList11[index++].toUInt();
+
+    m_SeniorFuncPort.manualChuckIn1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.manualChuckIn2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.autoDoorCot1Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.autoDoorCot2Port=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res3[0]=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res3[1]=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res3[2]=tempList11[index++].toUInt();
+    m_SeniorFuncPort.res3[3]=tempList11[index++].toUInt();
 }
 
 /*************************************************************************
@@ -127,6 +258,11 @@ void readIniPara()
     getProgramNameAndPath();//读取所有程序文件信息
     getSystemSet();
     ::readPasswdFromConfig();
+
+    // 读取完所有参数后根据参数更新参数对应 X 端口 或者 Y 端口的标志位
+    updateAdvancedFuncPortFlag();
+    updateInterLockPortFlag();
+    updateAxidParameterPortFlag();
 }
 
 void updateInterLockPortFlag()
@@ -239,4 +375,19 @@ void updateAdvancedFuncPortFlag()
     m_Port_Y[OUTPUT_NUM + 18].functionSet = (m_SeniorFunc.processSave2) ? 1 : 0;
 
 //    m_Port_Y[OUTPUT_NUM + 19].functionSet = ;
+}
+
+void updateAxidParameterPortFlag()
+{
+
+    for (int i = 0; i < AXIS_TOTAL_NUM; i++)
+    {
+        int index1 = axisParaPortMaping[i].axisLimitPostive;
+        int index2 = axisParaPortMaping[i].axisLimitNegtive;
+        int index3 = axisParaPortMaping[i].axisOriginType;
+
+        m_Port_X[index1].functionSet = m_AxisPar[i].limitPosSwt ? 1 : 0;
+        m_Port_X[index2].functionSet = m_AxisPar[i].limitNegSwt ? 1 : 0;
+        m_Port_X[index3].functionSet = m_AxisPar[i].originType ? 1 : 0;
+    }
 }

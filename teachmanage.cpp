@@ -247,15 +247,34 @@ void TeachManage::on_btn_Del_clicked()
         // to do...
 //        if ()
 
-        int selectedProgramIndex = -1;
-        for(int i = 0; i < m_ProgramNameAndPath.count(); i++)
+    int selectedProgramIndex = -1;
+    for(int i = 0; i < m_ProgramNameAndPath.count(); i++)
+    {
+        if(m_ProgramNameAndPath[i].fileName == programName)
         {
-            if(m_ProgramNameAndPath[i].fileName == programName)
-            {
-                selectedProgramIndex = i;
-                break;
-            }
+            selectedProgramIndex = i;
+            break;
         }
+    }
+
+    if (selectedProgramIndex < 0) return;
+
+    // juge whether the program can been deleted
+    // to do...
+    auto perm = m_ProgramNameAndPath[selectedProgramIndex].filePermission;
+    if (perm)
+    {
+        ErrorTipDialog tip(tr("请先对文件进行解锁！"), TipMode::ONLY_OK, nullptr);
+        tip.exec();
+
+        return;
+    }
+
+
+    ErrorTipDialog tip(tr("确认删除文件？"));
+    if (tip.exec() == QDialog::Accepted)
+    {
+//    deleteOneRowFromTable(ui->tableTeachManage);
 
         // insure that selected program is not the current running
         if(m_CurrentProgramNameAndPath.fileName != m_ProgramNameAndPath[selectedProgramIndex].fileName)
@@ -581,6 +600,10 @@ void TeachManage::updateFilePermission(int index)
                 progInfo.filePermission = index;
                 break;
             }
+        }
+        if (m_CurrentProgramNameAndPath.fileName == progName)
+        {
+            m_CurrentProgramNameAndPath.filePermission = index;
         }
     }
 }

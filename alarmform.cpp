@@ -8,6 +8,7 @@
 #include "alarminfodialog.h"
 
 #include "customkeyboard.h"
+#include "errortipdialog.h"
 
 AlarmForm::AlarmForm(QWidget *parent) :
     QWidget(parent),
@@ -148,6 +149,23 @@ void AlarmForm::setupAlarmInfo()
         auto alarmNum = item->text().toUInt();
 
         AlarmInfoDialog::instance()->showAlarmInfo(alarmNum);
+    });
+
+    connect(ui->btnClearAlarm, &QPushButton::clicked, [=](){
+
+        ErrorTipDialog tip(tr("确定清除报警？"), nullptr);
+        int reply = tip.exec();
+        if (reply == QDialog::Accepted)
+        {
+            alarmInfoQueue.clear();
+            QSettings settings(alarmInfoDataPath, QSettings::IniFormat);
+            settings.clear();
+            settings.sync();
+
+            // fresh display
+            ui->tableAlarmInfo->clear();
+            ui->tableAlarmInfo->setRowCount(alarmInfoQueue.size());
+        }
     });
 }
 

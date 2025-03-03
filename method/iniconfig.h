@@ -17,7 +17,6 @@ extern QString CustomizePortInfoPath;
 //extern QString m_defaultconfigPortXYNameIniPath;             //输入输出、名称定义配置文件（99）
 
 //extern QString m_defaultconfigPortSettingPath;
-extern QString m_configPortSettingPath;
 
 extern const QString alarmInfoMappingPath;
 extern const QString alarmInfoDataPath;

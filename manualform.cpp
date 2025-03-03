@@ -768,6 +768,13 @@ void ManualForm::updateGuidePoints()
         }
     }
 
+    if (guidePoints.isEmpty()) {
+        selectedButton[0] = nullptr;
+    }
+    else {
+        selectedButton[0] = guidePoints.begin().key();
+    }
+
 }
 
 void ManualForm::setupGuidePointConnections(DraggableButton *btn)

@@ -39,6 +39,8 @@ AlarmBar::AlarmBar(QWidget* parent)
     connect(ui->btnAlarmHelp, &QPushButton::clicked, this, [=](){
         this->hide();
 
+        if (alarmInfoQueue.isEmpty()) return;
+
         int alarmNum = alarmInfoQueue.back().alarmNum;
         AlarmInfoDialog::instance()->showAlarmInfo(alarmNum);
     });

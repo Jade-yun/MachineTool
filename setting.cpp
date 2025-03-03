@@ -115,7 +115,6 @@ Setting::Setting(QWidget *parent) :
         }
     });
 
-
     ui->editBrightTime->setInputRange(30, 65535);
     connect(ui->editBrightTime, &NumberEdit::textChanged, [=](const QString& val){
         int second = val.toInt();
@@ -414,6 +413,18 @@ Setting::Setting(QWidget *parent) :
             m_Port_X[30].functionSet = 1;
         }
     });
+    for (int i = 0; i < AXIS_TOTAL_NUM; i++)
+    {
+        connect(machineParaWidgets.at(i).originType, QOverload<int>::of(&QComboBox::activated), [=](int index) {
+
+            constexpr int originTypeInputPortMaping[AXIS_TOTAL_NUM] = {
+                25, 26, 27, 28, 29, 30
+            };
+            int portNum = originTypeInputPortMaping[i];
+            m_Port_X[portNum - 1].functionSet = index ? 1 : 0;
+        });
+    }
+
     //PXC_240914
     setupPortDefine();
     //触摸屏校准按钮
@@ -456,14 +467,6 @@ void Setting::ShowStackPage()
 
 void Setting::handleLoginModeChanged(LoginMode mode)
 {
-    const std::vector<QPushButton*> settingButtons = {
-        ui->btnSigSet, ui->btnSafetySet, ui->btnProductSet, ui->btnSystemSet,
-        ui->btnServoSpeed, ui->btnServoSafePoint, ui->btnMachinePara, ui->btnStackSet
-    };
-//    const std::vector<int> groupIDs = {
-//        1, 2, 3, 4, 5, 6, 7, 8
-//    };
-
     MenuState tempState;
 
     if (mode == LoginMode::Operator)
@@ -478,17 +481,6 @@ void Setting::handleLoginModeChanged(LoginMode mode)
     else if (mode == LoginMode::Advance)
     {
         tempState = MenuState::Senior;
-    }
-
-    for (size_t i = 0; i < settingButtons.size(); i++)
-    {
-        auto btn = settingButtons[i];
-//        auto id = groupIDs[i];
-        int id = i + 1;
-        const auto& state = menuStateMap.at(id);
-
-        bool enable = tempState >= state;
-        btn->setEnabled(enable);
     }
 
     currentLoginState = (int)mode;
@@ -2268,6 +2260,11 @@ void Setting::updateTabVisibility()
         {89, ui->tabStackSet}
     };
 
+    const std::vector<QPushButton*> settingButtons = {
+        ui->btnSigSet, ui->btnSafetySet, ui->btnProductSet, ui->btnSystemSet,
+        ui->btnServoSpeed, ui->btnServoSafePoint, ui->btnMachinePara, ui->btnStackSet
+    };
+
 //    tabNameMap need to be initialized
     // tab
 #if 0
@@ -2363,6 +2360,19 @@ void Setting::updateTabVisibility()
     ui->tabWidgetSystem->removeTab(ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority));
     if (currentLoginState){
         ui->tabWidgetSystem->addTab(ui->tabMenuAuthority, tr("菜单权限"));
+    }
+
+    for (size_t i = 0; i < settingButtons.size(); i++)
+    {
+        auto btn = settingButtons[i];
+//        auto id = groupIDs[i];
+        int id = i + 1;
+        const auto& state = menuStateMap.at(id);
+
+        bool hasOneTab = tabWidgetMap.at(id)->count();
+
+        bool enable = hasOneTab && (currentLoginState >= state);
+        btn->setEnabled(enable);
     }
 }
 
@@ -3205,7 +3215,7 @@ void Setting::outportInterlockSlots()
 //                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
 //                    break;
 //                }
-                m_OutportInterlock[i][j] = 1;
+                m_OutportInterlock[i][j] = outportInterlockIndex[i][j];
             }
             else
             {
