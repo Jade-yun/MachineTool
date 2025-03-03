@@ -3526,9 +3526,9 @@ uint8_t Usart::DataSyc()
         }
         else
         {
-            MySync_Data.sendDataOutTime++;//一次5ms
+            MySync_Data.sendDataOutTime++;
             if(MySync_Data.sendDataOutTime >= MySync_Data.OutTimenum)
-            {//超过1s未接收到反馈重新发送
+            {
                MySync_Data.sendDataNum++;
                 if(MySync_Data.sendDataNum>=5)
                 {
@@ -3538,6 +3538,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =1;
@@ -3573,7 +3574,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
-
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =2;
@@ -3609,6 +3610,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =3;
@@ -3644,6 +3646,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =4;
@@ -3679,6 +3682,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =5;
@@ -3714,6 +3718,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =6;
@@ -3749,6 +3754,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =7;
@@ -3784,6 +3790,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =8;
@@ -3819,6 +3826,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =9;
@@ -3855,6 +3863,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =10;
@@ -3890,6 +3899,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =11;
@@ -3944,6 +3954,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =12;
@@ -3997,6 +4008,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =13;
@@ -4032,6 +4044,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =14;
@@ -4067,6 +4080,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =15;
@@ -4102,6 +4116,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =16;
@@ -4173,6 +4188,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =17;
@@ -4208,6 +4224,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =18;
@@ -4243,6 +4260,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =19;
@@ -4296,6 +4314,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =20;
@@ -4362,6 +4381,7 @@ uint8_t Usart::DataSyc()
                     MySync_Data.SendData_flag = 0;
                 }
             }
+            MySync_Data.sendDataOutTime=0;
         }
         MySync_Data.SyncStep =21;
         break;
@@ -4396,6 +4416,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =22;
@@ -4475,6 +4496,7 @@ uint8_t Usart::DataSyc()
                         MySync_Data.SendData_flag = MySync_Data.mac_aixs;
                     }
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =23;
@@ -4510,6 +4532,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =24;
@@ -4545,6 +4568,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =25;
@@ -4588,6 +4612,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =26;
@@ -4623,6 +4648,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =27;
@@ -4668,6 +4694,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =28;
@@ -4732,6 +4759,7 @@ uint8_t Usart::DataSyc()
 //                    MySync_Data.SendData_flag = 0;
                     MySync_Data.TestSendFeedBackFlag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =29;
@@ -4767,6 +4795,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =30;
@@ -4802,6 +4831,7 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = 0;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
         }
         MySync_Data.SyncStep =31;
@@ -4837,7 +4867,7 @@ uint8_t Usart::DataSyc()
 //参数同步处理函数
 void Usart::sync_data_handle(void)
 {
-    UsartTimer->start(60);
+    UsartTimer->start(40);
     MySync_Data.SendDataStep = 0;
     MySync_Data.SendData_flag = 0;
     MySync_Data.sendDataOutTime = 0;
