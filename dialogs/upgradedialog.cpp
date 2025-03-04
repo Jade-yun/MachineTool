@@ -126,7 +126,7 @@ void upgradedialog::upgreadok_handle()
         {
             if(hasDuplicateFileNames(TargetPath,m_ProgramPath))
             {//if存在同名文件
-                int reply = showTip(tr("存在相同文件,请确认是否覆盖?确认(覆盖同名文件);取消(不恢复同名文件)"));
+                int reply = showTip(tr("文件已存在，请确认是否覆盖？"));
                 if(reply == QDialog::Accepted)
                 {
                     Cover_SameNameFile = true;
@@ -180,7 +180,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case HANDHELD:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
-        ui->upgrade_label->setText("是否现在进行手持器升级？");
+        ui->upgrade_label->setText(tr("是否现在进行手持器升级？"));
         ui->Data_select->hide();
         sure_handle_type = HANDHELD;
         UpFilePath = findFileAndGetDirectory(storage.rootPath(),"MachineTool");
@@ -190,7 +190,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case MAINBOARD:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
-        ui->upgrade_label->setText("是否现在进行主板升级？");
+        ui->upgrade_label->setText(tr("是否现在进行主板升级？"));
         ui->Data_select->hide();
         sure_handle_type = MAINBOARD;
         break;
@@ -198,7 +198,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case IOBOARD:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
-        ui->upgrade_label->setText("当前系统无IO板"); 
+        ui->upgrade_label->setText(tr("当前系统无IO板"));
         ui->Data_select->hide();
         sure_handle_type = IOBOARD;
         break;
@@ -206,7 +206,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case SERVO:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
-        ui->upgrade_label->setText("当前系统不支持伺服升级");
+        ui->upgrade_label->setText(tr("当前系统不支持伺服升级"));
         ui->Data_select->hide();
         sure_handle_type = SERVO;
         break;
@@ -214,7 +214,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case SYSTEM_DATA_COPY:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
-        ui->upgrade_label->setText("是否备份设置文件U盘?");
+        ui->upgrade_label->setText(tr("是否备份设置文件U盘？"));
         ui->Data_select->show();
         ui->All_checkbox->setChecked(true);//默认选中全部参数
         ui->upgrade_SearchName->setText("/HMI/");
@@ -224,7 +224,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case COPY_DATA_REST:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
-        ui->upgrade_label->setText("是否从U盘恢复设置文件?");
+        ui->upgrade_label->setText(tr("是否从U盘恢复设置文件？"));
         ui->Data_select->show();
         ui->All_checkbox->setChecked(true);//默认选中全部参数
         ui->upgrade_SearchName->setText("/HMI/");
@@ -233,7 +233,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case RESTSETTING:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage3);
-        ui->ressetting_label->setText("输入恢复密码,按确认按键,将恢复出场设置,并重启系统!");
+        ui->ressetting_label->setText(tr("输入恢复密码，按确认按键，将恢复出场设置，并重启系统!"));
         ui->Reserve_teach_checkbox->setChecked(true);
         ui->Reserve_Other_checkbox->setChecked(true);
         ui->ResSettInput_password->setDecimalPlaces(0);
@@ -340,7 +340,7 @@ void upgradedialog::pasteFileOrFolder()
                 if (QFile::exists(destinationPath))
                 {
                     QMessageBox::StandardButton btn = QMessageBox::question(this, tr("Confirm Overwrite"),
-                                                                            tr("以下文件已存在:\n%1\n是否覆盖他们?").arg(destinationPath),
+                                                                            tr("文件已存在，请确认是否覆盖？"),
                                                                             QMessageBox::Yes | QMessageBox::No);
                     if (btn == QMessageBox::Yes)
                     {
@@ -1039,30 +1039,4 @@ void upgradedialog::on_ResSettOK_clicked()
         });
         tip.exec();
     }
-}
-//cp是否成功反馈
-bool upgradedialog::cpStateReturn(QString CopyFilePath , QString TargetFilePath)
-{
-    bool state = 0;
-    QProcess process;
-    QStringList arguments;
-    arguments << CopyFilePath << TargetFilePath;
-    process.start("cp", arguments);
-    if (!process.waitForStarted()) {
-        showTip(tr("无法启动cp命令！"));
-    } else {
-        if (!process.waitForFinished()) {
-            showTip(tr("cp命令执行未完成！"));
-        } else {
-            // 检查cp命令的退出状态
-            if (process.exitCode() == 0) {
-                // cp命令成功执行
-                state = 1;
-            } else {
-                // cp命令执行失败
-                showTip(tr("cp命令执行失败！退出码：") + QString::number(process.exitCode()));
-            }
-        }
-    }
-    return state;
 }

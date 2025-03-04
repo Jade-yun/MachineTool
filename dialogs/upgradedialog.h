@@ -32,7 +32,7 @@ public:
     ~upgradedialog();
 
 private slots:
-    bool cpStateReturn(QString CopyFilePath , QString TargetFilePath);
+//    bool cpStateReturn(QString CopyFilePath , QString TargetFilePath);
     void on_Key_File_hand_select_clicked();
 
     void on_file_listView_doubleClicked(const QModelIndex &index);

@@ -15,6 +15,10 @@ contains(CONFIG, desktop) {
 # print value of DESTDIR
 #message(DESTDIR is $$DESTDIR)
 
+TRANSLATIONS += \
+    langurage/Translation_En.ts\
+    langurage/Translation_Ch.ts
+
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings

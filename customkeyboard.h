@@ -26,12 +26,12 @@ protected:
 public:
     static FullKeyboard* instance();
 private:
-//    FullKeyboard(QWidget* parent = nullptr);
+    FullKeyboard(QWidget* parent = nullptr);
 #else
-
-#endif
 public:
     FullKeyboard(QWidget* parent = nullptr);
+
+#endif
 public:
     void setCurrentEditObj(QObject* edit);
     void clearText();

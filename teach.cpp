@@ -571,7 +571,7 @@ void Teach::Pro_ReserveOutStructInit(void)
     ui->lineEdit_Reserve_Overturn->setText("");
     ui->lineEdit_Reserve_time->setText("0.00");
     ui->lineEdit_Reserve_num->setText("0");
-    ui->Reserve_Pass_Button->setText("预留通");
+    ui->Reserve_Pass_Button->setText(tr("预留通"));
     Temp_ReserveOutStruct.type=1;
     Temp_ReserveOutStruct.function = 0;
     Temp_ReserveOutStruct.interval = 0;
@@ -787,7 +787,7 @@ void Teach::Refresh_listWgtJumpto()
     {
         if(m_OperateProNum==0)
         {
-            ui->chboxComment->setText("标签"+QString::number(getLabelOrderIndex()));
+            ui->chboxComment->setText(tr("标签")+QString::number(getLabelOrderIndex()));
         }
         else if(m_OperateProNum>0&&m_OperateProNum<PRO_NUM)
         {
@@ -4155,11 +4155,11 @@ void Teach::on_Reserve_Pass_Button_clicked()
 {
     if(ui->Reserve_Pass_Button->getState() == 1)
     {
-        ui->Reserve_Pass_Button->setText("预留通");
+        ui->Reserve_Pass_Button->setText(tr("预留通"));
     }
     else
     {
-        ui->Reserve_Pass_Button->setText("预留断");
+        ui->Reserve_Pass_Button->setText(tr("预留断"));
     }
 }
 
@@ -4694,11 +4694,11 @@ void Teach::OrderEdit_Handle()
         ui->lineEdit_Edit_AxisMove_early_pos->setText(QString::number(advEndDis/100,'f',2));
         if(ui->editReferPoint->getRefPointIndex() == 0)
         {
-            ui->editReferPoint->setText("无参考");
+            ui->editReferPoint->setText("");
         }
         else
         {
-            ui->editReferPoint->setText("参考点"+QString::number(AxisMove->referPointNum));
+            ui->editReferPoint->setText(tr("参考点")+QString::number(AxisMove->referPointNum));
         }
         break;
     }

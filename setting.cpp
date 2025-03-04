@@ -4069,7 +4069,7 @@ void Setting::on_btnLogoUpdate_clicked()
     }
     else
     {//提示u盘未插入
-        MainWindow::pMainWindow->showErrorTip(tr("未插入U盘！"));
+        MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"));
     }
 }
 /*************************************************************************
@@ -4183,7 +4183,7 @@ void Setting::UpgradeHandle(int click_type)
     }
     else
     {
-        MainWindow::pMainWindow->showErrorTip(tr("未插入U盘！"));
+        MainWindow::pMainWindow->showErrorTip(tr("请插入U盘！"));
     }
 
 }

@@ -366,7 +366,7 @@ void TeachManage::on_btn_Export_clicked()
         ::sync();
     }
 
-    ErrorTipDialog tip(tr("文件导出成功！"), TipMode::ONLY_OK, nullptr);
+    ErrorTipDialog tip(tr("导出成功！"), TipMode::ONLY_OK, nullptr);
     tip.exec();
 }
 
@@ -406,7 +406,7 @@ void TeachManage::on_btn_Import_clicked()
 
     if (it != m_ProgramNameAndPath.end())
     {
-        ErrorTipDialog tip(tr("系统中存在相同文件，请确认是否覆盖？"));
+        ErrorTipDialog tip(tr("文件已存在，请确认是否覆盖？"));
         if (tip.exec() != QDialog::Accepted)
             return;
 

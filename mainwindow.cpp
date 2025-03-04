@@ -280,7 +280,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete dlgErrorTip;
+//    delete dlgErrorTip;
 //    delete backgroundProcess;
     delete g_Usart;
 
@@ -347,7 +347,7 @@ void MainWindow::handleLoginModeChanged(LoginMode mode)
 
 void MainWindow::onCheckPara()
 {
-    static int lastAlarmNum = 0;
+    static int lastAlarmNum = -1;
     if (lastAlarmNum != m_AlarmNum)
     {
         lastAlarmNum = m_AlarmNum;
@@ -440,7 +440,7 @@ void MainWindow::slotShowSubWindow()
     timer.restart();
 
 
-//    FullKeyboard::instance(this)->hide();
+    FullKeyboard::instance();
     qDebug() << "FullKeyboard：" << timer.elapsed() << "毫秒";
     timer.restart();
     qDebug() << "APP启动耗时：" << timer1.elapsed() << "毫秒";
@@ -483,7 +483,7 @@ void MainWindow::slotShowSubWindow()
     Refresh_Progress_bar(100);
     scanner->start();
     PowerOnStateHandle();//开机默认进入停止界面
-    ui->label_plan->setText("参数同步中:");
+    ui->label_plan->setText(tr("参数同步中:"));
     Refresh_Progress_bar(0);
     emit signal_sync_data();
 
