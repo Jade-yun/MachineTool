@@ -1757,14 +1757,6 @@ void Setting::syncParaToUI()
         {
             bool checked = m_OutportInterlock[i][j] != 0;
             outportInterlockList[4*i+j]->setChecked(checked);
-//            if (m_OutportInterlock[i][j])
-//            {
-//                outportInterlockList[4*i+j]->setChecked(true);
-//            }
-//            else
-//            {
-//                outportInterlockList[4*i+j]->setChecked(false);
-//            }
         }
     }
 
@@ -3200,21 +3192,6 @@ void Setting::outportInterlockSlots()
         {
             if(outportInterlockList[4*i+j]->isChecked())
             {
-//                switch (j)
-//                {
-//                case 0:
-//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
-//                    break;
-//                case 1:
-//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
-//                    break;
-//                case 2:
-//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_Y[outportInterlockIndex[i][j]].portNum*/;
-//                    break;
-//                case 3:
-//                    m_OutportInterlock[i][j]=outportInterlockIndex[i][j]/*m_Port_X[outportInterlockIndex[i][j]].portNum*/;
-//                    break;
-//                }
                 m_OutportInterlock[i][j] = outportInterlockIndex[i][j];
             }
             else

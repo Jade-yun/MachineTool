@@ -42,7 +42,7 @@ constexpr AxisParaInputPortGroup axisParaPortMaping[AXIS_TOTAL_NUM] = {
 
 //若没有对应端口号的，则索引定为99
 uint8_t outputTypeIndex[OUT_PORT_TYPE_NUM]={0};                    //输出类型对应的下标集合
-uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置
+uint8_t outportInterlockIndex[OUT_INTERLOCK_NUM][4]={0};                //互锁设置对应的端口号，从配置文件中读取出来赋值，之后提供给其他变量调用
 uint8_t outputRelevancyIndex[OUT_PORT_RELEVANCY_NUM][2]={0};                //预留关联
 uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM]={0};                    //预留出类型
 
@@ -114,22 +114,8 @@ void readSigSetPara()
             }
             else
             {
-                outportInterlockIndex[i][j]=tempIndex-1;
-                switch (j)
-                {
-                case 0:
-                    m_OutportInterlock[i][j]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
-                    break;
-                case 1:
-                    m_OutportInterlock[i][j]=tempIndex/*m_Port_X[tempIndex-1].portNum*/;
-                    break;
-                case 2:
-                    m_OutportInterlock[i][j]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
-                    break;
-                case 3:
-                    m_OutportInterlock[i][j]=tempIndex/*m_Port_X[tempIndex-1].portNum*/;
-                    break;
-                }
+                outportInterlockIndex[i][j]=tempIndex;//该变量用来记录互锁设置对应的端口号，后面只做被调用作用
+                m_OutportInterlock[i][j]=tempIndex;//使用了互锁设置时，代表端口号，不使用时为0
             }
         }
     }

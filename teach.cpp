@@ -1097,21 +1097,29 @@ void Teach::on_btnDelete_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();//获取当前选中行号，从0开始
-    int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除所选动作？"));
-    if (reply == QDialog::Accepted)
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
     {
-        if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_LABEL)
+        int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除所选动作？"));
+        if (reply == QDialog::Accepted)
         {
-            P_LabelStruct* LabelStruct = (P_LabelStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-            if(LabelStruct->labelNum>0)
+            if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_LABEL)
             {
-                uint16_t temp_labelNum = LabelStruct->labelNum;
-                if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) == 0)
+                P_LabelStruct* LabelStruct = (P_LabelStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+                if(LabelStruct->labelNum>0)
                 {
-                    temp_labelNum = ReturnLableListIndex(temp_labelNum);
-                    if(temp_labelNum>0)
+                    uint16_t temp_labelNum = LabelStruct->labelNum;
+                    if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) == 0)
                     {
-                        CurrentLableNameList.removeAt(temp_labelNum);
+                        temp_labelNum = ReturnLableListIndex(temp_labelNum);
+                        if(temp_labelNum>0)
+                        {
+                            CurrentLableNameList.removeAt(temp_labelNum);
+                        }
+                        else
+                        {
+                            MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+                            return;
+                        }
                     }
                     else
                     {
@@ -1119,24 +1127,19 @@ void Teach::on_btnDelete_clicked()
                         return;
                     }
                 }
-                 else
+            }
+            else
+            {
+                if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
                 {
                     MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                    return;
                 }
             }
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,1,0);
+            Teach_File_List_Refresh();//刷新程序列表
+            OrderNeedSaveFlag = true;
+            Teach_timer->start();
         }
-        else
-        {
-            if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
-            {
-                MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-            }
-        }
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,1,0);
-        Teach_File_List_Refresh();//刷新程序列表
-        OrderNeedSaveFlag = true;
-        Teach_timer->start();
     }
 }
 //教导界面-分解按钮处理函数
@@ -1147,11 +1150,14 @@ void Teach::on_btnDevide_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();//获取当前选中行号，从0开始
-    g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,3,0);//分解处理函数
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,3,0);
-    Teach_File_List_Refresh();//刷新程序列表
-    OrderNeedSaveFlag = true;
-    Teach_timer->start();
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
+    {
+        g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,3,0);//分解处理函数
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,3,0);
+        Teach_File_List_Refresh();//刷新程序列表
+        OrderNeedSaveFlag = true;
+        Teach_timer->start();
+    }
 }
 //教导界面-组合按钮处理函数
 void Teach::on_btnCombine_clicked()
@@ -1161,11 +1167,14 @@ void Teach::on_btnCombine_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();//获取当前选中行号，从0开始
-    g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,2,1);//date:0-向下组合 1-向上组合
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,2,1);
-    Teach_File_List_Refresh();//刷新程序列表
-    OrderNeedSaveFlag = true;
-    Teach_timer->start();
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
+    {
+        g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,2,1);//date:0-向下组合 1-向上组合
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,2,1);
+        Teach_File_List_Refresh();//刷新程序列表
+        OrderNeedSaveFlag = true;
+        Teach_timer->start();
+    }
 }
 //教导界面-上移按钮处理函数
 void Teach::on_btnMoveUp_clicked()
@@ -1175,11 +1184,14 @@ void Teach::on_btnMoveUp_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();//获取当前选中行号，从0开始
-    g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,4,1);//每次上移一行
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,4,1);
-    Teach_File_List_Refresh();//刷新程序列表
-    OrderNeedSaveFlag = true;
-    Teach_timer->start();
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
+    {
+        g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,4,1);//每次上移一行
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,4,1);
+        Teach_File_List_Refresh();//刷新程序列表
+        OrderNeedSaveFlag = true;
+        Teach_timer->start();
+    }
 }
 //教导界面-下移按钮处理函数
 void Teach::on_btnMoveDown_clicked()
@@ -1189,11 +1201,14 @@ void Teach::on_btnMoveDown_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();//获取当前选中行号，从0开始
-    g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,5,1);//每次下移一行
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,5,1);
-    Teach_File_List_Refresh();//刷新程序列表
-    OrderNeedSaveFlag = true;
-    Teach_timer->start();
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
+    {
+        g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,5,1);//每次下移一行
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,5,1);
+        Teach_File_List_Refresh();//刷新程序列表
+        OrderNeedSaveFlag = true;
+        Teach_timer->start();
+    }
 }
 //教导界面-屏蔽按钮处理函数
 void Teach::on_btnShield_clicked()
@@ -1203,11 +1218,14 @@ void Teach::on_btnShield_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();//获取当前选中行号，从0开始
-    g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,6,!(m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag));
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,6,!(m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag));
-    Teach_File_List_Refresh();//刷新程序列表
-    OrderNeedSaveFlag = true;
-    Teach_timer->start();
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
+    {
+        g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList+1,6,!m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag);
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,6,m_OperateProOrder[m_CurrentSelectProOrderList].noteFlag);
+        Teach_File_List_Refresh();//刷新程序列表
+        OrderNeedSaveFlag = true;
+        Teach_timer->start();
+    }
 }
 //教导界面-插入按钮处理函数
 void Teach::on_btnInset_clicked()
@@ -5643,7 +5661,10 @@ void Teach::on_btnPilot_clicked()
         return;
     }
     m_CurrentSelectProOrderList = ui->tableWgtTeach->currentIndex().row();
-    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DEBUG,m_OperateProNum,m_CurrentSelectProOrderList+1,m_RunPar.globalSpeed);//运行行号从1开始，为当前选中行序号+1
+    if(m_CurrentSelectProOrderList<m_OperateProOrderListNum)
+    {
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DEBUG,m_OperateProNum,m_CurrentSelectProOrderList+1,m_RunPar.globalSpeed);//运行行号从1开始，为当前选中行序号+1
+    }
 }
 //标签指令复选框处理函数
 void Teach::on_chboxComment_clicked()

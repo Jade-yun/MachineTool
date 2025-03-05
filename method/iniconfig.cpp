@@ -178,9 +178,8 @@ void getOutportInterlock(uint8_t defaultV)
             }
             else
             {
-                m_OutportInterlock[i][j] = outportInterlockIndex[i][j];
+                m_OutportInterlock[i][j] = outportInterlockIndex[i][j];//赋值互锁端口号
             }
-//            m_OutportInterlock[i][j] = getValue("OutportInterlock",QString("V%1_%2").arg(i).arg(j),defaultV);
         }
     }
 }
