@@ -79,7 +79,9 @@ private:
     void loadAndPlayGif(const QString& path);
     void logicSigsSlots();
 
-
+protected:
+    void changeEvent(QEvent *e) override;
+    void retranslate();
 
 private:
     Ui::StackEdit *ui;
@@ -110,6 +112,9 @@ private:
 public:
     QPushButton *moveButton;
     QPushButton *closeButton;
+
+protected:
+    void changeEvent(QEvent *e) override;
 };
 
 #endif // STACKEDIT_H

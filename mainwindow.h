@@ -149,6 +149,7 @@ public:
 protected:
     bool eventFilter(QObject *,QEvent *) override;
     void mousePressEvent(QMouseEvent *event) override;
+    void changeEvent(QEvent *e) override;
 
     //子线程相关
 public:

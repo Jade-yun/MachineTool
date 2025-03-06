@@ -256,5 +256,25 @@ void AlarmForm::setupMaintainInfo()
     });
 }
 
+void AlarmForm::retranslate()
+{
+    QStringList headers = {tr("维护内容"), tr("维护周期"), tr("剩余天数"), tr("下次保养时间")};
+    for (int i = 0; i < headers.size(); ++i) {
+//        m_maintainModel->setHeaderData(i, Qt::Horizontal, headers[i], Qt::DisplayRole);
+        m_maintainModel->setHorizontalHeader(i, headers[i]);
+    }
+    ui->tableAlarmInfo->setHorizontalHeaderLabels({tr("报警编号"), tr("报警内容"), tr("报警时间")});
+}
+
+void AlarmForm::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+        this->retranslate();
+    }
+    QWidget::changeEvent(e);
+}
+
 
 

@@ -538,18 +538,12 @@
             <item row="1" column="0">
              <widget class="QCheckBox" name="chboxVar5">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -569,18 +563,12 @@
             <item row="0" column="2">
              <widget class="QCheckBox" name="chboxVar3">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -600,18 +588,12 @@
             <item row="1" column="1">
              <widget class="QCheckBox" name="chboxVar6">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -631,18 +613,12 @@
             <item row="1" column="2">
              <widget class="QCheckBox" name="chboxVar7">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -662,18 +638,12 @@
             <item row="0" column="1">
              <widget class="QCheckBox" name="chboxVar2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -693,18 +663,12 @@
             <item row="0" column="0">
              <widget class="QCheckBox" name="chboxVar1">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -724,18 +688,12 @@
             <item row="0" column="3">
              <widget class="QCheckBox" name="chboxVar4">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -755,18 +713,12 @@
             <item row="1" column="3">
              <widget class="QCheckBox" name="chboxVar8">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -824,18 +776,12 @@
             <item row="0" column="0">
              <widget class="QCheckBox" name="chboxVar1_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -855,18 +801,12 @@
             <item row="0" column="1">
              <widget class="QCheckBox" name="chboxVar2_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -886,18 +826,12 @@
             <item row="0" column="2">
              <widget class="QCheckBox" name="chboxVar3_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -917,18 +851,12 @@
             <item row="0" column="3">
              <widget class="QCheckBox" name="chboxVar4_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -948,18 +876,12 @@
             <item row="1" column="0">
              <widget class="QCheckBox" name="chboxVar5_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -979,18 +901,12 @@
             <item row="1" column="1">
              <widget class="QCheckBox" name="chboxVar6_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -1010,18 +926,12 @@
             <item row="1" column="2">
              <widget class="QCheckBox" name="chboxVar7_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>
@@ -1041,18 +951,12 @@
             <item row="1" column="3">
              <widget class="QCheckBox" name="chboxVar8_2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
                 <verstretch>40</verstretch>
                </sizepolicy>
               </property>
               <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="maximumSize">
                <size>
                 <width>110</width>
                 <height>40</height>

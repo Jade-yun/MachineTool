@@ -1125,10 +1125,16 @@ border: 1px solid black;
      <property name="font">
       <font>
        <family>SimSun</family>
+       <pointsize>-1</pointsize>
        <weight>75</weight>
        <italic>false</italic>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+	font-size: 25px;
+}</string>
      </property>
      <property name="locale">
       <locale language="Chinese" country="China"/>

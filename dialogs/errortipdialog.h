@@ -30,6 +30,9 @@ public:
 
 private:
     Ui::ErrorTipDialog *ui;
+
+protected:
+    void changeEvent(QEvent* e) override;
 };
 
 #endif // ERRORTIPDIALOG_H

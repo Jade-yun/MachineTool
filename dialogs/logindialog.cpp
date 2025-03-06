@@ -130,3 +130,12 @@ void LoginDialog::paintEvent(QPaintEvent *event)
 //    QColor colorBackground("#2D3E34"); // 哑光深绿色
     painter.fillRect(rect, colorBackgroud);
 }
+
+void LoginDialog::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}

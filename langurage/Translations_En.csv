@@ -1,0 +1,1075 @@
+source_text,translation_text
+故障：,Fault:
+帮助,Help
+取消,Cancel
+报警编号：,Alarm No.:
+报警信息,Alarm Information
+合并显示,Merge Display
+清除历史报警,Clear History Alarms
+参数日志,Parameter Log
+动作,Action
+事件,Event
+日期时间,Date/Time
+动作日志,Action Log
+保养信息,Maintenance Information
+编辑,Edit
+重新计时,Reset Timer
+新建,New
+删除,Delete
+开发者选项,Developer Options
+报警编号,Number
+报警内容,Alarm Content
+报警时间,Alarm Time
+确定清除报警？,Confirm Clear Alarm?
+维护内容,Maintenance Content
+维护周期,Maintenance Cycle
+剩余天数,Remaining Days
+下次保养时间,Next Maintenance Time
+报警内容：,Content:
+报警原因：,Reason:
+解决方案：,Solution:
+主程序,Main Program
+子程序1,Subprogram 1
+子程序2,Subprogram 2
+子程序3,Subprogram 3
+子程序4,Subprogram 4
+子程序5,Subprogram 5
+子程序6,Subprogram 6
+子程序7,Subprogram 7
+子程序8,Subprogram 8
+跟随,Follow
+智能力矩,Smart Torque
+试行,Trial Run
+操作,Operate
+允许调速,Allow Speed Adjust
+清零,Reset
+1自动状态,1 Auto Status
+全局速度：,Global Speed:
+历史信息,History Info
+前拍周期：,Pre-Cycle:
+自动运行：,Auto Run:
+成型周期：,Molding Cycle:
+当前步号：,Current Step No.:
+计划产品：,Planned Product:
+取物时间：,Pickup Time:
+实际产品：,Actual Product:
+当前工位：,Current Station:
+主程序第4步,Main Program Step 4
+断点位置：,Breakpoint Position:
+起始步号：,Start Step No.:
+子程序7步号：,Subprogram 7 Step No.:
+子程序5步号：,Subprogram 5 Step No.:
+子程序6步号：,Subprogram 6 Step No.:
+主程序步号：,Main Program Step No.:
+子程序2步号：,Subprogram 2 Step No.:
+子程序1步号：,Subprogram 1 Step No.:
+子程序3步号：,Subprogram 3 Step No.:
+子程序4步号：,Subprogram 4 Step No.:
+子程序8步号：,Subprogram 8 Step No.:
+保存,Save
+当前动作无参数可修改,No Parameters to Modify for Current Action
+位置(+/- 5mm),Position(+/- 5mm)
+速度(%),Speed(%)
+延时(s),Delay(s)
+通时(s),On-Time(s)
+限时(s),Time Limit(s)
+条件1,Condition 1
+条件2,Condition 2
+操作数,Operand
+轴位置,Axis Position
+X1轴,X1 Axis
+Y1轴,Y1 Axis
+Z1轴,Z1 Axis
+C轴,C Axis
+Y2轴,Y2 Axis
+Z2轴,Z2 Axis
+A轴,A Axis
+B轴,B Axis
+循环次数,Cycle Count
+力距保护(%),Torque Protection(%)
+编号,Number
+内容,Content
+全局速度:,Global Speed:
+堆叠组号,Stack Group No.
+X1轴个数,X1 Axis Count
+Y1轴个数,Y1 Axis Count
+Z1轴个数,Z1 Axis Count
+堆叠完停止,Stop After Stacking
+变量,Variable
+堆叠状态,Stacking Status
+不使用,Not Used
+使用,Used
+堆叠指定,Stack Assignment
+从此运行,Run From Here
+断点设置,Breakpoint Setting
+断点清除,Breakpoint Clear
+参考点编辑,Reference Point Edit
+自动修正位置,Auto-Adjust Position
+最后一步不允许设为断点！,Last Step Cannot Be Set as Breakpoint!
+2变量状态,2 Variable Status
+3堆叠状态,3 Stacking Status
+4当前步号,4 Current Step No.
+堆叠,Stacking
+步号,Step No.
+参考点,Reference Point
+输入值的范围不能超过-5.00～5.00,请重新输入。,Input value must be within -5.00 to 5.00. Please re-enter.
+运行,Run
+停止,Stop
+暂停,Pause
+后台程序,Background Program
+计算器,Calculator
+清零选择,Reset Selection
+产品清零,Product Reset
+变量全部清零,Reset All Variables
+堆叠全部清零,Reset All Stacks
+堆叠1组,Stack 1
+堆叠2组,Stack 2
+堆叠3组,Stack 3
+堆叠4组,Stack 4
+堆叠5组,Stack 5
+堆叠6组,Stack 6
+堆叠7组,Stack 7
+堆叠8组,Stack 8
+旋转料仓,Rotary Magazine
+料仓工位：,Magazine Station:
+堆叠1组：,Stack 1:
+堆叠2组：,Stack 2:
+料仓工位数指定,Magazine Station Number Assignment
+料仓初始位,Magazine Initial Position
+料仓保持原位,Magazine Stay in Position
+启动自动时变量清零,Reset Variables on Auto Start
+变量5,Variable 5
+变量3,Variable 3
+变量6,Variable 6
+变量7,Variable 7
+变量2,Variable 2
+变量1,Variable 1
+变量4,Variable 4
+变量8,Variable 8
+变量断电记忆,Variable Power-Off Memory
+确定,Confirm
+提示,Prompt
+手轮轴选择,Handwheel Axis Selection
+B/Z2轴,B/Z2 Axis
+A/Y2轴,A/Y2 Axis
+手轮刻度,Handwheel Scale
+手轮模式,Handwheel Mode
+手轮,Handwheel
+主板,Mainboard
+通,On
+信号,Signal
+输入,Input
+输出,Output
+实际产量,Actual Output
+常量,Constant
+堆叠完成,Stacking Completed
+位置,Position
+位置表达式,Position Expression
+轴,Axis
+定时器,Timer
+定时器表达式,Timer Expression
+定时器1,Timer 1
+定时器2,Timer 2
+定时器3,Timer 3
+定时器4,Timer 4
+定时器5,Timer 5
+定时器6,Timer 6
+定时器7,Timer 7
+定时器8,Timer 8
+阀输出,Valve Output
+阀动作,Valve Action
+卡爪,Gripper
+原料1夹紧/松开,Raw Material 1 Clamp/Release
+成品1夹紧/松开,Product 1 Clamp/Release
+原料2夹紧/松开,Raw Material 2 Clamp/Release
+成品2夹紧/松开,Product 2 Clamp/Release
+卡爪1正转/反转,Gripper 1 CW/CCW
+卡爪2正转/反转,Gripper 2 CW/CCW
+反转台1正转/反转,Reversing Table 1 CW/CCW
+反转台2夹紧/松开,Reversing Table 2 Clamp/Release
+机床控制,CNC Control
+自动门1开/关,Auto Door 1 Open/Close
+自动门2开/关,Auto Door 2 Open/Close
+卡盘/吹屑,Chuck/Blow Chips
+卡盘1夹紧/松开,Chuck 1 Clamp/Release
+卡盘2夹紧/松开,Chuck 2 Clamp/Release
+吹气1,Air Blow 1
+吹气2,Air Blow 2
+输出状态,Output Status
+断,Off
+翻转,Flip
+预留,Reserved
+主板输出,Mainboard Output
+伺服,Servo
+轴运动方向,Axis Movement Direction
+正向,Forward
+反向,Reverse
+密码:,Passwd:
+操作员,Operator
+管理员,Admin
+高级,Senior
+密码错误！,Incorrect Passwd!
+设置,Settings
+监视,Monitor
+报警/日志,Alarms/Logs
+教导管理,Teach Manage
+手动页面,Manual Page
+初始化进度：,Initialization Progress:
+速度：,Speed:
+转速：,RPM:
+展晖机床机械手控制系统,Zhanhui CNC Manipulator Control System
+教导,Teach
+停止页面,Stop Page
+参数同步中:,Parameter Syncing:
+自动页面,Auto Page
+请先解决报警再启动！,Resolve Alarms Before Starting!
+请将三档开关切换到自动档再启动,Switch to Auto Mode Before Starting
+机器未复位,Machine Not Reset
+机器未回零,Machine Not Homed
+请先解决报警再回原！,Resolve Alarms Before Homing!
+是否现在回原点？,Home Now?
+请先解决报警再复位！,Resolve Alarms Before Resetting!
+是否现在复归？,Reset Now?
+请先将三档开关切换到自动档,Switch to Auto Mode First
+请先回原点,Home First
+参数同步失败!失败编号：,Parameter Sync Failed! Error Code:
+程式：,Program:
+教导参数有修改，是否需要保存？,Save Changes to Teach Parameters?
+回原点中...,Homing...
+复位中...,Resetting...
+操作指引,Operate Guide
+编辑位置,Edit Position
+导入图片,Import Image
+新增,Add
+轴动作,Axis Action
+手动,Manual
+位置+,Position+
+速度,Speed
+轴选择,Axis Select
+禁止,Disabled
+位置-,Position-
+调机,Commissioning
+调机功能,Commissioning Function
+手动智能力矩,Manual Smart Torque
+编码器脉冲,Encoder Pulse
+每转距离,Distance per Revolution
+当前轴,Current Axis
+内部脉冲,Internal Pulse
+正转,Clockwise
+反转,Counter-Clockwise
+无信号Z轴允许下降,Z Axis Allowed to Descend Without Signal
+卡爪/机床,Gripper/Machine
+控制旋转1断,Control Rotation 1 Off
+启动加工1断,Start Machining 1 Off
+自动门1关,Auto Door 1 Close
+主轴定位1断,Spindle Positioning 1 Off
+机床控制使能,Machine Control Enable
+卡盘1松开,Chuck 1 Release
+吹气1断,Air Blow 1 Off
+成品1松开,Product 1 Release
+卡爪1反转,Gripper 1 CCW
+原料1松开,Raw Material 1 Release
+组一,Group 1
+预留Y1断,Reserved Y1 Off
+预留Y2断,Reserved Y2 Off
+预留Y3断,Reserved Y3 Off
+预留Y4断,Reserved Y4 Off
+预留Y5断,Reserved Y5 Off
+预留Y6断,Reserved Y6 Off
+预留Y7断,Reserved Y7 Off
+预留Y8断,Reserved Y8 Off
+组二,Group 2
+预留Y9断,Reserved Y9 Off
+预留Y10断,Reserved Y10 Off
+预留Y11断,Reserved Y11 Off
+预留Y12断,Reserved Y12 Off
+预留Y13断,Reserved Y13 Off
+预留Y14断,Reserved Y14 Off
+预留Y15断,Reserved Y15 Off
+预留Y16断,Reserved Y16 Off
+组三,Group 3
+预留Y17断,Reserved Y17 Off
+预留Y19断,Reserved Y19 Off
+预留Y21断,Reserved Y21 Off
+预留Y23断,Reserved Y23 Off
+预留Y18断,Reserved Y18 Off
+预留Y20断,Reserved Y20 Off
+预留Y22断,Reserved Y22 Off
+预留Y24断,Reserved Y24 Off
+IO板,IO Board
+刷新,Refresh
+名称：,Name:
+移至参考点,Move to Reference Point
+进入堆叠,Enter Stacking
+当前未找原点,Current Position Not Found
+请输入高级管理员密码,Enter Advanced Admin Passwd
+确认删除：,Confirm Delete:
+操作指引参数有修改，是否需要保存？,Save Changes to Operate Guide?
+参考点参数有修改，是否需要保存？,Save Changes to Reference Points?
+未找到图片：guide.png，图片像素: 1001×450px。是否使用默认图片？,Image guide.png not found(1001×450px). Use default?
+未找到图片: referPoint.png，图片像素: 760×480px。是否使用默认图片？,Image referPoint.png not found(760×480px). Use default?
+机械手入,Manipulator In
+当前页：,Current Page:
+机械手出,Manipulator Out
+转矩,Torque
+实时值,Real-Time Value
+平均负载率,Average Load Rate
+多圈数据,Multi-Turn Data
+驱动温度,Driver Temperature
+母线电压,Bus Voltage
+单圈数据,Single-Turn Data
+最大值,Max
+手控器,HMI
+F1:自动门1开/关 通,F1: Auto Door 1 Open/Close On
+C-:自动门1开/关 断,C-: Auto Door 1 Open/Close Off
+F2:成品1夹紧/松开,F2: Product 1 Clamp/Release
+工作,Work
+加工完成,Machining Completed
+启动加工,Start Machining
+手轮按键,Handwheel Key
+工作:,Work:
+加工完成:,Machining Completed:
+启动加工:,Start Machining:
+信号:,Signal:
+手轮按键:,Handwheel Key:
+点数,Points Number
+A-起点,A-Start Point
+B-X方向终点,B-X End Point
+C-Y方向终点,C-Y End Point
+D点坐标,D Point Coordinates
+放料速度,Feeding Speed
+放料起始点,Feeding Start Point
+个数,Quantity
+目标位置,Target Position
+是否保存已修改的程序？,Save Modified Program?
+参考点指定,Reference Point Assignment
+不指定,Not Specified
+安全设置,Safety Settings
+信号设置,Signal Settings
+产品设置,Product Settings
+系统设置,System Settings
+伺服安全点,Servo Safety Points
+伺服参数,Servo Parameters
+机器参数,Machine Parameters
+堆叠设置,Stacking Settings
+输出类型,Output Type
+电平,Level
+单脉冲,Single Pulse
+双脉冲,Double Pulse
+卡盘1夹紧,Chuck 1 Clamping
+脉冲,Pulse
+主轴定位1,Spindle Positioning 1
+预留1,Reserved 1
+主轴旋转1,Spindle Rotation 1
+加工完成1,Processing Completed 1
+启动加工1,Start Processing 1
+自动门1开,Automatic Door 1 Open
+启动加工2,Start Processing 2
+自动门2开,Automatic Door 2 Open
+主轴旋转2,Spindle Rotation 2
+主轴定位2,Spindle Positioning 2
+加工完成2,Processing Completed 2
+预留2,Reserved 2
+卡盘2夹紧,Chuck 2 Clamping
+互锁设置,Interlock Settings
+正向阀,Pos Valve
+反向阀,Neg Valve
+正向检测,Pos Check
+反向检测,Neg Check
+成品1夹紧,Finished Product 1 Clamping
+卡爪1正转,Gripper 1 Forward Rotation
+原料1夹紧,Raw Material 1 Clamping
+原料2夹紧,Raw Material 2 Clamping
+成品2夹紧,Finished Product 2 Clamping
+卡爪2正转,Gripper 2 Forward Rotation
+页码：,Page:
+端口自定义,Port Customization
+默认名称,Default Name
+修改名称,Modify Name
+修改端口,Modify Port
+机械手入1,Robot Arm In 1
+机械手入2,Robot Arm In 2
+机械手出1,Robot Arm Out 1
+机械手出2,Robot Arm Out 2
+组选,Group Selection
+名称恢复,Restore Name
+全部,All
+单个,Single
+端口恢复,Restore Port
+导出,Export
+导入,Import
+名称自定义,Custom Name
+登陆权限,Login Permissions
+子程序,Subprogram
+放料跟随,Material Placement Following
+预留关联,Reserved Association
+正关联,Positive Association
+反关联,Negative Association
+预留Y7,Reserved Y7
+预留EY2,Reserved EY2
+预留EY3,Reserved EY3
+预留Y8,Reserved Y8
+预留Y3,Reserved Y3
+预留EY4,Reserved EY4
+预留EY5,Reserved EY5
+预留Y6,Reserved Y6
+预留Y2,Reserved Y2
+预留Y4,Reserved Y4
+预留Y5,Reserved Y5
+预留EY6,Reserved EY6
+预留EY1,Reserved EY1
+预留Y1,Reserved Y1
+预留出类型,Reserved Output Type
+停止断开,Stop Disconnect
+链条料道,Chain Material Track
+转盘模式,Turntable Mode
+按键/信号,Key/Signal
+按键B/Z2+,Key B/Z2+
+按键F1,Key F1
+按键B/Z2-,Key B/Z2-
+按键F4,Key F4
+按键X1-,Key X1-
+按键F3,Key F3
+按键X1+,Key X1+
+按键A/Y2-,Key A/Y2-
+按键A/Y2+,Key A/Y2+
+按键C-,Key C-
+按键F2,Key F2
+按键C+,Key C+
+按键Y1-,Key Y1-
+按键Y1+,Key Y1+
+按键Z1-,Key Z1-
+按键Z1+,Key Z1+
+刀座原点1检测,Tool Holder Origin 1 Check
+急停输入,Emergency Stop Input
+加工安全1,Processing Safety 1
+常开,Constent Open
+常闭,Constant Closed
+刀座原点2检测,Tool Holder Origin 2 Check
+暂停输入,Pause Input
+加工安全2,Processing Safety 2
+卡盘复归检测,Chuck Reset Check
+气压检测,Air Pressure Check
+急停断使能,Emergency Stop Disable
+料仓安全入1,Warehouse Safety In 1
+远程自动,Remote Automatic
+急停输出,Emergency Stop Output
+料仓安全入2,Warehouse Safety In 2
+远程停止,Remote Stop
+周期停,Cycle Stop
+自动灯,Automatic Light
+料仓安全出,Warehouse Safety Out
+低油限,Low Oil Limit
+报警灯,Alarm Light
+报警输入1,Alarm Input 1
+注油器,Oiler
+报警声,Alarm Sound
+报警输入2,Alarm Input 2
+润滑泵,Lubrication Pump
+暂停灯,Pause Light
+机床,CNC
+机械手,Robot Arm
+定位完成1,Positioning Completed 1
+预留4,Reserved 4
+预留7,Reserved 7
+预留5,Reserved 5
+自动门控制2,Automatic Door Control 2
+定位完成2,Positioning Completed 2
+预留3,Reserved 3
+手动卡盘2入,Manual Chuck 2 In
+预留6,Reserved 6
+预留8,Reserved 8
+自动门控制1,Automatic Door Control 1
+手动卡盘1入,Manual Chuck 1 In
+机床安全,Machine Safety
+首件启动加工是否输出,Whether to Output First Piece Processing Start
+手臂下降状态自动门2开关,Robot Arm Lowering State Automatic Door 2 Switch
+手臂下降状态自动门1开关,Robot Arm Lowering State Automatic Door 1 Switch
+不限制,No Restriction
+开,On
+关,Off
+允许,Allow
+不输出,No Output
+手臂下降状态自动门2开关状态,Robot Arm Lowering State Automatic Door 2 Switch Status
+手臂下降状态自动门1开关状态,Robot Arm Lowering State Automatic Door 1 Switch Status
+首件加工完成,First Piece Processing Completed
+启动有效,Start Valid
+启动无效,Start Invalid
+料仓安全,Warehouse Safety
+料仓安全入1恢复,Warehouse Safety In 1 Restore
+自动启动,Automatic Start
+手动启动,Manual Start
+料仓安全入2恢复,Warehouse Safety In 2 Restore
+卡爪安全,Gripper Safety
+卡爪安全1,Gripper Safety 1
+(B)C轴禁止区,(B) C-Axis Restricted Zone
+① X1轴范围(mm),① X1 Axis Range(mm)
+② Z1轴高度(mm),② Z1 Axis Height(mm)
+C轴在禁止区正转角度(mm),C-Axis Positive Rotation Angle in Restricted Zone(mm)
+C轴在禁止区反转角度(mm),C-Axis Negative Rotation Angle in Restricted Zone(mm)
+(A)卡爪1禁止区,(A) Gripper 1 Restricted Zone
+卡爪1禁止区状态,Gripper 1 Restricted Zone Status
+X轴,X-Axis
+无,None
+Z轴,Z-Axis
+卡爪安全2,Gripper Safety 2
+卡爪安全3,Gripper Safety 3
+卡爪安全4,Gripper Safety 4
+联机安全,Online Safety
+联机区域1,Online Area 1
+① 区域输入,① Area Input
+② 区域输出,② Area Output
+④请求输出,④ Request Output
+③请求输入,③ Request Input
+外部联机,External Connection
+内部联机,Internal Connection
+联机选择,Online Selection
+联机轴,Online Axis
+A1A2范围,A1A2 Range
+主从模式,Master-Slave Mode
+主机,Master
+从机,Slave
+脉冲时间(s),Pulse Time(s)
+联机区域2,Online Area 2
+联机区域3,Online Area 3
+联机区域4,Online Area 4
+等加工完成时间(s),Processing Completion Time(s)
+脉冲输出时间(s),Pulse Output Time(s)
+阀限制时间(s),Valve Limit Time(s)
+自动周期时间(s),Automatic Cycle Time(s)
+报警响时间(s),Alarm Sound Duration(s)
+链条到位延时(s),Chain Positioning Delay(s)
+夹检测滤波时间(s),Clamping Check Filtering Time(s)
+润滑开启时间(s),Lubrication Start Time(s)
+润滑关闭时间(s),Lubrication Stop Time(s)
+润滑延时(s),Lubrication Delay(s)
+润滑间隔周期(s),Lubrication Interval Cycle(s)
+产品记忆(s),Product Memory(s)
+物联网,Internet of Things
+手控器物联网,Handheld IoT
+手臂编号,Robot Arm Number
+机床编号,CNC Number
+生产批次,Production Batch
+主板物联网,Mainboard IoT
+机床通信,CNC Communication
+无校验,No Parity
+奇校验,Odd Parity
+偶校验,Even Parity
+奇偶校验,Parity Check
+主板通信,Mainboard Communication
+波特率,Baud Rate
+语言设置,Language Settings
+默认,Default
+新宋体,NSimSun
+楷体,KaiTi
+字体：,Font:
+语言设置：,Language Settings:
+字号：,Font Size:
+用户设置,User Settings
+按键音设置：,Key Sound:
+背光时间：,Backlight Time:
+触摸校准：,Touch Calibration:
+LOGO设置：,LOGO Settings:
+系统名称：,System Name:
+系统颜色：,System Color:
+系统时间：,System Time:
+秒,Seconds
+触摸屏校准,Calibration
+更新LOGO,Update LOGO
+机床机械手控制系统,CNC & Robot Arm Control System
+背光亮度：,Brightness:
+默认值,Default
+橘色,Orange
+黄色,Yellow
+绿色,Green
+棕色,Brown
+年,Year
+月,Month
+日,Day
+时,Hour
+分,Minute
+升级与备份,Upgrade/Backup
+系统数据备份,System Data Backup
+备份数据还原,Backup Data Restore
+恢复出厂设置,Restore Factory Settings
+升级,Upgrade
+手控器升级,HMI Upgrade
+主板升级,Mainboard Upgrade
+IO板升级,IO Board Upgrade
+伺服升级,Servo Upgrade
+记事本,Notepad
+回退,Back
+标题：,Title:
+密码设置,Passwd Settings
+旧密码：,Old Passwd:
+旧密码,Old Passwd
+新密码：,New Passwd:
+新密码,New Passwd
+确认新密码：,Confirm Passwd:
+确认新密码,Confirm Passwd
+超级管理员,Super Admin
+菜单权限,Menu Permissions
+Http服务器,HTTP Server
+Tcp客户端,TCP Client
+本地IP：,Local IP:
+本地端口：,Local Port:
+远程端口：,Remote Port:
+远程IP：,Remote IP:
+连接,Connect
+断开,Disconnect
+物联网：,IoT:
+物联网调试数据：,IoT Debug Data:
+清除窗口,Clear
+打印发送,Print Send
+启动失败！,Startup Failed!
+注册信息,Registration Information
+注册码：,Registration Code:
+激活,Activate
+注册码生成器,Registration Code Generator
+系统信息,System Information
+版本信息,Version Information
+手控器:,HMI:
+主板:,Mainboard:
+旋转轴单位,Rotary Axis Unit
+汇川,Inovance
+禾川,HNC
+迈信,Maxsine
+雷赛,Leadshine
+信捷,Xinjie
+睿能,Ruineng
+台邦,Taibang
+超川,Chaocuan
+纳川,Nachuan
+迪威迅,Dvision
+科昇,Kesheng
+红森,Hongsun
+通航,Tonghang
+台达,Delta
+普菲得,Pufeide
+埃斯顿,Estun
+三菱,Mitsubishi
+西门子,Siemens
+时代超群,Times Super
+正弦,Sine
+久同,Jiutong
+大族,Han’s Laser
+日鼎,Rital
+施耐德,Schneider
+麦格米特,Megmeet
+伺服品牌,Servo Brand
+2500线,2500 Lines
+16位,16-bit
+17位,17-bit
+18位,18-bit
+19位,19-bit
+20位,20-bit
+21位,21-bit
+22位,22-bit
+23位,23-bit
+伺服型号,Servo Model
+扩展IO开关,Extended IO Switch
+编码器类型,Encoder Type
+增量式,Incremental
+绝对式,Absolute
+编码器位数,Encoder Resolution
+1块,1 Block
+轴参数,Axis Parameters
+正,Positive
+负,Negative
+最大坐标,Max Coordinate
+单圈脉冲数,Pulses Per Revolution
+坐标方向,Coordinate Direction
+最小坐标,Min Coordinate
+单圈距离,Distance Per Revolution
+最大速度,Max Speed
+轴速度,Axis Speed
+减减速,Negative Jerk
+加加速,Jerk 
+加速时间(s),Acc Time(s)
+减速时间(s),Dec Time(s)
+安全区1,Safety Zone 1
+Z轴机床区参数,Z-Axis CNC Parameters
+最大待机位置,Max Standby Pos
+最大下降位置,Max Descent Pos
+机床内高度,CNC Inner Height
+轴组合,Axis Combination
+Y轴,Y-Axis
+X轴Y轴参数,X/Y-Axis Parameters
+(A1)机床点1,(A1) CNC Point 1
+(A2)机床点2,(A2) CNC Point 2
+(B1)料仓点1,(B1) Bin Point 1
+(B2)料仓点2,(B2) Bin Point 2
+Z轴料仓区参数,Z-Axis Feedbin Parameters
+最大允许启动位置,Max Allowed Start Pos
+加工完成输入口,Processing Completion Input Port
+安全区2,Safety Zone 2
+安全区3,Safety Zone 3
+安全区4,Safety Zone 4
+位置限定,Position Limit
+容差(mm),Tolerance(mm)
+Z1轴安全横行高度(mm),Z1-Axis Safe Traverse Height(mm)
+B/Z2轴安全横行高度(mm),B/Z2-Axis Safe Traverse Height(mm)
+旋转安全Y1位置(mm),Rotational Safe Y1 Position(mm)
+原点精度(mm),Origin Precision(mm)
+旋转安全Y2位置(mm),Rotational Safe Y2 Position(mm)
+动作确认误差(mm),Motion Confirmation Error(mm)
+堆叠方式,Stacking Method
+三点式,Three-Point Type
+四点式,Four-Point Type
+普通式,Standard Type
+旋转料仓完成提示,Rotational Warehouse Completion Prompt
+不提示,No Prompt
+旋转料仓工位数,Rotational Warehouse Workstations
+逐组堆叠,Grouped Stacking
+逐行堆叠,Row-by-Row Stacking
+逐层堆叠,Layer-by-Layer Stacking
+分组堆叠,Grouped Stacking
+一分二,One-to-Two
+一分三,One-to-Three
+堆叠记忆,Stacking Memory
+料仓类型,Warehouse Type
+平板式料仓,Flat Warehouse
+旋转式料仓,Rotational Warehouse
+限位,Limit
+原点信号,Origin Signal
+最大限位,Max Limit
+最小限位,Min Limit
+正限位,Positive Limit
+负限位,Negative Limit
+结构,Structure
+绝对位移,Absolute Displacement
+相对位移,Relative Displacement
+气阀,Pneumatic Valve
+轴类型,Axis Type
+运动模式,Motion Mode
+原点,Origin
+不回原点,No Homing
+回原点顺序,Homing Sequence
+无原点,No Origin
+长原点,Long Origin
+短原点,Short Origin
+回原点方向,Homing Direction
+找原点速度,Homing Speed
+原点偏移,Origin Offset
+离开原点速度,Leave Origin Speed
+原点类型,Origin Type
+复位子程序,Reset Subroutine
+扭矩限制,Torque Limit
+通信,Communication
+发送,Send
+参数数值,Parameter Value
+轴编号,Axis Number
+是否开机设置,Power-On Setting
+存放组号,Storage Group Number
+参数索引,Parameter Index
+参数子索引,Parameter Sub-Index
+是否保存,Save or Not
+参数长度,Parameter Length
+不保存,Do Not Save
+不设置,Not Set
+请输入菜单权限密码：,Please Enter Menu Permission Passwd:
+确认修改颜色？系统将重启！,Confirm Color Change? The System Will Restart!
+确定修改系统时间？,Confirm System Time Change?
+时间格式错误！,Incorrect Time Format!
+触摸校准会重启系统，请确认是否校准？,Touch Calibration Will Restart the System,Confirm Calibration?
+标题,Title
+修改时间,Modify Time
+请插入U盘！,Please Insert USB Drive!
+导入成功!,Import Successful!
+数据处理中，请稍候...,Processing Data,Please Wait...
+导出成功!,Export Successful!
+菜单,Menu
+不可见,Invisible
+产品,Product
+密码不能为空！,Passwd Cannot Be Empty!
+旧密码错误！,Incorrect Old Passwd!
+两次输入密码不一致！,Passwds do not match!
+密码修改成功！,Passwd changed successfully!
+标题不能为空！,Title cannot be empty!
+文件名格式错误！,Filename format error!
+确定删除？,Are you sure you want to delete?
+未检测到bootlogo.bmp文件,bootlogo.bmp file not detected
+未检测到stop.jpg文件,stop.jpg file not detected
+未检测到bootlogo.bmp和stop.jpg文件,bootlogo.bmp and stop.jpg files not detected
+手持器升级完成,正在重启中...,Handheld device upgrade complete,restarting...
+主板升级完成,正在重启中...,Motherboard upgrade complete,restarting...
+IO板升级完成,正在重启中...,IO board upgrade complete,restarting...
+伺服升级完成,正在重启中...,Servo upgrade complete,restarting...
+数据备份成功!,Data backup successful!
+数据还原成功!,Data restore successful!
+提示 : 手持器升级中,切勿断电,请等待自动重启!,Hint: Handheld device upgrading,do not power off,please wait for automatic restart!
+提示 : 主板升级中,切勿断电,请等待自动重启!,Hint: Motherboard upgrading,do not power off,please wait for automatic restart!
+提示 : IO板升级中,切勿断电,请等待自动重启!,Hint: IO board upgrading,do not power off,please wait for automatic restart!
+提示 : 伺服升级中,切勿断电,请等待自动重启!,Hint: Servo upgrading,do not power off,please wait for automatic restart!
+提示 : 数据备份中,切勿断电!,Hint: Data backup in progress,do not power off!
+提示 : 数据还原中,切勿断电!,Hint: Data restore in progress,do not power off!
+升级成功！等待重启,Upgrade successful! Waiting for restart
+升级失败，请重启机器再次升级！,Upgrade failed,please restart the machine and try upgrading again!
+输入信号,Input signal
+输出信号,Output signal
+关闭,Close
+soft key,Soft key
+Z轴参数,Z-axis parameters
+从小到大,From small to large
+从大到小,From large to small
+方向,Direction
+间距(mm),Spacing(mm)
+偏移,Offset
+起始(mm),Start(mm)
+移至堆叠点,Move to stacking point
+移至跟随点,Move to follow point
+顺序,Sequence
+计数方式,Counting method
+程序结束,Program end
+命令结束,Command end
+留空,Leave blank
+首位不取,Do not take first Position
+末位不放,Do not release last Position
+三轴联动,Three-axis linkage
+输入值的范围不能超过%1～%2,请重新输入！,Input value range cannot exceed %1～%2,please re-enter!
+移动,Move
+X1轴伺服未开启，请把轴的堆叠点数设为0,X1 axis servo not turned on,please set the stacking points of the axis to 0
+Y1轴伺服未开启，请把轴的堆叠点数设为0,Y1 axis servo not turned on,please set the stacking points of the axis to 0
+Z1轴伺服未开启，请把轴的堆叠点数设为0,Z1 axis servo not turned on,please set the stacking points of the axis to 0
+9组,9 groups
+轴指定个数：,Axis specified number:
+11组,11 groups
+10组,10 groups
+7组,7 groups
+6组,6 groups
+8组,8 groups
+5组,5 groups
+4组,4 groups
+Z轴指定个数：,Z-axis specified number:
+Y轴指定个数：,Y-axis specified number:
+2组,2 groups
+3组,3 groups
+X轴指定个数：,X-axis specified number:
+1组,1 group
+分解,Decompose
+组合,Combine
+上移,Move up
+下移,Move down
+屏蔽,Shield
+插入,Insert
+子程序选择,Subroutine selection
+延时时间,Delay time
+提前,Advance
+结束,End
+加速,Acceleration
+减速,Deceleration
+提前位置,Advance Position
+提前速度,Advance Speed
+状态,Status
+夹紧,Clamping
+松开,Release
+延时,Delay
+堆叠个数为0时，参数不能修改，请修改堆叠个数,Parameters cannot be modified when stacking number is 0,please change the stacking number
+间隔为,Interval is
+次,Times
+返回步号,Return step number
+返回标签,Return label
+无标签,No label
+限时,Time limit
+故障编号,Fault number
+提示编号,Prompt number
+标签1,Label 1
+跳转到,Jump to
+其他,Other
+运算符,Operator
+赋值,Assignment
+产量,Yield
+堆叠计数,Stacking count
+循环,Loop
+位置记忆,Position memory
+到位报警,Position alarm
+运行速度,Running Speed
+最大位置,Max Position
+偏移位置,Offset Position
+停止信号,Stop Signal
+低速转矩,Low-speed Torque
+自动子程序,Automatic subroutine
+标签/注释,Label/Comment
+转矩保护,Torque protection
+逻辑&变量,Logic & Variables
+伺服停止,Servo stop
+搜索,Search
+标签/标注,Label/Mark
+跳转,Jump
+如果,If
+条件2,Condition 2
+否则,Else
+结束如果,End if
+并且,And
+或者,Or
+循环结束,Loop end
+循环开始：,Loop start:
+操作数与运算符,Operand and operator
+运算符：,Operator:
+类型,Type
+定时开始,Timer start
+定时结束,Timer end
+定时清零,Timer reset
+定时器选择：,Timer selection:
+搜索1,Search 1
+搜索2,Search 2
+搜索3,Search 3
+搜索4,Search 4
+搜索5,Search 5
+搜索6,Search 6
+搜索7,Search 7
+搜索8,Search 8
+位置(mm),Position(mm)
+感应停止,Inductive stop
+标准,Standard
+自动,Automatic
+并行一次,Parallel once
+等待子程序完成,Wait for subroutine to complete
+通用,General
+信号等待,Signal wait
+卡爪动作,Gripper action
+速度教导,Speed teaching
+信号检测,Signal check
+预留输出,Reserved output
+信号输出,Signal output
+检测,Check
+卡爪检测,Gripper check
+夹紧检测开始,Clamping check start
+松开检测开始,Release check start
+夹紧检测结束,Clamping check end
+松开检测结束,Release check end
+原料1夹紧限,Material 1 clamping limit
+成品1夹紧限,Finished product 1 clamping limit
+卡盘1夹紧限,Chuck 1 clamping limit
+原料1松开限,Material 1 release limit
+成品1松开限,Finished product 1 release limit
+卡盘1松开限,Chuck 1 release limit
+预留检测,Reserved check
+预留ON检测,Reserved ON check
+预留OFF检测,Reserved OFF check
+预留检测结束,Reserved check end
+吹气1通,Blow air 1 open
+主轴旋转1通,Spindle rotation 1 open
+启动加工1通,Start processing 1 open
+主轴定位1通,Spindle Positioning 1 open
+报警灯开,Alarm light on
+报警声开,Alarm sound on
+延时动作,Delayed action
+报警自定义,Custom alarm
+周期停止,Cycle stop
+堆叠清零,Stacking reset
+放料跟随堆叠1组,Feed follow stacking 1 group
+放料跟随堆叠2组,Feed follow stacking 2 groups
+放料跟随堆叠3组,Feed follow stacking 3 groups
+放料跟随堆叠4组,Feed follow stacking 4 groups
+堆叠9组,Stacking 9 groups
+堆叠10组,Stacking 10 groups
+堆叠11组,Stacking 11 groups
+预留通,Reserved open
+预留通时,Reserved open time
+预留翻转,Reserved flip
+时间,Time
+等待机床,Wait for machine tool
+等待机床信号,Wait for machine tool signal
+等待卡爪,Wait for gripper
+等待松开OFF,Wait for release OFF
+卡爪1反转限,Gripper 1 reverse limit
+卡爪1正转限,Gripper 1 forward limit
+等待松开ON,Wait for release ON
+等待夹紧ON,Wait for clamping ON
+等待夹紧OFF,Wait for clamping OFF
+夹紧位置修正,Clamping Position correction
+卡爪1松开,Gripper 1 release
+等待预留,Wait for reserved
+等待预留上升沿,Wait for reserved rising edge
+等待预留OFF,Wait for reserved OFF
+等待预留下降沿,Wait for reserved falling edge
+等待预留ON,Wait for reserved ON
+等待预留跳变沿,Wait for reserved change edge
+返回,Return
+标签,Label
+整数,Integer
+一位小数,One decimal place
+两位小数,Two decimal places
+确认删除所选动作？,Confirm deletion of selected action?
+删除失败,Deletion failed
+X1轴超出最大范围,X1 axis exceeds maximum range
+Y1轴超出最大范围,Y1 axis exceeds maximum range
+Z1轴超出最大范围,Z1 axis exceeds maximum range
+Y2轴超出最大范围,Y2 axis exceeds maximum range
+Z2轴超出最大范围,Z2 axis exceeds maximum range
+预留断,Reserved interrupt
+输入值的范围不能超过1450～1499,请重新输入。,Input value range cannot exceed 1450～1499,please re-enter.
+复制,Copy
+加载,Load
+预览,Preview
+全选,Select all
+全不选,Deselect all
+原文件名：,Original file name:
+现文件名：,Current file name:
+权限：,Permission:
+时间/位置允许,Time/location allowed
+时间允许,Time allowed
+程序名格式错误！,Program name format error!
+程序文本不能为空,Program text cannot be empty
+文件已经存在！,File already exists!
+无法打开文件进行写入,Unable to open file for writing
+请选择一个要复制的程序！,Please select a program to copy!
+程序名不能为空！,Program name cannot be empty!
+文件已存在！,File already exists!
+文件复制失败！,File copy failed!
+请选择一个要加载的程序！,Please select a program to load!
+请选择一个要预览的程序！,Please select a program to preview!
+请先对文件进行解锁！,Please unlock the file first!
+确认删除文件？,Confirm file deletion?
+不能删除当前已经加载文件！,Cannot delete the currently loaded file!
+导出成功！,Export successful!
+没有选择要导入的文件！,No file selected for import!
+文件已存在，请确认是否覆盖？,File already exists,please confirm if it should be overwritten?
+文件导入成功！,File import successful!
+文件名,File name
+最后修改时间,Last modified time
+密码：,Passwd:
+变量9类型,Variable 9 type
+小数,Decimal
+变量10类型,Variable 10 type
+变量11类型,Variable 11 type
+变量12类型,Variable 12 type
+变量13类型,Variable 13 type
+变量14类型,Variable 14 type
+变量15类型,Variable 15 type
+变量16类型,Variable 16 type
+变量1类型,Variable 1 type
+变量2类型,Variable 2 type
+变量3类型,Variable 3 type
+变量4类型,Variable 4 type
+变量5类型,Variable 5 type
+变量6类型,Variable 6 type
+变量7类型,Variable 7 type
+变量8类型,Variable 8 type
+恢复选项,Restore options
+保留教导程序,Keep teaching program
+保留每转距离等数据,Retain data like per-revolution distance
+确认,Confirm
+输入密码:,Enter password:
+剪切,Cut
+粘贴,Paste
+重命名,Rename
+数据选项,Data options
+教导文件,Teaching file
+系统参数,System parameters
+全部参数,All parameters
+浏览...,Browse...
+请确认: [手持器]---->[U盘],Please confirm: [Handheld device]---->[USB drive]
+请确认: [U盘]---->[手持器],Please confirm: [USB drive]---->[Handheld device]
+是否现在进行手持器升级？,Do you want to upgrade the handheld device now?
+是否现在进行主板升级？,Do you want to upgrade the motherboard now?
+当前系统无IO板,Current system has no IO board
+当前系统不支持伺服升级,Current system does not support servo upgrade
+是否备份设置文件U盘？,Do you want to back up the setting file to the USB drive?
+是否从U盘恢复设置文件？,Do you want to restore the setting file from the USB drive?
+输入恢复密码，按确认按键，将恢复出场设置，并重启系统!,Enter the restore password,press the confirm button to restore factory settings and reboot the system!
+升级文件类型异常！请选择类型为M_VX_X.bin类型的文件进行升级,Upgrade file type is abnormal! Please choose a file of type M_VX_X.bin for upgrade
+未选中升级文件！,No upgrade file selected!
+请选择文件名为MachineTool的升级文件进行升级,Please select the upgrade file named MachineTool for upgrading
+未发现恢复出场设置文件！,Restore factory settings file not found!

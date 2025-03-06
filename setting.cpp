@@ -11,6 +11,7 @@
 #include <QThread>
 #include <QRadioButton>
 #include <QProgressDialog>
+#include <QTranslator>
 
 #include "mainwindow.h"
 #include "upgradedialog.h"
@@ -26,6 +27,8 @@ const QString noteDirPath = "/opt/MachineTool/docs/notepad/";
 const QString menuStateConfigPath = "/opt/MachineTool/configs/menustate_config.ini";
 
 QVector<QString> registerCode;
+
+extern QTranslator translator;
 
 MenuItem::MenuItem(int id, const QString& name) :
     id(id), name(name), state(MenuState::Operator) {}
@@ -84,182 +87,8 @@ Setting::Setting(QWidget *parent) :
         }
     });
 
-    connect(ui->btnSavePasswdAdmin, &QPushButton::clicked, [=]() {
-        QList<NumberEdit*> edits = {ui->editAdminOldPasswd, ui->editAdminNewPasswd, ui->editAdminNewPasswdConfirm};
-        handleSavePasswd(&passwd[0], edits, 0);
-    });
+    this->setupSystemSetting();
 
-    connect(ui->btnSavePasswdSuperAdmin, &QPushButton::clicked, [=]() {
-        QList<NumberEdit*> edits = {ui->editSuperAdminOldPasswd, ui->editSuperAdminNewPasswd, ui->editSuperAdminNewPasswdConfirm};
-        handleSavePasswd(&passwd[1], edits, 1);
-    });
-
-    connect(ui->btnSavePasswdMenu, &QPushButton::clicked, [=]() {
-        QList<NumberEdit*> edits = {ui->editMenuOldPasswd, ui->editMenuNewPasswd, ui->editMenuNewPasswdConfirm};
-        handleSavePasswd(&passwd[2], edits, 2);
-    });
-
-    // langurage set
-    connect(ui->coboxFonts, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
-        if (index != m_SystemSet.typeFace) {
-            updateAppFont();
-            m_SystemSet.typeFace = index;
-            ::setSystemSet(m_SystemSet);
-        }
-    });
-    connect(ui->coboxFontSize, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
-        if (index != m_SystemSet.wordSize) {
-            updateAppFont();
-            m_SystemSet.wordSize = index;
-            ::setSystemSet(m_SystemSet);
-        }
-    });
-
-    ui->editBrightTime->setInputRange(30, 65535);
-    connect(ui->editBrightTime, &NumberEdit::textChanged, [=](const QString& val){
-        int second = val.toInt();
-        if (second < 30 && second > 65535)
-            return;
-        BackLighter::instance()->setScreenOffTime(second);
-        m_SystemSet.backlightTime = second;
-        ::setSystemSet(m_SystemSet);
-    });
-
-    connect(ui->sliderBrightness, &QSlider::valueChanged, [=](int value){
-//        qDebug() << "value of slider:" << value;
-        BackLighter::instance()->setBrightness(value);
-        ui->percentageBrightness->setValue(value);
-//        qDebug() << "brightness:" << BackLighter::instance()->getBrightness();
-    });
-    connect(ui->sliderBrightness, &QSlider::sliderReleased, [=](){
-        m_SystemSet.backlightBrightness = ui->sliderBrightness->value();
-        ::setSystemSet(m_SystemSet);
-    });
-
-    connect(ui->chboxBuzzer, &QCheckBox::stateChanged, [=](int state){
-        bool enable = state;
-        Beeper::instance()->setEnable(enable);
-
-        m_SystemSet.keyListen = state;
-        ::setSystemSet(m_SystemSet);
-    });
-
-    connect(ui->btnSaveSysName, &QPushButton::clicked, [=](){
-        QString sysName = ui->editSystemName->text();
-        m_SystemSet.sysName = sysName;
-        ::setSystemSet(m_SystemSet);
-        emit sysNameChanged(sysName);
-    });
-    connect(ui->btnDefaultName, &QPushButton::clicked, [=](){
-        const QString defaultSysName = QString("展晖机床机械手系统");
-        m_SystemSet.sysName = defaultSysName;
-        ::setSystemSet(m_SystemSet);
-        emit sysNameChanged(defaultSysName);
-    });
-
-    connect(ui->btnSaveColor, &QPushButton::clicked, [=]() {
-        static const std::vector<QString> styles = {
-            ":/styleSheets/style.qss",                // 默认
-            "/opt/MachineTool/configs/style/style_orange_color.qss", // 橙色
-            "/opt/MachineTool/configs/style/style_yellow_color.qss", // 黄色
-            "/opt/MachineTool/configs/style/style_green_color.qss",  // 绿色
-            "/opt/MachineTool/configs/style/style_brown_color.qss"   // 棕色
-        };
-
-        const std::vector<QCheckBox*> colorCheckBoxes = {
-            ui->chboxColorDefault, // 默认
-            ui->chboxColorOriange, // 橙色
-            ui->chboxColorYellow,  // 黄色
-            ui->chboxColorGreen,   // 绿色
-            ui->chboxBrown         // 棕色
-        };
-
-        auto it = std::find_if(colorCheckBoxes.begin(), colorCheckBoxes.end(), [](QCheckBox* checkbox) {
-            return checkbox && checkbox->isChecked();
-        });
-
-//        static uint8_t setColor;
-//        setColor = (it != colorCheckBoxes.end()) ? std::distance(colorCheckBoxes.begin(), it) : 0;
-        uint8_t setColor = (it != colorCheckBoxes.end()) ? std::distance(colorCheckBoxes.begin(), it) : 0;
-
-        if (m_SystemSet.sysColor == setColor) {
-            return;
-        }
-        ErrorTipDialog tip (tr("确认修改颜色？系统将重启！"), nullptr);
-        auto reply =  tip.exec();
-        if (reply == QDialog::Accepted)
-        {
-            m_SystemSet.sysColor = setColor;
-            ::setSystemSet(m_SystemSet);
-
-            ::sync();
-            ::system("reboot");
-        }
-
-
-#if 0
-        static QProgressDialog progressDialog(tr("Please wait, applying new color settings..."), tr("取消"), 0, 0, this);
-        progressDialog.setCancelButton(nullptr);
-        progressDialog.setWindowModality(Qt::WindowModal);
-        progressDialog.setFixedSize(500, 300);
-        QCoreApplication::processEvents();
-        progressDialog.setStyleSheet(
-            "QProgressDialog {"
-            "   background-color: #24B4A5;"
-            "   border-radius: 10px;"
-            "}"
-            "QProgressBar {"
-            "   border: 2px solid white;"
-            "   border-radius: 5px;"
-            "   background: #ffffff;"
-            "   color: #000000;"
-            "}"
-        );
-
-        QTimer::singleShot(10, [setColor]() {
-            QFile file(styles[setColor]);
-            if (file.open(QIODevice::ReadOnly)) {
-                qApp->setStyleSheet(QString::fromLatin1(file.readAll()));
-                file.close();
-            }
-            progressDialog.close();
-        });
-
-        progressDialog.exec();
-#endif
-    });
-
-    connect(ui->btnSaveTime, &QPushButton::clicked, [=](){
-
-        ErrorTipDialog tip(tr("确定修改系统时间？"), nullptr);
-        if (tip.exec() == QDialog::Rejected) return;
-
-        int year = ui->editYear->text().toInt();
-        int month = ui->editMonth->text().toInt();
-        int day = ui->editDay->text().toInt();
-        int hour = ui->editHour->text().toInt();
-        int minute = ui->editMinute->text().toInt();
-        int second = ui->editSecond->text().toInt();
-
-        QDate date(year, month, 1);
-         int daysInMonth = date.daysInMonth();
-         if (day < 1 || day > daysInMonth) {
-             ErrorTipDialog tip(tr("时间格式错误！"), TipMode::ONLY_OK, nullptr);
-             tip.exec();
-             return;
-         }
-
-        tm t;
-        t.tm_year = year - 1900;
-        t.tm_isdst = 0;
-        t.tm_mon = month - 1;
-        t.tm_mday = day;
-        t.tm_hour = hour;
-        t.tm_min = minute;
-        t.tm_sec = second;
-
-        TimeSetter::instance()->setTime(t);
-    });
     connect(ui->coboxStackWay, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
         auto mode = (StackMode)(index);
         for (int i = 0; i < 8; i++)
@@ -427,15 +256,7 @@ Setting::Setting(QWidget *parent) :
 
     //PXC_240914
     setupPortDefine();
-    //触摸屏校准按钮
-    connect(ui->btnTouchCalibration,&QPushButton::clicked,this,[=]() {
-        int reply =  MainWindow::pMainWindow->showErrorTip(tr("触摸校准会重启系统，请确认是否校准？"));
-        if (reply == QDialog::Accepted)
-        {
-            QProcess_execute("rm",QStringList() <<"/etc/pointercal");
-            QProcess_execute("reboot",QStringList());
-        }
-    });
+
     /***************************升级与备份-信号槽连接**********************************/
     connect(ui->btnUpdateHandcontroller, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(HANDHELD);});
     connect(ui->btnUpdateIOBoard, &QPushButton::clicked,this,[=]() {this->UpgradeHandle(IOBOARD);});
@@ -1717,6 +1538,447 @@ void Setting::setupMenuAuthority()
     });
 }
 
+void Setting::setupSystemSetting()
+{
+    // langurage set
+    static std::vector<QCheckBox*> chboxsLang = {
+        ui->chboxChinese, ui->chboxEnglish, ui->chboxKorean
+    };
+    if (m_SystemSet.lan < chboxsLang.size())
+    {
+        chboxsLang.at(m_SystemSet.lan)->setChecked(true);
+    }
+
+    for (int i = 0; i < chboxsLang.size(); i++)
+    {
+        auto chbox = chboxsLang[i];
+        connect(chbox, &QCheckBox::stateChanged, [this, i](int state){
+            if (state)
+            {
+                ErrorTipDialog tip(tr("确认切换语言？"), TipMode::NORMAL, nullptr);
+                int reply = tip.exec();
+
+                if (reply == QDialog::Accepted)
+                {
+                    m_SystemSet.lan = i;
+
+                    setSystemSet(m_SystemSet);
+                    switchLangurage();
+                }
+                else
+                {
+                    if (m_SystemSet.lan < chboxsLang.size())
+                    {
+                        chboxsLang.at(m_SystemSet.lan)->setChecked(true);
+                    }
+                }
+            }
+        });
+    }
+
+    connect(ui->coboxFonts, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
+        if (index != m_SystemSet.typeFace) {
+            updateAppFont();
+            m_SystemSet.typeFace = index;
+            ::setSystemSet(m_SystemSet);
+        }
+    });
+    connect(ui->coboxFontSize, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
+        if (index != m_SystemSet.wordSize) {
+            updateAppFont();
+            m_SystemSet.wordSize = index;
+            ::setSystemSet(m_SystemSet);
+        }
+    });
+
+    // User Settings
+    ui->editBrightTime->setInputRange(30, 65535);
+    connect(ui->editBrightTime, &NumberEdit::textChanged, [=](const QString& val){
+        int second = val.toInt();
+        if (second < 30 && second > 65535)
+            return;
+        BackLighter::instance()->setScreenOffTime(second);
+        m_SystemSet.backlightTime = second;
+        ::setSystemSet(m_SystemSet);
+    });
+
+    connect(ui->sliderBrightness, &QSlider::valueChanged, [=](int value){
+//        qDebug() << "value of slider:" << value;
+        BackLighter::instance()->setBrightness(value);
+        ui->percentageBrightness->setValue(value);
+//        qDebug() << "brightness:" << BackLighter::instance()->getBrightness();
+    });
+    connect(ui->sliderBrightness, &QSlider::sliderReleased, [=](){
+        m_SystemSet.backlightBrightness = ui->sliderBrightness->value();
+        ::setSystemSet(m_SystemSet);
+    });
+
+    connect(ui->chboxBuzzer, &QCheckBox::stateChanged, [=](int state){
+        bool enable = state;
+        Beeper::instance()->setEnable(enable);
+
+        m_SystemSet.keyListen = state;
+        ::setSystemSet(m_SystemSet);
+    });
+
+    //触摸屏校准按钮
+    connect(ui->btnTouchCalibration,&QPushButton::clicked,this,[=]() {
+        int reply = MainWindow::pMainWindow->showErrorTip(tr("触摸校准会重启系统，请确认是否校准？"));
+        if (reply == QDialog::Accepted)
+        {
+            QProcess_execute("rm",QStringList() <<"/etc/pointercal");
+            QProcess_execute("reboot",QStringList());
+        }
+    });
+
+    connect(ui->btnSaveSysName, &QPushButton::clicked, [=](){
+        QString sysName = ui->editSystemName->text();
+        m_SystemSet.sysName = sysName;
+        ::setSystemSet(m_SystemSet);
+        emit sysNameChanged(sysName);
+    });
+    connect(ui->btnDefaultName, &QPushButton::clicked, [=](){
+        const QString defaultSysName = QString("展晖机床机械手系统");
+        m_SystemSet.sysName = defaultSysName;
+        ::setSystemSet(m_SystemSet);
+        emit sysNameChanged(defaultSysName);
+    });
+
+    connect(ui->btnSaveColor, &QPushButton::clicked, [=]() {
+        static const std::vector<QString> styles = {
+            ":/styleSheets/style.qss",                // 默认
+            "/opt/MachineTool/configs/style/style_orange_color.qss", // 橙色
+            "/opt/MachineTool/configs/style/style_yellow_color.qss", // 黄色
+            "/opt/MachineTool/configs/style/style_green_color.qss",  // 绿色
+            "/opt/MachineTool/configs/style/style_brown_color.qss"   // 棕色
+        };
+
+        const std::vector<QCheckBox*> colorCheckBoxes = {
+            ui->chboxColorDefault, // 默认
+            ui->chboxColorOriange, // 橙色
+            ui->chboxColorYellow,  // 黄色
+            ui->chboxColorGreen,   // 绿色
+            ui->chboxBrown         // 棕色
+        };
+
+        auto it = std::find_if(colorCheckBoxes.begin(), colorCheckBoxes.end(), [](QCheckBox* checkbox) {
+            return checkbox && checkbox->isChecked();
+        });
+
+//        static uint8_t setColor;
+//        setColor = (it != colorCheckBoxes.end()) ? std::distance(colorCheckBoxes.begin(), it) : 0;
+        uint8_t setColor = (it != colorCheckBoxes.end()) ? std::distance(colorCheckBoxes.begin(), it) : 0;
+
+        if (m_SystemSet.sysColor == setColor) {
+            return;
+        }
+        ErrorTipDialog tip (tr("确认修改颜色？系统将重启！"), nullptr);
+        auto reply =  tip.exec();
+        if (reply == QDialog::Accepted)
+        {
+            m_SystemSet.sysColor = setColor;
+            ::setSystemSet(m_SystemSet);
+
+            ::sync();
+            ::system("reboot");
+        }
+
+
+#if 0
+        static QProgressDialog progressDialog(tr("Please wait, applying new color settings..."), tr("取消"), 0, 0, this);
+        progressDialog.setCancelButton(nullptr);
+        progressDialog.setWindowModality(Qt::WindowModal);
+        progressDialog.setFixedSize(500, 300);
+        QCoreApplication::processEvents();
+        progressDialog.setStyleSheet(
+            "QProgressDialog {"
+            "   background-color: #24B4A5;"
+            "   border-radius: 10px;"
+            "}"
+            "QProgressBar {"
+            "   border: 2px solid white;"
+            "   border-radius: 5px;"
+            "   background: #ffffff;"
+            "   color: #000000;"
+            "}"
+        );
+
+        QTimer::singleShot(10, [setColor]() {
+            QFile file(styles[setColor]);
+            if (file.open(QIODevice::ReadOnly)) {
+                qApp->setStyleSheet(QString::fromLatin1(file.readAll()));
+                file.close();
+            }
+            progressDialog.close();
+        });
+
+        progressDialog.exec();
+#endif
+    });
+
+    connect(ui->btnSaveTime, &QPushButton::clicked, [=](){
+
+        ErrorTipDialog tip(tr("确定修改系统时间？"), nullptr);
+        if (tip.exec() == QDialog::Rejected) return;
+
+        int year = ui->editYear->text().toInt();
+        int month = ui->editMonth->text().toInt();
+        int day = ui->editDay->text().toInt();
+        int hour = ui->editHour->text().toInt();
+        int minute = ui->editMinute->text().toInt();
+        int second = ui->editSecond->text().toInt();
+
+        QDate date(year, month, 1);
+         int daysInMonth = date.daysInMonth();
+         if (day < 1 || day > daysInMonth) {
+             ErrorTipDialog tip(tr("时间格式错误！"), TipMode::ONLY_OK, nullptr);
+             tip.exec();
+             return;
+         }
+
+        tm t;
+        t.tm_year = year - 1900;
+        t.tm_isdst = 0;
+        t.tm_mon = month - 1;
+        t.tm_mday = day;
+        t.tm_hour = hour;
+        t.tm_min = minute;
+        t.tm_sec = second;
+
+        TimeSetter::instance()->setTime(t);
+    });
+
+
+    // Password setting
+    connect(ui->btnSavePasswdAdmin, &QPushButton::clicked, [=]() {
+        QList<NumberEdit*> edits = {ui->editAdminOldPasswd, ui->editAdminNewPasswd, ui->editAdminNewPasswdConfirm};
+        handleSavePasswd(&passwd[0], edits, 0);
+    });
+
+    connect(ui->btnSavePasswdSuperAdmin, &QPushButton::clicked, [=]() {
+        QList<NumberEdit*> edits = {ui->editSuperAdminOldPasswd, ui->editSuperAdminNewPasswd, ui->editSuperAdminNewPasswdConfirm};
+        handleSavePasswd(&passwd[1], edits, 1);
+    });
+
+    connect(ui->btnSavePasswdMenu, &QPushButton::clicked, [=]() {
+        QList<NumberEdit*> edits = {ui->editMenuOldPasswd, ui->editMenuNewPasswd, ui->editMenuNewPasswdConfirm};
+        handleSavePasswd(&passwd[2], edits, 2);
+    });
+
+    // Notepad
+
+    connect(ui->tableWgtNote, &QTableWidget::currentCellChanged, this, [=](int row, int){
+        if (row >= 0) {
+            // 获取第一列的标题内容
+            QString title = ui->tableWgtNote->item(row, 0)->text();
+            ui->editNoteTitle->setText(title);
+
+            // 构建文件名
+            QString fileName = noteDirPath + title + ".txt";
+
+            // 读取文件内容
+            QFile file(fileName);
+            if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+                QTextStream in(&file);
+                QString content = in.readAll();
+                ui->plainTextEditNote->setPlainText(content);
+                file.close();
+            } else {
+                ui->plainTextEditNote->setPlainText("无法打开文件: " + fileName);
+            }
+        }
+    });
+    connect(ui->btnEditNote, &QPushButton::clicked, this, [=](){
+        auto keyboard = FullKeyboard::instance();
+        keyboard->clearText();
+        keyboard->setCurrentEditObj(nullptr);
+        keyboard->exec();
+
+        QString input = keyboard->getInputText();
+
+        QTextCursor cursor = ui->plainTextEditNote->textCursor();
+
+//        cursor.clearSelection();
+//        cursor.movePosition(QTextCursor::NextWord, QTextCursor::KeepAnchor);
+        cursor.insertText(input);
+
+        ui->plainTextEditNote->setTextCursor(cursor);
+    });
+    connect(ui->btnSaveNote, &QPushButton::clicked, this, [=](){
+        int currentRow = ui->tableWgtNote->currentRow();
+        if (currentRow >= 0)
+        {
+            QString newTitle = ui->editNoteTitle->text().trimmed();
+
+            QRegularExpression illegalChars("[<>:\"/\\\\|?*.]");
+            if (newTitle.isEmpty())
+            {
+                MainWindow::pMainWindow->showErrorTip(tr("标题不能为空！"), TipMode::ONLY_OK);
+                return;
+            }
+            else if (newTitle.contains(illegalChars))
+            {
+                MainWindow::pMainWindow->showErrorTip(tr("文件名格式错误！"), TipMode::ONLY_OK);
+                return;
+            }
+            QString newFileName = noteDirPath + newTitle + ".txt";
+
+            QString title = ui->tableWgtNote->item(currentRow, 0)->text();
+            QString fileName = noteDirPath + title + ".txt";
+
+            QFile file(newFileName);
+            if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+            {
+                QTextStream out(&file);
+                QString content = ui->plainTextEditNote->toPlainText();
+                out << content;
+
+                file.flush();
+                file.close();
+                sync();
+
+                if (fileName != newFileName)
+                {
+                    if (QFile::exists(fileName))
+                    {
+                        QFile::remove(fileName);
+                    }
+                }
+
+                ui->tableWgtNote->item(currentRow, 0)->setText(newTitle);
+                QString revisedTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+                ui->tableWgtNote->item(currentRow, 1)->setText(revisedTime);
+            }
+        }
+    });
+    connect(ui->btnBackspaceNote, &QPushButton::clicked, this, [=]() {
+        QTextCursor cursor = ui->plainTextEditNote->textCursor();
+
+        if (!cursor.isNull() && cursor.position() > 0) {
+            cursor.deletePreviousChar();
+
+            ui->plainTextEditNote->setTextCursor(cursor);
+        }
+    });
+
+    connect(ui->btnNewNote, &QPushButton::clicked, this, [=](){
+        QDir dir(noteDirPath);
+         if (!dir.exists()) {
+             if (!dir.mkpath(".")) {
+                 qDebug() << "Failed to create directory:" << noteDirPath;
+                 return;
+             }
+         }
+
+       int rowCount = ui->tableWgtNote->rowCount();
+
+       QString newTitle = QString("untitled%1").arg(rowCount + 1);
+       QString newFileName = noteDirPath + newTitle + ".txt";
+
+       int count = 1;
+       while (QFile::exists(newFileName)) {
+           newFileName = noteDirPath + QString("untitled%1").arg(rowCount + 1 + count) + ".txt";
+           count++;
+       }
+
+       QFile file(newFileName);
+       if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+       {
+           file.close();
+
+           QString creationTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+
+           ui->tableWgtNote->insertRow(rowCount);
+           ui->tableWgtNote->setItem(rowCount, 0, new QTableWidgetItem(newTitle));
+           ui->tableWgtNote->setItem(rowCount, 1, new QTableWidgetItem(creationTime));
+
+           ui->editNoteTitle->setText(newTitle);
+           ui->plainTextEditNote->clear();
+       }
+    });
+
+    connect(ui->btnDeleteNote, &QPushButton::clicked, this, [=]() {
+        int reply = MainWindow::pMainWindow->showErrorTip(tr("确定删除？"));
+        if (reply == QDialog::Rejected)
+            return;
+
+        int currentRow = ui->tableWgtNote->currentRow();
+        if (currentRow >= 0)
+        {
+            QString title = ui->tableWgtNote->item(currentRow, 0)->text();
+            QString fileName = noteDirPath + title + ".txt";
+
+            QFile file(fileName);
+            if (file.exists())
+            {
+                if (file.remove())
+                {
+                    ui->tableWgtNote->removeRow(currentRow);
+                }
+            }
+        }
+    });
+
+    /****************************************************************************/
+    // Internet of Things
+    connect(ui->coboxIOTSelection, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index){
+    //    qDebug() << "index = " << index;
+    if (index == 2)
+    {
+        ui->stkWidgetIPSet->setCurrentIndex(0);
+
+        // disable these object
+        ui->stkWidgetIPSet->setDisabled(true);
+        ui->widgetIotDebug->setDisabled(true);
+    }
+    else
+    {
+        ui->stkWidgetIPSet->setEnabled(true);
+        ui->widgetIotDebug->setEnabled(true);
+    }
+    ui->stkWidgetIPSet->setCurrentIndex(index);
+    });
+
+    // Registration Information
+    {
+            QPushButton* inputBtns[16] = {
+                ui->btn0, ui->btn1, ui->btn2, ui->btn3, ui->btn4, ui->btn5, ui->btn6, ui->btn7,
+                ui->btn8, ui->btn9, ui->btn10, ui->btn11, ui->btn12, ui->btn13, ui->btn14, ui->btn15
+            };
+            QString hexChars[16] = {
+                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
+            };
+            for (int i = 0; i < 16; i++)
+            {
+                connect(inputBtns[i], &QPushButton::clicked, this, [=](){
+                    if (registerCode.size() < 32)
+                    {
+                        QString hexChar = hexChars[i];
+                        registerCode.append(hexChar);
+                        updateRegisterCodeDisplay();
+                    }
+                });
+            }
+
+            connect(ui->btnClearCode, &QPushButton::clicked, this, [=]() {
+                if(registerCode.isEmpty())
+                    return;
+                registerCode.clear();
+                registerCode.squeeze();
+                updateRegisterCodeDisplay();
+            });
+
+            connect(ui->btnBackspaceCode, &QPushButton::clicked, this, [=]() {
+                if (!registerCode.isEmpty())
+                {
+                    registerCode.removeLast();
+                    updateRegisterCodeDisplay();
+                }
+            });
+
+    }
+}
+
 //void Setting::saveMenuState(const QList<MenuItem*>& menuItems)
 //{
 //    QSettings settings(menuStateConfigPath, QSettings::IniFormat);
@@ -2368,6 +2630,39 @@ void Setting::updateTabVisibility()
     }
 }
 
+void Setting::switchLangurage()
+{
+    const QString BASE_PATH = "/opt/MachineTool/resources/lang/";
+    const QStringList LANGUAGE_FILES = {
+        "Translation_Ch.qm", // Chinese
+        "Translation_En.qm", // English
+        "Translation_Kr.qm"  // Korean
+    };
+
+    if (m_SystemSet.lan < 0 || m_SystemSet.lan >= LANGUAGE_FILES.size()) {
+        return; // Return early if language index is out of bounds
+    }
+
+    QString languageFilePath = BASE_PATH + LANGUAGE_FILES.at(m_SystemSet.lan);
+
+    if (!translator.load(languageFilePath))
+    {
+        qDebug() << "fail to load langurage file:" << languageFilePath;
+    }
+
+
+    qApp->installTranslator(&translator);
+
+    this->retranslate();
+}
+
+void Setting::retranslate()
+{
+    ui->retranslateUi(this);
+
+    ui->tableWgtNote->setHorizontalHeaderLabels({ tr("标题") , tr("修改时间")});
+}
+
 void Setting::onMenuStateChanged(MenuState newState)
 {
     MenuItem* item = qobject_cast<MenuItem*>(sender());
@@ -2543,218 +2838,6 @@ void Setting::pageSwitchInit()
                                                  % ui->stkWgtInterLock->count());
         ui->labPageNumInterLock->setText(QString("%1/2").arg(ui->stkWgtInterLock->currentIndex() + 1));
     });
-
-    /***************************************System setting part**********************************************************/
-
-    connect(ui->tableWgtNote, &QTableWidget::currentCellChanged, this, [=](int row, int){
-        if (row >= 0) {
-            // 获取第一列的标题内容
-            QString title = ui->tableWgtNote->item(row, 0)->text();
-            ui->editNoteTitle->setText(title);
-
-            // 构建文件名
-            QString fileName = noteDirPath + title + ".txt";
-
-            // 读取文件内容
-            QFile file(fileName);
-            if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-                QTextStream in(&file);
-                QString content = in.readAll();
-                ui->plainTextEditNote->setPlainText(content);
-                file.close();
-            } else {
-                ui->plainTextEditNote->setPlainText("无法打开文件: " + fileName);
-            }
-        }
-    });
-    connect(ui->btnEditNote, &QPushButton::clicked, this, [=](){
-        auto keyboard = FullKeyboard::instance();
-        keyboard->clearText();
-        keyboard->setCurrentEditObj(nullptr);
-        keyboard->exec();
-
-        QString input = keyboard->getInputText();
-
-        QTextCursor cursor = ui->plainTextEditNote->textCursor();
-
-//        cursor.clearSelection();
-//        cursor.movePosition(QTextCursor::NextWord, QTextCursor::KeepAnchor);
-        cursor.insertText(input);
-
-        ui->plainTextEditNote->setTextCursor(cursor);
-    });
-    connect(ui->btnSaveNote, &QPushButton::clicked, this, [=](){
-        int currentRow = ui->tableWgtNote->currentRow();
-        if (currentRow >= 0)
-        {
-            QString newTitle = ui->editNoteTitle->text().trimmed();
-
-            QRegularExpression illegalChars("[<>:\"/\\\\|?*.]");
-            if (newTitle.isEmpty())
-            {
-                MainWindow::pMainWindow->showErrorTip(tr("标题不能为空！"), TipMode::ONLY_OK);
-                return;
-            }
-            else if (newTitle.contains(illegalChars))
-            {
-                MainWindow::pMainWindow->showErrorTip(tr("文件名格式错误！"), TipMode::ONLY_OK);
-                return;
-            }
-            QString newFileName = noteDirPath + newTitle + ".txt";
-
-            QString title = ui->tableWgtNote->item(currentRow, 0)->text();
-            QString fileName = noteDirPath + title + ".txt";
-
-            QFile file(newFileName);
-            if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-            {
-                QTextStream out(&file);
-                QString content = ui->plainTextEditNote->toPlainText();
-                out << content;
-
-                file.flush();
-                file.close();
-                sync();
-
-                if (fileName != newFileName)
-                {
-                    if (QFile::exists(fileName))
-                    {
-                        QFile::remove(fileName);
-                    }
-                }
-
-                ui->tableWgtNote->item(currentRow, 0)->setText(newTitle);
-                QString revisedTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-                ui->tableWgtNote->item(currentRow, 1)->setText(revisedTime);
-            }
-        }
-    });
-    connect(ui->btnBackspaceNote, &QPushButton::clicked, this, [=]() {
-        QTextCursor cursor = ui->plainTextEditNote->textCursor();
-
-        if (!cursor.isNull() && cursor.position() > 0) {
-            cursor.deletePreviousChar();
-
-            ui->plainTextEditNote->setTextCursor(cursor);
-        }
-    });
-
-    connect(ui->btnNewNote, &QPushButton::clicked, this, [=](){
-        QDir dir(noteDirPath);
-         if (!dir.exists()) {
-             if (!dir.mkpath(".")) {
-                 qDebug() << "Failed to create directory:" << noteDirPath;
-                 return;
-             }
-         }
-
-       int rowCount = ui->tableWgtNote->rowCount();
-
-       QString newTitle = QString("untitled%1").arg(rowCount + 1);
-       QString newFileName = noteDirPath + newTitle + ".txt";
-
-       int count = 1;
-       while (QFile::exists(newFileName)) {
-           newFileName = noteDirPath + QString("untitled%1").arg(rowCount + 1 + count) + ".txt";
-           count++;
-       }
-
-       QFile file(newFileName);
-       if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-       {
-           file.close();
-
-           QString creationTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
-
-           ui->tableWgtNote->insertRow(rowCount);
-           ui->tableWgtNote->setItem(rowCount, 0, new QTableWidgetItem(newTitle));
-           ui->tableWgtNote->setItem(rowCount, 1, new QTableWidgetItem(creationTime));
-
-           ui->editNoteTitle->setText(newTitle);
-           ui->plainTextEditNote->clear();
-       }
-    });
-
-    connect(ui->btnDeleteNote, &QPushButton::clicked, this, [=]() {
-        int reply = MainWindow::pMainWindow->showErrorTip(tr("确定删除？"));
-        if (reply == QDialog::Rejected)
-            return;
-
-        int currentRow = ui->tableWgtNote->currentRow();
-        if (currentRow >= 0)
-        {
-            QString title = ui->tableWgtNote->item(currentRow, 0)->text();
-            QString fileName = noteDirPath + title + ".txt";
-
-            QFile file(fileName);
-            if (file.exists())
-            {
-                if (file.remove())
-                {
-                    ui->tableWgtNote->removeRow(currentRow);
-                }
-            }
-        }
-    });
-
-    /****************************************************************************/
-    connect(ui->coboxIOTSelection, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [=](int index){
-    //    qDebug() << "index = " << index;
-    if (index == 2)
-    {
-        ui->stkWidgetIPSet->setCurrentIndex(0);
-
-        // disable these object
-        ui->stkWidgetIPSet->setDisabled(true);
-        ui->widgetIotDebug->setDisabled(true);
-    }
-    else
-    {
-        ui->stkWidgetIPSet->setEnabled(true);
-        ui->widgetIotDebug->setEnabled(true);
-    }
-    ui->stkWidgetIPSet->setCurrentIndex(index);
-    });
-    /************************************************************************/
-
-    {
-            QPushButton* inputBtns[16] = {
-                ui->btn0, ui->btn1, ui->btn2, ui->btn3, ui->btn4, ui->btn5, ui->btn6, ui->btn7,
-                ui->btn8, ui->btn9, ui->btn10, ui->btn11, ui->btn12, ui->btn13, ui->btn14, ui->btn15
-            };
-            QString hexChars[16] = {
-                "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"
-            };
-            for (int i = 0; i < 16; i++)
-            {
-                connect(inputBtns[i], &QPushButton::clicked, this, [=](){
-                    if (registerCode.size() < 32)
-                    {
-                        QString hexChar = hexChars[i];
-                        registerCode.append(hexChar);
-                        updateRegisterCodeDisplay();
-                    }
-                });
-            }
-
-            connect(ui->btnClearCode, &QPushButton::clicked, this, [=]() {
-                if(registerCode.isEmpty())
-                    return;
-                registerCode.clear();
-                registerCode.squeeze();
-                updateRegisterCodeDisplay();
-            });
-
-            connect(ui->btnBackspaceCode, &QPushButton::clicked, this, [=]() {
-                if (!registerCode.isEmpty())
-                {
-                    registerCode.removeLast();
-                    updateRegisterCodeDisplay();
-                }
-            });
-
-    }
 
     /***************************************Safe setting part**********************************************************/
 

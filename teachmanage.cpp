@@ -596,6 +596,15 @@ void TeachManage::updateFilePermission(int index)
     }
 }
 
+void TeachManage::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}
+
 void TeachManage::on_tableTeachManage_itemSelectionChanged()
 {
     int curRow = ui->tableTeachManage->currentRow();

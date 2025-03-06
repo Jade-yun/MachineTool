@@ -56,6 +56,7 @@ public slots:
 protected:
     void showEvent(QShowEvent *event) override;
     void hideEvent(QHideEvent *event) override;
+    void changeEvent(QEvent* e) override;
 };
 
 #endif // MONITORFORM_H

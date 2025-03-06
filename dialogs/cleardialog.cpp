@@ -39,3 +39,12 @@ void ClearDialog::setMode(ClearDialog::ClearMode mode)
 {
     ui->stkWidget->setCurrentIndex(mode);
 }
+
+void ClearDialog::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}

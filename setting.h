@@ -82,7 +82,8 @@ private:
     void setupPortDefine(); // 端口自定义
     void setupNameDefine();
     void setupMenuAuthority();
-//    void saveMenuState(const QList<MenuItem *> &menuItems);
+
+    void setupSystemSetting();
 
     void syncParaToUI(); // 初始化时同步结构体参数到ui上显示
 
@@ -90,6 +91,9 @@ private:
     void handleSavePasswd(uint* passwd, const QList<NumberEdit*>& edits, const int suffix);
 
     void updateTabVisibility();
+
+    void switchLangurage();
+    void retranslate();
     //
 //    void updateInterLockPortFlag(int index, bool isUsed, bool)
 

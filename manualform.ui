@@ -384,7 +384,7 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>321</width>
+       <width>331</width>
        <height>491</height>
       </rect>
      </property>
@@ -788,7 +788,7 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <widget class="QPushButton" name="btnAdjustFunc">
@@ -796,7 +796,7 @@
          <rect>
           <x>30</x>
           <y>30</y>
-          <width>200</width>
+          <width>241</width>
           <height>45</height>
          </rect>
         </property>
@@ -805,18 +805,6 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>45</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>200</width>
-          <height>45</height>
-         </size>
         </property>
         <property name="font">
          <font>
@@ -847,7 +835,7 @@
          <rect>
           <x>30</x>
           <y>100</y>
-          <width>200</width>
+          <width>241</width>
           <height>45</height>
          </rect>
         </property>
@@ -856,18 +844,6 @@
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>200</width>
-          <height>45</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>200</width>
-          <height>45</height>
-         </size>
         </property>
         <property name="font">
          <font>
@@ -900,7 +876,7 @@
          <rect>
           <x>10</x>
           <y>0</y>
-          <width>263</width>
+          <width>291</width>
           <height>391</height>
          </rect>
         </property>
@@ -950,14 +926,8 @@
             <widget class="QComboBox" name="coboxAdjustMachineAxis">
              <property name="minimumSize">
               <size>
-               <width>118</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>118</width>
-               <height>40</height>
+               <width>0</width>
+               <height>41</height>
               </size>
              </property>
              <property name="font">
@@ -1041,17 +1011,11 @@
            </item>
            <item row="0" column="1">
             <widget class="QCheckBox" name="chboxUseAdjustMachine">
-             <property name="minimumSize">
-              <size>
-               <width>130</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>130</width>
-               <height>45</height>
-              </size>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
              </property>
              <property name="text">
               <string>使用</string>
@@ -1275,9 +1239,9 @@
     <widget class="QGroupBox" name="groupBox_3">
      <property name="geometry">
       <rect>
-       <x>700</x>
+       <x>690</x>
        <y>20</y>
-       <width>301</width>
+       <width>311</width>
        <height>491</height>
       </rect>
      </property>
@@ -1290,23 +1254,11 @@
      <widget class="QCheckBox" name="chbZAxisDesend">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>19</x>
         <y>50</y>
-        <width>240</width>
+        <width>291</width>
         <height>40</height>
        </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>240</width>
-        <height>40</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>240</width>
-        <height>40</height>
-       </size>
       </property>
       <property name="styleSheet">
        <string notr="true"/>

@@ -5,22 +5,22 @@
     <message>
         <location filename="../alarmbar.ui" line="80" />
         <source>故障：</source>
-        <translation type="unfinished">Fault:</translation>
+        <translation type="unfinished">고장:</translation>
     </message>
     <message>
         <location filename="../alarmbar.ui" line="99" />
         <source>帮助</source>
-        <translation type="unfinished">Help</translation>
+        <translation type="unfinished">도움말</translation>
     </message>
     <message>
         <location filename="../alarmbar.ui" line="131" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../alarmbar.cpp" line="57" />
         <source>报警编号：</source>
-        <translation type="unfinished">Alarm No.:</translation>
+        <translation type="unfinished">알람 번호:</translation>
     </message>
 </context>
 <context>
@@ -33,118 +33,118 @@
     <message>
         <location filename="../alarmform.ui" line="62" />
         <source>报警信息</source>
-        <translation type="unfinished">Alarm Information</translation>
+        <translation type="unfinished">알람 정보</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="187" />
         <source>合并显示</source>
-        <translation type="unfinished">Merge Display</translation>
+        <translation type="unfinished">병합 표시</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="238" />
         <source>清除历史报警</source>
-        <translation type="unfinished">Clear History Alarms</translation>
+        <translation type="unfinished">이전 알람 지우기</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="250" />
         <source>参数日志</source>
-        <translation type="unfinished">Parameter Log</translation>
+        <translation type="unfinished">파라미터 로그</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="406" />
         <location filename="../alarmform.ui" line="570" />
         <location filename="../alarmform.ui" line="873" />
         <source>动作</source>
-        <translation type="unfinished">Action</translation>
+        <translation type="unfinished">동작</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="411" />
         <location filename="../alarmform.ui" line="575" />
         <location filename="../alarmform.ui" line="878" />
         <source>事件</source>
-        <translation type="unfinished">Event</translation>
+        <translation type="unfinished">이벤트</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="416" />
         <location filename="../alarmform.ui" line="580" />
         <location filename="../alarmform.ui" line="883" />
         <source>日期时间</source>
-        <translation type="unfinished">Date/Time</translation>
+        <translation type="unfinished">날짜 시간</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="423" />
         <source>动作日志</source>
-        <translation type="unfinished">Action Log</translation>
+        <translation type="unfinished">동작 로그</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="587" />
         <source>保养信息</source>
-        <translation type="unfinished">Maintenance Information</translation>
+        <translation type="unfinished">유지보수 정보</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="678" />
         <source>编辑</source>
-        <translation type="unfinished">Edit</translation>
+        <translation type="unfinished">편집</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="691" />
         <source>重新计时</source>
-        <translation type="unfinished">Reset Timer</translation>
+        <translation type="unfinished">다시 카운트다운</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="704" />
         <source>新建</source>
-        <translation type="unfinished">New</translation>
+        <translation type="unfinished">새로 만들기</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="717" />
         <source>删除</source>
-        <translation type="unfinished">Delete</translation>
+        <translation type="unfinished">삭제</translation>
     </message>
     <message>
         <location filename="../alarmform.ui" line="726" />
         <source>开发者选项</source>
-        <translation type="unfinished">Developer Options</translation>
+        <translation type="unfinished">개발자 옵션</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="118" />
         <source>报警编号</source>
-        <translation type="unfinished">Number</translation>
+        <translation type="unfinished">알람 번호</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="118" />
         <source>报警内容</source>
-        <translation type="unfinished">Alarm Content</translation>
+        <translation type="unfinished">알람 내용</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="118" />
         <source>报警时间</source>
-        <translation type="unfinished">Alarm Time</translation>
+        <translation type="unfinished">알람 시간</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="160" />
         <source>确定清除报警？</source>
-        <translation type="unfinished">Confirm Clear Alarm?</translation>
+        <translation type="unfinished">알람을 지우겠습니까?</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183" />
         <source>维护内容</source>
-        <translation type="unfinished">Maintenance Content</translation>
+        <translation type="unfinished">유지보수 내용</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183" />
         <source>维护周期</source>
-        <translation type="unfinished">Maintenance Cycle</translation>
+        <translation type="unfinished">유지보수 주기</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183" />
         <source>剩余天数</source>
-        <translation type="unfinished">Remaining Days</translation>
+        <translation type="unfinished">남은 일수</translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183" />
         <source>下次保养时间</source>
-        <translation type="unfinished">Next Maintenance Time</translation>
+        <translation type="unfinished">다음 유지보수 시간</translation>
     </message>
 </context>
 <context>
@@ -157,27 +157,27 @@
     <message>
         <location filename="../dialogs/alarminfodialog.ui" line="73" />
         <source>报警编号：</source>
-        <translation type="unfinished">Alarm No.:</translation>
+        <translation type="unfinished">알람 번호:</translation>
     </message>
     <message>
         <location filename="../dialogs/alarminfodialog.ui" line="108" />
         <source>报警内容：</source>
-        <translation type="unfinished">Content:</translation>
+        <translation type="unfinished">알람 내용:</translation>
     </message>
     <message>
         <location filename="../dialogs/alarminfodialog.ui" line="146" />
         <source>报警原因：</source>
-        <translation type="unfinished">Reason:</translation>
+        <translation type="unfinished">알람 원인:</translation>
     </message>
     <message>
         <location filename="../dialogs/alarminfodialog.ui" line="184" />
         <source>解决方案：</source>
-        <translation type="unfinished">Solution:</translation>
+        <translation type="unfinished">해결 방법:</translation>
     </message>
     <message>
         <location filename="../dialogs/alarminfodialog.ui" line="243" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
 </context>
 <context>
@@ -216,94 +216,94 @@
     <message>
         <location filename="../autoform.ui" line="62" />
         <source>主程序</source>
-        <translation type="unfinished">Main Program</translation>
+        <translation type="unfinished">메인 프로그램</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="67" />
         <source>子程序1</source>
-        <translation type="unfinished">Subprogram 1</translation>
+        <translation type="unfinished">서브 프로그램 1</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="72" />
         <source>子程序2</source>
-        <translation type="unfinished">Subprogram 2</translation>
+        <translation type="unfinished">서브 프로그램 2</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="77" />
         <source>子程序3</source>
-        <translation type="unfinished">Subprogram 3</translation>
+        <translation type="unfinished">서브 프로그램 3</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="82" />
         <source>子程序4</source>
-        <translation type="unfinished">Subprogram 4</translation>
+        <translation type="unfinished">서브 프로그램 4</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="87" />
         <source>子程序5</source>
-        <translation type="unfinished">Subprogram 5</translation>
+        <translation type="unfinished">서브 프로그램 5</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="92" />
         <source>子程序6</source>
-        <translation type="unfinished">Subprogram 6</translation>
+        <translation type="unfinished">서브 프로그램 6</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="97" />
         <source>子程序7</source>
-        <translation type="unfinished">Subprogram 7</translation>
+        <translation type="unfinished">서브 프로그램 7</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="102" />
         <source>子程序8</source>
-        <translation type="unfinished">Subprogram 8</translation>
+        <translation type="unfinished">서브 프로그램 8</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="138" />
         <source>跟随</source>
-        <translation type="unfinished">Follow</translation>
+        <translation type="unfinished">따라가기</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="186" />
         <source>编辑</source>
-        <translation type="unfinished">Edit</translation>
+        <translation type="unfinished">편집</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="234" />
         <source>智能力矩</source>
-        <translation type="unfinished">Smart Torque</translation>
+        <translation type="unfinished">스마트 토크</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="275" />
         <source>试行</source>
-        <translation type="unfinished">Trial Run</translation>
+        <translation type="unfinished">시험 실행</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="320" />
         <source>操作</source>
-        <translation type="unfinished">Operate</translation>
+        <translation type="unfinished">조작</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="365" />
         <source>允许调速</source>
-        <translation type="unfinished">Allow Speed Adjust</translation>
+        <translation type="unfinished">속도 조정 허용</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="435" />
         <location filename="../autoform.cpp" line="1273" />
         <source>清零</source>
-        <translation type="unfinished">Reset</translation>
+        <translation type="unfinished">리셋</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="501" />
         <location filename="../autoform.cpp" line="1267" />
         <source>1自动状态</source>
-        <translation type="unfinished">1 Auto Status</translation>
+        <translation type="unfinished">자동 상태 1</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="570" />
         <source>全局速度：</source>
-        <translation type="unfinished">Global Speed:</translation>
+        <translation type="unfinished">전역 속도:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="592" />
@@ -318,7 +318,7 @@
     <message>
         <location filename="../autoform.ui" line="701" />
         <source>历史信息</source>
-        <translation type="unfinished">History Info</translation>
+        <translation type="unfinished">역사 정보</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="837" />
@@ -341,7 +341,7 @@
     <message>
         <location filename="../autoform.ui" line="859" />
         <source>前拍周期：</source>
-        <translation type="unfinished">Pre-Cycle:</translation>
+        <translation type="unfinished">앞 촬영 주기:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="878" />
@@ -357,7 +357,7 @@
     <message>
         <location filename="../autoform.ui" line="922" />
         <source>自动运行：</source>
-        <translation type="unfinished">Auto Run:</translation>
+        <translation type="unfinished">자동 실행:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="946" />
@@ -368,37 +368,37 @@
     <message>
         <location filename="../autoform.ui" line="1015" />
         <source>成型周期：</source>
-        <translation type="unfinished">Molding Cycle:</translation>
+        <translation type="unfinished">성형 주기:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1056" />
         <source>当前步号：</source>
-        <translation type="unfinished">Current Step No.:</translation>
+        <translation type="unfinished">현재 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1075" />
         <source>计划产品：</source>
-        <translation type="unfinished">Planned Product:</translation>
+        <translation type="unfinished">계획 제품:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1120" />
         <source>取物时间：</source>
-        <translation type="unfinished">Pickup Time:</translation>
+        <translation type="unfinished">물건 가져오는 시간:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1139" />
         <source>实际产品：</source>
-        <translation type="unfinished">Actual Product:</translation>
+        <translation type="unfinished">실제 제품:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1158" />
         <source>当前工位：</source>
-        <translation type="unfinished">Current Station:</translation>
+        <translation type="unfinished">현재 작업 위치:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1199" />
         <source>主程序第4步</source>
-        <translation type="unfinished">Main Program Step 4</translation>
+        <translation type="unfinished">메인 프로그램 4단계</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1221" />
@@ -408,90 +408,90 @@
     <message>
         <location filename="../autoform.ui" line="1290" />
         <source>断点位置：</source>
-        <translation type="unfinished">Breakpoint Position:</translation>
+        <translation type="unfinished">중단점 위치:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1309" />
         <source>起始步号：</source>
-        <translation type="unfinished">Start Step No.:</translation>
+        <translation type="unfinished">시작 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1616" />
         <source>子程序7步号：</source>
-        <translation type="unfinished">Subprogram 7 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 7 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1635" />
         <source>子程序5步号：</source>
-        <translation type="unfinished">Subprogram 5 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 5 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1720" />
         <source>子程序6步号：</source>
-        <translation type="unfinished">Subprogram 6 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 6 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1739" />
         <source>主程序步号：</source>
-        <translation type="unfinished">Main Program Step No.:</translation>
+        <translation type="unfinished">메인 프로그램 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1758" />
         <source>子程序2步号：</source>
-        <translation type="unfinished">Subprogram 2 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 2 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1777" />
         <source>子程序1步号：</source>
-        <translation type="unfinished">Subprogram 1 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 1 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1818" />
         <source>子程序3步号：</source>
-        <translation type="unfinished">Subprogram 3 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 3 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1881" />
         <source>子程序4步号：</source>
-        <translation type="unfinished">Subprogram 4 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 4 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1900" />
         <source>子程序8步号：</source>
-        <translation type="unfinished">Subprogram 8 Step No.:</translation>
+        <translation type="unfinished">서브 프로그램 8 단계 번호:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="1964" />
         <source>保存</source>
-        <translation type="unfinished">Save</translation>
+        <translation type="unfinished">저장</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2012" />
         <location filename="../autoform.ui" line="2607" />
         <source>当前动作无参数可修改</source>
-        <translation type="unfinished">No Parameters to Modify for Current Action</translation>
+        <translation type="unfinished">현재 동작에는 수정할 수 있는 매개변수가 없습니다.</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2042" />
         <source>位置(+/- 5mm)</source>
-        <translation type="unfinished">Position(+/- 5mm)</translation>
+        <translation type="unfinished">위치 (+/- 5mm)</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2083" />
         <source>速度(%)</source>
-        <translation type="unfinished">Speed(%)</translation>
+        <translation type="unfinished">속도 (%)</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2124" />
         <location filename="../autoform.ui" line="2265" />
         <location filename="../autoform.ui" line="2778" />
         <source>延时(s)</source>
-        <translation type="unfinished">Delay(s)</translation>
+        <translation type="unfinished">지연 (s)</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2176" />
         <source>通时(s)</source>
-        <translation type="unfinished">On-Time(s)</translation>
+        <translation type="unfinished">통과 시간 (s)</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2207" />
@@ -506,22 +506,22 @@
     <message>
         <location filename="../autoform.ui" line="2292" />
         <source>限时(s)</source>
-        <translation type="unfinished">Time Limit(s)</translation>
+        <translation type="unfinished">제한 시간 (s)</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2338" />
         <source>条件1</source>
-        <translation type="unfinished">Condition 1</translation>
+        <translation type="unfinished">조건 1</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2357" />
         <source>条件2</source>
-        <translation type="unfinished">Condition 2</translation>
+        <translation type="unfinished">조건 2</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2414" />
         <source>操作数</source>
-        <translation type="unfinished">Operand</translation>
+        <translation type="unfinished">연산자</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2427" />
@@ -531,50 +531,50 @@
     <message>
         <location filename="../autoform.ui" line="2442" />
         <source>轴位置</source>
-        <translation type="unfinished">Axis Position</translation>
+        <translation type="unfinished">축 위치</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2491" />
         <location filename="../autoform.ui" line="2679" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2496" />
         <location filename="../autoform.ui" line="2741" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2501" />
         <location filename="../autoform.ui" line="2710" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2506" />
         <source>C轴</source>
-        <translation type="unfinished">C Axis</translation>
+        <translation type="unfinished">C축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2511" />
         <source>Y2轴</source>
-        <translation type="unfinished">Y2 Axis</translation>
+        <translation type="unfinished">Y2축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2516" />
         <source>Z2轴</source>
-        <translation type="unfinished">Z2 Axis</translation>
+        <translation type="unfinished">Z2축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2521" />
         <source>A轴</source>
-        <translation type="unfinished">A Axis</translation>
+        <translation type="unfinished">A축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2526" />
         <source>B轴</source>
-        <translation type="unfinished">B Axis</translation>
+        <translation type="unfinished">B축</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2552" />
@@ -614,27 +614,27 @@
     <message>
         <location filename="../autoform.ui" line="2622" />
         <source>循环次数</source>
-        <translation type="unfinished">Cycle Count</translation>
+        <translation type="unfinished">반복 횟수</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2836" />
         <source>力距保护(%)</source>
-        <translation type="unfinished">Torque Protection(%)</translation>
+        <translation type="unfinished">토크 보호 (%)</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2992" />
         <source>编号</source>
-        <translation type="unfinished">Number</translation>
+        <translation type="unfinished">번호</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="2997" />
         <source>内容</source>
-        <translation type="unfinished">Content</translation>
+        <translation type="unfinished">내용</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="3056" />
         <source>全局速度:</source>
-        <translation type="unfinished">Global Speed:</translation>
+        <translation type="unfinished">전역 속도:</translation>
     </message>
     <message>
         <location filename="../autoform.ui" line="3078" />
@@ -669,114 +669,114 @@
     <message>
         <location filename="../autoform.cpp" line="61" />
         <source>堆叠组号</source>
-        <translation type="unfinished">Stack Group No.</translation>
+        <translation type="unfinished">스택 그룹 번호</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="61" />
         <source>X1轴个数</source>
-        <translation type="unfinished">X1 Axis Count</translation>
+        <translation type="unfinished">X1축 개수</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="61" />
         <source>Y1轴个数</source>
-        <translation type="unfinished">Y1 Axis Count</translation>
+        <translation type="unfinished">Y1축 개수</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="61" />
         <source>Z1轴个数</source>
-        <translation type="unfinished">Z1 Axis Count</translation>
+        <translation type="unfinished">Z1축 개수</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="61" />
         <source>堆叠完停止</source>
-        <translation type="unfinished">Stop After Stacking</translation>
+        <translation type="unfinished">스택 완료 후 중지</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="69" />
         <location filename="../autoform.cpp" line="1274" />
         <source>变量</source>
-        <translation type="unfinished">Variable</translation>
+        <translation type="unfinished">변수</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="69" />
         <source>堆叠状态</source>
-        <translation type="unfinished">Stacking Status</translation>
+        <translation type="unfinished">스택 상태</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="86" />
         <source>不使用</source>
-        <translation type="unfinished">Not Used</translation>
+        <translation type="unfinished">사용하지 않음</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="86" />
         <source>使用</source>
-        <translation type="unfinished">Used</translation>
+        <translation type="unfinished">사용</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="103" />
         <source>堆叠指定</source>
-        <translation type="unfinished">Stack Assignment</translation>
+        <translation type="unfinished">스택 지정</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="104" />
         <source>从此运行</source>
-        <translation type="unfinished">Run From Here</translation>
+        <translation type="unfinished">여기서 실행</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="105" />
         <source>断点设置</source>
-        <translation type="unfinished">Breakpoint Setting</translation>
+        <translation type="unfinished">중단점 설정</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="106" />
         <source>断点清除</source>
-        <translation type="unfinished">Breakpoint Clear</translation>
+        <translation type="unfinished">중단점 해제</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="107" />
         <location filename="../autoform.cpp" line="139" />
         <source>参考点编辑</source>
-        <translation type="unfinished">Reference Point Edit</translation>
+        <translation type="unfinished">참조 포인트 편집</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="108" />
         <source>自动修正位置</source>
-        <translation type="unfinished">Auto-Adjust Position</translation>
+        <translation type="unfinished">자동으로 위치 수정</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="392" />
         <source>最后一步不允许设为断点！</source>
-        <translation type="unfinished">Last Step Cannot Be Set as Breakpoint!</translation>
+        <translation type="unfinished">마지막 단계는 중단점으로 설정할 수 없습니다!</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="1268" />
         <source>2变量状态</source>
-        <translation type="unfinished">2 Variable Status</translation>
+        <translation type="unfinished">2 변수 상태</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="1269" />
         <source>3堆叠状态</source>
-        <translation type="unfinished">3 Stacking Status</translation>
+        <translation type="unfinished">3 스택 상태</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="1270" />
         <source>4当前步号</source>
-        <translation type="unfinished">4 Current Step No.</translation>
+        <translation type="unfinished">4 현재 단계 번호</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="1275" />
         <source>堆叠</source>
-        <translation type="unfinished">Stacking</translation>
+        <translation type="unfinished">스택</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="1276" />
         <source>步号</source>
-        <translation type="unfinished">Step No.</translation>
+        <translation type="unfinished">단계 번호</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="1349" />
         <source>参考点</source>
-        <translation type="unfinished">Reference Point</translation>
+        <translation type="unfinished">참조 포인트</translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="1382" />
@@ -796,22 +796,22 @@
     <message>
         <location filename="../dialogs/backgroundprocessform.ui" line="70" />
         <source>运行</source>
-        <translation type="unfinished">Run</translation>
+        <translation type="unfinished">실행</translation>
     </message>
     <message>
         <location filename="../dialogs/backgroundprocessform.ui" line="83" />
         <source>停止</source>
-        <translation type="unfinished">Stop</translation>
+        <translation type="unfinished">중지</translation>
     </message>
     <message>
         <location filename="../dialogs/backgroundprocessform.ui" line="96" />
         <source>暂停</source>
-        <translation type="unfinished">Pause</translation>
+        <translation type="unfinished">일시 중지</translation>
     </message>
     <message>
         <location filename="../dialogs/backgroundprocessform.cpp" line="13" />
         <source>后台程序</source>
-        <translation type="unfinished">Background Program</translation>
+        <translation type="unfinished">백그라운드 프로그램</translation>
     </message>
 </context>
 <context>
@@ -880,7 +880,7 @@
     <message>
         <location filename="../Calculator/src/calculator.cpp" line="236" />
         <source>计算器</source>
-        <translation type="unfinished">Calculator</translation>
+        <translation type="unfinished">계산기</translation>
     </message>
 </context>
 <context>
@@ -894,155 +894,155 @@
         <location filename="../dialogs/cleardialog.ui" line="47" />
         <location filename="../dialogs/cleardialog.ui" line="142" />
         <source>清零选择</source>
-        <translation type="unfinished">Reset Selection</translation>
+        <translation type="unfinished">리셋 선택</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="59" />
         <source>产品清零</source>
-        <translation type="unfinished">Product Reset</translation>
+        <translation type="unfinished">제품 리셋</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="78" />
         <source>变量全部清零</source>
-        <translation type="unfinished">Reset All Variables</translation>
+        <translation type="unfinished">모든 변수 리셋</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="97" />
         <source>堆叠全部清零</source>
-        <translation type="unfinished">Reset All Stacks</translation>
+        <translation type="unfinished">모든 스택 리셋</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="154" />
         <source>堆叠1组</source>
-        <translation type="unfinished">Stack 1</translation>
+        <translation type="unfinished">스택 그룹 1</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="173" />
         <source>堆叠2组</source>
-        <translation type="unfinished">Stack 2</translation>
+        <translation type="unfinished">스택 그룹 2</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="192" />
         <source>堆叠3组</source>
-        <translation type="unfinished">Stack 3</translation>
+        <translation type="unfinished">스택 그룹 3</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="211" />
         <source>堆叠4组</source>
-        <translation type="unfinished">Stack 4</translation>
+        <translation type="unfinished">스택 그룹 4</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="230" />
         <source>堆叠5组</source>
-        <translation type="unfinished">Stack 5</translation>
+        <translation type="unfinished">스택 그룹 5</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="249" />
         <source>堆叠6组</source>
-        <translation type="unfinished">Stack 6</translation>
+        <translation type="unfinished">스택 그룹 6</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="268" />
         <source>堆叠7组</source>
-        <translation type="unfinished">Stack 7</translation>
+        <translation type="unfinished">스택 그룹 7</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="287" />
         <source>堆叠8组</source>
-        <translation type="unfinished">Stack 8</translation>
+        <translation type="unfinished">스택 그룹 8</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="332" />
         <source>旋转料仓</source>
-        <translation type="unfinished">Rotary Magazine</translation>
+        <translation type="unfinished">회전 재고창</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="340" />
         <source>料仓工位：</source>
-        <translation type="unfinished">Magazine Station:</translation>
+        <translation type="unfinished">재고창 위치:</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="357" />
         <source>堆叠1组：</source>
-        <translation type="unfinished">Stack 1:</translation>
+        <translation type="unfinished">스택 그룹 1:</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="374" />
         <source>堆叠2组：</source>
-        <translation type="unfinished">Stack 2:</translation>
+        <translation type="unfinished">스택 그룹 2:</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="417" />
         <source>料仓工位数指定</source>
-        <translation type="unfinished">Magazine Station Number Assignment</translation>
+        <translation type="unfinished">재고창 위치 수 지정</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="436" />
         <source>料仓初始位</source>
-        <translation type="unfinished">Magazine Initial Position</translation>
+        <translation type="unfinished">재고창 초기 위치</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="455" />
         <source>料仓保持原位</source>
-        <translation type="unfinished">Magazine Stay in Position</translation>
+        <translation type="unfinished">재고창 원래 위치 유지</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="535" />
         <source>启动自动时变量清零</source>
-        <translation type="unfinished">Reset Variables on Auto Start</translation>
+        <translation type="unfinished">자동 시작 시 변수 리셋</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="559" />
         <location filename="../dialogs/cleardialog.ui" line="969" />
         <source>变量5</source>
-        <translation type="unfinished">Variable 5</translation>
+        <translation type="unfinished">변수 5</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="590" />
         <location filename="../dialogs/cleardialog.ui" line="907" />
         <source>变量3</source>
-        <translation type="unfinished">Variable 3</translation>
+        <translation type="unfinished">변수 3</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="621" />
         <location filename="../dialogs/cleardialog.ui" line="1000" />
         <source>变量6</source>
-        <translation type="unfinished">Variable 6</translation>
+        <translation type="unfinished">변수 6</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="652" />
         <location filename="../dialogs/cleardialog.ui" line="1031" />
         <source>变量7</source>
-        <translation type="unfinished">Variable 7</translation>
+        <translation type="unfinished">변수 7</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="683" />
         <location filename="../dialogs/cleardialog.ui" line="876" />
         <source>变量2</source>
-        <translation type="unfinished">Variable 2</translation>
+        <translation type="unfinished">변수 2</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="714" />
         <location filename="../dialogs/cleardialog.ui" line="845" />
         <source>变量1</source>
-        <translation type="unfinished">Variable 1</translation>
+        <translation type="unfinished">변수 1</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="745" />
         <location filename="../dialogs/cleardialog.ui" line="938" />
         <source>变量4</source>
-        <translation type="unfinished">Variable 4</translation>
+        <translation type="unfinished">변수 4</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="776" />
         <location filename="../dialogs/cleardialog.ui" line="1062" />
         <source>变量8</source>
-        <translation type="unfinished">Variable 8</translation>
+        <translation type="unfinished">변수 8</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="821" />
         <source>变量断电记忆</source>
-        <translation type="unfinished">Variable Power-Off Memory</translation>
+        <translation type="unfinished">변수 전원 끄기 기억</translation>
     </message>
     <message>
         <location filename="../dialogs/cleardialog.ui" line="1140" />
@@ -1060,19 +1060,19 @@
     <message>
         <location filename="../dialogs/errortipdialog.ui" line="26" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/errortipdialog.ui" line="101" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/errortipdialog.cpp" line="12" />
         <location filename="../dialogs/errortipdialog.cpp" line="26" />
         <location filename="../dialogs/errortipdialog.cpp" line="41" />
         <source>提示</source>
-        <translation type="unfinished">Prompt</translation>
+        <translation type="unfinished">안내</translation>
     </message>
 </context>
 <context>
@@ -1085,12 +1085,12 @@
     <message>
         <location filename="../dialogs/file_preview.ui" line="120" />
         <source>编号</source>
-        <translation type="unfinished">Number</translation>
+        <translation type="unfinished">번호</translation>
     </message>
     <message>
         <location filename="../dialogs/file_preview.ui" line="125" />
         <source>内容</source>
-        <translation type="unfinished">Content</translation>
+        <translation type="unfinished">내용</translation>
     </message>
     <message>
         <location filename="../dialogs/file_preview.ui" line="140" />
@@ -1108,37 +1108,37 @@
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="35" />
         <source>手轮轴选择</source>
-        <translation type="unfinished">Handwheel Axis Selection</translation>
+        <translation type="unfinished">핸드휠 축 선택</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="55" />
         <source>B/Z2轴</source>
-        <translation type="unfinished">B/Z2 Axis</translation>
+        <translation type="unfinished">B/Z2축</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="74" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="93" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="112" />
         <source>C轴</source>
-        <translation type="unfinished">C Axis</translation>
+        <translation type="unfinished">C축</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="131" />
         <source>A/Y2轴</source>
-        <translation type="unfinished">A/Y2 Axis</translation>
+        <translation type="unfinished">A/Y2축</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="153" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="215" />
@@ -1148,7 +1148,7 @@
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="233" />
         <source>手轮刻度</source>
-        <translation type="unfinished">Handwheel Scale</translation>
+        <translation type="unfinished">핸드휠 눈금</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="253" />
@@ -1173,12 +1173,12 @@
     <message>
         <location filename="../dialogs/handwheeldialog.ui" line="328" />
         <source>手轮模式</source>
-        <translation type="unfinished">Handwheel Mode</translation>
+        <translation type="unfinished">핸드휠 모드</translation>
     </message>
     <message>
         <location filename="../dialogs/handwheeldialog.cpp" line="20" />
         <source>手轮</source>
-        <translation type="unfinished">Handwheel</translation>
+        <translation type="unfinished">핸드휠</translation>
     </message>
 </context>
 <context>
@@ -1194,7 +1194,7 @@
         <location filename="../dialogs/ioportdialog.ui" line="596" />
         <location filename="../dialogs/ioportdialog.ui" line="608" />
         <source>主板</source>
-        <translation type="unfinished">Mainboard</translation>
+        <translation type="unfinished">메인 보드</translation>
     </message>
     <message>
         <location filename="../dialogs/ioportdialog.ui" line="86" />
@@ -1783,17 +1783,17 @@
         <location filename="../dialogs/ioportdialog.ui" line="1586" />
         <location filename="../dialogs/ioportdialog.ui" line="1650" />
         <source>通</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">통함</translation>
     </message>
     <message>
         <location filename="../dialogs/ioportdialog.ui" line="1829" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/ioportdialog.ui" line="1842" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
 </context>
 <context>
@@ -1806,27 +1806,27 @@
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="29" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="42" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="59" />
         <source>信号</source>
-        <translation type="unfinished">Signal</translation>
+        <translation type="unfinished">신호</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="75" />
         <source>主板</source>
-        <translation type="unfinished">Mainboard</translation>
+        <translation type="unfinished">메인 보드</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="87" />
         <source>输入</source>
-        <translation type="unfinished">Input</translation>
+        <translation type="unfinished">입력</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="142" />
@@ -1841,7 +1841,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="1095" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1270" />
         <source>通</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">통함</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="162" />
@@ -2148,7 +2148,7 @@
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="715" />
         <source>输出</source>
-        <translation type="unfinished">Output</translation>
+        <translation type="unfinished">출력</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="765" />
@@ -2380,70 +2380,70 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="1858" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2312" />
         <source>变量</source>
-        <translation type="unfinished">Variable</translation>
+        <translation type="unfinished">변수</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1355" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1884" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2158" />
         <source>堆叠1组</source>
-        <translation type="unfinished">Stack 1</translation>
+        <translation type="unfinished">스택 그룹 1</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1360" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1889" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2163" />
         <source>堆叠2组</source>
-        <translation type="unfinished">Stack 2</translation>
+        <translation type="unfinished">스택 그룹 2</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1365" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1894" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2168" />
         <source>堆叠3组</source>
-        <translation type="unfinished">Stack 3</translation>
+        <translation type="unfinished">스택 그룹 3</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1370" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1899" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2173" />
         <source>堆叠4组</source>
-        <translation type="unfinished">Stack 4</translation>
+        <translation type="unfinished">스택 그룹 4</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1375" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1904" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2178" />
         <source>堆叠5组</source>
-        <translation type="unfinished">Stack 5</translation>
+        <translation type="unfinished">스택 그룹 5</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1380" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1909" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2183" />
         <source>堆叠6组</source>
-        <translation type="unfinished">Stack 6</translation>
+        <translation type="unfinished">스택 그룹 6</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1385" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1914" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2188" />
         <source>堆叠7组</source>
-        <translation type="unfinished">Stack 7</translation>
+        <translation type="unfinished">스택 그룹 7</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1390" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1919" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2193" />
         <source>堆叠8组</source>
-        <translation type="unfinished">Stack 8</translation>
+        <translation type="unfinished">스택 그룹 8</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1429" />
         <location filename="../dialogs/ifprogramdialog.ui" line="1474" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2043" />
         <source>实际产量</source>
-        <translation type="unfinished">Actual Output</translation>
+        <translation type="unfinished">실제 생산량</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1448" />
@@ -2451,7 +2451,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="1594" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2804" />
         <source>常量</source>
-        <translation type="unfinished">Constant</translation>
+        <translation type="unfinished">상수</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1539" />
@@ -2459,7 +2459,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2083" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2472" />
         <source>变量1</source>
-        <translation type="unfinished">Variable 1</translation>
+        <translation type="unfinished">변수 1</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1544" />
@@ -2467,7 +2467,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2088" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2477" />
         <source>变量2</source>
-        <translation type="unfinished">Variable 2</translation>
+        <translation type="unfinished">변수 2</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1549" />
@@ -2475,7 +2475,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2093" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2482" />
         <source>变量3</source>
-        <translation type="unfinished">Variable 3</translation>
+        <translation type="unfinished">변수 3</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1554" />
@@ -2483,7 +2483,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2098" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2487" />
         <source>变量4</source>
-        <translation type="unfinished">Variable 4</translation>
+        <translation type="unfinished">변수 4</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1559" />
@@ -2491,7 +2491,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2103" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2492" />
         <source>变量5</source>
-        <translation type="unfinished">Variable 5</translation>
+        <translation type="unfinished">변수 5</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1564" />
@@ -2499,7 +2499,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2108" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2497" />
         <source>变量6</source>
-        <translation type="unfinished">Variable 6</translation>
+        <translation type="unfinished">변수 6</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1569" />
@@ -2507,7 +2507,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2113" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2502" />
         <source>变量7</source>
-        <translation type="unfinished">Variable 7</translation>
+        <translation type="unfinished">변수 7</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1574" />
@@ -2515,7 +2515,7 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2118" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2507" />
         <source>变量8</source>
-        <translation type="unfinished">Variable 8</translation>
+        <translation type="unfinished">변수 8</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1639" />
@@ -2576,7 +2576,7 @@
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1755" />
         <source>堆叠</source>
-        <translation type="unfinished">Stacking</translation>
+        <translation type="unfinished">스택</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="1967" />
@@ -2594,23 +2594,23 @@
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2214" />
         <source>堆叠完成</source>
-        <translation type="unfinished">Stacking Completed</translation>
+        <translation type="unfinished">스택 완료</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2238" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2268" />
         <source>位置</source>
-        <translation type="unfinished">Position</translation>
+        <translation type="unfinished">위치</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2250" />
         <source>位置表达式</source>
-        <translation type="unfinished">Position Expression</translation>
+        <translation type="unfinished">위치 표현식</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2290" />
         <source>轴</source>
-        <translation type="unfinished">Axis</translation>
+        <translation type="unfinished">축</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2345" />
@@ -2658,60 +2658,60 @@
         <location filename="../dialogs/ifprogramdialog.ui" line="2581" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2820" />
         <source>定时器</source>
-        <translation type="unfinished">Timer</translation>
+        <translation type="unfinished">타이머</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2593" />
         <source>定时器表达式</source>
-        <translation type="unfinished">Timer Expression</translation>
+        <translation type="unfinished">타이머 표현식</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2621" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2755" />
         <source>定时器1</source>
-        <translation type="unfinished">Timer 1</translation>
+        <translation type="unfinished">타이머 1</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2626" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2760" />
         <source>定时器2</source>
-        <translation type="unfinished">Timer 2</translation>
+        <translation type="unfinished">타이머 2</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2631" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2765" />
         <source>定时器3</source>
-        <translation type="unfinished">Timer 3</translation>
+        <translation type="unfinished">타이머 3</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2636" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2770" />
         <source>定时器4</source>
-        <translation type="unfinished">Timer 4</translation>
+        <translation type="unfinished">타이머 4</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2641" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2775" />
         <source>定时器5</source>
-        <translation type="unfinished">Timer 5</translation>
+        <translation type="unfinished">타이머 5</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2646" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2780" />
         <source>定时器6</source>
-        <translation type="unfinished">Timer 6</translation>
+        <translation type="unfinished">타이머 6</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2651" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2785" />
         <source>定时器7</source>
-        <translation type="unfinished">Timer 7</translation>
+        <translation type="unfinished">타이머 7</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2656" />
         <location filename="../dialogs/ifprogramdialog.ui" line="2790" />
         <source>定时器8</source>
-        <translation type="unfinished">Timer 8</translation>
+        <translation type="unfinished">타이머 8</translation>
     </message>
     <message>
         <location filename="../dialogs/ifprogramdialog.ui" line="2735" />
@@ -2729,131 +2729,131 @@
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="30" />
         <source>阀输出</source>
-        <translation type="unfinished">Valve Output</translation>
+        <translation type="unfinished">밸브 출력</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="42" />
         <source>阀动作</source>
-        <translation type="unfinished">Valve Action</translation>
+        <translation type="unfinished">밸브 동작</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="69" />
         <source>卡爪</source>
-        <translation type="unfinished">Gripper</translation>
+        <translation type="unfinished">집게</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="92" />
         <source>原料1夹紧/松开</source>
-        <translation type="unfinished">Raw Material 1 Clamp/Release</translation>
+        <translation type="unfinished">원료 1 클램핑 / 해제</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="97" />
         <source>成品1夹紧/松开</source>
-        <translation type="unfinished">Product 1 Clamp/Release</translation>
+        <translation type="unfinished">완성품 1 클램핑 / 해제</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="102" />
         <source>原料2夹紧/松开</source>
-        <translation type="unfinished">Raw Material 2 Clamp/Release</translation>
+        <translation type="unfinished">원료 2 클램핑 / 해제</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="107" />
         <source>成品2夹紧/松开</source>
-        <translation type="unfinished">Product 2 Clamp/Release</translation>
+        <translation type="unfinished">완성품 2 클램핑 / 해제</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="112" />
         <source>卡爪1正转/反转</source>
-        <translation type="unfinished">Gripper 1 CW/CCW</translation>
+        <translation type="unfinished">집게 1 정회전 / 역회전</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="117" />
         <source>卡爪2正转/反转</source>
-        <translation type="unfinished">Gripper 2 CW/CCW</translation>
+        <translation type="unfinished">집게 2 정회전 / 역회전</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="122" />
         <source>反转台1正转/反转</source>
-        <translation type="unfinished">Reversing Table 1 CW/CCW</translation>
+        <translation type="unfinished">회전대 1 정회전 / 역회전</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="127" />
         <source>反转台2夹紧/松开</source>
-        <translation type="unfinished">Reversing Table 2 Clamp/Release</translation>
+        <translation type="unfinished">회전대 2 클램핑 / 해제</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="147" />
         <source>机床控制</source>
-        <translation type="unfinished">CNC Control</translation>
+        <translation type="unfinished">기계 제어</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="170" />
         <source>自动门1开/关</source>
-        <translation type="unfinished">Auto Door 1 Open/Close</translation>
+        <translation type="unfinished">자동 문 1 열기 / 닫기</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="175" />
         <source>自动门2开/关</source>
-        <translation type="unfinished">Auto Door 2 Open/Close</translation>
+        <translation type="unfinished">자동 문 2 열기 / 닫기</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="195" />
         <source>卡盘/吹屑</source>
-        <translation type="unfinished">Chuck/Blow Chips</translation>
+        <translation type="unfinished">척 / 칩 분사</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="215" />
         <source>卡盘1夹紧/松开</source>
-        <translation type="unfinished">Chuck 1 Clamp/Release</translation>
+        <translation type="unfinished">척 1 클램핑 / 해제</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="220" />
         <source>卡盘2夹紧/松开</source>
-        <translation type="unfinished">Chuck 2 Clamp/Release</translation>
+        <translation type="unfinished">척 2 클램핑 / 해제</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="225" />
         <source>吹气1</source>
-        <translation type="unfinished">Air Blow 1</translation>
+        <translation type="unfinished">바람 1</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="230" />
         <source>吹气2</source>
-        <translation type="unfinished">Air Blow 2</translation>
+        <translation type="unfinished">바람 2</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="248" />
         <location filename="../dialogs/keydefinedialog.ui" line="841" />
         <source>输出状态</source>
-        <translation type="unfinished">Output Status</translation>
+        <translation type="unfinished">출력 상태</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="275" />
         <location filename="../dialogs/keydefinedialog.ui" line="868" />
         <source>通</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">통함</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="300" />
         <location filename="../dialogs/keydefinedialog.ui" line="893" />
         <source>断</source>
-        <translation type="unfinished">Off</translation>
+        <translation type="unfinished">끊김</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="322" />
         <location filename="../dialogs/keydefinedialog.ui" line="915" />
         <source>翻转</source>
-        <translation type="unfinished">Flip</translation>
+        <translation type="unfinished">뒤집기</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="335" />
         <source>预留</source>
-        <translation type="unfinished">Reserved</translation>
+        <translation type="unfinished">예약</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="347" />
         <source>主板输出</source>
-        <translation type="unfinished">Mainboard Output</translation>
+        <translation type="unfinished">메인 보드 출력</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="403" />
@@ -3078,62 +3078,62 @@
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="928" />
         <source>伺服</source>
-        <translation type="unfinished">Servo</translation>
+        <translation type="unfinished">서보</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="940" />
         <source>轴运动方向</source>
-        <translation type="unfinished">Axis Movement Direction</translation>
+        <translation type="unfinished">축 이동 방향</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="968" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="973" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="978" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="983" />
         <source>C轴</source>
-        <translation type="unfinished">C Axis</translation>
+        <translation type="unfinished">C축</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="988" />
         <source>A/Y2轴</source>
-        <translation type="unfinished">A/Y2 Axis</translation>
+        <translation type="unfinished">A/Y2축</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="993" />
         <source>B/Z2轴</source>
-        <translation type="unfinished">B/Z2 Axis</translation>
+        <translation type="unfinished">B/Z2축</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="1013" />
         <source>正向</source>
-        <translation type="unfinished">Forward</translation>
+        <translation type="unfinished">정방향</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="1035" />
         <source>反向</source>
-        <translation type="unfinished">Reverse</translation>
+        <translation type="unfinished">역방향</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="1057" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/keydefinedialog.ui" line="1070" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
 </context>
 <context>
@@ -3146,37 +3146,37 @@
     <message>
         <location filename="../dialogs/logindialog.ui" line="75" />
         <source>密码:</source>
-        <translation type="unfinished">Passwd:</translation>
+        <translation type="unfinished">비밀번호:</translation>
     </message>
     <message>
         <location filename="../dialogs/logindialog.ui" line="91" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/logindialog.ui" line="104" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/logindialog.ui" line="132" />
         <source>操作员</source>
-        <translation type="unfinished">Operator</translation>
+        <translation type="unfinished">운영자</translation>
     </message>
     <message>
         <location filename="../dialogs/logindialog.ui" line="157" />
         <source>管理员</source>
-        <translation type="unfinished">Admin</translation>
+        <translation type="unfinished">관리자</translation>
     </message>
     <message>
         <location filename="../dialogs/logindialog.ui" line="179" />
         <source>高级</source>
-        <translation type="unfinished">Senior</translation>
+        <translation type="unfinished">고급</translation>
     </message>
     <message>
         <location filename="../dialogs/logindialog.cpp" line="86" />
         <source>密码错误！</source>
-        <translation type="unfinished">Incorrect Passwd!</translation>
+        <translation type="unfinished">비밀번호 오류!</translation>
     </message>
 </context>
 <context>
@@ -3189,35 +3189,35 @@
     <message>
         <location filename="../mainwindow.ui" line="97" />
         <source>设置</source>
-        <translation type="unfinished">Settings</translation>
+        <translation type="unfinished">설정</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="146" />
         <source>监视</source>
-        <translation type="unfinished">Monitor</translation>
+        <translation type="unfinished">모니터링</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="192" />
         <source>报警/日志</source>
-        <translation type="unfinished">Alarms/Logs</translation>
+        <translation type="unfinished">알람/로그</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="241" />
         <location filename="../mainwindow.cpp" line="219" />
         <location filename="../mainwindow.cpp" line="330" />
         <source>教导管理</source>
-        <translation type="unfinished">Teach Manage</translation>
+        <translation type="unfinished">교육 관리</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290" />
         <location filename="../mainwindow.cpp" line="524" />
         <source>手动页面</source>
-        <translation type="unfinished">Manual Page</translation>
+        <translation type="unfinished">수동 페이지</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="454" />
         <source>初始化进度：</source>
-        <translation type="unfinished">Initialization Progress:</translation>
+        <translation type="unfinished">초기화 진행 상황:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="492" />
@@ -3272,7 +3272,7 @@
     <message>
         <location filename="../mainwindow.ui" line="995" />
         <source>速度：</source>
-        <translation type="unfinished">Speed:</translation>
+        <translation type="unfinished">속도:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1022" />
@@ -3287,7 +3287,7 @@
     <message>
         <location filename="../mainwindow.ui" line="1073" />
         <source>转速：</source>
-        <translation type="unfinished">RPM:</translation>
+        <translation type="unfinished">회전 속도:</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="1097" />
@@ -3297,63 +3297,63 @@
     <message>
         <location filename="../mainwindow.ui" line="1137" />
         <source>展晖机床机械手控制系统</source>
-        <translation type="unfinished">Zhanhui CNC Manipulator Control System</translation>
+        <translation type="unfinished">전휘 기계 로봇 제어 시스템</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="227" />
         <source>教导</source>
-        <translation type="unfinished">Teach</translation>
+        <translation type="unfinished">가르치기</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="331" />
         <location filename="../mainwindow.cpp" line="518" />
         <source>停止页面</source>
-        <translation type="unfinished">Stop Page</translation>
+        <translation type="unfinished">중지 페이지</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="486" />
         <source>参数同步中:</source>
-        <translation type="unfinished">Parameter Syncing:</translation>
+        <translation type="unfinished">매개변수 동기화 중:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="531" />
         <source>自动页面</source>
-        <translation type="unfinished">Auto Page</translation>
+        <translation type="unfinished">자동 페이지</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="928" />
         <source>请先解决报警再启动！</source>
-        <translation type="unfinished">Resolve Alarms Before Starting!</translation>
+        <translation type="unfinished">알람을 먼저 해결한 후 시작하세요!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="932" />
         <source>请将三档开关切换到自动档再启动</source>
-        <translation type="unfinished">Switch to Auto Mode Before Starting</translation>
+        <translation type="unfinished">세 가지 스위치를 자동으로 전환한 후 시작하세요.</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="938" />
         <source>机器未复位</source>
-        <translation type="unfinished">Machine Not Reset</translation>
+        <translation type="unfinished">기계가 리셋되지 않음</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="953" />
         <source>机器未回零</source>
-        <translation type="unfinished">Machine Not Homed</translation>
+        <translation type="unfinished">기계가 원점으로 돌아가지 않음</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="974" />
         <source>请先解决报警再回原！</source>
-        <translation type="unfinished">Resolve Alarms Before Homing!</translation>
+        <translation type="unfinished">알람을 먼저 해결한 후 원점으로 돌아가세요!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="978" />
         <source>是否现在回原点？</source>
-        <translation type="unfinished">Home Now?</translation>
+        <translation type="unfinished">지금 원점으로 돌아갈까요?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="994" />
         <source>请先解决报警再复位！</source>
-        <translation type="unfinished">Resolve Alarms Before Resetting!</translation>
+        <translation type="unfinished">알람을 먼저 해결한 후 리셋하세요!</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1000" />
@@ -3363,37 +3363,37 @@
     <message>
         <location filename="../mainwindow.cpp" line="1009" />
         <source>请先将三档开关切换到自动档</source>
-        <translation type="unfinished">Switch to Auto Mode First</translation>
+        <translation type="unfinished">세 가지 스위치를 먼저 자동으로 전환하세요</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1014" />
         <source>请先回原点</source>
-        <translation type="unfinished">Home First</translation>
+        <translation type="unfinished">먼저 원점으로 돌아가세요</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1289" />
         <source>参数同步失败!失败编号：</source>
-        <translation type="unfinished">Parameter Sync Failed! Error Code:</translation>
+        <translation type="unfinished">매개변수 동기화 실패! 실패 번호:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1323" />
         <source>程式：</source>
-        <translation type="unfinished">Program:</translation>
+        <translation type="unfinished">프로그램:</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1338" />
         <source>教导参数有修改，是否需要保存？</source>
-        <translation type="unfinished">Save Changes to Teach Parameters?</translation>
+        <translation type="unfinished">교육 매개변수가 수정되었습니다. 저장하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1360" />
         <source>回原点中...</source>
-        <translation type="unfinished">Homing...</translation>
+        <translation type="unfinished">원점으로 돌아가는 중...</translation>
     </message>
     <message>
         <location filename="../mainwindow.cpp" line="1376" />
         <source>复位中...</source>
-        <translation type="unfinished">Resetting...</translation>
+        <translation type="unfinished">리셋 중...</translation>
     </message>
 </context>
 <context>
@@ -3406,37 +3406,37 @@
     <message>
         <location filename="../manualform.ui" line="65" />
         <source>操作指引</source>
-        <translation type="unfinished">Operate Guide</translation>
+        <translation type="unfinished">조작 안내</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="108" />
         <location filename="../manualform.ui" line="3407" />
         <source>编辑位置</source>
-        <translation type="unfinished">Edit Position</translation>
+        <translation type="unfinished">위치 편집</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="140" />
         <location filename="../manualform.ui" line="3461" />
         <source>导入图片</source>
-        <translation type="unfinished">Import Image</translation>
+        <translation type="unfinished">이미지 가져오기</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="176" />
         <location filename="../manualform.ui" line="3236" />
         <source>新增</source>
-        <translation type="unfinished">Add</translation>
+        <translation type="unfinished">추가</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="212" />
         <location filename="../manualform.ui" line="3326" />
         <source>删除</source>
-        <translation type="unfinished">Delete</translation>
+        <translation type="unfinished">삭제</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="248" />
         <location filename="../manualform.ui" line="3191" />
         <source>编辑</source>
-        <translation type="unfinished">Edit</translation>
+        <translation type="unfinished">편집</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="277" />
@@ -3447,7 +3447,7 @@
         <location filename="../manualform.ui" line="303" />
         <location filename="../manualform.ui" line="3281" />
         <source>保存</source>
-        <translation type="unfinished">Save</translation>
+        <translation type="unfinished">저장</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="369" />
@@ -3457,28 +3457,28 @@
     <message>
         <location filename="../manualform.ui" line="380" />
         <source>轴动作</source>
-        <translation type="unfinished">Axis Action</translation>
+        <translation type="unfinished">축 동작</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="395" />
         <location filename="../manualform.ui" line="1288" />
         <source>手动</source>
-        <translation type="unfinished">Manual</translation>
+        <translation type="unfinished">수동</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="438" />
         <source>位置+</source>
-        <translation type="unfinished">Position+</translation>
+        <translation type="unfinished">위치+</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="475" />
         <source>速度</source>
-        <translation type="unfinished">Speed</translation>
+        <translation type="unfinished">속도</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="537" />
         <source>轴选择</source>
-        <translation type="unfinished">Axis Select</translation>
+        <translation type="unfinished">축 선택</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="586" />
@@ -3489,7 +3489,7 @@
         <location filename="../manualform.ui" line="617" />
         <location filename="../manualform.cpp" line="1673" />
         <source>禁止</source>
-        <translation type="unfinished">Disabled</translation>
+        <translation type="unfinished">금지</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="622" />
@@ -3530,7 +3530,7 @@
     <message>
         <location filename="../manualform.ui" line="683" />
         <source>位置-</source>
-        <translation type="unfinished">Position-</translation>
+        <translation type="unfinished">위치-</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="723" />
@@ -3542,43 +3542,43 @@
     <message>
         <location filename="../manualform.ui" line="779" />
         <source>调机</source>
-        <translation type="unfinished">Commissioning</translation>
+        <translation type="unfinished">기계 조정</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="832" />
         <location filename="../manualform.ui" line="922" />
         <source>调机功能</source>
-        <translation type="unfinished">Commissioning Function</translation>
+        <translation type="unfinished">기계 조정 기능</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="883" />
         <source>手动智能力矩</source>
-        <translation type="unfinished">Manual Smart Torque</translation>
+        <translation type="unfinished">수동 스마트 토크</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="935" />
         <source>编码器脉冲</source>
-        <translation type="unfinished">Encoder Pulse</translation>
+        <translation type="unfinished">인코더 펄스</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1012" />
         <source>每转距离</source>
-        <translation type="unfinished">Distance per Revolution</translation>
+        <translation type="unfinished">회전당 거리</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1057" />
         <source>使用</source>
-        <translation type="unfinished">Used</translation>
+        <translation type="unfinished">사용</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1076" />
         <source>当前轴</source>
-        <translation type="unfinished">Current Axis</translation>
+        <translation type="unfinished">현재 축</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1089" />
         <source>内部脉冲</source>
-        <translation type="unfinished">Internal Pulse</translation>
+        <translation type="unfinished">내부 펄스</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1102" />
@@ -3589,253 +3589,253 @@
     <message>
         <location filename="../manualform.ui" line="1164" />
         <source>正转</source>
-        <translation type="unfinished">Clockwise</translation>
+        <translation type="unfinished">정회전</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1209" />
         <source>反转</source>
-        <translation type="unfinished">Counter-Clockwise</translation>
+        <translation type="unfinished">역회전</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1254" />
         <source>清零</source>
-        <translation type="unfinished">Reset</translation>
+        <translation type="unfinished">리셋</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1315" />
         <source>无信号Z轴允许下降</source>
-        <translation type="unfinished">Z Axis Allowed to Descend Without Signal</translation>
+        <translation type="unfinished">신호 없이 Z축 하강 허용</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1322" />
         <source>卡爪/机床</source>
-        <translation type="unfinished">Gripper/Machine</translation>
+        <translation type="unfinished">집게/기계</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1337" />
         <source>机床控制</source>
-        <translation type="unfinished">CNC Control</translation>
+        <translation type="unfinished">기계 제어</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1380" />
         <source>控制旋转1断</source>
-        <translation type="unfinished">Control Rotation 1 Off</translation>
+        <translation type="unfinished">제어 회전 1 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1425" />
         <source>启动加工1断</source>
-        <translation type="unfinished">Start Machining 1 Off</translation>
+        <translation type="unfinished">가공 시작 1 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1470" />
         <source>自动门1关</source>
-        <translation type="unfinished">Auto Door 1 Close</translation>
+        <translation type="unfinished">자동 문 1 닫힘</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1515" />
         <source>主轴定位1断</source>
-        <translation type="unfinished">Spindle Positioning 1 Off</translation>
+        <translation type="unfinished">주축 위치 지정 1 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1547" />
         <source>机床控制使能</source>
-        <translation type="unfinished">Machine Control Enable</translation>
+        <translation type="unfinished">기계 제어 활성화</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1567" />
         <source>卡盘/吹屑</source>
-        <translation type="unfinished">Chuck/Blow Chips</translation>
+        <translation type="unfinished">척 / 칩 분사</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1610" />
         <source>卡盘1松开</source>
-        <translation type="unfinished">Chuck 1 Release</translation>
+        <translation type="unfinished">척 1 해제</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1655" />
         <source>吹气1断</source>
-        <translation type="unfinished">Air Blow 1 Off</translation>
+        <translation type="unfinished">바람 1 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1685" />
         <source>卡爪</source>
-        <translation type="unfinished">Gripper</translation>
+        <translation type="unfinished">집게</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1728" />
         <source>成品1松开</source>
-        <translation type="unfinished">Product 1 Release</translation>
+        <translation type="unfinished">완성품 1 해제</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1776" />
         <source>卡爪1反转</source>
-        <translation type="unfinished">Gripper 1 CCW</translation>
+        <translation type="unfinished">집게 1 역회전</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1824" />
         <source>原料1松开</source>
-        <translation type="unfinished">Raw Material 1 Release</translation>
+        <translation type="unfinished">원료 1 해제</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1850" />
         <source>预留</source>
-        <translation type="unfinished">Reserved</translation>
+        <translation type="unfinished">예약</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1869" />
         <source>主板</source>
-        <translation type="unfinished">Mainboard</translation>
+        <translation type="unfinished">메인 보드</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1892" />
         <source>组一</source>
-        <translation type="unfinished">Group 1</translation>
+        <translation type="unfinished">그룹 1</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1934" />
         <source>预留Y1断</source>
-        <translation type="unfinished">Reserved Y1 Off</translation>
+        <translation type="unfinished">예약 Y1 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="1980" />
         <source>预留Y2断</source>
-        <translation type="unfinished">Reserved Y2 Off</translation>
+        <translation type="unfinished">예약 Y2 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2026" />
         <source>预留Y3断</source>
-        <translation type="unfinished">Reserved Y3 Off</translation>
+        <translation type="unfinished">예약 Y3 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2072" />
         <source>预留Y4断</source>
-        <translation type="unfinished">Reserved Y4 Off</translation>
+        <translation type="unfinished">예약 Y4 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2125" />
         <source>预留Y5断</source>
-        <translation type="unfinished">Reserved Y5 Off</translation>
+        <translation type="unfinished">예약 Y5 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2171" />
         <source>预留Y6断</source>
-        <translation type="unfinished">Reserved Y6 Off</translation>
+        <translation type="unfinished">예약 Y6 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2217" />
         <source>预留Y7断</source>
-        <translation type="unfinished">Reserved Y7 Off</translation>
+        <translation type="unfinished">예약 Y7 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2263" />
         <source>预留Y8断</source>
-        <translation type="unfinished">Reserved Y8 Off</translation>
+        <translation type="unfinished">예약 Y8 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2293" />
         <source>组二</source>
-        <translation type="unfinished">Group 2</translation>
+        <translation type="unfinished">그룹 2</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2335" />
         <source>预留Y9断</source>
-        <translation type="unfinished">Reserved Y9 Off</translation>
+        <translation type="unfinished">예약 Y9 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2381" />
         <source>预留Y10断</source>
-        <translation type="unfinished">Reserved Y10 Off</translation>
+        <translation type="unfinished">예약 Y10 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2427" />
         <source>预留Y11断</source>
-        <translation type="unfinished">Reserved Y11 Off</translation>
+        <translation type="unfinished">예약 Y11 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2473" />
         <source>预留Y12断</source>
-        <translation type="unfinished">Reserved Y12 Off</translation>
+        <translation type="unfinished">예약 Y12 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2526" />
         <source>预留Y13断</source>
-        <translation type="unfinished">Reserved Y13 Off</translation>
+        <translation type="unfinished">예약 Y13 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2572" />
         <source>预留Y14断</source>
-        <translation type="unfinished">Reserved Y14 Off</translation>
+        <translation type="unfinished">예약 Y14 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2618" />
         <source>预留Y15断</source>
-        <translation type="unfinished">Reserved Y15 Off</translation>
+        <translation type="unfinished">예약 Y15 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2664" />
         <source>预留Y16断</source>
-        <translation type="unfinished">Reserved Y16 Off</translation>
+        <translation type="unfinished">예약 Y16 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2696" />
         <source>组三</source>
-        <translation type="unfinished">Group 3</translation>
+        <translation type="unfinished">그룹 3</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2738" />
         <source>预留Y17断</source>
-        <translation type="unfinished">Reserved Y17 Off</translation>
+        <translation type="unfinished">예약 Y17 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2784" />
         <source>预留Y19断</source>
-        <translation type="unfinished">Reserved Y19 Off</translation>
+        <translation type="unfinished">예약 Y19 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2830" />
         <source>预留Y21断</source>
-        <translation type="unfinished">Reserved Y21 Off</translation>
+        <translation type="unfinished">예약 Y21 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2876" />
         <source>预留Y23断</source>
-        <translation type="unfinished">Reserved Y23 Off</translation>
+        <translation type="unfinished">예약 Y23 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2926" />
         <source>预留Y18断</source>
-        <translation type="unfinished">Reserved Y18 Off</translation>
+        <translation type="unfinished">예약 Y18 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="2972" />
         <source>预留Y20断</source>
-        <translation type="unfinished">Reserved Y20 Off</translation>
+        <translation type="unfinished">예약 Y20 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="3018" />
         <source>预留Y22断</source>
-        <translation type="unfinished">Reserved Y22 Off</translation>
+        <translation type="unfinished">예약 Y22 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="3064" />
         <source>预留Y24断</source>
-        <translation type="unfinished">Reserved Y24 Off</translation>
+        <translation type="unfinished">예약 Y24 단절</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="3090" />
         <source>IO板</source>
-        <translation type="unfinished">IO Board</translation>
+        <translation type="unfinished">IO 보드</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="3097" />
         <location filename="../manualform.cpp" line="1040" />
         <source>参考点</source>
-        <translation type="unfinished">Reference Point</translation>
+        <translation type="unfinished">참조 포인트</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="3146" />
         <source>刷新</source>
-        <translation type="unfinished">Refresh</translation>
+        <translation type="unfinished">새로 고침</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="3426" />
@@ -3850,12 +3850,12 @@
     <message>
         <location filename="../manualform.ui" line="3589" />
         <source>移至参考点</source>
-        <translation type="unfinished">Move to Reference Point</translation>
+        <translation type="unfinished">참조 포인트로 이동</translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="3633" />
         <source>进入堆叠</source>
-        <translation type="unfinished">Enter Stacking</translation>
+        <translation type="unfinished">스택으로 진입</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="172" />
@@ -3879,7 +3879,7 @@
         <location filename="../manualform.cpp" line="1650" />
         <location filename="../manualform.cpp" line="1664" />
         <source>断</source>
-        <translation type="unfinished">Off</translation>
+        <translation type="unfinished">끊김</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="174" />
@@ -3895,52 +3895,52 @@
         <location filename="../manualform.cpp" line="1653" />
         <location filename="../manualform.cpp" line="1668" />
         <source>通</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">통함</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="283" />
         <source>当前未找原点</source>
-        <translation type="unfinished">Current Position Not Found</translation>
+        <translation type="unfinished">현재 원점을 찾지 못함</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="288" />
         <source>请输入高级管理员密码</source>
-        <translation type="unfinished">Enter Advanced Admin Passwd</translation>
+        <translation type="unfinished">고급 관리자 비밀번호를 입력하세요</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="447" />
         <source>确认删除：</source>
-        <translation type="unfinished">Confirm Delete:</translation>
+        <translation type="unfinished">삭제 확인:</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="542" />
         <source>确定删除：</source>
-        <translation type="unfinished">Confirm Delete:</translation>
+        <translation type="unfinished">삭제 확정:</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="692" />
         <source>轴位置</source>
-        <translation type="unfinished">Axis Position</translation>
+        <translation type="unfinished">축 위치</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="1335" />
         <source>操作指引参数有修改，是否需要保存？</source>
-        <translation type="unfinished">Save Changes to Operate Guide?</translation>
+        <translation type="unfinished">조작 안내 매개변수가 수정되었습니다. 저장하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="1354" />
         <source>参考点参数有修改，是否需要保存？</source>
-        <translation type="unfinished">Save Changes to Reference Points?</translation>
+        <translation type="unfinished">참조 포인트 매개변수가 수정되었습니다. 저장하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="1470" />
         <source>未找到图片：guide.png，图片像素: 1001×450px。是否使用默认图片？</source>
-        <translation type="unfinished">Image guide.png not found(1001×450px). Use default?</translation>
+        <translation type="unfinished">guide.png 이미지를 찾을 수 없습니다. 픽셀 크기: 1001×450px. 기본 이미지를 사용하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../manualform.cpp" line="1508" />
         <source>未找到图片: referPoint.png，图片像素: 760×480px。是否使用默认图片？</source>
-        <translation type="unfinished">Image referPoint.png not found(760×480px). Use default?</translation>
+        <translation type="unfinished">referPoint.png 이미지를 찾을 수 없습니다. 픽셀 크기: 760×480px. 기본 이미지를 사용하시겠습니까?</translation>
     </message>
 </context>
 <context>
@@ -3955,7 +3955,7 @@
         <location filename="../monitorform.ui" line="7293" />
         <location filename="../monitorform.ui" line="14416" />
         <source>机械手入</source>
-        <translation type="unfinished">Manipulator In</translation>
+        <translation type="unfinished">로봇 암 들어가기</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="223" />
@@ -3965,7 +3965,7 @@
         <location filename="../monitorform.ui" line="14512" />
         <location filename="../monitorform.ui" line="20644" />
         <source>当前页：</source>
-        <translation type="unfinished">Current Page:</translation>
+        <translation type="unfinished">현재 페이지:</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="275" />
@@ -4742,7 +4742,7 @@
         <location filename="../monitorform.ui" line="10900" />
         <location filename="../monitorform.ui" line="18038" />
         <source>机械手出</source>
-        <translation type="unfinished">Manipulator Out</translation>
+        <translation type="unfinished">로봇 암 나가기</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="3835" />
@@ -5066,63 +5066,63 @@
         <location filename="../monitorform.ui" line="13617" />
         <location filename="../monitorform.ui" line="20753" />
         <source>伺服</source>
-        <translation type="unfinished">Servo</translation>
+        <translation type="unfinished">서보</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6534" />
         <location filename="../monitorform.ui" line="13655" />
         <location filename="../monitorform.ui" line="20807" />
         <source>转矩</source>
-        <translation type="unfinished">Torque</translation>
+        <translation type="unfinished">토크</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6567" />
         <location filename="../monitorform.ui" line="13688" />
         <location filename="../monitorform.ui" line="20840" />
         <source>实时值</source>
-        <translation type="unfinished">Real-Time Value</translation>
+        <translation type="unfinished">실시간 값</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6600" />
         <location filename="../monitorform.ui" line="13721" />
         <location filename="../monitorform.ui" line="20873" />
         <source>平均负载率</source>
-        <translation type="unfinished">Average Load Rate</translation>
+        <translation type="unfinished">평균 부하율</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6636" />
         <location filename="../monitorform.ui" line="13757" />
         <location filename="../monitorform.ui" line="20909" />
         <source>多圈数据</source>
-        <translation type="unfinished">Multi-Turn Data</translation>
+        <translation type="unfinished">다중 회전 데이터</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6672" />
         <location filename="../monitorform.ui" line="13793" />
         <location filename="../monitorform.ui" line="20945" />
         <source>驱动温度</source>
-        <translation type="unfinished">Driver Temperature</translation>
+        <translation type="unfinished">드라이브 온도</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6708" />
         <location filename="../monitorform.ui" line="13829" />
         <location filename="../monitorform.ui" line="20981" />
         <source>母线电压</source>
-        <translation type="unfinished">Bus Voltage</translation>
+        <translation type="unfinished">버스 전압</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6744" />
         <location filename="../monitorform.ui" line="13865" />
         <location filename="../monitorform.ui" line="21017" />
         <source>单圈数据</source>
-        <translation type="unfinished">Single-Turn Data</translation>
+        <translation type="unfinished">단일 회전 데이터</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6777" />
         <location filename="../monitorform.ui" line="13898" />
         <location filename="../monitorform.ui" line="21050" />
         <source>最大值</source>
-        <translation type="unfinished">Max</translation>
+        <translation type="unfinished">최대값</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="6807" />
@@ -5213,12 +5213,12 @@
     <message>
         <location filename="../monitorform.ui" line="21502" />
         <source>手控器</source>
-        <translation type="unfinished">HMI</translation>
+        <translation type="unfinished">핸드 컨트롤러</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="21562" />
         <source>F1:自动门1开/关 通</source>
-        <translation type="unfinished">F1: Auto Door 1 Open/Close On</translation>
+        <translation type="unfinished">F1: 자동 문 1 열기/닫기 통함</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="21620" />
@@ -5268,7 +5268,7 @@
     <message>
         <location filename="../monitorform.ui" line="22502" />
         <source>C-:自动门1开/关 断</source>
-        <translation type="unfinished">C-: Auto Door 1 Open/Close Off</translation>
+        <translation type="unfinished">C-: 자동 문 1 열기/닫기 단절</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="22557" />
@@ -5283,62 +5283,62 @@
     <message>
         <location filename="../monitorform.ui" line="22720" />
         <source>F2:成品1夹紧/松开</source>
-        <translation type="unfinished">F2: Product 1 Clamp/Release</translation>
+        <translation type="unfinished">F2: 완성품 1 클램핑/해제</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="22750" />
         <location filename="../monitorform.cpp" line="1106" />
         <source>工作</source>
-        <translation type="unfinished">Work</translation>
+        <translation type="unfinished">작업</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="22780" />
         <location filename="../monitorform.cpp" line="1114" />
         <source>加工完成</source>
-        <translation type="unfinished">Machining Completed</translation>
+        <translation type="unfinished">가공 완료</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="22810" />
         <location filename="../monitorform.cpp" line="1122" />
         <source>启动加工</source>
-        <translation type="unfinished">Start Machining</translation>
+        <translation type="unfinished">가공 시작</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="22840" />
         <location filename="../monitorform.cpp" line="1130" />
         <source>信号</source>
-        <translation type="unfinished">Signal</translation>
+        <translation type="unfinished">신호</translation>
     </message>
     <message>
         <location filename="../monitorform.ui" line="22870" />
         <location filename="../monitorform.cpp" line="1138" />
         <source>手轮按键</source>
-        <translation type="unfinished">Handwheel Key</translation>
+        <translation type="unfinished">핸드휠 버튼</translation>
     </message>
     <message>
         <location filename="../monitorform.cpp" line="1102" />
         <source>工作:</source>
-        <translation type="unfinished">Work:</translation>
+        <translation type="unfinished">작업:</translation>
     </message>
     <message>
         <location filename="../monitorform.cpp" line="1110" />
         <source>加工完成:</source>
-        <translation type="unfinished">Machining Completed:</translation>
+        <translation type="unfinished">가공 완료:</translation>
     </message>
     <message>
         <location filename="../monitorform.cpp" line="1118" />
         <source>启动加工:</source>
-        <translation type="unfinished">Start Machining:</translation>
+        <translation type="unfinished">가공 시작:</translation>
     </message>
     <message>
         <location filename="../monitorform.cpp" line="1126" />
         <source>信号:</source>
-        <translation type="unfinished">Signal:</translation>
+        <translation type="unfinished">신호:</translation>
     </message>
     <message>
         <location filename="../monitorform.cpp" line="1134" />
         <source>手轮按键:</source>
-        <translation type="unfinished">Handwheel Key:</translation>
+        <translation type="unfinished">핸드휠 버튼:</translation>
     </message>
 </context>
 <context>
@@ -5347,89 +5347,89 @@
         <location filename="../dialogs/stackedit.cpp" line="22" />
         <location filename="../dialogs/stackedit.cpp" line="91" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="25" />
         <location filename="../dialogs/stackedit.cpp" line="92" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="25" />
         <source>Y2轴</source>
-        <translation type="unfinished">Y2 Axis</translation>
+        <translation type="unfinished">Y2축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="28" />
         <location filename="../dialogs/stackedit.cpp" line="93" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="28" />
         <source>Z2轴</source>
-        <translation type="unfinished">Z2 Axis</translation>
+        <translation type="unfinished">Z2축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="78" />
         <source>轴选择</source>
-        <translation type="unfinished">Axis Select</translation>
+        <translation type="unfinished">축 선택</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="79" />
         <source>速度</source>
-        <translation type="unfinished">Speed</translation>
+        <translation type="unfinished">속도</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="80" />
         <source>点数</source>
-        <translation type="unfinished">Points Number</translation>
+        <translation type="unfinished">점수</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="81" />
         <source>A-起点</source>
-        <translation type="unfinished">A-Start Point</translation>
+        <translation type="unfinished">A-시작점</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="82" />
         <source>B-X方向终点</source>
-        <translation type="unfinished">B-X End Point</translation>
+        <translation type="unfinished">B-X 방향 종점</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="83" />
         <source>C-Y方向终点</source>
-        <translation type="unfinished">C-Y End Point</translation>
+        <translation type="unfinished">C-Y 방향 종점</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="84" />
         <source>D点坐标</source>
-        <translation type="unfinished">D Point Coordinates</translation>
+        <translation type="unfinished">D 점 좌표</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="85" />
         <source>放料速度</source>
-        <translation type="unfinished">Feeding Speed</translation>
+        <translation type="unfinished">공급 속도</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="86" />
         <source>放料起始点</source>
-        <translation type="unfinished">Feeding Start Point</translation>
+        <translation type="unfinished">공급 시작점</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="802" />
         <source>个数</source>
-        <translation type="unfinished">Quantity</translation>
+        <translation type="unfinished">개수</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="802" />
         <source>目标位置</source>
-        <translation type="unfinished">Target Position</translation>
+        <translation type="unfinished">목표 위치</translation>
     </message>
     <message>
         <location filename="../method/program_popup.cpp" line="3" />
         <source>是否保存已修改的程序？</source>
-        <translation type="unfinished">Save Modified Program?</translation>
+        <translation type="unfinished">수정된 프로그램을 저장하시겠습니까?</translation>
     </message>
 </context>
 <context>
@@ -5442,22 +5442,22 @@
     <message>
         <location filename="../dialogs/referpointdialog.ui" line="52" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/referpointdialog.ui" line="65" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/referpointdialog.cpp" line="14" />
         <source>参考点指定</source>
-        <translation type="unfinished">Reference Point Assignment</translation>
+        <translation type="unfinished">참조 포인트 지정</translation>
     </message>
     <message>
         <location filename="../dialogs/referpointdialog.cpp" line="55" />
         <source>不指定</source>
-        <translation type="unfinished">Not Specified</translation>
+        <translation type="unfinished">미지정</translation>
     </message>
 </context>
 <context>
@@ -5465,22 +5465,22 @@
     <message>
         <location filename="../referencewidget.cpp" line="166" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../referencewidget.cpp" line="167" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../referencewidget.cpp" line="168" />
         <source>刷新</source>
-        <translation type="unfinished">Refresh</translation>
+        <translation type="unfinished">새로 고침</translation>
     </message>
     <message>
         <location filename="../referencewidget.cpp" line="169" />
         <source>编辑</source>
-        <translation type="unfinished">Edit</translation>
+        <translation type="unfinished">편집</translation>
     </message>
 </context>
 <context>
@@ -5489,44 +5489,44 @@
         <location filename="../setting.ui" line="147" />
         <location filename="../setting.cpp" line="1512" />
         <source>安全设置</source>
-        <translation type="unfinished">Safety Settings</translation>
+        <translation type="unfinished">안전 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="174" />
         <location filename="../setting.cpp" line="1511" />
         <source>信号设置</source>
-        <translation type="unfinished">Signal Settings</translation>
+        <translation type="unfinished">신호 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="271" />
         <location filename="../setting.ui" line="17929" />
         <location filename="../setting.cpp" line="1513" />
         <source>产品设置</source>
-        <translation type="unfinished">Product Settings</translation>
+        <translation type="unfinished">제품 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="333" />
         <location filename="../setting.cpp" line="1514" />
         <source>系统设置</source>
-        <translation type="unfinished">System Settings</translation>
+        <translation type="unfinished">시스템 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="456" />
         <location filename="../setting.cpp" line="1516" />
         <source>伺服安全点</source>
-        <translation type="unfinished">Servo Safety Points</translation>
+        <translation type="unfinished">서보 안전 포인트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="483" />
         <location filename="../setting.cpp" line="1515" />
         <source>伺服参数</source>
-        <translation type="unfinished">Servo Parameters</translation>
+        <translation type="unfinished">서보 매개변수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="510" />
         <location filename="../setting.cpp" line="1517" />
         <source>机器参数</source>
-        <translation type="unfinished">Machine Parameters</translation>
+        <translation type="unfinished">기계 매개변수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="537" />
@@ -5534,13 +5534,13 @@
         <location filename="../setting.cpp" line="1518" />
         <location filename="../setting.cpp" line="1592" />
         <source>堆叠设置</source>
-        <translation type="unfinished">Stacking Settings</translation>
+        <translation type="unfinished">스택 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="573" />
         <location filename="../setting.cpp" line="1530" />
         <source>输出类型</source>
-        <translation type="unfinished">Output Type</translation>
+        <translation type="unfinished">출력 유형</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="609" />
@@ -5558,7 +5558,7 @@
         <location filename="../setting.ui" line="1435" />
         <location filename="../setting.ui" line="1480" />
         <source>电平</source>
-        <translation type="unfinished">Level</translation>
+        <translation type="unfinished">레벨</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="614" />
@@ -5566,7 +5566,7 @@
         <location filename="../setting.ui" line="1440" />
         <location filename="../setting.ui" line="1485" />
         <source>单脉冲</source>
-        <translation type="unfinished">Single Pulse</translation>
+        <translation type="unfinished">단일 펄스</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="619" />
@@ -5574,13 +5574,13 @@
         <location filename="../setting.ui" line="1445" />
         <location filename="../setting.ui" line="1490" />
         <source>双脉冲</source>
-        <translation type="unfinished">Double Pulse</translation>
+        <translation type="unfinished">더블 펄스</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="647" />
         <location filename="../setting.ui" line="1556" />
         <source>卡盘1夹紧</source>
-        <translation type="unfinished">Chuck 1 Clamping</translation>
+        <translation type="unfinished">척 1 클램핑</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="683" />
@@ -5594,91 +5594,91 @@
         <location filename="../setting.ui" line="1282" />
         <location filename="../setting.ui" line="1376" />
         <source>脉冲</source>
-        <translation type="unfinished">Pulse</translation>
+        <translation type="unfinished">펄스</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="745" />
         <location filename="../setting.ui" line="9705" />
         <source>主轴定位1</source>
-        <translation type="unfinished">Spindle Positioning 1</translation>
+        <translation type="unfinished">주축 위치 지정 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="843" />
         <location filename="../setting.ui" line="10510" />
         <source>预留1</source>
-        <translation type="unfinished">Reserved 1</translation>
+        <translation type="unfinished">예약 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="873" />
         <location filename="../setting.ui" line="10570" />
         <source>主轴旋转1</source>
-        <translation type="unfinished">Spindle Rotation 1</translation>
+        <translation type="unfinished">주축 회전 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="903" />
         <location filename="../setting.ui" line="10920" />
         <source>加工完成1</source>
-        <translation type="unfinished">Processing Completed 1</translation>
+        <translation type="unfinished">가공 완료 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1006" />
         <location filename="../setting.ui" line="10698" />
         <source>启动加工1</source>
-        <translation type="unfinished">Start Processing 1</translation>
+        <translation type="unfinished">가공 시작 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1036" />
         <location filename="../setting.ui" line="1680" />
         <source>自动门1开</source>
-        <translation type="unfinished">Automatic Door 1 Open</translation>
+        <translation type="unfinished">자동 문 1 열림</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1078" />
         <location filename="../setting.ui" line="10313" />
         <source>启动加工2</source>
-        <translation type="unfinished">Start Processing 2</translation>
+        <translation type="unfinished">가공 시작 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1142" />
         <location filename="../setting.ui" line="2308" />
         <source>自动门2开</source>
-        <translation type="unfinished">Automatic Door 2 Open</translation>
+        <translation type="unfinished">자동 문 2 열림</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1240" />
         <location filename="../setting.ui" line="10826" />
         <source>主轴旋转2</source>
-        <translation type="unfinished">Spindle Rotation 2</translation>
+        <translation type="unfinished">주축 회전 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1310" />
         <location filename="../setting.ui" line="9641" />
         <source>主轴定位2</source>
-        <translation type="unfinished">Spindle Positioning 2</translation>
+        <translation type="unfinished">주축 위치 지정 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1340" />
         <location filename="../setting.ui" line="9547" />
         <source>加工完成2</source>
-        <translation type="unfinished">Processing Completed 2</translation>
+        <translation type="unfinished">가공 완료 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1404" />
         <location filename="../setting.ui" line="9453" />
         <source>预留2</source>
-        <translation type="unfinished">Reserved 2</translation>
+        <translation type="unfinished">예약 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1518" />
         <location filename="../setting.ui" line="2928" />
         <source>卡盘2夹紧</source>
-        <translation type="unfinished">Chuck 2 Clamping</translation>
+        <translation type="unfinished">척 2 클램핑</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1530" />
         <location filename="../setting.cpp" line="1531" />
         <source>互锁设置</source>
-        <translation type="unfinished">Interlock Settings</translation>
+        <translation type="unfinished">연동 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1582" />
@@ -5694,7 +5694,7 @@
         <location filename="../setting.ui" line="2830" />
         <location filename="../setting.ui" line="2954" />
         <source>正向阀</source>
-        <translation type="unfinished">Pos Valve</translation>
+        <translation type="unfinished">정방향 밸브</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1607" />
@@ -5710,7 +5710,7 @@
         <location filename="../setting.ui" line="2855" />
         <location filename="../setting.ui" line="2979" />
         <source>反向阀</source>
-        <translation type="unfinished">Neg Valve</translation>
+        <translation type="unfinished">역방향 밸브</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1632" />
@@ -5726,7 +5726,7 @@
         <location filename="../setting.ui" line="2880" />
         <location filename="../setting.ui" line="3004" />
         <source>正向检测</source>
-        <translation type="unfinished">Pos Check</translation>
+        <translation type="unfinished">정방향 감지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1657" />
@@ -5742,50 +5742,50 @@
         <location filename="../setting.ui" line="2905" />
         <location filename="../setting.ui" line="3029" />
         <source>反向检测</source>
-        <translation type="unfinished">Neg Check</translation>
+        <translation type="unfinished">역방향 감지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1804" />
         <location filename="../setting.ui" line="2432" />
         <location filename="../setting.ui" line="7483" />
         <source>预留</source>
-        <translation type="unfinished">Reserved</translation>
+        <translation type="unfinished">예약</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="1928" />
         <source>成品1夹紧</source>
-        <translation type="unfinished">Finished Product 1 Clamping</translation>
+        <translation type="unfinished">완성품 1 클램핑</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="2052" />
         <source>卡爪1正转</source>
-        <translation type="unfinished">Gripper 1 Forward Rotation</translation>
+        <translation type="unfinished">집게 1 정회전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="2176" />
         <source>原料1夹紧</source>
-        <translation type="unfinished">Raw Material 1 Clamping</translation>
+        <translation type="unfinished">원료 1 클램핑</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="2556" />
         <source>原料2夹紧</source>
-        <translation type="unfinished">Raw Material 2 Clamping</translation>
+        <translation type="unfinished">원료 2 클램핑</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="2680" />
         <source>成品2夹紧</source>
-        <translation type="unfinished">Finished Product 2 Clamping</translation>
+        <translation type="unfinished">완성품 2 클램핑</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="2804" />
         <source>卡爪2正转</source>
-        <translation type="unfinished">Gripper 2 Forward Rotation</translation>
+        <translation type="unfinished">집게 2 정회전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3067" />
         <location filename="../setting.ui" line="7715" />
         <source>页码：</source>
-        <translation type="unfinished">Page:</translation>
+        <translation type="unfinished">페이지 번호:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3091" />
@@ -5797,96 +5797,96 @@
         <location filename="../setting.ui" line="3146" />
         <location filename="../setting.cpp" line="1532" />
         <source>端口自定义</source>
-        <translation type="unfinished">Port Customization</translation>
+        <translation type="unfinished">포트 사용자 정의</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3370" />
         <location filename="../setting.ui" line="7437" />
         <source>信号</source>
-        <translation type="unfinished">Signal</translation>
+        <translation type="unfinished">신호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3375" />
         <location filename="../setting.ui" line="4263" />
         <location filename="../setting.cpp" line="1197" />
         <source>默认名称</source>
-        <translation type="unfinished">Default Name</translation>
+        <translation type="unfinished">기본 이름</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3380" />
         <location filename="../setting.ui" line="4268" />
         <location filename="../setting.cpp" line="1197" />
         <source>修改名称</source>
-        <translation type="unfinished">Modify Name</translation>
+        <translation type="unfinished">이름 수정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3385" />
         <source>修改端口</source>
-        <translation type="unfinished">Modify Port</translation>
+        <translation type="unfinished">포트 수정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3428" />
         <source>机械手入1</source>
-        <translation type="unfinished">Robot Arm In 1</translation>
+        <translation type="unfinished">로봇 암 들어가기 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3433" />
         <source>机械手入2</source>
-        <translation type="unfinished">Robot Arm In 2</translation>
+        <translation type="unfinished">로봇 암 들어가기 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3438" />
         <source>机械手出1</source>
-        <translation type="unfinished">Robot Arm Out 1</translation>
+        <translation type="unfinished">로봇 암 나가기 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3443" />
         <source>机械手出2</source>
-        <translation type="unfinished">Robot Arm Out 2</translation>
+        <translation type="unfinished">로봇 암 나가기 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3457" />
         <location filename="../setting.ui" line="4355" />
         <source>组选</source>
-        <translation type="unfinished">Group Selection</translation>
+        <translation type="unfinished">그룹 선택</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3478" />
         <location filename="../setting.ui" line="3858" />
         <location filename="../setting.ui" line="20602" />
         <source>名称恢复</source>
-        <translation type="unfinished">Restore Name</translation>
+        <translation type="unfinished">이름 복원</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3519" />
         <location filename="../setting.ui" line="3633" />
         <location filename="../setting.ui" line="3899" />
         <source>全部</source>
-        <translation type="unfinished">All</translation>
+        <translation type="unfinished">전체</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3564" />
         <location filename="../setting.ui" line="3678" />
         <location filename="../setting.ui" line="3944" />
         <source>单个</source>
-        <translation type="unfinished">Single</translation>
+        <translation type="unfinished">개별</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3592" />
         <source>端口恢复</source>
-        <translation type="unfinished">Restore Port</translation>
+        <translation type="unfinished">포트 복원</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3724" />
         <location filename="../setting.ui" line="4085" />
         <source>导出</source>
-        <translation type="unfinished">Export</translation>
+        <translation type="unfinished">내보내기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3773" />
         <location filename="../setting.ui" line="4036" />
         <source>导入</source>
-        <translation type="unfinished">Import</translation>
+        <translation type="unfinished">가져오기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3822" />
@@ -5915,54 +5915,54 @@
         <location filename="../setting.ui" line="35446" />
         <location filename="../setting.ui" line="37444" />
         <source>保存</source>
-        <translation type="unfinished">Save</translation>
+        <translation type="unfinished">저장</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="3838" />
         <location filename="../setting.cpp" line="1533" />
         <source>名称自定义</source>
-        <translation type="unfinished">Custom Name</translation>
+        <translation type="unfinished">이름 사용자 정의</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4311" />
         <source>登陆权限</source>
-        <translation type="unfinished">Login Permissions</translation>
+        <translation type="unfinished">로그인 권한</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4316" />
         <source>子程序</source>
-        <translation type="unfinished">Subprogram</translation>
+        <translation type="unfinished">서브 프로그램</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4321" />
         <source>轴</source>
-        <translation type="unfinished">Axis</translation>
+        <translation type="unfinished">축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4326" />
         <source>变量</source>
-        <translation type="unfinished">Variable</translation>
+        <translation type="unfinished">변수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4331" />
         <source>堆叠</source>
-        <translation type="unfinished">Stacking</translation>
+        <translation type="unfinished">스택</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4336" />
         <source>放料跟随</source>
-        <translation type="unfinished">Material Placement Following</translation>
+        <translation type="unfinished">공급 따라가기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4341" />
         <source>定时器</source>
-        <translation type="unfinished">Timer</translation>
+        <translation type="unfinished">타이머</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4361" />
         <location filename="../setting.cpp" line="1534" />
         <source>预留关联</source>
-        <translation type="unfinished">Reserved Association</translation>
+        <translation type="unfinished">예약 연결</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4394" />
@@ -6075,7 +6075,7 @@
         <location filename="../setting.ui" line="36935" />
         <location filename="../setting.ui" line="36970" />
         <source>不使用</source>
-        <translation type="unfinished">Not Used</translation>
+        <translation type="unfinished">사용하지 않음</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4399" />
@@ -6093,7 +6093,7 @@
         <location filename="../setting.ui" line="5407" />
         <location filename="../setting.ui" line="5452" />
         <source>正关联</source>
-        <translation type="unfinished">Positive Association</translation>
+        <translation type="unfinished">양의 연결</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4404" />
@@ -6111,97 +6111,97 @@
         <location filename="../setting.ui" line="5412" />
         <location filename="../setting.ui" line="5457" />
         <source>反关联</source>
-        <translation type="unfinished">Negative Association</translation>
+        <translation type="unfinished">음의 연결</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4483" />
         <location filename="../setting.ui" line="5826" />
         <source>预留Y7</source>
-        <translation type="unfinished">Reserved Y7</translation>
+        <translation type="unfinished">예약 Y7</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4519" />
         <location filename="../setting.ui" line="6564" />
         <source>预留EY2</source>
-        <translation type="unfinished">Reserved EY2</translation>
+        <translation type="unfinished">예약 EY2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4555" />
         <location filename="../setting.ui" line="6528" />
         <source>预留EY3</source>
-        <translation type="unfinished">Reserved EY3</translation>
+        <translation type="unfinished">예약 EY3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4636" />
         <location filename="../setting.ui" line="5790" />
         <source>预留Y8</source>
-        <translation type="unfinished">Reserved Y8</translation>
+        <translation type="unfinished">예약 Y8</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4717" />
         <location filename="../setting.ui" line="6270" />
         <source>预留Y3</source>
-        <translation type="unfinished">Reserved Y3</translation>
+        <translation type="unfinished">예약 Y3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4753" />
         <location filename="../setting.ui" line="6392" />
         <source>预留EY4</source>
-        <translation type="unfinished">Reserved EY4</translation>
+        <translation type="unfinished">예약 EY4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4879" />
         <location filename="../setting.ui" line="6034" />
         <source>预留EY5</source>
-        <translation type="unfinished">Reserved EY5</translation>
+        <translation type="unfinished">예약 EY5</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4915" />
         <location filename="../setting.ui" line="6306" />
         <source>预留Y6</source>
-        <translation type="unfinished">Reserved Y6</translation>
+        <translation type="unfinished">예약 Y6</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="4996" />
         <location filename="../setting.ui" line="5998" />
         <source>预留Y2</source>
-        <translation type="unfinished">Reserved Y2</translation>
+        <translation type="unfinished">예약 Y2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5032" />
         <location filename="../setting.ui" line="5754" />
         <source>预留Y4</source>
-        <translation type="unfinished">Reserved Y4</translation>
+        <translation type="unfinished">예약 Y4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5068" />
         <location filename="../setting.ui" line="5618" />
         <source>预留Y5</source>
-        <translation type="unfinished">Reserved Y5</translation>
+        <translation type="unfinished">예약 Y5</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5284" />
         <location filename="../setting.ui" line="5912" />
         <source>预留EY6</source>
-        <translation type="unfinished">Reserved EY6</translation>
+        <translation type="unfinished">예약 EY6</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5320" />
         <location filename="../setting.ui" line="5532" />
         <source>预留EY1</source>
-        <translation type="unfinished">Reserved EY1</translation>
+        <translation type="unfinished">예약 EY1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5491" />
         <location filename="../setting.ui" line="6700" />
         <source>预留Y1</source>
-        <translation type="unfinished">Reserved Y1</translation>
+        <translation type="unfinished">예약 Y1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5500" />
         <location filename="../setting.cpp" line="1535" />
         <source>预留出类型</source>
-        <translation type="unfinished">Reserved Output Type</translation>
+        <translation type="unfinished">예약 출력 유형</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5574" />
@@ -6219,7 +6219,7 @@
         <location filename="../setting.ui" line="6606" />
         <location filename="../setting.ui" line="6656" />
         <source>停止断开</source>
-        <translation type="unfinished">Stop Disconnect</translation>
+        <translation type="unfinished">중지 단절</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5579" />
@@ -6237,7 +6237,7 @@
         <location filename="../setting.ui" line="6611" />
         <location filename="../setting.ui" line="6661" />
         <source>链条料道</source>
-        <translation type="unfinished">Chain Material Track</translation>
+        <translation type="unfinished">체인 피더</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="5584" />
@@ -6255,108 +6255,108 @@
         <location filename="../setting.ui" line="6616" />
         <location filename="../setting.ui" line="6666" />
         <source>转盘模式</source>
-        <translation type="unfinished">Turntable Mode</translation>
+        <translation type="unfinished">회전판 모드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6709" />
         <location filename="../setting.cpp" line="1536" />
         <source>按键/信号</source>
-        <translation type="unfinished">Key/Signal</translation>
+        <translation type="unfinished">버튼/신호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6747" />
         <source>按键B/Z2+</source>
-        <translation type="unfinished">Key B/Z2+</translation>
+        <translation type="unfinished">버튼 B/Z2+</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6777" />
         <source>按键F1</source>
-        <translation type="unfinished">Key F1</translation>
+        <translation type="unfinished">버튼 F1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6807" />
         <source>按键B/Z2-</source>
-        <translation type="unfinished">Key B/Z2-</translation>
+        <translation type="unfinished">버튼 B/Z2-</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6885" />
         <source>按键F4</source>
-        <translation type="unfinished">Key F4</translation>
+        <translation type="unfinished">버튼 F4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6931" />
         <source>按键X1-</source>
-        <translation type="unfinished">Key X1-</translation>
+        <translation type="unfinished">버튼 X1-</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6961" />
         <source>按键F3</source>
-        <translation type="unfinished">Key F3</translation>
+        <translation type="unfinished">버튼 F3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="6991" />
         <source>工作</source>
-        <translation type="unfinished">Work</translation>
+        <translation type="unfinished">작업</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7021" />
         <source>按键X1+</source>
-        <translation type="unfinished">Key X1+</translation>
+        <translation type="unfinished">버튼 X1+</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7051" />
         <source>按键A/Y2-</source>
-        <translation type="unfinished">Key A/Y2-</translation>
+        <translation type="unfinished">버튼 A/Y2-</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7113" />
         <source>按键A/Y2+</source>
-        <translation type="unfinished">Key A/Y2+</translation>
+        <translation type="unfinished">버튼 A/Y2+</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7143" />
         <source>按键C-</source>
-        <translation type="unfinished">Key C-</translation>
+        <translation type="unfinished">버튼 C-</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7221" />
         <source>按键F2</source>
-        <translation type="unfinished">Key F2</translation>
+        <translation type="unfinished">버튼 F2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7283" />
         <source>按键C+</source>
-        <translation type="unfinished">Key C+</translation>
+        <translation type="unfinished">버튼 C+</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7345" />
         <source>加工完成</source>
-        <translation type="unfinished">Machining Completed</translation>
+        <translation type="unfinished">가공 완료</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7391" />
         <source>启动加工</source>
-        <translation type="unfinished">Start Machining</translation>
+        <translation type="unfinished">가공 시작</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7529" />
         <source>按键Y1-</source>
-        <translation type="unfinished">Key Y1-</translation>
+        <translation type="unfinished">버튼 Y1-</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7575" />
         <source>按键Y1+</source>
-        <translation type="unfinished">Key Y1+</translation>
+        <translation type="unfinished">버튼 Y1+</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7621" />
         <source>按键Z1-</source>
-        <translation type="unfinished">Key Z1-</translation>
+        <translation type="unfinished">버튼 Z1-</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7667" />
         <source>按键Z1+</source>
-        <translation type="unfinished">Key Z1+</translation>
+        <translation type="unfinished">버튼 Z1+</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7695" />
@@ -6365,12 +6365,12 @@
         <location filename="../setting.cpp" line="1537" />
         <location filename="../setting.cpp" line="1548" />
         <source>高级</source>
-        <translation type="unfinished">Senior</translation>
+        <translation type="unfinished">고급</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7843" />
         <source>刀座原点1检测</source>
-        <translation type="unfinished">Tool Holder Origin 1 Check</translation>
+        <translation type="unfinished">도구 홀더 원점 1 감지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7879" />
@@ -6421,141 +6421,141 @@
         <location filename="../setting.ui" line="36940" />
         <location filename="../setting.ui" line="36975" />
         <source>使用</source>
-        <translation type="unfinished">Used</translation>
+        <translation type="unfinished">사용</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7907" />
         <source>急停输入</source>
-        <translation type="unfinished">Emergency Stop Input</translation>
+        <translation type="unfinished">긴급 정지 입력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="7971" />
         <source>加工安全1</source>
-        <translation type="unfinished">Processing Safety 1</translation>
+        <translation type="unfinished">가공 안전 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8007" />
         <location filename="../setting.ui" line="8204" />
         <location filename="../setting.ui" line="8849" />
         <source>常开</source>
-        <translation type="unfinished">Constent Open</translation>
+        <translation type="unfinished">항상 열림</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8012" />
         <location filename="../setting.ui" line="8209" />
         <location filename="../setting.ui" line="8854" />
         <source>常闭</source>
-        <translation type="unfinished">Constant Closed</translation>
+        <translation type="unfinished">항상 닫힘</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8040" />
         <source>刀座原点2检测</source>
-        <translation type="unfinished">Tool Holder Origin 2 Check</translation>
+        <translation type="unfinished">도구 홀더 원점 2 감지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8104" />
         <source>暂停输入</source>
-        <translation type="unfinished">Pause Input</translation>
+        <translation type="unfinished">일시 중지 입력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8168" />
         <source>加工安全2</source>
-        <translation type="unfinished">Processing Safety 2</translation>
+        <translation type="unfinished">가공 안전 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8237" />
         <source>卡盘复归检测</source>
-        <translation type="unfinished">Chuck Reset Check</translation>
+        <translation type="unfinished">척 복귀 감지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8301" />
         <source>气压检测</source>
-        <translation type="unfinished">Air Pressure Check</translation>
+        <translation type="unfinished">공기 압력 감지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8365" />
         <source>急停断使能</source>
-        <translation type="unfinished">Emergency Stop Disable</translation>
+        <translation type="unfinished">긴급 정지 비활성화</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8429" />
         <source>料仓安全入1</source>
-        <translation type="unfinished">Warehouse Safety In 1</translation>
+        <translation type="unfinished">재고창 안전 입구 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8493" />
         <source>远程自动</source>
-        <translation type="unfinished">Remote Automatic</translation>
+        <translation type="unfinished">원격 자동</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8557" />
         <source>急停输出</source>
-        <translation type="unfinished">Emergency Stop Output</translation>
+        <translation type="unfinished">긴급 정지 출력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8621" />
         <source>料仓安全入2</source>
-        <translation type="unfinished">Warehouse Safety In 2</translation>
+        <translation type="unfinished">재고창 안전 입구 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8685" />
         <source>远程停止</source>
-        <translation type="unfinished">Remote Stop</translation>
+        <translation type="unfinished">원격 중지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8721" />
         <source>周期停</source>
-        <translation type="unfinished">Cycle Stop</translation>
+        <translation type="unfinished">주기적 정지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8749" />
         <source>自动灯</source>
-        <translation type="unfinished">Automatic Light</translation>
+        <translation type="unfinished">자동 등</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8813" />
         <source>料仓安全出</source>
-        <translation type="unfinished">Warehouse Safety Out</translation>
+        <translation type="unfinished">재고창 안전 출구</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8882" />
         <source>低油限</source>
-        <translation type="unfinished">Low Oil Limit</translation>
+        <translation type="unfinished">저유량 한계</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="8946" />
         <source>报警灯</source>
-        <translation type="unfinished">Alarm Light</translation>
+        <translation type="unfinished">경보등</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9010" />
         <source>报警输入1</source>
-        <translation type="unfinished">Alarm Input 1</translation>
+        <translation type="unfinished">경보 입력 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9074" />
         <source>注油器</source>
-        <translation type="unfinished">Oiler</translation>
+        <translation type="unfinished">윤활 장치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9138" />
         <source>报警声</source>
-        <translation type="unfinished">Alarm Sound</translation>
+        <translation type="unfinished">경보 소리</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9202" />
         <source>报警输入2</source>
-        <translation type="unfinished">Alarm Input 2</translation>
+        <translation type="unfinished">경보 입력 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9266" />
         <source>润滑泵</source>
-        <translation type="unfinished">Lubrication Pump</translation>
+        <translation type="unfinished">윤활 펌프</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9330" />
         <source>暂停灯</source>
-        <translation type="unfinished">Pause Light</translation>
+        <translation type="unfinished">일시 중지등</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9420" />
@@ -6565,7 +6565,7 @@
         <location filename="../setting.ui" line="10246" />
         <location filename="../setting.ui" line="10383" />
         <source>机床</source>
-        <translation type="unfinished">CNC</translation>
+        <translation type="unfinished">기계</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9425" />
@@ -6575,98 +6575,98 @@
         <location filename="../setting.ui" line="10251" />
         <location filename="../setting.ui" line="10388" />
         <source>机械手</source>
-        <translation type="unfinished">Robot Arm</translation>
+        <translation type="unfinished">로봇 암</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9517" />
         <source>定位完成1</source>
-        <translation type="unfinished">Positioning Completed 1</translation>
+        <translation type="unfinished">위치 지정 완료 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9611" />
         <source>预留4</source>
-        <translation type="unfinished">Reserved 4</translation>
+        <translation type="unfinished">예약 4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9837" />
         <source>预留7</source>
-        <translation type="unfinished">Reserved 7</translation>
+        <translation type="unfinished">예약 7</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="9906" />
         <source>预留5</source>
-        <translation type="unfinished">Reserved 5</translation>
+        <translation type="unfinished">예약 5</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10009" />
         <source>自动门控制2</source>
-        <translation type="unfinished">Automatic Door Control 2</translation>
+        <translation type="unfinished">자동 문 제어 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10078" />
         <source>定位完成2</source>
-        <translation type="unfinished">Positioning Completed 2</translation>
+        <translation type="unfinished">위치 지정 완료 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10176" />
         <source>预留3</source>
-        <translation type="unfinished">Reserved 3</translation>
+        <translation type="unfinished">예약 3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10450" />
         <source>手动卡盘2入</source>
-        <translation type="unfinished">Manual Chuck 2 In</translation>
+        <translation type="unfinished">수동 척 2 들어가기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10480" />
         <source>预留6</source>
-        <translation type="unfinished">Reserved 6</translation>
+        <translation type="unfinished">예약 6</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10540" />
         <source>预留8</source>
-        <translation type="unfinished">Reserved 8</translation>
+        <translation type="unfinished">예약 8</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10634" />
         <source>吹气2</source>
-        <translation type="unfinished">Air Blow 2</translation>
+        <translation type="unfinished">바람 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10762" />
         <source>吹气1</source>
-        <translation type="unfinished">Air Blow 1</translation>
+        <translation type="unfinished">바람 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10856" />
         <source>自动门控制1</source>
-        <translation type="unfinished">Automatic Door Control 1</translation>
+        <translation type="unfinished">자동 문 제어 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10950" />
         <source>手动卡盘1入</source>
-        <translation type="unfinished">Manual Chuck 1 In</translation>
+        <translation type="unfinished">수동 척 1 들어가기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="10993" />
         <location filename="../setting.cpp" line="1541" />
         <source>机床安全</source>
-        <translation type="unfinished">Machine Safety</translation>
+        <translation type="unfinished">기계 안전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11028" />
         <source>首件启动加工是否输出</source>
-        <translation type="unfinished">Whether to Output First Piece Processing Start</translation>
+        <translation type="unfinished">첫 번째 가공 시작 시 출력 여부</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11058" />
         <source>手臂下降状态自动门2开关</source>
-        <translation type="unfinished">Robot Arm Lowering State Automatic Door 2 Switch</translation>
+        <translation type="unfinished">팔이 내려간 상태에서 자동 문 2 스위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11088" />
         <source>手臂下降状态自动门1开关</source>
-        <translation type="unfinished">Robot Arm Lowering State Automatic Door 1 Switch</translation>
+        <translation type="unfinished">팔이 내려간 상태에서 자동 문 1 스위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11119" />
@@ -6676,105 +6676,105 @@
         <location filename="../setting.ui" line="14104" />
         <location filename="../setting.ui" line="14995" />
         <source>不限制</source>
-        <translation type="unfinished">No Restriction</translation>
+        <translation type="unfinished">제한 없음</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11124" />
         <location filename="../setting.ui" line="11261" />
         <source>开</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">열기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11129" />
         <location filename="../setting.ui" line="11266" />
         <source>关</source>
-        <translation type="unfinished">Off</translation>
+        <translation type="unfinished">닫기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11158" />
         <location filename="../setting.ui" line="11325" />
         <source>禁止</source>
-        <translation type="unfinished">Disabled</translation>
+        <translation type="unfinished">금지</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11163" />
         <location filename="../setting.ui" line="11330" />
         <source>允许</source>
-        <translation type="unfinished">Allow</translation>
+        <translation type="unfinished">허용</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11192" />
         <source>不输出</source>
-        <translation type="unfinished">No Output</translation>
+        <translation type="unfinished">출력하지 않음</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11197" />
         <source>输出</source>
-        <translation type="unfinished">Output</translation>
+        <translation type="unfinished">출력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11225" />
         <source>手臂下降状态自动门2开关状态</source>
-        <translation type="unfinished">Robot Arm Lowering State Automatic Door 2 Switch Status</translation>
+        <translation type="unfinished">팔이 내려간 상태에서 자동 문 2 스위치 상태</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11294" />
         <source>手臂下降状态自动门1开关状态</source>
-        <translation type="unfinished">Robot Arm Lowering State Automatic Door 1 Switch Status</translation>
+        <translation type="unfinished">팔이 내려간 상태에서 자동 문 1 스위치 상태</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11358" />
         <source>首件加工完成</source>
-        <translation type="unfinished">First Piece Processing Completed</translation>
+        <translation type="unfinished">첫 번째 가공 완료</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11389" />
         <source>启动有效</source>
-        <translation type="unfinished">Start Valid</translation>
+        <translation type="unfinished">시작 유효</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11394" />
         <source>启动无效</source>
-        <translation type="unfinished">Start Invalid</translation>
+        <translation type="unfinished">시작 무효</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11404" />
         <location filename="../setting.cpp" line="1542" />
         <source>料仓安全</source>
-        <translation type="unfinished">Warehouse Safety</translation>
+        <translation type="unfinished">재고창 안전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11439" />
         <source>料仓安全入1恢复</source>
-        <translation type="unfinished">Warehouse Safety In 1 Restore</translation>
+        <translation type="unfinished">재고창 안전 입구 1 복원</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11470" />
         <location filename="../setting.ui" line="11534" />
         <source>自动启动</source>
-        <translation type="unfinished">Automatic Start</translation>
+        <translation type="unfinished">자동 시작</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11475" />
         <location filename="../setting.ui" line="11539" />
         <source>手动启动</source>
-        <translation type="unfinished">Manual Start</translation>
+        <translation type="unfinished">수동 시작</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11503" />
         <source>料仓安全入2恢复</source>
-        <translation type="unfinished">Warehouse Safety In 2 Restore</translation>
+        <translation type="unfinished">재고창 안전 입구 2 복원</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11549" />
         <location filename="../setting.cpp" line="1543" />
         <source>卡爪安全</source>
-        <translation type="unfinished">Gripper Safety</translation>
+        <translation type="unfinished">집게 안전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11565" />
         <source>卡爪安全1</source>
-        <translation type="unfinished">Gripper Safety 1</translation>
+        <translation type="unfinished">집게 안전 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11582" />
@@ -6782,7 +6782,7 @@
         <location filename="../setting.ui" line="13576" />
         <location filename="../setting.ui" line="14464" />
         <source>(B)C轴禁止区</source>
-        <translation type="unfinished">(B) C-Axis Restricted Zone</translation>
+        <translation type="unfinished">(B)C축 금지 구역</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11612" />
@@ -6794,7 +6794,7 @@
         <location filename="../setting.ui" line="14306" />
         <location filename="../setting.ui" line="14494" />
         <source>① X1轴范围(mm)</source>
-        <translation type="unfinished">① X1 Axis Range(mm)</translation>
+        <translation type="unfinished">① X1축 범위 (mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11643" />
@@ -6806,7 +6806,7 @@
         <location filename="../setting.ui" line="14337" />
         <location filename="../setting.ui" line="14525" />
         <source>② Z1轴高度(mm)</source>
-        <translation type="unfinished">② Z1 Axis Height(mm)</translation>
+        <translation type="unfinished">② Z1축 높이 (mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11671" />
@@ -6937,7 +6937,7 @@
         <location filename="../setting.ui" line="13693" />
         <location filename="../setting.ui" line="14581" />
         <source>C轴在禁止区正转角度(mm)</source>
-        <translation type="unfinished">C-Axis Positive Rotation Angle in Restricted Zone(mm)</translation>
+        <translation type="unfinished">C축 금지 구역에서 정회전 각도 (mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11736" />
@@ -6945,7 +6945,7 @@
         <location filename="../setting.ui" line="13727" />
         <location filename="../setting.ui" line="14615" />
         <source>C轴在禁止区反转角度(mm)</source>
-        <translation type="unfinished">C-Axis Negative Rotation Angle in Restricted Zone(mm)</translation>
+        <translation type="unfinished">C축 금지 구역에서 역회전 각도 (mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="11800" />
@@ -7001,7 +7001,7 @@
         <location filename="../setting.ui" line="13388" />
         <location filename="../setting.ui" line="14276" />
         <source>(A)卡爪1禁止区</source>
-        <translation type="unfinished">(A) Gripper 1 Restricted Zone</translation>
+        <translation type="unfinished">(A)집게 1 금지 구역</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12282" />
@@ -7009,7 +7009,7 @@
         <location filename="../setting.ui" line="14058" />
         <location filename="../setting.ui" line="14949" />
         <source>卡爪1禁止区状态</source>
-        <translation type="unfinished">Gripper 1 Restricted Zone Status</translation>
+        <translation type="unfinished">집게 1 금지 구역 상태</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12318" />
@@ -7017,7 +7017,7 @@
         <location filename="../setting.ui" line="14094" />
         <location filename="../setting.ui" line="14985" />
         <source>正转</source>
-        <translation type="unfinished">Clockwise</translation>
+        <translation type="unfinished">정회전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12323" />
@@ -7025,7 +7025,7 @@
         <location filename="../setting.ui" line="14099" />
         <location filename="../setting.ui" line="14990" />
         <source>反转</source>
-        <translation type="unfinished">Counter-Clockwise</translation>
+        <translation type="unfinished">역회전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12348" />
@@ -7037,7 +7037,7 @@
         <location filename="../setting.ui" line="29800" />
         <location filename="../setting.ui" line="31234" />
         <source>X轴</source>
-        <translation type="unfinished">X-Axis</translation>
+        <translation type="unfinished">X축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12379" />
@@ -7096,7 +7096,7 @@
         <location filename="../setting.cpp" line="4347" />
         <location filename="../setting.cpp" line="4348" />
         <source>无</source>
-        <translation type="unfinished">None</translation>
+        <translation type="unfinished">없음</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12384" />
@@ -7121,7 +7121,7 @@
         <location filename="../setting.ui" line="35249" />
         <location filename="../setting.ui" line="36595" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12404" />
@@ -7133,7 +7133,7 @@
         <location filename="../setting.ui" line="29935" />
         <location filename="../setting.ui" line="31369" />
         <source>Z轴</source>
-        <translation type="unfinished">Z-Axis</translation>
+        <translation type="unfinished">Z축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12440" />
@@ -7150,7 +7150,7 @@
         <location filename="../setting.ui" line="35071" />
         <location filename="../setting.ui" line="35683" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12445" />
@@ -7167,34 +7167,34 @@
         <location filename="../setting.ui" line="35361" />
         <location filename="../setting.ui" line="36291" />
         <source>Z2轴</source>
-        <translation type="unfinished">Z2 Axis</translation>
+        <translation type="unfinished">Z2축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="12483" />
         <source>卡爪安全2</source>
-        <translation type="unfinished">Gripper Safety 2</translation>
+        <translation type="unfinished">집게 안전 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="13371" />
         <source>卡爪安全3</source>
-        <translation type="unfinished">Gripper Safety 3</translation>
+        <translation type="unfinished">집게 안전 3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="14259" />
         <source>卡爪安全4</source>
-        <translation type="unfinished">Gripper Safety 4</translation>
+        <translation type="unfinished">집게 안전 4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15168" />
         <location filename="../setting.cpp" line="1544" />
         <location filename="../setting.cpp" line="1550" />
         <source>联机安全</source>
-        <translation type="unfinished">Online Safety</translation>
+        <translation type="unfinished">연동 안전</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15184" />
         <source>联机区域1</source>
-        <translation type="unfinished">Online Area 1</translation>
+        <translation type="unfinished">연동 영역 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15236" />
@@ -7202,7 +7202,7 @@
         <location filename="../setting.ui" line="17135" />
         <location filename="../setting.ui" line="17814" />
         <source>① 区域输入</source>
-        <translation type="unfinished">① Area Input</translation>
+        <translation type="unfinished">① 영역 입력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15292" />
@@ -7210,7 +7210,7 @@
         <location filename="../setting.ui" line="16647" />
         <location filename="../setting.ui" line="17326" />
         <source>② 区域输出</source>
-        <translation type="unfinished">② Area Output</translation>
+        <translation type="unfinished">② 영역 출력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15354" />
@@ -7218,7 +7218,7 @@
         <location filename="../setting.ui" line="16848" />
         <location filename="../setting.ui" line="17527" />
         <source>④请求输出</source>
-        <translation type="unfinished">④ Request Output</translation>
+        <translation type="unfinished">④ 요청 출력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15410" />
@@ -7226,7 +7226,7 @@
         <location filename="../setting.ui" line="16774" />
         <location filename="../setting.ui" line="17453" />
         <source>③请求输入</source>
-        <translation type="unfinished">③ Request Input</translation>
+        <translation type="unfinished">③ 요청 입력</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15447" />
@@ -7234,7 +7234,7 @@
         <location filename="../setting.ui" line="16811" />
         <location filename="../setting.ui" line="17490" />
         <source>外部联机</source>
-        <translation type="unfinished">External Connection</translation>
+        <translation type="unfinished">외부 연동</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15452" />
@@ -7242,7 +7242,7 @@
         <location filename="../setting.ui" line="16816" />
         <location filename="../setting.ui" line="17495" />
         <source>内部联机</source>
-        <translation type="unfinished">Internal Connection</translation>
+        <translation type="unfinished">내부 연동</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15481" />
@@ -7250,7 +7250,7 @@
         <location filename="../setting.ui" line="17166" />
         <location filename="../setting.ui" line="17845" />
         <source>联机选择</source>
-        <translation type="unfinished">Online Selection</translation>
+        <translation type="unfinished">연동 선택</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15552" />
@@ -7258,7 +7258,7 @@
         <location filename="../setting.ui" line="17104" />
         <location filename="../setting.ui" line="17783" />
         <source>联机轴</source>
-        <translation type="unfinished">Online Axis</translation>
+        <translation type="unfinished">연동 축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15586" />
@@ -7266,7 +7266,7 @@
         <location filename="../setting.ui" line="16969" />
         <location filename="../setting.ui" line="17648" />
         <source>A1A2范围</source>
-        <translation type="unfinished">A1A2 Range</translation>
+        <translation type="unfinished">A1A2 범위</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15687" />
@@ -7282,7 +7282,7 @@
         <location filename="../setting.ui" line="16907" />
         <location filename="../setting.ui" line="17586" />
         <source>主从模式</source>
-        <translation type="unfinished">Master-Slave Mode</translation>
+        <translation type="unfinished">주-종 모드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15758" />
@@ -7290,7 +7290,7 @@
         <location filename="../setting.ui" line="16588" />
         <location filename="../setting.ui" line="17267" />
         <source>主机</source>
-        <translation type="unfinished">Master</translation>
+        <translation type="unfinished">주기기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15763" />
@@ -7298,7 +7298,7 @@
         <location filename="../setting.ui" line="16593" />
         <location filename="../setting.ui" line="17272" />
         <source>从机</source>
-        <translation type="unfinished">Slave</translation>
+        <translation type="unfinished">종기기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15792" />
@@ -7306,27 +7306,27 @@
         <location filename="../setting.ui" line="16551" />
         <location filename="../setting.ui" line="17230" />
         <source>脉冲时间(s)</source>
-        <translation type="unfinished">Pulse Time(s)</translation>
+        <translation type="unfinished">펄스 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="15854" />
         <source>联机区域2</source>
-        <translation type="unfinished">Online Area 2</translation>
+        <translation type="unfinished">연동 영역 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="16524" />
         <source>联机区域3</source>
-        <translation type="unfinished">Online Area 3</translation>
+        <translation type="unfinished">연동 영역 3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="17203" />
         <source>联机区域4</source>
-        <translation type="unfinished">Online Area 4</translation>
+        <translation type="unfinished">연동 영역 4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="17967" />
         <source>等加工完成时间(s)</source>
-        <translation type="unfinished">Processing Completion Time(s)</translation>
+        <translation type="unfinished">가공 완료 대기 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="17989" />
@@ -7346,57 +7346,57 @@
     <message>
         <location filename="../setting.ui" line="18016" />
         <source>脉冲输出时间(s)</source>
-        <translation type="unfinished">Pulse Output Time(s)</translation>
+        <translation type="unfinished">펄스 출력 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18065" />
         <source>阀限制时间(s)</source>
-        <translation type="unfinished">Valve Limit Time(s)</translation>
+        <translation type="unfinished">밸브 제한 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18114" />
         <source>自动周期时间(s)</source>
-        <translation type="unfinished">Automatic Cycle Time(s)</translation>
+        <translation type="unfinished">자동 주기 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18163" />
         <source>报警响时间(s)</source>
-        <translation type="unfinished">Alarm Sound Duration(s)</translation>
+        <translation type="unfinished">경보음 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18212" />
         <source>链条到位延时(s)</source>
-        <translation type="unfinished">Chain Positioning Delay(s)</translation>
+        <translation type="unfinished">체인 위치 지연 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18261" />
         <source>夹检测滤波时间(s)</source>
-        <translation type="unfinished">Clamping Check Filtering Time(s)</translation>
+        <translation type="unfinished">클램핑 감지 필터 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18330" />
         <source>润滑开启时间(s)</source>
-        <translation type="unfinished">Lubrication Start Time(s)</translation>
+        <translation type="unfinished">윤활 시작 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18379" />
         <source>润滑关闭时间(s)</source>
-        <translation type="unfinished">Lubrication Stop Time(s)</translation>
+        <translation type="unfinished">윤활 종료 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18428" />
         <source>润滑延时(s)</source>
-        <translation type="unfinished">Lubrication Delay(s)</translation>
+        <translation type="unfinished">윤활 지연 시간 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18477" />
         <source>润滑间隔周期(s)</source>
-        <translation type="unfinished">Lubrication Interval Cycle(s)</translation>
+        <translation type="unfinished">윤활 간격 주기 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18526" />
         <source>产品记忆(s)</source>
-        <translation type="unfinished">Product Memory(s)</translation>
+        <translation type="unfinished">제품 메모리 (s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18567" />
@@ -7405,23 +7405,23 @@
         <location filename="../setting.cpp" line="1549" />
         <location filename="../setting.cpp" line="1559" />
         <source>物联网</source>
-        <translation type="unfinished">Internet of Things</translation>
+        <translation type="unfinished">IoT</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18584" />
         <source>手控器物联网</source>
-        <translation type="unfinished">Handheld IoT</translation>
+        <translation type="unfinished">핸드 컨트롤러 IoT</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18656" />
         <location filename="../setting.ui" line="21358" />
         <source>编辑</source>
-        <translation type="unfinished">Edit</translation>
+        <translation type="unfinished">편집</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18697" />
         <source>手臂编号</source>
-        <translation type="unfinished">Robot Arm Number</translation>
+        <translation type="unfinished">암 번호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18719" />
@@ -7441,47 +7441,47 @@
     <message>
         <location filename="../setting.ui" line="18741" />
         <source>机床编号</source>
-        <translation type="unfinished">CNC Number</translation>
+        <translation type="unfinished">기계 번호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18785" />
         <source>生产批次</source>
-        <translation type="unfinished">Production Batch</translation>
+        <translation type="unfinished">생산 배치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18832" />
         <source>主板物联网</source>
-        <translation type="unfinished">Mainboard IoT</translation>
+        <translation type="unfinished">메인 보드 IoT</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18876" />
         <source>机床通信</source>
-        <translation type="unfinished">CNC Communication</translation>
+        <translation type="unfinished">기계 통신</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18905" />
         <source>无校验</source>
-        <translation type="unfinished">No Parity</translation>
+        <translation type="unfinished">검증 없음</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18910" />
         <source>奇校验</source>
-        <translation type="unfinished">Odd Parity</translation>
+        <translation type="unfinished">홀수 검증</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18915" />
         <source>偶校验</source>
-        <translation type="unfinished">Even Parity</translation>
+        <translation type="unfinished">짝수 검증</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18938" />
         <source>奇偶校验</source>
-        <translation type="unfinished">Parity Check</translation>
+        <translation type="unfinished">홀짝 검증</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18963" />
         <source>主板通信</source>
-        <translation type="unfinished">Mainboard Communication</translation>
+        <translation type="unfinished">메인 보드 통신</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="18994" />
@@ -7521,13 +7521,13 @@
     <message>
         <location filename="../setting.ui" line="19047" />
         <source>波特率</source>
-        <translation type="unfinished">Baud Rate</translation>
+        <translation type="unfinished">보드 속도</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19107" />
         <location filename="../setting.cpp" line="1554" />
         <source>语言设置</source>
-        <translation type="unfinished">Language Settings</translation>
+        <translation type="unfinished">언어 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19143" />
@@ -7536,22 +7536,22 @@
         <location filename="../setting.ui" line="24429" />
         <location filename="../setting.ui" line="24662" />
         <source>默认</source>
-        <translation type="unfinished">Default</translation>
+        <translation type="unfinished">기본값</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19148" />
         <source>新宋体</source>
-        <translation type="unfinished">NSimSun</translation>
+        <translation type="unfinished">신송체</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19153" />
         <source>楷体</source>
-        <translation type="unfinished">KaiTi</translation>
+        <translation type="unfinished">카이티</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19158" />
         <source>DejaVu Sans</source>
-        <translation type="unfinished"> DejaVu Sans</translation>
+        <translation type="unfinished">DejaVu Sans</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19201" />
@@ -7596,109 +7596,109 @@
     <message>
         <location filename="../setting.ui" line="19250" />
         <source>字体：</source>
-        <translation type="unfinished">Font:</translation>
+        <translation type="unfinished">글꼴:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19263" />
         <source>语言设置：</source>
-        <translation type="unfinished">Language Settings:</translation>
+        <translation type="unfinished">언어 설정:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19276" />
         <source>字号：</source>
-        <translation type="unfinished">Font Size:</translation>
+        <translation type="unfinished">글자 크기:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19589" />
         <location filename="../setting.cpp" line="1555" />
         <source>用户设置</source>
-        <translation type="unfinished">User Settings</translation>
+        <translation type="unfinished">사용자 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19626" />
         <source>按键音设置：</source>
-        <translation type="unfinished">Key Sound:</translation>
+        <translation type="unfinished">버튼 소리 설정:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19639" />
         <source>背光时间：</source>
-        <translation type="unfinished">Backlight Time:</translation>
+        <translation type="unfinished">백라이트 시간:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19652" />
         <source>触摸校准：</source>
-        <translation type="unfinished">Touch Calibration:</translation>
+        <translation type="unfinished">터치 교정:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19665" />
         <source>LOGO设置：</source>
-        <translation type="unfinished">LOGO Settings:</translation>
+        <translation type="unfinished">로고 설정:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19678" />
         <source>系统名称：</source>
-        <translation type="unfinished">System Name:</translation>
+        <translation type="unfinished">시스템 이름:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19691" />
         <source>系统颜色：</source>
-        <translation type="unfinished">System Color:</translation>
+        <translation type="unfinished">시스템 색상:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19704" />
         <source>系统时间：</source>
-        <translation type="unfinished">System Time:</translation>
+        <translation type="unfinished">시스템 시간:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19736" />
         <location filename="../setting.ui" line="20435" />
         <source>秒</source>
-        <translation type="unfinished">Seconds</translation>
+        <translation type="unfinished">초</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19757" />
         <source>触摸屏校准</source>
-        <translation type="unfinished">Calibration</translation>
+        <translation type="unfinished">터치 스크린 교정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19778" />
         <source>更新LOGO</source>
-        <translation type="unfinished">Update LOGO</translation>
+        <translation type="unfinished">로고 업데이트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19803" />
         <source>机床机械手控制系统</source>
-        <translation type="unfinished">CNC &amp; Robot Arm Control System</translation>
+        <translation type="unfinished">기계 로봇 제어 시스템</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19816" />
         <source>背光亮度：</source>
-        <translation type="unfinished">Brightness:</translation>
+        <translation type="unfinished">백라이트 밝기:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="19868" />
         <source>默认值</source>
-        <translation type="unfinished">Default</translation>
+        <translation type="unfinished">기본 값</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20030" />
         <source>橘色</source>
-        <translation type="unfinished">Orange</translation>
+        <translation type="unfinished">주황색</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20068" />
         <source>黄色</source>
-        <translation type="unfinished">Yellow</translation>
+        <translation type="unfinished">노란색</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20106" />
         <source>绿色</source>
-        <translation type="unfinished">Green</translation>
+        <translation type="unfinished">녹색</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20144" />
         <source>棕色</source>
-        <translation type="unfinished">Brown</translation>
+        <translation type="unfinished">갈색</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20196" />
@@ -7708,7 +7708,7 @@
     <message>
         <location filename="../setting.ui" line="20215" />
         <source>年</source>
-        <translation type="unfinished">Year</translation>
+        <translation type="unfinished">년</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20240" />
@@ -7721,22 +7721,22 @@
     <message>
         <location filename="../setting.ui" line="20259" />
         <source>月</source>
-        <translation type="unfinished">Month</translation>
+        <translation type="unfinished">월</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20303" />
         <source>日</source>
-        <translation type="unfinished">Day</translation>
+        <translation type="unfinished">일</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20347" />
         <source>时</source>
-        <translation type="unfinished">Hour</translation>
+        <translation type="unfinished">시</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20391" />
         <source>分</source>
-        <translation type="unfinished">Minute</translation>
+        <translation type="unfinished">분</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20416" />
@@ -7754,149 +7754,149 @@
         <location filename="../setting.ui" line="20585" />
         <location filename="../setting.cpp" line="1556" />
         <source>升级与备份</source>
-        <translation type="unfinished">Upgrade/Backup</translation>
+        <translation type="unfinished">업그레이드 및 백업</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20643" />
         <source>系统数据备份</source>
-        <translation type="unfinished">System Data Backup</translation>
+        <translation type="unfinished">시스템 데이터 백업</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20688" />
         <source>备份数据还原</source>
-        <translation type="unfinished">Backup Data Restore</translation>
+        <translation type="unfinished">백업 데이터 복원</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20733" />
         <source>恢复出厂设置</source>
-        <translation type="unfinished">Restore Factory Settings</translation>
+        <translation type="unfinished">공장 초기화 복원</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20758" />
         <source>升级</source>
-        <translation type="unfinished">Upgrade</translation>
+        <translation type="unfinished">업그레이드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20799" />
         <source>手控器升级</source>
-        <translation type="unfinished">HMI Upgrade</translation>
+        <translation type="unfinished">핸드 컨트롤러 업그레이드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20844" />
         <source>主板升级</source>
-        <translation type="unfinished">Mainboard Upgrade</translation>
+        <translation type="unfinished">메인 보드 업그레이드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20889" />
         <source>IO板升级</source>
-        <translation type="unfinished">IO Board Upgrade</translation>
+        <translation type="unfinished">IO 보드 업그레이드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="20934" />
         <source>伺服升级</source>
-        <translation type="unfinished">Servo Upgrade</translation>
+        <translation type="unfinished">서보 업그레이드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21136" />
         <location filename="../setting.cpp" line="1557" />
         <source>记事本</source>
-        <translation type="unfinished">Notepad</translation>
+        <translation type="unfinished">메모장</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21214" />
         <source>删除</source>
-        <translation type="unfinished">Delete</translation>
+        <translation type="unfinished">삭제</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21257" />
         <source>新建</source>
-        <translation type="unfinished">New</translation>
+        <translation type="unfinished">새로 만들기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21401" />
         <source>回退</source>
-        <translation type="unfinished">Back</translation>
+        <translation type="unfinished">롤백</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21439" />
         <source>标题：</source>
-        <translation type="unfinished">Title:</translation>
+        <translation type="unfinished">제목:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21490" />
         <location filename="../setting.cpp" line="1558" />
         <source>密码设置</source>
-        <translation type="unfinished">Passwd Settings</translation>
+        <translation type="unfinished">비밀번호 설정</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21507" />
         <location filename="../setting.cpp" line="1508" />
         <source>管理员</source>
-        <translation type="unfinished">Admin</translation>
+        <translation type="unfinished">관리자</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21562" />
         <location filename="../setting.ui" line="21773" />
         <location filename="../setting.ui" line="21990" />
         <source>旧密码：</source>
-        <translation type="unfinished">Old Passwd:</translation>
+        <translation type="unfinished">이전 비밀번호:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21596" />
         <location filename="../setting.ui" line="21807" />
         <location filename="../setting.ui" line="22024" />
         <source>旧密码</source>
-        <translation type="unfinished">Old Passwd</translation>
+        <translation type="unfinished">이전 비밀번호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21609" />
         <location filename="../setting.ui" line="21826" />
         <location filename="../setting.ui" line="22043" />
         <source>新密码：</source>
-        <translation type="unfinished">New Passwd:</translation>
+        <translation type="unfinished">새 비밀번호:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21643" />
         <location filename="../setting.ui" line="21860" />
         <location filename="../setting.ui" line="22077" />
         <source>新密码</source>
-        <translation type="unfinished">New Passwd</translation>
+        <translation type="unfinished">새 비밀번호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21656" />
         <location filename="../setting.ui" line="21873" />
         <location filename="../setting.ui" line="22090" />
         <source>确认新密码：</source>
-        <translation type="unfinished">Confirm Passwd:</translation>
+        <translation type="unfinished">새 비밀번호 확인:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21690" />
         <location filename="../setting.ui" line="21907" />
         <location filename="../setting.ui" line="22124" />
         <source>确认新密码</source>
-        <translation type="unfinished">Confirm Passwd</translation>
+        <translation type="unfinished">새 비밀번호 확인</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21712" />
         <source>超级管理员</source>
-        <translation type="unfinished">Super Admin</translation>
+        <translation type="unfinished">슈퍼 관리자</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="21929" />
         <location filename="../setting.ui" line="24278" />
         <location filename="../setting.cpp" line="2362" />
         <source>菜单权限</source>
-        <translation type="unfinished">Menu Permissions</translation>
+        <translation type="unfinished">메뉴 권한</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22167" />
         <source>Http服务器</source>
-        <translation type="unfinished">HTTP Server</translation>
+        <translation type="unfinished">HTTP 서버</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22172" />
         <source>Tcp客户端</source>
-        <translation type="unfinished">TCP Client</translation>
+        <translation type="unfinished">TCP 클라이언트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22224" />
@@ -7922,33 +7922,33 @@
         <location filename="../setting.ui" line="22455" />
         <location filename="../setting.ui" line="22577" />
         <source>本地IP：</source>
-        <translation type="unfinished">Local IP:</translation>
+        <translation type="unfinished">로컬 IP:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22468" />
         <location filename="../setting.ui" line="22626" />
         <source>本地端口：</source>
-        <translation type="unfinished">Local Port:</translation>
+        <translation type="unfinished">로컬 포트:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22799" />
         <source>远程端口：</source>
-        <translation type="unfinished">Remote Port:</translation>
+        <translation type="unfinished">원격 포트:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22874" />
         <source>远程IP：</source>
-        <translation type="unfinished">Remote IP:</translation>
+        <translation type="unfinished">원격 IP:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22932" />
         <source>连接</source>
-        <translation type="unfinished">Connect</translation>
+        <translation type="unfinished">연결</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22950" />
         <source>断开</source>
-        <translation type="unfinished">Disconnect</translation>
+        <translation type="unfinished">연결 해제</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="22965" />
@@ -7958,33 +7958,33 @@
     <message>
         <location filename="../setting.ui" line="22987" />
         <source>物联网调试数据：</source>
-        <translation type="unfinished">IoT Debug Data:</translation>
+        <translation type="unfinished">IoT 디버깅 데이터:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23005" />
         <source>清除窗口</source>
-        <translation type="unfinished">Clear</translation>
+        <translation type="unfinished">창 지우기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23023" />
         <source>打印发送</source>
-        <translation type="unfinished">Print Send</translation>
+        <translation type="unfinished">인쇄 전송</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23037" />
         <source>启动失败！</source>
-        <translation type="unfinished">Startup Failed!</translation>
+        <translation type="unfinished">시작 실패!</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23045" />
         <location filename="../setting.cpp" line="1560" />
         <source>注册信息</source>
-        <translation type="unfinished">Registration Information</translation>
+        <translation type="unfinished">등록 정보</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23057" />
         <source>注册码：</source>
-        <translation type="unfinished">Registration Code:</translation>
+        <translation type="unfinished">등록 코드:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23108" />
@@ -8035,12 +8035,12 @@
     <message>
         <location filename="../setting.ui" line="23342" />
         <source>激活</source>
-        <translation type="unfinished">Activate</translation>
+        <translation type="unfinished">활성화</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23366" />
         <source>注册码生成器</source>
-        <translation type="unfinished">Registration Code Generator</translation>
+        <translation type="unfinished">등록 코드 생성기</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="23468" />
@@ -8125,22 +8125,22 @@
         <location filename="../setting.ui" line="24112" />
         <location filename="../setting.cpp" line="2357" />
         <source>系统信息</source>
-        <translation type="unfinished">System Information</translation>
+        <translation type="unfinished">시스템 정보</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24131" />
         <source>版本信息</source>
-        <translation type="unfinished">Version Information</translation>
+        <translation type="unfinished">버전 정보</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24161" />
         <source>手控器:</source>
-        <translation type="unfinished">HMI:</translation>
+        <translation type="unfinished">핸드 컨트롤러:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24204" />
         <source>主板:</source>
-        <translation type="unfinished">Mainboard:</translation>
+        <translation type="unfinished">메인 보드:</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24247" />
@@ -8157,90 +8157,90 @@
         <location filename="../setting.ui" line="35224" />
         <location filename="../setting.cpp" line="1565" />
         <source>伺服</source>
-        <translation type="unfinished">Servo</translation>
+        <translation type="unfinished">서보</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24403" />
         <source>旋转轴单位</source>
-        <translation type="unfinished">Rotary Axis Unit</translation>
+        <translation type="unfinished">회전축 단위</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24434" />
         <location filename="../setting.ui" line="24667" />
         <source>汇川</source>
-        <translation type="unfinished">Inovance</translation>
+        <translation type="unfinished">HuiChuan</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24439" />
         <location filename="../setting.ui" line="24672" />
         <source>禾川</source>
-        <translation type="unfinished">HNC</translation>
+        <translation type="unfinished">HeChuan</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24444" />
         <location filename="../setting.ui" line="24677" />
         <source>迈信</source>
-        <translation type="unfinished">Maxsine</translation>
+        <translation type="unfinished">MaiXin</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24449" />
         <location filename="../setting.ui" line="24682" />
         <source>雷赛</source>
-        <translation type="unfinished">Leadshine</translation>
+        <translation type="unfinished">LeiSai</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24454" />
         <location filename="../setting.ui" line="24687" />
         <source>信捷</source>
-        <translation type="unfinished">Xinjie</translation>
+        <translation type="unfinished">XinJie</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24459" />
         <location filename="../setting.ui" line="24692" />
         <source>睿能</source>
-        <translation type="unfinished">Ruineng</translation>
+        <translation type="unfinished">RuiNeng</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24464" />
         <location filename="../setting.ui" line="24697" />
         <source>台邦</source>
-        <translation type="unfinished">Taibang</translation>
+        <translation type="unfinished">TaiBang</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24469" />
         <location filename="../setting.ui" line="24702" />
         <source>超川</source>
-        <translation type="unfinished">Chaocuan</translation>
+        <translation type="unfinished">ChaoChuan</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24474" />
         <location filename="../setting.ui" line="24707" />
         <source>纳川</source>
-        <translation type="unfinished">Nachuan</translation>
+        <translation type="unfinished">NaChuan</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24479" />
         <location filename="../setting.ui" line="24712" />
         <source>迪威迅</source>
-        <translation type="unfinished">Dvision</translation>
+        <translation type="unfinished">DiWeiXun</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24484" />
         <location filename="../setting.ui" line="24717" />
         <source>科昇</source>
-        <translation type="unfinished">Kesheng</translation>
+        <translation type="unfinished">KeSheng</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24489" />
         <location filename="../setting.ui" line="24722" />
         <source>红森</source>
-        <translation type="unfinished">Hongsun</translation>
+        <translation type="unfinished">HongSen</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24494" />
         <location filename="../setting.ui" line="24727" />
         <source>通航</source>
-        <translation type="unfinished">Tonghang</translation>
+        <translation type="unfinished">TongHang</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24499" />
@@ -8252,7 +8252,7 @@
         <location filename="../setting.ui" line="24504" />
         <location filename="../setting.ui" line="24737" />
         <source>普菲得</source>
-        <translation type="unfinished">Pufeide</translation>
+        <translation type="unfinished">PufeiDe</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24509" />
@@ -8276,7 +8276,7 @@
         <location filename="../setting.ui" line="24524" />
         <location filename="../setting.ui" line="24757" />
         <source>时代超群</source>
-        <translation type="unfinished">Times Super</translation>
+        <translation type="unfinished">ShidaiChaogroup</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24529" />
@@ -8288,19 +8288,19 @@
         <location filename="../setting.ui" line="24534" />
         <location filename="../setting.ui" line="24767" />
         <source>久同</source>
-        <translation type="unfinished">Jiutong</translation>
+        <translation type="unfinished">JiuTong</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24539" />
         <location filename="../setting.ui" line="24772" />
         <source>大族</source>
-        <translation type="unfinished">Han’s Laser</translation>
+        <translation type="unfinished">Dahua</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24544" />
         <location filename="../setting.ui" line="24777" />
         <source>日鼎</source>
-        <translation type="unfinished">Rital</translation>
+        <translation type="unfinished">Riden</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24549" />
@@ -8312,87 +8312,87 @@
         <location filename="../setting.ui" line="24554" />
         <location filename="../setting.ui" line="24787" />
         <source>麦格米特</source>
-        <translation type="unfinished">Megmeet</translation>
+        <translation type="unfinished">Magmeter</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24562" />
         <source>伺服品牌</source>
-        <translation type="unfinished">Servo Brand</translation>
+        <translation type="unfinished">서보 브랜드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24588" />
         <source>2500线</source>
-        <translation type="unfinished">2500 Lines</translation>
+        <translation type="unfinished">2500 선</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24593" />
         <source>16位</source>
-        <translation type="unfinished">16-bit</translation>
+        <translation type="unfinished">16비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24598" />
         <source>17位</source>
-        <translation type="unfinished">17-bit</translation>
+        <translation type="unfinished">17비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24603" />
         <source>18位</source>
-        <translation type="unfinished">18-bit</translation>
+        <translation type="unfinished">18비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24608" />
         <source>19位</source>
-        <translation type="unfinished">19-bit</translation>
+        <translation type="unfinished">19비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24613" />
         <source>20位</source>
-        <translation type="unfinished">20-bit</translation>
+        <translation type="unfinished">20비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24618" />
         <source>21位</source>
-        <translation type="unfinished">21-bit</translation>
+        <translation type="unfinished">21비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24623" />
         <source>22位</source>
-        <translation type="unfinished">22-bit</translation>
+        <translation type="unfinished">22비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24628" />
         <source>23位</source>
-        <translation type="unfinished">23-bit</translation>
+        <translation type="unfinished">23비트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24636" />
         <source>伺服型号</source>
-        <translation type="unfinished">Servo Model</translation>
+        <translation type="unfinished">서보 모델</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24795" />
         <source>扩展IO开关</source>
-        <translation type="unfinished">Extended IO Switch</translation>
+        <translation type="unfinished">확장 IO 스위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24805" />
         <source>编码器类型</source>
-        <translation type="unfinished">Encoder Type</translation>
+        <translation type="unfinished">인코더 유형</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24831" />
         <source>增量式</source>
-        <translation type="unfinished">Incremental</translation>
+        <translation type="unfinished">증분식</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24836" />
         <source>绝对式</source>
-        <translation type="unfinished">Absolute</translation>
+        <translation type="unfinished">절대식</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24844" />
         <source>编码器位数</source>
-        <translation type="unfinished">Encoder Resolution</translation>
+        <translation type="unfinished">인코더 비트 수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24870" />
@@ -8407,13 +8407,13 @@
     <message>
         <location filename="../setting.ui" line="24904" />
         <source>1块</source>
-        <translation type="unfinished">1 Block</translation>
+        <translation type="unfinished">1개</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="24942" />
         <location filename="../setting.cpp" line="1566" />
         <source>轴参数</source>
-        <translation type="unfinished">Axis Parameters</translation>
+        <translation type="unfinished">축 매개변수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25000" />
@@ -8423,7 +8423,7 @@
         <location filename="../setting.ui" line="25556" />
         <location filename="../setting.ui" line="25647" />
         <source>正</source>
-        <translation type="unfinished">Positive</translation>
+        <translation type="unfinished">양의</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25005" />
@@ -8433,7 +8433,7 @@
         <location filename="../setting.ui" line="25561" />
         <location filename="../setting.ui" line="25652" />
         <source>负</source>
-        <translation type="unfinished">Negative</translation>
+        <translation type="unfinished">음의</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25063" />
@@ -8442,17 +8442,17 @@
         <location filename="../setting.ui" line="35093" />
         <location filename="../setting.ui" line="36551" />
         <source>C轴</source>
-        <translation type="unfinished">C Axis</translation>
+        <translation type="unfinished">C축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25217" />
         <source>最大坐标</source>
-        <translation type="unfinished">Max Coordinate</translation>
+        <translation type="unfinished">최대 좌표</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25239" />
         <source>单圈脉冲数</source>
-        <translation type="unfinished">Pulses Per Revolution</translation>
+        <translation type="unfinished">단일 회전 펄스 수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25318" />
@@ -8469,7 +8469,7 @@
         <location filename="../setting.ui" line="35383" />
         <location filename="../setting.ui" line="36335" />
         <source>Y2轴</source>
-        <translation type="unfinished">Y2 Axis</translation>
+        <translation type="unfinished">Y2축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25427" />
@@ -8482,58 +8482,58 @@
         <location filename="../setting.ui" line="35271" />
         <location filename="../setting.ui" line="35943" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25525" />
         <source>坐标方向</source>
-        <translation type="unfinished">Coordinate Direction</translation>
+        <translation type="unfinished">좌표 방향</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25691" />
         <source>最小坐标</source>
-        <translation type="unfinished">Min Coordinate</translation>
+        <translation type="unfinished">최소 좌표</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25732" />
         <source>单圈距离</source>
-        <translation type="unfinished">Distance Per Revolution</translation>
+        <translation type="unfinished">단일 회전 거리</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="25874" />
         <source>最大速度</source>
-        <translation type="unfinished">Max Speed</translation>
+        <translation type="unfinished">최대 속도</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26028" />
         <location filename="../setting.cpp" line="1567" />
         <source>轴速度</source>
-        <translation type="unfinished">Axis Speed</translation>
+        <translation type="unfinished">축 속도</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26194" />
         <source>减减速</source>
-        <translation type="unfinished">Negative Jerk</translation>
+        <translation type="unfinished">감속</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26333" />
         <source>加加速</source>
-        <translation type="unfinished">Jerk </translation>
+        <translation type="unfinished">가속</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26355" />
         <source>加速时间(s)</source>
-        <translation type="unfinished">Acc Time(s)</translation>
+        <translation type="unfinished">가속 시간(s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26437" />
         <source>减速时间(s)</source>
-        <translation type="unfinished">Dec Time(s)</translation>
+        <translation type="unfinished">감속 시간(s)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26734" />
         <source>手轮</source>
-        <translation type="unfinished">Handwheel</translation>
+        <translation type="unfinished">핸드휠</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26857" />
@@ -8543,7 +8543,7 @@
         <location filename="../setting.ui" line="32214" />
         <location filename="../setting.cpp" line="1570" />
         <source>安全区1</source>
-        <translation type="unfinished">Safety Zone 1</translation>
+        <translation type="unfinished">안전 영역1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26877" />
@@ -8551,7 +8551,7 @@
         <location filename="../setting.ui" line="30437" />
         <location filename="../setting.ui" line="31871" />
         <source>Z轴机床区参数</source>
-        <translation type="unfinished">Z-Axis CNC Parameters</translation>
+        <translation type="unfinished">Z축 기계 영역 매개변수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26941" />
@@ -8559,7 +8559,7 @@
         <location filename="../setting.ui" line="30501" />
         <location filename="../setting.ui" line="31935" />
         <source>最大待机位置</source>
-        <translation type="unfinished">Max Standby Pos</translation>
+        <translation type="unfinished">최대 대기 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="26979" />
@@ -8571,7 +8571,7 @@
         <location filename="../setting.ui" line="31973" />
         <location filename="../setting.ui" line="32160" />
         <source>最大下降位置</source>
-        <translation type="unfinished">Max Descent Pos</translation>
+        <translation type="unfinished">최대 하강 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27017" />
@@ -8579,7 +8579,7 @@
         <location filename="../setting.ui" line="30577" />
         <location filename="../setting.ui" line="32011" />
         <source>机床内高度</source>
-        <translation type="unfinished">CNC Inner Height</translation>
+        <translation type="unfinished">기계 내부 높이</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27058" />
@@ -8587,7 +8587,7 @@
         <location filename="../setting.ui" line="29770" />
         <location filename="../setting.ui" line="31204" />
         <source>轴组合</source>
-        <translation type="unfinished">Axis Combination</translation>
+        <translation type="unfinished">축 조합</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27153" />
@@ -8595,7 +8595,7 @@
         <location filename="../setting.ui" line="29865" />
         <location filename="../setting.ui" line="31299" />
         <source>Y轴</source>
-        <translation type="unfinished">Y-Axis</translation>
+        <translation type="unfinished">Y축</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27287" />
@@ -8603,7 +8603,7 @@
         <location filename="../setting.ui" line="29999" />
         <location filename="../setting.ui" line="31433" />
         <source>X轴Y轴参数</source>
-        <translation type="unfinished">X/Y-Axis Parameters</translation>
+        <translation type="unfinished">X축 Y축 매개변수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27320" />
@@ -8611,7 +8611,7 @@
         <location filename="../setting.ui" line="30032" />
         <location filename="../setting.ui" line="31466" />
         <source>(A1)机床点1</source>
-        <translation type="unfinished">(A1) CNC Point 1</translation>
+        <translation type="unfinished">(A1) 기계점1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27339" />
@@ -8619,7 +8619,7 @@
         <location filename="../setting.ui" line="30051" />
         <location filename="../setting.ui" line="31485" />
         <source>(A2)机床点2</source>
-        <translation type="unfinished">(A2) CNC Point 2</translation>
+        <translation type="unfinished">(A2) 기계점2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27358" />
@@ -8627,7 +8627,7 @@
         <location filename="../setting.ui" line="30070" />
         <location filename="../setting.ui" line="31504" />
         <source>(B1)料仓点1</source>
-        <translation type="unfinished">(B1) Bin Point 1</translation>
+        <translation type="unfinished">(B1) 자재창고점1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27377" />
@@ -8635,7 +8635,7 @@
         <location filename="../setting.ui" line="30089" />
         <location filename="../setting.ui" line="31523" />
         <source>(B2)料仓点2</source>
-        <translation type="unfinished">(B2) Bin Point 2</translation>
+        <translation type="unfinished">(B2) 자재창고점2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27640" />
@@ -8644,7 +8644,7 @@
         <location filename="../setting.ui" line="31786" />
         <location filename="../setting.cpp" line="2827" />
         <source>C1C2</source>
-        <translation type="unfinished"> C1C2</translation>
+        <translation type="unfinished">C1C2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27725" />
@@ -8652,7 +8652,7 @@
         <location filename="../setting.ui" line="30621" />
         <location filename="../setting.ui" line="32055" />
         <source>Z轴料仓区参数</source>
-        <translation type="unfinished">Z-Axis Feedbin Parameters</translation>
+        <translation type="unfinished">Z축 자재창고 영역 매개변수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27792" />
@@ -8660,7 +8660,7 @@
         <location filename="../setting.ui" line="30688" />
         <location filename="../setting.ui" line="32122" />
         <source>最大允许启动位置</source>
-        <translation type="unfinished">Max Allowed Start Pos</translation>
+        <translation type="unfinished">최대 허용 시작 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27945" />
@@ -8668,7 +8668,7 @@
         <location filename="../setting.ui" line="30841" />
         <location filename="../setting.ui" line="32275" />
         <source>加工完成输入口</source>
-        <translation type="unfinished">Processing Completion Input Port</translation>
+        <translation type="unfinished">가공 완료 입력 포트</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="27973" />
@@ -9155,148 +9155,148 @@
         <location filename="../setting.ui" line="28291" />
         <location filename="../setting.cpp" line="1571" />
         <source>安全区2</source>
-        <translation type="unfinished">Safety Zone 2</translation>
+        <translation type="unfinished">안전 영역2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="29725" />
         <location filename="../setting.cpp" line="1572" />
         <source>安全区3</source>
-        <translation type="unfinished">Safety Zone 3</translation>
+        <translation type="unfinished">안전 영역3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="31187" />
         <location filename="../setting.cpp" line="1573" />
         <source>安全区4</source>
-        <translation type="unfinished">Safety Zone 4</translation>
+        <translation type="unfinished">안전 영역4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32621" />
         <location filename="../setting.cpp" line="1574" />
         <source>位置限定</source>
-        <translation type="unfinished">Position Limit</translation>
+        <translation type="unfinished">위치 제한</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32645" />
         <source>容差(mm)</source>
-        <translation type="unfinished">Tolerance(mm)</translation>
+        <translation type="unfinished">공차(mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32669" />
         <source>Z1轴安全横行高度(mm)</source>
-        <translation type="unfinished">Z1-Axis Safe Traverse Height(mm)</translation>
+        <translation type="unfinished">Z1축 안전 횡행 높이(mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32712" />
         <source>B/Z2轴安全横行高度(mm)</source>
-        <translation type="unfinished">B/Z2-Axis Safe Traverse Height(mm)</translation>
+        <translation type="unfinished">B/Z2축 안전 횡행 높이(mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32755" />
         <source>旋转安全Y1位置(mm)</source>
-        <translation type="unfinished">Rotational Safe Y1 Position(mm)</translation>
+        <translation type="unfinished">회전 안전 Y1 위치(mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32790" />
         <source>原点精度(mm)</source>
-        <translation type="unfinished">Origin Precision(mm)</translation>
+        <translation type="unfinished">원점 정밀도(mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32814" />
         <source>旋转安全Y2位置(mm)</source>
-        <translation type="unfinished">Rotational Safe Y2 Position(mm)</translation>
+        <translation type="unfinished">회전 안전 Y2 위치(mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="32907" />
         <source>动作确认误差(mm)</source>
-        <translation type="unfinished">Motion Confirmation Error(mm)</translation>
+        <translation type="unfinished">동작 확인 오류(mm)</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33025" />
         <location filename="../setting.cpp" line="1584" />
         <source>堆叠1组</source>
-        <translation type="unfinished">Stack 1</translation>
+        <translation type="unfinished">스택 그룹 1</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33030" />
         <location filename="../setting.cpp" line="1585" />
         <source>堆叠2组</source>
-        <translation type="unfinished">Stack 2</translation>
+        <translation type="unfinished">스택 그룹 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33035" />
         <location filename="../setting.cpp" line="1586" />
         <source>堆叠3组</source>
-        <translation type="unfinished">Stack 3</translation>
+        <translation type="unfinished">스택 그룹 3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33040" />
         <location filename="../setting.cpp" line="1587" />
         <source>堆叠4组</source>
-        <translation type="unfinished">Stack 4</translation>
+        <translation type="unfinished">스택 그룹 4</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33045" />
         <location filename="../setting.cpp" line="1588" />
         <source>堆叠5组</source>
-        <translation type="unfinished">Stack 5</translation>
+        <translation type="unfinished">스택 그룹 5</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33050" />
         <location filename="../setting.cpp" line="1589" />
         <source>堆叠6组</source>
-        <translation type="unfinished">Stack 6</translation>
+        <translation type="unfinished">스택 그룹 6</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33055" />
         <location filename="../setting.cpp" line="1590" />
         <source>堆叠7组</source>
-        <translation type="unfinished">Stack 7</translation>
+        <translation type="unfinished">스택 그룹 7</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33060" />
         <location filename="../setting.cpp" line="1591" />
         <source>堆叠8组</source>
-        <translation type="unfinished">Stack 8</translation>
+        <translation type="unfinished">스택 그룹 8</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33089" />
         <source>堆叠方式</source>
-        <translation type="unfinished">Stacking Method</translation>
+        <translation type="unfinished">적층 방식</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33123" />
         <source>三点式</source>
-        <translation type="unfinished">Three-Point Type</translation>
+        <translation type="unfinished">삼점식</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33128" />
         <source>四点式</source>
-        <translation type="unfinished">Four-Point Type</translation>
+        <translation type="unfinished">사점식</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33133" />
         <source>普通式</source>
-        <translation type="unfinished">Standard Type</translation>
+        <translation type="unfinished">일반식</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33159" />
         <source>旋转料仓完成提示</source>
-        <translation type="unfinished">Rotational Warehouse Completion Prompt</translation>
+        <translation type="unfinished">회전 자재창고 완료 알림</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33196" />
         <source>不提示</source>
-        <translation type="unfinished">No Prompt</translation>
+        <translation type="unfinished">알림 없음</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33201" />
         <source>提示</source>
-        <translation type="unfinished">Prompt</translation>
+        <translation type="unfinished">안내</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33227" />
         <source>旋转料仓工位数</source>
-        <translation type="unfinished">Rotational Warehouse Workstations</translation>
+        <translation type="unfinished">회전 자재창고 작업 위치 수</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33255" />
@@ -9306,7 +9306,7 @@
     <message>
         <location filename="../setting.ui" line="33280" />
         <source>逐组堆叠</source>
-        <translation type="unfinished">Grouped Stacking</translation>
+        <translation type="unfinished">그룹별 적층</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33319" />
@@ -9336,7 +9336,7 @@
     <message>
         <location filename="../setting.ui" line="33365" />
         <source>逐行堆叠</source>
-        <translation type="unfinished">Row-by-Row Stacking</translation>
+        <translation type="unfinished">행별 적층</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33404" />
@@ -9353,48 +9353,48 @@
     <message>
         <location filename="../setting.ui" line="33435" />
         <source>逐层堆叠</source>
-        <translation type="unfinished">Layer-by-Layer Stacking</translation>
+        <translation type="unfinished">층별 적층</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33505" />
         <source>分组堆叠</source>
-        <translation type="unfinished">Grouped Stacking</translation>
+        <translation type="unfinished">그룹 나누어 적층</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33544" />
         <source>一分二</source>
-        <translation type="unfinished">One-to-Two</translation>
+        <translation type="unfinished">1분할 2</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33549" />
         <source>一分三</source>
-        <translation type="unfinished">One-to-Three</translation>
+        <translation type="unfinished">1분할 3</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33575" />
         <source>堆叠记忆</source>
-        <translation type="unfinished">Stacking Memory</translation>
+        <translation type="unfinished">적층 기억</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33640" />
         <source>料仓类型</source>
-        <translation type="unfinished">Warehouse Type</translation>
+        <translation type="unfinished">자재창고 유형</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33674" />
         <source>平板式料仓</source>
-        <translation type="unfinished">Flat Warehouse</translation>
+        <translation type="unfinished">평판형 자재창고</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33679" />
         <source>旋转式料仓</source>
-        <translation type="unfinished">Rotational Warehouse</translation>
+        <translation type="unfinished">회전형 자재창고</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33724" />
         <location filename="../setting.cpp" line="1578" />
         <source>限位</source>
-        <translation type="unfinished">Limit</translation>
+        <translation type="unfinished">제한 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33768" />
@@ -9416,7 +9416,7 @@
         <location filename="../setting.ui" line="36446" />
         <location filename="../setting.ui" line="36626" />
         <source>正向</source>
-        <translation type="unfinished">Forward</translation>
+        <translation type="unfinished">정방향</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33773" />
@@ -9438,38 +9438,38 @@
         <location filename="../setting.ui" line="36451" />
         <location filename="../setting.ui" line="36631" />
         <source>反向</source>
-        <translation type="unfinished">Reverse</translation>
+        <translation type="unfinished">역방향</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33857" />
         <source>原点信号</source>
-        <translation type="unfinished">Origin Signal</translation>
+        <translation type="unfinished">원점 신호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33918" />
         <source>最大限位</source>
-        <translation type="unfinished">Max Limit</translation>
+        <translation type="unfinished">최대 제한 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="33995" />
         <source>最小限位</source>
-        <translation type="unfinished">Min Limit</translation>
+        <translation type="unfinished">최소 제한 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="34242" />
         <source>正限位</source>
-        <translation type="unfinished">Positive Limit</translation>
+        <translation type="unfinished">양(+) 제한 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="34682" />
         <source>负限位</source>
-        <translation type="unfinished">Negative Limit</translation>
+        <translation type="unfinished">음(-) 제한 위치</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="34770" />
         <location filename="../setting.cpp" line="1579" />
         <source>结构</source>
-        <translation type="unfinished">Structure</translation>
+        <translation type="unfinished">구조</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="34834" />
@@ -9479,7 +9479,7 @@
         <location filename="../setting.ui" line="35336" />
         <location filename="../setting.ui" line="35414" />
         <source>绝对位移</source>
-        <translation type="unfinished">Absolute Displacement</translation>
+        <translation type="unfinished">절대 변위</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="34839" />
@@ -9489,7 +9489,7 @@
         <location filename="../setting.ui" line="35341" />
         <location filename="../setting.ui" line="35419" />
         <source>相对位移</source>
-        <translation type="unfinished">Relative Displacement</translation>
+        <translation type="unfinished">상대 변위</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="34878" />
@@ -9499,23 +9499,23 @@
         <location filename="../setting.ui" line="35190" />
         <location filename="../setting.ui" line="35229" />
         <source>气阀</source>
-        <translation type="unfinished">Pneumatic Valve</translation>
+        <translation type="unfinished">에어 밸브</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="34898" />
         <source>轴类型</source>
-        <translation type="unfinished">Axis Type</translation>
+        <translation type="unfinished">축 유형</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35149" />
         <source>运动模式</source>
-        <translation type="unfinished">Motion Mode</translation>
+        <translation type="unfinished">운동 모드</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35429" />
         <location filename="../setting.cpp" line="1580" />
         <source>原点</source>
-        <translation type="unfinished">Origin</translation>
+        <translation type="unfinished">원점</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35496" />
@@ -9525,12 +9525,12 @@
         <location filename="../setting.ui" line="35871" />
         <location filename="../setting.ui" line="36737" />
         <source>不回原点</source>
-        <translation type="unfinished">No Homing</translation>
+        <translation type="unfinished">원점 복귀 안 함</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35639" />
         <source>回原点顺序</source>
-        <translation type="unfinished">Homing Sequence</translation>
+        <translation type="unfinished">원점 복귀 순서</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35773" />
@@ -9540,7 +9540,7 @@
         <location filename="../setting.ui" line="36834" />
         <location filename="../setting.ui" line="36873" />
         <source>无原点</source>
-        <translation type="unfinished">No Origin</translation>
+        <translation type="unfinished">원점 없음</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35778" />
@@ -9550,7 +9550,7 @@
         <location filename="../setting.ui" line="36839" />
         <location filename="../setting.ui" line="36878" />
         <source>长原点</source>
-        <translation type="unfinished">Long Origin</translation>
+        <translation type="unfinished">긴 원점</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35783" />
@@ -9560,93 +9560,93 @@
         <location filename="../setting.ui" line="36844" />
         <location filename="../setting.ui" line="36883" />
         <source>短原点</source>
-        <translation type="unfinished">Short Origin</translation>
+        <translation type="unfinished">짧은 원점</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="35965" />
         <source>回原点方向</source>
-        <translation type="unfinished">Homing Direction</translation>
+        <translation type="unfinished">원점 복귀 방향</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="36006" />
         <source>找原点速度</source>
-        <translation type="unfinished">Homing Speed</translation>
+        <translation type="unfinished">원점 탐색 속도</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="36206" />
         <source>原点偏移</source>
-        <translation type="unfinished">Origin Offset</translation>
+        <translation type="unfinished">원점 오프셋</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="36247" />
         <source>离开原点速度</source>
-        <translation type="unfinished">Leave Origin Speed</translation>
+        <translation type="unfinished">원점 이탈 속도</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="36415" />
         <source>原点类型</source>
-        <translation type="unfinished">Origin Type</translation>
+        <translation type="unfinished">원점 유형</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="36903" />
         <source>复位子程序</source>
-        <translation type="unfinished">Reset Subroutine</translation>
+        <translation type="unfinished">리셋 서브프로그램</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="36992" />
         <source>扭矩限制</source>
-        <translation type="unfinished">Torque Limit</translation>
+        <translation type="unfinished">토크 제한</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37001" />
         <location filename="../setting.cpp" line="1581" />
         <source>通信</source>
-        <translation type="unfinished">Communication</translation>
+        <translation type="unfinished">통신</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37018" />
         <source>发送</source>
-        <translation type="unfinished">Send</translation>
+        <translation type="unfinished">전송</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37059" />
         <source>参数数值</source>
-        <translation type="unfinished">Parameter Value</translation>
+        <translation type="unfinished">매개변수 값</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37084" />
         <source>轴编号</source>
-        <translation type="unfinished">Axis Number</translation>
+        <translation type="unfinished">축 번호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37109" />
         <source>是否开机设置</source>
-        <translation type="unfinished">Power-On Setting</translation>
+        <translation type="unfinished">전원 켜기 설정 여부</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37134" />
         <source>存放组号</source>
-        <translation type="unfinished">Storage Group Number</translation>
+        <translation type="unfinished">저장 그룹 번호</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37159" />
         <source>参数索引</source>
-        <translation type="unfinished">Parameter Index</translation>
+        <translation type="unfinished">매개변수 인덱스</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37184" />
         <source>参数子索引</source>
-        <translation type="unfinished">Parameter Sub-Index</translation>
+        <translation type="unfinished">매개변수 서브 인덱스</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37209" />
         <source>是否保存</source>
-        <translation type="unfinished">Save or Not</translation>
+        <translation type="unfinished">저장 여부</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37234" />
         <source>参数长度</source>
-        <translation type="unfinished">Parameter Length</translation>
+        <translation type="unfinished">매개변수 길이</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37289" />
@@ -9671,32 +9671,32 @@
     <message>
         <location filename="../setting.ui" line="37439" />
         <source>不保存</source>
-        <translation type="unfinished">Do Not Save</translation>
+        <translation type="unfinished">저장 안 함</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37473" />
         <source>不设置</source>
-        <translation type="unfinished">Not Set</translation>
+        <translation type="unfinished">설정 안 함</translation>
     </message>
     <message>
         <location filename="../setting.ui" line="37478" />
         <source>设置</source>
-        <translation type="unfinished">Settings</translation>
+        <translation type="unfinished">설정</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="63" />
         <source>请输入菜单权限密码：</source>
-        <translation type="unfinished">Please Enter Menu Permission Passwd:</translation>
+        <translation type="unfinished">메뉴 권한 비밀번호를 입력하세요:</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="78" />
         <source>密码错误！</source>
-        <translation type="unfinished">Incorrect Passwd!</translation>
+        <translation type="unfinished">비밀번호 오류!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="188" />
         <source>确认修改颜色？系统将重启！</source>
-        <translation type="unfinished">Confirm Color Change? The System Will Restart!</translation>
+        <translation type="unfinished">색상을 변경하시겠습니까? 시스템이 재부팅됩니다!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="201" />
@@ -9707,32 +9707,32 @@
         <location filename="../setting.cpp" line="201" />
         <location filename="../setting.cpp" line="1112" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="234" />
         <source>确定修改系统时间？</source>
-        <translation type="unfinished">Confirm System Time Change?</translation>
+        <translation type="unfinished">시스템 시간을 변경하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="247" />
         <source>时间格式错误！</source>
-        <translation type="unfinished">Incorrect Time Format!</translation>
+        <translation type="unfinished">시간 형식 오류!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="432" />
         <source>触摸校准会重启系统，请确认是否校准？</source>
-        <translation type="unfinished">Touch Calibration Will Restart the System</translation>
+        <translation type="unfinished">터치 보정을 진행하시겠습니까? 시스템이 재부팅됩니다!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="904" />
         <source>标题</source>
-        <translation type="unfinished">Title</translation>
+        <translation type="unfinished">제목</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="904" />
         <source>修改时间</source>
-        <translation type="unfinished">Modify Time</translation>
+        <translation type="unfinished">수정 시간</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1095" />
@@ -9742,94 +9742,94 @@
         <location filename="../setting.cpp" line="4072" />
         <location filename="../setting.cpp" line="4186" />
         <source>请插入U盘！</source>
-        <translation type="unfinished">Please Insert USB Drive!</translation>
+        <translation type="unfinished">USB를 삽입하세요!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1105" />
         <location filename="../setting.cpp" line="1388" />
         <source>导入成功!</source>
-        <translation type="unfinished">Import Successful!</translation>
+        <translation type="unfinished">가져오기 성공!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1112" />
         <source>数据处理中，请稍候...</source>
-        <translation type="unfinished">Processing Data</translation>
+        <translation type="unfinished">데이터 처리 중</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1158" />
         <location filename="../setting.cpp" line="1321" />
         <source>导出成功!</source>
-        <translation type="unfinished">Export Successful!</translation>
+        <translation type="unfinished">내보내기 성공!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1508" />
         <source>菜单</source>
-        <translation type="unfinished">Menu</translation>
+        <translation type="unfinished">메뉴</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1508" />
         <source>操作员</source>
-        <translation type="unfinished">Operator</translation>
+        <translation type="unfinished">운영자</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1508" />
         <source>不可见</source>
-        <translation type="unfinished">Invisible</translation>
+        <translation type="unfinished">보이지 않음</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="1547" />
         <source>产品</source>
-        <translation type="unfinished">Product</translation>
+        <translation type="unfinished">제품</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="2166" />
         <source>密码不能为空！</source>
-        <translation type="unfinished">Passwd Cannot Be Empty!</translation>
+        <translation type="unfinished">비밀번호는 비워둘 수 없습니다!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="2175" />
         <source>旧密码错误！</source>
-        <translation type="unfinished">Incorrect Old Passwd!</translation>
+        <translation type="unfinished">기존 비밀번호가 잘못되었습니다!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="2180" />
         <source>两次输入密码不一致！</source>
-        <translation type="unfinished">Passwds do not match!</translation>
+        <translation type="unfinished">두 번 입력한 비밀번호가 일치하지 않습니다!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="2192" />
         <source>密码修改成功！</source>
-        <translation type="unfinished">Passwd changed successfully!</translation>
+        <translation type="unfinished">비밀번호 변경 성공!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="2603" />
         <source>标题不能为空！</source>
-        <translation type="unfinished">Title cannot be empty!</translation>
+        <translation type="unfinished">제목은 비워둘 수 없습니다!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="2608" />
         <source>文件名格式错误！</source>
-        <translation type="unfinished">Filename format error!</translation>
+        <translation type="unfinished">파일명 형식 오류!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="2688" />
         <source>确定删除？</source>
-        <translation type="unfinished">Are you sure you want to delete?</translation>
+        <translation type="unfinished">삭제하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="4055" />
         <source>未检测到bootlogo.bmp文件</source>
-        <translation type="unfinished">bootlogo.bmp file not detected</translation>
+        <translation type="unfinished">bootlogo.bmp 파일이 감지되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="4060" />
         <source>未检测到stop.jpg文件</source>
-        <translation type="unfinished">stop.jpg file not detected</translation>
+        <translation type="unfinished">stop.jpg 파일이 감지되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="4065" />
         <source>未检测到bootlogo.bmp和stop.jpg文件</source>
-        <translation type="unfinished">bootlogo.bmp and stop.jpg files not detected</translation>
+        <translation type="unfinished">bootlogo.bmp 및 stop.jpg 파일이 감지되지 않았습니다.</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="4096" />
@@ -9854,12 +9854,12 @@
     <message>
         <location filename="../setting.cpp" line="4116" />
         <source>数据备份成功!</source>
-        <translation type="unfinished">Data backup successful!</translation>
+        <translation type="unfinished">데이터 백업 성공!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="4121" />
         <source>数据还原成功!</source>
-        <translation type="unfinished">Data restore successful!</translation>
+        <translation type="unfinished">데이터 복원 성공!</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="4134" />
@@ -9894,12 +9894,12 @@
     <message>
         <location filename="../setting.cpp" line="4199" />
         <source>升级成功！等待重启</source>
-        <translation type="unfinished">Upgrade successful! Waiting for restart</translation>
+        <translation type="unfinished">업그레이드 성공! 재시작을 기다려주세요</translation>
     </message>
     <message>
         <location filename="../setting.cpp" line="4208" />
         <source>升级失败，请重启机器再次升级！</source>
-        <translation type="unfinished">Upgrade failed</translation>
+        <translation type="unfinished">업그레이드 실패! 기계를 재시작하고 다시 업그레이드하세요!</translation>
     </message>
 </context>
 <context>
@@ -9912,23 +9912,23 @@
     <message>
         <location filename="../dialogs/sigdefinedialog.ui" line="26" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/sigdefinedialog.ui" line="39" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/sigdefinedialog.ui" line="56" />
         <source>输入信号</source>
-        <translation type="unfinished">Input signal</translation>
+        <translation type="unfinished">입력 신호</translation>
     </message>
     <message>
         <location filename="../dialogs/sigdefinedialog.ui" line="68" />
         <location filename="../dialogs/sigdefinedialog.ui" line="612" />
         <source>主板</source>
-        <translation type="unfinished">Mainboard</translation>
+        <translation type="unfinished">메인 보드</translation>
     </message>
     <message>
         <location filename="../dialogs/sigdefinedialog.ui" line="99" />
@@ -10233,7 +10233,7 @@
     <message>
         <location filename="../dialogs/sigdefinedialog.ui" line="600" />
         <source>输出信号</source>
-        <translation type="unfinished">Output signal</translation>
+        <translation type="unfinished">출력 신호</translation>
     </message>
     <message>
         <location filename="../dialogs/sigdefinedialog.ui" line="668" />
@@ -10466,7 +10466,7 @@
     <message>
         <location filename="../dialogs/softkeywidget.ui" line="264" />
         <source>关闭</source>
-        <translation type="unfinished">Close</translation>
+        <translation type="unfinished">닫기</translation>
     </message>
     <message>
         <location filename="../dialogs/softkeywidget.cpp" line="80" />
@@ -10484,7 +10484,7 @@
     <message>
         <location filename="../dialogs/stackedit.ui" line="43" />
         <source>Z轴参数</source>
-        <translation type="unfinished">Z-axis parameters</translation>
+        <translation type="unfinished">Z축 매개변수</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="73" />
@@ -10498,7 +10498,7 @@
         <location filename="../dialogs/stackedit.ui" line="1033" />
         <location filename="../dialogs/stackedit.ui" line="1292" />
         <source>从小到大</source>
-        <translation type="unfinished">From small to large</translation>
+        <translation type="unfinished">작은 값에서 큰 값으로</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="115" />
@@ -10507,14 +10507,14 @@
         <location filename="../dialogs/stackedit.ui" line="1038" />
         <location filename="../dialogs/stackedit.ui" line="1297" />
         <source>从大到小</source>
-        <translation type="unfinished">From large to small</translation>
+        <translation type="unfinished">큰 값에서 작은 값으로</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="141" />
         <location filename="../dialogs/stackedit.ui" line="297" />
         <location filename="../dialogs/stackedit.ui" line="1088" />
         <source>方向</source>
-        <translation type="unfinished">Direction</translation>
+        <translation type="unfinished">방향</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="166" />
@@ -10538,7 +10538,7 @@
         <location filename="../dialogs/stackedit.ui" line="421" />
         <location filename="../dialogs/stackedit.ui" line="1348" />
         <source>间距(mm)</source>
-        <translation type="unfinished">Spacing(mm)</translation>
+        <translation type="unfinished">간격 (mm)</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="316" />
@@ -10556,13 +10556,13 @@
         <location filename="../dialogs/stackedit.ui" line="630" />
         <location filename="../dialogs/stackedit.ui" line="1263" />
         <source>偏移</source>
-        <translation type="unfinished">Offset</translation>
+        <translation type="unfinished">오프셋</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="649" />
         <location filename="../dialogs/stackedit.ui" line="1323" />
         <source>起始(mm)</source>
-        <translation type="unfinished">Start(mm)</translation>
+        <translation type="unfinished">시작점 (mm)</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="673" />
@@ -10573,7 +10573,7 @@
         <location filename="../dialogs/stackedit.ui" line="726" />
         <location filename="../dialogs/stackedit.ui" line="1213" />
         <source>速度(%)</source>
-        <translation type="unfinished">Speed(%)</translation>
+        <translation type="unfinished">속도 (%)</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="750" />
@@ -10589,38 +10589,38 @@
         <location filename="../dialogs/stackedit.ui" line="861" />
         <location filename="../dialogs/stackedit.ui" line="1373" />
         <source>个数</source>
-        <translation type="unfinished">Quantity</translation>
+        <translation type="unfinished">개수</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="899" />
         <location filename="../dialogs/stackedit.ui" line="1489" />
         <source>轴选择</source>
-        <translation type="unfinished">Axis Select</translation>
+        <translation type="unfinished">축 선택</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="922" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="946" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="951" />
         <source>Y2轴</source>
-        <translation type="unfinished">Y2 Axis</translation>
+        <translation type="unfinished">Y2축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="975" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="980" />
         <source>Z2轴</source>
-        <translation type="unfinished">Z2 Axis</translation>
+        <translation type="unfinished">Z2축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1421" />
@@ -10630,32 +10630,32 @@
     <message>
         <location filename="../dialogs/stackedit.ui" line="1453" />
         <source>C轴</source>
-        <translation type="unfinished">C Axis</translation>
+        <translation type="unfinished">C축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1458" />
         <source>A轴</source>
-        <translation type="unfinished">A Axis</translation>
+        <translation type="unfinished">A축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1463" />
         <source>B轴</source>
-        <translation type="unfinished">B Axis</translation>
+        <translation type="unfinished">B축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1555" />
         <source>刷新</source>
-        <translation type="unfinished">Refresh</translation>
+        <translation type="unfinished">새로 고침</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1594" />
         <source>移至堆叠点</source>
-        <translation type="unfinished">Move to stacking point</translation>
+        <translation type="unfinished">스택 포인트로 이동</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1629" />
         <source>移至跟随点</source>
-        <translation type="unfinished">Move to follow point</translation>
+        <translation type="unfinished">따라가기 포인트로 이동</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1661" />
@@ -10670,7 +10670,7 @@
     <message>
         <location filename="../dialogs/stackedit.ui" line="1733" />
         <source>顺序</source>
-        <translation type="unfinished">Sequence</translation>
+        <translation type="unfinished">순서</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1764" />
@@ -10695,54 +10695,54 @@
     <message>
         <location filename="../dialogs/stackedit.ui" line="1799" />
         <source>计数方式</source>
-        <translation type="unfinished">Counting method</translation>
+        <translation type="unfinished">카운팅 방법</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1830" />
         <location filename="../dialogs/stackedit.ui" line="1891" />
         <location filename="../dialogs/stackedit.ui" line="1947" />
         <source>不使用</source>
-        <translation type="unfinished">Not Used</translation>
+        <translation type="unfinished">사용하지 않음</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1835" />
         <source>程序结束</source>
-        <translation type="unfinished">Program end</translation>
+        <translation type="unfinished">프로그램 종료</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1840" />
         <source>命令结束</source>
-        <translation type="unfinished">Command end</translation>
+        <translation type="unfinished">명령 종료</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1860" />
         <source>堆叠完停止</source>
-        <translation type="unfinished">Stop After Stacking</translation>
+        <translation type="unfinished">스택 완료 후 중지</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1896" />
         <source>使用</source>
-        <translation type="unfinished">Used</translation>
+        <translation type="unfinished">사용</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1916" />
         <source>留空</source>
-        <translation type="unfinished">Leave blank</translation>
+        <translation type="unfinished">비워두기</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1952" />
         <source>首位不取</source>
-        <translation type="unfinished">Do not take first Position</translation>
+        <translation type="unfinished">첫 번째 항목 제외</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1957" />
         <source>末位不放</source>
-        <translation type="unfinished">Do not release last Position</translation>
+        <translation type="unfinished">마지막 항목 추가하지 않음</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="1965" />
         <source>三轴联动</source>
-        <translation type="unfinished">Three-axis linkage</translation>
+        <translation type="unfinished">3축 연동</translation>
     </message>
 </context>
 <context>
@@ -10750,17 +10750,17 @@
     <message>
         <location filename="../dialogs/stackedit.cpp" line="803" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="803" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="803" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="821" />
@@ -10770,27 +10770,27 @@
     <message>
         <location filename="../dialogs/stackedit.cpp" line="837" />
         <source>移动</source>
-        <translation type="unfinished">Move</translation>
+        <translation type="unfinished">이동</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="846" />
         <source>X1轴伺服未开启，请把轴的堆叠点数设为0</source>
-        <translation type="unfinished">X1 axis servo not turned on</translation>
+        <translation type="unfinished">X1축 서보가 켜져 있지 않습니다. 축의 스택 포인트 수를 0으로 설정하세요.</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="851" />
         <source>Y1轴伺服未开启，请把轴的堆叠点数设为0</source>
-        <translation type="unfinished">Y1 axis servo not turned on</translation>
+        <translation type="unfinished">Y1축 서보가 켜져 있지 않습니다. 축의 스택 포인트 수를 0으로 설정하세요.</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="856" />
         <source>Z1轴伺服未开启，请把轴的堆叠点数设为0</source>
-        <translation type="unfinished">Z1 axis servo not turned on</translation>
+        <translation type="unfinished">Z1축 서보가 켜져 있지 않습니다. 축의 스택 포인트 수를 0으로 설정하세요.</translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="865" />
         <source>关闭</source>
-        <translation type="unfinished">Close</translation>
+        <translation type="unfinished">닫기</translation>
     </message>
 </context>
 <context>
@@ -10803,37 +10803,37 @@
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="100" />
         <source>9组</source>
-        <translation type="unfinished">9 groups</translation>
+        <translation type="unfinished">9 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="119" />
         <source>轴指定个数：</source>
-        <translation type="unfinished">Axis specified number:</translation>
+        <translation type="unfinished">축 지정 개수:</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="150" />
         <source>11组</source>
-        <translation type="unfinished">11 groups</translation>
+        <translation type="unfinished">11 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="187" />
         <source>10组</source>
-        <translation type="unfinished">10 groups</translation>
+        <translation type="unfinished">10 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="256" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="297" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="340" />
         <source>7组</source>
-        <translation type="unfinished">7 groups</translation>
+        <translation type="unfinished">7 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="374" />
@@ -10866,52 +10866,52 @@
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="651" />
         <source>6组</source>
-        <translation type="unfinished">6 groups</translation>
+        <translation type="unfinished">6 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="794" />
         <source>8组</source>
-        <translation type="unfinished">8 groups</translation>
+        <translation type="unfinished">8 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="881" />
         <source>5组</source>
-        <translation type="unfinished">5 groups</translation>
+        <translation type="unfinished">5 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="912" />
         <source>4组</source>
-        <translation type="unfinished">4 groups</translation>
+        <translation type="unfinished">4 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="1065" />
         <source>Z轴指定个数：</source>
-        <translation type="unfinished">Z-axis specified number:</translation>
+        <translation type="unfinished">Z축 지정 개수:</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="1072" />
         <source>Y轴指定个数：</source>
-        <translation type="unfinished">Y-axis specified number:</translation>
+        <translation type="unfinished">Y축 지정 개수:</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="1125" />
         <source>2组</source>
-        <translation type="unfinished">2 groups</translation>
+        <translation type="unfinished">2 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="1156" />
         <source>3组</source>
-        <translation type="unfinished">3 groups</translation>
+        <translation type="unfinished">3 그룹</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="1169" />
         <source>X轴指定个数：</source>
-        <translation type="unfinished">X-axis specified number:</translation>
+        <translation type="unfinished">X축 지정 개수:</translation>
     </message>
     <message>
         <location filename="../dialogs/stacksetdialog.ui" line="1194" />
         <source>1组</source>
-        <translation type="unfinished">1 group</translation>
+        <translation type="unfinished">1 그룹</translation>
     </message>
 </context>
 <context>
@@ -10919,12 +10919,12 @@
     <message>
         <location filename="../QtUi/statebutton.cpp" line="6" />
         <source>通</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">통함</translation>
     </message>
     <message>
         <location filename="../QtUi/statebutton.cpp" line="6" />
         <source>断</source>
-        <translation type="unfinished">Off</translation>
+        <translation type="unfinished">끊김</translation>
     </message>
 </context>
 <context>
@@ -10933,133 +10933,133 @@
         <location filename="../teach.ui" line="117" />
         <location filename="../teach.ui" line="11274" />
         <source>编号</source>
-        <translation type="unfinished">Number</translation>
+        <translation type="unfinished">번호</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="122" />
         <source>内容</source>
-        <translation type="unfinished">Content</translation>
+        <translation type="unfinished">내용</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="175" />
         <source>删除</source>
-        <translation type="unfinished">Delete</translation>
+        <translation type="unfinished">삭제</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="215" />
         <source>分解</source>
-        <translation type="unfinished">Decompose</translation>
+        <translation type="unfinished">분해</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="255" />
         <source>组合</source>
-        <translation type="unfinished">Combine</translation>
+        <translation type="unfinished">조합</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="295" />
         <source>上移</source>
-        <translation type="unfinished">Move up</translation>
+        <translation type="unfinished">위로 이동</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="335" />
         <source>下移</source>
-        <translation type="unfinished">Move down</translation>
+        <translation type="unfinished">아래로 이동</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="375" />
         <source>编辑</source>
-        <translation type="unfinished">Edit</translation>
+        <translation type="unfinished">편집</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="421" />
         <source>试行</source>
-        <translation type="unfinished">Trial Run</translation>
+        <translation type="unfinished">시험 실행</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="461" />
         <source>屏蔽</source>
-        <translation type="unfinished">Shield</translation>
+        <translation type="unfinished">차단</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="504" />
         <source>保存</source>
-        <translation type="unfinished">Save</translation>
+        <translation type="unfinished">저장</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="547" />
         <source>插入</source>
-        <translation type="unfinished">Insert</translation>
+        <translation type="unfinished">삽입</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="602" />
         <source>主程序</source>
-        <translation type="unfinished">Main Program</translation>
+        <translation type="unfinished">메인 프로그램</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="642" />
         <source>子程序选择</source>
-        <translation type="unfinished">Subroutine selection</translation>
+        <translation type="unfinished">서브 프로그램 선택</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="684" />
         <location filename="../teach.ui" line="9251" />
         <location filename="../teach.ui" line="12052" />
         <source>子程序3</source>
-        <translation type="unfinished">Subprogram 3</translation>
+        <translation type="unfinished">서브 프로그램 3</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="728" />
         <location filename="../teach.ui" line="9261" />
         <location filename="../teach.ui" line="12062" />
         <source>子程序5</source>
-        <translation type="unfinished">Subprogram 5</translation>
+        <translation type="unfinished">서브 프로그램 5</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="772" />
         <location filename="../teach.ui" line="9246" />
         <location filename="../teach.ui" line="12047" />
         <source>子程序2</source>
-        <translation type="unfinished">Subprogram 2</translation>
+        <translation type="unfinished">서브 프로그램 2</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="816" />
         <location filename="../teach.ui" line="9266" />
         <location filename="../teach.ui" line="12067" />
         <source>子程序6</source>
-        <translation type="unfinished">Subprogram 6</translation>
+        <translation type="unfinished">서브 프로그램 6</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="860" />
         <location filename="../teach.ui" line="9241" />
         <location filename="../teach.ui" line="12042" />
         <source>子程序1</source>
-        <translation type="unfinished">Subprogram 1</translation>
+        <translation type="unfinished">서브 프로그램 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="904" />
         <location filename="../teach.ui" line="9256" />
         <location filename="../teach.ui" line="12057" />
         <source>子程序4</source>
-        <translation type="unfinished">Subprogram 4</translation>
+        <translation type="unfinished">서브 프로그램 4</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="948" />
         <location filename="../teach.ui" line="9271" />
         <location filename="../teach.ui" line="12072" />
         <source>子程序7</source>
-        <translation type="unfinished">Subprogram 7</translation>
+        <translation type="unfinished">서브 프로그램 7</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="992" />
         <location filename="../teach.ui" line="9276" />
         <location filename="../teach.ui" line="12077" />
         <source>子程序8</source>
-        <translation type="unfinished">Subprogram 8</translation>
+        <translation type="unfinished">서브 프로그램 8</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1033" />
         <source>当前动作无参数可修改</source>
-        <translation type="unfinished">No Parameters to Modify for Current Action</translation>
+        <translation type="unfinished">현재 동작에는 수정할 수 있는 매개변수가 없습니다.</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1075" />
@@ -11113,7 +11113,7 @@
         <location filename="../teach.ui" line="3016" />
         <location filename="../teach.ui" line="8637" />
         <source>位置</source>
-        <translation type="unfinished">Position</translation>
+        <translation type="unfinished">위치</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1144" />
@@ -11169,7 +11169,7 @@
         <location filename="../teach.ui" line="11104" />
         <location filename="../teach.ui" line="13354" />
         <source>刷新</source>
-        <translation type="unfinished">Refresh</translation>
+        <translation type="unfinished">새로 고침</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1201" />
@@ -11178,7 +11178,7 @@
         <location filename="../teach.ui" line="3123" />
         <location filename="../teach.ui" line="9040" />
         <source>速度</source>
-        <translation type="unfinished">Speed</translation>
+        <translation type="unfinished">속도</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1220" />
@@ -11188,7 +11188,7 @@
         <location filename="../teach.ui" line="3142" />
         <location filename="../teach.ui" line="9065" />
         <source>延时时间</source>
-        <translation type="unfinished">Delay time</translation>
+        <translation type="unfinished">지연 시간</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1239" />
@@ -11229,7 +11229,7 @@
         <location filename="../teach.ui" line="1317" />
         <location filename="../teach.cpp" line="4701" />
         <source>参考点</source>
-        <translation type="unfinished">Reference Point</translation>
+        <translation type="unfinished">참조 포인트</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1330" />
@@ -11238,7 +11238,7 @@
         <location filename="../teach.ui" line="2741" />
         <location filename="../teach.ui" line="8768" />
         <source>提前</source>
-        <translation type="unfinished">Advance</translation>
+        <translation type="unfinished">미리</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1357" />
@@ -11247,7 +11247,7 @@
         <location filename="../teach.ui" line="2768" />
         <location filename="../teach.ui" line="8795" />
         <source>结束</source>
-        <translation type="unfinished">End</translation>
+        <translation type="unfinished">종료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1385" />
@@ -11256,7 +11256,7 @@
         <location filename="../teach.ui" line="2796" />
         <location filename="../teach.ui" line="8823" />
         <source>加速</source>
-        <translation type="unfinished">Acceleration</translation>
+        <translation type="unfinished">가속</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1413" />
@@ -11265,7 +11265,7 @@
         <location filename="../teach.ui" line="2824" />
         <location filename="../teach.ui" line="8851" />
         <source>减速</source>
-        <translation type="unfinished">Deceleration</translation>
+        <translation type="unfinished">감속</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1441" />
@@ -11275,7 +11275,7 @@
         <location filename="../teach.ui" line="8337" />
         <location filename="../teach.ui" line="8879" />
         <source>提前位置</source>
-        <translation type="unfinished">Advance Position</translation>
+        <translation type="unfinished">미리 위치</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1504" />
@@ -11285,22 +11285,22 @@
         <location filename="../teach.ui" line="8375" />
         <location filename="../teach.ui" line="8942" />
         <source>提前速度</source>
-        <translation type="unfinished">Advance Speed</translation>
+        <translation type="unfinished">미리 속도</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1567" />
         <source>状态</source>
-        <translation type="unfinished">Status</translation>
+        <translation type="unfinished">상태</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1591" />
         <source>夹紧</source>
-        <translation type="unfinished">Clamping</translation>
+        <translation type="unfinished">클램핑</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1625" />
         <source>松开</source>
-        <translation type="unfinished">Release</translation>
+        <translation type="unfinished">해제</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="1799" />
@@ -11308,12 +11308,12 @@
         <location filename="../teach.ui" line="3503" />
         <location filename="../teach.ui" line="8186" />
         <source>延时</source>
-        <translation type="unfinished">Delay</translation>
+        <translation type="unfinished">지연</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3210" />
         <source>堆叠个数为0时，参数不能修改，请修改堆叠个数</source>
-        <translation type="unfinished">Parameters cannot be modified when stacking number is 0</translation>
+        <translation type="unfinished">스택 개수가 0일 때 매개변수를 수정할 수 없습니다. 스택 개수를 수정하세요.</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3246" />
@@ -11329,7 +11329,7 @@
         <location filename="../teach.ui" line="12787" />
         <location filename="../teach.ui" line="15648" />
         <source>X1轴</source>
-        <translation type="unfinished">X1 Axis</translation>
+        <translation type="unfinished">X1축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3265" />
@@ -11345,7 +11345,7 @@
         <location filename="../teach.ui" line="12951" />
         <location filename="../teach.ui" line="15768" />
         <source>Z1轴</source>
-        <translation type="unfinished">Z1 Axis</translation>
+        <translation type="unfinished">Z1축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3284" />
@@ -11361,13 +11361,13 @@
         <location filename="../teach.ui" line="12869" />
         <location filename="../teach.ui" line="15708" />
         <source>Y1轴</source>
-        <translation type="unfinished">Y1 Axis</translation>
+        <translation type="unfinished">Y1축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3314" />
         <location filename="../teach.ui" line="15523" />
         <source>间隔为</source>
-        <translation type="unfinished">Interval is</translation>
+        <translation type="unfinished">간격:</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3370" />
@@ -11375,7 +11375,7 @@
         <location filename="../teach.ui" line="10021" />
         <location filename="../teach.ui" line="15579" />
         <source>次</source>
-        <translation type="unfinished">Times</translation>
+        <translation type="unfinished">회</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3451" />
@@ -11386,25 +11386,25 @@
         <location filename="../teach.ui" line="3565" />
         <location filename="../teach.ui" line="3740" />
         <source>返回步号</source>
-        <translation type="unfinished">Return step number</translation>
+        <translation type="unfinished">돌아갈 단계 번호</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3612" />
         <location filename="../teach.ui" line="3697" />
         <source>返回标签</source>
-        <translation type="unfinished">Return label</translation>
+        <translation type="unfinished">돌아갈 태그</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3635" />
         <location filename="../teach.ui" line="3720" />
         <location filename="../teach.ui" line="16818" />
         <source>无标签</source>
-        <translation type="unfinished">No label</translation>
+        <translation type="unfinished">태그 없음</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3827" />
         <source>限时</source>
-        <translation type="unfinished">Time limit</translation>
+        <translation type="unfinished">제한 시간</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3855" />
@@ -11419,12 +11419,12 @@
     <message>
         <location filename="../teach.ui" line="3907" />
         <source>报警内容</source>
-        <translation type="unfinished">Alarm Content</translation>
+        <translation type="unfinished">알람 내용</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3951" />
         <source>故障编号</source>
-        <translation type="unfinished">Fault number</translation>
+        <translation type="unfinished">고장 번호</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="3992" />
@@ -11434,7 +11434,7 @@
     <message>
         <location filename="../teach.ui" line="4011" />
         <source>提示编号</source>
-        <translation type="unfinished">Prompt number</translation>
+        <translation type="unfinished">안내 번호</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="4052" />
@@ -11445,18 +11445,18 @@
         <location filename="../teach.ui" line="4098" />
         <location filename="../teach.ui" line="9648" />
         <source>标签1</source>
-        <translation type="unfinished">Label 1</translation>
+        <translation type="unfinished">태그 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="4127" />
         <source>跳转到</source>
-        <translation type="unfinished">Jump to</translation>
+        <translation type="unfinished">이동</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="4190" />
         <location filename="../teach.ui" line="4851" />
         <source>信号</source>
-        <translation type="unfinished">Signal</translation>
+        <translation type="unfinished">신호</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="4206" />
@@ -11467,12 +11467,12 @@
         <location filename="../teach.ui" line="16090" />
         <location filename="../teach.ui" line="16190" />
         <source>主板</source>
-        <translation type="unfinished">Mainboard</translation>
+        <translation type="unfinished">메인 보드</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="4218" />
         <source>输入</source>
-        <translation type="unfinished">Input</translation>
+        <translation type="unfinished">입력</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="4299" />
@@ -11792,12 +11792,12 @@
         <location filename="../teach.cpp" line="524" />
         <location filename="../teach.cpp" line="525" />
         <source>通</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">통함</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="4879" />
         <source>输出</source>
-        <translation type="unfinished">Output</translation>
+        <translation type="unfinished">출력</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5055" />
@@ -12032,7 +12032,7 @@
         <location filename="../teach.ui" line="10030" />
         <location filename="../teach.ui" line="10182" />
         <source>变量</source>
-        <translation type="unfinished">Variable</translation>
+        <translation type="unfinished">변수</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5457" />
@@ -12102,7 +12102,7 @@
         <location filename="../teach.ui" line="10342" />
         <location filename="../teach.ui" line="10645" />
         <source>变量1</source>
-        <translation type="unfinished">Variable 1</translation>
+        <translation type="unfinished">변수 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5517" />
@@ -12116,7 +12116,7 @@
         <location filename="../teach.ui" line="10347" />
         <location filename="../teach.ui" line="10650" />
         <source>变量2</source>
-        <translation type="unfinished">Variable 2</translation>
+        <translation type="unfinished">변수 2</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5522" />
@@ -12130,7 +12130,7 @@
         <location filename="../teach.ui" line="10352" />
         <location filename="../teach.ui" line="10655" />
         <source>变量3</source>
-        <translation type="unfinished">Variable 3</translation>
+        <translation type="unfinished">변수 3</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5527" />
@@ -12144,7 +12144,7 @@
         <location filename="../teach.ui" line="10357" />
         <location filename="../teach.ui" line="10660" />
         <source>变量4</source>
-        <translation type="unfinished">Variable 4</translation>
+        <translation type="unfinished">변수 4</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5532" />
@@ -12158,7 +12158,7 @@
         <location filename="../teach.ui" line="10362" />
         <location filename="../teach.ui" line="10665" />
         <source>变量5</source>
-        <translation type="unfinished">Variable 5</translation>
+        <translation type="unfinished">변수 5</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5537" />
@@ -12172,7 +12172,7 @@
         <location filename="../teach.ui" line="10367" />
         <location filename="../teach.ui" line="10670" />
         <source>变量6</source>
-        <translation type="unfinished">Variable 6</translation>
+        <translation type="unfinished">변수 6</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5542" />
@@ -12186,7 +12186,7 @@
         <location filename="../teach.ui" line="10372" />
         <location filename="../teach.ui" line="10675" />
         <source>变量7</source>
-        <translation type="unfinished">Variable 7</translation>
+        <translation type="unfinished">변수 7</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5547" />
@@ -12200,7 +12200,7 @@
         <location filename="../teach.ui" line="10377" />
         <location filename="../teach.ui" line="10680" />
         <source>变量8</source>
-        <translation type="unfinished">Variable 8</translation>
+        <translation type="unfinished">변수 8</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5649" />
@@ -12212,7 +12212,7 @@
         <location filename="../teach.ui" line="10468" />
         <location filename="../teach.ui" line="10561" />
         <source>实际产量</source>
-        <translation type="unfinished">Actual Output</translation>
+        <translation type="unfinished">실제 생산량</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5670" />
@@ -12225,7 +12225,7 @@
         <location filename="../teach.ui" line="14821" />
         <location filename="../teach.ui" line="14896" />
         <source>堆叠1组</source>
-        <translation type="unfinished">Stack 1</translation>
+        <translation type="unfinished">스택 그룹 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5675" />
@@ -12238,7 +12238,7 @@
         <location filename="../teach.ui" line="14826" />
         <location filename="../teach.ui" line="14943" />
         <source>堆叠2组</source>
-        <translation type="unfinished">Stack 2</translation>
+        <translation type="unfinished">스택 그룹 2</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5680" />
@@ -12251,7 +12251,7 @@
         <location filename="../teach.ui" line="14831" />
         <location filename="../teach.ui" line="14990" />
         <source>堆叠3组</source>
-        <translation type="unfinished">Stack 3</translation>
+        <translation type="unfinished">스택 그룹 3</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5685" />
@@ -12264,7 +12264,7 @@
         <location filename="../teach.ui" line="14836" />
         <location filename="../teach.ui" line="15037" />
         <source>堆叠4组</source>
-        <translation type="unfinished">Stack 4</translation>
+        <translation type="unfinished">스택 그룹 4</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5690" />
@@ -12277,7 +12277,7 @@
         <location filename="../teach.ui" line="14841" />
         <location filename="../teach.ui" line="15081" />
         <source>堆叠5组</source>
-        <translation type="unfinished">Stack 5</translation>
+        <translation type="unfinished">스택 그룹 5</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5695" />
@@ -12290,7 +12290,7 @@
         <location filename="../teach.ui" line="14846" />
         <location filename="../teach.ui" line="15125" />
         <source>堆叠6组</source>
-        <translation type="unfinished">Stack 6</translation>
+        <translation type="unfinished">스택 그룹 6</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5700" />
@@ -12303,7 +12303,7 @@
         <location filename="../teach.ui" line="14851" />
         <location filename="../teach.ui" line="15169" />
         <source>堆叠7组</source>
-        <translation type="unfinished">Stack 7</translation>
+        <translation type="unfinished">스택 그룹 7</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5705" />
@@ -12316,23 +12316,23 @@
         <location filename="../teach.ui" line="14856" />
         <location filename="../teach.ui" line="15213" />
         <source>堆叠8组</source>
-        <translation type="unfinished">Stack 8</translation>
+        <translation type="unfinished">스택 그룹 8</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="5929" />
         <location filename="../teach.ui" line="12488" />
         <source>其他</source>
-        <translation type="unfinished">Other</translation>
+        <translation type="unfinished">기타</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6045" />
         <source>堆叠完成</source>
-        <translation type="unfinished">Stacking Completed</translation>
+        <translation type="unfinished">스택 완료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6224" />
         <source>轴位置</source>
-        <translation type="unfinished">Axis Position</translation>
+        <translation type="unfinished">축 위치</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6334" />
@@ -12368,74 +12368,74 @@
         <location filename="../teach.ui" line="6506" />
         <location filename="../teach.ui" line="10899" />
         <source>定时器</source>
-        <translation type="unfinished">Timer</translation>
+        <translation type="unfinished">타이머</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6583" />
         <location filename="../teach.ui" line="6664" />
         <location filename="../teach.ui" line="11023" />
         <source>定时器1</source>
-        <translation type="unfinished">Timer 1</translation>
+        <translation type="unfinished">타이머 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6588" />
         <location filename="../teach.ui" line="6669" />
         <location filename="../teach.ui" line="11028" />
         <source>定时器2</source>
-        <translation type="unfinished">Timer 2</translation>
+        <translation type="unfinished">타이머 2</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6593" />
         <location filename="../teach.ui" line="6674" />
         <location filename="../teach.ui" line="11033" />
         <source>定时器3</source>
-        <translation type="unfinished">Timer 3</translation>
+        <translation type="unfinished">타이머 3</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6598" />
         <location filename="../teach.ui" line="6679" />
         <location filename="../teach.ui" line="11038" />
         <source>定时器4</source>
-        <translation type="unfinished">Timer 4</translation>
+        <translation type="unfinished">타이머 4</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6603" />
         <location filename="../teach.ui" line="6684" />
         <location filename="../teach.ui" line="11043" />
         <source>定时器5</source>
-        <translation type="unfinished">Timer 5</translation>
+        <translation type="unfinished">타이머 5</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6608" />
         <location filename="../teach.ui" line="6689" />
         <location filename="../teach.ui" line="11048" />
         <source>定时器6</source>
-        <translation type="unfinished">Timer 6</translation>
+        <translation type="unfinished">타이머 6</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6613" />
         <location filename="../teach.ui" line="6694" />
         <location filename="../teach.ui" line="11053" />
         <source>定时器7</source>
-        <translation type="unfinished">Timer 7</translation>
+        <translation type="unfinished">타이머 7</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6618" />
         <location filename="../teach.ui" line="6699" />
         <location filename="../teach.ui" line="11058" />
         <source>定时器8</source>
-        <translation type="unfinished">Timer 8</translation>
+        <translation type="unfinished">타이머 8</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6747" />
         <location filename="../teach.ui" line="9768" />
         <source>条件1</source>
-        <translation type="unfinished">Condition 1</translation>
+        <translation type="unfinished">조건 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6775" />
         <source>条件2</source>
-        <translation type="unfinished">Condition 2</translation>
+        <translation type="unfinished">조건 2</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6824" />
@@ -12443,7 +12443,7 @@
         <location filename="../teach.ui" line="7495" />
         <location filename="../teach.ui" line="7776" />
         <source>运算符</source>
-        <translation type="unfinished">Operator</translation>
+        <translation type="unfinished">연산자</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="6912" />
@@ -12488,7 +12488,7 @@
         <location filename="../teach.ui" line="7849" />
         <location filename="../teach.ui" line="10125" />
         <source>赋值</source>
-        <translation type="unfinished">Assignment</translation>
+        <translation type="unfinished">할당</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7033" />
@@ -12503,7 +12503,7 @@
         <location filename="../teach.ui" line="13033" />
         <location filename="../teach.ui" line="15828" />
         <source>C轴</source>
-        <translation type="unfinished">C Axis</translation>
+        <translation type="unfinished">C축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7038" />
@@ -12516,7 +12516,7 @@
         <location filename="../teach.ui" line="13115" />
         <location filename="../teach.ui" line="15888" />
         <source>Y2轴</source>
-        <translation type="unfinished">Y2 Axis</translation>
+        <translation type="unfinished">Y2축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7043" />
@@ -12529,7 +12529,7 @@
         <location filename="../teach.ui" line="13197" />
         <location filename="../teach.ui" line="15948" />
         <source>Z2轴</source>
-        <translation type="unfinished">Z2 Axis</translation>
+        <translation type="unfinished">Z2축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7048" />
@@ -12542,7 +12542,7 @@
         <location filename="../teach.ui" line="11670" />
         <location filename="../teach.ui" line="11844" />
         <source>A轴</source>
-        <translation type="unfinished">A Axis</translation>
+        <translation type="unfinished">A축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7053" />
@@ -12555,13 +12555,13 @@
         <location filename="../teach.ui" line="11675" />
         <location filename="../teach.ui" line="11849" />
         <source>B轴</source>
-        <translation type="unfinished">B Axis</translation>
+        <translation type="unfinished">B축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7120" />
         <location filename="../teach.ui" line="10232" />
         <source>产量</source>
-        <translation type="unfinished">Yield</translation>
+        <translation type="unfinished">생산량</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7152" />
@@ -12570,7 +12570,7 @@
         <location filename="../teach.ui" line="7988" />
         <location filename="../teach.ui" line="10157" />
         <source>常量</source>
-        <translation type="unfinished">Constant</translation>
+        <translation type="unfinished">상수</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7171" />
@@ -12578,131 +12578,131 @@
         <location filename="../teach.ui" line="10207" />
         <location filename="../teach.ui" line="12687" />
         <source>轴</source>
-        <translation type="unfinished">Axis</translation>
+        <translation type="unfinished">축</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7483" />
         <location filename="../teach.ui" line="12359" />
         <source>堆叠</source>
-        <translation type="unfinished">Stacking</translation>
+        <translation type="unfinished">스택</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="7745" />
         <location filename="../teach.ui" line="10257" />
         <source>堆叠计数</source>
-        <translation type="unfinished">Stacking count</translation>
+        <translation type="unfinished">스택 카운팅</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8012" />
         <location filename="../teach.ui" line="9943" />
         <source>循环</source>
-        <translation type="unfinished">Loop</translation>
+        <translation type="unfinished">반복</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8095" />
         <source>循环次数</source>
-        <translation type="unfinished">Cycle Count</translation>
+        <translation type="unfinished">반복 횟수</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8117" />
         <source>位置记忆</source>
-        <translation type="unfinished">Position memory</translation>
+        <translation type="unfinished">위치 기억</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8130" />
         <source>到位报警</source>
-        <translation type="unfinished">Position alarm</translation>
+        <translation type="unfinished">도착 알람</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8205" />
         <source>运行速度</source>
-        <translation type="unfinished">Running Speed</translation>
+        <translation type="unfinished">작동 속도</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8224" />
         <source>最大位置</source>
-        <translation type="unfinished">Max Position</translation>
+        <translation type="unfinished">최대 위치</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8413" />
         <source>偏移位置</source>
-        <translation type="unfinished">Offset Position</translation>
+        <translation type="unfinished">오프셋 위치</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="8554" />
         <location filename="../teach.ui" line="11242" />
         <source>停止信号</source>
-        <translation type="unfinished">Stop Signal</translation>
+        <translation type="unfinished">정지 신호</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9095" />
         <location filename="../teach.ui" line="11585" />
         <source>低速转矩</source>
-        <translation type="unfinished">Low-speed Torque</translation>
+        <translation type="unfinished">저속 토크</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9216" />
         <source>自动子程序</source>
-        <translation type="unfinished">Automatic subroutine</translation>
+        <translation type="unfinished">자동 서브 프로그램</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9288" />
         <source>高级</source>
-        <translation type="unfinished">Senior</translation>
+        <translation type="unfinished">고급</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9342" />
         <source>标签/注释</source>
-        <translation type="unfinished">Label/Comment</translation>
+        <translation type="unfinished">태그/주석</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9385" />
         <location filename="../teach.ui" line="11930" />
         <source>子程序</source>
-        <translation type="unfinished">Subprogram</translation>
+        <translation type="unfinished">서브 프로그램</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9428" />
         <source>转矩保护</source>
-        <translation type="unfinished">Torque protection</translation>
+        <translation type="unfinished">토크 보호</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9471" />
         <source>逻辑&amp;变量</source>
-        <translation type="unfinished">Logic &amp; Variables</translation>
+        <translation type="unfinished">논리 &amp; 변수</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9514" />
         <location filename="../teach.ui" line="11753" />
         <source>伺服停止</source>
-        <translation type="unfinished">Servo stop</translation>
+        <translation type="unfinished">서보 정지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9557" />
         <location filename="../teach.ui" line="11409" />
         <source>偏移</source>
-        <translation type="unfinished">Offset</translation>
+        <translation type="unfinished">오프셋</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9600" />
         <location filename="../teach.ui" line="11084" />
         <source>搜索</source>
-        <translation type="unfinished">Search</translation>
+        <translation type="unfinished">검색</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9633" />
         <source>标签/标注</source>
-        <translation type="unfinished">Label/Mark</translation>
+        <translation type="unfinished">태그/표시</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9683" />
         <source>跳转</source>
-        <translation type="unfinished">Jump</translation>
+        <translation type="unfinished">점프</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9756" />
         <source>如果</source>
-        <translation type="unfinished">If</translation>
+        <translation type="unfinished">만약에</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9787" />
@@ -12712,32 +12712,32 @@
     <message>
         <location filename="../teach.ui" line="9800" />
         <source>否则</source>
-        <translation type="unfinished">Else</translation>
+        <translation type="unfinished">그렇지 않으면</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9819" />
         <source>结束如果</source>
-        <translation type="unfinished">End if</translation>
+        <translation type="unfinished">if 종료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9878" />
         <source>并且</source>
-        <translation type="unfinished">And</translation>
+        <translation type="unfinished">그리고</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9903" />
         <source>或者</source>
-        <translation type="unfinished">Or</translation>
+        <translation type="unfinished">또는</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9964" />
         <source>循环结束</source>
-        <translation type="unfinished">Loop end</translation>
+        <translation type="unfinished">반복 종료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="9983" />
         <source>循环开始：</source>
-        <translation type="unfinished">Loop start:</translation>
+        <translation type="unfinished">반복 시작:</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="10008" />
@@ -12747,84 +12747,84 @@
     <message>
         <location filename="../teach.ui" line="10047" />
         <source>操作数与运算符</source>
-        <translation type="unfinished">Operand and operator</translation>
+        <translation type="unfinished">피연산자와 연산자</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="10077" />
         <source>运算符：</source>
-        <translation type="unfinished">Operator:</translation>
+        <translation type="unfinished">연산자:</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="10580" />
         <source>类型</source>
-        <translation type="unfinished">Type</translation>
+        <translation type="unfinished">유형</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="10926" />
         <source>定时开始</source>
-        <translation type="unfinished">Timer start</translation>
+        <translation type="unfinished">타이머 시작</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="10951" />
         <source>定时结束</source>
-        <translation type="unfinished">Timer end</translation>
+        <translation type="unfinished">타이머 종료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="10976" />
         <source>定时清零</source>
-        <translation type="unfinished">Timer reset</translation>
+        <translation type="unfinished">타이머 초기화</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11001" />
         <source>定时器选择：</source>
-        <translation type="unfinished">Timer selection:</translation>
+        <translation type="unfinished">타이머 선택:</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11138" />
         <source>搜索1</source>
-        <translation type="unfinished">Search 1</translation>
+        <translation type="unfinished">검색 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11143" />
         <source>搜索2</source>
-        <translation type="unfinished">Search 2</translation>
+        <translation type="unfinished">검색 2</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11148" />
         <source>搜索3</source>
-        <translation type="unfinished">Search 3</translation>
+        <translation type="unfinished">검색 3</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11153" />
         <source>搜索4</source>
-        <translation type="unfinished">Search 4</translation>
+        <translation type="unfinished">검색 4</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11158" />
         <source>搜索5</source>
-        <translation type="unfinished">Search 5</translation>
+        <translation type="unfinished">검색 5</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11163" />
         <source>搜索6</source>
-        <translation type="unfinished">Search 6</translation>
+        <translation type="unfinished">검색 6</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11168" />
         <source>搜索7</source>
-        <translation type="unfinished">Search 7</translation>
+        <translation type="unfinished">검색 7</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11173" />
         <source>搜索8</source>
-        <translation type="unfinished">Search 8</translation>
+        <translation type="unfinished">검색 8</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11258" />
         <location filename="../teach.ui" line="11465" />
         <location filename="../teach.ui" line="13361" />
         <source>位置(mm)</source>
-        <translation type="unfinished">Position(mm)</translation>
+        <translation type="unfinished">위치 (mm)</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11350" />
@@ -12844,110 +12844,110 @@
         <location filename="../teach.ui" line="13371" />
         <location filename="../teach.ui" line="16025" />
         <source>速度(%)</source>
-        <translation type="unfinished">Speed(%)</translation>
+        <translation type="unfinished">속도 (%)</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11383" />
         <source>感应停止</source>
-        <translation type="unfinished">Inductive stop</translation>
+        <translation type="unfinished">감지 정지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11954" />
         <source>标准</source>
-        <translation type="unfinished">Standard</translation>
+        <translation type="unfinished">표준</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11973" />
         <source>自动</source>
-        <translation type="unfinished">Automatic</translation>
+        <translation type="unfinished">자동</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="11992" />
         <source>并行一次</source>
-        <translation type="unfinished">Parallel once</translation>
+        <translation type="unfinished">한 번 병렬 실행</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12011" />
         <source>等待子程序完成</source>
-        <translation type="unfinished">Wait for subroutine to complete</translation>
+        <translation type="unfinished">서브 프로그램 완료 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12090" />
         <source>通用</source>
-        <translation type="unfinished">General</translation>
+        <translation type="unfinished">일반</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12144" />
         <location filename="../teach.ui" line="12597" />
         <source>机床</source>
-        <translation type="unfinished">CNC</translation>
+        <translation type="unfinished">기계</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12187" />
         <source>信号等待</source>
-        <translation type="unfinished">Signal wait</translation>
+        <translation type="unfinished">신호 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12230" />
         <source>轴动作</source>
-        <translation type="unfinished">Axis Action</translation>
+        <translation type="unfinished">축 동작</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12273" />
         <source>卡爪动作</source>
-        <translation type="unfinished">Gripper action</translation>
+        <translation type="unfinished">집게 동작</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12316" />
         <source>速度教导</source>
-        <translation type="unfinished">Speed teaching</translation>
+        <translation type="unfinished">속도 교육</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12402" />
         <source>信号检测</source>
-        <translation type="unfinished">Signal check</translation>
+        <translation type="unfinished">신호 감지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12445" />
         <source>预留输出</source>
-        <translation type="unfinished">Reserved output</translation>
+        <translation type="unfinished">예약 출력</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12508" />
         <source>信号输出</source>
-        <translation type="unfinished">Signal output</translation>
+        <translation type="unfinished">신호 출력</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12552" />
         <source>检测</source>
-        <translation type="unfinished">Check</translation>
+        <translation type="unfinished">감지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="12642" />
         <source>卡爪</source>
-        <translation type="unfinished">Gripper</translation>
+        <translation type="unfinished">집게</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13472" />
         <location filename="../teach.ui" line="16439" />
         <source>原料1夹紧</source>
-        <translation type="unfinished">Raw Material 1 Clamping</translation>
+        <translation type="unfinished">원료 1 클램핑</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13521" />
         <location filename="../teach.ui" line="16444" />
         <source>成品1夹紧</source>
-        <translation type="unfinished">Finished Product 1 Clamping</translation>
+        <translation type="unfinished">완성품 1 클램핑</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13570" />
         <source>卡爪1正转</source>
-        <translation type="unfinished">Gripper 1 Forward Rotation</translation>
+        <translation type="unfinished">집게 1 정회전</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13628" />
         <source>卡爪检测</source>
-        <translation type="unfinished">Gripper check</translation>
+        <translation type="unfinished">집게 감지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13678" />
@@ -12958,22 +12958,22 @@
     <message>
         <location filename="../teach.ui" line="13709" />
         <source>夹紧检测开始</source>
-        <translation type="unfinished">Clamping check start</translation>
+        <translation type="unfinished">클램핑 감지 시작</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13734" />
         <source>松开检测开始</source>
-        <translation type="unfinished">Release check start</translation>
+        <translation type="unfinished">해제 감지 시작</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13759" />
         <source>夹紧检测结束</source>
-        <translation type="unfinished">Clamping check end</translation>
+        <translation type="unfinished">클램핑 감지 종료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13784" />
         <source>松开检测结束</source>
-        <translation type="unfinished">Release check end</translation>
+        <translation type="unfinished">해제 감지 종료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13809" />
@@ -12981,7 +12981,7 @@
         <location filename="../teach.ui" line="16312" />
         <location filename="../teach.ui" line="16390" />
         <source>原料1夹紧限</source>
-        <translation type="unfinished">Material 1 clamping limit</translation>
+        <translation type="unfinished">원료 1 클램핑 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13814" />
@@ -12989,13 +12989,13 @@
         <location filename="../teach.ui" line="16317" />
         <location filename="../teach.ui" line="16395" />
         <source>成品1夹紧限</source>
-        <translation type="unfinished">Finished product 1 clamping limit</translation>
+        <translation type="unfinished">완성품 1 클램핑 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13819" />
         <location filename="../teach.ui" line="13879" />
         <source>卡盘1夹紧限</source>
-        <translation type="unfinished">Chuck 1 clamping limit</translation>
+        <translation type="unfinished">척 1 클램핑 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13839" />
@@ -13003,7 +13003,7 @@
         <location filename="../teach.ui" line="16239" />
         <location filename="../teach.ui" line="16276" />
         <source>原料1松开限</source>
-        <translation type="unfinished">Material 1 release limit</translation>
+        <translation type="unfinished">원료 1 해제 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13844" />
@@ -13011,189 +13011,189 @@
         <location filename="../teach.ui" line="16244" />
         <location filename="../teach.ui" line="16281" />
         <source>成品1松开限</source>
-        <translation type="unfinished">Finished product 1 release limit</translation>
+        <translation type="unfinished">완성품 1 해제 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13849" />
         <location filename="../teach.ui" line="13909" />
         <source>卡盘1松开限</source>
-        <translation type="unfinished">Chuck 1 release limit</translation>
+        <translation type="unfinished">척 1 해제 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13920" />
         <source>预留检测</source>
-        <translation type="unfinished">Reserved check</translation>
+        <translation type="unfinished">예약 감지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13935" />
         <source>预留ON检测</source>
-        <translation type="unfinished">Reserved ON check</translation>
+        <translation type="unfinished">예약 ON 감지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="13973" />
         <source>预留OFF检测</source>
-        <translation type="unfinished">Reserved OFF check</translation>
+        <translation type="unfinished">예약 OFF 감지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14011" />
         <source>预留检测结束</source>
-        <translation type="unfinished">Reserved check end</translation>
+        <translation type="unfinished">예약 감지 종료</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14108" />
         <source>吹气1通</source>
-        <translation type="unfinished">Blow air 1 open</translation>
+        <translation type="unfinished">바람 1 통함</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14160" />
         <source>主轴旋转1通</source>
-        <translation type="unfinished">Spindle rotation 1 open</translation>
+        <translation type="unfinished">주축 회전 1 통함</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14187" />
         <source>自动门1开</source>
-        <translation type="unfinished">Automatic Door 1 Open</translation>
+        <translation type="unfinished">자동 문 1 열림</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14217" />
         <source>启动加工1通</source>
-        <translation type="unfinished">Start processing 1 open</translation>
+        <translation type="unfinished">가공 시작 1 통함</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14253" />
         <source>主轴定位1通</source>
-        <translation type="unfinished">Spindle Positioning 1 open</translation>
+        <translation type="unfinished">주축 위치 지정 1 통함</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14305" />
         <source>卡盘1夹紧</source>
-        <translation type="unfinished">Chuck 1 Clamping</translation>
+        <translation type="unfinished">척 1 클램핑</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14574" />
         <source>报警灯开</source>
-        <translation type="unfinished">Alarm light on</translation>
+        <translation type="unfinished">경보등 켬</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14590" />
         <source>报警声开</source>
-        <translation type="unfinished">Alarm sound on</translation>
+        <translation type="unfinished">경보음 켬</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14680" />
         <source>延时动作</source>
-        <translation type="unfinished">Delayed action</translation>
+        <translation type="unfinished">지연 동작</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14711" />
         <source>报警自定义</source>
-        <translation type="unfinished">Custom alarm</translation>
+        <translation type="unfinished">경보 사용자 정의</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14742" />
         <source>周期停止</source>
-        <translation type="unfinished">Cycle stop</translation>
+        <translation type="unfinished">주기적 정지</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14771" />
         <source>堆叠清零</source>
-        <translation type="unfinished">Stacking reset</translation>
+        <translation type="unfinished">스택 리셋</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14861" />
         <location filename="../teach.ui" line="15056" />
         <source>放料跟随堆叠1组</source>
-        <translation type="unfinished">Feed follow stacking 1 group</translation>
+        <translation type="unfinished">공급 따라가기 스택 그룹 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14866" />
         <location filename="../teach.ui" line="15100" />
         <source>放料跟随堆叠2组</source>
-        <translation type="unfinished">Feed follow stacking 2 groups</translation>
+        <translation type="unfinished">공급 따라가기 스택 그룹 2</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14871" />
         <location filename="../teach.ui" line="15144" />
         <source>放料跟随堆叠3组</source>
-        <translation type="unfinished">Feed follow stacking 3 groups</translation>
+        <translation type="unfinished">공급 따라가기 스택 그룹 3</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14876" />
         <location filename="../teach.ui" line="15188" />
         <source>放料跟随堆叠4组</source>
-        <translation type="unfinished">Feed follow stacking 4 groups</translation>
+        <translation type="unfinished">공급 따라가기 스택 그룹 4</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14918" />
         <source>堆叠9组</source>
-        <translation type="unfinished">Stacking 9 groups</translation>
+        <translation type="unfinished">스택 그룹 9</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="14965" />
         <source>堆叠10组</source>
-        <translation type="unfinished">Stacking 10 groups</translation>
+        <translation type="unfinished">스택 그룹 10</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="15012" />
         <source>堆叠11组</source>
-        <translation type="unfinished">Stacking 11 groups</translation>
+        <translation type="unfinished">스택 그룹 11</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="15239" />
         <source>预留</source>
-        <translation type="unfinished">Reserved</translation>
+        <translation type="unfinished">예약</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="15299" />
         <location filename="../teach.cpp" line="574" />
         <location filename="../teach.cpp" line="4158" />
         <source>预留通</source>
-        <translation type="unfinished">Reserved open</translation>
+        <translation type="unfinished">예약 통함</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="15356" />
         <source>预留通时</source>
-        <translation type="unfinished">Reserved open time</translation>
+        <translation type="unfinished">예약 통함 시간</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="15413" />
         <source>预留翻转</source>
-        <translation type="unfinished">Reserved flip</translation>
+        <translation type="unfinished">예약 뒤집기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="15604" />
         <source>时间</source>
-        <translation type="unfinished">Time</translation>
+        <translation type="unfinished">시간</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16070" />
         <source>等待机床</source>
-        <translation type="unfinished">Wait for machine tool</translation>
+        <translation type="unfinished">기계 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16120" />
         <source>等待机床信号</source>
-        <translation type="unfinished">Wait for machine tool signal</translation>
+        <translation type="unfinished">기계 신호 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16151" />
         <source>加工完成1</source>
-        <translation type="unfinished">Processing Completed 1</translation>
+        <translation type="unfinished">가공 완료 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16156" />
         <source>定位完成1</source>
-        <translation type="unfinished">Positioning Completed 1</translation>
+        <translation type="unfinished">위치 지정 완료 1</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16173" />
         <source>等待卡爪</source>
-        <translation type="unfinished">Wait for gripper</translation>
+        <translation type="unfinished">집게 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16208" />
         <source>等待松开OFF</source>
-        <translation type="unfinished">Wait for release OFF</translation>
+        <translation type="unfinished">해제 OFF 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16249" />
@@ -13204,153 +13204,153 @@
     <message>
         <location filename="../teach.ui" line="16286" />
         <source>卡爪1反转限</source>
-        <translation type="unfinished">Gripper 1 reverse limit</translation>
+        <translation type="unfinished">집게 1 역회전 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16322" />
         <location filename="../teach.ui" line="16400" />
         <source>卡爪1正转限</source>
-        <translation type="unfinished">Gripper 1 forward limit</translation>
+        <translation type="unfinished">집게 1 정회전 제한</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16330" />
         <source>等待松开ON</source>
-        <translation type="unfinished">Wait for release ON</translation>
+        <translation type="unfinished">해제 ON 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16343" />
         <source>等待夹紧ON</source>
-        <translation type="unfinished">Wait for clamping ON</translation>
+        <translation type="unfinished">클램핑 ON 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16356" />
         <source>等待夹紧OFF</source>
-        <translation type="unfinished">Wait for clamping OFF</translation>
+        <translation type="unfinished">클램핑 OFF 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16408" />
         <source>夹紧位置修正</source>
-        <translation type="unfinished">Clamping Position correction</translation>
+        <translation type="unfinished">클램핑 위치 수정</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16449" />
         <source>卡爪1松开</source>
-        <translation type="unfinished">Gripper 1 release</translation>
+        <translation type="unfinished">집게 1 해제</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16460" />
         <source>等待预留</source>
-        <translation type="unfinished">Wait for reserved</translation>
+        <translation type="unfinished">예약 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16475" />
         <source>等待预留上升沿</source>
-        <translation type="unfinished">Wait for reserved rising edge</translation>
+        <translation type="unfinished">예약 상승 에지 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16513" />
         <source>等待预留OFF</source>
-        <translation type="unfinished">Wait for reserved OFF</translation>
+        <translation type="unfinished">예약 OFF 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16526" />
         <source>等待预留下降沿</source>
-        <translation type="unfinished">Wait for reserved falling edge</translation>
+        <translation type="unfinished">예약 하강 에지 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16539" />
         <source>等待预留ON</source>
-        <translation type="unfinished">Wait for reserved ON</translation>
+        <translation type="unfinished">예약 ON 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16602" />
         <source>等待预留跳变沿</source>
-        <translation type="unfinished">Wait for reserved change edge</translation>
+        <translation type="unfinished">예약 변동 에지 대기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16681" />
         <source>返回</source>
-        <translation type="unfinished">Return</translation>
+        <translation type="unfinished">되돌아가기</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16742" />
         <location filename="../teach.cpp" line="790" />
         <source>标签</source>
-        <translation type="unfinished">Label</translation>
+        <translation type="unfinished">태그</translation>
     </message>
     <message>
         <location filename="../teach.ui" line="16767" />
         <source>步号</source>
-        <translation type="unfinished">Step No.</translation>
+        <translation type="unfinished">단계 번호</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="165" />
         <location filename="../teach.cpp" line="4329" />
         <source>教导参数有修改，是否需要保存？</source>
-        <translation type="unfinished">Save Changes to Teach Parameters?</translation>
+        <translation type="unfinished">교육 매개변수가 수정되었습니다. 저장하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="263" />
         <source>整数</source>
-        <translation type="unfinished">Integer</translation>
+        <translation type="unfinished">정수</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="267" />
         <source>一位小数</source>
-        <translation type="unfinished">One decimal place</translation>
+        <translation type="unfinished">소수점 한 자리</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="271" />
         <source>两位小数</source>
-        <translation type="unfinished">Two decimal places</translation>
+        <translation type="unfinished">소수점 두 자리</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="1017" />
         <location filename="../teach.cpp" line="1018" />
         <source>开</source>
-        <translation type="unfinished">On</translation>
+        <translation type="unfinished">열기</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="1100" />
         <source>确认删除所选动作？</source>
-        <translation type="unfinished">Confirm deletion of selected action?</translation>
+        <translation type="unfinished">선택한 동작을 삭제하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="1118" />
         <location filename="../teach.cpp" line="1124" />
         <location filename="../teach.cpp" line="1133" />
         <source>删除失败</source>
-        <translation type="unfinished">Deletion failed</translation>
+        <translation type="unfinished">삭제 실패</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="3407" />
         <source>X1轴超出最大范围</source>
-        <translation type="unfinished">X1 axis exceeds maximum range</translation>
+        <translation type="unfinished">X1축이 최대 범위를 초과했습니다.</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="3421" />
         <source>Y1轴超出最大范围</source>
-        <translation type="unfinished">Y1 axis exceeds maximum range</translation>
+        <translation type="unfinished">Y1축이 최대 범위를 초과했습니다.</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="3435" />
         <source>Z1轴超出最大范围</source>
-        <translation type="unfinished">Z1 axis exceeds maximum range</translation>
+        <translation type="unfinished">Z1축이 최대 범위를 초과했습니다.</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="3450" />
         <source>Y2轴超出最大范围</source>
-        <translation type="unfinished">Y2 axis exceeds maximum range</translation>
+        <translation type="unfinished">Y2축이 최대 범위를 초과했습니다.</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="3464" />
         <source>Z2轴超出最大范围</source>
-        <translation type="unfinished">Z2 axis exceeds maximum range</translation>
+        <translation type="unfinished">Z2축이 최대 범위를 초과했습니다.</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="4162" />
         <source>预留断</source>
-        <translation type="unfinished">Reserved interrupt</translation>
+        <translation type="unfinished">예약 단절</translation>
     </message>
     <message>
         <location filename="../teach.cpp" line="6314" />
@@ -13374,183 +13374,183 @@
     <message>
         <location filename="../teachmanage.ui" line="107" />
         <source>新建</source>
-        <translation type="unfinished">New</translation>
+        <translation type="unfinished">새로 만들기</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="136" />
         <source>复制</source>
-        <translation type="unfinished">Copy</translation>
+        <translation type="unfinished">복사</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="165" />
         <source>加载</source>
-        <translation type="unfinished">Load</translation>
+        <translation type="unfinished">로드</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="194" />
         <source>预览</source>
-        <translation type="unfinished">Preview</translation>
+        <translation type="unfinished">미리 보기</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="223" />
         <source>删除</source>
-        <translation type="unfinished">Delete</translation>
+        <translation type="unfinished">삭제</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="266" />
         <source>全选</source>
-        <translation type="unfinished">Select all</translation>
+        <translation type="unfinished">모두 선택</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="295" />
         <source>全不选</source>
-        <translation type="unfinished">Deselect all</translation>
+        <translation type="unfinished">모두 선택 취소</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="324" />
         <source>导出</source>
-        <translation type="unfinished">Export</translation>
+        <translation type="unfinished">내보내기</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="353" />
         <source>导入</source>
-        <translation type="unfinished">Import</translation>
+        <translation type="unfinished">가져오기</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="562" />
         <source>原文件名：</source>
-        <translation type="unfinished">Original file name:</translation>
+        <translation type="unfinished">원본 파일 이름:</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="627" />
         <source>现文件名：</source>
-        <translation type="unfinished">Current file name:</translation>
+        <translation type="unfinished">현재 파일 이름:</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="689" />
         <source>权限：</source>
-        <translation type="unfinished">Permission:</translation>
+        <translation type="unfinished">권한:</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="711" />
         <source>允许</source>
-        <translation type="unfinished">Allow</translation>
+        <translation type="unfinished">허용</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="746" />
         <source>时间/位置允许</source>
-        <translation type="unfinished">Time/location allowed</translation>
+        <translation type="unfinished">시간/위치 허용</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="781" />
         <source>时间允许</source>
-        <translation type="unfinished">Time allowed</translation>
+        <translation type="unfinished">시간 허용</translation>
     </message>
     <message>
         <location filename="../teachmanage.ui" line="816" />
         <source>禁止</source>
-        <translation type="unfinished">Disabled</translation>
+        <translation type="unfinished">금지</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="68" />
         <source>程序名格式错误！</source>
-        <translation type="unfinished">Program name format error!</translation>
+        <translation type="unfinished">프로그램 이름 형식 오류!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="86" />
         <source>程序文本不能为空</source>
-        <translation type="unfinished">Program text cannot be empty</translation>
+        <translation type="unfinished">프로그램 텍스트는 비어 있을 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="94" />
         <source>文件已经存在！</source>
-        <translation type="unfinished">File already exists!</translation>
+        <translation type="unfinished">파일이 이미 존재합니다!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="102" />
         <source>无法打开文件进行写入</source>
-        <translation type="unfinished">Unable to open file for writing</translation>
+        <translation type="unfinished">파일을 열어 쓰기 작업을 수행할 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="113" />
         <source>请选择一个要复制的程序！</source>
-        <translation type="unfinished">Please select a program to copy!</translation>
+        <translation type="unfinished">복사할 프로그램을 선택하세요!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="126" />
         <source>程序名不能为空！</source>
-        <translation type="unfinished">Program name cannot be empty!</translation>
+        <translation type="unfinished">프로그램 이름은 비어 있을 수 없습니다!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="135" />
         <source>文件已存在！</source>
-        <translation type="unfinished">File already exists!</translation>
+        <translation type="unfinished">파일이 이미 존재합니다!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="176" />
         <source>文件复制失败！</source>
-        <translation type="unfinished">File copy failed!</translation>
+        <translation type="unfinished">파일 복사 실패!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="186" />
         <source>请选择一个要加载的程序！</source>
-        <translation type="unfinished">Please select a program to load!</translation>
+        <translation type="unfinished">로드할 프로그램을 선택하세요!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="203" />
         <source>请选择一个要预览的程序！</source>
-        <translation type="unfinished">Please select a program to preview!</translation>
+        <translation type="unfinished">미리 볼 프로그램을 선택하세요!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="255" />
         <source>请先对文件进行解锁！</source>
-        <translation type="unfinished">Please unlock the file first!</translation>
+        <translation type="unfinished">먼저 파일 잠금을 해제하세요!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="262" />
         <source>确认删除文件？</source>
-        <translation type="unfinished">Confirm file deletion?</translation>
+        <translation type="unfinished">파일을 삭제하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="306" />
         <source>不能删除当前已经加载文件！</source>
-        <translation type="unfinished">Cannot delete the currently loaded file!</translation>
+        <translation type="unfinished">현재 로드된 파일은 삭제할 수 없습니다!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="334" />
         <location filename="../teachmanage.cpp" line="378" />
         <source>请插入U盘！</source>
-        <translation type="unfinished">Please Insert USB Drive!</translation>
+        <translation type="unfinished">USB를 삽입하세요!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="369" />
         <source>导出成功！</source>
-        <translation type="unfinished">Export successful!</translation>
+        <translation type="unfinished">내보내기 성공!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="393" />
         <source>没有选择要导入的文件！</source>
-        <translation type="unfinished">No file selected for import!</translation>
+        <translation type="unfinished">가져올 파일을 선택하지 않았습니다!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="409" />
         <source>文件已存在，请确认是否覆盖？</source>
-        <translation type="unfinished">File already exists</translation>
+        <translation type="unfinished">파일이 이미 존재합니다. 덮어쓰시겠습니까?</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="473" />
         <source>文件导入成功！</source>
-        <translation type="unfinished">File import successful!</translation>
+        <translation type="unfinished">파일 가져오기 성공!</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="715" />
         <source>文件名</source>
-        <translation type="unfinished">File name</translation>
+        <translation type="unfinished">파일 이름</translation>
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="715" />
         <source>最后修改时间</source>
-        <translation type="unfinished">Last modified time</translation>
+        <translation type="unfinished">마지막 수정 시간</translation>
     </message>
 </context>
 <context>
@@ -13563,22 +13563,22 @@
     <message>
         <location filename="../dialogs/tippasswddialog.ui" line="26" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/tippasswddialog.ui" line="39" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/tippasswddialog.ui" line="120" />
         <source>密码：</source>
-        <translation type="unfinished">Passwd:</translation>
+        <translation type="unfinished">비밀번호:</translation>
     </message>
     <message>
         <location filename="../dialogs/tippasswddialog.cpp" line="12" />
         <source>提示</source>
-        <translation type="unfinished">Prompt</translation>
+        <translation type="unfinished">안내</translation>
     </message>
 </context>
 <context>
@@ -13591,7 +13591,7 @@
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="41" />
         <source>变量9类型</source>
-        <translation type="unfinished">Variable 9 type</translation>
+        <translation type="unfinished">변수 9 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="69" />
@@ -13612,7 +13612,7 @@
         <location filename="../dialogs/vartypedialog.ui" line="845" />
         <location filename="../dialogs/vartypedialog.cpp" line="47" />
         <source>整数</source>
-        <translation type="unfinished">Integer</translation>
+        <translation type="unfinished">정수</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="74" />
@@ -13632,102 +13632,102 @@
         <location filename="../dialogs/vartypedialog.ui" line="797" />
         <location filename="../dialogs/vartypedialog.ui" line="850" />
         <source>小数</source>
-        <translation type="unfinished">Decimal</translation>
+        <translation type="unfinished">소수</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="85" />
         <source>变量10类型</source>
-        <translation type="unfinished">Variable 10 type</translation>
+        <translation type="unfinished">변수 10 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="129" />
         <source>变量11类型</source>
-        <translation type="unfinished">Variable 11 type</translation>
+        <translation type="unfinished">변수 11 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="173" />
         <source>变量12类型</source>
-        <translation type="unfinished">Variable 12 type</translation>
+        <translation type="unfinished">변수 12 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="217" />
         <source>变量13类型</source>
-        <translation type="unfinished">Variable 13 type</translation>
+        <translation type="unfinished">변수 13 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="261" />
         <source>变量14类型</source>
-        <translation type="unfinished">Variable 14 type</translation>
+        <translation type="unfinished">변수 14 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="305" />
         <source>变量15类型</source>
-        <translation type="unfinished">Variable 15 type</translation>
+        <translation type="unfinished">변수 15 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="349" />
         <source>变量16类型</source>
-        <translation type="unfinished">Variable 16 type</translation>
+        <translation type="unfinished">변수 16 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="399" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="412" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="437" />
         <source>变量1类型</source>
-        <translation type="unfinished">Variable 1 type</translation>
+        <translation type="unfinished">변수 1 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="490" />
         <source>变量2类型</source>
-        <translation type="unfinished">Variable 2 type</translation>
+        <translation type="unfinished">변수 2 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="543" />
         <source>变量3类型</source>
-        <translation type="unfinished">Variable 3 type</translation>
+        <translation type="unfinished">변수 3 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="596" />
         <source>变量4类型</source>
-        <translation type="unfinished">Variable 4 type</translation>
+        <translation type="unfinished">변수 4 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="649" />
         <source>变量5类型</source>
-        <translation type="unfinished">Variable 5 type</translation>
+        <translation type="unfinished">변수 5 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="702" />
         <source>变量6类型</source>
-        <translation type="unfinished">Variable 6 type</translation>
+        <translation type="unfinished">변수 6 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="755" />
         <source>变量7类型</source>
-        <translation type="unfinished">Variable 7 type</translation>
+        <translation type="unfinished">변수 7 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.ui" line="808" />
         <source>变量8类型</source>
-        <translation type="unfinished">Variable 8 type</translation>
+        <translation type="unfinished">변수 8 유형</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.cpp" line="47" />
         <source>一位小数</source>
-        <translation type="unfinished">One decimal place</translation>
+        <translation type="unfinished">소수점 한 자리</translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.cpp" line="47" />
         <source>两位小数</source>
-        <translation type="unfinished">Two decimal places</translation>
+        <translation type="unfinished">소수점 두 자리</translation>
     </message>
 </context>
 <context>
@@ -13740,151 +13740,151 @@
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="64" />
         <source>恢复选项</source>
-        <translation type="unfinished">Restore options</translation>
+        <translation type="unfinished">복원 옵션</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="76" />
         <source>保留教导程序</source>
-        <translation type="unfinished">Keep teaching program</translation>
+        <translation type="unfinished">교육 프로그램 유지</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="92" />
         <source>保留每转距离等数据</source>
-        <translation type="unfinished">Retain data like per-revolution distance</translation>
+        <translation type="unfinished">회전당 거리 등 데이터 유지</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="109" />
         <location filename="../dialogs/upgradedialog.ui" line="433" />
         <source>确认</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="122" />
         <location filename="../dialogs/upgradedialog.ui" line="402" />
         <location filename="../dialogs/upgradedialog.ui" line="459" />
         <source>取消</source>
-        <translation type="unfinished">Cancel</translation>
+        <translation type="unfinished">취소</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="169" />
         <source>输入密码:</source>
-        <translation type="unfinished">Enter password:</translation>
+        <translation type="unfinished">비밀번호 입력:</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="184" />
         <source>复制</source>
-        <translation type="unfinished">Copy</translation>
+        <translation type="unfinished">복사</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="197" />
         <source>剪切</source>
-        <translation type="unfinished">Cut</translation>
+        <translation type="unfinished">잘라내기</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="232" />
         <source>粘贴</source>
-        <translation type="unfinished">Paste</translation>
+        <translation type="unfinished">붙여넣기</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="326" />
         <source>确定</source>
-        <translation type="unfinished">Confirm</translation>
+        <translation type="unfinished">확인</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="345" />
         <source>新建</source>
-        <translation type="unfinished">New</translation>
+        <translation type="unfinished">새로 만들기</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="364" />
         <source>重命名</source>
-        <translation type="unfinished">Rename</translation>
+        <translation type="unfinished">이름 변경</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="383" />
         <source>删除</source>
-        <translation type="unfinished">Delete</translation>
+        <translation type="unfinished">삭제</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="503" />
         <source>数据选项</source>
-        <translation type="unfinished">Data options</translation>
+        <translation type="unfinished">데이터 옵션</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="515" />
         <source>教导文件</source>
-        <translation type="unfinished">Teaching file</translation>
+        <translation type="unfinished">교육 파일</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="531" />
         <source>系统参数</source>
-        <translation type="unfinished">System parameters</translation>
+        <translation type="unfinished">시스템 매개변수</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="547" />
         <source>名称自定义</source>
-        <translation type="unfinished">Custom Name</translation>
+        <translation type="unfinished">이름 사용자 정의</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="563" />
         <source>全部参数</source>
-        <translation type="unfinished">All parameters</translation>
+        <translation type="unfinished">모든 매개변수</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.ui" line="629" />
         <source>浏览...</source>
-        <translation type="unfinished">Browse...</translation>
+        <translation type="unfinished">찾아보기...</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="94" />
         <source>请确认: [手持器]----&gt;[U盘]</source>
-        <translation type="unfinished">Please confirm: [Handheld device]----&gt;[USB drive]</translation>
+        <translation type="unfinished">확인해주세요: [핸드 컨트롤러]----&gt;[USB]</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="124" />
         <source>请确认: [U盘]----&gt;[手持器]</source>
-        <translation type="unfinished">Please confirm: [USB drive]----&gt;[Handheld device]</translation>
+        <translation type="unfinished">확인해주세요: [USB]----&gt;[핸드 컨트롤러]</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="129" />
         <location filename="../dialogs/upgradedialog.cpp" line="343" />
         <source>文件已存在，请确认是否覆盖？</source>
-        <translation type="unfinished">File already exists</translation>
+        <translation type="unfinished">파일이 이미 존재합니다. 덮어쓰시겠습니까?</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="183" />
         <source>是否现在进行手持器升级？</source>
-        <translation type="unfinished">Do you want to upgrade the handheld device now?</translation>
+        <translation type="unfinished">지금 핸드 컨트롤러 업그레이드를 진행하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="193" />
         <source>是否现在进行主板升级？</source>
-        <translation type="unfinished">Do you want to upgrade the motherboard now?</translation>
+        <translation type="unfinished">지금 메인 보드 업그레이드를 진행하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="201" />
         <source>当前系统无IO板</source>
-        <translation type="unfinished">Current system has no IO board</translation>
+        <translation type="unfinished">현재 시스템에 IO 보드가 없습니다.</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="209" />
         <source>当前系统不支持伺服升级</source>
-        <translation type="unfinished">Current system does not support servo upgrade</translation>
+        <translation type="unfinished">현재 시스템은 서보 업그레이드를 지원하지 않습니다.</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="217" />
         <source>是否备份设置文件U盘？</source>
-        <translation type="unfinished">Do you want to back up the setting file to the USB drive?</translation>
+        <translation type="unfinished">설정 파일을 USB에 백업하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="227" />
         <source>是否从U盘恢复设置文件？</source>
-        <translation type="unfinished">Do you want to restore the setting file from the USB drive?</translation>
+        <translation type="unfinished">USB에서 설정 파일을 복원하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="236" />
         <source>输入恢复密码，按确认按键，将恢复出场设置，并重启系统!</source>
-        <translation type="unfinished">Enter the restore password</translation>
+        <translation type="unfinished">복원 비밀번호를 입력하고 확인 버튼을 누르면 출하 설정으로 복원되고 시스템이 재시작됩니다!</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="342" />
@@ -13894,27 +13894,27 @@
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="633" />
         <source>升级文件类型异常！请选择类型为M_VX_X.bin类型的文件进行升级</source>
-        <translation type="unfinished">Upgrade file type is abnormal! Please choose a file of type M_VX_X.bin for upgrade</translation>
+        <translation type="unfinished">업그레이드 파일 유형이 잘못되었습니다! M_VX_X.bin 유형의 파일을 선택하여 업그레이드하세요.</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="637" />
         <source>未选中升级文件！</source>
-        <translation type="unfinished">No upgrade file selected!</translation>
+        <translation type="unfinished">업그레이드 파일을 선택하지 않았습니다!</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="749" />
         <source>请选择文件名为MachineTool的升级文件进行升级</source>
-        <translation type="unfinished">Please select the upgrade file named MachineTool for upgrading</translation>
+        <translation type="unfinished">MachineTool이라는 파일 이름의 업그레이드 파일을 선택하세요.</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="995" />
         <source>未发现恢复出场设置文件！</source>
-        <translation type="unfinished">Restore factory settings file not found!</translation>
+        <translation type="unfinished">복원용 출하 설정 파일을 찾을 수 없습니다!</translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="1036" />
         <source>密码错误！</source>
-        <translation type="unfinished">Incorrect Passwd!</translation>
+        <translation type="unfinished">비밀번호 오류!</translation>
     </message>
 </context>
 </TS>

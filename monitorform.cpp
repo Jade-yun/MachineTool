@@ -1180,6 +1180,15 @@ void MonitorForm::hideEvent(QHideEvent *event)
     QWidget::hideEvent(event);
 }
 
+void MonitorForm::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}
+
 void MonitorForm::InitAllLedName()
 {
     setLedName(ui->x1,1,0);

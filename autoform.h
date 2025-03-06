@@ -64,8 +64,13 @@ private:
     StackSetDialog* stackSet; // 堆叠指定
     ClearDialog* clearDialog;
 
+    std::vector<QAction*> operateActions;
 private:
     void callNumKeyBoard(QObject* obj);
+
+protected:
+    void changeEvent(QEvent *e) override;
+    void retranslate();
 };
 
 #endif // AUTOFORM_H

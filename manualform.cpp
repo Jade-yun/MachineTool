@@ -1239,6 +1239,20 @@ bool ManualForm::eventFilter(QObject *watched, QEvent *event)
     return QWidget::eventFilter(watched, event);
 }
 
+void ManualForm::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        retranslate();
+    }
+    QWidget::changeEvent(e);
+}
+
+void ManualForm::retranslate()
+{
+    ui->retranslateUi(this);
+}
+
 void ManualForm::on_btnEditReference_clicked()
 {
     if (selectedButton[1])

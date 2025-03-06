@@ -66,6 +66,9 @@ signals:
 private:
     // 当前选中文件权限 0 允许    1 时间/位置允许   2 时间允许  3 禁止
     int filePermission;
+
+protected:
+    void changeEvent(QEvent *e) override;
 };
 
 #endif // TEACHMANAGE_H

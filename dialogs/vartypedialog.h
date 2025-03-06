@@ -26,6 +26,10 @@ private:
     Ui::VarTypeDialog *ui;
 
     std::array<QComboBox*, VAR_TOTAL_NUM> coboxVarType;
+
+protected:
+    void changeEvent(QEvent* e) override;
+    void retranslate();
 };
 
 #endif // VARTYPEDIALOG_H

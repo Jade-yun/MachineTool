@@ -16,8 +16,9 @@ contains(CONFIG, desktop) {
 #message(DESTDIR is $$DESTDIR)
 
 TRANSLATIONS += \
+    langurage/Translation_Ch.ts\
     langurage/Translation_En.ts\
-    langurage/Translation_Ch.ts
+    langurage/Translation_Kr.ts
 
 
 # The following define makes your compiler emit warnings if you use

@@ -38,7 +38,21 @@ void AlarmInfoDialog::showEvent(QShowEvent *event)
 {
     QDialog::showEvent(event);
 //    showAlarmInfo(1000, "无", "五",
-//                   "1.这是方案1。\n2.this is solution 2.\n3.this is solution 3.\n4.this is solution 4\n");
+    //                   "1.这是方案1。\n2.this is solution 2.\n3.this is solution 3.\n4.this is solution 4\n");
+}
+
+void AlarmInfoDialog::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    if (e->type() == QEvent::FontChange)
+    {
+        this->setFont(qApp->font());
+    }
+
+    QWidget::changeEvent(e);
 }
 
 AlarmInfoDialog *AlarmInfoDialog::instance()

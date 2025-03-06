@@ -702,6 +702,46 @@ void StackEdit::logicSigsSlots()
     });
 }
 
+void StackEdit::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+        retranslate();
+    }
+    QWidget::changeEvent(e);
+}
+
+void StackEdit::retranslate()
+{
+    QStringList verticalHeaderLabels = {
+        QObject::tr("轴选择"),
+        QObject::tr("速度"),
+        QObject::tr("点数"),
+        QObject::tr("A-起点"),
+        QObject::tr("B-X方向终点"),
+        QObject::tr("C-Y方向终点"),
+        QObject::tr("D点坐标"),
+        QObject::tr("放料速度"),
+        QObject::tr("放料起始点")
+    };
+    ui->tableStack->setVerticalHeaderLabels(verticalHeaderLabels);
+
+    QStringList horizontalHeaderLabels = {
+        QObject::tr("X1轴"),
+        QObject::tr("Y1轴"),
+        QObject::tr("Z1轴")
+    };
+    ui->tableStack->setHorizontalHeaderLabels(horizontalHeaderLabels);
+
+    axisSelect[0]->setItemText(0, QObject::tr("X1轴"));
+    axisSelect[1]->setItemText(0, QObject::tr("Y1轴"));
+    axisSelect[1]->setItemText(1, QObject::tr("Y2轴"));
+    axisSelect[2]->setItemText(0, QObject::tr("Z1轴"));
+    axisSelect[2]->setItemText(1, QObject::tr("Z2轴"));
+
+}
+
 void StackEdit::saveInfoConnections()
 {
     connect(ui->coboxStackOrder, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
@@ -903,6 +943,19 @@ void StackFollow::StackFollowInit()
         }
     }
 
+}
+
+void StackFollow::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        table->setHorizontalHeaderLabels({QObject::tr("个数"), QObject::tr("目标位置")});
+        table->setVerticalHeaderLabels({tr("X1轴"), tr("Y1轴"), tr("Z1轴")});
+
+        closeButton->setText(tr("关闭"));
+        moveButton->setText(tr("移动"));
+    }
+    QWidget::changeEvent(e);
 }
 void StackFollow::updateVerticalHeader(int index, const QString &text)
 {

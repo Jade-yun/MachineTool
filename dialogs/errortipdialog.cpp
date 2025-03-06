@@ -78,3 +78,12 @@ void ErrorTipDialog::setMode(TipMode mode)
         ui->btnCancel->hide();
     }
 }
+
+void ErrorTipDialog::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}

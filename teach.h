@@ -343,6 +343,9 @@ private:
 private:
 	void setGeneralBtnEvent(QString btnName);
 
+protected:
+    void changeEvent(QEvent *e) override;
+
 };
 
 

@@ -29,7 +29,8 @@ private:
 signals:
     void HandWheelModeChange_Signal(bool state);//手轮模式状态改变信号
 protected:
-    void showEvent(QShowEvent *event);
+    void showEvent(QShowEvent *event) override;
+    void changeEvent(QEvent* e) override;
 };
 
 #endif // HANDWHEELDIALOG_H

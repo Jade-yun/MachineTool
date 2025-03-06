@@ -309,3 +309,15 @@ void ReferenceWidget::showEvent(QShowEvent *event)
     updateUI(referencePoints);
     this->update();
 }
+
+void ReferenceWidget::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        btnOK->setText(tr("确定"));
+        btnCancel->setText(tr("取消"));
+        btnFresh->setText(tr("刷新"));
+        btnEditRefName->setText(tr("编辑"));
+    }
+    QWidget::changeEvent(e);
+}

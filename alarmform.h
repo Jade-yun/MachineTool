@@ -27,11 +27,15 @@ private:
 
     void setupMaintainInfo();
 
+    void retranslate();
 private:
     Ui::AlarmForm *ui;
 
 private:
     MaintainInfoModel *m_maintainModel;
+
+protected:
+    void changeEvent(QEvent *e) override;
 };
 
 #endif // ALARMFORM_H

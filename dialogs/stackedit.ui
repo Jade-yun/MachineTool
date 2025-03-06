@@ -119,9 +119,9 @@
    <widget class="QLabel" name="labDirect">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>5</x>
       <y>90</y>
-      <width>111</width>
+      <width>121</width>
       <height>40</height>
      </rect>
     </property>
@@ -139,6 +139,9 @@
     </property>
     <property name="text">
      <string>方向</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
    <widget class="NumberEdit" name="editIntervalDis">
@@ -169,9 +172,9 @@
    <widget class="QLabel" name="labIntervalDis">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>5</x>
       <y>40</y>
-      <width>111</width>
+      <width>121</width>
       <height>40</height>
      </rect>
     </property>
@@ -189,6 +192,9 @@
     </property>
     <property name="text">
      <string>间距(mm)</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
   </widget>
@@ -1497,8 +1503,8 @@
     <rect>
      <x>180</x>
      <y>450</y>
-     <width>821</width>
-     <height>51</height>
+     <width>831</width>
+     <height>57</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="hLayoutBottomBtn">
@@ -1508,8 +1514,11 @@
     <property name="topMargin">
      <number>6</number>
     </property>
+    <property name="rightMargin">
+     <number>6</number>
+    </property>
     <property name="bottomMargin">
-     <number>1</number>
+     <number>6</number>
     </property>
     <item>
      <spacer name="horizontalSpacer">
@@ -1532,13 +1541,13 @@
       <property name="minimumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1571,13 +1580,13 @@
       <property name="minimumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1606,13 +1615,13 @@
       <property name="minimumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>170</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1641,13 +1650,13 @@
       <property name="minimumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">
@@ -1673,13 +1682,13 @@
       <property name="minimumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
         <width>100</width>
-        <height>40</height>
+        <height>45</height>
        </size>
       </property>
       <property name="font">

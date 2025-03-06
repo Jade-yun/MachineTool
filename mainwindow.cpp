@@ -8,6 +8,8 @@
 #include <QPixmap>
 #include <QPalette>
 #include <QMessageBox>
+#include <QTranslator>
+
 #include "stackedit.h"
 #include "keydefinedialog.h"
 #include "sigdefinedialog.h"
@@ -30,6 +32,7 @@
 extern const QString alarmInfoMappingPath;
 
 MainWindow* MainWindow::pMainWindow = nullptr;
+QTranslator translator;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -65,10 +68,37 @@ MainWindow::MainWindow(QWidget *parent)
     QFont font("SimSun");
     const std::vector<int> fontSize = {
         20, // default
-        15, 16, 17, 18, 19, 20, 21, 22
+        12, 13, 14, 15, 16, 17, 18, 19, 20,
     };
-    font.setPixelSize(fontSize[m_SystemSet.wordSize]);
+    if (m_SystemSet.wordSize >= 0 && m_SystemSet.wordSize < fontSize.size())
+    {
+        font.setPixelSize(fontSize[m_SystemSet.wordSize]);
+    }
+    else {
+        font.setPixelSize(20);
+    }
     qApp->setFont(font);
+
+    // set langurage
+    const QString BASE_PATH = "/opt/MachineTool/resources/lang/";
+    const QStringList LANGUAGE_FILES = {
+        "Translation_Ch.qm", // Chinese
+        "Translation_En.qm", // English
+        "Translation_Kr.qm"  // Korean
+    };
+
+    if (m_SystemSet.lan >= 0 && m_SystemSet.lan < LANGUAGE_FILES.size()) {
+
+        QString languageFilePath = BASE_PATH + LANGUAGE_FILES.at(m_SystemSet.lan);
+
+        if (!translator.load(languageFilePath))
+        {
+            qDebug() << "fail to load langurage file:" << languageFilePath;
+        }
+
+        qApp->installTranslator(&translator);
+    }
+
 
     // after reading all init parameters, set the style for whole app.
     const std::vector<QString> styles = {
@@ -868,6 +898,15 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     }
 }
 
+void MainWindow::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}
+
 void MainWindow::callFullKeyboard(QObject *watched)
 {
     QString originText = watched->property("text").toString();
@@ -997,7 +1036,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
             {//回零完成
                 if(m_RobotRunSta == MAC_STA_AUTO_STANDBY)
                 {
-                    int reply =  MainWindow::pMainWindow->showErrorTip(tr("是否现在复归?"));
+                    int reply =  MainWindow::pMainWindow->showErrorTip(tr("是否现在复归？"));
                     if (reply == QDialog::Accepted)
                     {
                         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);

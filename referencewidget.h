@@ -59,6 +59,7 @@ private:
     // QWidget interface
 protected:
     void showEvent(QShowEvent *event) override;
+    void changeEvent(QEvent* e) override;
 };
 
 #endif // REFERENCEWIDGET_H

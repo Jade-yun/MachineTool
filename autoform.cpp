@@ -76,10 +76,6 @@ AutoForm::AutoForm(QWidget *parent) :
         ui->tableWgtVarState->setCellWidget(i++, 0, edit);
     }
 
-
-
-//    QString buttonName = QString("第%1个按钮").arg(buttonCount + 1);
-//    QPushButton *newButton = new QPushButton(buttonName, this);
     QComboBox* coboxStkGroupNum = new QComboBox(this);
     NumberEdit* editX1Num = new NumberEdit(this);
     NumberEdit* editY1Num = new NumberEdit(this);
@@ -110,6 +106,10 @@ AutoForm::AutoForm(QWidget *parent) :
     QAction* action4 = new QAction(tr("断点清除"), this);
     QAction* action5 = new QAction(tr("参考点编辑"), this);
     QAction* action6 = new QAction(tr("自动修正位置"), this);
+
+    operateActions = {
+        action1, action2, action3, action4, action5, action6
+    };
 
     menu->addAction(action1);
     menu->addAction(action2);
@@ -1298,6 +1298,28 @@ void AutoForm::callNumKeyBoard(QObject* obj)
         keyboard->setCurrentEditObj(obj);
         keyboard->exec();
     }
+}
+
+void AutoForm::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        retranslate();
+    }
+    QWidget::changeEvent(e);
+}
+
+void AutoForm::retranslate()
+{
+    ui->retranslateUi(this);
+
+    for (auto action : operateActions)
+    {
+        const char* sourceText = action->text().toStdString().c_str();
+        action->setText(QCoreApplication::translate("AutoForm", sourceText, nullptr));
+    }
+    ui->tableWgtVarState->setHorizontalHeaderLabels({tr("变量"), tr("堆叠状态")});
+
 }
 
 

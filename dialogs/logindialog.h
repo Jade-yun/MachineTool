@@ -37,6 +37,7 @@ private:
 protected:
     void showEvent(QShowEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
+    void changeEvent(QEvent* e) override;
 };
 
 #endif // LOGINDIALOG_H

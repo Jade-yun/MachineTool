@@ -122,6 +122,8 @@ private:
     // QObject interface
 protected:
     bool eventFilter(QObject *watched, QEvent *event) override;
+    void changeEvent(QEvent* e) override;
+    void retranslate();
 };
 
 #endif // MANUALFORM_H

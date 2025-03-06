@@ -133,3 +133,12 @@ void AlarmBar::mouseReleaseEvent(QMouseEvent* event)
     Q_UNUSED(event)
     isDragging = false; // 停止拖动
 }
+
+void AlarmBar::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}

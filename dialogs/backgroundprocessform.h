@@ -21,6 +21,8 @@ private:
     Ui::BackgroundProcessForm *ui;
 
     FramelessWidget2* frameBase;
+protected:
+    void changeEvent(QEvent* e) override;
 };
 
 #endif // BACKGROUNDPROCESSFORM_H

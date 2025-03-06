@@ -17,3 +17,12 @@ BackgroundProcessForm::~BackgroundProcessForm()
 {
     delete ui;
 }
+
+void BackgroundProcessForm::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}

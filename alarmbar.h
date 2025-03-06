@@ -28,6 +28,7 @@ protected:
     void mousePressEvent(QMouseEvent* event) override;      // 鼠标按下事件
     void mouseMoveEvent(QMouseEvent* event) override;       // 鼠标移动事件
     void mouseReleaseEvent(QMouseEvent* event) override;    // 鼠标释放事件
+    void changeEvent(QEvent* e) override;
 
 private:
     QPropertyAnimation* animation;                         // 动画对象

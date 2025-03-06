@@ -109,16 +109,19 @@
     </message>
     <message>
         <location filename="../alarmform.cpp" line="118"/>
+        <location filename="../alarmform.cpp" line="266"/>
         <source>报警编号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="118"/>
+        <location filename="../alarmform.cpp" line="266"/>
         <source>报警内容</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="118"/>
+        <location filename="../alarmform.cpp" line="266"/>
         <source>报警时间</source>
         <translation type="unfinished"></translation>
     </message>
@@ -129,21 +132,25 @@
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183"/>
+        <location filename="../alarmform.cpp" line="261"/>
         <source>维护内容</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183"/>
+        <location filename="../alarmform.cpp" line="261"/>
         <source>维护周期</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183"/>
+        <location filename="../alarmform.cpp" line="261"/>
         <source>剩余天数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../alarmform.cpp" line="183"/>
+        <location filename="../alarmform.cpp" line="261"/>
         <source>下次保养时间</source>
         <translation type="unfinished"></translation>
     </message>
@@ -156,27 +163,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/alarminfodialog.ui" line="73"/>
+        <location filename="../dialogs/alarminfodialog.ui" line="79"/>
         <source>报警编号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/alarminfodialog.ui" line="108"/>
+        <location filename="../dialogs/alarminfodialog.ui" line="120"/>
         <source>报警内容：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/alarminfodialog.ui" line="146"/>
+        <location filename="../dialogs/alarminfodialog.ui" line="164"/>
         <source>报警原因：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/alarminfodialog.ui" line="184"/>
+        <location filename="../dialogs/alarminfodialog.ui" line="208"/>
         <source>解决方案：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/alarminfodialog.ui" line="243"/>
+        <location filename="../dialogs/alarminfodialog.ui" line="267"/>
         <source>取消</source>
         <translation type="unfinished"></translation>
     </message>
@@ -302,368 +309,368 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="570"/>
+        <location filename="../autoform.ui" line="567"/>
         <source>全局速度：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="592"/>
+        <location filename="../autoform.ui" line="589"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="651"/>
+        <location filename="../autoform.ui" line="648"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="701"/>
+        <location filename="../autoform.ui" line="698"/>
         <source>历史信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="837"/>
-        <location filename="../autoform.ui" line="1177"/>
-        <location filename="../autoform.ui" line="1243"/>
-        <location filename="../autoform.ui" line="1572"/>
-        <location filename="../autoform.ui" line="1594"/>
-        <location filename="../autoform.ui" line="1654"/>
-        <location filename="../autoform.ui" line="1676"/>
-        <location filename="../autoform.ui" line="1698"/>
+        <location filename="../autoform.ui" line="834"/>
+        <location filename="../autoform.ui" line="1126"/>
+        <location filename="../autoform.ui" line="1192"/>
+        <location filename="../autoform.ui" line="1509"/>
+        <location filename="../autoform.ui" line="1531"/>
+        <location filename="../autoform.ui" line="1591"/>
+        <location filename="../autoform.ui" line="1613"/>
+        <location filename="../autoform.ui" line="1635"/>
+        <location filename="../autoform.ui" line="1733"/>
+        <location filename="../autoform.ui" line="1774"/>
         <location filename="../autoform.ui" line="1796"/>
-        <location filename="../autoform.ui" line="1837"/>
-        <location filename="../autoform.ui" line="1859"/>
-        <location filename="../autoform.ui" line="1919"/>
-        <location filename="../autoform.ui" line="2647"/>
-        <location filename="../autoform.ui" line="2867"/>
+        <location filename="../autoform.ui" line="1856"/>
+        <location filename="../autoform.ui" line="2584"/>
+        <location filename="../autoform.ui" line="2804"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="859"/>
+        <location filename="../autoform.ui" line="850"/>
         <source>前拍周期：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="878"/>
-        <location filename="../autoform.ui" line="1034"/>
+        <location filename="../autoform.ui" line="869"/>
+        <location filename="../autoform.ui" line="1013"/>
         <source>0.0 s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="900"/>
+        <location filename="../autoform.ui" line="891"/>
         <source>0.0 h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="922"/>
+        <location filename="../autoform.ui" line="907"/>
         <source>自动运行：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="946"/>
-        <location filename="../autoform.ui" line="1268"/>
+        <location filename="../autoform.ui" line="931"/>
+        <location filename="../autoform.ui" line="1217"/>
         <source>20</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1015"/>
+        <location filename="../autoform.ui" line="994"/>
         <source>成型周期：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1056"/>
+        <location filename="../autoform.ui" line="1029"/>
         <source>当前步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1075"/>
+        <location filename="../autoform.ui" line="1042"/>
         <source>计划产品：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1120"/>
+        <location filename="../autoform.ui" line="1081"/>
         <source>取物时间：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1139"/>
+        <location filename="../autoform.ui" line="1094"/>
         <source>实际产品：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1158"/>
+        <location filename="../autoform.ui" line="1107"/>
         <source>当前工位：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1199"/>
+        <location filename="../autoform.ui" line="1148"/>
         <source>主程序第4步</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1221"/>
+        <location filename="../autoform.ui" line="1170"/>
         <source>0.00 s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1290"/>
+        <location filename="../autoform.ui" line="1233"/>
         <source>断点位置：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1309"/>
+        <location filename="../autoform.ui" line="1246"/>
         <source>起始步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1616"/>
+        <location filename="../autoform.ui" line="1553"/>
         <source>子程序7步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1635"/>
+        <location filename="../autoform.ui" line="1572"/>
         <source>子程序5步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1720"/>
+        <location filename="../autoform.ui" line="1657"/>
         <source>子程序6步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1739"/>
+        <location filename="../autoform.ui" line="1676"/>
         <source>主程序步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1758"/>
+        <location filename="../autoform.ui" line="1695"/>
         <source>子程序2步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1777"/>
+        <location filename="../autoform.ui" line="1714"/>
         <source>子程序1步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1818"/>
+        <location filename="../autoform.ui" line="1755"/>
         <source>子程序3步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1881"/>
+        <location filename="../autoform.ui" line="1818"/>
         <source>子程序4步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1900"/>
+        <location filename="../autoform.ui" line="1837"/>
         <source>子程序8步号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="1964"/>
+        <location filename="../autoform.ui" line="1901"/>
         <source>保存</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2012"/>
-        <location filename="../autoform.ui" line="2607"/>
+        <location filename="../autoform.ui" line="1949"/>
+        <location filename="../autoform.ui" line="2544"/>
         <source>当前动作无参数可修改</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2042"/>
+        <location filename="../autoform.ui" line="1979"/>
         <source>位置(+/- 5mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2083"/>
+        <location filename="../autoform.ui" line="2020"/>
         <source>速度(%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2124"/>
-        <location filename="../autoform.ui" line="2265"/>
-        <location filename="../autoform.ui" line="2778"/>
+        <location filename="../autoform.ui" line="2061"/>
+        <location filename="../autoform.ui" line="2202"/>
+        <location filename="../autoform.ui" line="2715"/>
         <source>延时(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2176"/>
+        <location filename="../autoform.ui" line="2113"/>
         <source>通时(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2207"/>
-        <location filename="../autoform.ui" line="2240"/>
-        <location filename="../autoform.ui" line="2323"/>
-        <location filename="../autoform.ui" line="2401"/>
-        <location filename="../autoform.ui" line="2466"/>
-        <location filename="../autoform.ui" line="2809"/>
+        <location filename="../autoform.ui" line="2144"/>
+        <location filename="../autoform.ui" line="2177"/>
+        <location filename="../autoform.ui" line="2260"/>
+        <location filename="../autoform.ui" line="2338"/>
+        <location filename="../autoform.ui" line="2403"/>
+        <location filename="../autoform.ui" line="2746"/>
         <source>0.00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2292"/>
+        <location filename="../autoform.ui" line="2229"/>
         <source>限时(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2338"/>
+        <location filename="../autoform.ui" line="2275"/>
         <source>条件1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2357"/>
+        <location filename="../autoform.ui" line="2294"/>
         <source>条件2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2414"/>
+        <location filename="../autoform.ui" line="2351"/>
         <source>操作数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2427"/>
+        <location filename="../autoform.ui" line="2364"/>
         <source>S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2442"/>
+        <location filename="../autoform.ui" line="2379"/>
         <source>轴位置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2491"/>
-        <location filename="../autoform.ui" line="2679"/>
+        <location filename="../autoform.ui" line="2428"/>
+        <location filename="../autoform.ui" line="2616"/>
         <source>X1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2496"/>
-        <location filename="../autoform.ui" line="2741"/>
+        <location filename="../autoform.ui" line="2433"/>
+        <location filename="../autoform.ui" line="2678"/>
         <source>Y1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2501"/>
-        <location filename="../autoform.ui" line="2710"/>
+        <location filename="../autoform.ui" line="2438"/>
+        <location filename="../autoform.ui" line="2647"/>
         <source>Z1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2506"/>
+        <location filename="../autoform.ui" line="2443"/>
         <source>C轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2511"/>
+        <location filename="../autoform.ui" line="2448"/>
         <source>Y2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2516"/>
+        <location filename="../autoform.ui" line="2453"/>
         <source>Z2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2521"/>
+        <location filename="../autoform.ui" line="2458"/>
         <source>A轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2526"/>
+        <location filename="../autoform.ui" line="2463"/>
         <source>B轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2552"/>
+        <location filename="../autoform.ui" line="2489"/>
         <source>&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2557"/>
+        <location filename="../autoform.ui" line="2494"/>
         <source>&lt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2562"/>
+        <location filename="../autoform.ui" line="2499"/>
         <source>≥</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2567"/>
+        <location filename="../autoform.ui" line="2504"/>
         <source>≤</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2572"/>
+        <location filename="../autoform.ui" line="2509"/>
         <source>≠</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2577"/>
+        <location filename="../autoform.ui" line="2514"/>
         <source>==</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2591"/>
+        <location filename="../autoform.ui" line="2528"/>
         <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2622"/>
+        <location filename="../autoform.ui" line="2559"/>
         <source>循环次数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2836"/>
+        <location filename="../autoform.ui" line="2773"/>
         <source>力距保护(%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2992"/>
+        <location filename="../autoform.ui" line="2929"/>
         <source>编号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2997"/>
+        <location filename="../autoform.ui" line="2934"/>
         <source>内容</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="3056"/>
+        <location filename="../autoform.ui" line="2993"/>
         <source>全局速度:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="3078"/>
+        <location filename="../autoform.ui" line="3015"/>
         <source>10%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="3106"/>
+        <location filename="../autoform.ui" line="3043"/>
         <source>20%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="3134"/>
+        <location filename="../autoform.ui" line="3071"/>
         <source>40%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="3162"/>
+        <location filename="../autoform.ui" line="3099"/>
         <source>60%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="3190"/>
+        <location filename="../autoform.ui" line="3127"/>
         <source>80%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="3218"/>
+        <location filename="../autoform.ui" line="3155"/>
         <source>100%</source>
         <translation type="unfinished"></translation>
     </message>
@@ -695,52 +702,54 @@
     <message>
         <location filename="../autoform.cpp" line="69"/>
         <location filename="../autoform.cpp" line="1278"/>
+        <location filename="../autoform.cpp" line="1321"/>
         <source>变量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../autoform.cpp" line="69"/>
+        <location filename="../autoform.cpp" line="1321"/>
         <source>堆叠状态</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="90"/>
+        <location filename="../autoform.cpp" line="86"/>
         <source>不使用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="90"/>
+        <location filename="../autoform.cpp" line="86"/>
         <source>使用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="107"/>
+        <location filename="../autoform.cpp" line="103"/>
         <source>堆叠指定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="108"/>
+        <location filename="../autoform.cpp" line="104"/>
         <source>从此运行</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="109"/>
+        <location filename="../autoform.cpp" line="105"/>
         <source>断点设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="110"/>
+        <location filename="../autoform.cpp" line="106"/>
         <source>断点清除</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="111"/>
+        <location filename="../autoform.cpp" line="107"/>
         <location filename="../autoform.cpp" line="143"/>
         <source>参考点编辑</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="112"/>
+        <location filename="../autoform.cpp" line="108"/>
         <source>自动修正位置</source>
         <translation type="unfinished"></translation>
     </message>
@@ -775,14 +784,14 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="1353"/>
+        <location filename="../autoform.cpp" line="1375"/>
         <source>参考点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../autoform.cpp" line="1386"/>
-        <location filename="../autoform.cpp" line="1395"/>
-        <location filename="../autoform.cpp" line="1404"/>
+        <location filename="../autoform.cpp" line="1408"/>
+        <location filename="../autoform.cpp" line="1417"/>
+        <location filename="../autoform.cpp" line="1426"/>
         <source>输入值的范围不能超过-5.00～5.00,请重新输入。</source>
         <translation type="unfinished"></translation>
     </message>
@@ -993,60 +1002,60 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="559"/>
-        <location filename="../dialogs/cleardialog.ui" line="969"/>
+        <location filename="../dialogs/cleardialog.ui" line="553"/>
+        <location filename="../dialogs/cleardialog.ui" line="891"/>
         <source>变量5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="590"/>
-        <location filename="../dialogs/cleardialog.ui" line="907"/>
+        <location filename="../dialogs/cleardialog.ui" line="578"/>
+        <location filename="../dialogs/cleardialog.ui" line="841"/>
         <source>变量3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="621"/>
-        <location filename="../dialogs/cleardialog.ui" line="1000"/>
+        <location filename="../dialogs/cleardialog.ui" line="603"/>
+        <location filename="../dialogs/cleardialog.ui" line="916"/>
         <source>变量6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="652"/>
-        <location filename="../dialogs/cleardialog.ui" line="1031"/>
+        <location filename="../dialogs/cleardialog.ui" line="628"/>
+        <location filename="../dialogs/cleardialog.ui" line="941"/>
         <source>变量7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="683"/>
-        <location filename="../dialogs/cleardialog.ui" line="876"/>
+        <location filename="../dialogs/cleardialog.ui" line="653"/>
+        <location filename="../dialogs/cleardialog.ui" line="816"/>
         <source>变量2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="714"/>
-        <location filename="../dialogs/cleardialog.ui" line="845"/>
+        <location filename="../dialogs/cleardialog.ui" line="678"/>
+        <location filename="../dialogs/cleardialog.ui" line="791"/>
         <source>变量1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="745"/>
-        <location filename="../dialogs/cleardialog.ui" line="938"/>
+        <location filename="../dialogs/cleardialog.ui" line="703"/>
+        <location filename="../dialogs/cleardialog.ui" line="866"/>
         <source>变量4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="776"/>
-        <location filename="../dialogs/cleardialog.ui" line="1062"/>
+        <location filename="../dialogs/cleardialog.ui" line="728"/>
+        <location filename="../dialogs/cleardialog.ui" line="966"/>
         <source>变量8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="821"/>
+        <location filename="../dialogs/cleardialog.ui" line="773"/>
         <source>变量断电记忆</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/cleardialog.ui" line="1140"/>
+        <location filename="../dialogs/cleardialog.ui" line="1044"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1112,67 +1121,67 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="55"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="151"/>
         <source>B/Z2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="74"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="75"/>
         <source>Y1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="93"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="94"/>
         <source>Z1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="112"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="113"/>
         <source>C轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="131"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="132"/>
         <source>A/Y2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="153"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="56"/>
         <source>X1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="215"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="201"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="233"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="219"/>
         <source>手轮刻度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="253"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="239"/>
         <source>0.01</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="272"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="258"/>
         <source>0.1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="291"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="277"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="310"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="296"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/handwheeldialog.ui" line="328"/>
+        <location filename="../dialogs/handwheeldialog.ui" line="314"/>
         <source>手轮模式</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3145,32 +3154,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/logindialog.ui" line="75"/>
+        <location filename="../dialogs/logindialog.ui" line="154"/>
         <source>密码:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/logindialog.ui" line="91"/>
+        <location filename="../dialogs/logindialog.ui" line="32"/>
         <source>取消</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/logindialog.ui" line="104"/>
+        <location filename="../dialogs/logindialog.ui" line="45"/>
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/logindialog.ui" line="132"/>
+        <location filename="../dialogs/logindialog.ui" line="73"/>
         <source>操作员</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/logindialog.ui" line="157"/>
+        <location filename="../dialogs/logindialog.ui" line="98"/>
         <source>管理员</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/logindialog.ui" line="179"/>
+        <location filename="../dialogs/logindialog.ui" line="120"/>
         <source>高级</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3204,14 +3213,14 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="241"/>
-        <location filename="../mainwindow.cpp" line="219"/>
-        <location filename="../mainwindow.cpp" line="330"/>
+        <location filename="../mainwindow.cpp" line="245"/>
+        <location filename="../mainwindow.cpp" line="356"/>
         <source>教导管理</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="290"/>
-        <location filename="../mainwindow.cpp" line="524"/>
+        <location filename="../mainwindow.cpp" line="550"/>
         <source>手动页面</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3296,98 +3305,103 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="1137"/>
+        <location filename="../mainwindow.ui" line="1143"/>
         <source>展晖机床机械手控制系统</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="227"/>
+        <location filename="../mainwindow.cpp" line="253"/>
         <source>教导</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="331"/>
-        <location filename="../mainwindow.cpp" line="518"/>
+        <location filename="../mainwindow.cpp" line="357"/>
+        <location filename="../mainwindow.cpp" line="544"/>
         <source>停止页面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="531"/>
+        <location filename="../mainwindow.cpp" line="512"/>
+        <source>参数同步中:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="557"/>
         <source>自动页面</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="928"/>
+        <location filename="../mainwindow.cpp" line="963"/>
         <source>请先解决报警再启动！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="932"/>
+        <location filename="../mainwindow.cpp" line="967"/>
         <source>请将三档开关切换到自动档再启动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="938"/>
+        <location filename="../mainwindow.cpp" line="973"/>
         <source>机器未复位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="953"/>
+        <location filename="../mainwindow.cpp" line="988"/>
         <source>机器未回零</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="974"/>
+        <location filename="../mainwindow.cpp" line="1009"/>
         <source>请先解决报警再回原！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="978"/>
+        <location filename="../mainwindow.cpp" line="1013"/>
         <source>是否现在回原点？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="994"/>
+        <location filename="../mainwindow.cpp" line="1029"/>
         <source>请先解决报警再复位！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1000"/>
-        <source>是否现在复归?</source>
+        <location filename="../mainwindow.cpp" line="1035"/>
+        <source>是否现在复归？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1009"/>
+        <location filename="../mainwindow.cpp" line="1044"/>
         <source>请先将三档开关切换到自动档</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1014"/>
+        <location filename="../mainwindow.cpp" line="1049"/>
         <source>请先回原点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1289"/>
+        <location filename="../mainwindow.cpp" line="1324"/>
         <source>参数同步失败!失败编号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1323"/>
+        <location filename="../mainwindow.cpp" line="1358"/>
         <source>程式：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1338"/>
+        <location filename="../mainwindow.cpp" line="1373"/>
         <source>教导参数有修改，是否需要保存？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1360"/>
+        <location filename="../mainwindow.cpp" line="1395"/>
         <source>回原点中...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="1376"/>
+        <location filename="../mainwindow.cpp" line="1411"/>
         <source>复位中...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3406,31 +3420,31 @@
     </message>
     <message>
         <location filename="../manualform.ui" line="108"/>
-        <location filename="../manualform.ui" line="3407"/>
+        <location filename="../manualform.ui" line="3359"/>
         <source>编辑位置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="140"/>
-        <location filename="../manualform.ui" line="3461"/>
+        <location filename="../manualform.ui" line="3413"/>
         <source>导入图片</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="176"/>
-        <location filename="../manualform.ui" line="3236"/>
+        <location filename="../manualform.ui" line="3188"/>
         <source>新增</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="212"/>
-        <location filename="../manualform.ui" line="3326"/>
+        <location filename="../manualform.ui" line="3278"/>
         <source>删除</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="248"/>
-        <location filename="../manualform.ui" line="3191"/>
+        <location filename="../manualform.ui" line="3143"/>
         <source>编辑</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3441,7 +3455,7 @@
     </message>
     <message>
         <location filename="../manualform.ui" line="303"/>
-        <location filename="../manualform.ui" line="3281"/>
+        <location filename="../manualform.ui" line="3233"/>
         <source>保存</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3457,7 +3471,7 @@
     </message>
     <message>
         <location filename="../manualform.ui" line="395"/>
-        <location filename="../manualform.ui" line="1288"/>
+        <location filename="../manualform.ui" line="1252"/>
         <source>手动</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3483,43 +3497,43 @@
     </message>
     <message>
         <location filename="../manualform.ui" line="617"/>
-        <location filename="../manualform.cpp" line="1673"/>
+        <location filename="../manualform.cpp" line="1687"/>
         <source>禁止</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="622"/>
-        <location filename="../manualform.ui" line="973"/>
+        <location filename="../manualform.ui" line="943"/>
         <source>X1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="627"/>
-        <location filename="../manualform.ui" line="978"/>
+        <location filename="../manualform.ui" line="948"/>
         <source>Y1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="632"/>
-        <location filename="../manualform.ui" line="983"/>
+        <location filename="../manualform.ui" line="953"/>
         <source>Z1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="637"/>
-        <location filename="../manualform.ui" line="988"/>
+        <location filename="../manualform.ui" line="958"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="642"/>
-        <location filename="../manualform.ui" line="993"/>
+        <location filename="../manualform.ui" line="963"/>
         <source>A/Y2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../manualform.ui" line="647"/>
-        <location filename="../manualform.ui" line="998"/>
+        <location filename="../manualform.ui" line="968"/>
         <source>B/Z2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3531,7 +3545,7 @@
     <message>
         <location filename="../manualform.ui" line="723"/>
         <location filename="../manualform.ui" line="756"/>
-        <location filename="../manualform.ui" line="1038"/>
+        <location filename="../manualform.ui" line="1008"/>
         <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3541,315 +3555,315 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="832"/>
-        <location filename="../manualform.ui" line="922"/>
+        <location filename="../manualform.ui" line="820"/>
+        <location filename="../manualform.ui" line="898"/>
         <source>调机功能</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="883"/>
+        <location filename="../manualform.ui" line="859"/>
         <source>手动智能力矩</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="935"/>
+        <location filename="../manualform.ui" line="911"/>
         <source>编码器脉冲</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1012"/>
+        <location filename="../manualform.ui" line="982"/>
         <source>每转距离</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1057"/>
+        <location filename="../manualform.ui" line="1021"/>
         <source>使用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1076"/>
+        <location filename="../manualform.ui" line="1040"/>
         <source>当前轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1089"/>
+        <location filename="../manualform.ui" line="1053"/>
         <source>内部脉冲</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1102"/>
-        <location filename="../manualform.ui" line="1115"/>
+        <location filename="../manualform.ui" line="1066"/>
+        <location filename="../manualform.ui" line="1079"/>
         <source>p</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1164"/>
+        <location filename="../manualform.ui" line="1128"/>
         <source>正转</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1209"/>
+        <location filename="../manualform.ui" line="1173"/>
         <source>反转</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1254"/>
+        <location filename="../manualform.ui" line="1218"/>
         <source>清零</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1315"/>
+        <location filename="../manualform.ui" line="1267"/>
         <source>无信号Z轴允许下降</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1322"/>
+        <location filename="../manualform.ui" line="1274"/>
         <source>卡爪/机床</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1337"/>
+        <location filename="../manualform.ui" line="1289"/>
         <source>机床控制</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1380"/>
+        <location filename="../manualform.ui" line="1332"/>
         <source>控制旋转1断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1425"/>
+        <location filename="../manualform.ui" line="1377"/>
         <source>启动加工1断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1470"/>
+        <location filename="../manualform.ui" line="1422"/>
         <source>自动门1关</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1515"/>
+        <location filename="../manualform.ui" line="1467"/>
         <source>主轴定位1断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1547"/>
+        <location filename="../manualform.ui" line="1499"/>
         <source>机床控制使能</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1567"/>
+        <location filename="../manualform.ui" line="1519"/>
         <source>卡盘/吹屑</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1610"/>
+        <location filename="../manualform.ui" line="1562"/>
         <source>卡盘1松开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1655"/>
+        <location filename="../manualform.ui" line="1607"/>
         <source>吹气1断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1685"/>
+        <location filename="../manualform.ui" line="1637"/>
         <source>卡爪</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1728"/>
+        <location filename="../manualform.ui" line="1680"/>
         <source>成品1松开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1776"/>
+        <location filename="../manualform.ui" line="1728"/>
         <source>卡爪1反转</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1824"/>
+        <location filename="../manualform.ui" line="1776"/>
         <source>原料1松开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1850"/>
+        <location filename="../manualform.ui" line="1802"/>
         <source>预留</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1869"/>
+        <location filename="../manualform.ui" line="1821"/>
         <source>主板</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1892"/>
+        <location filename="../manualform.ui" line="1844"/>
         <source>组一</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1934"/>
+        <location filename="../manualform.ui" line="1886"/>
         <source>预留Y1断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="1980"/>
+        <location filename="../manualform.ui" line="1932"/>
         <source>预留Y2断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2026"/>
+        <location filename="../manualform.ui" line="1978"/>
         <source>预留Y3断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2072"/>
+        <location filename="../manualform.ui" line="2024"/>
         <source>预留Y4断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2125"/>
+        <location filename="../manualform.ui" line="2077"/>
         <source>预留Y5断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2171"/>
+        <location filename="../manualform.ui" line="2123"/>
         <source>预留Y6断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2217"/>
+        <location filename="../manualform.ui" line="2169"/>
         <source>预留Y7断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2263"/>
+        <location filename="../manualform.ui" line="2215"/>
         <source>预留Y8断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2293"/>
+        <location filename="../manualform.ui" line="2245"/>
         <source>组二</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2335"/>
+        <location filename="../manualform.ui" line="2287"/>
         <source>预留Y9断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2381"/>
+        <location filename="../manualform.ui" line="2333"/>
         <source>预留Y10断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2427"/>
+        <location filename="../manualform.ui" line="2379"/>
         <source>预留Y11断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2473"/>
+        <location filename="../manualform.ui" line="2425"/>
         <source>预留Y12断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2526"/>
+        <location filename="../manualform.ui" line="2478"/>
         <source>预留Y13断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2572"/>
+        <location filename="../manualform.ui" line="2524"/>
         <source>预留Y14断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2618"/>
+        <location filename="../manualform.ui" line="2570"/>
         <source>预留Y15断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2664"/>
+        <location filename="../manualform.ui" line="2616"/>
         <source>预留Y16断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2696"/>
+        <location filename="../manualform.ui" line="2648"/>
         <source>组三</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2738"/>
+        <location filename="../manualform.ui" line="2690"/>
         <source>预留Y17断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2784"/>
+        <location filename="../manualform.ui" line="2736"/>
         <source>预留Y19断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2830"/>
+        <location filename="../manualform.ui" line="2782"/>
         <source>预留Y21断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2876"/>
+        <location filename="../manualform.ui" line="2828"/>
         <source>预留Y23断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2926"/>
+        <location filename="../manualform.ui" line="2878"/>
         <source>预留Y18断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="2972"/>
+        <location filename="../manualform.ui" line="2924"/>
         <source>预留Y20断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3018"/>
+        <location filename="../manualform.ui" line="2970"/>
         <source>预留Y22断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3064"/>
+        <location filename="../manualform.ui" line="3016"/>
         <source>预留Y24断</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3090"/>
+        <location filename="../manualform.ui" line="3042"/>
         <source>IO板</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3097"/>
+        <location filename="../manualform.ui" line="3049"/>
         <location filename="../manualform.cpp" line="1040"/>
         <source>参考点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3146"/>
+        <location filename="../manualform.ui" line="3098"/>
         <source>刷新</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3426"/>
+        <location filename="../manualform.ui" line="3378"/>
         <source>referPoint.png</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3506"/>
+        <location filename="../manualform.ui" line="3458"/>
         <source> 名称：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3589"/>
+        <location filename="../manualform.ui" line="3541"/>
         <source>移至参考点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.ui" line="3633"/>
+        <location filename="../manualform.ui" line="3585"/>
         <source>进入堆叠</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3864,16 +3878,16 @@
         <location filename="../manualform.cpp" line="242"/>
         <location filename="../manualform.cpp" line="976"/>
         <location filename="../manualform.cpp" line="1097"/>
-        <location filename="../manualform.cpp" line="1567"/>
-        <location filename="../manualform.cpp" line="1570"/>
-        <location filename="../manualform.cpp" line="1571"/>
-        <location filename="../manualform.cpp" line="1572"/>
-        <location filename="../manualform.cpp" line="1582"/>
-        <location filename="../manualform.cpp" line="1615"/>
-        <location filename="../manualform.cpp" line="1636"/>
-        <location filename="../manualform.cpp" line="1643"/>
+        <location filename="../manualform.cpp" line="1581"/>
+        <location filename="../manualform.cpp" line="1584"/>
+        <location filename="../manualform.cpp" line="1585"/>
+        <location filename="../manualform.cpp" line="1586"/>
+        <location filename="../manualform.cpp" line="1596"/>
+        <location filename="../manualform.cpp" line="1629"/>
         <location filename="../manualform.cpp" line="1650"/>
+        <location filename="../manualform.cpp" line="1657"/>
         <location filename="../manualform.cpp" line="1664"/>
+        <location filename="../manualform.cpp" line="1678"/>
         <source>断</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3884,12 +3898,12 @@
         <location filename="../manualform.cpp" line="237"/>
         <location filename="../manualform.cpp" line="981"/>
         <location filename="../manualform.cpp" line="1097"/>
-        <location filename="../manualform.cpp" line="1586"/>
-        <location filename="../manualform.cpp" line="1618"/>
-        <location filename="../manualform.cpp" line="1639"/>
-        <location filename="../manualform.cpp" line="1646"/>
+        <location filename="../manualform.cpp" line="1600"/>
+        <location filename="../manualform.cpp" line="1632"/>
         <location filename="../manualform.cpp" line="1653"/>
-        <location filename="../manualform.cpp" line="1668"/>
+        <location filename="../manualform.cpp" line="1660"/>
+        <location filename="../manualform.cpp" line="1667"/>
+        <location filename="../manualform.cpp" line="1682"/>
         <source>通</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3919,22 +3933,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.cpp" line="1335"/>
+        <location filename="../manualform.cpp" line="1349"/>
         <source>操作指引参数有修改，是否需要保存？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.cpp" line="1354"/>
+        <location filename="../manualform.cpp" line="1368"/>
         <source>参考点参数有修改，是否需要保存？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.cpp" line="1470"/>
+        <location filename="../manualform.cpp" line="1484"/>
         <source>未找到图片：guide.png，图片像素: 1001×450px。是否使用默认图片？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../manualform.cpp" line="1508"/>
+        <location filename="../manualform.cpp" line="1522"/>
         <source>未找到图片: referPoint.png，图片像素: 760×480px。是否使用默认图片？</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5342,83 +5356,102 @@
     <message>
         <location filename="../dialogs/stackedit.cpp" line="22"/>
         <location filename="../dialogs/stackedit.cpp" line="91"/>
+        <location filename="../dialogs/stackedit.cpp" line="731"/>
+        <location filename="../dialogs/stackedit.cpp" line="737"/>
         <source>X1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="25"/>
         <location filename="../dialogs/stackedit.cpp" line="92"/>
+        <location filename="../dialogs/stackedit.cpp" line="732"/>
+        <location filename="../dialogs/stackedit.cpp" line="738"/>
         <source>Y1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="25"/>
+        <location filename="../dialogs/stackedit.cpp" line="739"/>
         <source>Y2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="28"/>
         <location filename="../dialogs/stackedit.cpp" line="93"/>
+        <location filename="../dialogs/stackedit.cpp" line="733"/>
+        <location filename="../dialogs/stackedit.cpp" line="740"/>
         <source>Z1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="28"/>
+        <location filename="../dialogs/stackedit.cpp" line="741"/>
         <source>Z2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="78"/>
+        <location filename="../dialogs/stackedit.cpp" line="718"/>
         <source>轴选择</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="79"/>
+        <location filename="../dialogs/stackedit.cpp" line="719"/>
         <source>速度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="80"/>
+        <location filename="../dialogs/stackedit.cpp" line="720"/>
         <source>点数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="81"/>
+        <location filename="../dialogs/stackedit.cpp" line="721"/>
         <source>A-起点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="82"/>
+        <location filename="../dialogs/stackedit.cpp" line="722"/>
         <source>B-X方向终点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="83"/>
+        <location filename="../dialogs/stackedit.cpp" line="723"/>
         <source>C-Y方向终点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="84"/>
+        <location filename="../dialogs/stackedit.cpp" line="724"/>
         <source>D点坐标</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="85"/>
+        <location filename="../dialogs/stackedit.cpp" line="725"/>
         <source>放料速度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.cpp" line="86"/>
+        <location filename="../dialogs/stackedit.cpp" line="726"/>
         <source>放料起始点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="802"/>
+        <location filename="../dialogs/stackedit.cpp" line="842"/>
+        <location filename="../dialogs/stackedit.cpp" line="952"/>
         <source>个数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="802"/>
+        <location filename="../dialogs/stackedit.cpp" line="842"/>
+        <location filename="../dialogs/stackedit.cpp" line="952"/>
         <source>目标位置</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5460,21 +5493,25 @@
     <name>ReferenceWidget</name>
     <message>
         <location filename="../referencewidget.cpp" line="166"/>
+        <location filename="../referencewidget.cpp" line="317"/>
         <source>确定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../referencewidget.cpp" line="167"/>
+        <location filename="../referencewidget.cpp" line="318"/>
         <source>取消</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../referencewidget.cpp" line="168"/>
+        <location filename="../referencewidget.cpp" line="319"/>
         <source>刷新</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../referencewidget.cpp" line="169"/>
+        <location filename="../referencewidget.cpp" line="320"/>
         <source>编辑</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5482,4467 +5519,4462 @@
 <context>
     <name>Setting</name>
     <message>
-        <location filename="../setting.ui" line="147"/>
-        <location filename="../setting.cpp" line="1512"/>
+        <location filename="../setting.ui" line="153"/>
+        <location filename="../setting.cpp" line="1333"/>
         <source>安全设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="174"/>
-        <location filename="../setting.cpp" line="1511"/>
+        <location filename="../setting.ui" line="180"/>
+        <location filename="../setting.cpp" line="1332"/>
         <source>信号设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="271"/>
-        <location filename="../setting.ui" line="17929"/>
-        <location filename="../setting.cpp" line="1513"/>
+        <location filename="../setting.ui" line="283"/>
+        <location filename="../setting.ui" line="15848"/>
+        <location filename="../setting.cpp" line="1334"/>
         <source>产品设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="333"/>
-        <location filename="../setting.cpp" line="1514"/>
+        <location filename="../setting.ui" line="351"/>
+        <location filename="../setting.cpp" line="1335"/>
         <source>系统设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="456"/>
-        <location filename="../setting.cpp" line="1516"/>
+        <location filename="../setting.ui" line="474"/>
+        <location filename="../setting.cpp" line="1337"/>
         <source>伺服安全点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="483"/>
-        <location filename="../setting.cpp" line="1515"/>
+        <location filename="../setting.ui" line="501"/>
+        <location filename="../setting.cpp" line="1336"/>
         <source>伺服参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="510"/>
-        <location filename="../setting.cpp" line="1517"/>
+        <location filename="../setting.ui" line="528"/>
+        <location filename="../setting.cpp" line="1338"/>
         <source>机器参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="537"/>
-        <location filename="../setting.ui" line="33065"/>
-        <location filename="../setting.cpp" line="1518"/>
-        <location filename="../setting.cpp" line="1592"/>
+        <location filename="../setting.ui" line="555"/>
+        <location filename="../setting.ui" line="30178"/>
+        <location filename="../setting.cpp" line="1339"/>
+        <location filename="../setting.cpp" line="1413"/>
         <source>堆叠设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="573"/>
-        <location filename="../setting.cpp" line="1530"/>
+        <location filename="../setting.ui" line="591"/>
+        <location filename="../setting.cpp" line="1351"/>
         <source>输出类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="609"/>
-        <location filename="../setting.ui" line="678"/>
-        <location filename="../setting.ui" line="712"/>
-        <location filename="../setting.ui" line="776"/>
-        <location filename="../setting.ui" line="810"/>
-        <location filename="../setting.ui" line="934"/>
-        <location filename="../setting.ui" line="973"/>
-        <location filename="../setting.ui" line="1109"/>
-        <location filename="../setting.ui" line="1173"/>
-        <location filename="../setting.ui" line="1207"/>
-        <location filename="../setting.ui" line="1277"/>
-        <location filename="../setting.ui" line="1371"/>
-        <location filename="../setting.ui" line="1435"/>
-        <location filename="../setting.ui" line="1480"/>
+        <location filename="../setting.ui" line="632"/>
+        <location filename="../setting.ui" line="689"/>
+        <location filename="../setting.ui" line="723"/>
+        <location filename="../setting.ui" line="775"/>
+        <location filename="../setting.ui" line="809"/>
+        <location filename="../setting.ui" line="897"/>
+        <location filename="../setting.ui" line="936"/>
+        <location filename="../setting.ui" line="1083"/>
+        <location filename="../setting.ui" line="1117"/>
+        <location filename="../setting.ui" line="1151"/>
+        <location filename="../setting.ui" line="1239"/>
+        <location filename="../setting.ui" line="1297"/>
+        <location filename="../setting.ui" line="1342"/>
+        <location filename="../setting.ui" line="1376"/>
         <source>电平</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="614"/>
-        <location filename="../setting.ui" line="939"/>
-        <location filename="../setting.ui" line="1440"/>
-        <location filename="../setting.ui" line="1485"/>
+        <location filename="../setting.ui" line="637"/>
+        <location filename="../setting.ui" line="902"/>
+        <location filename="../setting.ui" line="1302"/>
+        <location filename="../setting.ui" line="1381"/>
         <source>单脉冲</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="619"/>
-        <location filename="../setting.ui" line="944"/>
-        <location filename="../setting.ui" line="1445"/>
-        <location filename="../setting.ui" line="1490"/>
+        <location filename="../setting.ui" line="642"/>
+        <location filename="../setting.ui" line="907"/>
+        <location filename="../setting.ui" line="1307"/>
+        <location filename="../setting.ui" line="1386"/>
         <source>双脉冲</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="647"/>
-        <location filename="../setting.ui" line="1556"/>
+        <location filename="../setting.ui" line="658"/>
+        <location filename="../setting.ui" line="1437"/>
         <source>卡盘1夹紧</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="683"/>
-        <location filename="../setting.ui" line="717"/>
-        <location filename="../setting.ui" line="781"/>
-        <location filename="../setting.ui" line="815"/>
-        <location filename="../setting.ui" line="978"/>
-        <location filename="../setting.ui" line="1114"/>
-        <location filename="../setting.ui" line="1178"/>
-        <location filename="../setting.ui" line="1212"/>
-        <location filename="../setting.ui" line="1282"/>
-        <location filename="../setting.ui" line="1376"/>
+        <location filename="../setting.ui" line="694"/>
+        <location filename="../setting.ui" line="728"/>
+        <location filename="../setting.ui" line="780"/>
+        <location filename="../setting.ui" line="814"/>
+        <location filename="../setting.ui" line="941"/>
+        <location filename="../setting.ui" line="1088"/>
+        <location filename="../setting.ui" line="1122"/>
+        <location filename="../setting.ui" line="1156"/>
+        <location filename="../setting.ui" line="1244"/>
+        <location filename="../setting.ui" line="1347"/>
         <source>脉冲</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="745"/>
-        <location filename="../setting.ui" line="9705"/>
+        <location filename="../setting.ui" line="744"/>
+        <location filename="../setting.ui" line="8260"/>
         <source>主轴定位1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="843"/>
-        <location filename="../setting.ui" line="10510"/>
+        <location filename="../setting.ui" line="830"/>
+        <location filename="../setting.ui" line="8048"/>
         <source>预留1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="873"/>
-        <location filename="../setting.ui" line="10570"/>
+        <location filename="../setting.ui" line="848"/>
+        <location filename="../setting.ui" line="8156"/>
         <source>主轴旋转1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="903"/>
-        <location filename="../setting.ui" line="10920"/>
+        <location filename="../setting.ui" line="866"/>
+        <location filename="../setting.ui" line="7736"/>
         <source>加工完成1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1006"/>
-        <location filename="../setting.ui" line="10698"/>
+        <location filename="../setting.ui" line="957"/>
+        <location filename="../setting.ui" line="7944"/>
         <source>启动加工1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1036"/>
-        <location filename="../setting.ui" line="1680"/>
+        <location filename="../setting.ui" line="975"/>
+        <location filename="../setting.ui" line="1530"/>
         <source>自动门1开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1078"/>
-        <location filename="../setting.ui" line="10313"/>
+        <location filename="../setting.ui" line="1052"/>
+        <location filename="../setting.ui" line="7996"/>
         <source>启动加工2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1142"/>
-        <location filename="../setting.ui" line="2308"/>
+        <location filename="../setting.ui" line="1208"/>
+        <location filename="../setting.ui" line="2003"/>
         <source>自动门2开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1240"/>
-        <location filename="../setting.ui" line="10826"/>
+        <location filename="../setting.ui" line="1016"/>
+        <location filename="../setting.ui" line="8208"/>
         <source>主轴旋转2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1310"/>
-        <location filename="../setting.ui" line="9641"/>
+        <location filename="../setting.ui" line="1172"/>
+        <location filename="../setting.ui" line="8312"/>
         <source>主轴定位2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1340"/>
-        <location filename="../setting.ui" line="9547"/>
+        <location filename="../setting.ui" line="1190"/>
+        <location filename="../setting.ui" line="7788"/>
         <source>加工完成2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1404"/>
-        <location filename="../setting.ui" line="9453"/>
+        <location filename="../setting.ui" line="1034"/>
+        <location filename="../setting.ui" line="8100"/>
         <source>预留2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1518"/>
-        <location filename="../setting.ui" line="2928"/>
+        <location filename="../setting.ui" line="1260"/>
+        <location filename="../setting.ui" line="2468"/>
         <source>卡盘2夹紧</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1530"/>
-        <location filename="../setting.cpp" line="1531"/>
+        <location filename="../setting.ui" line="1411"/>
+        <location filename="../setting.cpp" line="1352"/>
         <source>互锁设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1582"/>
-        <location filename="../setting.ui" line="1706"/>
-        <location filename="../setting.ui" line="1830"/>
-        <location filename="../setting.ui" line="1954"/>
-        <location filename="../setting.ui" line="2078"/>
-        <location filename="../setting.ui" line="2202"/>
-        <location filename="../setting.ui" line="2334"/>
-        <location filename="../setting.ui" line="2458"/>
-        <location filename="../setting.ui" line="2582"/>
-        <location filename="../setting.ui" line="2706"/>
-        <location filename="../setting.ui" line="2830"/>
-        <location filename="../setting.ui" line="2954"/>
+        <location filename="../setting.ui" line="1452"/>
+        <location filename="../setting.ui" line="1545"/>
+        <location filename="../setting.ui" line="1638"/>
+        <location filename="../setting.ui" line="1731"/>
+        <location filename="../setting.ui" line="1824"/>
+        <location filename="../setting.ui" line="1917"/>
+        <location filename="../setting.ui" line="2018"/>
+        <location filename="../setting.ui" line="2111"/>
+        <location filename="../setting.ui" line="2204"/>
+        <location filename="../setting.ui" line="2297"/>
+        <location filename="../setting.ui" line="2390"/>
+        <location filename="../setting.ui" line="2483"/>
         <source>正向阀</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1607"/>
-        <location filename="../setting.ui" line="1731"/>
-        <location filename="../setting.ui" line="1855"/>
-        <location filename="../setting.ui" line="1979"/>
-        <location filename="../setting.ui" line="2103"/>
-        <location filename="../setting.ui" line="2227"/>
-        <location filename="../setting.ui" line="2359"/>
-        <location filename="../setting.ui" line="2483"/>
-        <location filename="../setting.ui" line="2607"/>
-        <location filename="../setting.ui" line="2731"/>
-        <location filename="../setting.ui" line="2855"/>
-        <location filename="../setting.ui" line="2979"/>
+        <location filename="../setting.ui" line="1471"/>
+        <location filename="../setting.ui" line="1564"/>
+        <location filename="../setting.ui" line="1657"/>
+        <location filename="../setting.ui" line="1750"/>
+        <location filename="../setting.ui" line="1843"/>
+        <location filename="../setting.ui" line="1936"/>
+        <location filename="../setting.ui" line="2037"/>
+        <location filename="../setting.ui" line="2130"/>
+        <location filename="../setting.ui" line="2223"/>
+        <location filename="../setting.ui" line="2316"/>
+        <location filename="../setting.ui" line="2409"/>
+        <location filename="../setting.ui" line="2502"/>
         <source>反向阀</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1632"/>
-        <location filename="../setting.ui" line="1756"/>
-        <location filename="../setting.ui" line="1880"/>
-        <location filename="../setting.ui" line="2004"/>
-        <location filename="../setting.ui" line="2128"/>
-        <location filename="../setting.ui" line="2252"/>
-        <location filename="../setting.ui" line="2384"/>
-        <location filename="../setting.ui" line="2508"/>
-        <location filename="../setting.ui" line="2632"/>
-        <location filename="../setting.ui" line="2756"/>
-        <location filename="../setting.ui" line="2880"/>
-        <location filename="../setting.ui" line="3004"/>
+        <location filename="../setting.ui" line="1490"/>
+        <location filename="../setting.ui" line="1583"/>
+        <location filename="../setting.ui" line="1676"/>
+        <location filename="../setting.ui" line="1769"/>
+        <location filename="../setting.ui" line="1862"/>
+        <location filename="../setting.ui" line="1955"/>
+        <location filename="../setting.ui" line="2056"/>
+        <location filename="../setting.ui" line="2149"/>
+        <location filename="../setting.ui" line="2242"/>
+        <location filename="../setting.ui" line="2335"/>
+        <location filename="../setting.ui" line="2428"/>
+        <location filename="../setting.ui" line="2521"/>
         <source>正向检测</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1657"/>
-        <location filename="../setting.ui" line="1781"/>
-        <location filename="../setting.ui" line="1905"/>
-        <location filename="../setting.ui" line="2029"/>
-        <location filename="../setting.ui" line="2153"/>
-        <location filename="../setting.ui" line="2277"/>
-        <location filename="../setting.ui" line="2409"/>
-        <location filename="../setting.ui" line="2533"/>
-        <location filename="../setting.ui" line="2657"/>
-        <location filename="../setting.ui" line="2781"/>
-        <location filename="../setting.ui" line="2905"/>
-        <location filename="../setting.ui" line="3029"/>
+        <location filename="../setting.ui" line="1509"/>
+        <location filename="../setting.ui" line="1602"/>
+        <location filename="../setting.ui" line="1695"/>
+        <location filename="../setting.ui" line="1788"/>
+        <location filename="../setting.ui" line="1881"/>
+        <location filename="../setting.ui" line="1974"/>
+        <location filename="../setting.ui" line="2075"/>
+        <location filename="../setting.ui" line="2168"/>
+        <location filename="../setting.ui" line="2261"/>
+        <location filename="../setting.ui" line="2354"/>
+        <location filename="../setting.ui" line="2447"/>
+        <location filename="../setting.ui" line="2546"/>
         <source>反向检测</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1804"/>
-        <location filename="../setting.ui" line="2432"/>
-        <location filename="../setting.ui" line="7483"/>
+        <location filename="../setting.ui" line="1623"/>
+        <location filename="../setting.ui" line="2096"/>
+        <location filename="../setting.ui" line="6267"/>
         <source>预留</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="1928"/>
+        <location filename="../setting.ui" line="1716"/>
         <source>成品1夹紧</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="2052"/>
+        <location filename="../setting.ui" line="1809"/>
         <source>卡爪1正转</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="2176"/>
+        <location filename="../setting.ui" line="1902"/>
         <source>原料1夹紧</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="2556"/>
+        <location filename="../setting.ui" line="2189"/>
         <source>原料2夹紧</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="2680"/>
+        <location filename="../setting.ui" line="2282"/>
         <source>成品2夹紧</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="2804"/>
+        <location filename="../setting.ui" line="2375"/>
         <source>卡爪2正转</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3067"/>
-        <location filename="../setting.ui" line="7715"/>
+        <location filename="../setting.ui" line="2582"/>
+        <location filename="../setting.ui" line="6345"/>
         <source>页码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3091"/>
-        <location filename="../setting.ui" line="7739"/>
+        <location filename="../setting.ui" line="2606"/>
+        <location filename="../setting.ui" line="6369"/>
         <source>1/2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3146"/>
-        <location filename="../setting.cpp" line="1532"/>
+        <location filename="../setting.ui" line="2661"/>
+        <location filename="../setting.cpp" line="1353"/>
         <source>端口自定义</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3370"/>
-        <location filename="../setting.ui" line="7437"/>
+        <location filename="../setting.ui" line="2885"/>
+        <location filename="../setting.ui" line="6233"/>
         <source>信号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3375"/>
-        <location filename="../setting.ui" line="4263"/>
-        <location filename="../setting.cpp" line="1197"/>
+        <location filename="../setting.ui" line="2890"/>
+        <location filename="../setting.ui" line="3781"/>
+        <location filename="../setting.cpp" line="1018"/>
         <source>默认名称</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3380"/>
-        <location filename="../setting.ui" line="4268"/>
-        <location filename="../setting.cpp" line="1197"/>
+        <location filename="../setting.ui" line="2895"/>
+        <location filename="../setting.ui" line="3786"/>
+        <location filename="../setting.cpp" line="1018"/>
         <source>修改名称</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3385"/>
+        <location filename="../setting.ui" line="2900"/>
         <source>修改端口</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3428"/>
+        <location filename="../setting.ui" line="3331"/>
         <source>机械手入1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3433"/>
+        <location filename="../setting.ui" line="3336"/>
         <source>机械手入2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3438"/>
+        <location filename="../setting.ui" line="3341"/>
         <source>机械手出1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3443"/>
+        <location filename="../setting.ui" line="3346"/>
         <source>机械手出2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3457"/>
-        <location filename="../setting.ui" line="4355"/>
+        <location filename="../setting.ui" line="3297"/>
+        <location filename="../setting.ui" line="3808"/>
         <source>组选</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3478"/>
-        <location filename="../setting.ui" line="3858"/>
-        <location filename="../setting.ui" line="20602"/>
+        <location filename="../setting.ui" line="2927"/>
+        <location filename="../setting.ui" line="3376"/>
+        <location filename="../setting.ui" line="18381"/>
         <source>名称恢复</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3519"/>
-        <location filename="../setting.ui" line="3633"/>
-        <location filename="../setting.ui" line="3899"/>
+        <location filename="../setting.ui" line="2968"/>
+        <location filename="../setting.ui" line="3082"/>
+        <location filename="../setting.ui" line="3417"/>
         <source>全部</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3564"/>
-        <location filename="../setting.ui" line="3678"/>
-        <location filename="../setting.ui" line="3944"/>
+        <location filename="../setting.ui" line="3013"/>
+        <location filename="../setting.ui" line="3127"/>
+        <location filename="../setting.ui" line="3462"/>
         <source>单个</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3592"/>
+        <location filename="../setting.ui" line="3041"/>
         <source>端口恢复</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3724"/>
-        <location filename="../setting.ui" line="4085"/>
+        <location filename="../setting.ui" line="3173"/>
+        <location filename="../setting.ui" line="3603"/>
         <source>导出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3773"/>
-        <location filename="../setting.ui" line="4036"/>
+        <location filename="../setting.ui" line="3222"/>
+        <location filename="../setting.ui" line="3554"/>
         <source>导入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3822"/>
-        <location filename="../setting.ui" line="3987"/>
-        <location filename="../setting.ui" line="12467"/>
-        <location filename="../setting.ui" line="13355"/>
-        <location filename="../setting.ui" line="14243"/>
-        <location filename="../setting.ui" line="15137"/>
-        <location filename="../setting.ui" line="15838"/>
-        <location filename="../setting.ui" line="16508"/>
-        <location filename="../setting.ui" line="17187"/>
-        <location filename="../setting.ui" line="17866"/>
-        <location filename="../setting.ui" line="18616"/>
-        <location filename="../setting.ui" line="19837"/>
-        <location filename="../setting.ui" line="19899"/>
-        <location filename="../setting.ui" line="19942"/>
-        <location filename="../setting.ui" line="21315"/>
-        <location filename="../setting.ui" line="22486"/>
-        <location filename="../setting.ui" line="24325"/>
-        <location filename="../setting.ui" line="24926"/>
-        <location filename="../setting.ui" line="26012"/>
-        <location filename="../setting.ui" line="29742"/>
-        <location filename="../setting.ui" line="32958"/>
-        <location filename="../setting.ui" line="34754"/>
-        <location filename="../setting.ui" line="34787"/>
-        <location filename="../setting.ui" line="35446"/>
-        <location filename="../setting.ui" line="37444"/>
+        <location filename="../setting.ui" line="3271"/>
+        <location filename="../setting.ui" line="3505"/>
+        <location filename="../setting.ui" line="10404"/>
+        <location filename="../setting.ui" line="11286"/>
+        <location filename="../setting.ui" line="12168"/>
+        <location filename="../setting.ui" line="13056"/>
+        <location filename="../setting.ui" line="13757"/>
+        <location filename="../setting.ui" line="14427"/>
+        <location filename="../setting.ui" line="15106"/>
+        <location filename="../setting.ui" line="15785"/>
+        <location filename="../setting.ui" line="16417"/>
+        <location filename="../setting.ui" line="17671"/>
+        <location filename="../setting.ui" line="17913"/>
+        <location filename="../setting.ui" line="18193"/>
+        <location filename="../setting.ui" line="19094"/>
+        <location filename="../setting.ui" line="20244"/>
+        <location filename="../setting.ui" line="22130"/>
+        <location filename="../setting.ui" line="22744"/>
+        <location filename="../setting.ui" line="23555"/>
+        <location filename="../setting.ui" line="26993"/>
+        <location filename="../setting.ui" line="30071"/>
+        <location filename="../setting.ui" line="31572"/>
+        <location filename="../setting.ui" line="31605"/>
+        <location filename="../setting.ui" line="32133"/>
+        <location filename="../setting.ui" line="33802"/>
         <source>保存</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="3838"/>
-        <location filename="../setting.cpp" line="1533"/>
+        <location filename="../setting.ui" line="3356"/>
+        <location filename="../setting.cpp" line="1354"/>
         <source>名称自定义</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4311"/>
+        <location filename="../setting.ui" line="3851"/>
         <source>登陆权限</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4316"/>
+        <location filename="../setting.ui" line="3856"/>
         <source>子程序</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4321"/>
+        <location filename="../setting.ui" line="3861"/>
         <source>轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4326"/>
+        <location filename="../setting.ui" line="3866"/>
         <source>变量</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4331"/>
+        <location filename="../setting.ui" line="3871"/>
         <source>堆叠</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4336"/>
+        <location filename="../setting.ui" line="3876"/>
         <source>放料跟随</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4341"/>
+        <location filename="../setting.ui" line="3881"/>
         <source>定时器</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4361"/>
-        <location filename="../setting.cpp" line="1534"/>
+        <location filename="../setting.ui" line="3891"/>
+        <location filename="../setting.cpp" line="1355"/>
         <source>预留关联</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4394"/>
-        <location filename="../setting.ui" line="4439"/>
-        <location filename="../setting.ui" line="4592"/>
-        <location filename="../setting.ui" line="4673"/>
-        <location filename="../setting.ui" line="4790"/>
-        <location filename="../setting.ui" line="4835"/>
-        <location filename="../setting.ui" line="4952"/>
-        <location filename="../setting.ui" line="5105"/>
-        <location filename="../setting.ui" line="5150"/>
+        <location filename="../setting.ui" line="3919"/>
+        <location filename="../setting.ui" line="3988"/>
+        <location filename="../setting.ui" line="4021"/>
+        <location filename="../setting.ui" line="4090"/>
+        <location filename="../setting.ui" line="4123"/>
+        <location filename="../setting.ui" line="4156"/>
+        <location filename="../setting.ui" line="4243"/>
+        <location filename="../setting.ui" line="4294"/>
+        <location filename="../setting.ui" line="4370"/>
+        <location filename="../setting.ui" line="4421"/>
+        <location filename="../setting.ui" line="4472"/>
+        <location filename="../setting.ui" line="4523"/>
+        <location filename="../setting.ui" line="4574"/>
+        <location filename="../setting.ui" line="4625"/>
+        <location filename="../setting.ui" line="4722"/>
+        <location filename="../setting.ui" line="4778"/>
+        <location filename="../setting.ui" line="4834"/>
+        <location filename="../setting.ui" line="4890"/>
+        <location filename="../setting.ui" line="4946"/>
+        <location filename="../setting.ui" line="5002"/>
+        <location filename="../setting.ui" line="5058"/>
+        <location filename="../setting.ui" line="5114"/>
         <location filename="../setting.ui" line="5195"/>
-        <location filename="../setting.ui" line="5240"/>
-        <location filename="../setting.ui" line="5357"/>
-        <location filename="../setting.ui" line="5402"/>
-        <location filename="../setting.ui" line="5447"/>
-        <location filename="../setting.ui" line="5569"/>
-        <location filename="../setting.ui" line="5655"/>
-        <location filename="../setting.ui" line="5705"/>
-        <location filename="../setting.ui" line="5863"/>
-        <location filename="../setting.ui" line="5949"/>
-        <location filename="../setting.ui" line="6071"/>
-        <location filename="../setting.ui" line="6121"/>
-        <location filename="../setting.ui" line="6171"/>
-        <location filename="../setting.ui" line="6221"/>
-        <location filename="../setting.ui" line="6343"/>
-        <location filename="../setting.ui" line="6429"/>
-        <location filename="../setting.ui" line="6479"/>
-        <location filename="../setting.ui" line="6601"/>
-        <location filename="../setting.ui" line="6651"/>
-        <location filename="../setting.ui" line="7874"/>
-        <location filename="../setting.ui" line="7938"/>
-        <location filename="../setting.ui" line="8002"/>
-        <location filename="../setting.ui" line="8071"/>
-        <location filename="../setting.ui" line="8135"/>
-        <location filename="../setting.ui" line="8199"/>
-        <location filename="../setting.ui" line="8268"/>
-        <location filename="../setting.ui" line="8332"/>
-        <location filename="../setting.ui" line="8396"/>
-        <location filename="../setting.ui" line="8460"/>
-        <location filename="../setting.ui" line="8524"/>
-        <location filename="../setting.ui" line="8588"/>
-        <location filename="../setting.ui" line="8652"/>
-        <location filename="../setting.ui" line="8716"/>
-        <location filename="../setting.ui" line="8780"/>
-        <location filename="../setting.ui" line="8844"/>
-        <location filename="../setting.ui" line="8913"/>
-        <location filename="../setting.ui" line="8977"/>
-        <location filename="../setting.ui" line="9041"/>
-        <location filename="../setting.ui" line="9105"/>
-        <location filename="../setting.ui" line="9169"/>
-        <location filename="../setting.ui" line="9233"/>
-        <location filename="../setting.ui" line="9297"/>
-        <location filename="../setting.ui" line="9361"/>
-        <location filename="../setting.ui" line="9415"/>
-        <location filename="../setting.ui" line="9484"/>
-        <location filename="../setting.ui" line="9578"/>
-        <location filename="../setting.ui" line="9672"/>
-        <location filename="../setting.ui" line="9736"/>
-        <location filename="../setting.ui" line="9770"/>
-        <location filename="../setting.ui" line="9804"/>
-        <location filename="../setting.ui" line="9868"/>
-        <location filename="../setting.ui" line="9937"/>
-        <location filename="../setting.ui" line="9971"/>
-        <location filename="../setting.ui" line="10040"/>
-        <location filename="../setting.ui" line="10109"/>
-        <location filename="../setting.ui" line="10143"/>
-        <location filename="../setting.ui" line="10207"/>
-        <location filename="../setting.ui" line="10241"/>
-        <location filename="../setting.ui" line="10280"/>
-        <location filename="../setting.ui" line="10344"/>
-        <location filename="../setting.ui" line="10378"/>
-        <location filename="../setting.ui" line="10417"/>
-        <location filename="../setting.ui" line="10601"/>
-        <location filename="../setting.ui" line="10665"/>
-        <location filename="../setting.ui" line="10729"/>
-        <location filename="../setting.ui" line="10793"/>
-        <location filename="../setting.ui" line="10887"/>
-        <location filename="../setting.ui" line="12313"/>
-        <location filename="../setting.ui" line="13201"/>
-        <location filename="../setting.ui" line="14089"/>
-        <location filename="../setting.ui" line="14980"/>
-        <location filename="../setting.ui" line="18552"/>
-        <location filename="../setting.ui" line="22177"/>
-        <location filename="../setting.ui" line="27907"/>
-        <location filename="../setting.ui" line="27968"/>
-        <location filename="../setting.ui" line="29341"/>
-        <location filename="../setting.ui" line="29402"/>
-        <location filename="../setting.ui" line="30803"/>
-        <location filename="../setting.ui" line="30864"/>
-        <location filename="../setting.ui" line="32237"/>
-        <location filename="../setting.ui" line="32298"/>
-        <location filename="../setting.ui" line="33314"/>
-        <location filename="../setting.ui" line="33399"/>
-        <location filename="../setting.ui" line="33469"/>
-        <location filename="../setting.ui" line="33539"/>
-        <location filename="../setting.ui" line="33609"/>
-        <location filename="../setting.ui" line="33763"/>
-        <location filename="../setting.ui" line="33888"/>
-        <location filename="../setting.ui" line="33949"/>
-        <location filename="../setting.ui" line="34064"/>
-        <location filename="../setting.ui" line="34157"/>
-        <location filename="../setting.ui" line="34212"/>
-        <location filename="../setting.ui" line="34321"/>
-        <location filename="../setting.ui" line="34360"/>
-        <location filename="../setting.ui" line="34399"/>
-        <location filename="../setting.ui" line="34438"/>
-        <location filename="../setting.ui" line="34493"/>
-        <location filename="../setting.ui" line="34608"/>
-        <location filename="../setting.ui" line="36935"/>
-        <location filename="../setting.ui" line="36970"/>
+        <location filename="../setting.ui" line="5251"/>
+        <location filename="../setting.ui" line="5307"/>
+        <location filename="../setting.ui" line="5363"/>
+        <location filename="../setting.ui" line="5419"/>
+        <location filename="../setting.ui" line="5475"/>
+        <location filename="../setting.ui" line="6482"/>
+        <location filename="../setting.ui" line="6534"/>
+        <location filename="../setting.ui" line="6586"/>
+        <location filename="../setting.ui" line="6638"/>
+        <location filename="../setting.ui" line="6690"/>
+        <location filename="../setting.ui" line="6742"/>
+        <location filename="../setting.ui" line="6799"/>
+        <location filename="../setting.ui" line="6851"/>
+        <location filename="../setting.ui" line="6910"/>
+        <location filename="../setting.ui" line="6962"/>
+        <location filename="../setting.ui" line="7014"/>
+        <location filename="../setting.ui" line="7066"/>
+        <location filename="../setting.ui" line="7118"/>
+        <location filename="../setting.ui" line="7170"/>
+        <location filename="../setting.ui" line="7222"/>
+        <location filename="../setting.ui" line="7274"/>
+        <location filename="../setting.ui" line="7333"/>
+        <location filename="../setting.ui" line="7390"/>
+        <location filename="../setting.ui" line="7447"/>
+        <location filename="../setting.ui" line="7499"/>
+        <location filename="../setting.ui" line="7551"/>
+        <location filename="../setting.ui" line="7603"/>
+        <location filename="../setting.ui" line="7655"/>
+        <location filename="../setting.ui" line="7707"/>
+        <location filename="../setting.ui" line="7767"/>
+        <location filename="../setting.ui" line="7819"/>
+        <location filename="../setting.ui" line="7871"/>
+        <location filename="../setting.ui" line="7923"/>
+        <location filename="../setting.ui" line="7975"/>
+        <location filename="../setting.ui" line="8027"/>
+        <location filename="../setting.ui" line="8079"/>
+        <location filename="../setting.ui" line="8131"/>
+        <location filename="../setting.ui" line="8187"/>
+        <location filename="../setting.ui" line="8239"/>
+        <location filename="../setting.ui" line="8291"/>
+        <location filename="../setting.ui" line="8343"/>
+        <location filename="../setting.ui" line="8395"/>
+        <location filename="../setting.ui" line="8447"/>
+        <location filename="../setting.ui" line="8499"/>
+        <location filename="../setting.ui" line="8551"/>
+        <location filename="../setting.ui" line="8607"/>
+        <location filename="../setting.ui" line="8659"/>
+        <location filename="../setting.ui" line="8711"/>
+        <location filename="../setting.ui" line="8768"/>
+        <location filename="../setting.ui" line="8825"/>
+        <location filename="../setting.ui" line="8882"/>
+        <location filename="../setting.ui" line="8939"/>
+        <location filename="../setting.ui" line="8996"/>
+        <location filename="../setting.ui" line="10250"/>
+        <location filename="../setting.ui" line="11132"/>
+        <location filename="../setting.ui" line="12014"/>
+        <location filename="../setting.ui" line="12899"/>
+        <location filename="../setting.ui" line="16267"/>
+        <location filename="../setting.ui" line="19935"/>
+        <location filename="../setting.ui" line="24920"/>
+        <location filename="../setting.ui" line="24984"/>
+        <location filename="../setting.ui" line="26308"/>
+        <location filename="../setting.ui" line="26372"/>
+        <location filename="../setting.ui" line="27724"/>
+        <location filename="../setting.ui" line="27788"/>
+        <location filename="../setting.ui" line="29120"/>
+        <location filename="../setting.ui" line="29184"/>
+        <location filename="../setting.ui" line="30250"/>
+        <location filename="../setting.ui" line="30406"/>
+        <location filename="../setting.ui" line="30445"/>
+        <location filename="../setting.ui" line="30513"/>
+        <location filename="../setting.ui" line="30547"/>
+        <location filename="../setting.ui" line="30748"/>
+        <location filename="../setting.ui" line="30791"/>
+        <location filename="../setting.ui" line="30872"/>
+        <location filename="../setting.ui" line="30915"/>
+        <location filename="../setting.ui" line="30958"/>
+        <location filename="../setting.ui" line="31119"/>
+        <location filename="../setting.ui" line="31258"/>
+        <location filename="../setting.ui" line="31307"/>
+        <location filename="../setting.ui" line="31350"/>
+        <location filename="../setting.ui" line="31425"/>
+        <location filename="../setting.ui" line="31458"/>
+        <location filename="../setting.ui" line="31491"/>
+        <location filename="../setting.ui" line="33622"/>
+        <location filename="../setting.ui" line="33657"/>
         <source>不使用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4399"/>
-        <location filename="../setting.ui" line="4444"/>
-        <location filename="../setting.ui" line="4597"/>
-        <location filename="../setting.ui" line="4678"/>
-        <location filename="../setting.ui" line="4795"/>
-        <location filename="../setting.ui" line="4840"/>
-        <location filename="../setting.ui" line="4957"/>
-        <location filename="../setting.ui" line="5110"/>
-        <location filename="../setting.ui" line="5155"/>
-        <location filename="../setting.ui" line="5200"/>
-        <location filename="../setting.ui" line="5245"/>
-        <location filename="../setting.ui" line="5362"/>
-        <location filename="../setting.ui" line="5407"/>
-        <location filename="../setting.ui" line="5452"/>
+        <location filename="../setting.ui" line="3924"/>
+        <location filename="../setting.ui" line="3993"/>
+        <location filename="../setting.ui" line="4026"/>
+        <location filename="../setting.ui" line="4095"/>
+        <location filename="../setting.ui" line="4128"/>
+        <location filename="../setting.ui" line="4161"/>
+        <location filename="../setting.ui" line="4248"/>
+        <location filename="../setting.ui" line="4299"/>
+        <location filename="../setting.ui" line="4375"/>
+        <location filename="../setting.ui" line="4426"/>
+        <location filename="../setting.ui" line="4477"/>
+        <location filename="../setting.ui" line="4528"/>
+        <location filename="../setting.ui" line="4579"/>
+        <location filename="../setting.ui" line="4630"/>
         <source>正关联</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4404"/>
-        <location filename="../setting.ui" line="4449"/>
-        <location filename="../setting.ui" line="4602"/>
-        <location filename="../setting.ui" line="4683"/>
-        <location filename="../setting.ui" line="4800"/>
-        <location filename="../setting.ui" line="4845"/>
-        <location filename="../setting.ui" line="4962"/>
-        <location filename="../setting.ui" line="5115"/>
-        <location filename="../setting.ui" line="5160"/>
-        <location filename="../setting.ui" line="5205"/>
-        <location filename="../setting.ui" line="5250"/>
-        <location filename="../setting.ui" line="5367"/>
-        <location filename="../setting.ui" line="5412"/>
-        <location filename="../setting.ui" line="5457"/>
+        <location filename="../setting.ui" line="3929"/>
+        <location filename="../setting.ui" line="3998"/>
+        <location filename="../setting.ui" line="4031"/>
+        <location filename="../setting.ui" line="4100"/>
+        <location filename="../setting.ui" line="4133"/>
+        <location filename="../setting.ui" line="4166"/>
+        <location filename="../setting.ui" line="4253"/>
+        <location filename="../setting.ui" line="4304"/>
+        <location filename="../setting.ui" line="4380"/>
+        <location filename="../setting.ui" line="4431"/>
+        <location filename="../setting.ui" line="4482"/>
+        <location filename="../setting.ui" line="4533"/>
+        <location filename="../setting.ui" line="4584"/>
+        <location filename="../setting.ui" line="4635"/>
         <source>反关联</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4483"/>
-        <location filename="../setting.ui" line="5826"/>
+        <location filename="../setting.ui" line="4047"/>
+        <location filename="../setting.ui" line="5033"/>
         <source>预留Y7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4519"/>
-        <location filename="../setting.ui" line="6564"/>
+        <location filename="../setting.ui" line="4396"/>
+        <location filename="../setting.ui" line="5226"/>
         <source>预留EY2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4555"/>
-        <location filename="../setting.ui" line="6528"/>
+        <location filename="../setting.ui" line="4447"/>
+        <location filename="../setting.ui" line="5282"/>
         <source>预留EY3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4636"/>
-        <location filename="../setting.ui" line="5790"/>
+        <location filename="../setting.ui" line="3963"/>
+        <location filename="../setting.ui" line="5089"/>
         <source>预留Y8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4717"/>
-        <location filename="../setting.ui" line="6270"/>
+        <location filename="../setting.ui" line="4269"/>
+        <location filename="../setting.ui" line="4809"/>
         <source>预留Y3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4753"/>
-        <location filename="../setting.ui" line="6392"/>
+        <location filename="../setting.ui" line="4498"/>
+        <location filename="../setting.ui" line="5338"/>
         <source>预留EY4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4879"/>
-        <location filename="../setting.ui" line="6034"/>
+        <location filename="../setting.ui" line="4549"/>
+        <location filename="../setting.ui" line="5394"/>
         <source>预留EY5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4915"/>
-        <location filename="../setting.ui" line="6306"/>
+        <location filename="../setting.ui" line="4200"/>
+        <location filename="../setting.ui" line="4977"/>
         <source>预留Y6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="4996"/>
-        <location filename="../setting.ui" line="5998"/>
+        <location filename="../setting.ui" line="4182"/>
+        <location filename="../setting.ui" line="4753"/>
         <source>预留Y2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5032"/>
-        <location filename="../setting.ui" line="5754"/>
+        <location filename="../setting.ui" line="4065"/>
+        <location filename="../setting.ui" line="4865"/>
         <source>预留Y4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5068"/>
-        <location filename="../setting.ui" line="5618"/>
+        <location filename="../setting.ui" line="3945"/>
+        <location filename="../setting.ui" line="4921"/>
         <source>预留Y5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5284"/>
-        <location filename="../setting.ui" line="5912"/>
+        <location filename="../setting.ui" line="4600"/>
+        <location filename="../setting.ui" line="5450"/>
         <source>预留EY6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5320"/>
-        <location filename="../setting.ui" line="5532"/>
+        <location filename="../setting.ui" line="4345"/>
+        <location filename="../setting.ui" line="5170"/>
         <source>预留EY1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5491"/>
-        <location filename="../setting.ui" line="6700"/>
+        <location filename="../setting.ui" line="4218"/>
+        <location filename="../setting.ui" line="4697"/>
         <source>预留Y1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5500"/>
-        <location filename="../setting.cpp" line="1535"/>
+        <location filename="../setting.ui" line="4676"/>
+        <location filename="../setting.cpp" line="1356"/>
         <source>预留出类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5574"/>
-        <location filename="../setting.ui" line="5660"/>
-        <location filename="../setting.ui" line="5710"/>
-        <location filename="../setting.ui" line="5868"/>
-        <location filename="../setting.ui" line="5954"/>
-        <location filename="../setting.ui" line="6076"/>
-        <location filename="../setting.ui" line="6126"/>
-        <location filename="../setting.ui" line="6176"/>
-        <location filename="../setting.ui" line="6226"/>
-        <location filename="../setting.ui" line="6348"/>
-        <location filename="../setting.ui" line="6434"/>
-        <location filename="../setting.ui" line="6484"/>
-        <location filename="../setting.ui" line="6606"/>
-        <location filename="../setting.ui" line="6656"/>
+        <location filename="../setting.ui" line="4727"/>
+        <location filename="../setting.ui" line="4783"/>
+        <location filename="../setting.ui" line="4839"/>
+        <location filename="../setting.ui" line="4895"/>
+        <location filename="../setting.ui" line="4951"/>
+        <location filename="../setting.ui" line="5007"/>
+        <location filename="../setting.ui" line="5063"/>
+        <location filename="../setting.ui" line="5119"/>
+        <location filename="../setting.ui" line="5200"/>
+        <location filename="../setting.ui" line="5256"/>
+        <location filename="../setting.ui" line="5312"/>
+        <location filename="../setting.ui" line="5368"/>
+        <location filename="../setting.ui" line="5424"/>
+        <location filename="../setting.ui" line="5480"/>
         <source>停止断开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5579"/>
-        <location filename="../setting.ui" line="5665"/>
-        <location filename="../setting.ui" line="5715"/>
-        <location filename="../setting.ui" line="5873"/>
-        <location filename="../setting.ui" line="5959"/>
-        <location filename="../setting.ui" line="6081"/>
-        <location filename="../setting.ui" line="6131"/>
-        <location filename="../setting.ui" line="6181"/>
-        <location filename="../setting.ui" line="6231"/>
-        <location filename="../setting.ui" line="6353"/>
-        <location filename="../setting.ui" line="6439"/>
-        <location filename="../setting.ui" line="6489"/>
-        <location filename="../setting.ui" line="6611"/>
-        <location filename="../setting.ui" line="6661"/>
+        <location filename="../setting.ui" line="4732"/>
+        <location filename="../setting.ui" line="4788"/>
+        <location filename="../setting.ui" line="4844"/>
+        <location filename="../setting.ui" line="4900"/>
+        <location filename="../setting.ui" line="4956"/>
+        <location filename="../setting.ui" line="5012"/>
+        <location filename="../setting.ui" line="5068"/>
+        <location filename="../setting.ui" line="5124"/>
+        <location filename="../setting.ui" line="5205"/>
+        <location filename="../setting.ui" line="5261"/>
+        <location filename="../setting.ui" line="5317"/>
+        <location filename="../setting.ui" line="5373"/>
+        <location filename="../setting.ui" line="5429"/>
+        <location filename="../setting.ui" line="5485"/>
         <source>链条料道</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="5584"/>
-        <location filename="../setting.ui" line="5670"/>
-        <location filename="../setting.ui" line="5720"/>
-        <location filename="../setting.ui" line="5878"/>
-        <location filename="../setting.ui" line="5964"/>
-        <location filename="../setting.ui" line="6086"/>
-        <location filename="../setting.ui" line="6136"/>
-        <location filename="../setting.ui" line="6186"/>
-        <location filename="../setting.ui" line="6236"/>
-        <location filename="../setting.ui" line="6358"/>
-        <location filename="../setting.ui" line="6444"/>
-        <location filename="../setting.ui" line="6494"/>
-        <location filename="../setting.ui" line="6616"/>
-        <location filename="../setting.ui" line="6666"/>
+        <location filename="../setting.ui" line="4737"/>
+        <location filename="../setting.ui" line="4793"/>
+        <location filename="../setting.ui" line="4849"/>
+        <location filename="../setting.ui" line="4905"/>
+        <location filename="../setting.ui" line="4961"/>
+        <location filename="../setting.ui" line="5017"/>
+        <location filename="../setting.ui" line="5073"/>
+        <location filename="../setting.ui" line="5129"/>
+        <location filename="../setting.ui" line="5210"/>
+        <location filename="../setting.ui" line="5266"/>
+        <location filename="../setting.ui" line="5322"/>
+        <location filename="../setting.ui" line="5378"/>
+        <location filename="../setting.ui" line="5434"/>
+        <location filename="../setting.ui" line="5490"/>
         <source>转盘模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6709"/>
-        <location filename="../setting.cpp" line="1536"/>
+        <location filename="../setting.ui" line="5531"/>
+        <location filename="../setting.cpp" line="1357"/>
         <source>按键/信号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6747"/>
+        <location filename="../setting.ui" line="5952"/>
         <source>按键B/Z2+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6777"/>
+        <location filename="../setting.ui" line="5986"/>
         <source>按键F1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6807"/>
+        <location filename="../setting.ui" line="5918"/>
         <source>按键B/Z2-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6885"/>
+        <location filename="../setting.ui" line="6088"/>
         <source>按键F4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6931"/>
+        <location filename="../setting.ui" line="5559"/>
         <source>按键X1-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6961"/>
+        <location filename="../setting.ui" line="6054"/>
         <source>按键F3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="6991"/>
+        <location filename="../setting.ui" line="6131"/>
         <source>工作</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7021"/>
+        <location filename="../setting.ui" line="5593"/>
         <source>按键X1+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7051"/>
+        <location filename="../setting.ui" line="5850"/>
         <source>按键A/Y2-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7113"/>
+        <location filename="../setting.ui" line="5884"/>
         <source>按键A/Y2+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7143"/>
+        <location filename="../setting.ui" line="5763"/>
         <source>按键C-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7221"/>
+        <location filename="../setting.ui" line="6020"/>
         <source>按键F2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7283"/>
+        <location filename="../setting.ui" line="5797"/>
         <source>按键C+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7345"/>
+        <location filename="../setting.ui" line="6165"/>
         <source>加工完成</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7391"/>
+        <location filename="../setting.ui" line="6199"/>
         <source>启动加工</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7529"/>
+        <location filename="../setting.ui" line="5627"/>
         <source>按键Y1-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7575"/>
+        <location filename="../setting.ui" line="5661"/>
         <source>按键Y1+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7621"/>
+        <location filename="../setting.ui" line="5695"/>
         <source>按键Z1-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7667"/>
+        <location filename="../setting.ui" line="5729"/>
         <source>按键Z1+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7695"/>
-        <location filename="../setting.ui" line="18292"/>
-        <location filename="../setting.cpp" line="1508"/>
-        <location filename="../setting.cpp" line="1537"/>
-        <location filename="../setting.cpp" line="1548"/>
+        <location filename="../setting.ui" line="6325"/>
+        <location filename="../setting.ui" line="16140"/>
+        <location filename="../setting.cpp" line="1329"/>
+        <location filename="../setting.cpp" line="1358"/>
+        <location filename="../setting.cpp" line="1369"/>
         <source>高级</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7843"/>
+        <location filename="../setting.ui" line="6451"/>
         <source>刀座原点1检测</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7879"/>
-        <location filename="../setting.ui" line="7943"/>
-        <location filename="../setting.ui" line="8076"/>
-        <location filename="../setting.ui" line="8140"/>
-        <location filename="../setting.ui" line="8273"/>
-        <location filename="../setting.ui" line="8337"/>
-        <location filename="../setting.ui" line="8401"/>
-        <location filename="../setting.ui" line="8465"/>
-        <location filename="../setting.ui" line="8529"/>
-        <location filename="../setting.ui" line="8593"/>
-        <location filename="../setting.ui" line="8657"/>
-        <location filename="../setting.ui" line="8785"/>
-        <location filename="../setting.ui" line="8918"/>
-        <location filename="../setting.ui" line="8982"/>
-        <location filename="../setting.ui" line="9046"/>
-        <location filename="../setting.ui" line="9110"/>
-        <location filename="../setting.ui" line="9174"/>
-        <location filename="../setting.ui" line="9238"/>
-        <location filename="../setting.ui" line="9302"/>
-        <location filename="../setting.ui" line="9366"/>
-        <location filename="../setting.ui" line="9489"/>
-        <location filename="../setting.ui" line="9583"/>
-        <location filename="../setting.ui" line="9677"/>
-        <location filename="../setting.ui" line="9741"/>
-        <location filename="../setting.ui" line="9775"/>
-        <location filename="../setting.ui" line="9809"/>
-        <location filename="../setting.ui" line="9942"/>
-        <location filename="../setting.ui" line="10114"/>
-        <location filename="../setting.ui" line="10148"/>
-        <location filename="../setting.ui" line="10212"/>
-        <location filename="../setting.ui" line="10285"/>
-        <location filename="../setting.ui" line="10349"/>
-        <location filename="../setting.ui" line="10422"/>
-        <location filename="../setting.ui" line="10606"/>
-        <location filename="../setting.ui" line="10670"/>
-        <location filename="../setting.ui" line="10734"/>
-        <location filename="../setting.ui" line="10798"/>
-        <location filename="../setting.ui" line="10892"/>
-        <location filename="../setting.ui" line="18557"/>
-        <location filename="../setting.ui" line="19601"/>
-        <location filename="../setting.ui" line="27912"/>
-        <location filename="../setting.ui" line="29346"/>
-        <location filename="../setting.ui" line="30808"/>
-        <location filename="../setting.ui" line="32242"/>
-        <location filename="../setting.ui" line="33614"/>
-        <location filename="../setting.ui" line="36940"/>
-        <location filename="../setting.ui" line="36975"/>
+        <location filename="../setting.ui" line="6487"/>
+        <location filename="../setting.ui" line="6539"/>
+        <location filename="../setting.ui" line="6591"/>
+        <location filename="../setting.ui" line="6643"/>
+        <location filename="../setting.ui" line="6695"/>
+        <location filename="../setting.ui" line="6804"/>
+        <location filename="../setting.ui" line="6856"/>
+        <location filename="../setting.ui" line="6915"/>
+        <location filename="../setting.ui" line="6967"/>
+        <location filename="../setting.ui" line="7019"/>
+        <location filename="../setting.ui" line="7071"/>
+        <location filename="../setting.ui" line="7175"/>
+        <location filename="../setting.ui" line="7227"/>
+        <location filename="../setting.ui" line="7279"/>
+        <location filename="../setting.ui" line="7452"/>
+        <location filename="../setting.ui" line="7504"/>
+        <location filename="../setting.ui" line="7556"/>
+        <location filename="../setting.ui" line="7608"/>
+        <location filename="../setting.ui" line="7660"/>
+        <location filename="../setting.ui" line="7712"/>
+        <location filename="../setting.ui" line="7772"/>
+        <location filename="../setting.ui" line="7824"/>
+        <location filename="../setting.ui" line="7876"/>
+        <location filename="../setting.ui" line="7928"/>
+        <location filename="../setting.ui" line="7980"/>
+        <location filename="../setting.ui" line="8032"/>
+        <location filename="../setting.ui" line="8084"/>
+        <location filename="../setting.ui" line="8136"/>
+        <location filename="../setting.ui" line="8192"/>
+        <location filename="../setting.ui" line="8244"/>
+        <location filename="../setting.ui" line="8296"/>
+        <location filename="../setting.ui" line="8348"/>
+        <location filename="../setting.ui" line="8400"/>
+        <location filename="../setting.ui" line="8452"/>
+        <location filename="../setting.ui" line="8504"/>
+        <location filename="../setting.ui" line="8556"/>
+        <location filename="../setting.ui" line="8612"/>
+        <location filename="../setting.ui" line="8664"/>
+        <location filename="../setting.ui" line="16272"/>
+        <location filename="../setting.ui" line="17411"/>
+        <location filename="../setting.ui" line="24925"/>
+        <location filename="../setting.ui" line="26313"/>
+        <location filename="../setting.ui" line="27729"/>
+        <location filename="../setting.ui" line="29125"/>
+        <location filename="../setting.ui" line="30518"/>
+        <location filename="../setting.ui" line="33627"/>
+        <location filename="../setting.ui" line="33662"/>
         <source>使用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7907"/>
+        <location filename="../setting.ui" line="6879"/>
         <source>急停输入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="7971"/>
+        <location filename="../setting.ui" line="7302"/>
         <source>加工安全1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8007"/>
-        <location filename="../setting.ui" line="8204"/>
-        <location filename="../setting.ui" line="8849"/>
+        <location filename="../setting.ui" line="6747"/>
+        <location filename="../setting.ui" line="7338"/>
+        <location filename="../setting.ui" line="7395"/>
         <source>常开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8012"/>
-        <location filename="../setting.ui" line="8209"/>
-        <location filename="../setting.ui" line="8854"/>
+        <location filename="../setting.ui" line="6752"/>
+        <location filename="../setting.ui" line="7343"/>
+        <location filename="../setting.ui" line="7400"/>
         <source>常闭</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8040"/>
+        <location filename="../setting.ui" line="6503"/>
         <source>刀座原点2检测</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8104"/>
+        <location filename="../setting.ui" line="6931"/>
         <source>暂停输入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8168"/>
+        <location filename="../setting.ui" line="7359"/>
         <source>加工安全2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8237"/>
+        <location filename="../setting.ui" line="6555"/>
         <source>卡盘复归检测</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8301"/>
+        <location filename="../setting.ui" line="6983"/>
         <source>气压检测</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8365"/>
+        <location filename="../setting.ui" line="7416"/>
         <source>急停断使能</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8429"/>
+        <location filename="../setting.ui" line="6607"/>
         <source>料仓安全入1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8493"/>
+        <location filename="../setting.ui" line="7035"/>
         <source>远程自动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8557"/>
+        <location filename="../setting.ui" line="7468"/>
         <source>急停输出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8621"/>
+        <location filename="../setting.ui" line="6659"/>
         <source>料仓安全入2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8685"/>
+        <location filename="../setting.ui" line="7087"/>
         <source>远程停止</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8721"/>
+        <location filename="../setting.ui" line="7123"/>
         <source>周期停</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8749"/>
+        <location filename="../setting.ui" line="7520"/>
         <source>自动灯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8813"/>
+        <location filename="../setting.ui" line="6711"/>
         <source>料仓安全出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8882"/>
+        <location filename="../setting.ui" line="7139"/>
         <source>低油限</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="8946"/>
+        <location filename="../setting.ui" line="7572"/>
         <source>报警灯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9010"/>
+        <location filename="../setting.ui" line="6768"/>
         <source>报警输入1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9074"/>
+        <location filename="../setting.ui" line="7191"/>
         <source>注油器</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9138"/>
+        <location filename="../setting.ui" line="7624"/>
         <source>报警声</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9202"/>
+        <location filename="../setting.ui" line="6820"/>
         <source>报警输入2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9266"/>
+        <location filename="../setting.ui" line="7243"/>
         <source>润滑泵</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9330"/>
+        <location filename="../setting.ui" line="7676"/>
         <source>暂停灯</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9420"/>
-        <location filename="../setting.ui" line="9873"/>
-        <location filename="../setting.ui" line="9976"/>
-        <location filename="../setting.ui" line="10045"/>
-        <location filename="../setting.ui" line="10246"/>
-        <location filename="../setting.ui" line="10383"/>
+        <location filename="../setting.ui" line="8716"/>
+        <location filename="../setting.ui" line="8773"/>
+        <location filename="../setting.ui" line="8830"/>
+        <location filename="../setting.ui" line="8887"/>
+        <location filename="../setting.ui" line="8944"/>
+        <location filename="../setting.ui" line="9001"/>
         <source>机床</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9425"/>
-        <location filename="../setting.ui" line="9878"/>
-        <location filename="../setting.ui" line="9981"/>
-        <location filename="../setting.ui" line="10050"/>
-        <location filename="../setting.ui" line="10251"/>
-        <location filename="../setting.ui" line="10388"/>
+        <location filename="../setting.ui" line="8721"/>
+        <location filename="../setting.ui" line="8778"/>
+        <location filename="../setting.ui" line="8835"/>
+        <location filename="../setting.ui" line="8892"/>
+        <location filename="../setting.ui" line="8949"/>
+        <location filename="../setting.ui" line="9006"/>
         <source>机械手</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9517"/>
+        <location filename="../setting.ui" line="7840"/>
         <source>定位完成1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9611"/>
+        <location filename="../setting.ui" line="8520"/>
         <source>预留4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9837"/>
+        <location filename="../setting.ui" line="8908"/>
         <source>预留7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="9906"/>
+        <location filename="../setting.ui" line="8794"/>
         <source>预留5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10009"/>
+        <location filename="../setting.ui" line="8737"/>
         <source>自动门控制2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10078"/>
+        <location filename="../setting.ui" line="7892"/>
         <source>定位完成2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10176"/>
+        <location filename="../setting.ui" line="8468"/>
         <source>预留3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10450"/>
+        <location filename="../setting.ui" line="8628"/>
         <source>手动卡盘2入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10480"/>
+        <location filename="../setting.ui" line="8851"/>
         <source>预留6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10540"/>
+        <location filename="../setting.ui" line="8965"/>
         <source>预留8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10634"/>
+        <location filename="../setting.ui" line="8416"/>
         <source>吹气2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10762"/>
+        <location filename="../setting.ui" line="8364"/>
         <source>吹气1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10856"/>
+        <location filename="../setting.ui" line="8680"/>
         <source>自动门控制1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10950"/>
+        <location filename="../setting.ui" line="8576"/>
         <source>手动卡盘1入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="10993"/>
-        <location filename="../setting.cpp" line="1541"/>
+        <location filename="../setting.ui" line="9048"/>
+        <location filename="../setting.cpp" line="1362"/>
         <source>机床安全</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11028"/>
+        <location filename="../setting.ui" line="9141"/>
         <source>首件启动加工是否输出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11058"/>
+        <location filename="../setting.ui" line="9123"/>
         <source>手臂下降状态自动门2开关</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11088"/>
+        <location filename="../setting.ui" line="9205"/>
         <source>手臂下降状态自动门1开关</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11119"/>
-        <location filename="../setting.ui" line="11256"/>
-        <location filename="../setting.ui" line="12328"/>
-        <location filename="../setting.ui" line="13216"/>
-        <location filename="../setting.ui" line="14104"/>
-        <location filename="../setting.ui" line="14995"/>
+        <location filename="../setting.ui" line="9248"/>
+        <location filename="../setting.ui" line="9309"/>
+        <location filename="../setting.ui" line="10265"/>
+        <location filename="../setting.ui" line="11147"/>
+        <location filename="../setting.ui" line="12029"/>
+        <location filename="../setting.ui" line="12914"/>
         <source>不限制</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11124"/>
-        <location filename="../setting.ui" line="11261"/>
+        <location filename="../setting.ui" line="9253"/>
+        <location filename="../setting.ui" line="9314"/>
         <source>开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11129"/>
-        <location filename="../setting.ui" line="11266"/>
+        <location filename="../setting.ui" line="9258"/>
+        <location filename="../setting.ui" line="9319"/>
         <source>关</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11158"/>
-        <location filename="../setting.ui" line="11325"/>
+        <location filename="../setting.ui" line="9166"/>
+        <location filename="../setting.ui" line="9342"/>
         <source>禁止</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11163"/>
-        <location filename="../setting.ui" line="11330"/>
+        <location filename="../setting.ui" line="9171"/>
+        <location filename="../setting.ui" line="9347"/>
         <source>允许</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11192"/>
+        <location filename="../setting.ui" line="9281"/>
         <source>不输出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11197"/>
+        <location filename="../setting.ui" line="9286"/>
         <source>输出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11225"/>
+        <location filename="../setting.ui" line="9071"/>
         <source>手臂下降状态自动门2开关状态</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11294"/>
+        <location filename="../setting.ui" line="9187"/>
         <source>手臂下降状态自动门1开关状态</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11358"/>
+        <location filename="../setting.ui" line="9223"/>
         <source>首件加工完成</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11389"/>
+        <location filename="../setting.ui" line="9096"/>
         <source>启动有效</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11394"/>
+        <location filename="../setting.ui" line="9101"/>
         <source>启动无效</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11404"/>
-        <location filename="../setting.cpp" line="1542"/>
+        <location filename="../setting.ui" line="9370"/>
+        <location filename="../setting.cpp" line="1363"/>
         <source>料仓安全</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11439"/>
+        <location filename="../setting.ui" line="9411"/>
         <source>料仓安全入1恢复</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11470"/>
-        <location filename="../setting.ui" line="11534"/>
+        <location filename="../setting.ui" line="9436"/>
+        <location filename="../setting.ui" line="9464"/>
         <source>自动启动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11475"/>
-        <location filename="../setting.ui" line="11539"/>
+        <location filename="../setting.ui" line="9441"/>
+        <location filename="../setting.ui" line="9469"/>
         <source>手动启动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11503"/>
+        <location filename="../setting.ui" line="9393"/>
         <source>料仓安全入2恢复</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11549"/>
-        <location filename="../setting.cpp" line="1543"/>
+        <location filename="../setting.ui" line="9492"/>
+        <location filename="../setting.cpp" line="1364"/>
         <source>卡爪安全</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11565"/>
+        <location filename="../setting.ui" line="9508"/>
         <source>卡爪安全1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11582"/>
-        <location filename="../setting.ui" line="12688"/>
-        <location filename="../setting.ui" line="13576"/>
-        <location filename="../setting.ui" line="14464"/>
+        <location filename="../setting.ui" line="9525"/>
+        <location filename="../setting.ui" line="10625"/>
+        <location filename="../setting.ui" line="11507"/>
+        <location filename="../setting.ui" line="12389"/>
         <source>(B)C轴禁止区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11612"/>
-        <location filename="../setting.ui" line="12102"/>
-        <location filename="../setting.ui" line="12530"/>
-        <location filename="../setting.ui" line="12718"/>
-        <location filename="../setting.ui" line="13418"/>
-        <location filename="../setting.ui" line="13606"/>
-        <location filename="../setting.ui" line="14306"/>
-        <location filename="../setting.ui" line="14494"/>
+        <location filename="../setting.ui" line="9555"/>
+        <location filename="../setting.ui" line="10045"/>
+        <location filename="../setting.ui" line="10467"/>
+        <location filename="../setting.ui" line="10655"/>
+        <location filename="../setting.ui" line="11349"/>
+        <location filename="../setting.ui" line="11537"/>
+        <location filename="../setting.ui" line="12231"/>
+        <location filename="../setting.ui" line="12419"/>
         <source>① X1轴范围(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11643"/>
-        <location filename="../setting.ui" line="12133"/>
-        <location filename="../setting.ui" line="12561"/>
-        <location filename="../setting.ui" line="12749"/>
-        <location filename="../setting.ui" line="13449"/>
-        <location filename="../setting.ui" line="13637"/>
-        <location filename="../setting.ui" line="14337"/>
-        <location filename="../setting.ui" line="14525"/>
+        <location filename="../setting.ui" line="9586"/>
+        <location filename="../setting.ui" line="10076"/>
+        <location filename="../setting.ui" line="10498"/>
+        <location filename="../setting.ui" line="10686"/>
+        <location filename="../setting.ui" line="11380"/>
+        <location filename="../setting.ui" line="11568"/>
+        <location filename="../setting.ui" line="12262"/>
+        <location filename="../setting.ui" line="12450"/>
         <source>② Z1轴高度(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11671"/>
-        <location filename="../setting.ui" line="11770"/>
-        <location filename="../setting.ui" line="11822"/>
-        <location filename="../setting.ui" line="11856"/>
-        <location filename="../setting.ui" line="11908"/>
-        <location filename="../setting.ui" line="11945"/>
-        <location filename="../setting.ui" line="11997"/>
-        <location filename="../setting.ui" line="12161"/>
-        <location filename="../setting.ui" line="12192"/>
-        <location filename="../setting.ui" line="12244"/>
-        <location filename="../setting.ui" line="12589"/>
-        <location filename="../setting.ui" line="12617"/>
-        <location filename="../setting.ui" line="12666"/>
-        <location filename="../setting.ui" line="12777"/>
-        <location filename="../setting.ui" line="12923"/>
-        <location filename="../setting.ui" line="12972"/>
-        <location filename="../setting.ui" line="13003"/>
-        <location filename="../setting.ui" line="13052"/>
-        <location filename="../setting.ui" line="13086"/>
-        <location filename="../setting.ui" line="13135"/>
-        <location filename="../setting.ui" line="13477"/>
-        <location filename="../setting.ui" line="13505"/>
-        <location filename="../setting.ui" line="13554"/>
-        <location filename="../setting.ui" line="13665"/>
-        <location filename="../setting.ui" line="13761"/>
-        <location filename="../setting.ui" line="13810"/>
-        <location filename="../setting.ui" line="13841"/>
-        <location filename="../setting.ui" line="13890"/>
-        <location filename="../setting.ui" line="13924"/>
-        <location filename="../setting.ui" line="13973"/>
-        <location filename="../setting.ui" line="14365"/>
-        <location filename="../setting.ui" line="14393"/>
-        <location filename="../setting.ui" line="14442"/>
-        <location filename="../setting.ui" line="14553"/>
-        <location filename="../setting.ui" line="14649"/>
-        <location filename="../setting.ui" line="14698"/>
-        <location filename="../setting.ui" line="14729"/>
-        <location filename="../setting.ui" line="14778"/>
-        <location filename="../setting.ui" line="14812"/>
-        <location filename="../setting.ui" line="14861"/>
-        <location filename="../setting.ui" line="15611"/>
-        <location filename="../setting.ui" line="15660"/>
-        <location filename="../setting.ui" line="15820"/>
-        <location filename="../setting.ui" line="15949"/>
-        <location filename="../setting.ui" line="16315"/>
-        <location filename="../setting.ui" line="16364"/>
-        <location filename="../setting.ui" line="16619"/>
-        <location filename="../setting.ui" line="16994"/>
-        <location filename="../setting.ui" line="17043"/>
-        <location filename="../setting.ui" line="17298"/>
-        <location filename="../setting.ui" line="17673"/>
-        <location filename="../setting.ui" line="17722"/>
-        <location filename="../setting.ui" line="26960"/>
-        <location filename="../setting.ui" line="26998"/>
-        <location filename="../setting.ui" line="27036"/>
-        <location filename="../setting.ui" line="27464"/>
-        <location filename="../setting.ui" line="27486"/>
-        <location filename="../setting.ui" line="27508"/>
-        <location filename="../setting.ui" line="27552"/>
-        <location filename="../setting.ui" line="27574"/>
-        <location filename="../setting.ui" line="27596"/>
-        <location filename="../setting.ui" line="27618"/>
-        <location filename="../setting.ui" line="27659"/>
-        <location filename="../setting.ui" line="27678"/>
-        <location filename="../setting.ui" line="27700"/>
-        <location filename="../setting.ui" line="27811"/>
-        <location filename="../setting.ui" line="27849"/>
-        <location filename="../setting.ui" line="28714"/>
-        <location filename="../setting.ui" line="28736"/>
-        <location filename="../setting.ui" line="28758"/>
-        <location filename="../setting.ui" line="28802"/>
-        <location filename="../setting.ui" line="28824"/>
-        <location filename="../setting.ui" line="28846"/>
-        <location filename="../setting.ui" line="28868"/>
-        <location filename="../setting.ui" line="28909"/>
-        <location filename="../setting.ui" line="28928"/>
-        <location filename="../setting.ui" line="28950"/>
-        <location filename="../setting.ui" line="29058"/>
-        <location filename="../setting.ui" line="29096"/>
-        <location filename="../setting.ui" line="29134"/>
-        <location filename="../setting.ui" line="29245"/>
-        <location filename="../setting.ui" line="29283"/>
-        <location filename="../setting.ui" line="30176"/>
-        <location filename="../setting.ui" line="30198"/>
-        <location filename="../setting.ui" line="30220"/>
-        <location filename="../setting.ui" line="30264"/>
-        <location filename="../setting.ui" line="30286"/>
-        <location filename="../setting.ui" line="30308"/>
-        <location filename="../setting.ui" line="30330"/>
-        <location filename="../setting.ui" line="30371"/>
-        <location filename="../setting.ui" line="30390"/>
-        <location filename="../setting.ui" line="30412"/>
-        <location filename="../setting.ui" line="30520"/>
-        <location filename="../setting.ui" line="30558"/>
-        <location filename="../setting.ui" line="30596"/>
-        <location filename="../setting.ui" line="30707"/>
-        <location filename="../setting.ui" line="30745"/>
-        <location filename="../setting.ui" line="31610"/>
-        <location filename="../setting.ui" line="31632"/>
-        <location filename="../setting.ui" line="31654"/>
-        <location filename="../setting.ui" line="31698"/>
-        <location filename="../setting.ui" line="31720"/>
-        <location filename="../setting.ui" line="31742"/>
-        <location filename="../setting.ui" line="31764"/>
-        <location filename="../setting.ui" line="31805"/>
-        <location filename="../setting.ui" line="31824"/>
-        <location filename="../setting.ui" line="31846"/>
-        <location filename="../setting.ui" line="31954"/>
-        <location filename="../setting.ui" line="31992"/>
-        <location filename="../setting.ui" line="32030"/>
-        <location filename="../setting.ui" line="32141"/>
-        <location filename="../setting.ui" line="32179"/>
-        <location filename="../setting.ui" line="32691"/>
-        <location filename="../setting.ui" line="32734"/>
-        <location filename="../setting.ui" line="32777"/>
-        <location filename="../setting.ui" line="32842"/>
-        <location filename="../setting.ui" line="32867"/>
-        <location filename="../setting.ui" line="32886"/>
-        <location filename="../setting.ui" line="32935"/>
+        <location filename="../setting.ui" line="9614"/>
+        <location filename="../setting.ui" line="9713"/>
+        <location filename="../setting.ui" line="9765"/>
+        <location filename="../setting.ui" line="9799"/>
+        <location filename="../setting.ui" line="9851"/>
+        <location filename="../setting.ui" line="9888"/>
+        <location filename="../setting.ui" line="9940"/>
+        <location filename="../setting.ui" line="10104"/>
+        <location filename="../setting.ui" line="10135"/>
+        <location filename="../setting.ui" line="10187"/>
+        <location filename="../setting.ui" line="10526"/>
+        <location filename="../setting.ui" line="10554"/>
+        <location filename="../setting.ui" line="10603"/>
+        <location filename="../setting.ui" line="10714"/>
+        <location filename="../setting.ui" line="10860"/>
+        <location filename="../setting.ui" line="10909"/>
+        <location filename="../setting.ui" line="10940"/>
+        <location filename="../setting.ui" line="10989"/>
+        <location filename="../setting.ui" line="11023"/>
+        <location filename="../setting.ui" line="11072"/>
+        <location filename="../setting.ui" line="11408"/>
+        <location filename="../setting.ui" line="11436"/>
+        <location filename="../setting.ui" line="11485"/>
+        <location filename="../setting.ui" line="11596"/>
+        <location filename="../setting.ui" line="11692"/>
+        <location filename="../setting.ui" line="11741"/>
+        <location filename="../setting.ui" line="11772"/>
+        <location filename="../setting.ui" line="11821"/>
+        <location filename="../setting.ui" line="11855"/>
+        <location filename="../setting.ui" line="11904"/>
+        <location filename="../setting.ui" line="12290"/>
+        <location filename="../setting.ui" line="12318"/>
+        <location filename="../setting.ui" line="12367"/>
+        <location filename="../setting.ui" line="12478"/>
+        <location filename="../setting.ui" line="12574"/>
+        <location filename="../setting.ui" line="12623"/>
+        <location filename="../setting.ui" line="12654"/>
+        <location filename="../setting.ui" line="12703"/>
+        <location filename="../setting.ui" line="12737"/>
+        <location filename="../setting.ui" line="12786"/>
+        <location filename="../setting.ui" line="13530"/>
+        <location filename="../setting.ui" line="13579"/>
+        <location filename="../setting.ui" line="13739"/>
+        <location filename="../setting.ui" line="13868"/>
+        <location filename="../setting.ui" line="14234"/>
+        <location filename="../setting.ui" line="14283"/>
+        <location filename="../setting.ui" line="14538"/>
+        <location filename="../setting.ui" line="14913"/>
+        <location filename="../setting.ui" line="14962"/>
+        <location filename="../setting.ui" line="15217"/>
+        <location filename="../setting.ui" line="15592"/>
+        <location filename="../setting.ui" line="15641"/>
+        <location filename="../setting.ui" line="24626"/>
+        <location filename="../setting.ui" line="24648"/>
+        <location filename="../setting.ui" line="24670"/>
+        <location filename="../setting.ui" line="24714"/>
+        <location filename="../setting.ui" line="24736"/>
+        <location filename="../setting.ui" line="24758"/>
+        <location filename="../setting.ui" line="24780"/>
+        <location filename="../setting.ui" line="24821"/>
+        <location filename="../setting.ui" line="24840"/>
+        <location filename="../setting.ui" line="24862"/>
+        <location filename="../setting.ui" line="25378"/>
+        <location filename="../setting.ui" line="25416"/>
+        <location filename="../setting.ui" line="25435"/>
+        <location filename="../setting.ui" line="25506"/>
+        <location filename="../setting.ui" line="25563"/>
+        <location filename="../setting.ui" line="26014"/>
+        <location filename="../setting.ui" line="26036"/>
+        <location filename="../setting.ui" line="26058"/>
+        <location filename="../setting.ui" line="26102"/>
+        <location filename="../setting.ui" line="26124"/>
+        <location filename="../setting.ui" line="26146"/>
+        <location filename="../setting.ui" line="26168"/>
+        <location filename="../setting.ui" line="26209"/>
+        <location filename="../setting.ui" line="26228"/>
+        <location filename="../setting.ui" line="26250"/>
+        <location filename="../setting.ui" line="26766"/>
+        <location filename="../setting.ui" line="26804"/>
+        <location filename="../setting.ui" line="26842"/>
+        <location filename="../setting.ui" line="26913"/>
+        <location filename="../setting.ui" line="26932"/>
+        <location filename="../setting.ui" line="27430"/>
+        <location filename="../setting.ui" line="27452"/>
+        <location filename="../setting.ui" line="27474"/>
+        <location filename="../setting.ui" line="27518"/>
+        <location filename="../setting.ui" line="27540"/>
+        <location filename="../setting.ui" line="27562"/>
+        <location filename="../setting.ui" line="27584"/>
+        <location filename="../setting.ui" line="27625"/>
+        <location filename="../setting.ui" line="27644"/>
+        <location filename="../setting.ui" line="27666"/>
+        <location filename="../setting.ui" line="28182"/>
+        <location filename="../setting.ui" line="28201"/>
+        <location filename="../setting.ui" line="28220"/>
+        <location filename="../setting.ui" line="28348"/>
+        <location filename="../setting.ui" line="28367"/>
+        <location filename="../setting.ui" line="28826"/>
+        <location filename="../setting.ui" line="28848"/>
+        <location filename="../setting.ui" line="28870"/>
+        <location filename="../setting.ui" line="28914"/>
+        <location filename="../setting.ui" line="28936"/>
+        <location filename="../setting.ui" line="28958"/>
+        <location filename="../setting.ui" line="28980"/>
+        <location filename="../setting.ui" line="29021"/>
+        <location filename="../setting.ui" line="29040"/>
+        <location filename="../setting.ui" line="29062"/>
+        <location filename="../setting.ui" line="29559"/>
+        <location filename="../setting.ui" line="29578"/>
+        <location filename="../setting.ui" line="29654"/>
+        <location filename="../setting.ui" line="29706"/>
+        <location filename="../setting.ui" line="29744"/>
+        <location filename="../setting.ui" line="29864"/>
+        <location filename="../setting.ui" line="29909"/>
+        <location filename="../setting.ui" line="29947"/>
+        <location filename="../setting.ui" line="29972"/>
+        <location filename="../setting.ui" line="29997"/>
+        <location filename="../setting.ui" line="30016"/>
+        <location filename="../setting.ui" line="30035"/>
         <source>0.00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11702"/>
-        <location filename="../setting.ui" line="12805"/>
-        <location filename="../setting.ui" line="13693"/>
-        <location filename="../setting.ui" line="14581"/>
+        <location filename="../setting.ui" line="9645"/>
+        <location filename="../setting.ui" line="10742"/>
+        <location filename="../setting.ui" line="11624"/>
+        <location filename="../setting.ui" line="12506"/>
         <source>C轴在禁止区正转角度(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11736"/>
-        <location filename="../setting.ui" line="12839"/>
-        <location filename="../setting.ui" line="13727"/>
-        <location filename="../setting.ui" line="14615"/>
+        <location filename="../setting.ui" line="9679"/>
+        <location filename="../setting.ui" line="10776"/>
+        <location filename="../setting.ui" line="11658"/>
+        <location filename="../setting.ui" line="12540"/>
         <source>C轴在禁止区反转角度(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11800"/>
-        <location filename="../setting.ui" line="11886"/>
-        <location filename="../setting.ui" line="11975"/>
-        <location filename="../setting.ui" line="12222"/>
-        <location filename="../setting.ui" line="12644"/>
-        <location filename="../setting.ui" line="12950"/>
-        <location filename="../setting.ui" line="13030"/>
-        <location filename="../setting.ui" line="13113"/>
-        <location filename="../setting.ui" line="13532"/>
-        <location filename="../setting.ui" line="13788"/>
-        <location filename="../setting.ui" line="13868"/>
-        <location filename="../setting.ui" line="13951"/>
-        <location filename="../setting.ui" line="14420"/>
-        <location filename="../setting.ui" line="14676"/>
-        <location filename="../setting.ui" line="14756"/>
-        <location filename="../setting.ui" line="14839"/>
-        <location filename="../setting.ui" line="15638"/>
-        <location filename="../setting.ui" line="16342"/>
-        <location filename="../setting.ui" line="17021"/>
-        <location filename="../setting.ui" line="17700"/>
-        <location filename="../setting.ui" line="26907"/>
-        <location filename="../setting.ui" line="27755"/>
-        <location filename="../setting.ui" line="29005"/>
-        <location filename="../setting.ui" line="29189"/>
-        <location filename="../setting.ui" line="30467"/>
-        <location filename="../setting.ui" line="30651"/>
-        <location filename="../setting.ui" line="31901"/>
-        <location filename="../setting.ui" line="32085"/>
+        <location filename="../setting.ui" line="9743"/>
+        <location filename="../setting.ui" line="9829"/>
+        <location filename="../setting.ui" line="9918"/>
+        <location filename="../setting.ui" line="10165"/>
+        <location filename="../setting.ui" line="10581"/>
+        <location filename="../setting.ui" line="10887"/>
+        <location filename="../setting.ui" line="10967"/>
+        <location filename="../setting.ui" line="11050"/>
+        <location filename="../setting.ui" line="11463"/>
+        <location filename="../setting.ui" line="11719"/>
+        <location filename="../setting.ui" line="11799"/>
+        <location filename="../setting.ui" line="11882"/>
+        <location filename="../setting.ui" line="12345"/>
+        <location filename="../setting.ui" line="12601"/>
+        <location filename="../setting.ui" line="12681"/>
+        <location filename="../setting.ui" line="12764"/>
+        <location filename="../setting.ui" line="13557"/>
+        <location filename="../setting.ui" line="14261"/>
+        <location filename="../setting.ui" line="14940"/>
+        <location filename="../setting.ui" line="15619"/>
         <source>~</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12028"/>
-        <location filename="../setting.ui" line="12895"/>
-        <location filename="../setting.ui" line="14001"/>
-        <location filename="../setting.ui" line="14914"/>
+        <location filename="../setting.ui" line="9971"/>
+        <location filename="../setting.ui" line="10832"/>
+        <location filename="../setting.ui" line="11932"/>
+        <location filename="../setting.ui" line="12839"/>
         <source>④</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12053"/>
-        <location filename="../setting.ui" line="12870"/>
-        <location filename="../setting.ui" line="14026"/>
-        <location filename="../setting.ui" line="14889"/>
+        <location filename="../setting.ui" line="9996"/>
+        <location filename="../setting.ui" line="10807"/>
+        <location filename="../setting.ui" line="11957"/>
+        <location filename="../setting.ui" line="12814"/>
         <source>③</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12072"/>
-        <location filename="../setting.ui" line="12500"/>
-        <location filename="../setting.ui" line="13388"/>
-        <location filename="../setting.ui" line="14276"/>
+        <location filename="../setting.ui" line="10015"/>
+        <location filename="../setting.ui" line="10437"/>
+        <location filename="../setting.ui" line="11319"/>
+        <location filename="../setting.ui" line="12201"/>
         <source>(A)卡爪1禁止区</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12282"/>
-        <location filename="../setting.ui" line="13170"/>
-        <location filename="../setting.ui" line="14058"/>
-        <location filename="../setting.ui" line="14949"/>
+        <location filename="../setting.ui" line="10219"/>
+        <location filename="../setting.ui" line="11101"/>
+        <location filename="../setting.ui" line="11983"/>
+        <location filename="../setting.ui" line="12868"/>
         <source>卡爪1禁止区状态</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12318"/>
-        <location filename="../setting.ui" line="13206"/>
-        <location filename="../setting.ui" line="14094"/>
-        <location filename="../setting.ui" line="14985"/>
+        <location filename="../setting.ui" line="10255"/>
+        <location filename="../setting.ui" line="11137"/>
+        <location filename="../setting.ui" line="12019"/>
+        <location filename="../setting.ui" line="12904"/>
         <source>正转</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12323"/>
-        <location filename="../setting.ui" line="13211"/>
-        <location filename="../setting.ui" line="14099"/>
-        <location filename="../setting.ui" line="14990"/>
+        <location filename="../setting.ui" line="10260"/>
+        <location filename="../setting.ui" line="11142"/>
+        <location filename="../setting.ui" line="12024"/>
+        <location filename="../setting.ui" line="12909"/>
         <source>反转</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12348"/>
-        <location filename="../setting.ui" line="13236"/>
-        <location filename="../setting.ui" line="14124"/>
-        <location filename="../setting.ui" line="15015"/>
-        <location filename="../setting.ui" line="27088"/>
-        <location filename="../setting.ui" line="28338"/>
-        <location filename="../setting.ui" line="29800"/>
-        <location filename="../setting.ui" line="31234"/>
+        <location filename="../setting.ui" line="10285"/>
+        <location filename="../setting.ui" line="11167"/>
+        <location filename="../setting.ui" line="12049"/>
+        <location filename="../setting.ui" line="12934"/>
+        <location filename="../setting.ui" line="24252"/>
+        <location filename="../setting.ui" line="25640"/>
+        <location filename="../setting.ui" line="27056"/>
+        <location filename="../setting.ui" line="28452"/>
         <source>X轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12379"/>
-        <location filename="../setting.ui" line="12435"/>
-        <location filename="../setting.ui" line="13267"/>
-        <location filename="../setting.ui" line="13323"/>
-        <location filename="../setting.ui" line="14155"/>
-        <location filename="../setting.ui" line="14211"/>
-        <location filename="../setting.ui" line="15046"/>
-        <location filename="../setting.ui" line="15105"/>
-        <location filename="../setting.ui" line="15518"/>
-        <location filename="../setting.ui" line="16039"/>
-        <location filename="../setting.ui" line="16712"/>
-        <location filename="../setting.ui" line="17391"/>
-        <location filename="../setting.ui" line="24899"/>
-        <location filename="../setting.ui" line="27116"/>
-        <location filename="../setting.ui" line="27181"/>
-        <location filename="../setting.ui" line="27251"/>
-        <location filename="../setting.ui" line="28366"/>
-        <location filename="../setting.ui" line="28431"/>
-        <location filename="../setting.ui" line="28501"/>
-        <location filename="../setting.ui" line="29828"/>
-        <location filename="../setting.ui" line="29893"/>
-        <location filename="../setting.ui" line="29963"/>
-        <location filename="../setting.ui" line="31262"/>
-        <location filename="../setting.ui" line="31327"/>
-        <location filename="../setting.ui" line="31397"/>
-        <location filename="../setting.ui" line="34868"/>
-        <location filename="../setting.ui" line="34963"/>
-        <location filename="../setting.ui" line="35002"/>
-        <location filename="../setting.ui" line="35041"/>
-        <location filename="../setting.ui" line="35180"/>
-        <location filename="../setting.ui" line="35219"/>
-        <location filename="../setting.cpp" line="4322"/>
-        <location filename="../setting.cpp" line="4323"/>
-        <location filename="../setting.cpp" line="4324"/>
-        <location filename="../setting.cpp" line="4325"/>
-        <location filename="../setting.cpp" line="4327"/>
-        <location filename="../setting.cpp" line="4328"/>
-        <location filename="../setting.cpp" line="4329"/>
-        <location filename="../setting.cpp" line="4330"/>
-        <location filename="../setting.cpp" line="4332"/>
-        <location filename="../setting.cpp" line="4333"/>
-        <location filename="../setting.cpp" line="4334"/>
-        <location filename="../setting.cpp" line="4335"/>
-        <location filename="../setting.cpp" line="4337"/>
-        <location filename="../setting.cpp" line="4338"/>
-        <location filename="../setting.cpp" line="4339"/>
-        <location filename="../setting.cpp" line="4340"/>
-        <location filename="../setting.cpp" line="4341"/>
-        <location filename="../setting.cpp" line="4342"/>
-        <location filename="../setting.cpp" line="4343"/>
-        <location filename="../setting.cpp" line="4344"/>
-        <location filename="../setting.cpp" line="4345"/>
-        <location filename="../setting.cpp" line="4346"/>
-        <location filename="../setting.cpp" line="4347"/>
-        <location filename="../setting.cpp" line="4348"/>
+        <location filename="../setting.ui" line="10316"/>
+        <location filename="../setting.ui" line="10372"/>
+        <location filename="../setting.ui" line="11198"/>
+        <location filename="../setting.ui" line="11254"/>
+        <location filename="../setting.ui" line="12080"/>
+        <location filename="../setting.ui" line="12136"/>
+        <location filename="../setting.ui" line="12965"/>
+        <location filename="../setting.ui" line="13024"/>
+        <location filename="../setting.ui" line="13437"/>
+        <location filename="../setting.ui" line="13958"/>
+        <location filename="../setting.ui" line="14631"/>
+        <location filename="../setting.ui" line="15310"/>
+        <location filename="../setting.ui" line="22383"/>
+        <location filename="../setting.ui" line="24280"/>
+        <location filename="../setting.ui" line="24337"/>
+        <location filename="../setting.ui" line="24399"/>
+        <location filename="../setting.ui" line="25668"/>
+        <location filename="../setting.ui" line="25725"/>
+        <location filename="../setting.ui" line="25787"/>
+        <location filename="../setting.ui" line="27084"/>
+        <location filename="../setting.ui" line="27141"/>
+        <location filename="../setting.ui" line="27203"/>
+        <location filename="../setting.ui" line="28480"/>
+        <location filename="../setting.ui" line="28537"/>
+        <location filename="../setting.ui" line="28599"/>
+        <location filename="../setting.ui" line="31646"/>
+        <location filename="../setting.ui" line="31707"/>
+        <location filename="../setting.ui" line="31768"/>
+        <location filename="../setting.ui" line="31829"/>
+        <location filename="../setting.ui" line="31920"/>
+        <location filename="../setting.ui" line="32023"/>
+        <location filename="../setting.cpp" line="4399"/>
+        <location filename="../setting.cpp" line="4400"/>
+        <location filename="../setting.cpp" line="4401"/>
+        <location filename="../setting.cpp" line="4402"/>
+        <location filename="../setting.cpp" line="4404"/>
+        <location filename="../setting.cpp" line="4405"/>
+        <location filename="../setting.cpp" line="4406"/>
+        <location filename="../setting.cpp" line="4407"/>
+        <location filename="../setting.cpp" line="4409"/>
+        <location filename="../setting.cpp" line="4410"/>
+        <location filename="../setting.cpp" line="4411"/>
+        <location filename="../setting.cpp" line="4412"/>
+        <location filename="../setting.cpp" line="4414"/>
+        <location filename="../setting.cpp" line="4415"/>
+        <location filename="../setting.cpp" line="4416"/>
+        <location filename="../setting.cpp" line="4417"/>
+        <location filename="../setting.cpp" line="4418"/>
+        <location filename="../setting.cpp" line="4419"/>
+        <location filename="../setting.cpp" line="4420"/>
+        <location filename="../setting.cpp" line="4421"/>
+        <location filename="../setting.cpp" line="4422"/>
+        <location filename="../setting.cpp" line="4423"/>
+        <location filename="../setting.cpp" line="4424"/>
+        <location filename="../setting.cpp" line="4425"/>
         <source>无</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12384"/>
-        <location filename="../setting.ui" line="13272"/>
-        <location filename="../setting.ui" line="14160"/>
-        <location filename="../setting.ui" line="15051"/>
-        <location filename="../setting.ui" line="15523"/>
-        <location filename="../setting.ui" line="16044"/>
-        <location filename="../setting.ui" line="16717"/>
-        <location filename="../setting.ui" line="17396"/>
-        <location filename="../setting.ui" line="25157"/>
-        <location filename="../setting.ui" line="26311"/>
-        <location filename="../setting.ui" line="27121"/>
-        <location filename="../setting.ui" line="27442"/>
-        <location filename="../setting.ui" line="28371"/>
-        <location filename="../setting.ui" line="28692"/>
-        <location filename="../setting.ui" line="29833"/>
-        <location filename="../setting.ui" line="30154"/>
-        <location filename="../setting.ui" line="31267"/>
-        <location filename="../setting.ui" line="31588"/>
-        <location filename="../setting.ui" line="34660"/>
-        <location filename="../setting.ui" line="35249"/>
-        <location filename="../setting.ui" line="36595"/>
+        <location filename="../setting.ui" line="10321"/>
+        <location filename="../setting.ui" line="11203"/>
+        <location filename="../setting.ui" line="12085"/>
+        <location filename="../setting.ui" line="12970"/>
+        <location filename="../setting.ui" line="13442"/>
+        <location filename="../setting.ui" line="13963"/>
+        <location filename="../setting.ui" line="14636"/>
+        <location filename="../setting.ui" line="15315"/>
+        <location filename="../setting.ui" line="22920"/>
+        <location filename="../setting.ui" line="23595"/>
+        <location filename="../setting.ui" line="24285"/>
+        <location filename="../setting.ui" line="24604"/>
+        <location filename="../setting.ui" line="25673"/>
+        <location filename="../setting.ui" line="25992"/>
+        <location filename="../setting.ui" line="27089"/>
+        <location filename="../setting.ui" line="27408"/>
+        <location filename="../setting.ui" line="28485"/>
+        <location filename="../setting.ui" line="28804"/>
+        <location filename="../setting.ui" line="30933"/>
+        <location filename="../setting.ui" line="31875"/>
+        <location filename="../setting.ui" line="33282"/>
         <source>X1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12404"/>
-        <location filename="../setting.ui" line="13292"/>
-        <location filename="../setting.ui" line="14180"/>
-        <location filename="../setting.ui" line="15074"/>
-        <location filename="../setting.ui" line="27223"/>
-        <location filename="../setting.ui" line="28473"/>
-        <location filename="../setting.ui" line="29935"/>
-        <location filename="../setting.ui" line="31369"/>
+        <location filename="../setting.ui" line="10341"/>
+        <location filename="../setting.ui" line="11223"/>
+        <location filename="../setting.ui" line="12105"/>
+        <location filename="../setting.ui" line="12993"/>
+        <location filename="../setting.ui" line="24371"/>
+        <location filename="../setting.ui" line="25759"/>
+        <location filename="../setting.ui" line="27175"/>
+        <location filename="../setting.ui" line="28571"/>
         <source>Z轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12440"/>
-        <location filename="../setting.ui" line="13328"/>
-        <location filename="../setting.ui" line="14216"/>
-        <location filename="../setting.ui" line="15110"/>
-        <location filename="../setting.ui" line="25814"/>
-        <location filename="../setting.ui" line="26712"/>
-        <location filename="../setting.ui" line="27256"/>
-        <location filename="../setting.ui" line="28506"/>
-        <location filename="../setting.ui" line="29968"/>
-        <location filename="../setting.ui" line="31402"/>
-        <location filename="../setting.ui" line="34110"/>
-        <location filename="../setting.ui" line="35071"/>
-        <location filename="../setting.ui" line="35683"/>
+        <location filename="../setting.ui" line="10377"/>
+        <location filename="../setting.ui" line="11259"/>
+        <location filename="../setting.ui" line="12141"/>
+        <location filename="../setting.ui" line="13029"/>
+        <location filename="../setting.ui" line="23518"/>
+        <location filename="../setting.ui" line="23788"/>
+        <location filename="../setting.ui" line="24404"/>
+        <location filename="../setting.ui" line="25792"/>
+        <location filename="../setting.ui" line="27208"/>
+        <location filename="../setting.ui" line="28604"/>
+        <location filename="../setting.ui" line="31325"/>
+        <location filename="../setting.ui" line="31895"/>
+        <location filename="../setting.ui" line="32370"/>
         <source>Z1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12445"/>
-        <location filename="../setting.ui" line="13333"/>
-        <location filename="../setting.ui" line="14221"/>
-        <location filename="../setting.ui" line="15115"/>
-        <location filename="../setting.ui" line="25773"/>
-        <location filename="../setting.ui" line="26153"/>
-        <location filename="../setting.ui" line="27261"/>
-        <location filename="../setting.ui" line="28511"/>
-        <location filename="../setting.ui" line="29973"/>
-        <location filename="../setting.ui" line="31407"/>
-        <location filename="../setting.ui" line="34017"/>
-        <location filename="../setting.ui" line="35361"/>
-        <location filename="../setting.ui" line="36291"/>
+        <location filename="../setting.ui" line="10382"/>
+        <location filename="../setting.ui" line="11264"/>
+        <location filename="../setting.ui" line="12146"/>
+        <location filename="../setting.ui" line="13034"/>
+        <location filename="../setting.ui" line="23358"/>
+        <location filename="../setting.ui" line="23846"/>
+        <location filename="../setting.ui" line="24409"/>
+        <location filename="../setting.ui" line="25797"/>
+        <location filename="../setting.ui" line="27213"/>
+        <location filename="../setting.ui" line="28609"/>
+        <location filename="../setting.ui" line="30890"/>
+        <location filename="../setting.ui" line="31885"/>
+        <location filename="../setting.ui" line="32978"/>
         <source>Z2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="12483"/>
+        <location filename="../setting.ui" line="10420"/>
         <source>卡爪安全2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="13371"/>
+        <location filename="../setting.ui" line="11302"/>
         <source>卡爪安全3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="14259"/>
+        <location filename="../setting.ui" line="12184"/>
         <source>卡爪安全4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15168"/>
-        <location filename="../setting.cpp" line="1544"/>
-        <location filename="../setting.cpp" line="1550"/>
+        <location filename="../setting.ui" line="13087"/>
+        <location filename="../setting.cpp" line="1365"/>
+        <location filename="../setting.cpp" line="1371"/>
         <source>联机安全</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15184"/>
+        <location filename="../setting.ui" line="13103"/>
         <source>联机区域1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15236"/>
-        <location filename="../setting.ui" line="16456"/>
-        <location filename="../setting.ui" line="17135"/>
-        <location filename="../setting.ui" line="17814"/>
+        <location filename="../setting.ui" line="13155"/>
+        <location filename="../setting.ui" line="14375"/>
+        <location filename="../setting.ui" line="15054"/>
+        <location filename="../setting.ui" line="15733"/>
         <source>① 区域输入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15292"/>
-        <location filename="../setting.ui" line="15977"/>
-        <location filename="../setting.ui" line="16647"/>
-        <location filename="../setting.ui" line="17326"/>
+        <location filename="../setting.ui" line="13211"/>
+        <location filename="../setting.ui" line="13896"/>
+        <location filename="../setting.ui" line="14566"/>
+        <location filename="../setting.ui" line="15245"/>
         <source>② 区域输出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15354"/>
-        <location filename="../setting.ui" line="16175"/>
-        <location filename="../setting.ui" line="16848"/>
-        <location filename="../setting.ui" line="17527"/>
+        <location filename="../setting.ui" line="13273"/>
+        <location filename="../setting.ui" line="14094"/>
+        <location filename="../setting.ui" line="14767"/>
+        <location filename="../setting.ui" line="15446"/>
         <source>④请求输出</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15410"/>
-        <location filename="../setting.ui" line="16101"/>
-        <location filename="../setting.ui" line="16774"/>
-        <location filename="../setting.ui" line="17453"/>
+        <location filename="../setting.ui" line="13329"/>
+        <location filename="../setting.ui" line="14020"/>
+        <location filename="../setting.ui" line="14693"/>
+        <location filename="../setting.ui" line="15372"/>
         <source>③请求输入</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15447"/>
-        <location filename="../setting.ui" line="16138"/>
-        <location filename="../setting.ui" line="16811"/>
-        <location filename="../setting.ui" line="17490"/>
+        <location filename="../setting.ui" line="13366"/>
+        <location filename="../setting.ui" line="14057"/>
+        <location filename="../setting.ui" line="14730"/>
+        <location filename="../setting.ui" line="15409"/>
         <source>外部联机</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15452"/>
-        <location filename="../setting.ui" line="16143"/>
-        <location filename="../setting.ui" line="16816"/>
-        <location filename="../setting.ui" line="17495"/>
+        <location filename="../setting.ui" line="13371"/>
+        <location filename="../setting.ui" line="14062"/>
+        <location filename="../setting.ui" line="14735"/>
+        <location filename="../setting.ui" line="15414"/>
         <source>内部联机</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15481"/>
-        <location filename="../setting.ui" line="16487"/>
-        <location filename="../setting.ui" line="17166"/>
-        <location filename="../setting.ui" line="17845"/>
+        <location filename="../setting.ui" line="13400"/>
+        <location filename="../setting.ui" line="14406"/>
+        <location filename="../setting.ui" line="15085"/>
+        <location filename="../setting.ui" line="15764"/>
         <source>联机选择</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15552"/>
-        <location filename="../setting.ui" line="16425"/>
-        <location filename="../setting.ui" line="17104"/>
-        <location filename="../setting.ui" line="17783"/>
+        <location filename="../setting.ui" line="13471"/>
+        <location filename="../setting.ui" line="14344"/>
+        <location filename="../setting.ui" line="15023"/>
+        <location filename="../setting.ui" line="15702"/>
         <source>联机轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15586"/>
-        <location filename="../setting.ui" line="16290"/>
-        <location filename="../setting.ui" line="16969"/>
-        <location filename="../setting.ui" line="17648"/>
+        <location filename="../setting.ui" line="13505"/>
+        <location filename="../setting.ui" line="14209"/>
+        <location filename="../setting.ui" line="14888"/>
+        <location filename="../setting.ui" line="15567"/>
         <source>A1A2范围</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15687"/>
-        <location filename="../setting.ui" line="16391"/>
-        <location filename="../setting.ui" line="17070"/>
-        <location filename="../setting.ui" line="17749"/>
+        <location filename="../setting.ui" line="13606"/>
+        <location filename="../setting.ui" line="14310"/>
+        <location filename="../setting.ui" line="14989"/>
+        <location filename="../setting.ui" line="15668"/>
         <source>(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15721"/>
-        <location filename="../setting.ui" line="16231"/>
-        <location filename="../setting.ui" line="16907"/>
-        <location filename="../setting.ui" line="17586"/>
+        <location filename="../setting.ui" line="13640"/>
+        <location filename="../setting.ui" line="14150"/>
+        <location filename="../setting.ui" line="14826"/>
+        <location filename="../setting.ui" line="15505"/>
         <source>主从模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15758"/>
-        <location filename="../setting.ui" line="15918"/>
-        <location filename="../setting.ui" line="16588"/>
-        <location filename="../setting.ui" line="17267"/>
+        <location filename="../setting.ui" line="13677"/>
+        <location filename="../setting.ui" line="13837"/>
+        <location filename="../setting.ui" line="14507"/>
+        <location filename="../setting.ui" line="15186"/>
         <source>主机</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15763"/>
-        <location filename="../setting.ui" line="15923"/>
-        <location filename="../setting.ui" line="16593"/>
-        <location filename="../setting.ui" line="17272"/>
+        <location filename="../setting.ui" line="13682"/>
+        <location filename="../setting.ui" line="13842"/>
+        <location filename="../setting.ui" line="14512"/>
+        <location filename="../setting.ui" line="15191"/>
         <source>从机</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15792"/>
-        <location filename="../setting.ui" line="15881"/>
-        <location filename="../setting.ui" line="16551"/>
-        <location filename="../setting.ui" line="17230"/>
+        <location filename="../setting.ui" line="13711"/>
+        <location filename="../setting.ui" line="13800"/>
+        <location filename="../setting.ui" line="14470"/>
+        <location filename="../setting.ui" line="15149"/>
         <source>脉冲时间(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="15854"/>
+        <location filename="../setting.ui" line="13773"/>
         <source>联机区域2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="16524"/>
+        <location filename="../setting.ui" line="14443"/>
         <source>联机区域3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="17203"/>
+        <location filename="../setting.ui" line="15122"/>
         <source>联机区域4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="17967"/>
-        <source>等加工完成时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="17989"/>
-        <location filename="../setting.ui" line="18038"/>
-        <location filename="../setting.ui" line="18087"/>
-        <location filename="../setting.ui" line="18136"/>
-        <location filename="../setting.ui" line="18185"/>
-        <location filename="../setting.ui" line="18234"/>
-        <location filename="../setting.ui" line="18283"/>
-        <location filename="../setting.ui" line="18352"/>
-        <location filename="../setting.ui" line="18401"/>
-        <location filename="../setting.ui" line="18450"/>
-        <location filename="../setting.ui" line="18499"/>
+        <location filename="../setting.ui" line="15878"/>
+        <location filename="../setting.ui" line="15897"/>
+        <location filename="../setting.ui" line="15916"/>
+        <location filename="../setting.ui" line="15935"/>
+        <location filename="../setting.ui" line="15972"/>
+        <location filename="../setting.ui" line="16081"/>
+        <location filename="../setting.ui" line="16118"/>
+        <location filename="../setting.ui" line="16170"/>
+        <location filename="../setting.ui" line="16189"/>
+        <location filename="../setting.ui" line="16244"/>
+        <location filename="../setting.ui" line="16310"/>
         <source>0.0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18016"/>
-        <source>脉冲输出时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18065"/>
-        <source>阀限制时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18114"/>
-        <source>自动周期时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18163"/>
-        <source>报警响时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18212"/>
-        <source>链条到位延时(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18261"/>
-        <source>夹检测滤波时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18330"/>
-        <source>润滑开启时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18379"/>
-        <source>润滑关闭时间(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18428"/>
-        <source>润滑延时(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18477"/>
-        <source>润滑间隔周期(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18526"/>
-        <source>产品记忆(S)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="18567"/>
-        <location filename="../setting.ui" line="18871"/>
-        <location filename="../setting.ui" line="22134"/>
-        <location filename="../setting.cpp" line="1549"/>
-        <location filename="../setting.cpp" line="1559"/>
+        <location filename="../setting.ui" line="16368"/>
+        <location filename="../setting.ui" line="16672"/>
+        <location filename="../setting.ui" line="19892"/>
+        <location filename="../setting.cpp" line="1370"/>
+        <location filename="../setting.cpp" line="1380"/>
         <source>物联网</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18584"/>
+        <location filename="../setting.ui" line="16385"/>
         <source>手控器物联网</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18656"/>
-        <location filename="../setting.ui" line="21358"/>
+        <location filename="../setting.ui" line="16457"/>
+        <location filename="../setting.ui" line="19137"/>
         <source>编辑</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18697"/>
+        <location filename="../setting.ui" line="16498"/>
         <source>手臂编号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18719"/>
-        <location filename="../setting.ui" line="18763"/>
-        <location filename="../setting.ui" line="18810"/>
-        <location filename="../setting.ui" line="23444"/>
-        <location filename="../setting.ui" line="35501"/>
-        <location filename="../setting.ui" line="35594"/>
-        <location filename="../setting.ui" line="35719"/>
-        <location filename="../setting.ui" line="35817"/>
-        <location filename="../setting.ui" line="35876"/>
-        <location filename="../setting.ui" line="36742"/>
-        <location filename="../setting.ui" line="37376"/>
+        <location filename="../setting.ui" line="16520"/>
+        <location filename="../setting.ui" line="16564"/>
+        <location filename="../setting.ui" line="16611"/>
+        <location filename="../setting.ui" line="21189"/>
+        <location filename="../setting.ui" line="32188"/>
+        <location filename="../setting.ui" line="32281"/>
+        <location filename="../setting.ui" line="32406"/>
+        <location filename="../setting.ui" line="32504"/>
+        <location filename="../setting.ui" line="32563"/>
+        <location filename="../setting.ui" line="33429"/>
+        <location filename="../setting.ui" line="33850"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18741"/>
+        <location filename="../setting.ui" line="16542"/>
         <source>机床编号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18785"/>
+        <location filename="../setting.ui" line="16586"/>
         <source>生产批次</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18832"/>
+        <location filename="../setting.ui" line="16633"/>
         <source>主板物联网</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18876"/>
+        <location filename="../setting.ui" line="16677"/>
         <source>机床通信</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18905"/>
+        <location filename="../setting.ui" line="16706"/>
         <source>无校验</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18910"/>
+        <location filename="../setting.ui" line="16711"/>
         <source>奇校验</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18915"/>
+        <location filename="../setting.ui" line="16716"/>
         <source>偶校验</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18938"/>
+        <location filename="../setting.ui" line="16739"/>
         <source>奇偶校验</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18963"/>
+        <location filename="../setting.ui" line="16764"/>
         <source>主板通信</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18994"/>
+        <location filename="../setting.ui" line="16795"/>
         <source>2400</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="18999"/>
+        <location filename="../setting.ui" line="16800"/>
         <source>4800</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19004"/>
+        <location filename="../setting.ui" line="16805"/>
         <source>9600</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19009"/>
+        <location filename="../setting.ui" line="16810"/>
         <source>19200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19014"/>
+        <location filename="../setting.ui" line="16815"/>
         <source>38400</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19019"/>
+        <location filename="../setting.ui" line="16820"/>
         <source>57600</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19024"/>
+        <location filename="../setting.ui" line="16825"/>
         <source>115200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19047"/>
+        <location filename="../setting.ui" line="16848"/>
         <source>波特率</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19107"/>
-        <location filename="../setting.cpp" line="1554"/>
+        <location filename="../setting.ui" line="16908"/>
+        <location filename="../setting.cpp" line="1375"/>
         <source>语言设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19143"/>
-        <location filename="../setting.ui" line="19196"/>
-        <location filename="../setting.ui" line="19991"/>
-        <location filename="../setting.ui" line="24429"/>
-        <location filename="../setting.ui" line="24662"/>
+        <location filename="../setting.ui" line="16944"/>
+        <location filename="../setting.ui" line="16997"/>
+        <location filename="../setting.ui" line="17745"/>
+        <location filename="../setting.ui" line="22234"/>
+        <location filename="../setting.ui" line="22564"/>
         <source>默认</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19148"/>
+        <location filename="../setting.ui" line="16949"/>
         <source>新宋体</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19153"/>
+        <location filename="../setting.ui" line="16954"/>
         <source>楷体</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19158"/>
+        <location filename="../setting.ui" line="16959"/>
         <source>DejaVu Sans</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19201"/>
+        <location filename="../setting.ui" line="17002"/>
         <source>15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19206"/>
+        <location filename="../setting.ui" line="17007"/>
         <source>16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19211"/>
+        <location filename="../setting.ui" line="17012"/>
         <source>17</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19216"/>
+        <location filename="../setting.ui" line="17017"/>
         <source>18</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19221"/>
+        <location filename="../setting.ui" line="17022"/>
         <source>19</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19226"/>
+        <location filename="../setting.ui" line="17027"/>
         <source>20</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19231"/>
+        <location filename="../setting.ui" line="17032"/>
         <source>21</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19236"/>
+        <location filename="../setting.ui" line="17037"/>
         <source>22</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19250"/>
+        <location filename="../setting.ui" line="17051"/>
         <source>字体：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19263"/>
+        <location filename="../setting.ui" line="17067"/>
         <source>语言设置：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19276"/>
+        <location filename="../setting.ui" line="17083"/>
         <source>字号：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19319"/>
+        <location filename="../setting.ui" line="17129"/>
         <source>Special</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19353"/>
+        <location filename="../setting.ui" line="17163"/>
         <source>Poiskie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19384"/>
+        <location filename="../setting.ui" line="17194"/>
         <source>中文</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19418"/>
+        <location filename="../setting.ui" line="17228"/>
         <source>中文繁体</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19449"/>
+        <location filename="../setting.ui" line="17259"/>
         <source>English</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19480"/>
+        <location filename="../setting.ui" line="17290"/>
         <source>Russian</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19514"/>
+        <location filename="../setting.ui" line="17324"/>
         <source>Vietnam</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19545"/>
+        <location filename="../setting.ui" line="17355"/>
         <source>Korean</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19576"/>
+        <location filename="../setting.ui" line="17386"/>
         <source>Spain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19589"/>
-        <location filename="../setting.cpp" line="1555"/>
+        <location filename="../setting.ui" line="17399"/>
+        <location filename="../setting.cpp" line="1376"/>
         <source>用户设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19626"/>
+        <location filename="../setting.ui" line="17436"/>
         <source>按键音设置：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19639"/>
+        <location filename="../setting.ui" line="17452"/>
         <source>背光时间：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19652"/>
+        <location filename="../setting.ui" line="17468"/>
         <source>触摸校准：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19665"/>
+        <location filename="../setting.ui" line="17484"/>
         <source>LOGO设置：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19678"/>
+        <location filename="../setting.ui" line="17500"/>
         <source>系统名称：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19691"/>
+        <location filename="../setting.ui" line="17516"/>
         <source>系统颜色：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19704"/>
+        <location filename="../setting.ui" line="17532"/>
         <source>系统时间：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19736"/>
-        <location filename="../setting.ui" line="20435"/>
+        <location filename="../setting.ui" line="17567"/>
+        <location filename="../setting.ui" line="18166"/>
         <source>秒</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19757"/>
+        <location filename="../setting.ui" line="17588"/>
         <source>触摸屏校准</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19778"/>
+        <location filename="../setting.ui" line="17609"/>
         <source>更新LOGO</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19803"/>
+        <location filename="../setting.ui" line="17634"/>
         <source>机床机械手控制系统</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19816"/>
+        <location filename="../setting.ui" line="17647"/>
         <source>背光亮度：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="19868"/>
+        <location filename="../setting.ui" line="17702"/>
         <source>默认值</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20030"/>
+        <location filename="../setting.ui" line="17778"/>
         <source>橘色</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20068"/>
+        <location filename="../setting.ui" line="17810"/>
         <source>黄色</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20106"/>
+        <location filename="../setting.ui" line="17842"/>
         <source>绿色</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20144"/>
+        <location filename="../setting.ui" line="17874"/>
         <source>棕色</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20196"/>
+        <location filename="../setting.ui" line="17963"/>
         <source>2024</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20215"/>
+        <location filename="../setting.ui" line="17976"/>
         <source>年</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20240"/>
-        <location filename="../setting.ui" line="20284"/>
-        <location filename="../setting.ui" line="20328"/>
-        <location filename="../setting.ui" line="20372"/>
+        <location filename="../setting.ui" line="18001"/>
+        <location filename="../setting.ui" line="18039"/>
+        <location filename="../setting.ui" line="18077"/>
+        <location filename="../setting.ui" line="18115"/>
         <source>06</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20259"/>
+        <location filename="../setting.ui" line="18014"/>
         <source>月</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20303"/>
+        <location filename="../setting.ui" line="18052"/>
         <source>日</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20347"/>
+        <location filename="../setting.ui" line="18090"/>
         <source>时</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20391"/>
+        <location filename="../setting.ui" line="18128"/>
         <source>分</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20416"/>
-        <location filename="../setting.ui" line="23420"/>
+        <location filename="../setting.ui" line="18153"/>
+        <location filename="../setting.ui" line="21165"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20555"/>
-        <location filename="../setting.ui" line="21020"/>
+        <location filename="../setting.ui" line="18336"/>
+        <location filename="../setting.ui" line="18799"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20585"/>
-        <location filename="../setting.cpp" line="1556"/>
+        <location filename="../setting.ui" line="18364"/>
+        <location filename="../setting.cpp" line="1377"/>
         <source>升级与备份</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20643"/>
+        <location filename="../setting.ui" line="18422"/>
         <source>系统数据备份</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20688"/>
+        <location filename="../setting.ui" line="18467"/>
         <source>备份数据还原</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20733"/>
+        <location filename="../setting.ui" line="18512"/>
         <source>恢复出厂设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20758"/>
+        <location filename="../setting.ui" line="18537"/>
         <source>升级</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20799"/>
+        <location filename="../setting.ui" line="18578"/>
         <source>手控器升级</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20844"/>
+        <location filename="../setting.ui" line="18623"/>
         <source>主板升级</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20889"/>
+        <location filename="../setting.ui" line="18668"/>
         <source>IO板升级</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="20934"/>
+        <location filename="../setting.ui" line="18713"/>
         <source>伺服升级</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21136"/>
-        <location filename="../setting.cpp" line="1557"/>
+        <location filename="../setting.ui" line="18915"/>
+        <location filename="../setting.cpp" line="1378"/>
         <source>记事本</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21214"/>
+        <location filename="../setting.ui" line="18993"/>
         <source>删除</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21257"/>
+        <location filename="../setting.ui" line="19036"/>
         <source>新建</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21401"/>
+        <location filename="../setting.ui" line="19180"/>
         <source>回退</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21439"/>
+        <location filename="../setting.ui" line="19218"/>
         <source>标题：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21490"/>
-        <location filename="../setting.cpp" line="1558"/>
+        <location filename="../setting.ui" line="19269"/>
+        <location filename="../setting.cpp" line="1379"/>
         <source>密码设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21507"/>
-        <location filename="../setting.cpp" line="1508"/>
+        <location filename="../setting.ui" line="19286"/>
+        <location filename="../setting.cpp" line="1329"/>
         <source>管理员</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21562"/>
-        <location filename="../setting.ui" line="21773"/>
-        <location filename="../setting.ui" line="21990"/>
+        <location filename="../setting.ui" line="19341"/>
+        <location filename="../setting.ui" line="19549"/>
+        <location filename="../setting.ui" line="19754"/>
         <source>旧密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21596"/>
-        <location filename="../setting.ui" line="21807"/>
-        <location filename="../setting.ui" line="22024"/>
+        <location filename="../setting.ui" line="19375"/>
+        <location filename="../setting.ui" line="19583"/>
+        <location filename="../setting.ui" line="19788"/>
         <source>旧密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21609"/>
-        <location filename="../setting.ui" line="21826"/>
-        <location filename="../setting.ui" line="22043"/>
+        <location filename="../setting.ui" line="19388"/>
+        <location filename="../setting.ui" line="19596"/>
+        <location filename="../setting.ui" line="19801"/>
         <source>新密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21643"/>
-        <location filename="../setting.ui" line="21860"/>
-        <location filename="../setting.ui" line="22077"/>
+        <location filename="../setting.ui" line="19422"/>
+        <location filename="../setting.ui" line="19630"/>
+        <location filename="../setting.ui" line="19835"/>
         <source>新密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21656"/>
-        <location filename="../setting.ui" line="21873"/>
-        <location filename="../setting.ui" line="22090"/>
+        <location filename="../setting.ui" line="19435"/>
+        <location filename="../setting.ui" line="19643"/>
+        <location filename="../setting.ui" line="19848"/>
         <source>确认新密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21690"/>
-        <location filename="../setting.ui" line="21907"/>
-        <location filename="../setting.ui" line="22124"/>
+        <location filename="../setting.ui" line="19469"/>
+        <location filename="../setting.ui" line="19677"/>
+        <location filename="../setting.ui" line="19882"/>
         <source>确认新密码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21712"/>
+        <location filename="../setting.ui" line="19491"/>
         <source>超级管理员</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="21929"/>
-        <location filename="../setting.ui" line="24278"/>
-        <location filename="../setting.cpp" line="2362"/>
+        <location filename="../setting.ui" line="19699"/>
+        <location filename="../setting.ui" line="22083"/>
+        <location filename="../setting.cpp" line="2620"/>
         <source>菜单权限</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22167"/>
+        <location filename="../setting.ui" line="19925"/>
         <source>Http服务器</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22172"/>
+        <location filename="../setting.ui" line="19930"/>
         <source>Tcp客户端</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22224"/>
-        <location filename="../setting.ui" line="22301"/>
-        <location filename="../setting.ui" line="22398"/>
-        <location filename="../setting.ui" line="22595"/>
-        <location filename="../setting.ui" line="22613"/>
-        <location filename="../setting.ui" line="22666"/>
-        <location filename="../setting.ui" line="22742"/>
-        <location filename="../setting.ui" line="22839"/>
-        <location filename="../setting.ui" line="22914"/>
+        <location filename="../setting.ui" line="19982"/>
+        <location filename="../setting.ui" line="20059"/>
+        <location filename="../setting.ui" line="20156"/>
+        <location filename="../setting.ui" line="20353"/>
+        <location filename="../setting.ui" line="20371"/>
+        <location filename="../setting.ui" line="20424"/>
+        <location filename="../setting.ui" line="20500"/>
+        <location filename="../setting.ui" line="20597"/>
+        <location filename="../setting.ui" line="20672"/>
         <source>.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22340"/>
-        <location filename="../setting.ui" line="22706"/>
-        <location filename="../setting.ui" line="22724"/>
+        <location filename="../setting.ui" line="20098"/>
+        <location filename="../setting.ui" line="20464"/>
+        <location filename="../setting.ui" line="20482"/>
         <source>：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22455"/>
-        <location filename="../setting.ui" line="22577"/>
+        <location filename="../setting.ui" line="20213"/>
+        <location filename="../setting.ui" line="20335"/>
         <source>本地IP：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22468"/>
-        <location filename="../setting.ui" line="22626"/>
+        <location filename="../setting.ui" line="20226"/>
+        <location filename="../setting.ui" line="20384"/>
         <source>本地端口：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22799"/>
+        <location filename="../setting.ui" line="20557"/>
         <source>远程端口：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22874"/>
+        <location filename="../setting.ui" line="20632"/>
         <source>远程IP：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22932"/>
+        <location filename="../setting.ui" line="20690"/>
         <source>连接</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22950"/>
+        <location filename="../setting.ui" line="20708"/>
         <source>断开</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22965"/>
+        <location filename="../setting.ui" line="20723"/>
         <source>物联网：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="22987"/>
+        <location filename="../setting.ui" line="20745"/>
         <source>物联网调试数据：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23005"/>
+        <location filename="../setting.ui" line="20763"/>
         <source>清除窗口</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23023"/>
+        <location filename="../setting.ui" line="20781"/>
         <source>打印发送</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23037"/>
+        <location filename="../setting.ui" line="20795"/>
         <source>启动失败！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23045"/>
-        <location filename="../setting.cpp" line="1560"/>
+        <location filename="../setting.ui" line="20803"/>
+        <location filename="../setting.cpp" line="1381"/>
         <source>注册信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23057"/>
+        <location filename="../setting.ui" line="21379"/>
         <source>注册码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23108"/>
+        <location filename="../setting.ui" line="20853"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23132"/>
+        <location filename="../setting.ui" line="20877"/>
         <source>9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23156"/>
+        <location filename="../setting.ui" line="20901"/>
         <source>A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23180"/>
+        <location filename="../setting.ui" line="20925"/>
         <source>B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23204"/>
-        <location filename="../setting.ui" line="37299"/>
+        <location filename="../setting.ui" line="20949"/>
+        <location filename="../setting.ui" line="34001"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23228"/>
+        <location filename="../setting.ui" line="20973"/>
         <source>D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23252"/>
+        <location filename="../setting.ui" line="20997"/>
         <source>E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23276"/>
+        <location filename="../setting.ui" line="21021"/>
         <source>F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23300"/>
+        <location filename="../setting.ui" line="21045"/>
         <source>CE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23342"/>
+        <location filename="../setting.ui" line="21087"/>
         <source>激活</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23366"/>
+        <location filename="../setting.ui" line="21111"/>
         <source>注册码生成器</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23468"/>
-        <location filename="../setting.ui" line="35506"/>
-        <location filename="../setting.ui" line="35599"/>
-        <location filename="../setting.ui" line="35724"/>
-        <location filename="../setting.ui" line="35822"/>
-        <location filename="../setting.ui" line="35881"/>
-        <location filename="../setting.ui" line="36747"/>
-        <location filename="../setting.ui" line="37381"/>
+        <location filename="../setting.ui" line="21213"/>
+        <location filename="../setting.ui" line="32193"/>
+        <location filename="../setting.ui" line="32286"/>
+        <location filename="../setting.ui" line="32411"/>
+        <location filename="../setting.ui" line="32509"/>
+        <location filename="../setting.ui" line="32568"/>
+        <location filename="../setting.ui" line="33434"/>
+        <location filename="../setting.ui" line="33855"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23492"/>
-        <location filename="../setting.ui" line="35511"/>
-        <location filename="../setting.ui" line="35604"/>
-        <location filename="../setting.ui" line="35729"/>
-        <location filename="../setting.ui" line="35827"/>
-        <location filename="../setting.ui" line="35886"/>
-        <location filename="../setting.ui" line="36752"/>
-        <location filename="../setting.ui" line="37386"/>
+        <location filename="../setting.ui" line="21237"/>
+        <location filename="../setting.ui" line="32198"/>
+        <location filename="../setting.ui" line="32291"/>
+        <location filename="../setting.ui" line="32416"/>
+        <location filename="../setting.ui" line="32514"/>
+        <location filename="../setting.ui" line="32573"/>
+        <location filename="../setting.ui" line="33439"/>
+        <location filename="../setting.ui" line="33860"/>
         <source>3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23516"/>
-        <location filename="../setting.ui" line="35516"/>
-        <location filename="../setting.ui" line="35609"/>
-        <location filename="../setting.ui" line="35734"/>
-        <location filename="../setting.ui" line="35832"/>
-        <location filename="../setting.ui" line="35891"/>
-        <location filename="../setting.ui" line="36757"/>
-        <location filename="../setting.ui" line="37391"/>
+        <location filename="../setting.ui" line="21261"/>
+        <location filename="../setting.ui" line="32203"/>
+        <location filename="../setting.ui" line="32296"/>
+        <location filename="../setting.ui" line="32421"/>
+        <location filename="../setting.ui" line="32519"/>
+        <location filename="../setting.ui" line="32578"/>
+        <location filename="../setting.ui" line="33444"/>
+        <location filename="../setting.ui" line="33865"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23540"/>
-        <location filename="../setting.ui" line="35521"/>
-        <location filename="../setting.ui" line="35614"/>
-        <location filename="../setting.ui" line="35739"/>
-        <location filename="../setting.ui" line="35837"/>
-        <location filename="../setting.ui" line="35896"/>
-        <location filename="../setting.ui" line="36762"/>
+        <location filename="../setting.ui" line="21285"/>
+        <location filename="../setting.ui" line="32208"/>
+        <location filename="../setting.ui" line="32301"/>
+        <location filename="../setting.ui" line="32426"/>
+        <location filename="../setting.ui" line="32524"/>
+        <location filename="../setting.ui" line="32583"/>
+        <location filename="../setting.ui" line="33449"/>
         <source>5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23564"/>
-        <location filename="../setting.ui" line="35526"/>
-        <location filename="../setting.ui" line="35619"/>
-        <location filename="../setting.ui" line="35744"/>
-        <location filename="../setting.ui" line="35842"/>
-        <location filename="../setting.ui" line="35901"/>
-        <location filename="../setting.ui" line="36767"/>
+        <location filename="../setting.ui" line="21309"/>
+        <location filename="../setting.ui" line="32213"/>
+        <location filename="../setting.ui" line="32306"/>
+        <location filename="../setting.ui" line="32431"/>
+        <location filename="../setting.ui" line="32529"/>
+        <location filename="../setting.ui" line="32588"/>
+        <location filename="../setting.ui" line="33454"/>
         <source>6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23588"/>
+        <location filename="../setting.ui" line="21333"/>
         <source>7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23612"/>
+        <location filename="../setting.ui" line="21357"/>
         <source>←</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="23688"/>
-        <location filename="../setting.ui" line="23752"/>
-        <location filename="../setting.ui" line="23816"/>
-        <location filename="../setting.ui" line="23880"/>
-        <location filename="../setting.ui" line="23944"/>
-        <location filename="../setting.ui" line="24008"/>
-        <location filename="../setting.ui" line="24072"/>
+        <location filename="../setting.ui" line="21440"/>
+        <location filename="../setting.ui" line="21504"/>
+        <location filename="../setting.ui" line="21568"/>
+        <location filename="../setting.ui" line="21632"/>
+        <location filename="../setting.ui" line="21696"/>
+        <location filename="../setting.ui" line="21760"/>
+        <location filename="../setting.ui" line="21824"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24112"/>
-        <location filename="../setting.cpp" line="2357"/>
+        <location filename="../setting.ui" line="21877"/>
+        <location filename="../setting.cpp" line="2615"/>
         <source>系统信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24131"/>
+        <location filename="../setting.ui" line="21901"/>
         <source>版本信息</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24161"/>
+        <location filename="../setting.ui" line="21927"/>
         <source>手控器:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24204"/>
+        <location filename="../setting.ui" line="21976"/>
         <source>主板:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24247"/>
+        <location filename="../setting.ui" line="22025"/>
         <source>Servo:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24388"/>
-        <location filename="../setting.ui" line="34873"/>
-        <location filename="../setting.ui" line="34968"/>
-        <location filename="../setting.ui" line="35007"/>
-        <location filename="../setting.ui" line="35046"/>
-        <location filename="../setting.ui" line="35185"/>
-        <location filename="../setting.ui" line="35224"/>
-        <location filename="../setting.cpp" line="1565"/>
+        <location filename="../setting.ui" line="22193"/>
+        <location filename="../setting.ui" line="31651"/>
+        <location filename="../setting.ui" line="31712"/>
+        <location filename="../setting.ui" line="31773"/>
+        <location filename="../setting.ui" line="31834"/>
+        <location filename="../setting.ui" line="31925"/>
+        <location filename="../setting.ui" line="32028"/>
+        <location filename="../setting.cpp" line="1386"/>
         <source>伺服</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24403"/>
+        <location filename="../setting.ui" line="22208"/>
         <source>旋转轴单位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24434"/>
-        <location filename="../setting.ui" line="24667"/>
+        <location filename="../setting.ui" line="22239"/>
+        <location filename="../setting.ui" line="22569"/>
         <source>汇川</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24439"/>
-        <location filename="../setting.ui" line="24672"/>
+        <location filename="../setting.ui" line="22244"/>
+        <location filename="../setting.ui" line="22574"/>
         <source>禾川</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24444"/>
-        <location filename="../setting.ui" line="24677"/>
+        <location filename="../setting.ui" line="22249"/>
+        <location filename="../setting.ui" line="22579"/>
         <source>迈信</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24449"/>
-        <location filename="../setting.ui" line="24682"/>
+        <location filename="../setting.ui" line="22254"/>
+        <location filename="../setting.ui" line="22584"/>
         <source>雷赛</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24454"/>
-        <location filename="../setting.ui" line="24687"/>
+        <location filename="../setting.ui" line="22259"/>
+        <location filename="../setting.ui" line="22589"/>
         <source>信捷</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24459"/>
-        <location filename="../setting.ui" line="24692"/>
+        <location filename="../setting.ui" line="22264"/>
+        <location filename="../setting.ui" line="22594"/>
         <source>睿能</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24464"/>
-        <location filename="../setting.ui" line="24697"/>
+        <location filename="../setting.ui" line="22269"/>
+        <location filename="../setting.ui" line="22599"/>
         <source>台邦</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24469"/>
-        <location filename="../setting.ui" line="24702"/>
+        <location filename="../setting.ui" line="22274"/>
+        <location filename="../setting.ui" line="22604"/>
         <source>超川</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24474"/>
-        <location filename="../setting.ui" line="24707"/>
+        <location filename="../setting.ui" line="22279"/>
+        <location filename="../setting.ui" line="22609"/>
         <source>纳川</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24479"/>
-        <location filename="../setting.ui" line="24712"/>
+        <location filename="../setting.ui" line="22284"/>
+        <location filename="../setting.ui" line="22614"/>
         <source>迪威迅</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24484"/>
-        <location filename="../setting.ui" line="24717"/>
+        <location filename="../setting.ui" line="22289"/>
+        <location filename="../setting.ui" line="22619"/>
         <source>科昇</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24489"/>
-        <location filename="../setting.ui" line="24722"/>
+        <location filename="../setting.ui" line="22294"/>
+        <location filename="../setting.ui" line="22624"/>
         <source>红森</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24494"/>
-        <location filename="../setting.ui" line="24727"/>
+        <location filename="../setting.ui" line="22299"/>
+        <location filename="../setting.ui" line="22629"/>
         <source>通航</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24499"/>
-        <location filename="../setting.ui" line="24732"/>
+        <location filename="../setting.ui" line="22304"/>
+        <location filename="../setting.ui" line="22634"/>
         <source>台达</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24504"/>
-        <location filename="../setting.ui" line="24737"/>
+        <location filename="../setting.ui" line="22309"/>
+        <location filename="../setting.ui" line="22639"/>
         <source>普菲得</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24509"/>
-        <location filename="../setting.ui" line="24742"/>
+        <location filename="../setting.ui" line="22314"/>
+        <location filename="../setting.ui" line="22644"/>
         <source>埃斯顿</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24514"/>
-        <location filename="../setting.ui" line="24747"/>
+        <location filename="../setting.ui" line="22319"/>
+        <location filename="../setting.ui" line="22649"/>
         <source>三菱</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24519"/>
-        <location filename="../setting.ui" line="24752"/>
+        <location filename="../setting.ui" line="22324"/>
+        <location filename="../setting.ui" line="22654"/>
         <source>西门子</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24524"/>
-        <location filename="../setting.ui" line="24757"/>
+        <location filename="../setting.ui" line="22329"/>
+        <location filename="../setting.ui" line="22659"/>
         <source>时代超群</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24529"/>
-        <location filename="../setting.ui" line="24762"/>
+        <location filename="../setting.ui" line="22334"/>
+        <location filename="../setting.ui" line="22664"/>
         <source>正弦</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24534"/>
-        <location filename="../setting.ui" line="24767"/>
+        <location filename="../setting.ui" line="22339"/>
+        <location filename="../setting.ui" line="22669"/>
         <source>久同</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24539"/>
-        <location filename="../setting.ui" line="24772"/>
+        <location filename="../setting.ui" line="22344"/>
+        <location filename="../setting.ui" line="22674"/>
         <source>大族</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24544"/>
-        <location filename="../setting.ui" line="24777"/>
+        <location filename="../setting.ui" line="22349"/>
+        <location filename="../setting.ui" line="22679"/>
         <source>日鼎</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24549"/>
-        <location filename="../setting.ui" line="24782"/>
+        <location filename="../setting.ui" line="22354"/>
+        <location filename="../setting.ui" line="22684"/>
         <source>施耐德</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24554"/>
-        <location filename="../setting.ui" line="24787"/>
+        <location filename="../setting.ui" line="22359"/>
+        <location filename="../setting.ui" line="22689"/>
         <source>麦格米特</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24562"/>
+        <location filename="../setting.ui" line="22396"/>
         <source>伺服品牌</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24588"/>
+        <location filename="../setting.ui" line="22490"/>
         <source>2500线</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24593"/>
+        <location filename="../setting.ui" line="22495"/>
         <source>16位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24598"/>
+        <location filename="../setting.ui" line="22500"/>
         <source>17位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24603"/>
+        <location filename="../setting.ui" line="22505"/>
         <source>18位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24608"/>
+        <location filename="../setting.ui" line="22510"/>
         <source>19位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24613"/>
+        <location filename="../setting.ui" line="22515"/>
         <source>20位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24618"/>
+        <location filename="../setting.ui" line="22520"/>
         <source>21位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24623"/>
+        <location filename="../setting.ui" line="22525"/>
         <source>22位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24628"/>
+        <location filename="../setting.ui" line="22530"/>
         <source>23位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24636"/>
+        <location filename="../setting.ui" line="22538"/>
         <source>伺服型号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24795"/>
+        <location filename="../setting.ui" line="22697"/>
         <source>扩展IO开关</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24805"/>
+        <location filename="../setting.ui" line="22707"/>
         <source>编码器类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24831"/>
+        <location filename="../setting.ui" line="22461"/>
         <source>增量式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24836"/>
+        <location filename="../setting.ui" line="22466"/>
         <source>绝对式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24844"/>
+        <location filename="../setting.ui" line="22406"/>
         <source>编码器位数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24870"/>
+        <location filename="../setting.ui" line="22432"/>
         <source>mm</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24875"/>
+        <location filename="../setting.ui" line="22437"/>
         <source>°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24904"/>
+        <location filename="../setting.ui" line="22388"/>
         <source>1块</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="24942"/>
-        <location filename="../setting.cpp" line="1566"/>
+        <location filename="../setting.ui" line="22760"/>
+        <location filename="../setting.cpp" line="1387"/>
         <source>轴参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25000"/>
-        <location filename="../setting.ui" line="25094"/>
-        <location filename="../setting.ui" line="25349"/>
-        <location filename="../setting.ui" line="25402"/>
-        <location filename="../setting.ui" line="25556"/>
-        <location filename="../setting.ui" line="25647"/>
+        <location filename="../setting.ui" line="22845"/>
+        <location filename="../setting.ui" line="23065"/>
+        <location filename="../setting.ui" line="23119"/>
+        <location filename="../setting.ui" line="23230"/>
+        <location filename="../setting.ui" line="23271"/>
+        <location filename="../setting.ui" line="23483"/>
         <source>正</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25005"/>
-        <location filename="../setting.ui" line="25099"/>
-        <location filename="../setting.ui" line="25354"/>
-        <location filename="../setting.ui" line="25407"/>
-        <location filename="../setting.ui" line="25561"/>
-        <location filename="../setting.ui" line="25652"/>
+        <location filename="../setting.ui" line="22850"/>
+        <location filename="../setting.ui" line="23070"/>
+        <location filename="../setting.ui" line="23124"/>
+        <location filename="../setting.ui" line="23235"/>
+        <location filename="../setting.ui" line="23276"/>
+        <location filename="../setting.ui" line="23488"/>
         <source>负</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25063"/>
-        <location filename="../setting.ui" line="26497"/>
-        <location filename="../setting.ui" line="34561"/>
-        <location filename="../setting.ui" line="35093"/>
-        <location filename="../setting.ui" line="36551"/>
+        <location filename="../setting.ui" line="22858"/>
+        <location filename="../setting.ui" line="23930"/>
+        <location filename="../setting.ui" line="31094"/>
+        <location filename="../setting.ui" line="32069"/>
+        <location filename="../setting.ui" line="33238"/>
         <source>C轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25217"/>
+        <location filename="../setting.ui" line="23157"/>
         <source>最大坐标</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25239"/>
+        <location filename="../setting.ui" line="23192"/>
         <source>单圈脉冲数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25318"/>
-        <location filename="../setting.ui" line="26690"/>
-        <location filename="../setting.ui" line="27191"/>
-        <location filename="../setting.ui" line="27530"/>
-        <location filename="../setting.ui" line="28441"/>
-        <location filename="../setting.ui" line="28780"/>
-        <location filename="../setting.ui" line="29903"/>
-        <location filename="../setting.ui" line="30242"/>
-        <location filename="../setting.ui" line="31337"/>
-        <location filename="../setting.ui" line="31676"/>
-        <location filename="../setting.ui" line="34539"/>
-        <location filename="../setting.ui" line="35383"/>
-        <location filename="../setting.ui" line="36335"/>
+        <location filename="../setting.ui" line="22992"/>
+        <location filename="../setting.ui" line="23888"/>
+        <location filename="../setting.ui" line="24347"/>
+        <location filename="../setting.ui" line="24692"/>
+        <location filename="../setting.ui" line="25735"/>
+        <location filename="../setting.ui" line="26080"/>
+        <location filename="../setting.ui" line="27151"/>
+        <location filename="../setting.ui" line="27496"/>
+        <location filename="../setting.ui" line="28547"/>
+        <location filename="../setting.ui" line="28892"/>
+        <location filename="../setting.ui" line="31201"/>
+        <location filename="../setting.ui" line="31938"/>
+        <location filename="../setting.ui" line="33022"/>
         <source>Y2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25427"/>
-        <location filename="../setting.ui" line="26415"/>
-        <location filename="../setting.ui" line="27186"/>
-        <location filename="../setting.ui" line="28436"/>
-        <location filename="../setting.ui" line="29898"/>
-        <location filename="../setting.ui" line="31332"/>
-        <location filename="../setting.ui" line="34638"/>
-        <location filename="../setting.ui" line="35271"/>
-        <location filename="../setting.ui" line="35943"/>
+        <location filename="../setting.ui" line="22969"/>
+        <location filename="../setting.ui" line="23624"/>
+        <location filename="../setting.ui" line="24342"/>
+        <location filename="../setting.ui" line="25730"/>
+        <location filename="../setting.ui" line="27146"/>
+        <location filename="../setting.ui" line="28542"/>
+        <location filename="../setting.ui" line="31400"/>
+        <location filename="../setting.ui" line="31976"/>
+        <location filename="../setting.ui" line="32630"/>
         <source>Y1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25525"/>
+        <location filename="../setting.ui" line="23014"/>
         <source>坐标方向</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25691"/>
+        <location filename="../setting.ui" line="23508"/>
         <source>最小坐标</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25732"/>
+        <location filename="../setting.ui" line="23458"/>
         <source>单圈距离</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="25874"/>
+        <location filename="../setting.ui" line="23322"/>
         <source>最大速度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26028"/>
-        <location filename="../setting.cpp" line="1567"/>
+        <location filename="../setting.ui" line="23571"/>
+        <location filename="../setting.cpp" line="1388"/>
         <source>轴速度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26194"/>
+        <location filename="../setting.ui" line="24017"/>
         <source>减减速</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26333"/>
+        <location filename="../setting.ui" line="23659"/>
         <source>加加速</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26355"/>
+        <location filename="../setting.ui" line="24078"/>
         <source>加速时间(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26437"/>
+        <location filename="../setting.ui" line="23681"/>
         <source>减速时间(s)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26734"/>
+        <location filename="../setting.ui" line="23804"/>
         <source>手轮</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26857"/>
-        <location filename="../setting.ui" line="27884"/>
-        <location filename="../setting.ui" line="29318"/>
-        <location filename="../setting.ui" line="30780"/>
-        <location filename="../setting.ui" line="32214"/>
-        <location filename="../setting.cpp" line="1570"/>
+        <location filename="../setting.ui" line="24203"/>
+        <location filename="../setting.ui" line="24897"/>
+        <location filename="../setting.ui" line="26285"/>
+        <location filename="../setting.ui" line="27701"/>
+        <location filename="../setting.ui" line="29097"/>
+        <location filename="../setting.cpp" line="1391"/>
         <source>安全区1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26877"/>
-        <location filename="../setting.ui" line="28975"/>
-        <location filename="../setting.ui" line="30437"/>
-        <location filename="../setting.ui" line="31871"/>
+        <location filename="../setting.ui" line="25338"/>
+        <location filename="../setting.ui" line="26726"/>
+        <location filename="../setting.ui" line="28142"/>
+        <location filename="../setting.ui" line="29538"/>
         <source>Z轴机床区参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26941"/>
-        <location filename="../setting.ui" line="29039"/>
-        <location filename="../setting.ui" line="30501"/>
-        <location filename="../setting.ui" line="31935"/>
+        <location filename="../setting.ui" line="25454"/>
+        <location filename="../setting.ui" line="26747"/>
+        <location filename="../setting.ui" line="28163"/>
+        <location filename="../setting.ui" line="29616"/>
         <source>最大待机位置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="26979"/>
-        <location filename="../setting.ui" line="27830"/>
-        <location filename="../setting.ui" line="29077"/>
-        <location filename="../setting.ui" line="29264"/>
-        <location filename="../setting.ui" line="30539"/>
-        <location filename="../setting.ui" line="30726"/>
-        <location filename="../setting.ui" line="31973"/>
-        <location filename="../setting.ui" line="32160"/>
+        <location filename="../setting.ui" line="25359"/>
+        <location filename="../setting.ui" line="25544"/>
+        <location filename="../setting.ui" line="26785"/>
+        <location filename="../setting.ui" line="26951"/>
+        <location filename="../setting.ui" line="28239"/>
+        <location filename="../setting.ui" line="28310"/>
+        <location filename="../setting.ui" line="29635"/>
+        <location filename="../setting.ui" line="29725"/>
         <source>最大下降位置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27017"/>
-        <location filename="../setting.ui" line="29115"/>
-        <location filename="../setting.ui" line="30577"/>
-        <location filename="../setting.ui" line="32011"/>
+        <location filename="../setting.ui" line="25397"/>
+        <location filename="../setting.ui" line="26823"/>
+        <location filename="../setting.ui" line="28258"/>
+        <location filename="../setting.ui" line="29597"/>
         <source>机床内高度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27058"/>
-        <location filename="../setting.ui" line="28308"/>
-        <location filename="../setting.ui" line="29770"/>
-        <location filename="../setting.ui" line="31204"/>
+        <location filename="../setting.ui" line="24220"/>
+        <location filename="../setting.ui" line="25605"/>
+        <location filename="../setting.ui" line="27021"/>
+        <location filename="../setting.ui" line="28409"/>
         <source>轴组合</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27153"/>
-        <location filename="../setting.ui" line="28403"/>
-        <location filename="../setting.ui" line="29865"/>
-        <location filename="../setting.ui" line="31299"/>
+        <location filename="../setting.ui" line="24309"/>
+        <location filename="../setting.ui" line="25697"/>
+        <location filename="../setting.ui" line="27113"/>
+        <location filename="../setting.ui" line="28509"/>
         <source>Y轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27287"/>
-        <location filename="../setting.ui" line="28537"/>
-        <location filename="../setting.ui" line="29999"/>
-        <location filename="../setting.ui" line="31433"/>
+        <location filename="../setting.ui" line="24449"/>
+        <location filename="../setting.ui" line="25837"/>
+        <location filename="../setting.ui" line="27253"/>
+        <location filename="../setting.ui" line="28649"/>
         <source>X轴Y轴参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27320"/>
-        <location filename="../setting.ui" line="28570"/>
-        <location filename="../setting.ui" line="30032"/>
-        <location filename="../setting.ui" line="31466"/>
+        <location filename="../setting.ui" line="24482"/>
+        <location filename="../setting.ui" line="25870"/>
+        <location filename="../setting.ui" line="27286"/>
+        <location filename="../setting.ui" line="28682"/>
         <source>(A1)机床点1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27339"/>
-        <location filename="../setting.ui" line="28589"/>
-        <location filename="../setting.ui" line="30051"/>
-        <location filename="../setting.ui" line="31485"/>
+        <location filename="../setting.ui" line="24501"/>
+        <location filename="../setting.ui" line="25889"/>
+        <location filename="../setting.ui" line="27305"/>
+        <location filename="../setting.ui" line="28701"/>
         <source>(A2)机床点2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27358"/>
-        <location filename="../setting.ui" line="28608"/>
-        <location filename="../setting.ui" line="30070"/>
-        <location filename="../setting.ui" line="31504"/>
+        <location filename="../setting.ui" line="24520"/>
+        <location filename="../setting.ui" line="25908"/>
+        <location filename="../setting.ui" line="27324"/>
+        <location filename="../setting.ui" line="28720"/>
         <source>(B1)料仓点1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27377"/>
-        <location filename="../setting.ui" line="28627"/>
-        <location filename="../setting.ui" line="30089"/>
-        <location filename="../setting.ui" line="31523"/>
+        <location filename="../setting.ui" line="24539"/>
+        <location filename="../setting.ui" line="25927"/>
+        <location filename="../setting.ui" line="27343"/>
+        <location filename="../setting.ui" line="28739"/>
         <source>(B2)料仓点2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27640"/>
-        <location filename="../setting.ui" line="28890"/>
-        <location filename="../setting.ui" line="30352"/>
-        <location filename="../setting.ui" line="31786"/>
-        <location filename="../setting.cpp" line="2827"/>
+        <location filename="../setting.ui" line="24802"/>
+        <location filename="../setting.ui" line="26190"/>
+        <location filename="../setting.ui" line="27606"/>
+        <location filename="../setting.ui" line="29002"/>
+        <location filename="../setting.cpp" line="2904"/>
         <source>C1C2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27725"/>
-        <location filename="../setting.ui" line="29159"/>
-        <location filename="../setting.ui" line="30621"/>
-        <location filename="../setting.ui" line="32055"/>
+        <location filename="../setting.ui" line="25485"/>
+        <location filename="../setting.ui" line="26873"/>
+        <location filename="../setting.ui" line="28289"/>
+        <location filename="../setting.ui" line="29685"/>
         <source>Z轴料仓区参数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27792"/>
-        <location filename="../setting.ui" line="29226"/>
-        <location filename="../setting.ui" line="30688"/>
-        <location filename="../setting.ui" line="32122"/>
+        <location filename="../setting.ui" line="25525"/>
+        <location filename="../setting.ui" line="26894"/>
+        <location filename="../setting.ui" line="28329"/>
+        <location filename="../setting.ui" line="29763"/>
         <source>最大允许启动位置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27945"/>
-        <location filename="../setting.ui" line="29379"/>
-        <location filename="../setting.ui" line="30841"/>
-        <location filename="../setting.ui" line="32275"/>
+        <location filename="../setting.ui" line="24961"/>
+        <location filename="../setting.ui" line="26349"/>
+        <location filename="../setting.ui" line="27765"/>
+        <location filename="../setting.ui" line="29161"/>
         <source>加工完成输入口</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27973"/>
-        <location filename="../setting.ui" line="29407"/>
-        <location filename="../setting.ui" line="30869"/>
-        <location filename="../setting.ui" line="32303"/>
-        <location filename="../setting.ui" line="37284"/>
+        <location filename="../setting.ui" line="15950"/>
+        <source>链条到位延时(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="15987"/>
+        <source>报警响时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16005"/>
+        <source>自动周期时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16023"/>
+        <source>等加工完成时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16041"/>
+        <source>脉冲输出时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16059"/>
+        <source>阀限制时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16096"/>
+        <source>夹检测滤波时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16204"/>
+        <source>产品记忆(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16222"/>
+        <source>润滑延时(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16288"/>
+        <source>润滑间隔周期(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16325"/>
+        <source>润滑开启时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="16343"/>
+        <source>润滑关闭时间(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.ui" line="24989"/>
+        <location filename="../setting.ui" line="26377"/>
+        <location filename="../setting.ui" line="27793"/>
+        <location filename="../setting.ui" line="29189"/>
+        <location filename="../setting.ui" line="33986"/>
         <source>X1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27978"/>
-        <location filename="../setting.ui" line="29412"/>
-        <location filename="../setting.ui" line="30874"/>
-        <location filename="../setting.ui" line="32308"/>
+        <location filename="../setting.ui" line="24994"/>
+        <location filename="../setting.ui" line="26382"/>
+        <location filename="../setting.ui" line="27798"/>
+        <location filename="../setting.ui" line="29194"/>
         <source>X2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27983"/>
-        <location filename="../setting.ui" line="29417"/>
-        <location filename="../setting.ui" line="30879"/>
-        <location filename="../setting.ui" line="32313"/>
+        <location filename="../setting.ui" line="24999"/>
+        <location filename="../setting.ui" line="26387"/>
+        <location filename="../setting.ui" line="27803"/>
+        <location filename="../setting.ui" line="29199"/>
         <source>X3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27988"/>
-        <location filename="../setting.ui" line="29422"/>
-        <location filename="../setting.ui" line="30884"/>
-        <location filename="../setting.ui" line="32318"/>
+        <location filename="../setting.ui" line="25004"/>
+        <location filename="../setting.ui" line="26392"/>
+        <location filename="../setting.ui" line="27808"/>
+        <location filename="../setting.ui" line="29204"/>
         <source>X4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27993"/>
-        <location filename="../setting.ui" line="29427"/>
-        <location filename="../setting.ui" line="30889"/>
-        <location filename="../setting.ui" line="32323"/>
+        <location filename="../setting.ui" line="25009"/>
+        <location filename="../setting.ui" line="26397"/>
+        <location filename="../setting.ui" line="27813"/>
+        <location filename="../setting.ui" line="29209"/>
         <source>X5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="27998"/>
-        <location filename="../setting.ui" line="29432"/>
-        <location filename="../setting.ui" line="30894"/>
-        <location filename="../setting.ui" line="32328"/>
+        <location filename="../setting.ui" line="25014"/>
+        <location filename="../setting.ui" line="26402"/>
+        <location filename="../setting.ui" line="27818"/>
+        <location filename="../setting.ui" line="29214"/>
         <source>X6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28003"/>
-        <location filename="../setting.ui" line="29437"/>
-        <location filename="../setting.ui" line="30899"/>
-        <location filename="../setting.ui" line="32333"/>
+        <location filename="../setting.ui" line="25019"/>
+        <location filename="../setting.ui" line="26407"/>
+        <location filename="../setting.ui" line="27823"/>
+        <location filename="../setting.ui" line="29219"/>
         <source>X7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28008"/>
-        <location filename="../setting.ui" line="29442"/>
-        <location filename="../setting.ui" line="30904"/>
-        <location filename="../setting.ui" line="32338"/>
+        <location filename="../setting.ui" line="25024"/>
+        <location filename="../setting.ui" line="26412"/>
+        <location filename="../setting.ui" line="27828"/>
+        <location filename="../setting.ui" line="29224"/>
         <source>X8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28013"/>
-        <location filename="../setting.ui" line="29447"/>
-        <location filename="../setting.ui" line="30909"/>
-        <location filename="../setting.ui" line="32343"/>
+        <location filename="../setting.ui" line="25029"/>
+        <location filename="../setting.ui" line="26417"/>
+        <location filename="../setting.ui" line="27833"/>
+        <location filename="../setting.ui" line="29229"/>
         <source>X9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28018"/>
-        <location filename="../setting.ui" line="29452"/>
-        <location filename="../setting.ui" line="30914"/>
-        <location filename="../setting.ui" line="32348"/>
+        <location filename="../setting.ui" line="25034"/>
+        <location filename="../setting.ui" line="26422"/>
+        <location filename="../setting.ui" line="27838"/>
+        <location filename="../setting.ui" line="29234"/>
         <source>X10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28023"/>
-        <location filename="../setting.ui" line="29457"/>
-        <location filename="../setting.ui" line="30919"/>
-        <location filename="../setting.ui" line="32353"/>
+        <location filename="../setting.ui" line="25039"/>
+        <location filename="../setting.ui" line="26427"/>
+        <location filename="../setting.ui" line="27843"/>
+        <location filename="../setting.ui" line="29239"/>
         <source>X11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28028"/>
-        <location filename="../setting.ui" line="29462"/>
-        <location filename="../setting.ui" line="30924"/>
-        <location filename="../setting.ui" line="32358"/>
+        <location filename="../setting.ui" line="25044"/>
+        <location filename="../setting.ui" line="26432"/>
+        <location filename="../setting.ui" line="27848"/>
+        <location filename="../setting.ui" line="29244"/>
         <source>X12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28033"/>
-        <location filename="../setting.ui" line="29467"/>
-        <location filename="../setting.ui" line="30929"/>
-        <location filename="../setting.ui" line="32363"/>
+        <location filename="../setting.ui" line="25049"/>
+        <location filename="../setting.ui" line="26437"/>
+        <location filename="../setting.ui" line="27853"/>
+        <location filename="../setting.ui" line="29249"/>
         <source>X13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28038"/>
-        <location filename="../setting.ui" line="29472"/>
-        <location filename="../setting.ui" line="30934"/>
-        <location filename="../setting.ui" line="32368"/>
+        <location filename="../setting.ui" line="25054"/>
+        <location filename="../setting.ui" line="26442"/>
+        <location filename="../setting.ui" line="27858"/>
+        <location filename="../setting.ui" line="29254"/>
         <source>X14</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28043"/>
-        <location filename="../setting.ui" line="29477"/>
-        <location filename="../setting.ui" line="30939"/>
-        <location filename="../setting.ui" line="32373"/>
+        <location filename="../setting.ui" line="25059"/>
+        <location filename="../setting.ui" line="26447"/>
+        <location filename="../setting.ui" line="27863"/>
+        <location filename="../setting.ui" line="29259"/>
         <source>X15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28048"/>
-        <location filename="../setting.ui" line="29482"/>
-        <location filename="../setting.ui" line="30944"/>
-        <location filename="../setting.ui" line="32378"/>
+        <location filename="../setting.ui" line="25064"/>
+        <location filename="../setting.ui" line="26452"/>
+        <location filename="../setting.ui" line="27868"/>
+        <location filename="../setting.ui" line="29264"/>
         <source>X16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28053"/>
-        <location filename="../setting.ui" line="29487"/>
-        <location filename="../setting.ui" line="30949"/>
-        <location filename="../setting.ui" line="32383"/>
+        <location filename="../setting.ui" line="25069"/>
+        <location filename="../setting.ui" line="26457"/>
+        <location filename="../setting.ui" line="27873"/>
+        <location filename="../setting.ui" line="29269"/>
         <source>X17</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28058"/>
-        <location filename="../setting.ui" line="29492"/>
-        <location filename="../setting.ui" line="30954"/>
-        <location filename="../setting.ui" line="32388"/>
+        <location filename="../setting.ui" line="25074"/>
+        <location filename="../setting.ui" line="26462"/>
+        <location filename="../setting.ui" line="27878"/>
+        <location filename="../setting.ui" line="29274"/>
         <source>X18</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28063"/>
-        <location filename="../setting.ui" line="29497"/>
-        <location filename="../setting.ui" line="30959"/>
-        <location filename="../setting.ui" line="32393"/>
+        <location filename="../setting.ui" line="25079"/>
+        <location filename="../setting.ui" line="26467"/>
+        <location filename="../setting.ui" line="27883"/>
+        <location filename="../setting.ui" line="29279"/>
         <source>X19</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28068"/>
-        <location filename="../setting.ui" line="29502"/>
-        <location filename="../setting.ui" line="30964"/>
-        <location filename="../setting.ui" line="32398"/>
+        <location filename="../setting.ui" line="25084"/>
+        <location filename="../setting.ui" line="26472"/>
+        <location filename="../setting.ui" line="27888"/>
+        <location filename="../setting.ui" line="29284"/>
         <source>X20</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28073"/>
-        <location filename="../setting.ui" line="29507"/>
-        <location filename="../setting.ui" line="30969"/>
-        <location filename="../setting.ui" line="32403"/>
+        <location filename="../setting.ui" line="25089"/>
+        <location filename="../setting.ui" line="26477"/>
+        <location filename="../setting.ui" line="27893"/>
+        <location filename="../setting.ui" line="29289"/>
         <source>X21</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28078"/>
-        <location filename="../setting.ui" line="29512"/>
-        <location filename="../setting.ui" line="30974"/>
-        <location filename="../setting.ui" line="32408"/>
+        <location filename="../setting.ui" line="25094"/>
+        <location filename="../setting.ui" line="26482"/>
+        <location filename="../setting.ui" line="27898"/>
+        <location filename="../setting.ui" line="29294"/>
         <source>X22</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28083"/>
-        <location filename="../setting.ui" line="29517"/>
-        <location filename="../setting.ui" line="30979"/>
-        <location filename="../setting.ui" line="32413"/>
+        <location filename="../setting.ui" line="25099"/>
+        <location filename="../setting.ui" line="26487"/>
+        <location filename="../setting.ui" line="27903"/>
+        <location filename="../setting.ui" line="29299"/>
         <source>X23</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28088"/>
-        <location filename="../setting.ui" line="29522"/>
-        <location filename="../setting.ui" line="30984"/>
-        <location filename="../setting.ui" line="32418"/>
+        <location filename="../setting.ui" line="25104"/>
+        <location filename="../setting.ui" line="26492"/>
+        <location filename="../setting.ui" line="27908"/>
+        <location filename="../setting.ui" line="29304"/>
         <source>X24</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28093"/>
-        <location filename="../setting.ui" line="29527"/>
-        <location filename="../setting.ui" line="30989"/>
-        <location filename="../setting.ui" line="32423"/>
+        <location filename="../setting.ui" line="25109"/>
+        <location filename="../setting.ui" line="26497"/>
+        <location filename="../setting.ui" line="27913"/>
+        <location filename="../setting.ui" line="29309"/>
         <source>X25</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28098"/>
-        <location filename="../setting.ui" line="29532"/>
-        <location filename="../setting.ui" line="30994"/>
-        <location filename="../setting.ui" line="32428"/>
+        <location filename="../setting.ui" line="25114"/>
+        <location filename="../setting.ui" line="26502"/>
+        <location filename="../setting.ui" line="27918"/>
+        <location filename="../setting.ui" line="29314"/>
         <source>X26</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28103"/>
-        <location filename="../setting.ui" line="29537"/>
-        <location filename="../setting.ui" line="30999"/>
-        <location filename="../setting.ui" line="32433"/>
+        <location filename="../setting.ui" line="25119"/>
+        <location filename="../setting.ui" line="26507"/>
+        <location filename="../setting.ui" line="27923"/>
+        <location filename="../setting.ui" line="29319"/>
         <source>X27</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28108"/>
-        <location filename="../setting.ui" line="29542"/>
-        <location filename="../setting.ui" line="31004"/>
-        <location filename="../setting.ui" line="32438"/>
+        <location filename="../setting.ui" line="25124"/>
+        <location filename="../setting.ui" line="26512"/>
+        <location filename="../setting.ui" line="27928"/>
+        <location filename="../setting.ui" line="29324"/>
         <source>X28</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28113"/>
-        <location filename="../setting.ui" line="29547"/>
-        <location filename="../setting.ui" line="31009"/>
-        <location filename="../setting.ui" line="32443"/>
+        <location filename="../setting.ui" line="25129"/>
+        <location filename="../setting.ui" line="26517"/>
+        <location filename="../setting.ui" line="27933"/>
+        <location filename="../setting.ui" line="29329"/>
         <source>X29</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28118"/>
-        <location filename="../setting.ui" line="29552"/>
-        <location filename="../setting.ui" line="31014"/>
-        <location filename="../setting.ui" line="32448"/>
+        <location filename="../setting.ui" line="25134"/>
+        <location filename="../setting.ui" line="26522"/>
+        <location filename="../setting.ui" line="27938"/>
+        <location filename="../setting.ui" line="29334"/>
         <source>X30</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28123"/>
-        <location filename="../setting.ui" line="29557"/>
-        <location filename="../setting.ui" line="31019"/>
-        <location filename="../setting.ui" line="32453"/>
+        <location filename="../setting.ui" line="25139"/>
+        <location filename="../setting.ui" line="26527"/>
+        <location filename="../setting.ui" line="27943"/>
+        <location filename="../setting.ui" line="29339"/>
         <source>X31</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28128"/>
-        <location filename="../setting.ui" line="29562"/>
-        <location filename="../setting.ui" line="31024"/>
-        <location filename="../setting.ui" line="32458"/>
+        <location filename="../setting.ui" line="25144"/>
+        <location filename="../setting.ui" line="26532"/>
+        <location filename="../setting.ui" line="27948"/>
+        <location filename="../setting.ui" line="29344"/>
         <source>X32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28133"/>
-        <location filename="../setting.ui" line="29567"/>
-        <location filename="../setting.ui" line="31029"/>
-        <location filename="../setting.ui" line="32463"/>
+        <location filename="../setting.ui" line="25149"/>
+        <location filename="../setting.ui" line="26537"/>
+        <location filename="../setting.ui" line="27953"/>
+        <location filename="../setting.ui" line="29349"/>
         <source>X33</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28138"/>
-        <location filename="../setting.ui" line="29572"/>
-        <location filename="../setting.ui" line="31034"/>
-        <location filename="../setting.ui" line="32468"/>
+        <location filename="../setting.ui" line="25154"/>
+        <location filename="../setting.ui" line="26542"/>
+        <location filename="../setting.ui" line="27958"/>
+        <location filename="../setting.ui" line="29354"/>
         <source>X34</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28143"/>
-        <location filename="../setting.ui" line="29577"/>
-        <location filename="../setting.ui" line="31039"/>
-        <location filename="../setting.ui" line="32473"/>
+        <location filename="../setting.ui" line="25159"/>
+        <location filename="../setting.ui" line="26547"/>
+        <location filename="../setting.ui" line="27963"/>
+        <location filename="../setting.ui" line="29359"/>
         <source>X35</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28148"/>
-        <location filename="../setting.ui" line="29582"/>
-        <location filename="../setting.ui" line="31044"/>
-        <location filename="../setting.ui" line="32478"/>
+        <location filename="../setting.ui" line="25164"/>
+        <location filename="../setting.ui" line="26552"/>
+        <location filename="../setting.ui" line="27968"/>
+        <location filename="../setting.ui" line="29364"/>
         <source>X36</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28153"/>
-        <location filename="../setting.ui" line="29587"/>
-        <location filename="../setting.ui" line="31049"/>
-        <location filename="../setting.ui" line="32483"/>
+        <location filename="../setting.ui" line="25169"/>
+        <location filename="../setting.ui" line="26557"/>
+        <location filename="../setting.ui" line="27973"/>
+        <location filename="../setting.ui" line="29369"/>
         <source>EX1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28158"/>
-        <location filename="../setting.ui" line="29592"/>
-        <location filename="../setting.ui" line="31054"/>
-        <location filename="../setting.ui" line="32488"/>
+        <location filename="../setting.ui" line="25174"/>
+        <location filename="../setting.ui" line="26562"/>
+        <location filename="../setting.ui" line="27978"/>
+        <location filename="../setting.ui" line="29374"/>
         <source>EX2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28163"/>
-        <location filename="../setting.ui" line="29597"/>
-        <location filename="../setting.ui" line="31059"/>
-        <location filename="../setting.ui" line="32493"/>
+        <location filename="../setting.ui" line="25179"/>
+        <location filename="../setting.ui" line="26567"/>
+        <location filename="../setting.ui" line="27983"/>
+        <location filename="../setting.ui" line="29379"/>
         <source>EX3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28168"/>
-        <location filename="../setting.ui" line="29602"/>
-        <location filename="../setting.ui" line="31064"/>
-        <location filename="../setting.ui" line="32498"/>
+        <location filename="../setting.ui" line="25184"/>
+        <location filename="../setting.ui" line="26572"/>
+        <location filename="../setting.ui" line="27988"/>
+        <location filename="../setting.ui" line="29384"/>
         <source>EX4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28173"/>
-        <location filename="../setting.ui" line="29607"/>
-        <location filename="../setting.ui" line="31069"/>
-        <location filename="../setting.ui" line="32503"/>
+        <location filename="../setting.ui" line="25189"/>
+        <location filename="../setting.ui" line="26577"/>
+        <location filename="../setting.ui" line="27993"/>
+        <location filename="../setting.ui" line="29389"/>
         <source>EX5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28178"/>
-        <location filename="../setting.ui" line="29612"/>
-        <location filename="../setting.ui" line="31074"/>
-        <location filename="../setting.ui" line="32508"/>
+        <location filename="../setting.ui" line="25194"/>
+        <location filename="../setting.ui" line="26582"/>
+        <location filename="../setting.ui" line="27998"/>
+        <location filename="../setting.ui" line="29394"/>
         <source>EX6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28183"/>
-        <location filename="../setting.ui" line="29617"/>
-        <location filename="../setting.ui" line="31079"/>
-        <location filename="../setting.ui" line="32513"/>
+        <location filename="../setting.ui" line="25199"/>
+        <location filename="../setting.ui" line="26587"/>
+        <location filename="../setting.ui" line="28003"/>
+        <location filename="../setting.ui" line="29399"/>
         <source>EX7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28188"/>
-        <location filename="../setting.ui" line="29622"/>
-        <location filename="../setting.ui" line="31084"/>
-        <location filename="../setting.ui" line="32518"/>
+        <location filename="../setting.ui" line="25204"/>
+        <location filename="../setting.ui" line="26592"/>
+        <location filename="../setting.ui" line="28008"/>
+        <location filename="../setting.ui" line="29404"/>
         <source>EX8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28193"/>
-        <location filename="../setting.ui" line="29627"/>
-        <location filename="../setting.ui" line="31089"/>
-        <location filename="../setting.ui" line="32523"/>
+        <location filename="../setting.ui" line="25209"/>
+        <location filename="../setting.ui" line="26597"/>
+        <location filename="../setting.ui" line="28013"/>
+        <location filename="../setting.ui" line="29409"/>
         <source>EX9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28198"/>
-        <location filename="../setting.ui" line="29632"/>
-        <location filename="../setting.ui" line="31094"/>
-        <location filename="../setting.ui" line="32528"/>
+        <location filename="../setting.ui" line="25214"/>
+        <location filename="../setting.ui" line="26602"/>
+        <location filename="../setting.ui" line="28018"/>
+        <location filename="../setting.ui" line="29414"/>
         <source>EX10</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28203"/>
-        <location filename="../setting.ui" line="29637"/>
-        <location filename="../setting.ui" line="31099"/>
-        <location filename="../setting.ui" line="32533"/>
+        <location filename="../setting.ui" line="25219"/>
+        <location filename="../setting.ui" line="26607"/>
+        <location filename="../setting.ui" line="28023"/>
+        <location filename="../setting.ui" line="29419"/>
         <source>EX11</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28208"/>
-        <location filename="../setting.ui" line="29642"/>
-        <location filename="../setting.ui" line="31104"/>
-        <location filename="../setting.ui" line="32538"/>
+        <location filename="../setting.ui" line="25224"/>
+        <location filename="../setting.ui" line="26612"/>
+        <location filename="../setting.ui" line="28028"/>
+        <location filename="../setting.ui" line="29424"/>
         <source>EX12</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28213"/>
-        <location filename="../setting.ui" line="29647"/>
-        <location filename="../setting.ui" line="31109"/>
-        <location filename="../setting.ui" line="32543"/>
+        <location filename="../setting.ui" line="25229"/>
+        <location filename="../setting.ui" line="26617"/>
+        <location filename="../setting.ui" line="28033"/>
+        <location filename="../setting.ui" line="29429"/>
         <source>EX13</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28218"/>
-        <location filename="../setting.ui" line="29652"/>
-        <location filename="../setting.ui" line="31114"/>
-        <location filename="../setting.ui" line="32548"/>
+        <location filename="../setting.ui" line="25234"/>
+        <location filename="../setting.ui" line="26622"/>
+        <location filename="../setting.ui" line="28038"/>
+        <location filename="../setting.ui" line="29434"/>
         <source>EX14</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28223"/>
-        <location filename="../setting.ui" line="29657"/>
-        <location filename="../setting.ui" line="31119"/>
-        <location filename="../setting.ui" line="32553"/>
+        <location filename="../setting.ui" line="25239"/>
+        <location filename="../setting.ui" line="26627"/>
+        <location filename="../setting.ui" line="28043"/>
+        <location filename="../setting.ui" line="29439"/>
         <source>EX15</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28228"/>
-        <location filename="../setting.ui" line="29662"/>
-        <location filename="../setting.ui" line="31124"/>
-        <location filename="../setting.ui" line="32558"/>
+        <location filename="../setting.ui" line="25244"/>
+        <location filename="../setting.ui" line="26632"/>
+        <location filename="../setting.ui" line="28048"/>
+        <location filename="../setting.ui" line="29444"/>
         <source>EX16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28233"/>
-        <location filename="../setting.ui" line="29667"/>
-        <location filename="../setting.ui" line="31129"/>
-        <location filename="../setting.ui" line="32563"/>
+        <location filename="../setting.ui" line="25249"/>
+        <location filename="../setting.ui" line="26637"/>
+        <location filename="../setting.ui" line="28053"/>
+        <location filename="../setting.ui" line="29449"/>
         <source>EX17</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28238"/>
-        <location filename="../setting.ui" line="29672"/>
-        <location filename="../setting.ui" line="31134"/>
-        <location filename="../setting.ui" line="32568"/>
+        <location filename="../setting.ui" line="25254"/>
+        <location filename="../setting.ui" line="26642"/>
+        <location filename="../setting.ui" line="28058"/>
+        <location filename="../setting.ui" line="29454"/>
         <source>EX18</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28243"/>
-        <location filename="../setting.ui" line="29677"/>
-        <location filename="../setting.ui" line="31139"/>
-        <location filename="../setting.ui" line="32573"/>
+        <location filename="../setting.ui" line="25259"/>
+        <location filename="../setting.ui" line="26647"/>
+        <location filename="../setting.ui" line="28063"/>
+        <location filename="../setting.ui" line="29459"/>
         <source>EX19</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28248"/>
-        <location filename="../setting.ui" line="29682"/>
-        <location filename="../setting.ui" line="31144"/>
-        <location filename="../setting.ui" line="32578"/>
+        <location filename="../setting.ui" line="25264"/>
+        <location filename="../setting.ui" line="26652"/>
+        <location filename="../setting.ui" line="28068"/>
+        <location filename="../setting.ui" line="29464"/>
         <source>EX20</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28253"/>
-        <location filename="../setting.ui" line="29687"/>
-        <location filename="../setting.ui" line="31149"/>
-        <location filename="../setting.ui" line="32583"/>
+        <location filename="../setting.ui" line="25269"/>
+        <location filename="../setting.ui" line="26657"/>
+        <location filename="../setting.ui" line="28073"/>
+        <location filename="../setting.ui" line="29469"/>
         <source>EX21</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28258"/>
-        <location filename="../setting.ui" line="29692"/>
-        <location filename="../setting.ui" line="31154"/>
-        <location filename="../setting.ui" line="32588"/>
+        <location filename="../setting.ui" line="25274"/>
+        <location filename="../setting.ui" line="26662"/>
+        <location filename="../setting.ui" line="28078"/>
+        <location filename="../setting.ui" line="29474"/>
         <source>EX22</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28263"/>
-        <location filename="../setting.ui" line="29697"/>
-        <location filename="../setting.ui" line="31159"/>
-        <location filename="../setting.ui" line="32593"/>
+        <location filename="../setting.ui" line="25279"/>
+        <location filename="../setting.ui" line="26667"/>
+        <location filename="../setting.ui" line="28083"/>
+        <location filename="../setting.ui" line="29479"/>
         <source>EX23</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28268"/>
-        <location filename="../setting.ui" line="29702"/>
-        <location filename="../setting.ui" line="31164"/>
-        <location filename="../setting.ui" line="32598"/>
+        <location filename="../setting.ui" line="25284"/>
+        <location filename="../setting.ui" line="26672"/>
+        <location filename="../setting.ui" line="28088"/>
+        <location filename="../setting.ui" line="29484"/>
         <source>EX24</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="28291"/>
-        <location filename="../setting.cpp" line="1571"/>
+        <location filename="../setting.ui" line="25588"/>
+        <location filename="../setting.cpp" line="1392"/>
         <source>安全区2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="29725"/>
-        <location filename="../setting.cpp" line="1572"/>
+        <location filename="../setting.ui" line="26976"/>
+        <location filename="../setting.cpp" line="1393"/>
         <source>安全区3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="31187"/>
-        <location filename="../setting.cpp" line="1573"/>
+        <location filename="../setting.ui" line="28392"/>
+        <location filename="../setting.cpp" line="1394"/>
         <source>安全区4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32621"/>
-        <location filename="../setting.cpp" line="1574"/>
+        <location filename="../setting.ui" line="29788"/>
+        <location filename="../setting.cpp" line="1395"/>
         <source>位置限定</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32645"/>
+        <location filename="../setting.ui" line="29816"/>
         <source>容差(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32669"/>
+        <location filename="../setting.ui" line="29829"/>
         <source>Z1轴安全横行高度(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32712"/>
+        <location filename="../setting.ui" line="29874"/>
         <source>B/Z2轴安全横行高度(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32755"/>
+        <location filename="../setting.ui" line="29919"/>
         <source>旋转安全Y1位置(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32790"/>
+        <location filename="../setting.ui" line="29806"/>
         <source>原点精度(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32814"/>
+        <location filename="../setting.ui" line="29887"/>
         <source>旋转安全Y2位置(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="32907"/>
+        <location filename="../setting.ui" line="29842"/>
         <source>动作确认误差(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33025"/>
-        <location filename="../setting.cpp" line="1584"/>
+        <location filename="../setting.ui" line="30138"/>
+        <location filename="../setting.cpp" line="1405"/>
         <source>堆叠1组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33030"/>
-        <location filename="../setting.cpp" line="1585"/>
+        <location filename="../setting.ui" line="30143"/>
+        <location filename="../setting.cpp" line="1406"/>
         <source>堆叠2组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33035"/>
-        <location filename="../setting.cpp" line="1586"/>
+        <location filename="../setting.ui" line="30148"/>
+        <location filename="../setting.cpp" line="1407"/>
         <source>堆叠3组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33040"/>
-        <location filename="../setting.cpp" line="1587"/>
+        <location filename="../setting.ui" line="30153"/>
+        <location filename="../setting.cpp" line="1408"/>
         <source>堆叠4组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33045"/>
-        <location filename="../setting.cpp" line="1588"/>
+        <location filename="../setting.ui" line="30158"/>
+        <location filename="../setting.cpp" line="1409"/>
         <source>堆叠5组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33050"/>
-        <location filename="../setting.cpp" line="1589"/>
+        <location filename="../setting.ui" line="30163"/>
+        <location filename="../setting.cpp" line="1410"/>
         <source>堆叠6组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33055"/>
-        <location filename="../setting.cpp" line="1590"/>
+        <location filename="../setting.ui" line="30168"/>
+        <location filename="../setting.cpp" line="1411"/>
         <source>堆叠7组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33060"/>
-        <location filename="../setting.cpp" line="1591"/>
+        <location filename="../setting.ui" line="30173"/>
+        <location filename="../setting.cpp" line="1412"/>
         <source>堆叠8组</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33089"/>
+        <location filename="../setting.ui" line="30601"/>
         <source>堆叠方式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33123"/>
+        <location filename="../setting.ui" line="30629"/>
         <source>三点式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33128"/>
+        <location filename="../setting.ui" line="30634"/>
         <source>四点式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33133"/>
+        <location filename="../setting.ui" line="30639"/>
         <source>普通式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33159"/>
+        <location filename="../setting.ui" line="30482"/>
         <source>旋转料仓完成提示</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33196"/>
+        <location filename="../setting.ui" line="30304"/>
         <source>不提示</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33201"/>
+        <location filename="../setting.ui" line="30309"/>
         <source>提示</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33227"/>
+        <location filename="../setting.ui" line="30362"/>
         <source>旋转料仓工位数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33255"/>
+        <location filename="../setting.ui" line="30577"/>
         <source>1~255</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33280"/>
+        <location filename="../setting.ui" line="30323"/>
         <source>逐组堆叠</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33319"/>
+        <location filename="../setting.ui" line="30255"/>
         <source>1/2/3/4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33324"/>
+        <location filename="../setting.ui" line="30260"/>
         <source>1/2, 3/4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33329"/>
+        <location filename="../setting.ui" line="30265"/>
         <source>1/2/3/4/5/6/7/8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33334"/>
+        <location filename="../setting.ui" line="30270"/>
         <source>1/2/3/4, 5/6/7/8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33339"/>
+        <location filename="../setting.ui" line="30275"/>
         <source>1/2, 3/4, 5/6, 7/8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33365"/>
+        <location filename="../setting.ui" line="30378"/>
         <source>逐行堆叠</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33404"/>
-        <location filename="../setting.ui" line="33474"/>
+        <location filename="../setting.ui" line="30411"/>
+        <location filename="../setting.ui" line="30552"/>
         <source>1/5, 2/6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33409"/>
-        <location filename="../setting.ui" line="33479"/>
+        <location filename="../setting.ui" line="30416"/>
+        <location filename="../setting.ui" line="30557"/>
         <source>1/5, 2/6, 3/7, 4/8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33435"/>
+        <location filename="../setting.ui" line="30349"/>
         <source>逐层堆叠</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33505"/>
+        <location filename="../setting.ui" line="30336"/>
         <source>分组堆叠</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33544"/>
+        <location filename="../setting.ui" line="30450"/>
         <source>一分二</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33549"/>
+        <location filename="../setting.ui" line="30455"/>
         <source>一分三</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33575"/>
+        <location filename="../setting.ui" line="30590"/>
         <source>堆叠记忆</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33640"/>
+        <location filename="../setting.ui" line="30469"/>
         <source>料仓类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33674"/>
+        <location filename="../setting.ui" line="30216"/>
         <source>平板式料仓</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33679"/>
+        <location filename="../setting.ui" line="30221"/>
         <source>旋转式料仓</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33724"/>
-        <location filename="../setting.cpp" line="1578"/>
+        <location filename="../setting.ui" line="30715"/>
+        <location filename="../setting.cpp" line="1399"/>
         <source>限位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33768"/>
-        <location filename="../setting.ui" line="33893"/>
-        <location filename="../setting.ui" line="33954"/>
-        <location filename="../setting.ui" line="34069"/>
-        <location filename="../setting.ui" line="34162"/>
-        <location filename="../setting.ui" line="34217"/>
-        <location filename="../setting.ui" line="34326"/>
-        <location filename="../setting.ui" line="34365"/>
-        <location filename="../setting.ui" line="34404"/>
-        <location filename="../setting.ui" line="34443"/>
-        <location filename="../setting.ui" line="34498"/>
-        <location filename="../setting.ui" line="34613"/>
-        <location filename="../setting.ui" line="35555"/>
-        <location filename="../setting.ui" line="36037"/>
-        <location filename="../setting.ui" line="36128"/>
-        <location filename="../setting.ui" line="36181"/>
-        <location filename="../setting.ui" line="36446"/>
-        <location filename="../setting.ui" line="36626"/>
+        <location filename="../setting.ui" line="30753"/>
+        <location filename="../setting.ui" line="30796"/>
+        <location filename="../setting.ui" line="30877"/>
+        <location filename="../setting.ui" line="30920"/>
+        <location filename="../setting.ui" line="30963"/>
+        <location filename="../setting.ui" line="31124"/>
+        <location filename="../setting.ui" line="31263"/>
+        <location filename="../setting.ui" line="31312"/>
+        <location filename="../setting.ui" line="31355"/>
+        <location filename="../setting.ui" line="31430"/>
+        <location filename="../setting.ui" line="31463"/>
+        <location filename="../setting.ui" line="31496"/>
+        <location filename="../setting.ui" line="32242"/>
+        <location filename="../setting.ui" line="32724"/>
+        <location filename="../setting.ui" line="32815"/>
+        <location filename="../setting.ui" line="32868"/>
+        <location filename="../setting.ui" line="33133"/>
+        <location filename="../setting.ui" line="33313"/>
         <source>正向</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33773"/>
-        <location filename="../setting.ui" line="33898"/>
-        <location filename="../setting.ui" line="33959"/>
-        <location filename="../setting.ui" line="34074"/>
-        <location filename="../setting.ui" line="34167"/>
-        <location filename="../setting.ui" line="34222"/>
-        <location filename="../setting.ui" line="34331"/>
-        <location filename="../setting.ui" line="34370"/>
-        <location filename="../setting.ui" line="34409"/>
-        <location filename="../setting.ui" line="34448"/>
-        <location filename="../setting.ui" line="34503"/>
-        <location filename="../setting.ui" line="34618"/>
-        <location filename="../setting.ui" line="35560"/>
-        <location filename="../setting.ui" line="36042"/>
-        <location filename="../setting.ui" line="36133"/>
-        <location filename="../setting.ui" line="36186"/>
-        <location filename="../setting.ui" line="36451"/>
-        <location filename="../setting.ui" line="36631"/>
+        <location filename="../setting.ui" line="30758"/>
+        <location filename="../setting.ui" line="30801"/>
+        <location filename="../setting.ui" line="30882"/>
+        <location filename="../setting.ui" line="30925"/>
+        <location filename="../setting.ui" line="30968"/>
+        <location filename="../setting.ui" line="31129"/>
+        <location filename="../setting.ui" line="31268"/>
+        <location filename="../setting.ui" line="31317"/>
+        <location filename="../setting.ui" line="31360"/>
+        <location filename="../setting.ui" line="31435"/>
+        <location filename="../setting.ui" line="31468"/>
+        <location filename="../setting.ui" line="31501"/>
+        <location filename="../setting.ui" line="32247"/>
+        <location filename="../setting.ui" line="32729"/>
+        <location filename="../setting.ui" line="32820"/>
+        <location filename="../setting.ui" line="32873"/>
+        <location filename="../setting.ui" line="33138"/>
+        <location filename="../setting.ui" line="33318"/>
         <source>反向</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33857"/>
+        <location filename="../setting.ui" line="30766"/>
         <source>原点信号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33918"/>
+        <location filename="../setting.ui" line="31535"/>
         <source>最大限位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="33995"/>
+        <location filename="../setting.ui" line="31137"/>
         <source>最小限位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="34242"/>
+        <location filename="../setting.ui" line="31159"/>
         <source>正限位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="34682"/>
+        <location filename="../setting.ui" line="31084"/>
         <source>负限位</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="34770"/>
-        <location filename="../setting.cpp" line="1579"/>
+        <location filename="../setting.ui" line="31588"/>
+        <location filename="../setting.cpp" line="1400"/>
         <source>结构</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="34834"/>
-        <location filename="../setting.ui" line="34929"/>
-        <location filename="../setting.ui" line="35124"/>
-        <location filename="../setting.ui" line="35302"/>
-        <location filename="../setting.ui" line="35336"/>
-        <location filename="../setting.ui" line="35414"/>
+        <location filename="../setting.ui" line="31679"/>
+        <location filename="../setting.ui" line="31740"/>
+        <location filename="../setting.ui" line="31801"/>
+        <location filename="../setting.ui" line="31862"/>
+        <location filename="../setting.ui" line="31963"/>
+        <location filename="../setting.ui" line="32056"/>
         <source>绝对位移</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="34839"/>
-        <location filename="../setting.ui" line="34934"/>
-        <location filename="../setting.ui" line="35129"/>
-        <location filename="../setting.ui" line="35307"/>
-        <location filename="../setting.ui" line="35341"/>
-        <location filename="../setting.ui" line="35419"/>
+        <location filename="../setting.ui" line="31684"/>
+        <location filename="../setting.ui" line="31745"/>
+        <location filename="../setting.ui" line="31806"/>
+        <location filename="../setting.ui" line="31867"/>
+        <location filename="../setting.ui" line="31968"/>
+        <location filename="../setting.ui" line="32061"/>
         <source>相对位移</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="34878"/>
-        <location filename="../setting.ui" line="34973"/>
-        <location filename="../setting.ui" line="35012"/>
-        <location filename="../setting.ui" line="35051"/>
-        <location filename="../setting.ui" line="35190"/>
-        <location filename="../setting.ui" line="35229"/>
+        <location filename="../setting.ui" line="31656"/>
+        <location filename="../setting.ui" line="31717"/>
+        <location filename="../setting.ui" line="31778"/>
+        <location filename="../setting.ui" line="31839"/>
+        <location filename="../setting.ui" line="31930"/>
+        <location filename="../setting.ui" line="32033"/>
         <source>气阀</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="34898"/>
+        <location filename="../setting.ui" line="32091"/>
         <source>轴类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35149"/>
+        <location filename="../setting.ui" line="31998"/>
         <source>运动模式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35429"/>
-        <location filename="../setting.cpp" line="1580"/>
+        <location filename="../setting.ui" line="32116"/>
+        <location filename="../setting.cpp" line="1401"/>
         <source>原点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35496"/>
-        <location filename="../setting.ui" line="35589"/>
-        <location filename="../setting.ui" line="35714"/>
-        <location filename="../setting.ui" line="35812"/>
-        <location filename="../setting.ui" line="35871"/>
-        <location filename="../setting.ui" line="36737"/>
+        <location filename="../setting.ui" line="32183"/>
+        <location filename="../setting.ui" line="32276"/>
+        <location filename="../setting.ui" line="32401"/>
+        <location filename="../setting.ui" line="32499"/>
+        <location filename="../setting.ui" line="32558"/>
+        <location filename="../setting.ui" line="33424"/>
         <source>不回原点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35639"/>
+        <location filename="../setting.ui" line="32326"/>
         <source>回原点顺序</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35773"/>
-        <location filename="../setting.ui" line="36385"/>
-        <location filename="../setting.ui" line="36480"/>
-        <location filename="../setting.ui" line="36660"/>
-        <location filename="../setting.ui" line="36834"/>
-        <location filename="../setting.ui" line="36873"/>
+        <location filename="../setting.ui" line="32460"/>
+        <location filename="../setting.ui" line="33072"/>
+        <location filename="../setting.ui" line="33167"/>
+        <location filename="../setting.ui" line="33347"/>
+        <location filename="../setting.ui" line="33521"/>
+        <location filename="../setting.ui" line="33560"/>
         <source>无原点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35778"/>
-        <location filename="../setting.ui" line="36390"/>
-        <location filename="../setting.ui" line="36485"/>
-        <location filename="../setting.ui" line="36665"/>
-        <location filename="../setting.ui" line="36839"/>
-        <location filename="../setting.ui" line="36878"/>
+        <location filename="../setting.ui" line="32465"/>
+        <location filename="../setting.ui" line="33077"/>
+        <location filename="../setting.ui" line="33172"/>
+        <location filename="../setting.ui" line="33352"/>
+        <location filename="../setting.ui" line="33526"/>
+        <location filename="../setting.ui" line="33565"/>
         <source>长原点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35783"/>
-        <location filename="../setting.ui" line="36395"/>
-        <location filename="../setting.ui" line="36490"/>
-        <location filename="../setting.ui" line="36670"/>
-        <location filename="../setting.ui" line="36844"/>
-        <location filename="../setting.ui" line="36883"/>
+        <location filename="../setting.ui" line="32470"/>
+        <location filename="../setting.ui" line="33082"/>
+        <location filename="../setting.ui" line="33177"/>
+        <location filename="../setting.ui" line="33357"/>
+        <location filename="../setting.ui" line="33531"/>
+        <location filename="../setting.ui" line="33570"/>
         <source>短原点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="35965"/>
+        <location filename="../setting.ui" line="32652"/>
         <source>回原点方向</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="36006"/>
+        <location filename="../setting.ui" line="32693"/>
         <source>找原点速度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="36206"/>
+        <location filename="../setting.ui" line="32893"/>
         <source>原点偏移</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="36247"/>
+        <location filename="../setting.ui" line="32934"/>
         <source>离开原点速度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="36415"/>
+        <location filename="../setting.ui" line="33102"/>
         <source>原点类型</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="36903"/>
+        <location filename="../setting.ui" line="33590"/>
         <source>复位子程序</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="36992"/>
+        <location filename="../setting.ui" line="33679"/>
         <source>扭矩限制</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37001"/>
-        <location filename="../setting.cpp" line="1581"/>
+        <location filename="../setting.ui" line="33688"/>
+        <location filename="../setting.cpp" line="1402"/>
         <source>通信</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37018"/>
+        <location filename="../setting.ui" line="33705"/>
         <source>发送</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37059"/>
+        <location filename="../setting.ui" line="34035"/>
         <source>参数数值</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37084"/>
+        <location filename="../setting.ui" line="33955"/>
         <source>轴编号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37109"/>
+        <location filename="../setting.ui" line="34022"/>
         <source>是否开机设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37134"/>
+        <location filename="../setting.ui" line="33923"/>
         <source>存放组号</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37159"/>
+        <location filename="../setting.ui" line="34048"/>
         <source>参数索引</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37184"/>
+        <location filename="../setting.ui" line="33734"/>
         <source>参数子索引</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37209"/>
+        <location filename="../setting.ui" line="33747"/>
         <source>是否保存</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37234"/>
+        <location filename="../setting.ui" line="33876"/>
         <source>参数长度</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37289"/>
+        <location filename="../setting.ui" line="33991"/>
         <source>Y1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37294"/>
+        <location filename="../setting.ui" line="33996"/>
         <source>Z1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37304"/>
+        <location filename="../setting.ui" line="34006"/>
         <source>A/Y2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37309"/>
+        <location filename="../setting.ui" line="34011"/>
         <source>B/Z2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37439"/>
+        <location filename="../setting.ui" line="33797"/>
         <source>不保存</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37473"/>
+        <location filename="../setting.ui" line="33907"/>
         <source>不设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="37478"/>
+        <location filename="../setting.ui" line="33912"/>
         <source>设置</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="63"/>
+        <location filename="../setting.cpp" line="66"/>
         <source>请输入菜单权限密码：</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="78"/>
+        <location filename="../setting.cpp" line="81"/>
         <source>密码错误！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="188"/>
+        <location filename="../setting.cpp" line="1671"/>
         <source>确认修改颜色？系统将重启！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="201"/>
+        <location filename="../setting.cpp" line="1684"/>
         <source>Please wait, applying new color settings...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="201"/>
-        <location filename="../setting.cpp" line="1112"/>
+        <location filename="../setting.cpp" line="933"/>
+        <location filename="../setting.cpp" line="1684"/>
         <source>取消</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="234"/>
+        <location filename="../setting.cpp" line="1717"/>
         <source>确定修改系统时间？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="247"/>
+        <location filename="../setting.cpp" line="1730"/>
         <source>时间格式错误！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="432"/>
+        <location filename="../setting.cpp" line="1622"/>
         <source>触摸校准会重启系统，请确认是否校准？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="904"/>
+        <location filename="../setting.cpp" line="725"/>
+        <location filename="../setting.cpp" line="2665"/>
         <source>标题</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="904"/>
+        <location filename="../setting.cpp" line="725"/>
+        <location filename="../setting.cpp" line="2665"/>
         <source>修改时间</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1095"/>
-        <location filename="../setting.cpp" line="1146"/>
-        <location filename="../setting.cpp" line="1313"/>
-        <location filename="../setting.cpp" line="1332"/>
+        <location filename="../setting.cpp" line="916"/>
+        <location filename="../setting.cpp" line="967"/>
+        <location filename="../setting.cpp" line="1134"/>
+        <location filename="../setting.cpp" line="1153"/>
+        <location filename="../setting.cpp" line="4149"/>
+        <location filename="../setting.cpp" line="4263"/>
         <source>请插入U盘！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1105"/>
-        <location filename="../setting.cpp" line="1388"/>
+        <location filename="../setting.cpp" line="926"/>
+        <location filename="../setting.cpp" line="1209"/>
         <source>导入成功!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1112"/>
+        <location filename="../setting.cpp" line="933"/>
         <source>数据处理中，请稍候...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1158"/>
-        <location filename="../setting.cpp" line="1321"/>
+        <location filename="../setting.cpp" line="979"/>
+        <location filename="../setting.cpp" line="1142"/>
         <source>导出成功!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1508"/>
+        <location filename="../setting.cpp" line="1329"/>
         <source>菜单</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1508"/>
+        <location filename="../setting.cpp" line="1329"/>
         <source>操作员</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1508"/>
+        <location filename="../setting.cpp" line="1329"/>
         <source>不可见</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="1547"/>
+        <location filename="../setting.cpp" line="1368"/>
         <source>产品</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="2166"/>
+        <location filename="../setting.cpp" line="2424"/>
         <source>密码不能为空！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="2175"/>
+        <location filename="../setting.cpp" line="2433"/>
         <source>旧密码错误！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="2180"/>
+        <location filename="../setting.cpp" line="2438"/>
         <source>两次输入密码不一致！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="2192"/>
+        <location filename="../setting.cpp" line="2450"/>
         <source>密码修改成功！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="2603"/>
+        <location filename="../setting.cpp" line="1812"/>
         <source>标题不能为空！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="2608"/>
+        <location filename="../setting.cpp" line="1554"/>
+        <source>确认切换语言？</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../setting.cpp" line="1817"/>
         <source>文件名格式错误！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="2688"/>
+        <location filename="../setting.cpp" line="1897"/>
         <source>确定删除？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4055"/>
+        <location filename="../setting.cpp" line="4132"/>
         <source>未检测到bootlogo.bmp文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4060"/>
+        <location filename="../setting.cpp" line="4137"/>
         <source>未检测到stop.jpg文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4065"/>
+        <location filename="../setting.cpp" line="4142"/>
         <source>未检测到bootlogo.bmp和stop.jpg文件</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4072"/>
-        <location filename="../setting.cpp" line="4186"/>
-        <source>未插入U盘！</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../setting.cpp" line="4096"/>
+        <location filename="../setting.cpp" line="4173"/>
         <source>手持器升级完成,正在重启中...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4101"/>
+        <location filename="../setting.cpp" line="4178"/>
         <source>主板升级完成,正在重启中...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4106"/>
+        <location filename="../setting.cpp" line="4183"/>
         <source>IO板升级完成,正在重启中...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4111"/>
+        <location filename="../setting.cpp" line="4188"/>
         <source>伺服升级完成,正在重启中...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4116"/>
+        <location filename="../setting.cpp" line="4193"/>
         <source>数据备份成功!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4121"/>
+        <location filename="../setting.cpp" line="4198"/>
         <source>数据还原成功!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4134"/>
+        <location filename="../setting.cpp" line="4211"/>
         <source>提示 : 手持器升级中,切勿断电,请等待自动重启!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4139"/>
+        <location filename="../setting.cpp" line="4216"/>
         <source>提示 : 主板升级中,切勿断电,请等待自动重启!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4144"/>
+        <location filename="../setting.cpp" line="4221"/>
         <source>提示 : IO板升级中,切勿断电,请等待自动重启!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4149"/>
+        <location filename="../setting.cpp" line="4226"/>
         <source>提示 : 伺服升级中,切勿断电,请等待自动重启!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4154"/>
+        <location filename="../setting.cpp" line="4231"/>
         <source>提示 : 数据备份中,切勿断电!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4159"/>
+        <location filename="../setting.cpp" line="4236"/>
         <source>提示 : 数据还原中,切勿断电!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4199"/>
+        <location filename="../setting.cpp" line="4276"/>
         <source>升级成功！等待重启</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../setting.cpp" line="4208"/>
+        <location filename="../setting.cpp" line="4285"/>
         <source>升级失败，请重启机器再次升级！</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10538,254 +10570,254 @@
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="110"/>
-        <location filename="../dialogs/stackedit.ui" line="396"/>
-        <location filename="../dialogs/stackedit.ui" line="1004"/>
-        <location filename="../dialogs/stackedit.ui" line="1033"/>
-        <location filename="../dialogs/stackedit.ui" line="1292"/>
+        <location filename="../dialogs/stackedit.ui" line="402"/>
+        <location filename="../dialogs/stackedit.ui" line="1010"/>
+        <location filename="../dialogs/stackedit.ui" line="1039"/>
+        <location filename="../dialogs/stackedit.ui" line="1298"/>
         <source>从小到大</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="115"/>
-        <location filename="../dialogs/stackedit.ui" line="401"/>
-        <location filename="../dialogs/stackedit.ui" line="1009"/>
-        <location filename="../dialogs/stackedit.ui" line="1038"/>
-        <location filename="../dialogs/stackedit.ui" line="1297"/>
+        <location filename="../dialogs/stackedit.ui" line="407"/>
+        <location filename="../dialogs/stackedit.ui" line="1015"/>
+        <location filename="../dialogs/stackedit.ui" line="1044"/>
+        <location filename="../dialogs/stackedit.ui" line="1303"/>
         <source>从大到小</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="141"/>
-        <location filename="../dialogs/stackedit.ui" line="297"/>
-        <location filename="../dialogs/stackedit.ui" line="1088"/>
+        <location filename="../dialogs/stackedit.ui" line="303"/>
+        <location filename="../dialogs/stackedit.ui" line="1094"/>
         <source>方向</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="166"/>
-        <location filename="../dialogs/stackedit.ui" line="335"/>
-        <location filename="../dialogs/stackedit.ui" line="354"/>
-        <location filename="../dialogs/stackedit.ui" line="373"/>
-        <location filename="../dialogs/stackedit.ui" line="459"/>
-        <location filename="../dialogs/stackedit.ui" line="478"/>
-        <location filename="../dialogs/stackedit.ui" line="535"/>
-        <location filename="../dialogs/stackedit.ui" line="573"/>
-        <location filename="../dialogs/stackedit.ui" line="592"/>
-        <location filename="../dialogs/stackedit.ui" line="880"/>
-        <location filename="../dialogs/stackedit.ui" line="1163"/>
-        <location filename="../dialogs/stackedit.ui" line="1188"/>
-        <location filename="../dialogs/stackedit.ui" line="1238"/>
+        <location filename="../dialogs/stackedit.ui" line="169"/>
+        <location filename="../dialogs/stackedit.ui" line="341"/>
+        <location filename="../dialogs/stackedit.ui" line="360"/>
+        <location filename="../dialogs/stackedit.ui" line="379"/>
+        <location filename="../dialogs/stackedit.ui" line="465"/>
+        <location filename="../dialogs/stackedit.ui" line="484"/>
+        <location filename="../dialogs/stackedit.ui" line="541"/>
+        <location filename="../dialogs/stackedit.ui" line="579"/>
+        <location filename="../dialogs/stackedit.ui" line="598"/>
+        <location filename="../dialogs/stackedit.ui" line="886"/>
+        <location filename="../dialogs/stackedit.ui" line="1169"/>
+        <location filename="../dialogs/stackedit.ui" line="1194"/>
+        <location filename="../dialogs/stackedit.ui" line="1244"/>
         <source>0.00</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="191"/>
-        <location filename="../dialogs/stackedit.ui" line="421"/>
-        <location filename="../dialogs/stackedit.ui" line="1348"/>
+        <location filename="../dialogs/stackedit.ui" line="194"/>
+        <location filename="../dialogs/stackedit.ui" line="427"/>
+        <location filename="../dialogs/stackedit.ui" line="1354"/>
         <source>间距(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="316"/>
-        <location filename="../dialogs/stackedit.ui" line="440"/>
-        <location filename="../dialogs/stackedit.ui" line="497"/>
-        <location filename="../dialogs/stackedit.ui" line="516"/>
-        <location filename="../dialogs/stackedit.ui" line="554"/>
-        <location filename="../dialogs/stackedit.ui" line="611"/>
-        <location filename="../dialogs/stackedit.ui" line="1113"/>
-        <location filename="../dialogs/stackedit.ui" line="1138"/>
+        <location filename="../dialogs/stackedit.ui" line="322"/>
+        <location filename="../dialogs/stackedit.ui" line="446"/>
+        <location filename="../dialogs/stackedit.ui" line="503"/>
+        <location filename="../dialogs/stackedit.ui" line="522"/>
+        <location filename="../dialogs/stackedit.ui" line="560"/>
+        <location filename="../dialogs/stackedit.ui" line="617"/>
+        <location filename="../dialogs/stackedit.ui" line="1119"/>
+        <location filename="../dialogs/stackedit.ui" line="1144"/>
         <source>0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="630"/>
-        <location filename="../dialogs/stackedit.ui" line="1263"/>
+        <location filename="../dialogs/stackedit.ui" line="636"/>
+        <location filename="../dialogs/stackedit.ui" line="1269"/>
         <source>偏移</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="649"/>
-        <location filename="../dialogs/stackedit.ui" line="1323"/>
+        <location filename="../dialogs/stackedit.ui" line="655"/>
+        <location filename="../dialogs/stackedit.ui" line="1329"/>
         <source>起始(mm)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="673"/>
+        <location filename="../dialogs/stackedit.ui" line="679"/>
         <source>Z1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="726"/>
-        <location filename="../dialogs/stackedit.ui" line="1213"/>
+        <location filename="../dialogs/stackedit.ui" line="732"/>
+        <location filename="../dialogs/stackedit.ui" line="1219"/>
         <source>速度(%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="750"/>
+        <location filename="../dialogs/stackedit.ui" line="756"/>
         <source>Y1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="808"/>
+        <location filename="../dialogs/stackedit.ui" line="814"/>
         <source>X1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="861"/>
-        <location filename="../dialogs/stackedit.ui" line="1373"/>
+        <location filename="../dialogs/stackedit.ui" line="867"/>
+        <location filename="../dialogs/stackedit.ui" line="1379"/>
         <source>个数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="899"/>
-        <location filename="../dialogs/stackedit.ui" line="1489"/>
+        <location filename="../dialogs/stackedit.ui" line="905"/>
+        <location filename="../dialogs/stackedit.ui" line="1495"/>
         <source>轴选择</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="922"/>
+        <location filename="../dialogs/stackedit.ui" line="928"/>
         <source>X1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="946"/>
+        <location filename="../dialogs/stackedit.ui" line="952"/>
         <source>Y1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="951"/>
+        <location filename="../dialogs/stackedit.ui" line="957"/>
         <source>Y2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="975"/>
+        <location filename="../dialogs/stackedit.ui" line="981"/>
         <source>Z1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="980"/>
+        <location filename="../dialogs/stackedit.ui" line="986"/>
         <source>Z2轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1421"/>
+        <location filename="../dialogs/stackedit.ui" line="1427"/>
         <source>C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1453"/>
+        <location filename="../dialogs/stackedit.ui" line="1459"/>
         <source>C轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1458"/>
+        <location filename="../dialogs/stackedit.ui" line="1464"/>
         <source>A轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1463"/>
+        <location filename="../dialogs/stackedit.ui" line="1469"/>
         <source>B轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1555"/>
+        <location filename="../dialogs/stackedit.ui" line="1564"/>
         <source>刷新</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1594"/>
+        <location filename="../dialogs/stackedit.ui" line="1603"/>
         <source>移至堆叠点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1629"/>
+        <location filename="../dialogs/stackedit.ui" line="1638"/>
         <source>移至跟随点</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1661"/>
+        <location filename="../dialogs/stackedit.ui" line="1670"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1693"/>
+        <location filename="../dialogs/stackedit.ui" line="1702"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1733"/>
+        <location filename="../dialogs/stackedit.ui" line="1742"/>
         <source>顺序</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1764"/>
+        <location filename="../dialogs/stackedit.ui" line="1773"/>
         <source>Y1-X1-Z1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1769"/>
+        <location filename="../dialogs/stackedit.ui" line="1778"/>
         <source>X1-Y1-Z1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1774"/>
+        <location filename="../dialogs/stackedit.ui" line="1783"/>
         <source>Z1-Y1-X1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1779"/>
+        <location filename="../dialogs/stackedit.ui" line="1788"/>
         <source>Z1-X1-Y1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1799"/>
+        <location filename="../dialogs/stackedit.ui" line="1808"/>
         <source>计数方式</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1830"/>
-        <location filename="../dialogs/stackedit.ui" line="1891"/>
-        <location filename="../dialogs/stackedit.ui" line="1947"/>
+        <location filename="../dialogs/stackedit.ui" line="1839"/>
+        <location filename="../dialogs/stackedit.ui" line="1900"/>
+        <location filename="../dialogs/stackedit.ui" line="1956"/>
         <source>不使用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1835"/>
+        <location filename="../dialogs/stackedit.ui" line="1844"/>
         <source>程序结束</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1840"/>
+        <location filename="../dialogs/stackedit.ui" line="1849"/>
         <source>命令结束</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1860"/>
+        <location filename="../dialogs/stackedit.ui" line="1869"/>
         <source>堆叠完停止</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1896"/>
+        <location filename="../dialogs/stackedit.ui" line="1905"/>
         <source>使用</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1916"/>
+        <location filename="../dialogs/stackedit.ui" line="1925"/>
         <source>留空</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1952"/>
+        <location filename="../dialogs/stackedit.ui" line="1961"/>
         <source>首位不取</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1957"/>
+        <location filename="../dialogs/stackedit.ui" line="1966"/>
         <source>末位不放</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.ui" line="1965"/>
+        <location filename="../dialogs/stackedit.ui" line="1974"/>
         <source>三轴联动</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10793,47 +10825,52 @@
 <context>
     <name>StackFollow</name>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="803"/>
+        <location filename="../dialogs/stackedit.cpp" line="843"/>
+        <location filename="../dialogs/stackedit.cpp" line="953"/>
         <source>X1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="803"/>
+        <location filename="../dialogs/stackedit.cpp" line="843"/>
+        <location filename="../dialogs/stackedit.cpp" line="953"/>
         <source>Y1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="803"/>
+        <location filename="../dialogs/stackedit.cpp" line="843"/>
+        <location filename="../dialogs/stackedit.cpp" line="953"/>
         <source>Z1轴</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="821"/>
+        <location filename="../dialogs/stackedit.cpp" line="861"/>
         <source>输入值的范围不能超过%1～%2,请重新输入！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="837"/>
+        <location filename="../dialogs/stackedit.cpp" line="877"/>
+        <location filename="../dialogs/stackedit.cpp" line="956"/>
         <source>移动</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="846"/>
+        <location filename="../dialogs/stackedit.cpp" line="886"/>
         <source>X1轴伺服未开启，请把轴的堆叠点数设为0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="851"/>
+        <location filename="../dialogs/stackedit.cpp" line="891"/>
         <source>Y1轴伺服未开启，请把轴的堆叠点数设为0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="856"/>
+        <location filename="../dialogs/stackedit.cpp" line="896"/>
         <source>Z1轴伺服未开启，请把轴的堆叠点数设为0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dialogs/stackedit.cpp" line="865"/>
+        <location filename="../dialogs/stackedit.cpp" line="905"/>
+        <location filename="../dialogs/stackedit.cpp" line="955"/>
         <source>关闭</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11272,6 +11309,7 @@
     </message>
     <message>
         <location filename="../teach.ui" line="1317"/>
+        <location filename="../teach.cpp" line="4710"/>
         <source>参考点</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13189,6 +13227,8 @@
     </message>
     <message>
         <location filename="../teach.ui" line="15299"/>
+        <location filename="../teach.cpp" line="574"/>
+        <location filename="../teach.cpp" line="4167"/>
         <source>预留通</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13316,6 +13356,7 @@
     </message>
     <message>
         <location filename="../teach.ui" line="16742"/>
+        <location filename="../teach.cpp" line="790"/>
         <source>标签</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13326,7 +13367,7 @@
     </message>
     <message>
         <location filename="../teach.cpp" line="165"/>
-        <location filename="../teach.cpp" line="4329"/>
+        <location filename="../teach.cpp" line="4338"/>
         <source>教导参数有修改，是否需要保存？</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13352,45 +13393,50 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="1100"/>
+        <location filename="../teach.cpp" line="1109"/>
         <source>确认删除所选动作？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="1118"/>
-        <location filename="../teach.cpp" line="1124"/>
+        <location filename="../teach.cpp" line="1127"/>
         <location filename="../teach.cpp" line="1133"/>
+        <location filename="../teach.cpp" line="1142"/>
         <source>删除失败</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="3407"/>
+        <location filename="../teach.cpp" line="3416"/>
         <source>X1轴超出最大范围</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="3421"/>
+        <location filename="../teach.cpp" line="3430"/>
         <source>Y1轴超出最大范围</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="3435"/>
+        <location filename="../teach.cpp" line="3444"/>
         <source>Z1轴超出最大范围</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="3450"/>
+        <location filename="../teach.cpp" line="3459"/>
         <source>Y2轴超出最大范围</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="3464"/>
+        <location filename="../teach.cpp" line="3473"/>
         <source>Z2轴超出最大范围</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teach.cpp" line="6314"/>
-        <location filename="../teach.cpp" line="6328"/>
+        <location filename="../teach.cpp" line="4171"/>
+        <source>预留断</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../teach.cpp" line="6323"/>
+        <location filename="../teach.cpp" line="6337"/>
         <source>输入值的范围不能超过1450～1499,请重新输入。</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13560,7 +13606,7 @@
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="369"/>
-        <source>文件导出成功！</source>
+        <source>导出成功！</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13570,7 +13616,7 @@
     </message>
     <message>
         <location filename="../teachmanage.cpp" line="409"/>
-        <source>系统中存在相同文件，请确认是否覆盖？</source>
+        <source>文件已存在，请确认是否覆盖？</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13579,12 +13625,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teachmanage.cpp" line="715"/>
+        <location filename="../teachmanage.cpp" line="724"/>
         <source>文件名</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../teachmanage.cpp" line="715"/>
+        <location filename="../teachmanage.cpp" line="724"/>
         <source>最后修改时间</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13647,6 +13693,7 @@
         <location filename="../dialogs/vartypedialog.ui" line="792"/>
         <location filename="../dialogs/vartypedialog.ui" line="845"/>
         <location filename="../dialogs/vartypedialog.cpp" line="47"/>
+        <location filename="../dialogs/vartypedialog.cpp" line="121"/>
         <source>整数</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13757,11 +13804,13 @@
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.cpp" line="47"/>
+        <location filename="../dialogs/vartypedialog.cpp" line="121"/>
         <source>一位小数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/vartypedialog.cpp" line="47"/>
+        <location filename="../dialogs/vartypedialog.cpp" line="121"/>
         <source>两位小数</source>
         <translation type="unfinished"></translation>
     </message>
@@ -13883,19 +13932,48 @@
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="129"/>
-        <source>存在相同文件,请确认是否覆盖?确认(覆盖同名文件);取消(不恢复同名文件)</source>
+        <location filename="../dialogs/upgradedialog.cpp" line="343"/>
+        <source>文件已存在，请确认是否覆盖？</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/upgradedialog.cpp" line="183"/>
+        <source>是否现在进行手持器升级？</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/upgradedialog.cpp" line="193"/>
+        <source>是否现在进行主板升级？</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/upgradedialog.cpp" line="201"/>
+        <source>当前系统无IO板</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/upgradedialog.cpp" line="209"/>
+        <source>当前系统不支持伺服升级</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/upgradedialog.cpp" line="217"/>
+        <source>是否备份设置文件U盘？</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/upgradedialog.cpp" line="227"/>
+        <source>是否从U盘恢复设置文件？</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dialogs/upgradedialog.cpp" line="236"/>
+        <source>输入恢复密码，按确认按键，将恢复出场设置，并重启系统!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="342"/>
         <source>Confirm Overwrite</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogs/upgradedialog.cpp" line="343"/>
-        <source>以下文件已存在:
-%1
-是否覆盖他们?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -13921,21 +13999,6 @@
     <message>
         <location filename="../dialogs/upgradedialog.cpp" line="1036"/>
         <source>密码错误！</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogs/upgradedialog.cpp" line="1052"/>
-        <source>无法启动cp命令！</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogs/upgradedialog.cpp" line="1055"/>
-        <source>cp命令执行未完成！</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../dialogs/upgradedialog.cpp" line="1063"/>
-        <source>cp命令执行失败！退出码：</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

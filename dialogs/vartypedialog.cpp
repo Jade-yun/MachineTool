@@ -104,5 +104,27 @@ void VarTypeDialog::setVariabText()
     ui->label_var14->setText(m_NameDefine[1].varName[13]);
     ui->label_var15->setText(m_NameDefine[1].varName[14]);
     ui->label_var16->setText(m_NameDefine[1].varName[15]);
-    #endif
+#endif
+}
+
+void VarTypeDialog::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        this->retranslate();
+    }
+    QWidget::changeEvent(e);
+}
+
+void VarTypeDialog::retranslate()
+{
+    QStringList items= {tr("整数"), tr("一位小数"), tr("两位小数")};
+    for (int i = 0; i < VAR_TOTAL_NUM; i++)
+    {
+        for (int j = 0; j < items.size(); j++)
+        {
+            coboxVarType[i]->setItemText(j, items[j]);
+        }
+
+    }
 }

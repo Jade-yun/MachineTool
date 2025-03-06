@@ -124,6 +124,15 @@ void HandWheelDialog::showEvent(QShowEvent *event)
     QWidget::showEvent(event);
 }
 
+void HandWheelDialog::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}
+
 void HandWheelDialog::HandWheelButtonClickHandel()
 {
     ui->chboxHandWhellMode->setChecked(m_manualAxis.handwheelMode);

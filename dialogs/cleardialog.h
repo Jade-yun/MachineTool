@@ -29,6 +29,8 @@ public:
 
 private:
     Ui::ClearDialog *ui;
+protected:
+    void changeEvent(QEvent* e) override;
 };
 
 #endif // CLEARDIALOG_H

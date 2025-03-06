@@ -1089,6 +1089,15 @@ void Teach::setGeneralBtnEvent(QString btnName)
     }
 }
 
+void Teach::changeEvent(QEvent *e)
+{
+    if (e->type() == QEvent::LanguageChange)
+    {
+        ui->retranslateUi(this);
+    }
+    QWidget::changeEvent(e);
+}
+
 //教导界面-删除按钮处理函数
 void Teach::on_btnDelete_clicked()
 {

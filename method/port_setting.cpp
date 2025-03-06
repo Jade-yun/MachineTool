@@ -253,8 +253,8 @@ void readIniPara()
 void updateInterLockPortFlag()
 {
     for (int i = 0; i < OUT_INTERLOCK_NUM; i++) {
-        bool useForwardValue = m_OutportInterlock[i][0] != 0;
-        bool useReverseValue = m_OutportInterlock[i][2] != 0;
+        bool useForwardValve = m_OutportInterlock[i][0] != 0;
+        bool useReverseValve = m_OutportInterlock[i][2] != 0;
         bool forwardCheck = m_OutportInterlock[i][1] != 0;
         bool reverseCheck = m_OutportInterlock[i][3] != 0;
 
@@ -263,11 +263,11 @@ void updateInterLockPortFlag()
         // 如果是预留的组，跳过
         if (group.forwardValuePort == -1) continue;
 
-        m_Port_Y[group.forwardValuePort].functionSet = useForwardValue;
-        m_Port_Y[group.reverseValuePort].functionSet = useForwardValue && useReverseValue;
+        m_Port_Y[group.forwardValuePort].functionSet = useForwardValve;
+        m_Port_Y[group.reverseValuePort].functionSet = useForwardValve && useReverseValve;
 
-        m_Port_X[group.forwardDetectPort].functionSet = useForwardValue && forwardCheck;
-        m_Port_X[group.reverseDetectPort].functionSet = useForwardValue && reverseCheck;
+        m_Port_X[group.forwardDetectPort].functionSet = useForwardValve && forwardCheck;
+        m_Port_X[group.reverseDetectPort].functionSet = useForwardValve && reverseCheck;
     }
 }
 
