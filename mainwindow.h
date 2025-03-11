@@ -70,6 +70,8 @@ private slots:
     void labProgramNameRollShow();
 
     void AxisTypeChange_Handle();
+
+    void SettingParNeedSaveHandle();
 public slots:
 
     void slotShowSubWindow();
@@ -90,6 +92,7 @@ signals:
     void HandWheelButtonClick_Signal();//手轮按钮按下触发更新手轮界面-手轮模式控件信号
     void RefreshHandWheel_Signal();//刷新手轮界面信号
     void Refresh_globalSpeedShow_Signal();//在自动界面时，通过按键修改速度时，发送刷新自动界面速度显示
+    void SwitchPageParSaveSignal(ParSaveIndex Index);//切换界面时设置界面有参数需要保存信号
 private:
     Ui::MainWindow *ui;
 

@@ -992,6 +992,37 @@ typedef struct
     int SyncStep;//用来记录到那一步了
 }Sync_Data;
 
+//设置中所有需要点击保存按钮才能保存的参数是否需要保存结构体
+typedef struct
+{
+    bool SavePort = 0;//端口自定义保存
+    bool SaveNameDef = 0;//名称自定义保存
+    bool ClawSafeFlag[4] = {0,0,0,0};//卡爪安全1～4
+    bool OnlineSafe[4] = {0,0,0,0};//联机区域1～4
+    bool ProcuctionBatch = 0;//手控器物联网
+    bool SaveServoPara = 0;//伺服保存
+    bool SaveAxisPara = 0;//轴参数保存
+    bool SafeArea[4] = {0,0,0,0};//安全区1～安全区4
+    bool SaveServoSafePoint = 0;//位置限定
+    bool SaveMachineParaLimit = 0;//机器参数-限位保存
+    bool SaveMachineParaStruct = 0;//机器参数-结构保存
+    bool SaveMachineParaOrigin = 0;//机器参数-原点保存
+}NeedSaveSettingPar;
+
+enum ParSaveIndex {
+    SavePort=0,
+    SaveNameDef,
+    ClawSafe,
+    OnlineSafe,
+    AllMachinePara,//所有机器参数
+    ServoSafePoint,//伺服安全点参数
+    horizontalPosList,//位置限定
+    MachineParaLimit,//限位
+    MachineParaStruct,//结构
+    MachineParaOrigin//原点
+};
+extern NeedSaveSettingPar M_SaveSetPar;
+
 extern MainUpdateStruct M_MainUpdate;//主控板升级结构体
 extern Sync_Data MySync_Data;       //参数同步结构体
 /**********************************变量定义********************************/

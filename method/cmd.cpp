@@ -6,6 +6,8 @@ cmd::cmd()
 
 }
 
+NeedSaveSettingPar M_SaveSetPar;
+
 std::vector<QString> keyFunDesription;
 std::vector<QString> sigSetDesription;
 uint32_t passwd[4] = {12345, 12345, 12345,12345};
@@ -689,7 +691,7 @@ uint8_t g_InsertProOrder(uint8_t* data)
 
     for(i=m_OperateProOrderListNum; i>=proOrder.list; i--)
     {//将插入位置后面的程序向后移动一行
-        if(m_OperateProOrder[i-1].list >= 0 && m_OperateProOrder[i-1].runOrderNum >= 0)
+        if(m_OperateProOrder[i-1].list > 0 && m_OperateProOrder[i-1].runOrderNum > 0)
         {//有效程序才向后移动
            g_ProOrderSwap(&m_OperateProOrder[i-1], &m_OperateProOrder[i]);		//交换命令数据
            g_FreeProOrder(&m_OperateProOrder[i-1]);	//释放被交换的命令数据指针
@@ -712,6 +714,7 @@ uint8_t g_InsertProOrder(uint8_t* data)
     }
     g_FreeProOrder(&proOrder);				//释放临时变量中的命令指针
     OrderNeedSaveFlag = true;
+    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,0);
     return 0;   
 }
 
@@ -742,12 +745,27 @@ uint8_t g_DeleteProOrder(uint8_t proNum, uint16_t list)
 
     for(i=list; i<m_OperateProOrderListNum; i++)
     {//将删除程序后面的程序前移动一行
-        if(m_OperateProOrder[i].list >= 0 && m_OperateProOrder[i].runOrderNum >= 0)
+        if(m_OperateProOrder[i].list > 0 && m_OperateProOrder[i].runOrderNum > 0)
         {//有效程序才向前移动
             g_ProOrderSwap(&m_OperateProOrder[i], &m_OperateProOrder[i+1]);	//交换命令数据
             g_FreeProOrder(&m_OperateProOrder[i+1]);	//释放交换的命令数据指针
-            m_OperateProOrder[i].list--;//删除后的行号处理
-            m_OperateProOrder[i].runOrderNum--; //删除后的序号处理
+            if(m_OperateProOrder[i].list>1)
+            {
+                m_OperateProOrder[i].list--;//删除后的行号处理
+            }
+            if(m_OperateProOrder[i].runOrderNum>1)
+            {
+                if(m_OperateProOrder[i].runOrderNum == m_OperateProOrder[i-1].runOrderNum+1)
+                {//删除的是合并行的第一行，不做处理
+                }
+                else if(m_OperateProOrder[i].runOrderNum == m_OperateProOrder[i-1].runOrderNum)
+                {//删除的是合并行的第2行~合并行的到数第二行，不做处理
+                }
+                else
+                {//删除的是合并行的最后一行，或者每合并的普通一行，则运行序号-1
+                    m_OperateProOrder[i].runOrderNum--; //删除后的序号处理
+                }
+            }
         }
         else
         {//后面都是无效程序，结束处理
@@ -963,10 +981,28 @@ uint8_t g_ProOrderUpMove(uint8_t proNum, uint16_t proListNum, uint16_t len)
         if(m_OperateProOrder[i-1].list > 0 && m_OperateProOrder[i-1].runOrderNum > 0)
         {//有效程序才向后移动
             g_ProOrderSwap(&m_OperateProOrder[i], &m_OperateProOrder[i-1]);	//交换命令数据
-            m_OperateProOrder[i].runOrderNum++;
-            m_OperateProOrder[i-1].runOrderNum--;
-            m_OperateProOrder[i].list++;
-            m_OperateProOrder[i-1].list--;
+            if(m_OperateProOrder[i-1].runOrderNum>1 && m_OperateProOrder[i-1].list>1)
+            {
+                if(m_OperateProOrder[i-1].runOrderNum == m_OperateProOrder[i].runOrderNum+1)
+                {//上移的是合并行的第一行
+                    m_OperateProOrder[i].runOrderNum++;
+                    m_OperateProOrder[i-1].runOrderNum--;
+                    m_OperateProOrder[i].list++;
+                    m_OperateProOrder[i-1].list--;
+                }
+                else if(m_OperateProOrder[i-1].runOrderNum == m_OperateProOrder[i].runOrderNum)
+                {//上移的是合并行的第2行~合并行的最后一行，只处理序号
+                    m_OperateProOrder[i].list++;
+                    m_OperateProOrder[i-1].list--;
+                }
+                else
+                {//上移的是合并行的最后一行，或者每合并的普通一行，则运行序号-1
+                    m_OperateProOrder[i].runOrderNum++;
+                    m_OperateProOrder[i-1].runOrderNum--;
+                    m_OperateProOrder[i].list++;
+                    m_OperateProOrder[i-1].list--;
+                }
+            }
             m_CurrentSelectProOrderList--;
         }
     }
@@ -997,10 +1033,28 @@ uint8_t g_ProOrderDownMove(uint8_t proNum, uint16_t proListNum, uint16_t len)
         if(m_OperateProOrder[i].list > 0 && m_OperateProOrder[i].runOrderNum > 0)
         {//有效程序才向后移动
             g_ProOrderSwap(&m_OperateProOrder[i-1], &m_OperateProOrder[i]);	//交换命令数据
-            m_OperateProOrder[i].runOrderNum++;
-            m_OperateProOrder[i-1].runOrderNum--;
-            m_OperateProOrder[i].list++;
-            m_OperateProOrder[i-1].list--;
+            if(m_OperateProOrder[i-1].runOrderNum>1 && m_OperateProOrder[i-1].list>1)
+            {
+                if(m_OperateProOrder[i-1].runOrderNum == m_OperateProOrder[i].runOrderNum+1)
+                {//下移的是合并行的第一行
+                    m_OperateProOrder[i].runOrderNum++;
+                    m_OperateProOrder[i-1].runOrderNum--;
+                    m_OperateProOrder[i].list++;
+                    m_OperateProOrder[i-1].list--;
+                }
+                else if(m_OperateProOrder[i-1].runOrderNum == m_OperateProOrder[i].runOrderNum)
+                {//下移的是合并行的第2行~合并行的最后一行，只处理序号
+                    m_OperateProOrder[i].list++;
+                    m_OperateProOrder[i-1].list--;
+                }
+                else
+                {//下移的是合并行的最后一行，或者每合并的普通一行，则运行序号-1
+                    m_OperateProOrder[i].runOrderNum++;
+                    m_OperateProOrder[i-1].runOrderNum--;
+                    m_OperateProOrder[i].list++;
+                    m_OperateProOrder[i-1].list--;
+                }
+            }
             m_CurrentSelectProOrderList++;
         }
     }

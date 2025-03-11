@@ -249,6 +249,7 @@ MainWindow::MainWindow(QWidget *parent)
             ui->Btn_TeachHome->setText(tr("教导管理"));
             ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
             TrimodeSwitchCommandSend(code,value);
+            SettingParNeedSaveHandle();
         }
         else if (code == 143 && value == 1)
         {
@@ -257,6 +258,7 @@ MainWindow::MainWindow(QWidget *parent)
             ui->Btn_TeachHome->setText(tr("教导"));
             ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, false);
             TrimodeSwitchCommandSend(code,value);
+            SettingParNeedSaveHandle();
         }
         else if (code == 144 && value == 1)
         {
@@ -264,6 +266,7 @@ MainWindow::MainWindow(QWidget *parent)
             curMode = TriMode::AUTO;
             ui->Btn_TeachHome->setEnabled(false);
             TrimodeSwitchCommandSend(code,value);
+            SettingParNeedSaveHandle();
         }
         emit ui->Btn_ManualHome->clicked();
         ui->Btn_ManualHome->setChecked(true);
@@ -563,6 +566,7 @@ void MainWindow::on_Btn_ManualHome_clicked()
         emit Auto_File_List_Refresh_signal(0);//切换到自动界面时默认显示主程序
     }
     Widget_jump_Order_Need_Save_Handel();
+    SettingParNeedSaveHandle();
 }
 
 void MainWindow::on_Btn_SetHome_clicked()
@@ -571,6 +575,7 @@ void MainWindow::on_Btn_SetHome_clicked()
 //    qDebug()<< "emit sigSettingHome";
     ui->stkWidget->setCurrentWidget(setWidget);
     Widget_jump_Order_Need_Save_Handel();
+    SettingParNeedSaveHandle();
 }
 
 void MainWindow::on_Btn_MonitorHome_clicked()
@@ -578,6 +583,7 @@ void MainWindow::on_Btn_MonitorHome_clicked()
     // jump to monitor page
     ui->stkWidget->setCurrentWidget(monitorWidget);
     Widget_jump_Order_Need_Save_Handel();
+    SettingParNeedSaveHandle();
 }
 
 void MainWindow::on_Btn_TeachHome_clicked()
@@ -593,6 +599,7 @@ void MainWindow::on_Btn_TeachHome_clicked()
     {
         ui->stkWidget->setCurrentWidget(teachManageWidget);
     }
+    SettingParNeedSaveHandle();
 }
 
 void MainWindow::on_Btn_AlarmHome_clicked()
@@ -600,6 +607,7 @@ void MainWindow::on_Btn_AlarmHome_clicked()
     // jump to alarm page
     ui->stkWidget->setCurrentWidget(alarmWidget);
     Widget_jump_Order_Need_Save_Handel();
+    SettingParNeedSaveHandle();
 }
 
 int MainWindow::showErrorTip(const QString &message, TipMode mode)
@@ -671,6 +679,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget,&Setting::AxisTypeChange_Signal,this,&MainWindow::AxisTypeChange_Handle);//轴类型切换后更新主界面轴坐标显示
     connect(setWidget,&Setting::AxisTypeChange_Signal,teachWidget,&Teach::AxisTypeChangeTeachHandle);//教导界面轴编号选择需要刷新
     connect(setWidget,&Setting::AxisTypeChange_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
+    connect(this,&MainWindow::SwitchPageParSaveSignal,setWidget,&Setting::SwitchPageParSaveHandle);//切换界面时有参数需要保存处理
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, [&]() {
@@ -718,7 +727,6 @@ void MainWindow::connectAllSignalsAndSlots()
         /*自动界面内容刷新*/
         if (curMode == TriMode::AUTO)
         {
-            m_AutoInforRefresh.Old_Follow_ProNum = 0;
             autoWidget->AutoForm_Refresh();
         }
     });
@@ -1386,11 +1394,49 @@ void MainWindow::Widget_jump_Order_Need_Save_Handel()
         emit Auto_File_List_Refresh_signal(0);//切换到自动界面时默认显示主程序
     }
 }
-
+//设置中所有界面参数需要保存处理函数
+void MainWindow::SettingParNeedSaveHandle()
+{
+    for(int i=0;i<4;i++)
+    {
+        if(M_SaveSetPar.ClawSafeFlag[i] == true)
+        {
+            emit SwitchPageParSaveSignal(ParSaveIndex::ClawSafe);
+        }
+        if(M_SaveSetPar.OnlineSafe[i] == true)
+        {
+            emit SwitchPageParSaveSignal(ParSaveIndex::OnlineSafe);
+        }
+    }
+    if(M_SaveSetPar.SavePort == true)
+    {
+        emit SwitchPageParSaveSignal(ParSaveIndex::SavePort);
+    }
+    if(M_SaveSetPar.SaveNameDef == true)
+    {
+        emit SwitchPageParSaveSignal(ParSaveIndex::SaveNameDef);
+    }
+    if(M_SaveSetPar.SaveServoPara == true || M_SaveSetPar.SaveAxisPara == true ||
+        M_SaveSetPar.SaveMachineParaLimit == true || M_SaveSetPar.SaveMachineParaStruct == true ||
+        M_SaveSetPar.SaveMachineParaOrigin == true)
+    {
+        emit SwitchPageParSaveSignal(ParSaveIndex::AllMachinePara);
+    }
+    for(int i=0;i<4;i++)
+    {
+        if(M_SaveSetPar.SafeArea[i] == true)
+        {
+            emit SwitchPageParSaveSignal(ParSaveIndex::ServoSafePoint);
+        }
+    }
+    if(M_SaveSetPar.SaveServoSafePoint == true)
+    {
+        emit SwitchPageParSaveSignal(ParSaveIndex::horizontalPosList);
+    }
+}
 //机器状态检测处理函数
 void MainWindow::m_RobotStateRefreash()
 {
-
     //回原点状态处理
     if(m_RobotRunSta == MAC_STA_BACK_ORIGIN && m_RobotOriginState == 1)
     {

@@ -2336,7 +2336,6 @@ void Teach::on_btnInset_clicked()
                 Teach_File_List_Refresh();//刷新程序列表
             }
         }
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,0);
         Teach_timer->start();
     }
     else
@@ -5846,11 +5845,9 @@ void Teach::on_btn_Refresh_clicked()
             AxisCurPos = m_AxisCurPos.Pos_c;//m_AxisCurPos[C_AXIS];
             break;
         case Y2_AXIS:
-        case Y2_AXIS+2:
             AxisCurPos = m_AxisCurPos.Pos_y2;//m_AxisCurPos[Y2_AXIS];
             break;
         case Z2_AXIS:
-        case Z2_AXIS+2:
             AxisCurPos = m_AxisCurPos.Pos_z2;//m_AxisCurPos[Z2_AXIS];
             break;
         default:

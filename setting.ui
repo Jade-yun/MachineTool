@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>6</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -575,7 +575,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -9032,7 +9032,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -12773,8 +12773,8 @@ QPushButton::released{
       <widget class="QTabWidget" name="tabWgtOnlineSafe">
        <property name="geometry">
         <rect>
-         <x>340</x>
-         <y>30</y>
+         <x>320</x>
+         <y>5</y>
          <width>671</width>
          <height>481</height>
         </rect>
@@ -15516,7 +15516,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -21723,7 +21723,7 @@ font-weight: bold;
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -23736,7 +23736,7 @@ font-weight: bold;
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -23770,7 +23770,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>473</height>
+         <height>482</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -23781,6 +23781,12 @@ font-weight: bold;
          <layout class="QHBoxLayout" name="horizontalLayout_10">
           <property name="spacing">
            <number>10</number>
+          </property>
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
           </property>
           <item>
            <widget class="QLabel" name="label_106">
@@ -24870,6 +24876,12 @@ font-weight: bold;
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_69">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>7</number>
+          </property>
           <item>
            <widget class="QGroupBox" name="grboxZAxisMachineParaSA1">
             <property name="enabled">
@@ -25154,7 +25166,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>482</height>
+         <height>481</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -26560,7 +26572,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>496</height>
+         <height>481</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -27938,7 +27950,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>496</height>
+         <height>481</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -29637,7 +29649,7 @@ font-weight: bold;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>8</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -30217,7 +30229,7 @@ font-weight: bold;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -30323,6 +30335,9 @@ font-weight: bold;
         </item>
         <item row="4" column="3">
          <widget class="IOInEdit" name="editMinLimitSignalC">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30339,6 +30354,9 @@ font-weight: bold;
         </item>
         <item row="6" column="3">
          <widget class="IOInEdit" name="editMinLimitSignalZ2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30355,6 +30373,9 @@ font-weight: bold;
         </item>
         <item row="3" column="4">
          <widget class="IOInEdit" name="editMaxLimitSignalZ1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30490,6 +30511,9 @@ font-weight: bold;
         </item>
         <item row="3" column="3">
          <widget class="IOInEdit" name="editMinLimitSignalZ1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30506,6 +30530,9 @@ font-weight: bold;
         </item>
         <item row="1" column="5">
          <widget class="IOInEdit" name="editOriginSignalX1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30522,6 +30549,9 @@ font-weight: bold;
         </item>
         <item row="5" column="4">
          <widget class="IOInEdit" name="editMaxLimitSignalY2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30538,6 +30568,9 @@ font-weight: bold;
         </item>
         <item row="1" column="3">
          <widget class="IOInEdit" name="editMinLimitSignalX1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30554,6 +30587,9 @@ font-weight: bold;
         </item>
         <item row="2" column="3">
          <widget class="IOInEdit" name="editMinLimitSignalY1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30570,6 +30606,9 @@ font-weight: bold;
         </item>
         <item row="1" column="4">
          <widget class="IOInEdit" name="editMaxLimitSignalX1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30683,6 +30722,9 @@ font-weight: bold;
         </item>
         <item row="4" column="5">
          <widget class="IOInEdit" name="editOriginSignalC">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30699,6 +30741,9 @@ font-weight: bold;
         </item>
         <item row="4" column="4">
          <widget class="IOInEdit" name="editMaxLimitSignalC">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30725,6 +30770,9 @@ font-weight: bold;
         </item>
         <item row="5" column="3">
          <widget class="IOInEdit" name="editMinLimitSignalY2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30741,6 +30789,9 @@ font-weight: bold;
         </item>
         <item row="5" column="5">
          <widget class="IOInEdit" name="editOriginSignalY2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30790,6 +30841,9 @@ font-weight: bold;
         </item>
         <item row="3" column="5">
          <widget class="IOInEdit" name="editOriginSignalZ1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30882,6 +30936,9 @@ font-weight: bold;
         </item>
         <item row="6" column="5">
          <widget class="IOInEdit" name="editOriginSignalZ2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -30898,6 +30955,9 @@ font-weight: bold;
         </item>
         <item row="2" column="4">
          <widget class="IOInEdit" name="editMaxLimitSignalY1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -31023,6 +31083,9 @@ font-weight: bold;
         </item>
         <item row="2" column="5">
          <widget class="IOInEdit" name="editOriginSignalY1">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="minimumSize">
            <size>
             <width>130</width>
@@ -31033,6 +31096,9 @@ font-weight: bold;
         </item>
         <item row="6" column="4">
          <widget class="IOInEdit" name="editMaxLimitSignalZ2">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>

@@ -1152,15 +1152,15 @@ void AutoForm::Program_Follow_Refresh()
             m_AutoInforRefresh.Program_Follow_Flog = 1;
         }
 
-        if (m_ProRunInfo.proNum[m_OperateProNum] <= ui->Auto_file_List->rowCount() && m_AutoInforRefresh.Old_Follow_ProNum != m_ProRunInfo.proNum[m_OperateProNum]+1)
+        if (m_ProRunInfo.proNum[m_OperateProNum] <= ui->Auto_file_List->rowCount() && m_AutoInforRefresh.Old_Follow_ProNum != m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum)
         {
+            qDebug()<<"当前运行序号："<<m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum;
             for(int row = 0;row<ui->Auto_file_List->rowCount();row++)
             {
                 if (ui->Auto_file_List->item(row, 0))
                 {
-                    if(ui->Auto_file_List->item(row, 0)->text().toInt() == m_ProRunInfo.proNum[m_OperateProNum]+1)
+                    if(ui->Auto_file_List->item(row, 0)->text().toInt() == m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum)
                     {
-                        qDebug()<<"当前运行行号："<<m_ProRunInfo.proNum[m_OperateProNum];
                          ui->Auto_file_List->scrollToItem(ui->Auto_file_List->item(row, 0));//若列表项在可视区域外，视图会自动滚动以确保该项可见。
                          for (int column = 0; column < ui->Auto_file_List->columnCount(); column++)
                          {
@@ -1180,7 +1180,7 @@ void AutoForm::Program_Follow_Refresh()
                     }
                 }
             }
-            m_AutoInforRefresh.Old_Follow_ProNum = m_ProRunInfo.proNum[m_OperateProNum]+1;//上一次运行行号
+            m_AutoInforRefresh.Old_Follow_ProNum = m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum;//上一次运行行号
         }
     }
     else

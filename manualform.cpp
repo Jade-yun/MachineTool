@@ -23,6 +23,7 @@ ManualForm::ManualForm(QWidget *parent) :
 
     initVar();
 
+    ui->stkWgtAdjustMachine->setCurrentIndex(0);
     // set tab to be invisible
 //    ui->tabAxisAction->setVisible(false);
 //    ui->tabWidgetManualPage->removeTab(1);

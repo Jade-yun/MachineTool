@@ -1052,7 +1052,7 @@ void MonitorForm::refeshPortLableName()
     {
         const auto& port = m_Port_X[i];
 
-        QString portName = port.functionSet ? port.modifyName : port.ResModifyName;
+        QString portName = port.functionSet ? port.definePort+tr(" ")+port.modifyName : port.definePort+tr(" ")+port.ResModifyName;
         for (int j = 0; j < 3; j++)
         {
             labsInputPort.at(j).at(i)->setText(portName);
@@ -1062,7 +1062,7 @@ void MonitorForm::refeshPortLableName()
     {
         const auto& port = m_Port_Y[i];
 
-        QString portName = port.functionSet ? port.modifyName : port.ResModifyName;
+        QString portName = port.functionSet ? port.definePort+tr(" ")+port.modifyName : port.definePort+tr(" ")+port.ResModifyName;
 
         for (size_t j = 0; j < labsOutputPort.size(); j++)
         {

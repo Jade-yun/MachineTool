@@ -64,6 +64,9 @@ public slots:
     void ShowStackPage();
     void handleLoginModeChanged(LoginMode mode);
     void AxisParRefresh(uint8_t index);//轴参数界面参数刷新
+    void ParNeedSaveCheckConnectHandle();
+    void SwitchPageParSaveHandle(ParSaveIndex SaveIndex);
+
 private:
     Ui::Setting *ui;
     upgradedialog *UpgradeDialog;
@@ -74,7 +77,6 @@ private:
 //    std::map<int, QWidget*> tabContentMap;     // store the mapping of each tab about MenuItem id
     std::map<int, QString> tabNameMap;
     int currentLoginState = MenuState::Operator;
-
 private:
     void init();
     void initWidgets();
@@ -101,6 +103,12 @@ private:
 private slots:
     void onMenuStateChanged(MenuState newState);
     void updateAppFont();
+    void UpdateClawSafepage(int index);
+    void UpdateOnlineSafepage(int index);
+    void updateServoParaPage();
+    void updateAxisParPage();
+    void updateSafeAreaPage(int index);
+    void updatehorizontalPosList();
 public:
     void UpgradeHandle(int click_type);
 
@@ -248,7 +256,6 @@ private:
     std::vector<QString> minLimitStrs;
     std::vector<QString> maxLimitStrs;
     std::vector<QString> originSigStrs;
-
 private slots:
    void SetWidgetAxisQcomboboxHandel();
    void outputTypeSlots();
@@ -268,7 +275,7 @@ private slots:
    void saveProductSetInternetPara();              //产品设置——物联网
    void saveServoPara();                   //伺服结构
    void saveAccDecTimeSpeed(int index);              //加减速时间和速度
-   void saveSafeAreaPara(); // 保存安全区参数到结构体，index 为安全区的组号（从0开始，共四组）
+   void saveSafeAreaPara(int index); // 保存安全区参数到结构体，index 为安全区的组号（从0开始，共四组）
    void saveTolerancePara();    //容差
    void saveDegreePara(); // 保存伺服安全位置限定参数
 
@@ -277,7 +284,7 @@ private slots:
    void saveMachineAllPara(int index);      //机器参数保存并下发
 
    void savePortDefine();    //保存端口自定义
-
+   void saveNameDefine();    //保存名称自定义
    bool modifyPort(int row, int column);           //端口自定义界面修改端口号
    void on_btnLogoUpdate_clicked();
    // QObject interface
@@ -287,6 +294,7 @@ private slots:
 public:
    bool eventFilter(QObject *watched, QEvent *event);
    void RefreshPortDefine();//端口自定义刷新
+   void RefreshNameDefine();//名称自定义刷新
 };
 
 #endif // SETTING_H

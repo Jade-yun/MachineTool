@@ -54,6 +54,7 @@ Setting::Setting(QWidget *parent) :
 
     pageSwitchInit();
     setupCommunicationConnections();
+    ParNeedSaveCheckConnectHandle();
 
     connect(ui->tabWidgetSystem, &QTabWidget::tabBarClicked, this, [=](int index){
         int menuIndex = ui->tabWidgetSystem->indexOf(ui->tabMenuAuthority);
@@ -805,37 +806,13 @@ void Setting::setupPortDefine()
 
     connect(ui->btnSavePort,&QPushButton::clicked, [=](){
         if (!ui->btnSavePort->isParaChanged()) return;
-
-        for (int i = 0; i < ui->tableWgtPortDef->rowCount(); i++)
-        {
-            auto revisedPortItem = ui->tableWgtPortDef->item(i, 3);
-            if (revisedPortItem) {
-                // 从 UserRole 获取暂存的 portNum
-                int revisedPortNum = revisedPortItem->data(Qt::UserRole).toUInt();
-
-                if (i < INPUT_TOTAL_NUM) {
-                    m_Port_X[i].actualPortNum = revisedPortNum;
-                } else {
-                    m_Port_Y[i - INPUT_TOTAL_NUM].actualPortNum = revisedPortNum;
-                }
-            }
-        }
-
         this->savePortDefine();
-        g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
-        g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
-        emit monitor_port_refreash();
-        emit WidgetNameRefresh_signal();
-        emit updatemonitorhandcontrol();
-        emit updateManualformButtonName_Signal();//更新手动界面按钮显示
-
-        ui->btnSavePort->setParaChangedFlag(false);
-
     });
     connect(ui->tableWgtPortDef,&QTableWidget::cellClicked,[=](int row, int column){
         auto res = modifyPort(row, column);
 
         ui->btnSavePort->setParaChangedFlag(res);
+        M_SaveSetPar.SavePort = res;
     });
 
     connect(ui->btnRestoreNameOnePortDef, &QPushButton::clicked, [=](){
@@ -849,6 +826,7 @@ void Setting::setupPortDefine()
         {
             revisedNameItem->setText(defaultNameItem->text());
             ui->btnSavePort->setParaChangedFlag(true);
+            M_SaveSetPar.SavePort = true;
         }
     });
     connect(ui->btnRestoreNameAllPortDef, &QPushButton::clicked, [=](){
@@ -863,6 +841,7 @@ void Setting::setupPortDefine()
             }
         }
         ui->btnSavePort->setParaChangedFlag(true);
+        M_SaveSetPar.SavePort = true;
     });
     connect(ui->btnRestorePortOnePortDef, &QPushButton::clicked, [=](){
 
@@ -885,6 +864,7 @@ void Setting::setupPortDefine()
                 revisedPortItem->setData(Qt::UserRole, m_Port_Y[curRow - INPUT_TOTAL_NUM].portNum);
             }
             ui->btnSavePort->setParaChangedFlag(true);
+            M_SaveSetPar.SavePort = true;
         }
     });
     connect(ui->btnRestorePortAllPortDef, &QPushButton::clicked, [=](){
@@ -908,6 +888,7 @@ void Setting::setupPortDefine()
             }
         }
         ui->btnSavePort->setParaChangedFlag(true);
+        M_SaveSetPar.SavePort = true;
     });
 
     connect(ui->btnImportPortDef, &QPushButton::clicked, this, [=](){
@@ -1077,56 +1058,14 @@ void Setting::setupNameDefine()
             {
                 item->setText(inputText);
                 ui->btnSaveNameDef->setParaChangedFlag(true);
+                M_SaveSetPar.SaveNameDef = true;
             }
         }
     });
 
     connect(ui->btnSaveNameDef, &QPushButton::clicked, this, [=](){
         if (!ui->btnSaveNameDef->isParaChanged()) return;
-
-        int index = 0;
-        m_NameDefine[1].adminName = tableNameDef->item(index++, 1)->text();
-        m_NameDefine[1].operatorName = tableNameDef->item(index++, 1)->text();
-        for (int i = 0; i < 8; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            m_NameDefine[1].subProgName[i] = item->text();
-            ++index;
-        }
-
-        for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            m_NameDefine[1].axisName[i] = item->text();
-            ++index;
-        }
-
-        for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            m_NameDefine[1].varName[i] = item->text();
-            ++index;
-        }
-
-        for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            m_NameDefine[1].stackName[i] = item->text();
-            ++index;
-        }
-
-        for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            m_NameDefine[1].followStackName[i] = item->text();
-            ++index;
-        }
-
-        for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
-            auto item = tableNameDef->item(index, 1);
-            m_NameDefine[1].timerName[i] = item->text();
-            ++index;
-        }
-        ::writeNameDefine();
-        // to fresh all name display in every windows.
-        emit coboxVarSelectVarPreOpItemSet_signal();
-
-        ui->btnSaveNameDef->setParaChangedFlag(false);
+        saveNameDefine();
     });
     connect(ui->btnExportNameDef, &QPushButton::clicked, this, [=](){
        if (!UsbDisk::instance()->isInserted())
@@ -1160,49 +1099,7 @@ void Setting::setupNameDefine()
        ::readNameDefine();
 
        // fresh dispaly
-       for (int col = 0; col < 2; col++)
-       {
-           int index = 0;
-           tableNameDef->item(index++, col)->setText(m_NameDefine[col].adminName);
-
-           tableNameDef->item(index++, col)->setText(m_NameDefine[col].operatorName);
-
-           for (int i = 0; i < 8; ++i) {
-               auto item = tableNameDef->item(index, col);
-               item->setText(m_NameDefine[col].subProgName[i]);
-               ++index;
-           }
-
-           for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
-               auto item = tableNameDef->item(index, col);
-               item->setText(m_NameDefine[col].axisName[i]);
-               ++index;
-           }
-
-           for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
-               auto item = tableNameDef->item(index, col);
-               item->setText(m_NameDefine[col].varName[i]);
-               ++index;
-           }
-
-           for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
-               auto item = tableNameDef->item(index, col);
-               item->setText(m_NameDefine[col].stackName[i]);
-               ++index;
-           }
-
-           for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
-               auto item = tableNameDef->item(index, col);
-               item->setText(m_NameDefine[col].followStackName[i]);
-               ++index;
-           }
-
-           for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
-               auto item = tableNameDef->item(index, col);
-               item->setText(m_NameDefine[col].timerName[i]);
-               ++index;
-           }
-       }
+       RefreshNameDefine();
 
        if (res)
        {
@@ -1212,7 +1109,7 @@ void Setting::setupNameDefine()
            });
            tip.exec();
        }
-
+       M_SaveSetPar.SaveNameDef = true;
        emit coboxVarSelectVarPreOpItemSet_signal();
     });
     connect(ui->btnRestoreNameOneNameDef, &QPushButton::clicked, this, [=](){
@@ -1225,6 +1122,7 @@ void Setting::setupNameDefine()
         {
             itemRevised->setText(itemDefault->text());
             ui->btnSaveNameDef->setParaChangedFlag(true);
+            M_SaveSetPar.SaveNameDef = true;
         }
     });
 
@@ -1245,6 +1143,7 @@ void Setting::setupNameDefine()
             {
                 revisedItem->setText(defaultName);
                 flag = true;
+                M_SaveSetPar.SaveNameDef = true;
             }
         }
         ui->btnSaveNameDef->setParaChangedFlag(flag);
@@ -2127,69 +2026,13 @@ void Setting::syncParaToUI()
 
     for (size_t i = 0; i < clawSafeWidgets.size(); i++)
     {
-        clawSafeWidgets.at(i).clawKeepoutSta->setCurrentIndex(m_ClawSave[i].clawKeepoutSta);
-
-        int axisXItemIndex = 0;
-        if (m_ClawSave[i].axisSelect_X == X1_AXIS+1 && m_AxisPar[X1_AXIS].axisType == 1)
-        {
-            axisXItemIndex = 1;
-        }
-        clawSafeWidgets.at(i).axisSelect_X->setCurrentIndex(axisXItemIndex);
-
-        int axisZItemIndex = 0;
-        if(m_ClawSave[i].axisSelect_Z == Z1_AXIS + 1  && m_AxisPar[Z1_AXIS].axisType == 1)
-        {
-            axisZItemIndex = 1;
-        }
-        else if (m_ClawSave[i].axisSelect_Z == Z2_AXIS + 1  && m_AxisPar[Z2_AXIS].axisType == 1)
-        {
-            axisZItemIndex = 2;
-        }
-//        clawSafeWidgets.at(i).axisSelect_X->setCurrentIndex(axisZItemIndex);
-
-        clawSafeWidgets.at(i).clawKeepoutMinX->setText(QString::number(m_ClawSave[i].clawKeepoutMinX / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).clawKeepoutMaxX->setText(QString::number(m_ClawSave[i].clawKeepoutMaxX / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).clawKeepoutHighZ->setText(QString::number(m_ClawSave[i].clawKeepoutHighZ / 100.0, 'f', 2));
-
-        clawSafeWidgets.at(i).cKeepoutMinX->setText(QString::number(m_ClawSave[i].cKeepoutMinX / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).cKeepoutMaxX->setText(QString::number(m_ClawSave[i].cKeepoutMaxX / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).cKeepoutHighZ->setText(QString::number(m_ClawSave[i].cKeepoutHighZ / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).cKeepoutPosMinC->setText(QString::number(m_ClawSave[i].cKeepoutPosMinC / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).cKeepoutPosMaxC->setText(QString::number(m_ClawSave[i].cKeepoutPosMaxC / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).cKeepoutNegMinC->setText(QString::number(m_ClawSave[i].cKeepoutNegMinC / 100.0, 'f', 2));
-        clawSafeWidgets.at(i).cKeepoutNegMaxC->setText(QString::number(m_ClawSave[i].cKeepoutNegMaxC / 100.0, 'f', 2));
-
+        UpdateClawSafepage(i);
     }
 
     /****************************联机安全********************************************/
     for (size_t i = 0; i < onlineSafeWidgets.size(); i++)
     {
-        onlineSafeWidgets.at(i).mainSunMode->setCurrentIndex(m_OnlineSave[i].mainSunMode);
-        onlineSafeWidgets.at(i).pluseTime->setText(QString::number(m_OnlineSave[i].pluseTime / 100.0, 'f', 2));
-        onlineSafeWidgets.at(i).onlineSelect->setCurrentIndex(m_OnlineSave[i].onlineSelect);
-
-        int onlineAxisIndex = 0;
-        if (m_OnlineSave[i].axisNum == 1)
-        {
-            onlineAxisIndex = 1;
-        }
-        onlineSafeWidgets.at(i).axisNum->setCurrentIndex(onlineAxisIndex);
-
-        onlineSafeWidgets.at(i).areaInNum->setCurrentPort(m_OnlineSave[i].areaInNum);
-        onlineSafeWidgets.at(i).areaOutNum->setCurrentPort(m_OnlineSave[i].areaOutNum);
-        onlineSafeWidgets.at(i).requestInNum->setCurrentPort(m_OnlineSave[i].requestInNum);
-        onlineSafeWidgets.at(i).requestOutNum->setCurrentPort(m_OnlineSave[i].requestOutNum);
-
-        onlineSafeWidgets.at(i).a1A2MainPos->setText(QString::number(m_OnlineSave[i].a1A2MainPos / 100.0, 'f', 2));
-        onlineSafeWidgets.at(i).a1A2SunPos->setText(QString::number(m_OnlineSave[i].a1A2SunPos / 100.0, 'f', 2));
-
-        std::vector<QString> tempStrs;
-        readOnlineSafeInOutDescription(i, tempStrs);
-        onlineSafeWidgets.at(i).areaInNum->setText(tempStrs[0]);
-        onlineSafeWidgets.at(i).areaOutNum->setText(tempStrs[1]);
-        onlineSafeWidgets.at(i).requestInNum->setText(tempStrs[2]);
-        onlineSafeWidgets.at(i).requestOutNum->setText(tempStrs[3]);
-
+        UpdateOnlineSafepage(i);
     }
 
     /****************************产品设置********************************************/
@@ -2215,6 +2058,114 @@ void Setting::syncParaToUI()
 
     /****************************伺服参数********************************************/
     // 伺服
+    updateServoParaPage();
+
+    /****************************机器参数********************************************/
+
+    readLimitSigDescription(0, minLimitStrs);
+    readLimitSigDescription(1, maxLimitStrs);
+    readLimitSigDescription(2, originSigStrs);
+
+    updateAxisParPage();
+
+    /****************************安全区********************************************/
+    for (int index = 0; index < SAVE_AREA_NUM; index++)
+    {
+        updateSafeAreaPage(index);
+    }
+
+    /****************************伺服安全点--位置限定********************************************/
+    updatehorizontalPosList();
+
+    /****************************堆叠设置********************************************/
+    for (int i = 0; i < 8; i++)
+    {
+        stack[i]->syncParaToUI();
+//        stack[i]->switchStackWay((StackMode)m_StackFunc.stackType);
+    }
+
+    stackCoboxs.at(0)->setCurrentIndex(m_StackFunc.stackType);
+    stackCoboxs.at(1)->setCurrentIndex(m_StackFunc.groupStack);
+    stackCoboxs.at(2)->setCurrentIndex(m_StackFunc.rowStack);
+    stackCoboxs.at(3)->setCurrentIndex(m_StackFunc.storeyStack);
+    stackCoboxs.at(4)->setCurrentIndex(m_StackFunc.divideStack);
+    stackCoboxs.at(5)->setCurrentIndex(m_StackFunc.stackMemory);
+    stackCoboxs.at(6)->setCurrentIndex(m_StackFunc.siloType);
+    stackCoboxs.at(7)->setCurrentIndex(m_StackFunc.rotateSiloFinHint);
+    ui->editRotateSiloPlaceNum->setText(QString::number(m_StackFunc.rotateSiloPlaceNum));
+
+}
+//更新卡爪安全界面参数 index：卡爪安全1-卡爪安全4
+void Setting::UpdateClawSafepage(int index)
+{
+    for (size_t i = 0; i < clawSafeWidgets.size(); i++)
+    {
+        clawSafeWidgets.at(index).clawKeepoutSta->setCurrentIndex(m_ClawSave[index].clawKeepoutSta);
+
+        int axisXItemIndex = 0;
+        if (m_ClawSave[index].axisSelect_X == X1_AXIS+1 && m_AxisPar[X1_AXIS].axisType == 1)
+        {
+            axisXItemIndex = 1;
+        }
+        clawSafeWidgets.at(index).axisSelect_X->setCurrentIndex(axisXItemIndex);
+
+        int axisZItemIndex = 0;
+        if(m_ClawSave[index].axisSelect_Z == Z1_AXIS + 1  && m_AxisPar[Z1_AXIS].axisType == 1)
+        {
+            axisZItemIndex = 1;
+        }
+        else if (m_ClawSave[index].axisSelect_Z == Z2_AXIS + 1  && m_AxisPar[Z2_AXIS].axisType == 1)
+        {
+            axisZItemIndex = 2;
+        }
+//        clawSafeWidgets.at(i).axisSelect_X->setCurrentIndex(axisZItemIndex);
+
+        clawSafeWidgets.at(index).clawKeepoutMinX->setText(QString::number(m_ClawSave[index].clawKeepoutMinX / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).clawKeepoutMaxX->setText(QString::number(m_ClawSave[index].clawKeepoutMaxX / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).clawKeepoutHighZ->setText(QString::number(m_ClawSave[index].clawKeepoutHighZ / 100.0, 'f', 2));
+
+        clawSafeWidgets.at(index).cKeepoutMinX->setText(QString::number(m_ClawSave[index].cKeepoutMinX / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).cKeepoutMaxX->setText(QString::number(m_ClawSave[index].cKeepoutMaxX / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).cKeepoutHighZ->setText(QString::number(m_ClawSave[index].cKeepoutHighZ / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).cKeepoutPosMinC->setText(QString::number(m_ClawSave[index].cKeepoutPosMinC / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).cKeepoutPosMaxC->setText(QString::number(m_ClawSave[index].cKeepoutPosMaxC / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).cKeepoutNegMinC->setText(QString::number(m_ClawSave[index].cKeepoutNegMinC / 100.0, 'f', 2));
+        clawSafeWidgets.at(index).cKeepoutNegMaxC->setText(QString::number(m_ClawSave[index].cKeepoutNegMaxC / 100.0, 'f', 2));
+
+    }
+}
+//更新联机安全界面参数 index：联机区域1-联机区域4
+void Setting::UpdateOnlineSafepage(int index)
+{
+    onlineSafeWidgets.at(index).mainSunMode->setCurrentIndex(m_OnlineSave[index].mainSunMode);
+    onlineSafeWidgets.at(index).pluseTime->setText(QString::number(m_OnlineSave[index].pluseTime / 100.0, 'f', 2));
+    onlineSafeWidgets.at(index).onlineSelect->setCurrentIndex(m_OnlineSave[index].onlineSelect);
+
+    int onlineAxisIndex = 0;
+    if (m_OnlineSave[index].axisNum == 1)
+    {
+        onlineAxisIndex = 1;
+    }
+    onlineSafeWidgets.at(index).axisNum->setCurrentIndex(onlineAxisIndex);
+
+    onlineSafeWidgets.at(index).areaInNum->setCurrentPort(m_OnlineSave[index].areaInNum);
+    onlineSafeWidgets.at(index).areaOutNum->setCurrentPort(m_OnlineSave[index].areaOutNum);
+    onlineSafeWidgets.at(index).requestInNum->setCurrentPort(m_OnlineSave[index].requestInNum);
+    onlineSafeWidgets.at(index).requestOutNum->setCurrentPort(m_OnlineSave[index].requestOutNum);
+
+    onlineSafeWidgets.at(index).a1A2MainPos->setText(QString::number(m_OnlineSave[index].a1A2MainPos / 100.0, 'f', 2));
+    onlineSafeWidgets.at(index).a1A2SunPos->setText(QString::number(m_OnlineSave[index].a1A2SunPos / 100.0, 'f', 2));
+
+    std::vector<QString> tempStrs;
+    readOnlineSafeInOutDescription(index, tempStrs);
+    onlineSafeWidgets.at(index).areaInNum->setText(tempStrs[0]);
+    onlineSafeWidgets.at(index).areaOutNum->setText(tempStrs[1]);
+    onlineSafeWidgets.at(index).requestInNum->setText(tempStrs[2]);
+    onlineSafeWidgets.at(index).requestOutNum->setText(tempStrs[3]);
+}
+//更新伺服界面参数
+void Setting::updateServoParaPage()
+{
     servoPara.at(0)->setCurrentIndex(m_ServoPar.encoderType);
     servoPara.at(1)->setCurrentIndex(m_ServoPar.encoderBitNum);
     servoPara.at(2)->setCurrentIndex(m_ServoPar.servoBrand);
@@ -2223,13 +2174,10 @@ void Setting::syncParaToUI()
     servoPara.at(5)->setCurrentIndex(m_ServoPar.rotateAxisUnit);
     servoPara.at(6)->setCurrentIndex(m_ServoPar.resetSunProFlag);
     servoPara.at(7)->setCurrentIndex(m_ServoPar.torqueLimitFlag);
-
-    /****************************机器参数********************************************/
-
-    readLimitSigDescription(0, minLimitStrs);
-    readLimitSigDescription(1, maxLimitStrs);
-    readLimitSigDescription(2, originSigStrs);
-
+}
+//更新轴参数界面参数
+void Setting::updateAxisParPage()
+{
     for (int i = 0; i < AXIS_TOTAL_NUM; i++)
     {
         machineParaWidgets.at(i).axisType->setCurrentIndex(m_AxisPar[i].axisType);
@@ -2265,100 +2213,218 @@ void Setting::syncParaToUI()
     HandwheelParaWidgets.decTime->setText(QString::number(m_HandwheelPar.decTime / 100.0, 'f', 2));
     HandwheelParaWidgets.accAcc->setText(QString::number(m_HandwheelPar.accAcc));
     HandwheelParaWidgets.decDec->setText(QString::number(m_HandwheelPar.decDec));
-
-    /****************************安全区********************************************/
-    for (int index = 0; index < SAVE_AREA_NUM; index++)
+}
+//更新安全区界面参数
+void Setting::updateSafeAreaPage(int index)
+{
+    // 设置开关和完成进程数
+    servoPointSafeArea.at(index).safeAreaSwt->setCurrentIndex(m_SaveArea[index].saveAreaSwt);
+    servoPointSafeArea.at(index).processFinishNum->setCurrentIndex(m_SaveArea[index].processFinishNum);
+    if(m_SaveArea[index].saveAreaSwt == 1)
     {
-        // 设置开关和完成进程数
-        servoPointSafeArea.at(index).safeAreaSwt->setCurrentIndex(m_SaveArea[index].saveAreaSwt);
-        servoPointSafeArea.at(index).processFinishNum->setCurrentIndex(m_SaveArea[index].processFinishNum);
-
-        // X 轴
-        int xAxis = m_SaveArea[index].axisSelect[0];
-        if(xAxis == 0)
+        if(index == 0){
+            ui->grboxXYParaSA1->setEnabled(true);
+        }else if(index == 1)
         {
-            if(servoPointSafeArea.at(index).axisSelect[0]->count()>0)
-            {
-                servoPointSafeArea.at(index).axisSelect[0]->setCurrentIndex(0);
-            }
+            ui->grboxXYParaSA1_2->setEnabled(true);
         }
-        else if(m_AxisPar[0].axisType == 1 && servoPointSafeArea.at(index).axisSelect[0]->count()>1)
+        else if(index == 2)
         {
-            servoPointSafeArea.at(index).axisSelect[0]->setCurrentIndex(1);
+            ui->grboxXYParaSA1_3->setEnabled(true);
         }
-
-        // Y 轴
-        int yAxis = m_SaveArea[index].axisSelect[1];
-        if (yAxis == 0) {
-            if(servoPointSafeArea.at(index).axisSelect[1]->count()>0)
-            {
-                servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(0);
-            }
-        }
-        else if (yAxis == 2) { // Y1轴
-            if(servoPointSafeArea.at(index).axisSelect[1]->count()>1)
-            {
-                servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(1);
-            }
-        }
-        else if (yAxis == 5) { // Y2轴
-            if(servoPointSafeArea.at(index).axisSelect[1]->count()>2)
-            {
-                servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(2);
-            }
-        }
-
-        // Z 轴
-        int zAxis = m_SaveArea[index].axisSelect[2];
-        if (zAxis == 0) {
-            if(servoPointSafeArea.at(index).axisSelect[2]->count()>0)
-            {
-                servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(0);
-            }
-        }
-        else if (zAxis == 3) {
-            if(servoPointSafeArea.at(index).axisSelect[2]->count()>1)
-            {
-                servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(1);
-            }
-        }
-        else if (zAxis == 6) {
-            if(servoPointSafeArea.at(index).axisSelect[2]->count()>2)
-            {
-                servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(2);
-            }
-        }
-
-        // 第三组用不上 默认传为0
-        for (int i = 0; i < 2; i++)
+        else if(index == 3)
         {
-            servoPointSafeArea.at(index).machineA1Pos[i]->setText(
-                        QString::number(m_SaveArea[index].machineA1Pos[i] / 100.0, 'f', 2));
-            servoPointSafeArea.at(index).machineA2Pos[i]->setText(
-                        QString::number(m_SaveArea[index].machineA2Pos[i] / 100.0, 'f', 2));
-            servoPointSafeArea.at(index).starckB1Pos[i]->setText(
-                        QString::number(m_SaveArea[index].starckB1Pos[i] / 100.0, 'f', 2));
-            servoPointSafeArea.at(index).starckB2Pos[i]->setText(
-                        QString::number(m_SaveArea[index].starckB2Pos[i] / 100.0, 'f', 2));
+            ui->grboxXYParaSA1_4->setEnabled(true);
         }
-        servoPointSafeArea.at(index).machineA1Pos[SAVE_Z_AXIS]->setText(
-                    QString::number(m_SaveArea[index].machineA1Pos[SAVE_Z_AXIS] / 100.0, 'f', 2));
-        servoPointSafeArea.at(index).machineA2Pos[SAVE_Z_AXIS]->setText(
-                    QString::number(m_SaveArea[index].machineA2Pos[SAVE_Z_AXIS] / 100.0, 'f', 2));
-
-        servoPointSafeArea.at(index).machine_Z_WaitMaxPos->setText(
-                    QString::number(m_SaveArea[index].machine_Z_WaitMaxPos / 100.0, 'f', 2));
-        servoPointSafeArea.at(index).machine_Z_FallMaxPos->setText(
-                    QString::number(m_SaveArea[index].machine_Z_FallMaxPos / 100.0, 'f', 2));
-        servoPointSafeArea.at(index).machine_Z_InsideHigh->setText(
-                    QString::number(m_SaveArea[index].machine_Z_InsideHigh / 100.0, 'f', 2));
-        servoPointSafeArea.at(index).stack_Z_StartMaxPos->setText(
-                    QString::number(m_SaveArea[index].stack_Z_StartMaxPos / 100.0, 'f', 2));
-        servoPointSafeArea.at(index).stack_Z_FallMaxPos->setText(
-                    QString::number(m_SaveArea[index].stack_Z_FallMaxPos / 100.0, 'f', 2));
+    }
+    else
+    {
+        if(index == 0){
+            ui->grboxXYParaSA1->setEnabled(false);
+        }else if(index == 1)
+        {
+            ui->grboxXYParaSA1_2->setEnabled(false);
+        }
+        else if(index == 2)
+        {
+            ui->grboxXYParaSA1_3->setEnabled(false);
+        }
+        else if(index == 3)
+        {
+            ui->grboxXYParaSA1_4->setEnabled(false);
+        }
+    }
+    // X 轴
+    int xAxis = m_SaveArea[index].axisSelect[0];
+    if(xAxis == 0)
+    {
+        if(servoPointSafeArea.at(index).axisSelect[0]->count()>0)
+        {
+            servoPointSafeArea.at(index).axisSelect[0]->setCurrentIndex(0);
+            if(index == 0){
+                ui->labAxisXSelectSA1->setEnabled(false);
+                ui->labAxisCSelectSA1->setEnabled(false);
+                ui->editMachineA1AxisXSA1->setEnabled(false);
+                ui->editMachineA2AxisXSA1->setEnabled(false);
+                ui->editStockBinB1AxisXSA1->setEnabled(false);
+                ui->editStockBinB2AxisXSA1->setEnabled(false);
+                ui->editMachineA1AxisCSA1->setEnabled(false);
+                ui->editMachineA2AxisCSA1->setEnabled(false);
+            }else if(index == 1)
+            {
+                ui->labAxisXSelectSA1_2->setEnabled(false);
+                ui->labAxisCSelectSA1_2->setEnabled(false);
+                ui->editMachineA1AxisXSA1_2->setEnabled(false);
+                ui->editMachineA2AxisXSA1_2->setEnabled(false);
+                ui->editStockBinB1AxisXSA1_2->setEnabled(false);
+                ui->editStockBinB2AxisXSA1_2->setEnabled(false);
+                ui->editMachineA1AxisCSA1_2->setEnabled(false);
+                ui->editMachineA2AxisCSA1_2->setEnabled(false);
+            }
+            else if(index == 2)
+            {
+                ui->labAxisXSelectSA1_3->setEnabled(false);
+                ui->labAxisCSelectSA1_3->setEnabled(false);
+                ui->editMachineA1AxisXSA1_3->setEnabled(false);
+                ui->editMachineA2AxisXSA1_3->setEnabled(false);
+                ui->editStockBinB1AxisXSA1_3->setEnabled(false);
+                ui->editStockBinB2AxisXSA1_3->setEnabled(false);
+                ui->editMachineA1AxisCSA1_3->setEnabled(false);
+                ui->editMachineA2AxisCSA1_3->setEnabled(false);
+            }
+            else if(index == 3)
+            {
+                ui->labAxisXSelectSA1_4->setEnabled(false);
+                ui->labAxisCSelectSA1_4->setEnabled(false);
+                ui->editMachineA1AxisXSA1_4->setEnabled(false);
+                ui->editMachineA2AxisXSA1_4->setEnabled(false);
+                ui->editStockBinB1AxisXSA1_4->setEnabled(false);
+                ui->editStockBinB2AxisXSA1_4->setEnabled(false);
+                ui->editMachineA1AxisCSA1_4->setEnabled(false);
+                ui->editMachineA2AxisCSA1_4->setEnabled(false);
+            }
+        }
+    }
+    else if(m_AxisPar[0].axisType == 1 && servoPointSafeArea.at(index).axisSelect[0]->count()>1)
+    {
+        servoPointSafeArea.at(index).axisSelect[0]->setCurrentIndex(1);
+        if(index == 0){
+            ui->labAxisXSelectSA1->setEnabled(true);
+            ui->labAxisCSelectSA1->setEnabled(true);
+            ui->editMachineA1AxisXSA1->setEnabled(true);
+            ui->editMachineA2AxisXSA1->setEnabled(true);
+            ui->editStockBinB1AxisXSA1->setEnabled(true);
+            ui->editStockBinB2AxisXSA1->setEnabled(true);
+            ui->editMachineA1AxisCSA1->setEnabled(true);
+            ui->editMachineA2AxisCSA1->setEnabled(true);
+        }else if(index == 1)
+        {
+            ui->labAxisXSelectSA1_2->setEnabled(true);
+            ui->labAxisCSelectSA1_2->setEnabled(true);
+            ui->editMachineA1AxisXSA1_2->setEnabled(true);
+            ui->editMachineA2AxisXSA1_2->setEnabled(true);
+            ui->editStockBinB1AxisXSA1_2->setEnabled(true);
+            ui->editStockBinB2AxisXSA1_2->setEnabled(true);
+            ui->editMachineA1AxisCSA1_2->setEnabled(true);
+            ui->editMachineA2AxisCSA1_2->setEnabled(true);
+        }
+        else if(index == 2)
+        {
+            ui->labAxisXSelectSA1_3->setEnabled(true);
+            ui->labAxisCSelectSA1_3->setEnabled(true);
+            ui->editMachineA1AxisXSA1_3->setEnabled(true);
+            ui->editMachineA2AxisXSA1_3->setEnabled(true);
+            ui->editStockBinB1AxisXSA1_3->setEnabled(true);
+            ui->editStockBinB2AxisXSA1_3->setEnabled(true);
+            ui->editMachineA1AxisCSA1_3->setEnabled(true);
+            ui->editMachineA2AxisCSA1_3->setEnabled(true);
+        }
+        else if(index == 3)
+        {
+            ui->labAxisXSelectSA1_4->setEnabled(true);
+            ui->labAxisCSelectSA1_4->setEnabled(true);
+            ui->editMachineA1AxisXSA1_4->setEnabled(true);
+            ui->editMachineA2AxisXSA1_4->setEnabled(true);
+            ui->editStockBinB1AxisXSA1_4->setEnabled(true);
+            ui->editStockBinB2AxisXSA1_4->setEnabled(true);
+            ui->editMachineA1AxisCSA1_4->setEnabled(true);
+            ui->editMachineA2AxisCSA1_4->setEnabled(true);
+        }
     }
 
-    /****************************伺服安全点--位置限定********************************************/
+    // Y 轴
+    int yAxis = m_SaveArea[index].axisSelect[1];
+    if (yAxis == 0) {
+        if(servoPointSafeArea.at(index).axisSelect[1]->count()>0)
+        {
+            servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(0);
+        }
+    }
+    else if (yAxis == 2) { // Y1轴
+        if(servoPointSafeArea.at(index).axisSelect[1]->count()>1)
+        {
+            servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(1);
+        }
+    }
+    else if (yAxis == 5) { // Y2轴
+        if(servoPointSafeArea.at(index).axisSelect[1]->count()>2)
+        {
+            servoPointSafeArea.at(index).axisSelect[1]->setCurrentIndex(2);
+        }
+    }
+
+    // Z 轴
+    int zAxis = m_SaveArea[index].axisSelect[2];
+    if (zAxis == 0) {
+        if(servoPointSafeArea.at(index).axisSelect[2]->count()>0)
+        {
+            servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(0);
+        }
+    }
+    else if (zAxis == 3) {
+        if(servoPointSafeArea.at(index).axisSelect[2]->count()>1)
+        {
+            servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(1);
+        }
+    }
+    else if (zAxis == 6) {
+        if(servoPointSafeArea.at(index).axisSelect[2]->count()>2)
+        {
+            servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(2);
+        }
+    }
+
+    // 第三组用不上 默认传为0
+    for (int i = 0; i < 2; i++)
+    {
+        servoPointSafeArea.at(index).machineA1Pos[i]->setText(
+                    QString::number(m_SaveArea[index].machineA1Pos[i] / 100.0, 'f', 2));
+        servoPointSafeArea.at(index).machineA2Pos[i]->setText(
+                    QString::number(m_SaveArea[index].machineA2Pos[i] / 100.0, 'f', 2));
+        servoPointSafeArea.at(index).starckB1Pos[i]->setText(
+                    QString::number(m_SaveArea[index].starckB1Pos[i] / 100.0, 'f', 2));
+        servoPointSafeArea.at(index).starckB2Pos[i]->setText(
+                    QString::number(m_SaveArea[index].starckB2Pos[i] / 100.0, 'f', 2));
+    }
+    servoPointSafeArea.at(index).machineA1Pos[SAVE_Z_AXIS]->setText(
+                QString::number(m_SaveArea[index].machineA1Pos[SAVE_Z_AXIS] / 100.0, 'f', 2));
+    servoPointSafeArea.at(index).machineA2Pos[SAVE_Z_AXIS]->setText(
+                QString::number(m_SaveArea[index].machineA2Pos[SAVE_Z_AXIS] / 100.0, 'f', 2));
+
+    servoPointSafeArea.at(index).machine_Z_WaitMaxPos->setText(
+                QString::number(m_SaveArea[index].machine_Z_WaitMaxPos / 100.0, 'f', 2));
+    servoPointSafeArea.at(index).machine_Z_FallMaxPos->setText(
+                QString::number(m_SaveArea[index].machine_Z_FallMaxPos / 100.0, 'f', 2));
+    servoPointSafeArea.at(index).machine_Z_InsideHigh->setText(
+                QString::number(m_SaveArea[index].machine_Z_InsideHigh / 100.0, 'f', 2));
+    servoPointSafeArea.at(index).stack_Z_StartMaxPos->setText(
+                QString::number(m_SaveArea[index].stack_Z_StartMaxPos / 100.0, 'f', 2));
+    servoPointSafeArea.at(index).stack_Z_FallMaxPos->setText(
+                QString::number(m_SaveArea[index].stack_Z_FallMaxPos / 100.0, 'f', 2));
+}
+//更新位置限定界面参数
+void Setting::updatehorizontalPosList()
+{
     toleranceList[0]->setText(QString::number(m_DegreeParS.tolerance / 100.0, 'f', 2));
     toleranceList[1]->setText(QString::number(m_DegreeParS.originDegree / 100.0, 'f', 2));
     toleranceList[2]->setText(QString::number(m_DegreeParS.actionFinDegree / 100.0, 'f', 2));
@@ -2367,26 +2433,7 @@ void Setting::syncParaToUI()
     horizontalPosList[1]->setText(QString::number(m_DegreeParS.saveRampageHige_Z2 / 100.0, 'f', 2));
     horizontalPosList[2]->setText(QString::number(m_DegreeParS.saveRotatePos_Y1 / 100.0, 'f', 2));
     horizontalPosList[3]->setText(QString::number(m_DegreeParS.saveRotatePos_Y2 / 100.0, 'f', 2));
-
-    /****************************堆叠设置********************************************/
-    for (int i = 0; i < 8; i++)
-    {
-        stack[i]->syncParaToUI();
-//        stack[i]->switchStackWay((StackMode)m_StackFunc.stackType);
-    }
-
-    stackCoboxs.at(0)->setCurrentIndex(m_StackFunc.stackType);
-    stackCoboxs.at(1)->setCurrentIndex(m_StackFunc.groupStack);
-    stackCoboxs.at(2)->setCurrentIndex(m_StackFunc.rowStack);
-    stackCoboxs.at(3)->setCurrentIndex(m_StackFunc.storeyStack);
-    stackCoboxs.at(4)->setCurrentIndex(m_StackFunc.divideStack);
-    stackCoboxs.at(5)->setCurrentIndex(m_StackFunc.stackMemory);
-    stackCoboxs.at(6)->setCurrentIndex(m_StackFunc.siloType);
-    stackCoboxs.at(7)->setCurrentIndex(m_StackFunc.rotateSiloFinHint);
-    ui->editRotateSiloPlaceNum->setText(QString::number(m_StackFunc.rotateSiloPlaceNum));
-
 }
-
 void Setting::updateRegisterCodeDisplay()
 {
     QLineEdit* edits[8] = {
@@ -3039,7 +3086,6 @@ void Setting::pageSwitchInit()
         ui->labStackWay->setVisible(!state);
         ui->coboxStackWay->setVisible(!state);
     });
-
 }
 
 //PXC_240826    通信
@@ -3199,23 +3245,24 @@ void Setting::setupCommunicationConnections()
     }
     //安全区（四组）
     connect(ui->btnSaveServoSafePoint,&QPushButton::clicked,[=](){
-        saveSafeAreaPara();
+        int index=ui->tabWgtServoSafePoint->currentIndex();
+        saveSafeAreaPara(index);
     });
 
     //伺服安全点
     //容差
-    for (int i=0;i<3;i++) {
-        connect(toleranceList[i],&NumberEdit::textChanged,[=](const QString &){
-            saveTolerancePara();
-        });
-    }
+//    for (int i=0;i<3;i++) {
+//        connect(toleranceList[i],&NumberEdit::textChanged,[=](const QString &){
+//            saveTolerancePara();
+//        });
+//    }
 
-    //横行位置限定
-    for (int i=0;i<4;i++) {
-        connect(horizontalPosList[i],&NumberEdit::textChanged,[=](const QString &){
-            saveDegreePara();
-        });
-    }
+//    //横行位置限定
+//    for (int i=0;i<4;i++) {
+//        connect(horizontalPosList[i],&NumberEdit::textChanged,[=](const QString &){
+//            saveDegreePara();
+//        });
+//    }
 
     //机器参数
     const QVector<QPushButton*> machineParaList={
@@ -3253,7 +3300,461 @@ void Setting::setupCommunicationConnections()
 
 
 }
+//设置所有界面带保存按钮界面参数检测是否需要保存处理
+void Setting::ParNeedSaveCheckConnectHandle()
+{
+    /****信号设置子界面****/
+    connect(ui->tabWidgetSig,&QTabWidget::currentChanged,this,[=](){
+       SwitchPageParSaveHandle(ParSaveIndex::SavePort);
+       SwitchPageParSaveHandle(ParSaveIndex::SaveNameDef);
+    });
+    /****安全设置子界面****/
+    connect(ui->tabWgtClawSafety,&QTabWidget::currentChanged,this,[=](){
+        SwitchPageParSaveHandle(ParSaveIndex::ClawSafe);
+    });
+    connect(ui->tabWgtOnlineSafe,&QTabWidget::currentChanged,this,[=](){
+        SwitchPageParSaveHandle(ParSaveIndex::OnlineSafe);
+    });
+    connect(ui->tabWgtSafe,&QTabWidget::currentChanged,this,[=](){
+        SwitchPageParSaveHandle(ParSaveIndex::ClawSafe);//卡爪安全
+        SwitchPageParSaveHandle(ParSaveIndex::OnlineSafe);//联机安全
+    });
 
+    for (int i=0;i<static_cast<int>(clawSafeWidgets.size());i++)
+    {//卡爪安全1～卡爪安全4
+        connect(clawSafeWidgets[i].clawKeepoutSta,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].axisSelect_X,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].axisSelect_Z,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].clawKeepoutMinX,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].clawKeepoutMaxX,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].clawKeepoutHighZ,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutMinX,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutMaxX,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutHighZ,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutPosMinC,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutPosMaxC,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutNegMinC,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutNegMaxC,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+    }
+
+    for (int i=0;i<static_cast<int>(onlineSafeWidgets.size());i++)
+    {//联机安全1～联机安全4
+        connect(onlineSafeWidgets[i].mainSunMode,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].onlineSelect,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].axisNum,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].pluseTime,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].requestInNum,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].a1A2MainPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].a1A2SunPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+    }
+
+    /****伺服参数子界面****/
+    connect(ui->tabWgtServoPara,&QTabWidget::currentChanged,this,[=](){
+        SwitchPageParSaveHandle(ParSaveIndex::AllMachinePara);
+    });
+    for(int i=0;i<8;i++)
+    {//伺服参数
+        connect(servoPara.at(i),QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveServoPara = true;
+        });
+    }
+    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+    {//轴参数
+        connect(machineParaWidgets.at(i).axisMinPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveAxisPara = true;
+        });
+        connect(machineParaWidgets.at(i).axisMaxPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveAxisPara = true;
+        });
+        connect(machineParaWidgets.at(i).circlePluseNum,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveAxisPara = true;
+        });
+        connect(machineParaWidgets.at(i).circleDis,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveAxisPara = true;
+        });
+        connect(machineParaWidgets.at(i).maxSpeed,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveAxisPara = true;
+        });
+        connect(machineParaWidgets.at(i).coordDir,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveAxisPara = true;
+        });
+    }
+    /****伺服安全点子界面****/
+    connect(ui->tabWgtServoSafePoint,&QTabWidget::currentChanged,this,[=](){
+        SwitchPageParSaveHandle(ParSaveIndex::ServoSafePoint);
+        SwitchPageParSaveHandle(ParSaveIndex::horizontalPosList);
+    });
+    for(int i=0;i<static_cast<int>(servoPointSafeArea.size());i++)
+    {
+        connect(servoPointSafeArea.at(i).safeAreaSwt,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).processFinishNum,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).axisSelect[0],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).axisSelect[1],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).axisSelect[2],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machineA1Pos[0],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machineA1Pos[1],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machineA1Pos[2],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machineA2Pos[0],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machineA2Pos[1],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machineA2Pos[2],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).starckB1Pos[0],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).starckB1Pos[1],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).starckB2Pos[0],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).starckB2Pos[1],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machine_Z_WaitMaxPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machine_Z_FallMaxPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).machine_Z_InsideHigh,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).stack_Z_StartMaxPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(servoPointSafeArea.at(i).stack_Z_FallMaxPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SafeArea[i] = true;
+        });
+        connect(toleranceList[0],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveServoSafePoint = true;
+        });
+        connect(toleranceList[1],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveServoSafePoint = true;
+        });
+        connect(toleranceList[2],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveServoSafePoint = true;
+        });
+        connect(horizontalPosList[0],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveServoSafePoint = true;
+        });
+        connect(horizontalPosList[1],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveServoSafePoint = true;
+        });
+        connect(horizontalPosList[2],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveServoSafePoint = true;
+        });
+        connect(horizontalPosList[3],&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveServoSafePoint = true;
+        });
+    }
+    /****机器参数子界面****/
+    connect(ui->tabWidgetMachinePara,&QTabWidget::currentChanged,this,[=](){
+        SwitchPageParSaveHandle(ParSaveIndex::AllMachinePara);
+    });
+    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+    {
+        connect(machineParaWidgets.at(i).limitPosSwt,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveMachineParaLimit = true;
+        });
+        connect(machineParaWidgets.at(i).limitNegSwt,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveMachineParaLimit = true;
+        });
+        connect(machineParaWidgets.at(i).axisType,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveMachineParaStruct = true;
+        });
+        connect(machineParaWidgets.at(i).axisMoveMade,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveMachineParaStruct = true;
+        });
+
+        connect(machineParaWidgets.at(i).originType,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveMachineParaOrigin = true;
+        });
+
+        connect(machineParaWidgets.at(i).findOriginSpeed,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveMachineParaOrigin = true;
+        });
+
+        connect(machineParaWidgets.at(i).leaveOriginSpeed,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveMachineParaOrigin = true;
+        });
+
+        connect(machineParaWidgets.at(i).originOffset,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.SaveMachineParaOrigin = true;
+        });
+
+        connect(machineParaWidgets.at(i).originDir,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveMachineParaOrigin = true;
+        });
+
+        connect(machineParaWidgets.at(i).backOriginOrder,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.SaveMachineParaOrigin = true;
+        });
+    }
+
+}
+//切换界面时参数保存处理
+void Setting::SwitchPageParSaveHandle(ParSaveIndex SaveIndex)
+{
+    switch(SaveIndex) {
+    case ParSaveIndex::SavePort:
+    {
+        if(M_SaveSetPar.SavePort == true)
+        {
+            int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+            if(reply == QDialog::Accepted)
+            {
+                this->savePortDefine();
+            }
+            else if(reply == QDialog::Rejected)
+            {
+                RefreshPortDefine();
+                M_SaveSetPar.SavePort = false;
+                ui->btnSavePort->setParaChangedFlag(false);
+            }
+        }
+        break;
+    }
+    case ParSaveIndex::SaveNameDef:
+    {
+        if(M_SaveSetPar.SaveNameDef == true)
+        {
+            int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+            if(reply == QDialog::Accepted)
+            {
+                this->saveNameDefine();
+            }
+            else if(reply == QDialog::Rejected)
+            {
+                RefreshNameDefine();
+                M_SaveSetPar.SaveNameDef = false;
+                ui->btnSaveNameDef->setParaChangedFlag(false);
+            }
+        }
+        break;
+    }
+    case ParSaveIndex::ClawSafe:
+    {
+        for(int i=0;i<static_cast<int>(clawSafeWidgets.size());i++)
+        {
+            if(M_SaveSetPar.ClawSafeFlag[i]==true)
+            {
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+                if(reply == QDialog::Accepted)
+                {
+                    saveClawSafePara(i);
+                }
+                else if(reply == QDialog::Rejected)
+                {
+                    UpdateClawSafepage(i);
+                    M_SaveSetPar.ClawSafeFlag[i] = false;
+                }
+            }
+        }
+        break;
+    }
+    case ParSaveIndex::OnlineSafe:
+    {
+        for(int i=0;i<static_cast<int>(onlineSafeWidgets.size());i++)
+        {
+            if(M_SaveSetPar.OnlineSafe[i]==true)
+            {
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+                if(reply == QDialog::Accepted)
+                {
+                    saveOnlineSafePara(i);
+                }
+                else if(reply == QDialog::Rejected)
+                {
+                    UpdateOnlineSafepage(i);
+                    M_SaveSetPar.OnlineSafe[i] = false;
+                }
+            }
+        }
+        break;
+    }
+    case ParSaveIndex::AllMachinePara:
+    {
+        if(M_SaveSetPar.SaveMachineParaLimit == true)
+        {
+            int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+            if(reply == QDialog::Accepted)
+            {
+                saveMachineAllPara(0);
+            }
+            else if(reply == QDialog::Rejected)
+            {
+                updateAxisParPage();
+            }
+            M_SaveSetPar.SaveMachineParaLimit = false;
+        }
+        if(M_SaveSetPar.SaveMachineParaStruct == true)
+        {
+            int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+            if(reply == QDialog::Accepted)
+            {
+                saveMachineAllPara(1);
+            }
+            else if(reply == QDialog::Rejected)
+            {
+                updateAxisParPage();
+            }
+            M_SaveSetPar.SaveMachineParaStruct = false;
+        }
+        if(M_SaveSetPar.SaveMachineParaOrigin == true)
+        {
+            int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+            if(reply == QDialog::Accepted)
+            {
+                saveMachineAllPara(2);
+            }
+            else if(reply == QDialog::Rejected)
+            {
+                updateAxisParPage();
+            }
+            M_SaveSetPar.SaveMachineParaOrigin = false;
+        }
+        if(M_SaveSetPar.SaveServoPara == true)
+        {
+            int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+            if(reply == QDialog::Accepted)
+            {
+                saveMachineAllPara(4);
+            }
+            else if(reply == QDialog::Rejected)
+            {
+                updateServoParaPage();
+            }
+            M_SaveSetPar.SaveServoPara = false;
+        }
+        if(M_SaveSetPar.SaveAxisPara == true)
+        {
+            int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+            if(reply == QDialog::Accepted)
+            {
+                saveMachineAllPara(5);
+            }
+            else if(reply == QDialog::Rejected)
+            {
+                updateAxisParPage();
+            }
+            M_SaveSetPar.SaveAxisPara = false;
+        }
+        break;
+    }
+    case ParSaveIndex::ServoSafePoint:
+    {
+        for(int i=0;i<static_cast<int>(servoPointSafeArea.size());i++)
+        {
+            if(M_SaveSetPar.SafeArea[i]==true)
+            {
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+                if(reply == QDialog::Accepted)
+                {
+                    saveSafeAreaPara(i);
+                }
+                else if(reply == QDialog::Rejected)
+                {
+                    updateSafeAreaPage(i);
+                }
+                M_SaveSetPar.SafeArea[i] = false;
+            }
+        }
+        break;
+    }
+    case ParSaveIndex::horizontalPosList:
+    {
+        for(int i=0;i<static_cast<int>(toleranceList.size());i++)
+        {
+            if(M_SaveSetPar.SaveServoSafePoint==true)
+            {
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("配置参数有修改，是否需要保存？"),TipMode::NORMAL);
+                if(reply == QDialog::Accepted)
+                {
+                    saveTolerancePara();
+                    QThread::msleep(10);
+                    saveDegreePara();
+                }
+                else if(reply == QDialog::Rejected)
+                {
+                    updatehorizontalPosList();
+                }
+                M_SaveSetPar.SaveServoSafePoint = false;
+            }
+        }
+        break;
+    }
+    default:
+        break;
+    }
+
+}
 void Setting::outputTypeSlots()
 {
     //先将最新的参数存入结构体中
@@ -3508,6 +4009,7 @@ void Setting::saveClawSafePara(int index)
     m_ClawSave[index].cKeepoutNegMaxC = clawSafeWidgets.at(index).cKeepoutNegMaxC->text().toFloat()*100;
     g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,index+1);
     setClawSave(m_ClawSave[index],index);
+    M_SaveSetPar.ClawSafeFlag[index] = false;
 }
 
 void Setting::saveOnlineSafePara(int index)
@@ -3524,6 +4026,7 @@ void Setting::saveOnlineSafePara(int index)
     m_OnlineSave[index].a1A2SunPos = onlineSafeWidgets.at(index).a1A2SunPos->text().toFloat()*100;
     g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,index+1);
     setOnlineSafe(m_OnlineSave[index],index);
+    M_SaveSetPar.OnlineSafe[index] = false;
 }
 
 void Setting::saveProductSetPara()
@@ -3594,9 +4097,8 @@ void Setting::saveAccDecTimeSpeed(int index)
     setHandwheelPar(m_HandwheelPar);
 }
 
-void Setting::saveSafeAreaPara()
+void Setting::saveSafeAreaPara(int index)
 {
-    int index=ui->tabWgtServoSafePoint->currentIndex();
     uint8_t AxisSelect_X=0;//选择的轴编号
     uint8_t AxisSelect_Y=0;
     uint8_t AxisSelect_Z=0;
@@ -3605,6 +4107,7 @@ void Setting::saveSafeAreaPara()
         saveTolerancePara();
         QThread::msleep(10);
         saveDegreePara();
+        M_SaveSetPar.SaveServoSafePoint = false;
         return;
     }
     m_SaveArea[index].saveAreaSwt = servoPointSafeArea.at(index).safeAreaSwt->currentIndex();
@@ -3648,6 +4151,7 @@ void Setting::saveSafeAreaPara()
     m_SaveArea[index].stack_Z_FallMaxPos = servoPointSafeArea.at(index).stack_Z_FallMaxPos->text().toFloat()*100;
     g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,index+1);
     setSaveArea(m_SaveArea[index],index);
+    M_SaveSetPar.SafeArea[index] = false;
 }
 
 void Setting::saveTolerancePara()
@@ -3744,7 +4248,7 @@ void Setting::saveMachinePara()
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
     emit ManualDebugMachineRefresh_Signal(0);
     emit AxisTypeChange_Signal();
-    SetWidgetAxisQcomboboxHandel();
+//    SetWidgetAxisQcomboboxHandel();
 }
 
 void Setting::saveMachineAllPara(int index)
@@ -3779,9 +4283,18 @@ void Setting::saveMachineAllPara(int index)
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,i+1);
             QThread::msleep(10);
         }
+        M_SaveSetPar.SaveMachineParaLimit = false;
         break;
     case 1:
         g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_STRUCT);
+        SetWidgetAxisQcomboboxHandel();
+        M_SaveSetPar.SaveMachineParaStruct = false;
+        for(int i=0;i<4;i++)
+        {
+            M_SaveSetPar.ClawSafeFlag[i]=false;
+            M_SaveSetPar.OnlineSafe[i]=false;
+            M_SaveSetPar.SafeArea[i]=false;
+        }
         break;
     case 2:
         for(i=0;i<AXIS_TOTAL_NUM;i++)
@@ -3790,6 +4303,7 @@ void Setting::saveMachineAllPara(int index)
             QThread::msleep(10);
         }
         g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_ORIGIN);
+        M_SaveSetPar.SaveMachineParaOrigin = false;
         break;
     case 3:
     {
@@ -3816,6 +4330,7 @@ void Setting::saveMachineAllPara(int index)
         break;
     case 4:
         g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_STRUCT);
+        M_SaveSetPar.SaveServoPara = false;
         break;
     case 5:
         for(i=0;i<AXIS_TOTAL_NUM;i++)
@@ -3830,61 +4345,11 @@ void Setting::saveMachineAllPara(int index)
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,i+1);
             QThread::msleep(10);
         }
+        M_SaveSetPar.SaveAxisPara = false;
         break;
     default:
         break;
     }
-
-//    int i;
-//    switch(index)
-//    {
-//    case 0:
-//        for(i=0;i<AXIS_TOTAL_NUM;i++)
-//        {
-//            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,i+1);
-//            QThread::msleep(10);
-//        }
-//        for(i=0;i<AXIS_TOTAL_NUM;i++)
-//        {
-//            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,i+1);
-//            QThread::msleep(10);
-//        }
-
-
-//        break;
-//    case 1:
-//        for(i=0;i<AXIS_TOTAL_NUM;i++)
-//        {
-//            g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,i+1);
-//            QThread::msleep(10);
-//        }
-//        g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_MAX_SPEED);
-//        break;
-//    case 2:
-//        g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_LIMIT_SWT);
-//        QThread::msleep(10);
-//        for(i=0;i<AXIS_TOTAL_NUM;i++)
-//        {
-//            g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,i+1);
-//            QThread::msleep(10);
-//        }
-//        break;
-//    case 3:
-//        g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_STRUCT);
-//        break;
-//    case 4:
-//        for(i=0;i<AXIS_TOTAL_NUM;i++)
-//        {
-//            g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,i+1);
-//            QThread::msleep(10);
-//        }
-//        g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_ORIGIN);
-//        break;
-//    default:
-//        break;
-
-//    }
-
 }
 
 //端口自定义刷新
@@ -3956,6 +4421,53 @@ void Setting::RefreshPortDefine()
     }
     ui->tableWgtPortDef->repaint();//强制刷新列表
 }
+//名称自定义刷新
+void Setting::RefreshNameDefine()
+{
+    for (int col = 0; col < 2; col++)
+    {
+        int index = 0;
+        ui->tableWgtNameDef->item(index++, col)->setText(m_NameDefine[col].adminName);
+
+        ui->tableWgtNameDef->item(index++, col)->setText(m_NameDefine[col].operatorName);
+
+        for (int i = 0; i < 8; ++i) {
+            auto item = ui->tableWgtNameDef->item(index, col);
+            item->setText(m_NameDefine[col].subProgName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
+            auto item = ui->tableWgtNameDef->item(index, col);
+            item->setText(m_NameDefine[col].axisName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
+            auto item = ui->tableWgtNameDef->item(index, col);
+            item->setText(m_NameDefine[col].varName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
+            auto item = ui->tableWgtNameDef->item(index, col);
+            item->setText(m_NameDefine[col].stackName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
+            auto item = ui->tableWgtNameDef->item(index, col);
+            item->setText(m_NameDefine[col].followStackName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
+            auto item = ui->tableWgtNameDef->item(index, col);
+            item->setText(m_NameDefine[col].timerName[i]);
+            ++index;
+        }
+    }
+}
 //保存端口自定义
 void Setting::savePortDefine()
 {
@@ -3977,6 +4489,7 @@ void Setting::savePortDefine()
         if(XmodifyPortItem)
         {
             m_Port_X[i].modifyPort = XmodifyPortItem->text();
+            m_Port_X[i].actualPortNum = XmodifyPortItem->data(Qt::UserRole).toUInt();
         }
         m_InportFuncDefine[i]=m_Port_X[i].actualPortNum;
     }
@@ -3998,13 +4511,71 @@ void Setting::savePortDefine()
         if(YmodifyPortItem)
         {
             m_Port_Y[i].modifyPort = YmodifyPortItem->text();
+            m_Port_Y[i].actualPortNum = YmodifyPortItem->data(Qt::UserRole).toUInt();
         }
         m_OutportFuncDefine[i] = m_Port_Y[i].actualPortNum;
     }
 //    setPortDefineNameOrPortNum();
     ::writePortDefInfo();
+    g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_IN_FUNC_DEF);
+    g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_FUNC_DEF);
+    emit monitor_port_refreash();
+    emit WidgetNameRefresh_signal();
+    emit updatemonitorhandcontrol();
+    emit updateManualformButtonName_Signal();//更新手动界面按钮显示
+
+    ui->btnSavePort->setParaChangedFlag(false);
+    M_SaveSetPar.SavePort = false;
 }
 
+//保存名称自定义
+void Setting::saveNameDefine()
+{
+    int index = 0;
+    m_NameDefine[1].adminName = ui->tableWgtNameDef->item(index++, 1)->text();
+    m_NameDefine[1].operatorName = ui->tableWgtNameDef->item(index++, 1)->text();
+    for (int i = 0; i < 8; ++i) {
+        auto item = ui->tableWgtNameDef->item(index, 1);
+        m_NameDefine[1].subProgName[i] = item->text();
+        ++index;
+    }
+
+    for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
+        auto item = ui->tableWgtNameDef->item(index, 1);
+        m_NameDefine[1].axisName[i] = item->text();
+        ++index;
+    }
+
+    for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
+        auto item = ui->tableWgtNameDef->item(index, 1);
+        m_NameDefine[1].varName[i] = item->text();
+        ++index;
+    }
+
+    for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
+        auto item = ui->tableWgtNameDef->item(index, 1);
+        m_NameDefine[1].stackName[i] = item->text();
+        ++index;
+    }
+
+    for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
+        auto item = ui->tableWgtNameDef->item(index, 1);
+        m_NameDefine[1].followStackName[i] = item->text();
+        ++index;
+    }
+
+    for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
+        auto item = ui->tableWgtNameDef->item(index, 1);
+        m_NameDefine[1].timerName[i] = item->text();
+        ++index;
+    }
+    ::writeNameDefine();
+    // to fresh all name display in every windows.
+    emit coboxVarSelectVarPreOpItemSet_signal();
+
+    ui->btnSaveNameDef->setParaChangedFlag(false);
+    M_SaveSetPar.SaveNameDef = false;
+}
 bool Setting::modifyPort(int row, int column)
 {
     if(column == 2)
