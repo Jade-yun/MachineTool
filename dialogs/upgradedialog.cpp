@@ -1033,10 +1033,14 @@ void upgradedialog::on_ResSettOK_clicked()
     else
     {
         ui->ResSettInput_password->setStyleSheet("QLineEdit { border: 2px solid red; }");
-        ErrorTipDialog tip(tr("密码错误！"), TipMode::ONLY_OK, nullptr);
-        QTimer::singleShot(1000, this, [&](){
-            tip.accept();
+
+        ErrorTipDialog *tip = new ErrorTipDialog(tr("密码错误！!"), TipMode::ONLY_OK, nullptr);
+        QTimer::singleShot(1000, tip, [tip]() {
+            if (tip->isVisible()) {
+                tip->accept();
+            }
+            tip->deleteLater();
         });
-        tip.exec();
+        tip->exec();
     }
 }

@@ -9501,7 +9501,7 @@ QPushButton::released{
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tabClawSafe1">
         <attribute name="title">
@@ -16054,15 +16054,15 @@ QPushButton::released{
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>30</x>
+         <x>10</x>
          <y>50</y>
-         <width>971</width>
+         <width>991</width>
          <height>210</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_73">
         <property name="spacing">
-         <number>20</number>
+         <number>9</number>
         </property>
         <item>
          <widget class="QGroupBox" name="grboxHandlerIOT">
@@ -23770,12 +23770,12 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>482</height>
+         <height>471</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <property name="spacing">
-         <number>3</number>
+         <number>6</number>
         </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_10">
@@ -25166,7 +25166,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>482</height>
+         <height>471</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -26572,7 +26572,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>482</height>
+         <height>471</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -27950,7 +27950,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>482</height>
+         <height>471</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -33682,16 +33682,6 @@ font-weight: bold;
    <header>customedit.h</header>
   </customwidget>
   <customwidget>
-   <class>KeyEdit</class>
-   <extends>QLineEdit</extends>
-   <header>keydefinedialog.h</header>
-  </customwidget>
-  <customwidget>
-   <class>SaveButton</class>
-   <extends>QPushButton</extends>
-   <header location="global">savebutton.h</header>
-  </customwidget>
-  <customwidget>
    <class>IOOnlineInEdit</class>
    <extends>QLineEdit</extends>
    <header>ioportdialog.h</header>
@@ -33700,6 +33690,16 @@ font-weight: bold;
    <class>IOOnlineOutEdit</class>
    <extends>QLineEdit</extends>
    <header>ioportdialog.h</header>
+  </customwidget>
+  <customwidget>
+   <class>KeyEdit</class>
+   <extends>QLineEdit</extends>
+   <header>keydefinedialog.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SaveButton</class>
+   <extends>QPushButton</extends>
+   <header location="global">savebutton.h</header>
   </customwidget>
   <customwidget>
    <class>SigLEDEdit</class>

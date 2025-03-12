@@ -138,15 +138,20 @@ Teach::Teach(QWidget* parent) :
     generalBtn[2] = ui->btn_General_3;
     generalBtn[3] = ui->btn_General_4;
 
-    generalStr[0] = QStringLiteral("轴");
-    generalStr[1] = QStringLiteral("卡爪");
-    generalStr[2] = QStringLiteral("检测");
-    generalStr[3] = QStringLiteral("机床");
+//    generalStr[0] = QStringLiteral("轴");
+//    generalStr[1] = QStringLiteral("卡爪");
+//    generalStr[2] = QStringLiteral("检测");
+//    generalStr[3] = QStringLiteral("机床");
 
     generalIconPath[0] = ":/images/teach_img/axis.png";
     generalIconPath[1] = ":/images/teach_img/claw.png";
     generalIconPath[2] = ":/images/teach_img/signalCheck.png";
     generalIconPath[3] = ":/images/teach_img/machine.png";
+
+    for (int i = 0; i < 4; i++)
+    {
+        generalBtn[i]->setIcon(QIcon(generalIconPath[i]));
+    }
 
     SubroutineBtn[0] = ui->Subroutine1_button;
     SubroutineBtn[1] = ui->Subroutine2_button;
@@ -890,19 +895,22 @@ void Teach::on_btn_General_AxisAction_clicked()
 {
     ui->stackedWidget_General->setCurrentIndex(1);
     ui->stackedWidget_Four->setCurrentIndex(0);
-    generalBtn[3]->setVisible(false);
-    generalStrList.clear();
-    generalIconPathList.clear();
-    for (int i = 1; i < 4; i++)
-    {
-        generalStrList.append(generalStr[i]);
-        generalIconPathList.append(generalIconPath[i]);
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        generalBtn[i]->setText(generalStrList[i]);
-        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
-    }
+    generalBtn[0]->setVisible(false);
+    generalBtn[1]->setVisible(true);
+    generalBtn[2]->setVisible(true);
+    generalBtn[3]->setVisible(true);
+//    generalStrList.clear();
+//    generalIconPathList.clear();
+//    for (int i = 1; i < 4; i++)
+//    {
+//        generalStrList.append(generalStr[i]);
+//        generalIconPathList.append(generalIconPath[i]);
+//    }
+//    for (int i = 0; i < 3; i++)
+//    {
+//        generalBtn[i]->setText(generalStrList[i]);
+//        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
+//    }
     Pro_AxisActOrderInit();//轴运动界面参数和控件初始化
 }
 
@@ -910,21 +918,24 @@ void Teach::on_btn_General_ClawAction_clicked()
 {
     ui->stackedWidget_General->setCurrentIndex(1);
     ui->stackedWidget_Four->setCurrentIndex(1);
-    generalBtn[3]->setVisible(false);
-    generalStrList.clear();
-    generalIconPathList.clear();
-    for (int i = 2; i < 4; i++)
-    {
-        generalStrList.append(generalStr[i]);
-        generalIconPathList.append(generalIconPath[i]);
-    }
-    generalStrList.append(generalStr[0]);
-    generalIconPathList.append(generalIconPath[0]);
-    for (int i = 0; i < 3; i++)
-    {
-        generalBtn[i]->setText(generalStrList[i]);
-        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
-    }
+    generalBtn[1]->setVisible(false);
+    generalBtn[0]->setVisible(true);
+    generalBtn[2]->setVisible(true);
+    generalBtn[3]->setVisible(true);
+//    generalStrList.clear();
+//    generalIconPathList.clear();
+//    for (int i = 2; i < 4; i++)
+//    {
+//        generalStrList.append(generalStr[i]);
+//        generalIconPathList.append(generalIconPath[i]);
+//    }
+//    generalStrList.append(generalStr[0]);
+//    generalIconPathList.append(generalIconPath[0]);
+//    for (int i = 0; i < 3; i++)
+//    {
+//        generalBtn[i]->setText(generalStrList[i]);
+//        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
+//    }
     Pro_ClawActionStructInit();//卡爪动作指令界面初始化
 }
 
@@ -933,21 +944,24 @@ void Teach::on_btn_General_SignalDetection_clicked()
     ui->stackedWidget_General->setCurrentIndex(1);
     ui->stackedWidget_Four->setCurrentIndex(2);
     ui->tabWidget_Reserve->setCurrentIndex(0);
-    generalBtn[3]->setVisible(false);
-    generalStrList.clear();
-    generalIconPathList.clear();
-    generalStrList.append(generalStr[3]);
-    generalIconPathList.append(generalIconPath[3]);
-    for (int i = 0; i < 2; i++)
-    {
-        generalStrList.append(generalStr[i]);
-        generalIconPathList.append(generalIconPath[i]);
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        generalBtn[i]->setText(generalStrList[i]);
-        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
-    }
+    generalBtn[2]->setVisible(false);
+    generalBtn[0]->setVisible(true);
+    generalBtn[1]->setVisible(true);
+    generalBtn[3]->setVisible(true);
+//    generalStrList.clear();
+//    generalIconPathList.clear();
+//    generalStrList.append(generalStr[3]);
+//    generalIconPathList.append(generalIconPath[3]);
+//    for (int i = 0; i < 2; i++)
+//    {
+//        generalStrList.append(generalStr[i]);
+//        generalIconPathList.append(generalIconPath[i]);
+//    }
+//    for (int i = 0; i < 3; i++)
+//    {
+//        generalBtn[i]->setText(generalStrList[i]);
+//        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
+//    }
     Pro_ClawCheckStructInit();
     Pro_ReserveCheckStructInit();
 }
@@ -957,18 +971,21 @@ void Teach::on_btn_General_MachineTool_clicked()
     ui->stackedWidget_General->setCurrentIndex(1);
     ui->stackedWidget_Four->setCurrentIndex(3);
     generalBtn[3]->setVisible(false);
-    generalStrList.clear();
-    generalIconPathList.clear();
-    for (int i = 0; i < 3; i++)
-    {
-        generalStrList.append(generalStr[i]);
-        generalIconPathList.append(generalIconPath[i]);
-    }
-    for (int i = 0; i < 3; i++)
-    {
-        generalBtn[i]->setText(generalStrList[i]);
-        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
-    }
+    generalBtn[0]->setVisible(true);
+    generalBtn[1]->setVisible(true);
+    generalBtn[2]->setVisible(true);
+//    generalStrList.clear();
+//    generalIconPathList.clear();
+//    for (int i = 0; i < 3; i++)
+//    {
+//        generalStrList.append(generalStr[i]);
+//        generalIconPathList.append(generalIconPath[i]);
+//    }
+//    for (int i = 0; i < 3; i++)
+//    {
+//        generalBtn[i]->setText(generalStrList[i]);
+//        generalBtn[i]->setIcon(QIcon(generalIconPathList[i]));
+//    }
     Pro_MachineOutStructInit();
 }
 
@@ -1000,11 +1017,15 @@ void Teach::on_btn_General_Other_clicked()
 {
     ui->stackedWidget_General->setCurrentIndex(1);
     ui->stackedWidget_Four->setCurrentIndex(4);
-    generalBtn[3]->setVisible(true);
+//    generalBtn[3]->setVisible(true);
+//    for (int i = 0; i < 4; i++)
+//    {
+//        generalBtn[i]->setText(generalStr[i]);
+//        generalBtn[i]->setIcon(QIcon(generalIconPath[i]));
+//    }
     for (int i = 0; i < 4; i++)
     {
-        generalBtn[i]->setText(generalStr[i]);
-        generalBtn[i]->setIcon(QIcon(generalIconPath[i]));
+        generalBtn[i]->show();
     }
     //界面参数初始化
     Temp_OtherAlarmCustStruct.alarmNum = 1450;
@@ -1028,22 +1049,26 @@ void Teach::on_btn_General_Other_clicked()
 
 void Teach::on_btn_General_1_clicked()
 {
-    setGeneralBtnEvent(ui->btn_General_1->text());
+//    setGeneralBtnEvent(ui->btn_General_1->text());
+    on_btn_General_AxisAction_clicked();
 }
 
 void Teach::on_btn_General_2_clicked()
 {
-    setGeneralBtnEvent(ui->btn_General_2->text());
+//    setGeneralBtnEvent(ui->btn_General_2->text());
+    on_btn_General_ClawAction_clicked();
 }
 
 void Teach::on_btn_General_3_clicked()
 {
-    setGeneralBtnEvent(ui->btn_General_3->text());
+//    setGeneralBtnEvent(ui->btn_General_3->text());
+    on_btn_General_SignalDetection_clicked();
 }
 
 void Teach::on_btn_General_4_clicked()
 {
-    setGeneralBtnEvent(ui->btn_General_4->text());
+//    setGeneralBtnEvent(ui->btn_General_4->text());
+    on_btn_General_MachineTool_clicked();
 }
 
 void Teach::on_btn_General_PageTurn_clicked()
@@ -1061,33 +1086,33 @@ void Teach::on_btn_General_PageTurn_clicked()
     }
 }
 
-void Teach::setGeneralBtnEvent(QString btnName)
-{
-    int index = 0;
-    for (int i = 0; i < 4; i++)
-    {
-        if (btnName == generalStr[i])
-        {
-            index = i;
-            break;
-        }
-    }
-    switch (index)
-    {
-    case 0:
-        on_btn_General_AxisAction_clicked();
-        break;
-    case 1:
-        on_btn_General_ClawAction_clicked();
-        break;
-    case 2:
-        on_btn_General_SignalDetection_clicked();
-        break;
-    case 3:
-        on_btn_General_MachineTool_clicked();
-        break;
-    }
-}
+//void Teach::setGeneralBtnEvent(QString btnName)
+//{
+//    int index = 0;
+//    for (int i = 0; i < 4; i++)
+//    {
+//        if (btnName == generalStr[i])
+//        {
+//            index = i;
+//            break;
+//        }
+//    }
+//    switch (index)
+//    {
+//    case 0:
+//        on_btn_General_AxisAction_clicked();
+//        break;
+//    case 1:
+//        on_btn_General_ClawAction_clicked();
+//        break;
+//    case 2:
+//        on_btn_General_SignalDetection_clicked();
+//        break;
+//    case 3:
+//        on_btn_General_MachineTool_clicked();
+//        break;
+//    }
+//}
 
 void Teach::changeEvent(QEvent *e)
 {
@@ -1096,6 +1121,55 @@ void Teach::changeEvent(QEvent *e)
         ui->retranslateUi(this);
     }
     QWidget::changeEvent(e);
+}
+
+void Teach::showEvent(QShowEvent *event)
+{
+    auto perm = m_CurrentProgramNameAndPath.filePermission;
+
+    // 只有允许权限才能使用 其他权限不可使用
+    const std::vector<QWidget*> otherWidgets = {
+        ui->checkBox_Edit_Wait_label, ui->checkBox_Edit_Wait_step, ui->lineEdit_Edit_Wait_step,
+        ui->comboBox_Edit_Wait_label, ui->checkBox_Edit_Wait_step_2, ui->lineEdit_Edit_Wait_step_2,
+        ui->checkBox_Edit_Wait_label_2, ui->comboBox_Edit_Wait_label_2
+
+    };
+    auto otherEnable = (perm == 0);
+    for (auto& widget : otherWidgets)
+    {
+        widget->setEnabled(otherEnable);
+    }
+
+    if (perm == 1 || perm == 2)
+    {
+        ui->btnDelete->setEnabled(false);
+        ui->btnCombine->setEnabled(false);
+        ui->btnDevide->setEnabled(false);
+        ui->btnInset->setEnabled(false);
+
+        // 时间允许 位置不允许
+        bool posDisable = (perm == 2);
+
+        ui->lineEdit_Edit_offsetpos->setEnabled(!posDisable);
+        ui->lineEdit_Edit_AxisMove_pos->setEnabled(!posDisable);
+        ui->Edit_AxisMove_Refresh->setEnabled(!posDisable);
+        ui->Stack_Edit_Pos->setEnabled(!posDisable);
+        ui->AxisEditRefreshx1->setEnabled(!posDisable);
+        ui->Stack_Edit_Pos_2->setEnabled(!posDisable);
+        ui->AxisEditRefreshy1->setEnabled(!posDisable);
+        ui->Stack_Edit_Pos_2->setEnabled(!posDisable);
+        ui->StackAxisEditRefreshz1->setEnabled(!posDisable);
+
+    }
+    else
+    {
+        ui->btnDelete->setEnabled(true);
+        ui->btnCombine->setEnabled(true);
+        ui->btnDevide->setEnabled(true);
+        ui->btnInset->setEnabled(true);
+    }
+
+    QWidget::showEvent(event);
 }
 
 //教导界面-删除按钮处理函数
@@ -4358,11 +4432,11 @@ void Teach::on_btnAlarmLamp_button_clicked()
     Temp_OtherAlarmLampStruct.type = !Temp_OtherAlarmLampStruct.type;
     if(Temp_OtherAlarmLampStruct.type == 0)
     {
-        ui->btnAlarmLamp_button->setText(m_Port_Y[OTHER_ALARM_LAMP].modifyName+"关");
+        ui->btnAlarmLamp_button->setText(m_Port_Y[OTHER_ALARM_LAMP].modifyName+tr("关"));
     }
     else
     {
-        ui->btnAlarmLamp_button->setText(m_Port_Y[OTHER_ALARM_LAMP].modifyName+"开");
+        ui->btnAlarmLamp_button->setText(m_Port_Y[OTHER_ALARM_LAMP].modifyName+tr("开"));
     }
     Temp_OtherAlarmLampStruct.outportNum = m_Port_Y[OTHER_ALARM_LAMP].portNum;//实际端口
 }
@@ -4372,11 +4446,11 @@ void Teach::on_btnAlarmSound_button_clicked()
     Temp_OtherAlarmSoundStruct.type = !Temp_OtherAlarmSoundStruct.type;
    if(Temp_OtherAlarmSoundStruct.type == 0)
    {
-       ui->btnAlarmSound_button->setText(m_Port_Y[OTHER_ALARM_SOUND].modifyName+"关");
+       ui->btnAlarmSound_button->setText(m_Port_Y[OTHER_ALARM_SOUND].modifyName+tr("关"));
    }
    else
    {
-       ui->btnAlarmSound_button->setText(m_Port_Y[OTHER_ALARM_SOUND].modifyName+"开");
+       ui->btnAlarmSound_button->setText(m_Port_Y[OTHER_ALARM_SOUND].modifyName+tr("开"));
    }
    Temp_OtherAlarmLampStruct.outportNum = m_Port_Y[OTHER_ALARM_SOUND].portNum;//实际端口
 }

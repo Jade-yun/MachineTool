@@ -1500,3 +1500,29 @@ void readPortDefInfo()
         settings.endGroup();
     }
 }
+
+void reloadTranslateNameDefine()
+{
+    const std::vector<QString> CUSTOMIZE_NAME_PATHS = {
+        "/opt/MachineTool/configs/NameDef_Customize_CN.ini",
+        "/opt/MachineTool/configs/NameDef_Customize_EN.ini"
+    };
+    if (m_SystemSet.lan >= 0 && m_SystemSet.lan < CUSTOMIZE_NAME_PATHS.size())
+    {
+        CustomizeNameDefPath = CUSTOMIZE_NAME_PATHS.at(m_SystemSet.lan);
+    }
+    ::readNameDefine();
+}
+
+void reloadTranslatePortDefInfo()
+{
+    const std::vector<QString> CUSTOMIZE_NAME_PATHS = {
+        "/opt/MachineTool/configs/PortInfo_Customize_CN.ini",
+        "/opt/MachineTool/configs/PortInfo_Customize_EN.ini"
+    };
+    if (m_SystemSet.lan >= 0 && m_SystemSet.lan < CUSTOMIZE_NAME_PATHS.size())
+    {
+        CustomizePortInfoPath = CUSTOMIZE_NAME_PATHS.at(m_SystemSet.lan);
+    }
+    ::readPortDefInfo();
+}

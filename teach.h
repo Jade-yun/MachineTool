@@ -324,10 +324,10 @@ private:
 private:
 	QPushButton* generalBtn[4];
     QPushButton* SubroutineBtn[8];
-	QString generalStr[4];
+//	QString generalStr[4];
 	QString generalIconPath[4];
-	QStringList generalStrList;			//使用哪几个
-	QStringList generalIconPathList;
+//	QStringList generalStrList;			//使用哪几个
+//	QStringList generalIconPathList;
     StackEdit* stack_Temp;
     BaseWindow *stack_Dialog;
     QTimer *Teach_timer;
@@ -341,10 +341,11 @@ private:
     std::array<NumberEdit*, 3> nums; // 个数
     std::array<QTableWidgetItem*, 3> objPos; // 目标位置
 private:
-	void setGeneralBtnEvent(QString btnName);
+//	void setGeneralBtnEvent(QString btnName);
 
 protected:
     void changeEvent(QEvent *e) override;
+    void showEvent(QShowEvent *event) override;
 
 };
 

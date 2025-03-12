@@ -60,7 +60,7 @@ void TeachManage::on_btn_New_clicked()
 {
 
     QString programName = ui->lineEdit_NowFileName->text().trimmed();
-    QRegularExpression illegalChars("[<>:\"/\\\\|?*.]");
+    QRegularExpression illegalChars("[<>:\"/\\\\|?*.]"); // "\/:*?"<>|"
 
     if (programName.contains(illegalChars))
     {
@@ -125,6 +125,15 @@ void TeachManage::on_btn_Copy_clicked()
     {
         ErrorTipDialog tip(tr("程序名不能为空！"), TipMode::ONLY_OK);
         tip.exec();
+        return;
+    }
+    QRegularExpression illegalChars("[<>:\"/\\\\|?*.]"); // "\/:*?"<>|"
+
+    if (targeProgName.contains(illegalChars))
+    {
+        ErrorTipDialog dlgTip;
+        dlgTip.setMessage(tr("程序名格式错误！"));
+        dlgTip.exec();
         return;
     }
 

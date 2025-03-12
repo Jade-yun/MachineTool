@@ -76,6 +76,7 @@ private:
 //    std::map<int, QTabWidget*> tabWidgetMap; // store the mapping of each QTabWidget group about MenuItem id/10
 //    std::map<int, QWidget*> tabContentMap;     // store the mapping of each tab about MenuItem id
     std::map<int, QString> tabNameMap;
+    std::map<int, QString> tabSourceNameMap;
     int currentLoginState = MenuState::Operator;
 private:
     void init();
@@ -83,6 +84,7 @@ private:
 
     void setupPortDefine(); // 端口自定义
     void setupNameDefine();
+    void refreshNameDefine();
     void setupMenuAuthority();
 
     void setupSystemSetting();

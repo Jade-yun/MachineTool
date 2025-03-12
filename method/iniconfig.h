@@ -89,6 +89,7 @@ void writePortDefInfo();
  * @brief readPortDefInfo 读取默认和修改的端口相关信息
  */
 void readPortDefInfo();
+void reloadTranslatePortDefInfo();
 
 // 名称自定义
 /**
@@ -99,6 +100,8 @@ void readNameDefine();
  * @brief writeNameDefine 只写入修改后的名称
  */
 void writeNameDefine();
+
+void reloadTranslateNameDefine();
 
 //预留关联
 extern void getOutportRelevancy(uint8_t defaultV = 0);

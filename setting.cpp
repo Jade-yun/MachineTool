@@ -392,7 +392,7 @@ void Setting::init()
 
     // fresh backlight time dispaly
     BackLighter::instance()->setScreenOffTime(m_SystemSet.backlightTime);
-    int duration = BackLighter::instance()->getScreenOffTime();
+    int duration = m_SystemSet.backlightTime;
     ui->editBrightTime->setText(QString::number(duration));
 
     // fresh backlight brightness dispaly
@@ -904,11 +904,14 @@ void Setting::setupPortDefine()
 
         if (res)
         {
-            ErrorTipDialog tip(tr("导入成功!"), TipMode::ONLY_OK, nullptr);
-            QTimer::singleShot(1000, [&](){
-                tip.accept();
+            ErrorTipDialog *tip = new ErrorTipDialog(tr("导入成功!"), TipMode::ONLY_OK, nullptr);
+            QTimer::singleShot(1000, tip, [tip]() {
+                if (tip->isVisible()) {
+                    tip->accept();
+                }
+                tip->deleteLater();
             });
-            tip.exec();
+            tip->exec();
         }
 
         QProgressDialog loadingTip(tr("数据处理中，请稍候..."), tr("取消"), 0, 0, this);
@@ -957,11 +960,14 @@ void Setting::setupPortDefine()
 
         if (res)
         {
-            ErrorTipDialog tip(tr("导出成功!"), TipMode::ONLY_OK, nullptr);
-            QTimer::singleShot(1000, [&](){
-                tip.accept();
+            ErrorTipDialog *tip = new ErrorTipDialog(tr("导出成功!"), TipMode::ONLY_OK, nullptr);
+            QTimer::singleShot(1000, tip, [tip]() {
+                if (tip->isVisible()) {
+                    tip->accept();
+                }
+                tip->deleteLater();
             });
-            tip.exec();
+            tip->exec();
         }
     });
 
@@ -1078,11 +1084,15 @@ void Setting::setupNameDefine()
 
        if (res)
        {
-           ErrorTipDialog tip(tr("导出成功!"), TipMode::ONLY_OK, nullptr);
-           QTimer::singleShot(1000, [&](){
-               tip.accept();
+           ErrorTipDialog *tip = new ErrorTipDialog(tr("导出成功!"), TipMode::ONLY_OK, nullptr);
+           QTimer::singleShot(1000, tip, [tip]() {
+               if (tip->isVisible()) {
+                   tip->accept();
+               }
+               tip->deleteLater();
            });
-           tip.exec();
+           tip->exec();
+
        }
 
     });
@@ -1097,17 +1107,18 @@ void Setting::setupNameDefine()
        ::sync();
 
        ::readNameDefine();
-
-       // fresh dispaly
-       RefreshNameDefine();
+       this->refreshNameDefine();
 
        if (res)
        {
-           ErrorTipDialog tip(tr("导入成功!"), TipMode::ONLY_OK, nullptr);
-           QTimer::singleShot(1000, [&](){
-               tip.accept();
+           ErrorTipDialog *tip = new ErrorTipDialog(tr("导入成功!"), TipMode::ONLY_OK, nullptr);
+           QTimer::singleShot(1000, tip, [tip]() {
+               if (tip->isVisible()) {
+                   tip->accept();
+               }
+               tip->deleteLater();
            });
-           tip.exec();
+           tip->exec();
        }
        M_SaveSetPar.SaveNameDef = true;
        emit coboxVarSelectVarPreOpItemSet_signal();
@@ -1191,6 +1202,55 @@ void Setting::setupNameDefine()
     });
 }
 
+void Setting::refreshNameDefine()
+{
+    auto tableNameDef = ui->tableWgtNameDef;
+    // fresh dispaly
+    for (int col = 0; col < 2; col++)
+    {
+        int index = 0;
+        tableNameDef->item(index++, col)->setText(m_NameDefine[col].adminName);
+
+        tableNameDef->item(index++, col)->setText(m_NameDefine[col].operatorName);
+
+        for (int i = 0; i < 8; ++i) {
+            auto item = tableNameDef->item(index, col);
+            item->setText(m_NameDefine[col].subProgName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < AXIS_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, col);
+            item->setText(m_NameDefine[col].axisName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < VAR_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, col);
+            item->setText(m_NameDefine[col].varName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < STACK_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, col);
+            item->setText(m_NameDefine[col].stackName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < FOLLOW_STACK_NUM; ++i) {
+            auto item = tableNameDef->item(index, col);
+            item->setText(m_NameDefine[col].followStackName[i]);
+            ++index;
+        }
+
+        for (int i = 0; i < TIME_TOTAL_NUM; ++i) {
+            auto item = tableNameDef->item(index, col);
+            item->setText(m_NameDefine[col].timerName[i]);
+            ++index;
+        }
+    }
+}
+
 void Setting::setupMenuAuthority()
 {
     ui->treeWgt->setColumnCount(5);
@@ -1227,6 +1287,7 @@ void Setting::setupMenuAuthority()
                                );
     ui->treeWgt->setHeaderLabels({tr("菜单"), tr("操作员"), tr("管理员"), tr("高级"), tr("不可见")});
 
+#if 0
     QList<MenuItem*> menuItems;
     MenuItem* sigSet = new MenuItem(1, tr("信号设置"));
     MenuItem* safeSet = new MenuItem(2, tr("安全设置"));
@@ -1311,17 +1372,107 @@ void Setting::setupMenuAuthority()
         new MenuItem(88, {tr("堆叠8组")}),
         new MenuItem(89, {tr("堆叠设置")})
     };
+#endif
+    QList<MenuItem*> menuItems;
+    MenuItem* sigSet = new MenuItem(1, "信号设置");
+    MenuItem* safeSet = new MenuItem(2, "安全设置");
+    MenuItem* productSet = new MenuItem(3, "产品设置");
+    MenuItem* systemSet = new MenuItem(4, "系统设置");
+    MenuItem* servoPara = new MenuItem(5, "伺服参数");
+    MenuItem* servoSafe = new MenuItem(6, "伺服安全点");
+    MenuItem* machinePara = new MenuItem(7, "机器参数");
+    MenuItem* stactSet = new MenuItem(8, "堆叠设置");
+    menuItems.append(sigSet);
+    menuItems.append(safeSet);
+    menuItems.append(productSet);
+    menuItems.append(systemSet);
+    menuItems.append(servoPara);
+    menuItems.append(servoSafe);
+    menuItems.append(machinePara);
+    menuItems.append(stactSet);
+
+    // Add items for sigSet, safeSet, productSet
+    sigSet->children = {
+        new MenuItem(11, "输出类型"),
+        new MenuItem(12, "互锁设置"),
+        new MenuItem(13, "端口自定义"),
+        new MenuItem(14, "名称自定义"),
+        new MenuItem(15, "预留关联"),
+        new MenuItem(16, "预留出类型"),
+        new MenuItem(17, "按键/信号"),
+        new MenuItem(18, "高级")
+    };
+
+    safeSet->children = {
+        new MenuItem(21, "机床安全"),
+        new MenuItem(22, "料仓安全"),
+        new MenuItem(23, "卡爪安全"),
+        new MenuItem(24, "联机安全")
+    };
+    productSet->children = {
+        new MenuItem(31, "产品"),
+        new MenuItem(32, "高级"),
+        new MenuItem(33, "物联网"),
+        new MenuItem(34, "联机安全")
+    };
+
+    systemSet->children = {
+        new MenuItem(41, "语言设置"),
+        new MenuItem(42, "用户设置"),
+        new MenuItem(43, "升级与备份"),
+        new MenuItem(44, "记事本"),
+        new MenuItem(45, "密码设置"),
+        new MenuItem(46, "物联网"),
+        new MenuItem(47, "注册信息")
+    };
+
+    servoPara->children = {
+        new MenuItem(51, "伺服"),
+        new MenuItem(52, "轴参数"),
+        new MenuItem(53, "轴速度")
+    };
+    servoSafe->children = {
+        new MenuItem(61, "安全区1"),
+        new MenuItem(62, "安全区2"),
+        new MenuItem(63, "安全区3"),
+        new MenuItem(64, "安全区4"),
+        new MenuItem(65, "位置限定")
+    };
+
+    machinePara->children = {
+        new MenuItem(71, "限位"),
+        new MenuItem(72, "结构"),
+        new MenuItem(73, "原点"),
+        new MenuItem(74, "通信")
+    };
+    stactSet->children = {
+        new MenuItem(81, "堆叠1组"),
+        new MenuItem(82, "堆叠2组"),
+        new MenuItem(83, "堆叠3组"),
+        new MenuItem(84, "堆叠4组"),
+        new MenuItem(85, "堆叠5组"),
+        new MenuItem(86, "堆叠6组"),
+        new MenuItem(87, "堆叠7组"),
+        new MenuItem(88, "堆叠8组"),
+        new MenuItem(89, "堆叠设置")
+    };
     // 使用 QMap 存储 MenuItem 和 QTreeWidgetItem 的映射关系
     QMap<MenuItem*, QTreeWidgetItem*> itemMap;
 
     // 将 MenuItem 转换为 QTreeWidgetItem 并添加到树形结构中
     QList<QTreeWidgetItem*> treeItems;
     for (auto menuItem : menuItems) {
-        QTreeWidgetItem* treeItem = new QTreeWidgetItem(ui->treeWgt, {menuItem->name});
+        auto itemName = QCoreApplication::translate("Setting", menuItem->name.toStdString().c_str(), nullptr);
+        tabNameMap[menuItem->id] = itemName;
+        tabSourceNameMap[menuItem->id] = menuItem->name;
+        QTreeWidgetItem* treeItem = new QTreeWidgetItem(ui->treeWgt, {itemName});
         itemMap[menuItem] = treeItem;
         treeItems.append(treeItem);
         for (auto& child : menuItem->children) {
-            QTreeWidgetItem* childItem = new QTreeWidgetItem(treeItem, {child->name});
+            auto childName = QCoreApplication::translate("Setting", child->name.toStdString().c_str(), nullptr);
+            tabNameMap[child->id] = childName;
+            tabSourceNameMap[child->id] = child->name;
+            QTreeWidgetItem* childItem = new QTreeWidgetItem(treeItem, {childName});
             itemMap[child] = childItem;
         }
     }
@@ -1340,7 +1491,6 @@ void Setting::setupMenuAuthority()
         menuItem->state = static_cast<MenuState>(savedState);
 
         menuStateMap[menuItem->id] = static_cast<MenuState>(savedState);
-        tabNameMap[menuItem->id] = menuItem->name;
         // 子菜单项的状态
         for (auto& child : menuItem->children) {
             int savedChildState = settings.value(QString::number(child->id) + "/state", static_cast<int>(MenuState::Operator)).toInt();
@@ -1348,7 +1498,6 @@ void Setting::setupMenuAuthority()
             child->state = static_cast<MenuState>(savedChildState);
 
             menuStateMap[child->id] = static_cast<MenuState>(savedChildState);
-            tabNameMap[child->id] = child->name;
         }
     }
 
@@ -2701,6 +2850,7 @@ void Setting::switchLangurage()
     qApp->installTranslator(&translator);
 
     this->retranslate();
+
 }
 
 void Setting::retranslate()
@@ -2708,6 +2858,45 @@ void Setting::retranslate()
     ui->retranslateUi(this);
 
     ui->tableWgtNote->setHorizontalHeaderLabels({ tr("标题") , tr("修改时间")});
+    ui->treeWgt->setHeaderLabels({tr("菜单"), tr("操作员"), tr("管理员"), tr("高级"), tr("不可见")});
+
+    // update translation in tabNameMap
+    for (auto& pair : tabNameMap)
+    {
+        const char* sourceText = tabSourceNameMap.at(pair.first).toStdString().c_str();
+        pair.second = tr(sourceText);
+    }
+
+
+    for (int i = 0; i < ui->treeWgt->topLevelItemCount(); ++i) {
+        QTreeWidgetItem* topLevelItem = ui->treeWgt->topLevelItem(i);
+        int groupId = i + 1;
+        auto it = tabNameMap.find(groupId);
+        if (it != tabNameMap.end())
+        {
+            topLevelItem->setText(0, it->second);
+        }
+
+        // 遍历每个顶级项的所有子项
+        for (int j = 0; j < topLevelItem->childCount(); ++j) {
+            QTreeWidgetItem* childItem = topLevelItem->child(j);
+
+            int childId = groupId * 10 + (j + 1);
+            auto childIt = tabNameMap.find(childId);
+            if (childIt != tabNameMap.end())
+            {
+                childItem->setText(0, childIt->second);
+            }
+        }
+    }
+
+    // retranslate customize name
+    ui->tableWgtNameDef->setHorizontalHeaderLabels({tr("默认名称"), tr("修改名称")});
+    ::reloadTranslateNameDefine();
+    this->refreshNameDefine();
+    // retranslate customize port
+    ::reloadTranslatePortDefInfo();
+    this->RefreshPortDefine();
 }
 
 void Setting::onMenuStateChanged(MenuState newState)

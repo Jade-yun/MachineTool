@@ -129,7 +129,7 @@ QPushButton:pressed
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -3720,7 +3720,7 @@ font: 20pt ;</string>
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -3793,11 +3793,10 @@ font: 20pt ;</string>
         </item>
        </layout>
       </widget>
-      <zorder>label_174</zorder>
+      <zorder>layoutWidget</zorder>
       <zorder>btn1_add</zorder>
       <zorder>btn1_cut</zorder>
       <zorder>left_InWidget</zorder>
-      <zorder>lab_page1</zorder>
      </widget>
      <widget class="QWidget" name="tabOutputType">
       <attribute name="title">
@@ -6467,7 +6466,7 @@ font: 20pt ;</string>
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -7315,7 +7314,7 @@ font: 20pt ;</string>
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -10890,7 +10889,7 @@ font: 20pt ;</string>
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -13626,7 +13625,7 @@ font: 20pt ;</string>
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -18066,7 +18065,7 @@ font: 20pt ;</string>
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -20800,7 +20799,7 @@ font: 20pt ;</string>
         </size>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>10</x>

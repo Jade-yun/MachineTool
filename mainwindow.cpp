@@ -86,7 +86,6 @@ MainWindow::MainWindow(QWidget *parent)
         "Translation_En.qm", // English
         "Translation_Kr.qm"  // Korean
     };
-
     if (m_SystemSet.lan >= 0 && m_SystemSet.lan < LANGUAGE_FILES.size()) {
 
         QString languageFilePath = BASE_PATH + LANGUAGE_FILES.at(m_SystemSet.lan);
@@ -591,6 +590,17 @@ void MainWindow::on_Btn_TeachHome_clicked()
 //    ui->stkWidget->setCurrentIndex(1);
     if (curMode == TriMode::MANUAL)
     {
+        // 禁止
+        auto perm = m_CurrentProgramNameAndPath.filePermission;
+        if (perm == 3)
+        {
+            ErrorTipDialog tip(tr("请先对文件进行解锁！"), TipMode::ONLY_OK, nullptr);
+            tip.exec();
+
+            return;
+        }
+
+
         ui->stkWidget->setCurrentWidget(teachWidget);
         emit signal_refresh_TeachList();//发送刷新教导界面列表信号
         emit signal_TeachPageInit();//教导界面初始化信号
