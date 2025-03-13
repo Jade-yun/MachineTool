@@ -680,6 +680,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget,&Setting::AxisTypeChange_Signal,teachWidget,&Teach::AxisTypeChangeTeachHandle);//教导界面轴编号选择需要刷新
     connect(setWidget,&Setting::AxisTypeChange_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
     connect(this,&MainWindow::SwitchPageParSaveSignal,setWidget,&Setting::SwitchPageParSaveHandle);//切换界面时有参数需要保存处理
+    connect(this,&MainWindow::SetAutoRunIcon_Signal,autoWidget,&AutoForm::SetAutoRunIcon);//自动界面断点图标需刷新
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, [&]() {
@@ -978,7 +979,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
             {//回零完成，但不在自动状态
                 MainWindow::pMainWindow->showErrorTip(tr("请将三档开关切换到自动档再启动"),TipMode::ONLY_OK);
             }
-            else if(m_RobotRunSta == MAC_STA_AUTO_STANDBY)
+            else if(m_RobotRunSta == MAC_STA_AUTO_STANDBY || m_RobotRunSta == MAC_STA_PAUSE)
             {//回零完成，在自动状态
                 if(m_RobotResetState != 2)
                 {//未复位完成
@@ -986,16 +987,22 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
                 }
                 else
                 {
+                    if(m_RunPar.startRunLineNum == m_RunPar.breakPointList)
+                    {
+                        if(m_RunPar.breakPointFlag == true)
+                        {
+                            m_RunPar.breakPointFlag = false;
+                            m_RunPar.breakPointList = 1;
+                            g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+                            emit SetAutoRunIcon_Signal();
+                        }
+                    }
                     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
                 }
             }
-//            else if(m_RobotRunSta == MAC_STA_RUN)
-//            {//在运行中时按启动，变成暂停
-//                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,2,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
-//            }
             else
             {//机器未回零
-                if(m_RobotRunSta != MAC_STA_RUN)
+                if(m_RobotRunSta == MAC_STA_AUTO_INVALID || m_RobotRunSta == MAC_STA_MANUAL_INVALID || m_RobotRunSta == MAC_STA_STOP_INVALID )
                 {
                     MainWindow::pMainWindow->showErrorTip(tr("机器未回零"),TipMode::ONLY_OK);
                 }
@@ -1007,8 +1014,8 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
     case HandControlKeyCode::STOP://停止
     {
         if(value == 1)
-        {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,0,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+        {//左侧按键停止-机器暂停
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,2,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
         }
         break;
     }
@@ -1038,7 +1045,8 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
         {
             if(m_RobotRunSta == MAC_STA_ALARM)
             {
-                MainWindow::pMainWindow->showErrorTip(tr("请先解决报警再复位！"),TipMode::ONLY_OK);
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_CLEAR_ALARM,1,0);//有报警时，按复位按钮清除报警
+//                MainWindow::pMainWindow->showErrorTip(tr("请先解决报警再复位！"),TipMode::ONLY_OK);
             }
             else if(m_RobotOriginState == 2)
             {//回零完成

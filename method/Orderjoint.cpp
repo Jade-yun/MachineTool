@@ -1786,7 +1786,7 @@ uint16_t ReturnLableListIndex(uint16_t lableNum)
         }
         if(LabelIndex == lableNum)
         {
-            return i;
+            return i+1;
         }
     }
     return 0;

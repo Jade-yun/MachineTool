@@ -139,6 +139,7 @@ extern AxisCurPos m_AxisCurPos;
 #define CMD_SUN_STA_STACK										0x06      	//堆叠实时参数读写
 #define CMD_SUN_STA_VAR											0x07      	//变量值读写
 #define CMD_SUN_STA_TIME										0x08      	//定时器读写
+#define CMD_SUN_STA_CLEAR_ALARM                                 0x09        //清除报警
 #define CMD_SUN_STA_UPGRADE_STATE                               0x0D        //控制器升级状态读取
 
 //手动操作

@@ -2376,6 +2376,12 @@ bool Load_Program_Handle(QString fileName)
     }
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_STA_VAR_TYPE,0,0);
+    m_RunPar.startRunLineFlag = true;
+    m_RunPar.planProductNum = 0;
+    m_RunPar.startRunLineNum = 1;//加载程序时起始行号设置为1
+    m_RunPar.breakPointFlag = false;
+    m_RunPar.breakPointProNum = 0;
+    m_RunPar.breakPointList = 1;
     return true;
 }
 

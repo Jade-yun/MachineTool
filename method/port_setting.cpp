@@ -56,20 +56,6 @@ uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM]={0};                    //预
 **************************************************************************/
 void readSigSetPara()
 {
-    getOutPortType();
-    getOutportInterlock();
-    getOutportRelevancy();
-    getReleteOut();
-    getKeyFunc();
-    getLedFunc();
-    getSeniorFunc();
-
-    // 端口自定义
-    ::readPortDefInfo();
-    //名称自定义
-    ::readNameDefine();
-
-
     for(int i = 0;i < INPUT_TOTAL_NUM;i++)
     {
         m_Port_X[i].isReserve = !(i < INPUT_NUM);
@@ -224,6 +210,19 @@ void readSigSetPara()
 **************************************************************************/
 void readIniPara()
 {
+    getOutPortType();
+    getOutportInterlock();
+    getOutportRelevancy();
+    getReleteOut();
+    getKeyFunc();
+    getLedFunc();
+    getSeniorFunc();
+
+    // 端口自定义
+    ::readPortDefInfo();
+    //名称自定义
+    ::readNameDefine();
+
     getMachineSave();
     getStackSave();
     getClawSave();

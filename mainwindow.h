@@ -83,7 +83,7 @@ signals:
     void signal_refresh_TeachList();//刷新教导界面列表信号
     void EditOperatorVarPreOp_Refresh();//教导界面变量指令-变量类型刷新信号
     void signal_sync_data();       //同步数据到主控板
-
+    void SetAutoRunIcon_Signal();//发送自动界面图标刷新信号
     void alarmOccurred(int alarmNum);
     void Auto_File_List_Refresh_signal(uint8_t ProNum);//刷新自动运行界面列表信号
     void monitor_hand_contril(uint16_t code, int32_t value);//监视界面手控器界面刷新

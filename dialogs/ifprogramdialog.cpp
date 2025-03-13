@@ -585,9 +585,12 @@ void IfProgramDialog::SetCoboxAxisSelectItem()
 {
     ui->coboxPosPreOpAxisSelect->clear();
     ui->coboxPosPostOpAxisSelect->clear();
-    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    for(int i=0;i<AXIS_TOTAL_NUM;i++)
     {
-        ui->coboxPosPreOpAxisSelect->addItem(m_NameDefine[1].axisName[i]);
-        ui->coboxPosPostOpAxisSelect->addItem(m_NameDefine[1].axisName[i]);
+        if(m_AxisPar[i].axisType == 1)
+        {
+            ui->coboxPosPreOpAxisSelect->addItem(m_NameDefine[1].axisName[i]);
+            ui->coboxPosPostOpAxisSelect->addItem(m_NameDefine[1].axisName[i]);
+        }
     }
 }

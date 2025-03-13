@@ -164,7 +164,10 @@ AutoForm::AutoForm(QWidget *parent) :
     });
 
     connect(action2, &QAction::triggered, this, [=]() {//从改行运行
-        SetAutoRunParIcon(0);
+        if(m_RobotRunSta == MAC_STA_AUTO_INVALID || m_RobotRunSta == MAC_STA_AUTO_STANDBY)
+        {//在停止状态下才能设置从此行运行行号
+            SetAutoRunParIcon(0);
+        }
     });
 
     connect(action3, &QAction::triggered, this, [=]() {
@@ -358,12 +361,12 @@ void AutoForm::SetAutoRunParIcon(uint8_t type)
         if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd != C_PRO_END)
         {
             m_RunPar.startRunLineFlag = true;
-            m_RunPar.startRunLineNum = m_CurrentSelectProOrderList+1;//从1行开始
+            m_RunPar.startRunLineNum = m_OperateProOrder[m_CurrentSelectProOrderList].list;
             m_RunPar.startRunLineProNum = m_OperateProNum;
             if(m_RunPar.breakPointFlag == true && m_RunPar.startRunLineNum == m_RunPar.breakPointList && m_RunPar.startRunLineProNum == m_RunPar.breakPointProNum)
             {
                 m_RunPar.breakPointFlag = 0;
-                m_RunPar.breakPointList = 0;
+                m_RunPar.breakPointList = 1;
                 m_RunPar.breakPointProNum = 0;
             }
             g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
@@ -376,11 +379,11 @@ void AutoForm::SetAutoRunParIcon(uint8_t type)
     {
         if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd != C_PRO_END)
         {
-            if(m_CurrentSelectProOrderList+1  < m_ProInfo.proNum[m_OperateProNum]-1)
+            if(m_OperateProOrder[m_CurrentSelectProOrderList].list  < m_ProInfo.proNum[m_OperateProNum]-1)
             {
                 //为目标行设置新的图标和文本
                 m_RunPar.breakPointFlag = true;
-                m_RunPar.breakPointList = m_CurrentSelectProOrderList+1;
+                m_RunPar.breakPointList = m_OperateProOrder[m_CurrentSelectProOrderList].list;
                 m_RunPar.breakPointProNum = m_OperateProNum;
                 if(m_RunPar.startRunLineFlag == true && m_RunPar.startRunLineNum == m_RunPar.breakPointList && m_RunPar.startRunLineProNum == m_RunPar.breakPointProNum)
                 {
@@ -402,8 +405,8 @@ void AutoForm::SetAutoRunParIcon(uint8_t type)
     {
         m_RunPar.breakPointFlag = false;
         m_RunPar.breakPointList = 1;
-        m_RunPar.breakPointProNum = false;
-        m_RunPar.startRunLineFlag = 0;
+        m_RunPar.breakPointProNum = 0;
+        m_RunPar.startRunLineFlag = false;
         m_RunPar.startRunLineNum = 1;
         m_RunPar.startRunLineProNum = 0;
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
@@ -428,10 +431,10 @@ void AutoForm::SetAutoRunIcon()
     if(m_RunPar.breakPointFlag == true)
     {
         //为目标行设置新的图标和文本
-        QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.breakPointList].runOrderNum));
-        QIcon icon(":/images/autoPageImages/breakpoint.png");
         if(m_RunPar.breakPointList>0)
         {
+            QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.breakPointList-1].runOrderNum));
+            QIcon icon(":/images/autoPageImages/breakpoint.png");
             ui->Auto_file_List->setItem(m_RunPar.breakPointList-1,0,item);
             item->setIcon(icon);
             item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
@@ -450,14 +453,15 @@ void AutoForm::SetAutoRunIcon()
     if(m_RunPar.startRunLineFlag == true)
     {
         //为目标行设置新的图标和文本
-        QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.startRunLineNum].runOrderNum));
-        QIcon icon(":/images/autoPageImages/continue.png");
         if(m_RunPar.startRunLineNum>0)
         {
+            QTableWidgetItem *item = new QTableWidgetItem(QString::number(m_OperateProOrder[m_RunPar.startRunLineNum-1].runOrderNum));
+            QIcon icon(":/images/autoPageImages/continue.png");
             ui->Auto_file_List->setItem(m_RunPar.startRunLineNum-1,0,item);
             item->setIcon(icon);
             item->setTextAlignment(Qt::AlignCenter);//设置内容居中显示
         }
+
 
         ui->labStartStep->show();
         ui->labStartStep0->show();
@@ -1132,6 +1136,11 @@ void AutoForm::Auto_CurStep_Refresh()
         ui->labSubProg7StepNum->setText(QString::number(m_ProRunInfo.proNum[6]));
         ui->labSubProg8StepNum->setText(QString::number(m_ProRunInfo.proNum[7]));
     }
+    if(m_ProRunInfo.proNum[0]+1 >= m_RunPar.startRunLineNum && m_RunPar.startRunLineNum != 1)
+    {
+        m_RunPar.startRunLineNum = 1;
+        SetAutoRunIcon();
+    }
 }
 /*************************************************************************
 **  函数名：  Program_Follow_Refresh()
@@ -1262,7 +1271,11 @@ void AutoForm::Auto_File_List_Refresh(uint8_t ProNum)
     ui->stkWgtOuter->setCurrentWidget(ui->pageState);//界面切到自动状态界面
     ui->stkWgtState->setCurrentWidget(ui->page1AutoState);
     ui->btnEdit->setChecked(false);//编辑按钮默认关闭
-
+    if(ProNum == 0)
+    {//如果在主程序，刷新从此运行行号标志
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+        SetAutoRunIcon();
+    }
 }
 
 void AutoForm::updateLabelState(int index)

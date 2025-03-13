@@ -82,6 +82,7 @@ private:
 protected:
     void changeEvent(QEvent *e) override;
     void retranslate();
+    void showEvent(QShowEvent *event) override;
 
 private:
     Ui::StackEdit *ui;

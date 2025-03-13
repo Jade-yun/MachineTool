@@ -1116,19 +1116,75 @@ void Teach::on_btnDelete_clicked()
                 P_LabelStruct* LabelStruct = (P_LabelStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
                 if(LabelStruct->labelNum>0)
                 {
-                    uint16_t temp_labelNum = LabelStruct->labelNum;
-                    if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) == 0)
+                    bool JumpLabelFlag = false;//该标签是否存在对应的跳转指令
+                    uint16_t temp_labelNum1 = LabelStruct->labelNum;
+                    uint16_t temp_labelNum = ReturnLableListIndex(temp_labelNum1);
+                    if(temp_labelNum>0)
                     {
-                        temp_labelNum = ReturnLableListIndex(temp_labelNum);
-                        if(temp_labelNum>0)
-                        {
-                            CurrentLableNameList.removeAt(temp_labelNum);
+                        if(LabelStruct->type == 0)
+                        {//如果删除的是标签指令
+                            for(int i=0;i<m_OperateProOrderListNum;i++)
+                            {
+                                if(m_OperateProOrder[i].cmd == C_LABEL)
+                                {
+                                    P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[i].pData;
+                                    if(LabelStruct1->labelNum == temp_labelNum1 && LabelStruct1->type == 1)
+                                    {//删除标签指令之前，先判断该标签是否有跳转标签指令
+                                        JumpLabelFlag = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if(JumpLabelFlag == true)
+                            {
+                                int reply =  MainWindow::pMainWindow->showErrorTip(tr("该标签指令存在跳转标签指令，如果确认删除，对应的跳转标签指令也会删除！"));
+                                if (reply == QDialog::Accepted)
+                                {
+                                    JumpLabelFlag = false;
+                                    if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
+                                    {
+                                        MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+                                        return;
+                                    }
+                                    for(int i=0;i<m_OperateProOrderListNum;i++)
+                                    {
+                                        if(m_OperateProOrder[i].cmd == C_LABEL)
+                                        {
+                                            P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[i].pData;
+                                            if(LabelStruct1->labelNum == temp_labelNum1 && LabelStruct1->type == 1)
+                                            {//删除标签指令之前，先判断该标签是否有跳转标签指令
+                                                CurrentLableNameList.removeAt(temp_labelNum-1);
+                                                if(g_ProOrderOperate(m_OperateProNum,i,1,0) != 0)
+                                                {
+                                                    MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                CurrentLableNameList.removeAt(temp_labelNum-1);
+                                if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
+                                {
+                                    MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+                                    return;
+                                }
+                            }
                         }
-                        else
+                        else if(LabelStruct->type == 1)
                         {
-                            MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                            return;
+                            if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
+                            {
+                                MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+                                return;
+                            }
                         }
+
+                        Refresh_listWgtJumpto();
+                        listWgtJumptoLabelIndex = 0;
                     }
                     else
                     {
@@ -2686,12 +2742,12 @@ void Teach::OrderSaveHandel()
                     uint16_t LabelIndex = ReturnLableListIndex(LabelStruct->labelNum);
                     if(LabelIndex>0)
                     {
-                        int spaceIndex = CurrentLableNameList[LabelIndex].indexOf(' ');
+                        int spaceIndex = CurrentLableNameList[LabelIndex-1].indexOf(' ');
                         if (spaceIndex != -1) { // 如果找到了空格
                             // 替换空格之后的内容
                             QString revise_Text = ui->label_Edit->text();
-                            QString clearedText = CurrentLableNameList[LabelIndex].left(spaceIndex + 1); // 保留包括空格在内的左侧部分
-                            CurrentLableNameList[LabelIndex]=clearedText+revise_Text;
+                            QString clearedText = CurrentLableNameList[LabelIndex-1].left(spaceIndex + 1); // 保留包括空格在内的左侧部分
+                            CurrentLableNameList[LabelIndex-1]=clearedText+revise_Text;
                         }
                     }
                 }
@@ -4899,7 +4955,7 @@ void Teach::OrderEdit_Handle()
                 uint16_t ListIndex = ReturnLableListIndex(LabelStruct->labelNum);
                 if(ListIndex>0)
                 {
-                    QStringList labelText = CurrentLableNameList[ListIndex].split(signalSpace);
+                    QStringList labelText = CurrentLableNameList[ListIndex-1].split(signalSpace);
                     if(labelText.length()>1)
                     {
                         ui->label_Edit->setText(labelText[1]);

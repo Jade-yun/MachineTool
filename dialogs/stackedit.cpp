@@ -742,6 +742,13 @@ void StackEdit::retranslate()
 
 }
 
+void StackEdit::showEvent(QShowEvent *event)
+{
+    stack[groupIndex]->syncParaToUI();
+
+    QWidget::showEvent(event);
+}
+
 void StackEdit::saveInfoConnections()
 {
     connect(ui->coboxStackOrder, QOverload<int>::of(&QComboBox::activated), this, [=](int ){

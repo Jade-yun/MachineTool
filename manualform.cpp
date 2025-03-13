@@ -816,11 +816,65 @@ void ManualForm::setupGuidePointConnections(DraggableButton *btn)
             {
 
             }
-            else if(para.keyType == 2)
-            {
+//            else if(para.keyType == 2)
+//            {
+//                int axisIndex = para.portNum;
+//                int direct = para.status == 1 ? 1 : 2;
+//                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT, axisIndex, direct);
+//            }
+        }
+    });
+    connect(btn, &DraggableButton::pressed, this, [this, btn]() {
+        // Retrieve guide information from the guidePoints map
+        const auto it = guidePoints.find(btn);
+        if (it != guidePoints.end()) {
+            const GuidePara& para = it.value();
+
+            qDebug() << "keyType:" << para.keyType << ",port:" << para.portNum << ",status:" << para.status;
+
+            // 0阀输出 1输出 2轴
+            if(para.keyType == 2)
+            {//如果是轴输出，需要长按移动，松开停止
                 int axisIndex = para.portNum;
                 int direct = para.status == 1 ? 1 : 2;
-                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT, axisIndex, direct);
+               if(axisIndex>0)
+               {
+                   if(m_AxisPar[m_KeyFunc[axisIndex-1].funcNum-1].axisType == 1)
+                   {
+                       g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, axisIndex, direct);
+                   }
+               }
+               else
+               {
+                   qDebug()<<tr("操作索引按键轴编号有误！");
+               }
+            }
+        }
+    });
+    connect(btn, &DraggableButton::released, this, [this, btn]() {
+        // Retrieve guide information from the guidePoints map
+        const auto it = guidePoints.find(btn);
+        if (it != guidePoints.end()) {
+            const GuidePara& para = it.value();
+
+            qDebug() << "keyType:" << para.keyType << ",port:" << para.portNum << ",status:" << para.status;
+
+            // 0阀输出 1输出 2轴
+            if(para.keyType == 2)
+            {//如果是轴输出，需要长按移动，松开停止
+                int axisIndex = para.portNum;
+                int direct = 0;//按键松开时停止轴移动
+               if(axisIndex>0)
+               {
+                   if(m_AxisPar[m_KeyFunc[axisIndex-1].funcNum-1].axisType == 1)
+                   {
+                       g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, axisIndex, direct);
+                   }
+               }
+               else
+               {
+                   qDebug()<<tr("操作索引按键轴编号有误！");
+               }
             }
         }
     });

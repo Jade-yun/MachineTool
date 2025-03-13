@@ -1080,7 +1080,7 @@ void Setting::setupNameDefine()
        {
            ErrorTipDialog tip(tr("导出成功!"), TipMode::ONLY_OK, nullptr);
            QTimer::singleShot(1000, [&](){
-              tip.accept();
+               tip.accept();
            });
            tip.exec();
        }

@@ -25166,7 +25166,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>481</height>
+         <height>482</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -26572,7 +26572,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>481</height>
+         <height>482</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -27950,7 +27950,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>481</height>
+         <height>482</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">

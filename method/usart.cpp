@@ -991,6 +991,12 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             len+=1;
             sendDataBuf[len] = (uint8_t)m_RunPar.breakPointList;
             sendDataBuf[len+1] = (uint8_t)(m_RunPar.breakPointList>>8);
+            len+=2;
+        }
+        else if(sunCmd == CMD_SUN_STA_CLEAR_ALARM)
+        {
+            len = 0;
+            sendDataBuf[len] = parNum;
             len+=1;
         }
     }
