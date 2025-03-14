@@ -156,6 +156,7 @@ void SigLEDEdit::mouseReleaseEvent(QMouseEvent *event)
         auto type_port = dialog.getSigTypeAndPortDefine();
         this->setSigTypeAndPort(type_port.first, type_port.second);
         this->setText(text);
+        emit returnPressed();
     }
 }
 

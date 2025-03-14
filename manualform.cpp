@@ -260,7 +260,7 @@ ManualForm::ManualForm(QWidget *parent) :
     StateButtonInit();//初始化相关状态按钮状态
 
     /*********************************操作指引逻辑********************************************/
-    connect(ui->editGuideKeyDef, &KeyEdit::saveKeyDef, this, &ManualForm::onSaveKeyDef);
+    connect(ui->editGuideKeyDef, &KeyEdit::returnPressed, this, &ManualForm::onSaveKeyDef);
 
     connect(ui->btnHideGuide, &QPushButton::toggled, this, [=](bool checked){
 

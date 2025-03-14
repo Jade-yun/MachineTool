@@ -3328,7 +3328,9 @@ void Setting::setupCommunicationConnections()
 
     //按键
     for (int i=0;i<OPR_KEY_NUM;i++) {
-        connect(keyEdits[i],&KeyEdit::textChanged,[=](const QString &text){
+        connect(keyEdits[i],&KeyEdit::returnPressed,[=](){
+            auto text = keyEdits[i]->text();
+
             saveKeyAndLEDFuncDefine();
             writeKeySetStrToConfig(i, text);
             keyFunDesription[i]=text;
@@ -3337,7 +3339,8 @@ void Setting::setupCommunicationConnections()
 
     //LED
     for (int i=0;i<OPR_LED_NUM;i++) {
-        connect(sigEdits[i],&SigLEDEdit::textChanged,[=](const QString &text){
+        connect(sigEdits[i],&SigLEDEdit::returnPressed,[=](){
+            auto text = sigEdits[i]->text();
             saveKeyAndLEDFuncDefine();
             writeSigSetStrToConfig(i, text);
             sigSetDesription[i]=text;
@@ -3571,13 +3574,13 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(onlineSafeWidgets[i].pluseTime,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::returnPressed,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].requestInNum,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].requestInNum,&QLineEdit::returnPressed,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::returnPressed,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
         connect(onlineSafeWidgets[i].a1A2MainPos,&NumberEdit::finishedInput,[=](){
@@ -3756,6 +3759,7 @@ void Setting::ParNeedSaveCheckConnectHandle()
 //切换界面时参数保存处理
 void Setting::SwitchPageParSaveHandle(ParSaveIndex SaveIndex)
 {
+
     switch(SaveIndex) {
     case ParSaveIndex::SavePort:
     {

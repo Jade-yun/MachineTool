@@ -154,6 +154,7 @@ void NumberEdit::mouseReleaseEvent(QMouseEvent *event)
         keyboard->setCurrentEditObj(this);
         if (keyboard->exec() == QDialog::Accepted){
             emit finishedInput();
+            emit returnPressed();
         }
     }
 }

@@ -947,6 +947,7 @@ void IOOnlineInEdit::mouseReleaseEvent(QMouseEvent *event)
         QString text = dialog.getIOOnlineIn();
         port = static_cast<uint8_t>(dialog.getInputPort());
         this->setText(text);
+        emit returnPressed();
     }
 }
 
@@ -976,6 +977,7 @@ void IOOnlineOutEdit::mouseReleaseEvent(QMouseEvent *event)
         QString text = dialog.getIOOnlineOut();
         port = static_cast<uint8_t>(dialog.getOutputPort());
         this->setText(text);
+        emit returnPressed();
     }
 }
 
@@ -1007,6 +1009,7 @@ void IOInEdit::mouseReleaseEvent(QMouseEvent *event)
         QString text = dialog.getIOOnlineIn();
         port = static_cast<uint8_t>(dialog.get_IOInEdit_InPort());
         this->setText(text);
+        emit returnPressed();
     }
 }
 
@@ -1036,6 +1039,7 @@ void IOOutEdit::mouseReleaseEvent(QMouseEvent *event)
         QString text = dialog.getIOOnlineOut();
         port = static_cast<uint8_t>(dialog.get_IOInEdit_OutPort());
         this->setText(text);
+        emit returnPressed();
     }
 }
 
@@ -1072,5 +1076,6 @@ void IOOnlineSearchStopEdit::mouseReleaseEvent(QMouseEvent *event)
         port = static_cast<uint8_t>(dialog.getSearchStopInPort());
         portState = static_cast<uint8_t>(dialog.getSearchStopPortState());
         this->setText(text);
+        emit returnPressed();
     }
 }

@@ -283,6 +283,7 @@ void KeyEdit::mouseReleaseEvent(QMouseEvent *event)
         this->setKeyFunc(keyFunc.keyType, keyFunc.portNum, keyFunc.funcStatus);
         this->setText(expression);
         emit saveKeyDef();
+        emit returnPressed();
     }
 }
 

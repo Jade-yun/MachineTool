@@ -504,6 +504,7 @@ void StackEdit::syncParaToUI()
         offset[i]->setText(QString::number((double)m_StackInfo[groupIndex].offsetDis[i] / 100, 'f', 2));
     }
     ui->editIntervalDis->setText(QString::number((double)m_StackInfo[groupIndex].intevalDis[2] / 100, 'f', 2));
+    ui->coboxStackDirect->setCurrentIndex(m_StackInfo[groupIndex].stackDir[2]);
 }
 
 StackEdit::StackEdit(int groupIndex, QWidget *parent) :
@@ -779,13 +780,19 @@ void StackEdit::saveInfoConnections()
 //#begin
     /*********************普通模式和三点/四点式下共有的参数**********************************/
     connect(ui->coboxStackDirect, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
-        stackDirect[2]->setCurrentIndex(index);
-        saveStackBasicInfo();
+        m_StackInfo[groupIndex].stackDir[2] = index;
+
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,groupIndex+1);
+        QThread::msleep(10);
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_SET);
+        setStackInfo(m_StackInfo[groupIndex],groupIndex);
     });
     connect(ui->editIntervalDis, &NumberEdit::finishedInput,[=](){
-        auto value = ui->editIntervalDis->text();
-        intervalDis[2]->setText(value);
-        saveStackPointPosInfo();
+        auto value = ui->editIntervalDis->text().toInt();
+        m_StackInfo[groupIndex].intevalDis[2] = value;
+
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,groupIndex+1);
+        setStackInfo(m_StackInfo[groupIndex],groupIndex);
     });
 
     for (int i = 0; i < STACK_AXIS_NUM; i++)
