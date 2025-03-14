@@ -247,6 +247,9 @@ void readIniPara()
     updateAdvancedFuncPortFlag();
     updateInterLockPortFlag();
     updateAxidParameterPortFlag();
+
+    //读取自动界面需要存储的参数
+    getAutoPagePar();
 }
 
 void updateInterLockPortFlag()

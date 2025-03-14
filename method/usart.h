@@ -153,6 +153,11 @@ extern AxisCurPos m_AxisCurPos;
 #define CMD_SUN_MANUAL_UPGRADE_CONTROL                          0x07        //主控板升级控制指令
 #define CMD_SUN_MANUAL_UPGRADE_DATE                              0x08        //主控板升级数据指令
 #define CMD_SUN_SYSDATA_FINISH                                   0x09        //开机参数同步完成下发
+#define CMD_SUN_PAR_RESET                                        0x0A        //自动界面参数清零
+#define CMD_SUN_ROTAT_SILO_SET                                   0x0B        //旋转料仓设置指令
+#define CMD_SUN_VAR_AUTO_RESET                                   0x0C        //启动自动时变量清零
+#define CMD_SUN_VAR_POWER_OFF_MEMORY                             0x0D        //变量断电记忆设置
+
 //程序编辑
 #define CMD_MAIN_PRO												0x15      	//程序编辑
 #define CMD_SUN_PRO_INFO										0x01      	//程序信息读写

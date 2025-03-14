@@ -315,7 +315,7 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QGroupBox" name="groupBox_3">
+          <widget class="QGroupBox" name="Silo_GroupBox">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -342,7 +342,7 @@
                </widget>
               </item>
               <item row="0" column="1">
-               <widget class="QLineEdit" name="lineEdit">
+               <widget class="NumberEdit" name="EditSilo_Number">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -359,7 +359,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QLineEdit" name="lineEdit_2">
+               <widget class="NumberEdit" name="EditStackGroup1">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -376,7 +376,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QLineEdit" name="lineEdit_3">
+               <widget class="NumberEdit" name="EditStackGroup2">
                 <property name="minimumSize">
                  <size>
                   <width>0</width>
@@ -406,7 +406,7 @@
             <item>
              <layout class="QVBoxLayout" name="verticalLayout">
               <item>
-               <widget class="QCheckBox" name="chboxStack3_2">
+               <widget class="QCheckBox" name="chboxSilo_Num">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                   <horstretch>120</horstretch>
@@ -420,12 +420,12 @@
                  <bool>false</bool>
                 </property>
                 <property name="autoExclusive">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="chboxStack7_2">
+               <widget class="QCheckBox" name="chboxSiloInitPos">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                   <horstretch>120</horstretch>
@@ -439,12 +439,12 @@
                  <bool>false</bool>
                 </property>
                 <property name="autoExclusive">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="chboxStack11_2">
+               <widget class="QCheckBox" name="chboxSilo_Stay">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                   <horstretch>120</horstretch>
@@ -458,7 +458,7 @@
                  <bool>false</bool>
                 </property>
                 <property name="autoExclusive">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -517,6 +517,12 @@
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_9">
+         <property name="spacing">
+          <number>6</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QGroupBox" name="groupBox_4">
            <property name="sizePolicy">
@@ -535,8 +541,26 @@
             <string>启动自动时变量清零</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_4">
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="chboxVar5">
+            <property name="leftMargin">
+             <number>9</number>
+            </property>
+            <property name="topMargin">
+             <number>9</number>
+            </property>
+            <property name="rightMargin">
+             <number>9</number>
+            </property>
+            <property name="bottomMargin">
+             <number>9</number>
+            </property>
+            <property name="horizontalSpacing">
+             <number>6</number>
+            </property>
+            <property name="verticalSpacing">
+             <number>10</number>
+            </property>
+            <item row="0" column="3">
+             <widget class="QCheckBox" name="chboxVar4">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
@@ -550,7 +574,7 @@
                </size>
               </property>
               <property name="text">
-               <string>变量5</string>
+               <string>变量4</string>
               </property>
               <property name="checked">
                <bool>false</bool>
@@ -560,14 +584,8 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QCheckBox" name="chboxVar3">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>120</horstretch>
-                <verstretch>40</verstretch>
-               </sizepolicy>
-              </property>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="chboxVar9">
               <property name="minimumSize">
                <size>
                 <width>110</width>
@@ -575,13 +593,7 @@
                </size>
               </property>
               <property name="text">
-               <string>变量3</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
+               <string>变量9</string>
               </property>
              </widget>
             </item>
@@ -635,8 +647,8 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="chboxVar2">
+            <item row="1" column="3">
+             <widget class="QCheckBox" name="chboxVar8">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
@@ -650,7 +662,7 @@
                </size>
               </property>
               <property name="text">
-               <string>变量2</string>
+               <string>变量8</string>
               </property>
               <property name="checked">
                <bool>false</bool>
@@ -685,8 +697,8 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="3">
-             <widget class="QCheckBox" name="chboxVar4">
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="chboxVar5">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
@@ -700,7 +712,7 @@
                </size>
               </property>
               <property name="text">
-               <string>变量4</string>
+               <string>变量5</string>
               </property>
               <property name="checked">
                <bool>false</bool>
@@ -710,8 +722,8 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="3">
-             <widget class="QCheckBox" name="chboxVar8">
+            <item row="0" column="2">
+             <widget class="QCheckBox" name="chboxVar3">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>120</horstretch>
@@ -725,13 +737,129 @@
                </size>
               </property>
               <property name="text">
-               <string>变量8</string>
+               <string>变量3</string>
               </property>
               <property name="checked">
                <bool>false</bool>
               </property>
               <property name="autoExclusive">
                <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="chboxVar2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>120</horstretch>
+                <verstretch>40</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量2</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="chboxVar10">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量10</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="chboxVar11">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量11</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="chboxVar12">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量12</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chboxVar13">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量13</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="chboxVar14">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量14</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="chboxVar15">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量15</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="chboxVar16">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量16</string>
               </property>
              </widget>
             </item>
@@ -773,6 +901,9 @@
             <string>变量断电记忆</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_3">
+            <property name="verticalSpacing">
+             <number>10</number>
+            </property>
             <item row="0" column="0">
              <widget class="QCheckBox" name="chboxVar1_2">
               <property name="sizePolicy">
@@ -820,6 +951,44 @@
               </property>
               <property name="autoExclusive">
                <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="chboxVar5_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>120</horstretch>
+                <verstretch>40</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量5</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="chboxVar10_2">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量10</string>
               </property>
              </widget>
             </item>
@@ -873,14 +1042,8 @@
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="chboxVar5_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>120</horstretch>
-                <verstretch>40</verstretch>
-               </sizepolicy>
-              </property>
+            <item row="2" column="3">
+             <widget class="QCheckBox" name="chboxVar12_2">
               <property name="minimumSize">
                <size>
                 <width>110</width>
@@ -888,63 +1051,7 @@
                </size>
               </property>
               <property name="text">
-               <string>变量5</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="chboxVar6_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>120</horstretch>
-                <verstretch>40</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>变量6</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="QCheckBox" name="chboxVar7_2">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                <horstretch>120</horstretch>
-                <verstretch>40</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>110</width>
-                <height>40</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>变量7</string>
-              </property>
-              <property name="checked">
-               <bool>false</bool>
-              </property>
-              <property name="autoExclusive">
-               <bool>false</bool>
+               <string>变量12</string>
               </property>
              </widget>
             </item>
@@ -973,6 +1080,134 @@
               </property>
              </widget>
             </item>
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="chboxVar9_2">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量9</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="chboxVar6_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>120</horstretch>
+                <verstretch>40</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量6</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="2">
+             <widget class="QCheckBox" name="chboxVar11_2">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量11</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QCheckBox" name="chboxVar7_2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>120</horstretch>
+                <verstretch>40</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量7</string>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chboxVar13_2">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量13</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="chboxVar14_2">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量14</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QCheckBox" name="chboxVar15_2">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量15</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="3">
+             <widget class="QCheckBox" name="chboxVar16_2">
+              <property name="minimumSize">
+               <size>
+                <width>110</width>
+                <height>40</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>变量16</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -990,19 +1225,6 @@
           </spacer>
          </item>
         </layout>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -1049,6 +1271,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>NumberEdit</class>
+   <extends>QLineEdit</extends>
+   <header>customedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

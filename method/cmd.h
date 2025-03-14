@@ -1009,6 +1009,31 @@ typedef struct
     bool SaveMachineParaOrigin = 0;//机器参数-原点保存
 }NeedSaveSettingPar;
 
+//自动界面参数清零
+typedef struct
+{
+    uint8_t Product_Clear = 0;//产量清零
+    uint8_t Var_All_Clear = 0;//变量全部清零
+    uint8_t Stack_All_Clear = 0;//堆叠全部清零
+    uint8_t Stack_Group_Clear[STACK_TOTAL_NUM] = {0};//堆叠1-8组清零
+}AutoPageParReset;
+
+//自动界面清零弹窗-旋转料仓设置
+typedef struct
+{
+    uint8_t type = 0;        //0：料仓工位数指定 1：料仓初始位 2：料仓保持原位
+    uint16_t Silo_Number;    //料仓工位号
+    uint16_t Stack_Group1;   //堆叠1组
+    uint16_t Stack_Group2;   //堆叠2组
+}AutoPageRotat_Silo_Set;
+
+//自动界面变量
+typedef struct
+{
+    uint8_t StartReset[VAR_TOTAL_NUM] = {0};        //变量自动启动时清零 0：启动时不清零 1：启动时清零
+    uint8_t PowerOffMemory[VAR_TOTAL_NUM] = {0};    //变量断电记忆 0：断电不记忆 1：断电记忆
+}AutoPageVar;
+
 enum ParSaveIndex {
     SavePort=0,
     SaveNameDef,
@@ -1021,6 +1046,11 @@ enum ParSaveIndex {
     MachineParaStruct,//结构
     MachineParaOrigin//原点
 };
+
+extern AutoPageParReset m_AutoPageParReset;
+extern AutoPageRotat_Silo_Set m_AutoPageRotat_Silo_Set;
+extern AutoPageVar m_AutoPageVar;
+
 extern NeedSaveSettingPar M_SaveSetPar;
 
 extern MainUpdateStruct M_MainUpdate;//主控板升级结构体

@@ -1000,7 +1000,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
                 }
                 else
                 {
-                    if(m_RunPar.startRunLineNum == m_RunPar.breakPointList)
+                    if(m_ProRunInfo.proNum[m_OperateProNum] + 1 == m_RunPar.breakPointList)
                     {
                         if(m_RunPar.breakPointFlag == true)
                         {
@@ -1010,7 +1010,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
                             emit SetAutoRunIcon_Signal();
                         }
                     }
-                    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+                    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,1,m_RunPar.globalSpeed);
                 }
             }
             else
@@ -1475,7 +1475,7 @@ void MainWindow::m_RobotStateRefreash()
         m_RobotOriginState = 2;
     }
     //复位状态处理
-    if(m_RobotResetState != 2 && m_RobotOriginState == 2 && RobotResetPromptFlag == true)
+    if((m_RobotRunSta == MAC_STA_RESET || m_RobotRunSta == MAC_STA_RESET_ORDER) && m_RobotResetState != 2 && m_RobotOriginState == 2 && RobotResetPromptFlag == true)
     {
         if(!dlgErrorTip->isVisible())
         {

@@ -264,15 +264,62 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
             len += UPGRADE_ONE_FRAME_LENGTH;
             break;
         case CMD_SUN_SYSDATA_FINISH:
+        {
+            len=0;
+            sendDataBuf[len] = 0;//随机数暂时不要设置，默认发送0
+            sendDataBuf[len+1] = 0;
+            sendDataBuf[len+2] = 0;
+            sendDataBuf[len+3] = 0;
+            len+=4;
+            break;
+        }
+        case CMD_SUN_PAR_RESET:
+        {
+            len = 0;
+            sendDataBuf[len] = m_AutoPageParReset.Product_Clear;
+            sendDataBuf[len+1] = m_AutoPageParReset.Var_All_Clear;
+            sendDataBuf[len+2] = m_AutoPageParReset.Stack_All_Clear;
+            len+=3;
+            for(int i=0;i<STACK_TOTAL_NUM;i++)
             {
-                len=0;
-                sendDataBuf[len] = 0;//随机数暂时不要设置，默认发送0
-                sendDataBuf[len+1] = 0;
-                sendDataBuf[len+2] = 0;
-                sendDataBuf[len+3] = 0;
-                len+=4;
-                break;
+                sendDataBuf[len+i] = m_AutoPageParReset.Stack_Group_Clear[i];
             }
+            len+=STACK_TOTAL_NUM;
+            break;
+        }
+        case CMD_SUN_ROTAT_SILO_SET:
+        {
+            len = 0;
+            sendDataBuf[len] = m_AutoPageRotat_Silo_Set.type;
+            sendDataBuf[len+1] = (uint8_t)m_AutoPageRotat_Silo_Set.Silo_Number;
+            sendDataBuf[len+2] = (uint8_t)(m_AutoPageRotat_Silo_Set.Silo_Number>>8);
+            sendDataBuf[len+3] = (uint8_t)m_AutoPageRotat_Silo_Set.Stack_Group1;
+            sendDataBuf[len+4] = (uint8_t)(m_AutoPageRotat_Silo_Set.Stack_Group1>>8);
+            sendDataBuf[len+5] = (uint8_t)m_AutoPageRotat_Silo_Set.Stack_Group2;
+            sendDataBuf[len+6] = (uint8_t)(m_AutoPageRotat_Silo_Set.Stack_Group2>>8);
+            len+=7;
+            break;
+        }
+        case CMD_SUN_VAR_AUTO_RESET:
+        {
+            len = 0;
+            for(int i=0;i<VAR_TOTAL_NUM;i++)
+            {
+                sendDataBuf[len+i] = m_AutoPageVar.StartReset[i];
+            }
+            len+=VAR_TOTAL_NUM;
+            break;
+        }
+        case CMD_SUN_VAR_POWER_OFF_MEMORY:
+        {
+            len = 0;
+            for(int i=0;i<VAR_TOTAL_NUM;i++)
+            {
+                sendDataBuf[len+i] = m_AutoPageVar.PowerOffMemory[i];
+            }
+            len+=VAR_TOTAL_NUM;
+            break;
+        }
         default:
             break;
         }

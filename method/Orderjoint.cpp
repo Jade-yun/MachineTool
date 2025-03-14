@@ -1350,7 +1350,7 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
 #endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
 
-        if(LogicIf->sufferCmpType[IfIndex] == 0)
+        if(LogicIf->sufferCmpType[IfIndex] == 101)
         {//被比较对象类型-位置
             LogicIfStr = LogicIfStr+QString::number(sufferCmpValue/100,'f',2);
         }

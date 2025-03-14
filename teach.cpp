@@ -3295,7 +3295,7 @@ void Teach::Edit_ifOrder_Save_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex)
     else if(ui->stkWgtIf->currentWidget() == ui->pageAxisPosIf)
     {//轴
         LogicIf->cmpMode[IfIndex] = ui->coboxOperatorAxisPos->currentIndex();
-        if(LogicIf->sufferCmpType[IfIndex] == 0)
+        if(LogicIf->sufferCmpType[IfIndex] == 101)
         {
             LogicIf->sufferCmpValue[IfIndex] = ui->editAxisPos->text().toDouble()*100;
         }
@@ -5599,12 +5599,12 @@ void Teach::Edit_ifOrder_handle(P_LogicIfStruct* LogicIf,uint8_t IfIndex)
         ui->coboxAxisDisplay->setCurrentIndex(LogicIf->cmpType[IfIndex]-61);
         ui->coboxAxisDisplay->setEnabled(false);
         ui->coboxOperatorAxisPos->setCurrentIndex(LogicIf->cmpMode[IfIndex]);
-        if(LogicIf->sufferCmpType[IfIndex] == 0)
+        if(LogicIf->sufferCmpType[IfIndex] == 101)
         {
             ui->editAxisPos->show();
             ui->coboxVarSelectAxisPos->hide();
             ui->coboxAxisDisplay_2->hide();
-            ui->editAxisPos->setText(QString::number(LogicIf->sufferCmpValue[IfIndex],'f',2));
+            ui->editAxisPos->setText(QString::number(((double)LogicIf->sufferCmpValue[IfIndex])/100,'f',2));
         }
         else if(LogicIf->sufferCmpType[IfIndex]>=1 && LogicIf->sufferCmpType[IfIndex]<=20)
         {

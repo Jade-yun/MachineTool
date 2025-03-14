@@ -2375,34 +2375,50 @@ void Setting::updateSafeAreaPage(int index)
     {
         if(index == 0){
             ui->grboxXYParaSA1->setEnabled(true);
+            ui->grboxZAxisMachineParaSA1->setEnabled(true);
+            ui->grboxZAxisStockBinParaSA1->setEnabled(true);
         }else if(index == 1)
         {
             ui->grboxXYParaSA1_2->setEnabled(true);
+            ui->grboxZAxisMachineParaSA1_2->setEnabled(true);
+            ui->grboxZAxisStockBinParaSA1_2->setEnabled(true);
         }
         else if(index == 2)
         {
             ui->grboxXYParaSA1_3->setEnabled(true);
+            ui->grboxZAxisMachineParaSA1_3->setEnabled(true);
+            ui->grboxZAxisStockBinParaSA1_3->setEnabled(true);
         }
         else if(index == 3)
         {
             ui->grboxXYParaSA1_4->setEnabled(true);
+            ui->grboxZAxisMachineParaSA1_4->setEnabled(true);
+            ui->grboxZAxisStockBinParaSA1_4->setEnabled(true);
         }
     }
     else
     {
         if(index == 0){
             ui->grboxXYParaSA1->setEnabled(false);
+            ui->grboxZAxisMachineParaSA1->setEnabled(false);
+            ui->grboxZAxisStockBinParaSA1->setEnabled(false);
         }else if(index == 1)
         {
             ui->grboxXYParaSA1_2->setEnabled(false);
+            ui->grboxZAxisMachineParaSA1_2->setEnabled(false);
+            ui->grboxZAxisStockBinParaSA1_2->setEnabled(false);
         }
         else if(index == 2)
         {
             ui->grboxXYParaSA1_3->setEnabled(false);
+            ui->grboxZAxisMachineParaSA1_3->setEnabled(false);
+            ui->grboxZAxisStockBinParaSA1_3->setEnabled(false);
         }
         else if(index == 3)
         {
             ui->grboxXYParaSA1_4->setEnabled(false);
+            ui->grboxZAxisMachineParaSA1_4->setEnabled(false);
+            ui->grboxZAxisStockBinParaSA1_4->setEnabled(false);
         }
     }
     // X 轴
@@ -2530,18 +2546,108 @@ void Setting::updateSafeAreaPage(int index)
         if(servoPointSafeArea.at(index).axisSelect[2]->count()>0)
         {
             servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(0);
+            if(index == 0){
+                ui->editMachinInsideHeightSA1->setEnabled(false);
+                ui->editMachineZMaxFallPosSA1->setEnabled(false);
+                ui->editMaxWaitPosSA1->setEnabled(false);
+                ui->editMaxStartPosSA1->setEnabled(false);
+                ui->editStockBinZMaxFallPosSA1->setEnabled(false);
+            }else if(index == 1)
+            {
+                ui->editMachinInsideHeightSA1_2->setEnabled(false);
+                ui->editMachineZMaxFallPosSA1_2->setEnabled(false);
+                ui->editMaxWaitPosSA1_2->setEnabled(false);
+                ui->editMaxStartPosSA1_2->setEnabled(false);
+                ui->editStockBinZMaxFallPosSA1_2->setEnabled(false);
+            }
+            else if(index == 2)
+            {
+                ui->editMachinInsideHeightSA1_3->setEnabled(false);
+                ui->editMachineZMaxFallPosSA1_3->setEnabled(false);
+                ui->editMaxWaitPosSA1_3->setEnabled(false);
+                ui->editMaxStartPosSA1_3->setEnabled(false);
+                ui->editStockBinZMaxFallPosSA1_3->setEnabled(false);
+            }
+            else if(index == 3)
+            {
+                ui->editMachinInsideHeightSA1_4->setEnabled(false);
+                ui->editMachineZMaxFallPosSA1_4->setEnabled(false);
+                ui->editMaxWaitPosSA1_4->setEnabled(false);
+                ui->editMaxStartPosSA1_4->setEnabled(false);
+                ui->editStockBinZMaxFallPosSA1_4->setEnabled(false);
+            }
         }
     }
     else if (zAxis == 3) {
         if(servoPointSafeArea.at(index).axisSelect[2]->count()>1)
         {
             servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(1);
+            if(index == 0){
+                ui->editMachinInsideHeightSA1->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1->setEnabled(true);
+                ui->editMaxWaitPosSA1->setEnabled(true);
+                ui->editMaxStartPosSA1->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1->setEnabled(true);
+            }else if(index == 1)
+            {
+                ui->editMachinInsideHeightSA1_2->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1_2->setEnabled(true);
+                ui->editMaxWaitPosSA1_2->setEnabled(true);
+                ui->editMaxStartPosSA1_2->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1_2->setEnabled(true);
+            }
+            else if(index == 2)
+            {
+                ui->editMachinInsideHeightSA1_3->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1_3->setEnabled(true);
+                ui->editMaxWaitPosSA1_3->setEnabled(true);
+                ui->editMaxStartPosSA1_3->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1_3->setEnabled(true);
+            }
+            else if(index == 3)
+            {
+                ui->editMachinInsideHeightSA1_4->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1_4->setEnabled(true);
+                ui->editMaxWaitPosSA1_4->setEnabled(true);
+                ui->editMaxStartPosSA1_4->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1_4->setEnabled(true);
+            }
         }
     }
     else if (zAxis == 6) {
         if(servoPointSafeArea.at(index).axisSelect[2]->count()>2)
         {
             servoPointSafeArea.at(index).axisSelect[2]->setCurrentIndex(2);
+            if(index == 0){
+                ui->editMachinInsideHeightSA1->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1->setEnabled(true);
+                ui->editMaxWaitPosSA1->setEnabled(true);
+                ui->editMaxStartPosSA1->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1->setEnabled(true);
+            }else if(index == 1)
+            {
+                ui->editMachinInsideHeightSA1_2->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1_2->setEnabled(true);
+                ui->editMaxWaitPosSA1_2->setEnabled(true);
+                ui->editMaxStartPosSA1_2->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1_2->setEnabled(true);
+            }
+            else if(index == 2)
+            {
+                ui->editMachinInsideHeightSA1_3->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1_3->setEnabled(true);
+                ui->editMaxWaitPosSA1_3->setEnabled(true);
+                ui->editMaxStartPosSA1_3->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1_3->setEnabled(true);
+            }
+            else if(index == 3)
+            {
+                ui->editMachinInsideHeightSA1_4->setEnabled(true);
+                ui->editMachineZMaxFallPosSA1_4->setEnabled(true);
+                ui->editMaxWaitPosSA1_4->setEnabled(true);
+                ui->editMaxStartPosSA1_4->setEnabled(true);
+                ui->editStockBinZMaxFallPosSA1_4->setEnabled(true);
+            }
         }
     }
 
@@ -3168,11 +3274,17 @@ void Setting::pageSwitchInit()
     };
 
     // Helper function to connect QComboBox index changes to QGroupBox enabling
-    auto connectAxisZ = [&](QComboBox* comboBox, QGroupBox* groupBox1, QGroupBox* groupBox2)
+    auto connectAxisZ = [&](QComboBox* comboBox, QGroupBox* groupBox1, QGroupBox* groupBox2,QLineEdit* edit1,
+            QLineEdit* edit2, QLineEdit* edit3, QLineEdit* edit4, QLineEdit* edit5)
     {
         connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
             groupBox1->setEnabled(index);
             groupBox2->setEnabled(index);
+            edit1->setEnabled(index);
+            edit2->setEnabled(index);
+            edit3->setEnabled(index);
+            edit4->setEnabled(index);
+            edit5->setEnabled(index);
         });
     };
 
@@ -3187,12 +3299,14 @@ void Setting::pageSwitchInit()
     connectAxisY(ui->coboxAxisYSA1, ui->labAxisYSelectSA1,
                  ui->editMachineA1AxisYSA1, ui->editMachineA2AxisYSA1,
                  ui->editStockBinB1AxisYSA1, ui->editStockBinB2AxisYSA1);
-    connectAxisZ(ui->coboxAxisZSA1, ui->grboxZAxisMachineParaSA1, ui->grboxZAxisStockBinParaSA1);
+    connectAxisZ(ui->coboxAxisZSA1, ui->grboxZAxisMachineParaSA1, ui->grboxZAxisStockBinParaSA1,
+                 ui->editMachinInsideHeightSA1,ui->editMachineZMaxFallPosSA1,ui->editMaxWaitPosSA1,
+                 ui->editMaxStartPosSA1,ui->editStockBinZMaxFallPosSA1);
 
     // 安全区2
     connectComboBoxToGroupBoxes(ui->coboxSafeArea1_2, ui->grboxAxisCombineSA1Arm2_2, ui->grboxXYParaSA1_2,
                                 ui->grboxZAxisMachineParaSA1_2, ui->grboxZAxisStockBinParaSA1_2,
-                                ui->coboxAxisZSA1_2->currentIndex() == 0);
+                                ui->coboxAxisZSA1_2->currentIndex() != 0);
     connectAxisX(ui->coboxAxisXSA1_2, ui->labAxisXSelectSA1_2, ui->labAxisCSelectSA1_2,
                  ui->editMachineA1AxisXSA1_2, ui->editMachineA2AxisXSA1_2,
                  ui->editStockBinB1AxisXSA1_2, ui->editStockBinB2AxisXSA1_2,
@@ -3200,12 +3314,14 @@ void Setting::pageSwitchInit()
     connectAxisY(ui->coboxAxisYSA1_2, ui->labAxisYSelectSA1_2,
                  ui->editMachineA1AxisYSA1_2, ui->editMachineA2AxisYSA1_2,
                  ui->editStockBinB1AxisYSA1_2, ui->editStockBinB2AxisYSA1_2);
-    connectAxisZ(ui->coboxAxisZSA1_2, ui->grboxZAxisMachineParaSA1_2, ui->grboxZAxisStockBinParaSA1_2);
+    connectAxisZ(ui->coboxAxisZSA1_2, ui->grboxZAxisMachineParaSA1_2, ui->grboxZAxisStockBinParaSA1_2,
+            ui->editMachinInsideHeightSA1_2,ui->editMachineZMaxFallPosSA1_2,ui->editMaxWaitPosSA1_2,
+            ui->editMaxStartPosSA1_2,ui->editStockBinZMaxFallPosSA1_2);
 
     // 安全区3
     connectComboBoxToGroupBoxes(ui->coboxSafeArea1_3, ui->grboxAxisCombineSA1Arm2_3, ui->grboxXYParaSA1_3,
                                 ui->grboxZAxisMachineParaSA1_3, ui->grboxZAxisStockBinParaSA1_3,
-                                ui->coboxAxisZSA1_3->currentIndex() == 0);
+                                ui->coboxAxisZSA1_3->currentIndex() != 0);
     connectAxisX(ui->coboxAxisXSA1_3, ui->labAxisXSelectSA1_3, ui->labAxisCSelectSA1_3,
                  ui->editMachineA1AxisXSA1_3, ui->editMachineA2AxisXSA1_3,
                  ui->editStockBinB1AxisXSA1_3, ui->editStockBinB2AxisXSA1_3,
@@ -3213,12 +3329,14 @@ void Setting::pageSwitchInit()
     connectAxisY(ui->coboxAxisYSA1_3, ui->labAxisYSelectSA1_3,
                  ui->editMachineA1AxisYSA1_3, ui->editMachineA2AxisYSA1_3,
                  ui->editStockBinB1AxisYSA1_3, ui->editStockBinB2AxisYSA1_3);
-    connectAxisZ(ui->coboxAxisZSA1_3, ui->grboxZAxisMachineParaSA1_3, ui->grboxZAxisStockBinParaSA1_3);
+    connectAxisZ(ui->coboxAxisZSA1_3, ui->grboxZAxisMachineParaSA1_3, ui->grboxZAxisStockBinParaSA1_3,
+                 ui->editMachinInsideHeightSA1_3,ui->editMachineZMaxFallPosSA1_3,ui->editMaxWaitPosSA1_3,
+                 ui->editMaxStartPosSA1_3,ui->editStockBinZMaxFallPosSA1_3);
 
     // 安全区4
     connectComboBoxToGroupBoxes(ui->coboxSafeArea1_4, ui->grboxAxisCombineSA1Arm2_4, ui->grboxXYParaSA1_4,
                                 ui->grboxZAxisMachineParaSA1_4, ui->grboxZAxisStockBinParaSA1_4,
-                                ui->coboxAxisZSA1_4->currentIndex() == 0);
+                                ui->coboxAxisZSA1_4->currentIndex() != 0);
     connectAxisX(ui->coboxAxisXSA1_4, ui->labAxisXSelectSA1_4, ui->labAxisCSelectSA1_4,
                  ui->editMachineA1AxisXSA1_4, ui->editMachineA2AxisXSA1_4,
                  ui->editStockBinB1AxisXSA1_4, ui->editStockBinB2AxisXSA1_4,
@@ -3226,7 +3344,9 @@ void Setting::pageSwitchInit()
     connectAxisY(ui->coboxAxisYSA1_4, ui->labAxisYSelectSA1_4,
                  ui->editMachineA1AxisYSA1_4, ui->editMachineA2AxisYSA1_4,
                  ui->editStockBinB1AxisYSA1_4, ui->editStockBinB2AxisYSA1_4);
-    connectAxisZ(ui->coboxAxisZSA1_4, ui->grboxZAxisMachineParaSA1_4, ui->grboxZAxisStockBinParaSA1_4);
+    connectAxisZ(ui->coboxAxisZSA1_4, ui->grboxZAxisMachineParaSA1_4, ui->grboxZAxisStockBinParaSA1_4,
+                 ui->editMachinInsideHeightSA1_4,ui->editMachineZMaxFallPosSA1_4,ui->editMaxWaitPosSA1_4,
+                 ui->editMaxStartPosSA1_4,ui->editStockBinZMaxFallPosSA1_4);
 
     auto setSafeAreaPic = [&](QComboBox* coboxAxisY, QLabel* labSafeAreaPic){
         connect(coboxAxisY, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
@@ -3513,6 +3633,7 @@ void Setting::ParNeedSaveCheckConnectHandle()
         SwitchPageParSaveHandle(ParSaveIndex::OnlineSafe);//联机安全
     });
 
+#if 0
     for (int i=0;i<static_cast<int>(clawSafeWidgets.size());i++)
     {//卡爪安全1～卡爪安全4
         connect(clawSafeWidgets[i].clawKeepoutSta,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
@@ -3586,7 +3707,81 @@ void Setting::ParNeedSaveCheckConnectHandle()
             M_SaveSetPar.OnlineSafe[i] = true;
         });
     }
+#else
+    for (int i=0;i<static_cast<int>(clawSafeWidgets.size());i++)
+    {//卡爪安全1～卡爪安全4
+        connect(clawSafeWidgets[i].clawKeepoutSta,QOverload<int>::of(&QComboBox::activated),[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].axisSelect_X,QOverload<int>::of(&QComboBox::activated),[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].axisSelect_Z,QOverload<int>::of(&QComboBox::activated),[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].clawKeepoutMinX,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].clawKeepoutMaxX,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].clawKeepoutHighZ,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutMinX,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutMaxX,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutHighZ,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutPosMinC,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutPosMaxC,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutNegMinC,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+        connect(clawSafeWidgets[i].cKeepoutNegMaxC,&QLineEdit::editingFinished,[=](){
+            M_SaveSetPar.ClawSafeFlag[i] = true;
+        });
+    }
 
+    for (int i=0;i<static_cast<int>(onlineSafeWidgets.size());i++)
+    {//联机安全1～联机安全4
+        connect(onlineSafeWidgets[i].mainSunMode,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].onlineSelect,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].axisNum,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].pluseTime,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].requestInNum,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].a1A2MainPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+        connect(onlineSafeWidgets[i].a1A2SunPos,&QLineEdit::textChanged,[=](){
+            M_SaveSetPar.OnlineSafe[i] = true;
+        });
+    }
+#endif
     /****伺服参数子界面****/
     connect(ui->tabWgtServoPara,&QTabWidget::currentChanged,this,[=](){
         SwitchPageParSaveHandle(ParSaveIndex::AllMachinePara);

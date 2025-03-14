@@ -151,7 +151,9 @@ CircularBuffer m_cb = {0};
 
 D_ManualAxis m_manualAxis = {0};
 D_ManualAdjust m_manualAdjust = {0};
-
+AutoPageParReset m_AutoPageParReset;
+AutoPageRotat_Silo_Set m_AutoPageRotat_Silo_Set;
+AutoPageVar m_AutoPageVar;
 // 初始化环形缓冲区
 void CircularBuffer_Init() {
     m_cb.buffer[BUFFER_SIZE]={0};

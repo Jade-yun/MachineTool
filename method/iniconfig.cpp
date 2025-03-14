@@ -1526,3 +1526,30 @@ void reloadTranslatePortDefInfo()
     }
     ::readPortDefInfo();
 }
+
+void setAutoPagePar()
+{
+    setValue("AutoPagePar","Silo_Type",m_AutoPageRotat_Silo_Set.type);
+    setValue("AutoPagePar","Silo_Number",m_AutoPageRotat_Silo_Set.Silo_Number);
+    setValue("AutoPagePar","Stack_Group1",m_AutoPageRotat_Silo_Set.Stack_Group1);
+    setValue("AutoPagePar","Stack_Group2",m_AutoPageRotat_Silo_Set.Stack_Group2);
+    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    {
+        setValue("AutoPagePar",QString("StartReset_%1").arg(i),m_AutoPageVar.StartReset[i]);
+        setValue("AutoPagePar",QString("PowerOffMemory_%1").arg(i),m_AutoPageVar.PowerOffMemory[i]);
+    }
+}
+
+void getAutoPagePar()
+{
+    m_AutoPageRotat_Silo_Set.type = getValue("AutoPagePar","Silo_Type",0);
+    m_AutoPageRotat_Silo_Set.Silo_Number = getValue("AutoPagePar","Silo_Number",0);
+    m_AutoPageRotat_Silo_Set.Stack_Group1 = getValue("AutoPagePar","Stack_Group1",0);
+    m_AutoPageRotat_Silo_Set.Stack_Group2 = getValue("AutoPagePar","Stack_Group2",0);
+    for(int i=0;i<VAR_TOTAL_NUM;i++)
+    {
+        m_AutoPageVar.StartReset[i] = getValue("AutoPagePar",QString("StartReset_%1").arg(i),0);
+        m_AutoPageVar.PowerOffMemory[i] = getValue("AutoPagePar",QString("PowerOffMemory_%1").arg(i),0);
+    }
+}
+

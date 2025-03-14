@@ -264,13 +264,24 @@ AutoForm::AutoForm(QWidget *parent) :
             clearDialog->setMode(ClearDialog::AutoState);
             if(clearDialog->exec() == QDialog::Accepted)
             {
-
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_PAR_RESET,0,0);
+                if(m_StackFunc.siloType == 1)
+                {//如果是旋转式料仓
+                    g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_ROTAT_SILO_SET,0,0);
+                }
+                setAutoPagePar();
             }
         }
         if (index == 1)
         {
             clearDialog->setMode(ClearDialog::VarState);
-            clearDialog->exec();
+            if(clearDialog->exec() == QDialog::Accepted)
+            {
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_VAR_AUTO_RESET,0,0);
+                QThread::msleep(5);
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_VAR_POWER_OFF_MEMORY,0,0);
+            }
+            setAutoPagePar();
         }
     });
 
@@ -406,9 +417,6 @@ void AutoForm::SetAutoRunParIcon(uint8_t type)
         m_RunPar.breakPointFlag = false;
         m_RunPar.breakPointList = 1;
         m_RunPar.breakPointProNum = 0;
-        m_RunPar.startRunLineFlag = false;
-        m_RunPar.startRunLineNum = 1;
-        m_RunPar.startRunLineProNum = 0;
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
         SetAutoRunIcon();
         break;
@@ -465,7 +473,7 @@ void AutoForm::SetAutoRunIcon()
 
         ui->labStartStep->show();
         ui->labStartStep0->show();
-        ui->labStartStep->setText(QString::number(m_CurrentSelectProOrderList+1));
+        ui->labStartStep->setText(QString::number(m_RunPar.startRunLineNum));
     }
     else
     {

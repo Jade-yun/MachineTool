@@ -526,7 +526,7 @@ void IfProgramDialog::setLogicStructPar(uint8_t page_index,uint8_t CondIndex)
         {
             Temp_LogicIfStruct.cmpType[CondIndex] = 61+AxisSelectIndex;//ui->coboxPosPreOpAxisSelect->currentIndex();//比较对象类型-61-80轴
             Temp_LogicIfStruct.cmpMode[CondIndex] = ui->coboxOperandPos->currentIndex();//比较方式
-            Temp_LogicIfStruct.sufferCmpType[CondIndex] = 0;//被比较对象类型-常量
+            Temp_LogicIfStruct.sufferCmpType[CondIndex] = 101;//被比较对象类型-位置
             Temp_LogicIfStruct.sufferCmpValue[CondIndex] = ui->editPosPostOp->text().toDouble()*100;//被比较对象值
         }
         else if (ui->chboxVariablePos->isChecked())

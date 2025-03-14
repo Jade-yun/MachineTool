@@ -179,6 +179,9 @@ extern D_ProgramNameAndPathStruct readPowerOnReadOneProInfo();
 void setProgramPermission(const QString& programName, int permission);
 int getProgramPermission(const QString& programName);
 
+//自动界面清零，变量参数存储
+extern void setAutoPagePar();
+extern void getAutoPagePar();
 /*****************命令相关参数保存*****************/
 extern QStringList fileSectionList;                        //程序保存节点
 extern QStringList programInfoList;                        //程序信息
