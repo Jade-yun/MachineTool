@@ -20,6 +20,7 @@ public:
     int getDecimalPlaces() const;
     QVariant getMinValue() const;
     QVariant getMaxValue() const;
+    QVariant getValue() const;
 
     QString formatInput(const QString& inputText) const;
 private slots:
@@ -29,7 +30,7 @@ signals:
     void finishedInput();
 
 private:
-    QString previousValue;
+    QVariant previousValue;
     QVariant value;
 
 protected:

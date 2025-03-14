@@ -8,11 +8,15 @@
 #include "mainwindow.h"
 QPointer<StackEdit> stack[8] = {nullptr};
 
-void StackEdit::initStackPara(QTableWidget* tableWidget)
+void StackEdit::initWidgets()
 {
+    QTableWidget* tableWidget = ui->tableStack;
     /******************创建表格********************************/
     tableWidget->setRowCount(9);
     tableWidget->setColumnCount(3);
+    ui->tableStack->setCornerButtonEnabled(true);
+    ui->tableStack->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableStack->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     for (int i = 0; i < 3; ++i)
     {
@@ -128,6 +132,19 @@ void StackEdit::initStackPara(QTableWidget* tableWidget)
     setEditPrecision_2({ui->editStart0, ui->editStart1, ui->editStart2,
                         ui->editIntervalDis0, ui->editIntervalDis1, ui->editIntervalDis2, ui->editIntervalDis,
                         ui->editOffset0, ui->editOffset1, ui->editOffset2});
+
+    for (auto cobox : findChildren<QComboBox*>())
+    {
+//        cobox->setView(new QListView(cobox));
+        cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    }
+
+    // 初始化时 ui 界面
+    ui->btnOK->setVisible(false);
+    ui->btnCancel->setVisible(false);
+    ui->coboxStackOrder->setCurrentIndex(1);
+    ui->coboxStackOrder->setCurrentIndex(0);
+    ui->stkWgtStackWay->setCurrentIndex(0);
 }
 
 void StackEdit::switchStackWay(StackMode mode)
@@ -515,24 +532,7 @@ StackEdit::StackEdit(int groupIndex, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->tableStack->setCornerButtonEnabled(true);
-    ui->tableStack->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-    ui->tableStack->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
-    initStackPara(ui->tableStack);
-
-    for (int i = 0; i < 3; i++)
-    {
-        connect(axisSelect[i], QOverload<int>::of(&QComboBox::currentIndexChanged), [=]() {
-            ui->tableStack->horizontalHeaderItem(i)->setText(axisSelect[i]->currentText());
-        });
-    }
-
-    ui->btnOK->setVisible(false);
-    ui->btnCancel->setVisible(false);
-    ui->coboxStackOrder->setCurrentIndex(1);
-    ui->coboxStackOrder->setCurrentIndex(0);
-
-    ui->stkWgtStackWay->setCurrentIndex(0);
+    initWidgets();
 
     connect(ui->btnOK, &QPushButton::clicked, [=](){
         saveStackBasicInfo();//保存参数
@@ -550,9 +550,6 @@ StackEdit::StackEdit(int groupIndex, QWidget *parent) :
     moveStack = new StackFollow;
     moveFollow = new StackFollow;
 
-//    connect(ui->btnMoveToStack, &QPushButton::clicked, moveStack, &StackFollow::exec);
-//    connect(ui->btnMoveToFollow, &QPushButton::clicked, moveFollow, &StackFollow::exec);
-
     connect(ui->btnMoveToStack, &QPushButton::clicked, moveStack,[=](){
         MoveStackFollowPoint.Stack_Type = 1;//移至堆叠点
         MoveStackFollowPoint.Stack_Index = groupIndex + 1;
@@ -565,16 +562,12 @@ StackEdit::StackEdit(int groupIndex, QWidget *parent) :
         emit StackFollowRefreshSignal();
         moveFollow->exec();
     });
-    connect(this,&StackEdit::emit StackFollowRefreshSignal,moveStack,&StackFollow::StackFollowInit);
-    connect(this,&StackEdit::emit StackFollowRefreshSignal,moveFollow,&StackFollow::StackFollowInit);
-    logicSigsSlots();
-//    saveInfoConnections();
 
-    for (auto cobox : findChildren<QComboBox*>())
-    {
-//        cobox->setView(new QListView(cobox));
-        cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
-    }
+    connect(this,&StackEdit::StackFollowRefreshSignal,moveStack,&StackFollow::StackFollowInit);
+    connect(this,&StackEdit::StackFollowRefreshSignal,moveFollow,&StackFollow::StackFollowInit);
+
+    logicSigsSlots();
+    saveInfoConnections();
 }
 
 StackEdit::~StackEdit()
@@ -608,58 +601,6 @@ void StackEdit::logicSigsSlots()
     {
         ui->labAxisRotateBin->setText(text);
     });
-#if 0
-/*****************此处为不同堆叠方式下两个界面的共用参数数据同步*******************************************/
-    // 0. 轴选择  共用
-    // 1. startPosA 起始  共用
-    // 2. intervalDis 共用（只有z轴在 三点式和四点式的模式下才有)
-    // 3. speed  共用
-    // 4. pointNum 个数  共用
-    // 5. offset 偏移
-    // 6. stackDirect 方向 共用（只有z轴在 三点式和四点式的模式下才有)
-    connect(axisSelect[0], QOverload<int>::of(&QComboBox::currentIndexChanged),
-            ui->coboxAxisSelect0, &QComboBox::setCurrentIndex);
-    connect(ui->coboxAxisSelect0, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            axisSelect[0], &QComboBox::setCurrentIndex);
-    connect(axisSelect[1], QOverload<int>::of(&QComboBox::currentIndexChanged),
-            ui->coboxAxisSelect1, &QComboBox::setCurrentIndex);
-    connect(ui->coboxAxisSelect1, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            axisSelect[1], &QComboBox::setCurrentIndex);
-    connect(axisSelect[2], QOverload<int>::of(&QComboBox::currentIndexChanged),
-            ui->coboxAxisSelect2, &QComboBox::setCurrentIndex);
-    connect(ui->coboxAxisSelect2, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            axisSelect[2], &QComboBox::setCurrentIndex);
-
-    connect(startPosA[0], &NumberEdit::textChanged, ui->editStart0, &NumberEdit::setText);
-    connect(ui->editStart0, &NumberEdit::textChanged, startPosA[0], &NumberEdit::setText);
-    connect(startPosA[1], &NumberEdit::textChanged, ui->editStart1, &NumberEdit::setText);
-    connect(ui->editStart1, &NumberEdit::textChanged, startPosA[1], &NumberEdit::setText);
-    connect(startPosA[2], &NumberEdit::textChanged, ui->editStart2, &NumberEdit::setText);
-    connect(ui->editStart2, &NumberEdit::textChanged, startPosA[2], &NumberEdit::setText);
-
-    connect(speed[0], &NumberEdit::textChanged, ui->editStackSpeed0, &NumberEdit::setText);
-    connect(ui->editStackSpeed0, &NumberEdit::textChanged, speed[0], &NumberEdit::setText);
-    connect(speed[1], &NumberEdit::textChanged, ui->editStackSpeed1, &NumberEdit::setText);
-    connect(ui->editStackSpeed1, &NumberEdit::textChanged, speed[1], &NumberEdit::setText);
-    connect(speed[2], &NumberEdit::textChanged, ui->editStackSpeed2, &NumberEdit::setText);
-    connect(ui->editStackSpeed2, &NumberEdit::textChanged, speed[2], &NumberEdit::setText);
-
-    connect(pointNum[0], &NumberEdit::textChanged, ui->editStackNum0, &NumberEdit::setText);
-    connect(ui->editStackNum0, &NumberEdit::textChanged, pointNum[0], &NumberEdit::setText);
-    connect(pointNum[1], &NumberEdit::textChanged, ui->editStackNum1, &NumberEdit::setText);
-    connect(ui->editStackNum1, &NumberEdit::textChanged, pointNum[1], &NumberEdit::setText);
-    connect(pointNum[2], &NumberEdit::textChanged, ui->editStackNum2, &NumberEdit::setText);
-    connect(ui->editStackNum2, &NumberEdit::textChanged, pointNum[2], &NumberEdit::setText);
-
-    // intervalDis 共用（只有z轴在 三点式和四点式的模式下才有)
-    connect(ui->editIntervalDis, &NumberEdit::textChanged, ui->editIntervalDis2, &NumberEdit::setText);
-//    connect(ui->editStackNum2, &NumberEdit::textChanged, ui->editIntervalDis2, &NumberEdit::setText);
-
-    connect(ui->coboxStackDirect, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            ui->coboxStackDirect2, &QComboBox::setCurrentIndex);
-    connect(ui->coboxStackDirect2, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            ui->coboxStackDirect, &QComboBox::setCurrentIndex);
-#endif
     /***********普通堆叠模式下参数变化导致构件使能变化和**********************/
 
     connect(ui->coboxAxisSelect0, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index) {
@@ -710,6 +651,14 @@ void StackEdit::logicSigsSlots()
         ui->editOffset2->setEnabled(!disable);
         ui->coboxStackDirect2->setEnabled(!disable);
     });
+
+    //
+    for (int i = 0; i < 3; i++)
+    {
+        connect(axisSelect[i], QOverload<int>::of(&QComboBox::currentIndexChanged), [=]() {
+            ui->tableStack->horizontalHeaderItem(i)->setText(axisSelect[i]->currentText());
+        });
+    }
 }
 
 void StackEdit::changeEvent(QEvent *e)
@@ -787,9 +736,9 @@ void StackEdit::saveInfoConnections()
         g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_SET);
         setStackInfo(m_StackInfo[groupIndex],groupIndex);
     });
-    connect(ui->editIntervalDis, &NumberEdit::finishedInput,[=](){
-        auto value = ui->editIntervalDis->text().toInt();
-        m_StackInfo[groupIndex].intevalDis[2] = value;
+    connect(ui->editIntervalDis, &NumberEdit::returnPressed,[=](){
+        auto value = ui->editIntervalDis->getValue().toFloat();
+        m_StackInfo[groupIndex].intevalDis[2] = static_cast<int32_t>(value * 100);
 
         g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,groupIndex+1);
         setStackInfo(m_StackInfo[groupIndex],groupIndex);
@@ -809,22 +758,22 @@ void StackEdit::saveInfoConnections()
                 saveStackBasicInfo();
             }
         });
-        connect(startPosA[i],&NumberEdit::finishedInput, [=](){
+        connect(startPosA[i],&NumberEdit::returnPressed, [=](){
             saveStackPointPosInfo();
         });
-        connect(startPosANormal[i],&NumberEdit::finishedInput, [=](){
+        connect(startPosANormal[i],&NumberEdit::returnPressed, [=](){
             saveStackPointPosInfo();
         });
-        connect(pointNum[i],&NumberEdit::finishedInput,[=](){
+        connect(pointNum[i],&NumberEdit::returnPressed,[=](){
             saveStackBasicInfo();
         });
-        connect(pointNumNormal[i],&NumberEdit::finishedInput,[=](){
+        connect(pointNumNormal[i],&NumberEdit::returnPressed,[=](){
             saveStackBasicInfo();
         });
-        connect(speed[i],&NumberEdit::finishedInput,[=](){
+        connect(speed[i],&NumberEdit::returnPressed,[=](){
             saveStackBasicInfo();
         });
-        connect(speedNormal[i],&NumberEdit::finishedInput,[=](){
+        connect(speedNormal[i],&NumberEdit::returnPressed,[=](){
             saveStackBasicInfo();
         });
         /*********************普通模式和三点/四点式下共有的参数**********************************/
@@ -836,25 +785,25 @@ void StackEdit::saveInfoConnections()
                 saveStackBasicInfo();
             }
         });
-        connect(speedDischage[i],&NumberEdit::finishedInput,[=](){
+        connect(speedDischage[i],&NumberEdit::returnPressed,[=](){
             saveStackBasicInfo();
         });
-        connect(endPosB_X[i],&NumberEdit::finishedInput,[=](){
+        connect(endPosB_X[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
         });
-        connect(endPosC_Y[i],&NumberEdit::finishedInput,[=](){
+        connect(endPosC_Y[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
         });
-        connect(posD[i],&NumberEdit::finishedInput,[=](){
+        connect(posD[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
         });
-        connect(startPosDischage[i],&NumberEdit::finishedInput,[=](){
+        connect(startPosDischage[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
         });
-        connect(intervalDis[i],&NumberEdit::finishedInput,[=](){
+        connect(intervalDis[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
         });
-        connect(offset[i],&NumberEdit::finishedInput,[=](){
+        connect(offset[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
         });
     }
@@ -904,7 +853,7 @@ StackFollow::StackFollow(QWidget *parent)
         table->setCellWidget(i, 0, nums[i]);
         objPos[i] = new QTableWidgetItem("");
         table->setItem(i, 1, objPos[i]);
-        connect(nums[i],&NumberEdit::finishedInput, this,[=](){
+        connect(nums[i],&NumberEdit::returnPressed, this,[=](){
             if(MoveStackFollowPoint.Stack_Index>0)
             {
                 if(nums[i]->text().toUInt()<1 || nums[i]->text().toUInt()>m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[i])

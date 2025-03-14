@@ -32,7 +32,7 @@ class StackFollow;
 class StackEdit : public QWidget
 {
     Q_OBJECT
-public:
+private:
     // 三点式/四点式 模式界面对应的控件
     QComboBox* axisSelect[3];
     NumberEdit* speed[3];
@@ -64,13 +64,11 @@ public:
     StackFollow* moveStack;
     StackFollow* moveFollow;
 
-    void initStackPara(QTableWidget* tableWidget);
+    void initWidgets();
 
 public:
     void switchStackWay(StackMode mode);
     void showOKandCancelButton(bool isVisible);
-
-    void saveInfoConnections();
 
 public slots:
     void saveStackBasicInfo();          //基础参数
@@ -87,6 +85,7 @@ public:
 private:
     void loadAndPlayGif(const QString& path);
     void logicSigsSlots();
+    void saveInfoConnections();
 
 protected:
     void changeEvent(QEvent *e) override;

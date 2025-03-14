@@ -14,7 +14,6 @@ NumberEdit::NumberEdit(QWidget *parent)
 
     previousValue = this->text();
 
-    connect(this, &NumberEdit::finishedInput, this, &NumberEdit::validateInput);
     connect(this, &NumberEdit::showRangeError, [=](const QString& message){
         ErrorTipDialog tip(message, TipMode::ONLY_OK);
         tip.exec();
@@ -53,6 +52,11 @@ QVariant NumberEdit::getMinValue() const
 QVariant NumberEdit::getMaxValue() const
 {
     return this->property("maxValue");
+}
+
+QVariant NumberEdit::getValue() const
+{
+    return this->value;
 }
 
 QString NumberEdit::formatInput(const QString& inputText) const
@@ -131,21 +135,18 @@ void NumberEdit::validateInput()
     if ((minValue.isValid() && value.toDouble() < minValue.toDouble()) ||
         (maxValue.isValid() && value.toDouble() > maxValue.toDouble()))
     {
-        this->setText(previousValue);
+        value = previousValue;
         emit showRangeError(QString("输入的值范围不能超过 %1 ~ %2, 请重新输入。")
                             .arg(minValue.toString())
                             .arg(maxValue.toString()));
     }
-    else
-    {
-        this->setText(value.toString());
-    }
+    this->setText(value.toString());
 }
 
 void NumberEdit::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
-    previousValue = this->text();
+    previousValue = value;
 
     NumKeyboard temp;
     NumKeyboard *keyboard = &temp;
@@ -153,8 +154,10 @@ void NumberEdit::mouseReleaseEvent(QMouseEvent *event)
         keyboard->clearText();
         keyboard->setCurrentEditObj(this);
         if (keyboard->exec() == QDialog::Accepted){
-            emit finishedInput();
+            validateInput();
+
             emit returnPressed();
+            emit finishedInput();
         }
     }
 }

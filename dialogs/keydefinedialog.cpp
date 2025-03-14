@@ -282,8 +282,8 @@ void KeyEdit::mouseReleaseEvent(QMouseEvent *event)
         auto keyFunc = dialog.getKeyFuncDefine();
         this->setKeyFunc(keyFunc.keyType, keyFunc.portNum, keyFunc.funcStatus);
         this->setText(expression);
-        emit saveKeyDef();
         emit returnPressed();
+        emit saveKeyDef();
     }
 }
 

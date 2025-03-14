@@ -1645,7 +1645,7 @@ void Setting::setupSystemSetting()
 
     // User Settings
     ui->editBrightTime->setInputRange(30, 65535);
-    connect(ui->editBrightTime, &NumberEdit::finishedInput, [=](){
+    connect(ui->editBrightTime, &NumberEdit::returnPressed, [=](){
         int second = ui->editBrightTime->text().toUInt();
         BackLighter::instance()->setScreenOffTime(second);
         m_SystemSet.backlightTime = second;
@@ -3482,10 +3482,6 @@ void Setting::setupCommunicationConnections()
     connect(ui->editRotateSiloPlaceNum,&NumberEdit::textChanged,[=](const QString &){
         saveStackFunc();
     });
-    for (int i = 0; i < 8; i++)
-    {
-        stack[i]->saveInfoConnections();
-    }
 //    QSignalMapper *outputTypeMapper = new QSignalMapper(this);
 //    for (int i=0;i<outputTypeList.count();i++)
 //    {
@@ -3528,34 +3524,34 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(clawSafeWidgets[i].axisSelect_Z,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].clawKeepoutMinX,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].clawKeepoutMinX,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].clawKeepoutMaxX,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].clawKeepoutMaxX,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].clawKeepoutHighZ,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].clawKeepoutHighZ,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutMinX,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].cKeepoutMinX,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutMaxX,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].cKeepoutMaxX,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutHighZ,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].cKeepoutHighZ,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutPosMinC,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].cKeepoutPosMinC,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutPosMaxC,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].cKeepoutPosMaxC,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutNegMinC,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].cKeepoutNegMinC,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutNegMaxC,&NumberEdit::finishedInput,[=](){
+        connect(clawSafeWidgets[i].cKeepoutNegMaxC,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
     }
@@ -3571,7 +3567,7 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(onlineSafeWidgets[i].axisNum,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].pluseTime,&NumberEdit::finishedInput,[=](){
+        connect(onlineSafeWidgets[i].pluseTime,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
         connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::returnPressed,[=](){
@@ -3583,10 +3579,10 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::returnPressed,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].a1A2MainPos,&NumberEdit::finishedInput,[=](){
+        connect(onlineSafeWidgets[i].a1A2MainPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].a1A2SunPos,&NumberEdit::finishedInput,[=](){
+        connect(onlineSafeWidgets[i].a1A2SunPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
     }
@@ -3603,19 +3599,19 @@ void Setting::ParNeedSaveCheckConnectHandle()
     }
     for(int i=0;i<AXIS_TOTAL_NUM;i++)
     {//轴参数
-        connect(machineParaWidgets.at(i).axisMinPos,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).axisMinPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).axisMaxPos,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).axisMaxPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).circlePluseNum,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).circlePluseNum,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).circleDis,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).circleDis,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).maxSpeed,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).maxSpeed,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
         connect(machineParaWidgets.at(i).coordDir,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
@@ -3644,70 +3640,70 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(servoPointSafeArea.at(i).axisSelect[2],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA1Pos[0],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machineA1Pos[0],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA1Pos[1],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machineA1Pos[1],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA1Pos[2],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machineA1Pos[2],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA2Pos[0],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machineA2Pos[0],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA2Pos[1],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machineA2Pos[1],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA2Pos[2],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machineA2Pos[2],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB1Pos[0],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).starckB1Pos[0],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB1Pos[1],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).starckB1Pos[1],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB2Pos[0],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).starckB2Pos[0],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB2Pos[1],&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).starckB2Pos[1],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machine_Z_WaitMaxPos,&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machine_Z_WaitMaxPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machine_Z_FallMaxPos,&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machine_Z_FallMaxPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machine_Z_InsideHigh,&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).machine_Z_InsideHigh,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).stack_Z_StartMaxPos,&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).stack_Z_StartMaxPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).stack_Z_FallMaxPos,&NumberEdit::finishedInput,[=](){
+        connect(servoPointSafeArea.at(i).stack_Z_FallMaxPos,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(toleranceList[0],&NumberEdit::finishedInput,[=](){
+        connect(toleranceList[0],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(toleranceList[1],&NumberEdit::finishedInput,[=](){
+        connect(toleranceList[1],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(toleranceList[2],&NumberEdit::finishedInput,[=](){
+        connect(toleranceList[2],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[0],&NumberEdit::finishedInput,[=](){
+        connect(horizontalPosList[0],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[1],&NumberEdit::finishedInput,[=](){
+        connect(horizontalPosList[1],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[2],&NumberEdit::finishedInput,[=](){
+        connect(horizontalPosList[2],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[3],&NumberEdit::finishedInput,[=](){
+        connect(horizontalPosList[3],&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
     }
@@ -3734,15 +3730,15 @@ void Setting::ParNeedSaveCheckConnectHandle()
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).findOriginSpeed,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).findOriginSpeed,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).leaveOriginSpeed,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).leaveOriginSpeed,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).originOffset,&NumberEdit::finishedInput,[=](){
+        connect(machineParaWidgets.at(i).originOffset,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 

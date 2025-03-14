@@ -319,7 +319,7 @@ ManualForm::ManualForm(QWidget *parent) :
             ui->chboxUseAdjustMachine->setChecked(true);
         }
     });
-    connect(ui->AdjustMachineSpace,&NumberEdit::finishedInput, this,[=](){//每转距离
+    connect(ui->AdjustMachineSpace,&NumberEdit::returnPressed, this,[=](){//每转距离
         for(int i=0;i<AXIS_TOTAL_NUM;i++)
         {
             if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
@@ -330,7 +330,7 @@ ManualForm::ManualForm(QWidget *parent) :
             }
         }
     });
-    connect(ui->AdjustMachineInternalPulse,&NumberEdit::finishedInput, this,[=](){//内部脉冲
+    connect(ui->AdjustMachineInternalPulse,&NumberEdit::returnPressed, this,[=](){//内部脉冲
         for(int i=0;i<AXIS_TOTAL_NUM;i++)
         {
             if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
