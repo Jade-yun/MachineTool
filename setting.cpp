@@ -1597,11 +1597,14 @@ void Setting::setupSystemSetting()
         chboxsLang.at(m_SystemSet.lan)->setChecked(true);
     }
 
+
+    static int lastLang = m_SystemSet.lan;
     for (int i = 0; i < chboxsLang.size(); i++)
     {
         auto chbox = chboxsLang[i];
-        connect(chbox, &QCheckBox::stateChanged, [this, i](int state){
-            if (state)
+        connect(chbox, &QCheckBox::clicked, [this, i](bool checked){
+            bool langChanged = (lastLang != i);
+            if (checked && langChanged)
             {
                 ErrorTipDialog tip(tr("确认切换语言？"), TipMode::NORMAL, nullptr);
                 int reply = tip.exec();
@@ -1609,6 +1612,7 @@ void Setting::setupSystemSetting()
                 if (reply == QDialog::Accepted)
                 {
                     m_SystemSet.lan = i;
+                    lastLang = i;
 
                     setSystemSet(m_SystemSet);
                     switchLangurage();
@@ -1641,10 +1645,8 @@ void Setting::setupSystemSetting()
 
     // User Settings
     ui->editBrightTime->setInputRange(30, 65535);
-    connect(ui->editBrightTime, &NumberEdit::textChanged, [=](const QString& val){
-        int second = val.toInt();
-        if (second < 30 && second > 65535)
-            return;
+    connect(ui->editBrightTime, &NumberEdit::finishedInput, [=](){
+        int second = ui->editBrightTime->text().toUInt();
         BackLighter::instance()->setScreenOffTime(second);
         m_SystemSet.backlightTime = second;
         ::setSystemSet(m_SystemSet);
@@ -2857,6 +2859,9 @@ void Setting::retranslate()
 {
     ui->retranslateUi(this);
 
+    // 需要重新同步参数
+    this->syncParaToUI();
+
     ui->tableWgtNote->setHorizontalHeaderLabels({ tr("标题") , tr("修改时间")});
     ui->treeWgt->setHeaderLabels({tr("菜单"), tr("操作员"), tr("管理员"), tr("高级"), tr("不可见")});
 
@@ -3520,50 +3525,50 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(clawSafeWidgets[i].axisSelect_Z,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].clawKeepoutMinX,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].clawKeepoutMinX,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].clawKeepoutMaxX,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].clawKeepoutMaxX,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].clawKeepoutHighZ,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].clawKeepoutHighZ,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutMinX,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].cKeepoutMinX,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutMaxX,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].cKeepoutMaxX,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutHighZ,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].cKeepoutHighZ,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutPosMinC,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].cKeepoutPosMinC,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutPosMaxC,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].cKeepoutPosMaxC,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutNegMinC,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].cKeepoutNegMinC,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
-        connect(clawSafeWidgets[i].cKeepoutNegMaxC,&QLineEdit::textChanged,[=](){
+        connect(clawSafeWidgets[i].cKeepoutNegMaxC,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.ClawSafeFlag[i] = true;
         });
     }
 
     for (int i=0;i<static_cast<int>(onlineSafeWidgets.size());i++)
     {//联机安全1～联机安全4
-        connect(onlineSafeWidgets[i].mainSunMode,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(onlineSafeWidgets[i].mainSunMode,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].onlineSelect,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(onlineSafeWidgets[i].onlineSelect,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].axisNum,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(onlineSafeWidgets[i].axisNum,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].pluseTime,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].pluseTime,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
         connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::textChanged,[=](){
@@ -3575,10 +3580,10 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::textChanged,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].a1A2MainPos,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].a1A2MainPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].a1A2SunPos,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].a1A2SunPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
     }
@@ -3595,19 +3600,19 @@ void Setting::ParNeedSaveCheckConnectHandle()
     }
     for(int i=0;i<AXIS_TOTAL_NUM;i++)
     {//轴参数
-        connect(machineParaWidgets.at(i).axisMinPos,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).axisMinPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).axisMaxPos,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).axisMaxPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).circlePluseNum,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).circlePluseNum,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).circleDis,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).circleDis,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).maxSpeed,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).maxSpeed,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
         connect(machineParaWidgets.at(i).coordDir,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
@@ -3636,70 +3641,70 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(servoPointSafeArea.at(i).axisSelect[2],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA1Pos[0],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machineA1Pos[0],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA1Pos[1],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machineA1Pos[1],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA1Pos[2],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machineA1Pos[2],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA2Pos[0],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machineA2Pos[0],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA2Pos[1],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machineA2Pos[1],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machineA2Pos[2],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machineA2Pos[2],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB1Pos[0],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).starckB1Pos[0],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB1Pos[1],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).starckB1Pos[1],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB2Pos[0],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).starckB2Pos[0],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).starckB2Pos[1],&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).starckB2Pos[1],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machine_Z_WaitMaxPos,&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machine_Z_WaitMaxPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machine_Z_FallMaxPos,&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machine_Z_FallMaxPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).machine_Z_InsideHigh,&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).machine_Z_InsideHigh,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).stack_Z_StartMaxPos,&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).stack_Z_StartMaxPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).stack_Z_FallMaxPos,&QLineEdit::textChanged,[=](){
+        connect(servoPointSafeArea.at(i).stack_Z_FallMaxPos,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(toleranceList[0],&QLineEdit::textChanged,[=](){
+        connect(toleranceList[0],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(toleranceList[1],&QLineEdit::textChanged,[=](){
+        connect(toleranceList[1],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(toleranceList[2],&QLineEdit::textChanged,[=](){
+        connect(toleranceList[2],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[0],&QLineEdit::textChanged,[=](){
+        connect(horizontalPosList[0],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[1],&QLineEdit::textChanged,[=](){
+        connect(horizontalPosList[1],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[2],&QLineEdit::textChanged,[=](){
+        connect(horizontalPosList[2],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
-        connect(horizontalPosList[3],&QLineEdit::textChanged,[=](){
+        connect(horizontalPosList[3],&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveServoSafePoint = true;
         });
     }
@@ -3726,15 +3731,15 @@ void Setting::ParNeedSaveCheckConnectHandle()
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).findOriginSpeed,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).findOriginSpeed,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).leaveOriginSpeed,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).leaveOriginSpeed,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).originOffset,&QLineEdit::textChanged,[=](){
+        connect(machineParaWidgets.at(i).originOffset,&NumberEdit::finishedInput,[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
@@ -5053,6 +5058,8 @@ bool Setting::eventFilter(QObject *watched, QEvent *event)
         ui->editSecond->setText(QString::number(second));
 
         ui->editSystemName->setText(m_SystemSet.sysName);
+        auto duration = m_SystemSet.backlightTime;
+        ui->editBrightTime->setText(QString::number(duration));
 
         const std::array<QCheckBox*, 5> chboxColor = {
             ui->chboxColorDefault, ui->chboxColorOriange, ui->chboxColorYellow, ui->chboxColorGreen, ui->chboxBrown

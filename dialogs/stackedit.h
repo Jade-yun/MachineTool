@@ -33,6 +33,7 @@ class StackEdit : public QWidget
 {
     Q_OBJECT
 public:
+    // 三点式/四点式 模式界面对应的控件
     QComboBox* axisSelect[3];
     NumberEdit* speed[3];
     NumberEdit* pointNum[3]; // 和个数等价
@@ -50,9 +51,15 @@ public:
     // 4. pointNum 个数  共用
     // 5. offset 偏移
     // 6. stackDirect 方向
-    QComboBox* stackDirect[3]; //0 从小到大  1 从大到小
+
+    // 普通模式界面对应的控件
+    QComboBox* axisSelectNormal[3];
+    NumberEdit* startPosANormal[3];
     NumberEdit* intervalDis[3];
+    NumberEdit* speedNormal[3];
+    NumberEdit* pointNumNormal[3];
     NumberEdit* offset[3];
+    QComboBox* stackDirect[3]; //0 从小到大  1 从大到小
 
     StackFollow* moveStack;
     StackFollow* moveFollow;
@@ -66,8 +73,10 @@ public:
     void saveInfoConnections();
 
 public slots:
-    void saveStackInfo1();          //基础参数
-    void saveStackInfo(int index);           //点位参数
+    void saveStackBasicInfo();          //基础参数
+    void saveStackPointPosInfo();           //点位参数
+    void saveRotateBinStackInfo(); // 保存旋转料仓模式下的堆叠参数
+
     void updateGroupIndex(int index);
     void StackAxisSelectQcomboboxRefresh();//堆叠轴选择框需要刷新
     void syncParaToUI();

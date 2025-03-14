@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -9032,7 +9032,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>
@@ -9501,7 +9501,7 @@ QPushButton::released{
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tabClawSafe1">
         <attribute name="title">
@@ -9563,7 +9563,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -9615,7 +9615,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -9652,7 +9652,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -9733,7 +9733,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -9785,7 +9785,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -9868,7 +9868,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -9920,7 +9920,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -9989,7 +9989,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -10041,7 +10041,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -10078,7 +10078,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
               <property name="clearButtonEnabled">
                <bool>false</bool>
@@ -10383,7 +10383,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -10432,7 +10432,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -10479,7 +10479,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -10556,7 +10556,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -10605,7 +10605,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -10639,7 +10639,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -10717,7 +10717,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -10766,7 +10766,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -10846,7 +10846,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -10895,7 +10895,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11199,7 +11199,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11248,7 +11248,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11282,7 +11282,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -11359,7 +11359,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11408,7 +11408,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11442,7 +11442,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -11520,7 +11520,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11569,7 +11569,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11649,7 +11649,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -11698,7 +11698,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12002,7 +12002,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12051,7 +12051,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12085,7 +12085,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -12162,7 +12162,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12211,7 +12211,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12245,7 +12245,7 @@ QPushButton::released{
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -12323,7 +12323,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12372,7 +12372,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12452,7 +12452,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -12501,7 +12501,7 @@ QPushButton::released{
                  </size>
                 </property>
                 <property name="text">
-                 <string>0.00</string>
+                 <string/>
                 </property>
                </widget>
               </item>
@@ -13211,7 +13211,7 @@ QPushButton::released{
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -13260,7 +13260,7 @@ QPushButton::released{
              </size>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -13420,7 +13420,7 @@ QPushButton::released{
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
         <widget class="QPushButton" name="btnOnlineSafe1">
@@ -13549,7 +13549,7 @@ QPushButton::released{
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="labAreaOutput_2">
@@ -13915,7 +13915,7 @@ QPushButton::released{
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -13964,7 +13964,7 @@ QPushButton::released{
              </size>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -14219,7 +14219,7 @@ QPushButton::released{
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="labAreaOutput_3">
@@ -14594,7 +14594,7 @@ QPushButton::released{
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -14643,7 +14643,7 @@ QPushButton::released{
              </size>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -14898,7 +14898,7 @@ QPushButton::released{
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
         <widget class="QLabel" name="labAreaOutput_4">
@@ -15273,7 +15273,7 @@ QPushButton::released{
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -15322,7 +15322,7 @@ QPushButton::released{
              </size>
             </property>
             <property name="text">
-             <string>0.00</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -15559,7 +15559,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15578,7 +15578,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15597,7 +15597,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15616,7 +15616,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15653,7 +15653,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15762,7 +15762,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15799,7 +15799,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15851,7 +15851,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15870,7 +15870,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15925,7 +15925,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -15991,7 +15991,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0.0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -16112,7 +16112,7 @@ QPushButton::released{
               </size>
              </property>
              <property name="text">
-              <string>1</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -16150,7 +16150,7 @@ QPushButton::released{
               </size>
              </property>
              <property name="text">
-              <string>1</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -16191,7 +16191,7 @@ QPushButton::released{
               </size>
              </property>
              <property name="text">
-              <string>1</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -17509,7 +17509,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>2024</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -17547,7 +17547,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>06</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -17585,7 +17585,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>06</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -17623,7 +17623,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>06</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -17661,7 +17661,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>06</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -17699,7 +17699,7 @@ QPushButton::released{
            </size>
           </property>
           <property name="text">
-           <string>0</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -21723,7 +21723,7 @@ font-weight: bold;
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -23770,7 +23770,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>471</height>
+         <height>488</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -24630,7 +24630,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24652,7 +24652,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24674,7 +24674,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24718,7 +24718,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24740,7 +24740,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24762,7 +24762,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24784,7 +24784,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24825,7 +24825,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24844,7 +24844,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24866,7 +24866,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -24933,7 +24933,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -24971,7 +24971,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -24990,7 +24990,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -25061,7 +25061,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -25118,7 +25118,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -25166,7 +25166,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>471</height>
+         <height>482</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -26014,7 +26014,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26036,7 +26036,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26058,7 +26058,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26102,7 +26102,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26124,7 +26124,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26146,7 +26146,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26168,7 +26168,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26209,7 +26209,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26228,7 +26228,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26250,7 +26250,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -26311,7 +26311,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -26349,7 +26349,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -26387,7 +26387,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -26458,7 +26458,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -26477,7 +26477,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -26572,7 +26572,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>471</height>
+         <height>482</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -27402,28 +27402,6 @@ font-weight: bold;
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="NumberEdit" name="editMachineA2AxisXSA1_3">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>0.00</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="3">
              <widget class="NumberEdit" name="editStockBinB1AxisXSA1_3">
               <property name="enabled">
@@ -27442,51 +27420,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="4">
-             <widget class="NumberEdit" name="editStockBinB2AxisXSA1_3">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>0.00</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="labAxisYSelectSA1_3">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>16777215</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>Y2轴</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -27508,51 +27442,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="2">
-             <widget class="NumberEdit" name="editMachineA2AxisYSA1_3">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>0.00</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="3">
-             <widget class="NumberEdit" name="editStockBinB1AxisYSA1_3">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>125</width>
-                <height>35</height>
-               </size>
-              </property>
-              <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -27574,7 +27464,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -27600,22 +27490,25 @@ font-weight: bold;
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
-             <widget class="NumberEdit" name="editMachineA1AxisCSA1_3">
+            <item row="1" column="0">
+             <widget class="QLabel" name="labAxisYSelectSA1_3">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="minimumSize">
                <size>
-                <width>125</width>
+                <width>0</width>
                 <height>35</height>
                </size>
               </property>
               <property name="maximumSize">
                <size>
-                <width>125</width>
+                <width>16777215</width>
                 <height>35</height>
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string>Y2轴</string>
               </property>
              </widget>
             </item>
@@ -27634,7 +27527,48 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="4">
+             <widget class="NumberEdit" name="editStockBinB2AxisXSA1_3">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="NumberEdit" name="editMachineA1AxisCSA1_3">
+              <property name="minimumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
               </property>
              </widget>
             </item>
@@ -27656,7 +27590,73 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="NumberEdit" name="editMachineA2AxisXSA1_3">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="NumberEdit" name="editMachineA2AxisYSA1_3">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3">
+             <widget class="NumberEdit" name="editStockBinB1AxisYSA1_3">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>125</width>
+                <height>35</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
               </property>
              </widget>
             </item>
@@ -27683,82 +27683,6 @@ font-weight: bold;
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
             </property>
             <layout class="QGridLayout" name="gridLayout_20">
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_490">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>最大待机位置</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="NumberEdit" name="editMachineZMaxFallPosSA1_3">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>0.00</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="NumberEdit" name="editMachinInsideHeightSA1_3">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>0.00</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="NumberEdit" name="editMaxWaitPosSA1_3">
-               <property name="minimumSize">
-                <size>
-                 <width>120</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>35</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>0.00</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_413">
                <property name="minimumSize">
@@ -27775,6 +27699,38 @@ font-weight: bold;
                </property>
                <property name="text">
                 <string>最大下降位置</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <spacer name="horizontalSpacer_39">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_490">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>最大待机位置</string>
                </property>
               </widget>
              </item>
@@ -27797,18 +27753,62 @@ font-weight: bold;
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <spacer name="horizontalSpacer_39">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
+             <item row="0" column="1">
+              <widget class="NumberEdit" name="editMaxWaitPosSA1_3">
+               <property name="minimumSize">
                 <size>
-                 <width>40</width>
-                 <height>20</height>
+                 <width>120</width>
+                 <height>35</height>
                 </size>
                </property>
-              </spacer>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="NumberEdit" name="editMachinInsideHeightSA1_3">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="NumberEdit" name="editMachineZMaxFallPosSA1_3">
+               <property name="minimumSize">
+                <size>
+                 <width>120</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>35</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -27849,6 +27849,19 @@ font-weight: bold;
                </property>
               </widget>
              </item>
+             <item row="0" column="2">
+              <spacer name="horizontalSpacer_40">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_493">
                <property name="minimumSize">
@@ -27883,7 +27896,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -27902,22 +27915,9 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
-             </item>
-             <item row="0" column="2">
-              <spacer name="horizontalSpacer_40">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
              </item>
             </layout>
            </widget>
@@ -27950,7 +27950,7 @@ font-weight: bold;
          <x>310</x>
          <y>0</y>
          <width>691</width>
-         <height>471</height>
+         <height>482</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -28806,7 +28806,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -28828,7 +28828,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -28850,7 +28850,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -28894,7 +28894,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -28916,7 +28916,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -28938,7 +28938,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -28960,7 +28960,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -29001,7 +29001,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -29020,7 +29020,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -29042,7 +29042,7 @@ font-weight: bold;
                </size>
               </property>
               <property name="text">
-               <string>0.00</string>
+               <string/>
               </property>
              </widget>
             </item>
@@ -29084,7 +29084,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -29103,7 +29103,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -29179,7 +29179,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -29231,7 +29231,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -29269,7 +29269,7 @@ font-weight: bold;
                 </size>
                </property>
                <property name="text">
-                <string>0.00</string>
+                <string/>
                </property>
               </widget>
              </item>
@@ -29391,7 +29391,7 @@ font-weight: bold;
            </size>
           </property>
           <property name="text">
-           <string>0.00</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -29436,7 +29436,7 @@ font-weight: bold;
            </size>
           </property>
           <property name="text">
-           <string>0.00</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -29474,7 +29474,7 @@ font-weight: bold;
            </size>
           </property>
           <property name="text">
-           <string>0.00</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -29499,7 +29499,7 @@ font-weight: bold;
            </size>
           </property>
           <property name="text">
-           <string>0.00</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -29524,7 +29524,7 @@ font-weight: bold;
            </size>
           </property>
           <property name="text">
-           <string>0.00</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -29543,7 +29543,7 @@ font-weight: bold;
            </size>
           </property>
           <property name="text">
-           <string>0.00</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -29562,7 +29562,7 @@ font-weight: bold;
            </size>
           </property>
           <property name="text">
-           <string>0.00</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -30229,7 +30229,7 @@ font-weight: bold;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>3</number>
      </property>
      <property name="iconSize">
       <size>

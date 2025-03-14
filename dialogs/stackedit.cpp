@@ -63,6 +63,21 @@ void StackEdit::initStackPara(QTableWidget* tableWidget)
         tableWidget->setCellWidget(8, i, startPosDischage[i]);
     }
 
+    axisSelectNormal[0] = ui->coboxAxisSelect0;
+    axisSelectNormal[1] = ui->coboxAxisSelect1;
+    axisSelectNormal[2] = ui->coboxAxisSelect2;
+
+    startPosANormal[0] = ui->editStart0;
+    startPosANormal[1] = ui->editStart1;
+    startPosANormal[2] = ui->editStart2;
+
+    speedNormal[0] = ui->editStackSpeed0;
+    speedNormal[1] = ui->editStackSpeed1;
+    speedNormal[2] = ui->editStackSpeed2;
+    pointNumNormal[0] = ui->editStackNum0;
+    pointNumNormal[1] = ui->editStackNum1;
+    pointNumNormal[2] = ui->editStackNum2;
+
     stackDirect[0] = ui->coboxStackDirect0;
     stackDirect[1] = ui->coboxStackDirect1;
     stackDirect[2] = ui->coboxStackDirect2;
@@ -237,7 +252,7 @@ void StackEdit::showOKandCancelButton(bool isVisible)
     ui->btnCancel->setVisible(isVisible);
 }
 
-void StackEdit::saveStackInfo1()
+void StackEdit::saveStackBasicInfo()
 {
     m_StackInfo[groupIndex].stackOrder = ui->coboxStackOrder->currentIndex();
     m_StackInfo[groupIndex].countMode = ui->coboxCountWay->currentIndex();
@@ -248,6 +263,14 @@ void StackEdit::saveStackInfo1()
     for (int i = 0; i < STACK_AXIS_NUM; i++)
     {
         int indexAsix=axisSelect[i]->currentIndex();
+        if (m_StackFunc.stackType == 0 || m_StackFunc.stackType == 1)
+        {
+            indexAsix = axisSelect[i]->currentIndex();
+        }
+        else if (m_StackFunc.stackType == 2)
+        {
+            indexAsix = axisSelectNormal[i]->currentIndex();
+        }
         switch (i)
         {
         case 0:
@@ -277,8 +300,18 @@ void StackEdit::saveStackInfo1()
             }
             break;
         }
-        m_StackInfo[groupIndex].axisSpeed[i] = speed[i]->text().toInt();
-        m_StackInfo[groupIndex].stackPointNum[i] = pointNum[i]->text().toInt();
+
+        if (m_StackFunc.stackType == 0 || m_StackFunc.stackType == 1)
+        {
+            m_StackInfo[groupIndex].axisSpeed[i] = speed[i]->text().toInt();
+            m_StackInfo[groupIndex].stackPointNum[i] = pointNum[i]->text().toInt();
+        }
+        else if (m_StackFunc.stackType == 2)
+        {
+            m_StackInfo[groupIndex].axisSpeed[i] = speedNormal[i]->text().toInt();
+            m_StackInfo[groupIndex].stackPointNum[i] = pointNumNormal[i]->text().toInt();
+        }
+
         m_StackInfo[groupIndex].stackDir[i] = stackDirect[i]->currentIndex();
         m_StackInfo[groupIndex].dischangeSpeed[i] = (uint8_t)(speedDischage[i]->text().toUInt());
     }
@@ -287,53 +320,19 @@ void StackEdit::saveStackInfo1()
     g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_SET);
     setStackInfo(m_StackInfo[groupIndex],groupIndex);
 }
-void StackEdit::saveStackInfo(int index)
+void StackEdit::saveStackPointPosInfo()
 {
-    m_StackInfo[groupIndex].stackOrder = ui->coboxStackOrder->currentIndex();
-    m_StackInfo[groupIndex].countMode = ui->coboxCountWay->currentIndex();
-    m_StackInfo[groupIndex].stackFinStopFlag = ui->coboxStopAfterStack->currentIndex();
-    m_StackInfo[groupIndex].groupLeaveBlank = ui->coboxLeaveBlank->currentIndex();
-    m_StackInfo[groupIndex].stackMoveMode = ui->checkBoxTriAxisUnion->isChecked() ? 1 : 0;
-
     for (int i = 0; i < STACK_AXIS_NUM; i++)
     {
-        int indexAsix=axisSelect[i]->currentIndex();
-        switch (i)
+        if (m_StackFunc.stackType == 0 || m_StackFunc.stackType == 1)
         {
-        case 0:
-            if(indexAsix==0)
-            {
-                m_StackInfo[groupIndex].axisSelect[i]=1;
-            }
-            break;
-        case 1:
-            if(indexAsix==0)
-            {
-                m_StackInfo[groupIndex].axisSelect[i]=2;
-            }
-            else if(indexAsix==1)
-            {
-                m_StackInfo[groupIndex].axisSelect[i]=5;
-            }
-            break;
-        case 2:
-            if(indexAsix==0)
-            {
-                m_StackInfo[groupIndex].axisSelect[i]=3;
-            }
-            else if(indexAsix==1)
-            {
-                m_StackInfo[groupIndex].axisSelect[i]=6;
-            }
-            break;
-
+            m_StackInfo[groupIndex].stackStartPos[i] = startPosA[i]->text().toDouble()*100;
         }
-//        m_StackInfo[groupIndex].axisSelect[i] = axisSelect[i]->currentIndex();
-        m_StackInfo[groupIndex].axisSpeed[i] = speed[i]->text().toInt();
-        m_StackInfo[groupIndex].stackPointNum[i] = pointNum[i]->text().toInt();
-        m_StackInfo[groupIndex].stackDir[i] = stackDirect[i]->currentIndex();
-        m_StackInfo[groupIndex].dischangeSpeed[i] = speedDischage[i]->text().toInt();
-        m_StackInfo[groupIndex].stackStartPos[i] = startPosA[i]->text().toDouble()*100;
+        else if (m_StackFunc.stackType == 2)
+        {
+            m_StackInfo[groupIndex].stackStartPos[i] = startPosANormal[i]->text().toDouble()*100;
+        }
+//        m_StackInfo[groupIndex].stackStartPos[i] = startPosA[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stack_X_EndPos[i] = endPosB_X[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stack_Y_EndPos[i] = endPosC_Y[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].stackDiagonalPos[i] = posD[i]->text().toDouble()*100;
@@ -342,10 +341,13 @@ void StackEdit::saveStackInfo(int index)
         m_StackInfo[groupIndex].offsetDis[i] = offset[i]->text().toDouble()*100;
     }
 
-//    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,groupIndex+1);
-//    QThread::msleep(10);
-    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,index+1);
+    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,groupIndex+1);
     setStackInfo(m_StackInfo[groupIndex],groupIndex);
+}
+
+void StackEdit::saveRotateBinStackInfo()
+{
+
 }
 
 // 这样写不行，后面写不通。需要换个方式来实现
@@ -414,7 +416,7 @@ void StackEdit::StackAxisSelectQcomboboxRefresh()
     else
     {
         axisSelect[1]->setCurrentIndex(0);
-        saveStackInfo1();
+        saveStackBasicInfo();
     }
 
     if (axisZIndex == 3 && m_AxisPar[Z1_AXIS].axisType == 1)
@@ -434,7 +436,7 @@ void StackEdit::StackAxisSelectQcomboboxRefresh()
     else
     {
         axisSelect[2]->setCurrentIndex(0);
-        saveStackInfo1();
+        saveStackBasicInfo();
     }
 
 }
@@ -447,23 +449,28 @@ void StackEdit::syncParaToUI()
     ui->checkBoxTriAxisUnion->setChecked(m_StackInfo[groupIndex].stackMoveMode == 1);
 
     axisSelect[0]->setCurrentIndex(0);
+    axisSelectNormal[0]->setCurrentIndex(0);
     int axisYIndex = m_StackInfo[groupIndex].axisSelect[1];
     int axisZIndex = m_StackInfo[groupIndex].axisSelect[2];
     if (axisYIndex == 2)
     {
         axisSelect[1]->setCurrentIndex(0);
+        axisSelectNormal[1]->setCurrentIndex(0);
     }
     else if (axisYIndex == 5)
     {
         axisSelect[1]->setCurrentIndex(1);
+        axisSelectNormal[1]->setCurrentIndex(1);
     }
     if (axisZIndex == 3)
     {
         axisSelect[2]->setCurrentIndex(0);
+        axisSelectNormal[2]->setCurrentIndex(0);
     }
     else if (axisZIndex == 6)
     {
         axisSelect[2]->setCurrentIndex(1);
+        axisSelectNormal[2]->setCurrentIndex(1);
     }
 
     for (int i = 0; i < STACK_AXIS_NUM; i++)
@@ -482,10 +489,13 @@ void StackEdit::syncParaToUI()
 //        }
 
         speed[i]->setText(QString::number(m_StackInfo[groupIndex].axisSpeed[i]));
+        speedNormal[i]->setText(QString::number(m_StackInfo[groupIndex].axisSpeed[i]));
         pointNum[i]->setText(QString::number(m_StackInfo[groupIndex].stackPointNum[i]));
+        pointNumNormal[i]->setText(QString::number(m_StackInfo[groupIndex].stackPointNum[i]));
         stackDirect[i]->setCurrentIndex(m_StackInfo[groupIndex].stackDir[i]);
         speedDischage[i]->setText(QString::number(m_StackInfo[groupIndex].dischangeSpeed[i]));
         startPosA[i]->setText(QString::number((double)m_StackInfo[groupIndex].stackStartPos[i] / 100, 'f', 2));
+        startPosANormal[i]->setText(QString::number((double)m_StackInfo[groupIndex].stackStartPos[i] / 100, 'f', 2));
         endPosB_X[i]->setText(QString::number((double)m_StackInfo[groupIndex].stack_X_EndPos[i] / 100, 'f', 2));
         endPosC_Y[i]->setText(QString::number((double)m_StackInfo[groupIndex].stack_Y_EndPos[i] / 100, 'f', 2));
         posD[i]->setText(QString::number((double)m_StackInfo[groupIndex].stackDiagonalPos[i] / 100, 'f', 2));
@@ -493,6 +503,7 @@ void StackEdit::syncParaToUI()
         intervalDis[i]->setText(QString::number((double)m_StackInfo[groupIndex].intevalDis[i] / 100, 'f', 2));
         offset[i]->setText(QString::number((double)m_StackInfo[groupIndex].offsetDis[i] / 100, 'f', 2));
     }
+    ui->editIntervalDis->setText(QString::number((double)m_StackInfo[groupIndex].intevalDis[2] / 100, 'f', 2));
 }
 
 StackEdit::StackEdit(int groupIndex, QWidget *parent) :
@@ -523,8 +534,8 @@ StackEdit::StackEdit(int groupIndex, QWidget *parent) :
     ui->stkWgtStackWay->setCurrentIndex(0);
 
     connect(ui->btnOK, &QPushButton::clicked, [=](){
-        saveStackInfo1();//保存参数
-        saveStackInfo(groupIndex);
+        saveStackBasicInfo();//保存参数
+        saveStackPointPosInfo();
         this->close();
         emit closeStackEditDialogSignal();
         emit stackParRefreshSignal();
@@ -596,8 +607,7 @@ void StackEdit::logicSigsSlots()
     {
         ui->labAxisRotateBin->setText(text);
     });
-
-
+#if 0
 /*****************此处为不同堆叠方式下两个界面的共用参数数据同步*******************************************/
     // 0. 轴选择  共用
     // 1. startPosA 起始  共用
@@ -648,8 +658,7 @@ void StackEdit::logicSigsSlots()
             ui->coboxStackDirect2, &QComboBox::setCurrentIndex);
     connect(ui->coboxStackDirect2, QOverload<int>::of(&QComboBox::currentIndexChanged),
             ui->coboxStackDirect, &QComboBox::setCurrentIndex);
-
-
+#endif
     /***********普通堆叠模式下参数变化导致构件使能变化和**********************/
 
     connect(ui->coboxAxisSelect0, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index) {
@@ -708,6 +717,8 @@ void StackEdit::changeEvent(QEvent *e)
     {
         ui->retranslateUi(this);
         retranslate();
+        // 需要重新同步参数
+        this->syncParaToUI();
     }
     QWidget::changeEvent(e);
 }
@@ -752,20 +763,29 @@ void StackEdit::showEvent(QShowEvent *event)
 void StackEdit::saveInfoConnections()
 {
     connect(ui->coboxStackOrder, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
-        saveStackInfo1();
+        saveStackBasicInfo();
     });
     connect(ui->coboxCountWay, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
-        saveStackInfo1();
+        saveStackBasicInfo();
     });
     connect(ui->coboxStopAfterStack, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
-        saveStackInfo1();
+        saveStackBasicInfo();
     });
     connect(ui->coboxLeaveBlank, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
-        saveStackInfo1();
+        saveStackBasicInfo();
     });
-    connect(ui->checkBoxTriAxisUnion, &QCheckBox::clicked, this, &StackEdit::saveStackInfo1);
-    connect(ui->coboxStackDirect, QOverload<int>::of(&QComboBox::activated), this, [=](int ){
-        saveStackInfo1();
+    connect(ui->checkBoxTriAxisUnion, &QCheckBox::clicked, this, &StackEdit::saveStackBasicInfo);
+
+//#begin
+    /*********************普通模式和三点/四点式下共有的参数**********************************/
+    connect(ui->coboxStackDirect, QOverload<int>::of(&QComboBox::activated), this, [=](int index){
+        stackDirect[2]->setCurrentIndex(index);
+        saveStackBasicInfo();
+    });
+    connect(ui->editIntervalDis, &NumberEdit::finishedInput,[=](){
+        auto value = ui->editIntervalDis->text();
+        intervalDis[2]->setText(value);
+        saveStackPointPosInfo();
     });
 
     for (int i = 0; i < STACK_AXIS_NUM; i++)
@@ -773,45 +793,62 @@ void StackEdit::saveInfoConnections()
         connect(axisSelect[i], QOverload<int>::of(&QComboBox::activated), this, [=](int index){
             if (index != -1)
             {
-                saveStackInfo1();
+                saveStackBasicInfo();
             }
         });
+        connect(axisSelectNormal[i], QOverload<int>::of(&QComboBox::activated), this, [=](int index){
+            if (index != -1)
+            {
+                saveStackBasicInfo();
+            }
+        });
+        connect(startPosA[i],&NumberEdit::finishedInput, [=](){
+            saveStackPointPosInfo();
+        });
+        connect(startPosANormal[i],&NumberEdit::finishedInput, [=](){
+            saveStackPointPosInfo();
+        });
+        connect(pointNum[i],&NumberEdit::finishedInput,[=](){
+            saveStackBasicInfo();
+        });
+        connect(pointNumNormal[i],&NumberEdit::finishedInput,[=](){
+            saveStackBasicInfo();
+        });
+        connect(speed[i],&NumberEdit::finishedInput,[=](){
+            saveStackBasicInfo();
+        });
+        connect(speedNormal[i],&NumberEdit::finishedInput,[=](){
+            saveStackBasicInfo();
+        });
+        /*********************普通模式和三点/四点式下共有的参数**********************************/
+//#end
+
         connect(stackDirect[i], QOverload<int>::of(&QComboBox::activated), this, [=](int index){
             if (index != -1)
             {
-                saveStackInfo1();
+                saveStackBasicInfo();
             }
         });
-
-        connect(speed[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo1();
+        connect(speedDischage[i],&NumberEdit::finishedInput,[=](){
+            saveStackBasicInfo();
         });
-        connect(pointNum[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo1();
+        connect(endPosB_X[i],&NumberEdit::finishedInput,[=](){
+            saveStackPointPosInfo();
         });
-        connect(speedDischage[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo1();
+        connect(endPosC_Y[i],&NumberEdit::finishedInput,[=](){
+            saveStackPointPosInfo();
         });
-        connect(startPosA[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo(i);
+        connect(posD[i],&NumberEdit::finishedInput,[=](){
+            saveStackPointPosInfo();
         });
-        connect(endPosB_X[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo(i);
+        connect(startPosDischage[i],&NumberEdit::finishedInput,[=](){
+            saveStackPointPosInfo();
         });
-        connect(endPosC_Y[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo(i);
+        connect(intervalDis[i],&NumberEdit::finishedInput,[=](){
+            saveStackPointPosInfo();
         });
-        connect(posD[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo(i);
-        });
-        connect(startPosDischage[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo(i);
-        });
-        connect(intervalDis[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo(i);
-        });
-        connect(offset[i],&NumberEdit::textChanged,[=](const QString &){
-            saveStackInfo(i);
+        connect(offset[i],&NumberEdit::finishedInput,[=](){
+            saveStackPointPosInfo();
         });
     }
 }

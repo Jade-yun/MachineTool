@@ -58,6 +58,9 @@ MainWindow::MainWindow(QWidget *parent)
     readSigSetPara();
     readIniPara();
 
+    reloadTranslateNameDefine();
+    reloadTranslatePortDefInfo();
+
     // set fonts for whole app
     const std::vector<QString> fontType = {
         "WenQuanYi Zen Hei",            // 默认字体

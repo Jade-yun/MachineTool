@@ -494,16 +494,6 @@
         <translation type="unfinished">On-Time(s)</translation>
     </message>
     <message>
-        <location filename="../autoform.ui" line="2207" />
-        <location filename="../autoform.ui" line="2240" />
-        <location filename="../autoform.ui" line="2323" />
-        <location filename="../autoform.ui" line="2401" />
-        <location filename="../autoform.ui" line="2466" />
-        <location filename="../autoform.ui" line="2809" />
-        <source>0.00</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
         <location filename="../autoform.ui" line="2292" />
         <source>限时(s)</source>
         <translation type="unfinished">Time Limit(s)</translation>
@@ -6809,129 +6799,6 @@
         <translation type="unfinished">② Z1 Axis Height(mm)</translation>
     </message>
     <message>
-        <location filename="../setting.ui" line="11671" />
-        <location filename="../setting.ui" line="11770" />
-        <location filename="../setting.ui" line="11822" />
-        <location filename="../setting.ui" line="11856" />
-        <location filename="../setting.ui" line="11908" />
-        <location filename="../setting.ui" line="11945" />
-        <location filename="../setting.ui" line="11997" />
-        <location filename="../setting.ui" line="12161" />
-        <location filename="../setting.ui" line="12192" />
-        <location filename="../setting.ui" line="12244" />
-        <location filename="../setting.ui" line="12589" />
-        <location filename="../setting.ui" line="12617" />
-        <location filename="../setting.ui" line="12666" />
-        <location filename="../setting.ui" line="12777" />
-        <location filename="../setting.ui" line="12923" />
-        <location filename="../setting.ui" line="12972" />
-        <location filename="../setting.ui" line="13003" />
-        <location filename="../setting.ui" line="13052" />
-        <location filename="../setting.ui" line="13086" />
-        <location filename="../setting.ui" line="13135" />
-        <location filename="../setting.ui" line="13477" />
-        <location filename="../setting.ui" line="13505" />
-        <location filename="../setting.ui" line="13554" />
-        <location filename="../setting.ui" line="13665" />
-        <location filename="../setting.ui" line="13761" />
-        <location filename="../setting.ui" line="13810" />
-        <location filename="../setting.ui" line="13841" />
-        <location filename="../setting.ui" line="13890" />
-        <location filename="../setting.ui" line="13924" />
-        <location filename="../setting.ui" line="13973" />
-        <location filename="../setting.ui" line="14365" />
-        <location filename="../setting.ui" line="14393" />
-        <location filename="../setting.ui" line="14442" />
-        <location filename="../setting.ui" line="14553" />
-        <location filename="../setting.ui" line="14649" />
-        <location filename="../setting.ui" line="14698" />
-        <location filename="../setting.ui" line="14729" />
-        <location filename="../setting.ui" line="14778" />
-        <location filename="../setting.ui" line="14812" />
-        <location filename="../setting.ui" line="14861" />
-        <location filename="../setting.ui" line="15611" />
-        <location filename="../setting.ui" line="15660" />
-        <location filename="../setting.ui" line="15820" />
-        <location filename="../setting.ui" line="15949" />
-        <location filename="../setting.ui" line="16315" />
-        <location filename="../setting.ui" line="16364" />
-        <location filename="../setting.ui" line="16619" />
-        <location filename="../setting.ui" line="16994" />
-        <location filename="../setting.ui" line="17043" />
-        <location filename="../setting.ui" line="17298" />
-        <location filename="../setting.ui" line="17673" />
-        <location filename="../setting.ui" line="17722" />
-        <location filename="../setting.ui" line="26960" />
-        <location filename="../setting.ui" line="26998" />
-        <location filename="../setting.ui" line="27036" />
-        <location filename="../setting.ui" line="27464" />
-        <location filename="../setting.ui" line="27486" />
-        <location filename="../setting.ui" line="27508" />
-        <location filename="../setting.ui" line="27552" />
-        <location filename="../setting.ui" line="27574" />
-        <location filename="../setting.ui" line="27596" />
-        <location filename="../setting.ui" line="27618" />
-        <location filename="../setting.ui" line="27659" />
-        <location filename="../setting.ui" line="27678" />
-        <location filename="../setting.ui" line="27700" />
-        <location filename="../setting.ui" line="27811" />
-        <location filename="../setting.ui" line="27849" />
-        <location filename="../setting.ui" line="28714" />
-        <location filename="../setting.ui" line="28736" />
-        <location filename="../setting.ui" line="28758" />
-        <location filename="../setting.ui" line="28802" />
-        <location filename="../setting.ui" line="28824" />
-        <location filename="../setting.ui" line="28846" />
-        <location filename="../setting.ui" line="28868" />
-        <location filename="../setting.ui" line="28909" />
-        <location filename="../setting.ui" line="28928" />
-        <location filename="../setting.ui" line="28950" />
-        <location filename="../setting.ui" line="29058" />
-        <location filename="../setting.ui" line="29096" />
-        <location filename="../setting.ui" line="29134" />
-        <location filename="../setting.ui" line="29245" />
-        <location filename="../setting.ui" line="29283" />
-        <location filename="../setting.ui" line="30176" />
-        <location filename="../setting.ui" line="30198" />
-        <location filename="../setting.ui" line="30220" />
-        <location filename="../setting.ui" line="30264" />
-        <location filename="../setting.ui" line="30286" />
-        <location filename="../setting.ui" line="30308" />
-        <location filename="../setting.ui" line="30330" />
-        <location filename="../setting.ui" line="30371" />
-        <location filename="../setting.ui" line="30390" />
-        <location filename="../setting.ui" line="30412" />
-        <location filename="../setting.ui" line="30520" />
-        <location filename="../setting.ui" line="30558" />
-        <location filename="../setting.ui" line="30596" />
-        <location filename="../setting.ui" line="30707" />
-        <location filename="../setting.ui" line="30745" />
-        <location filename="../setting.ui" line="31610" />
-        <location filename="../setting.ui" line="31632" />
-        <location filename="../setting.ui" line="31654" />
-        <location filename="../setting.ui" line="31698" />
-        <location filename="../setting.ui" line="31720" />
-        <location filename="../setting.ui" line="31742" />
-        <location filename="../setting.ui" line="31764" />
-        <location filename="../setting.ui" line="31805" />
-        <location filename="../setting.ui" line="31824" />
-        <location filename="../setting.ui" line="31846" />
-        <location filename="../setting.ui" line="31954" />
-        <location filename="../setting.ui" line="31992" />
-        <location filename="../setting.ui" line="32030" />
-        <location filename="../setting.ui" line="32141" />
-        <location filename="../setting.ui" line="32179" />
-        <location filename="../setting.ui" line="32691" />
-        <location filename="../setting.ui" line="32734" />
-        <location filename="../setting.ui" line="32777" />
-        <location filename="../setting.ui" line="32842" />
-        <location filename="../setting.ui" line="32867" />
-        <location filename="../setting.ui" line="32886" />
-        <location filename="../setting.ui" line="32935" />
-        <source>0.00</source>
-        <translation type="unfinished" />
-    </message>
-    <message>
         <location filename="../setting.ui" line="11702" />
         <location filename="../setting.ui" line="12805" />
         <location filename="../setting.ui" line="13693" />
@@ -7327,21 +7194,6 @@
         <location filename="../setting.ui" line="17967" />
         <source>等加工完成时间(s)</source>
         <translation type="unfinished">Processing Completion Time(s)</translation>
-    </message>
-    <message>
-        <location filename="../setting.ui" line="17989" />
-        <location filename="../setting.ui" line="18038" />
-        <location filename="../setting.ui" line="18087" />
-        <location filename="../setting.ui" line="18136" />
-        <location filename="../setting.ui" line="18185" />
-        <location filename="../setting.ui" line="18234" />
-        <location filename="../setting.ui" line="18283" />
-        <location filename="../setting.ui" line="18352" />
-        <location filename="../setting.ui" line="18401" />
-        <location filename="../setting.ui" line="18450" />
-        <location filename="../setting.ui" line="18499" />
-        <source>0.0</source>
-        <translation type="unfinished" />
     </message>
     <message>
         <location filename="../setting.ui" line="18016" />
@@ -10515,23 +10367,6 @@
         <location filename="../dialogs/stackedit.ui" line="1088" />
         <source>方向</source>
         <translation type="unfinished">Direction</translation>
-    </message>
-    <message>
-        <location filename="../dialogs/stackedit.ui" line="166" />
-        <location filename="../dialogs/stackedit.ui" line="335" />
-        <location filename="../dialogs/stackedit.ui" line="354" />
-        <location filename="../dialogs/stackedit.ui" line="373" />
-        <location filename="../dialogs/stackedit.ui" line="459" />
-        <location filename="../dialogs/stackedit.ui" line="478" />
-        <location filename="../dialogs/stackedit.ui" line="535" />
-        <location filename="../dialogs/stackedit.ui" line="573" />
-        <location filename="../dialogs/stackedit.ui" line="592" />
-        <location filename="../dialogs/stackedit.ui" line="880" />
-        <location filename="../dialogs/stackedit.ui" line="1163" />
-        <location filename="../dialogs/stackedit.ui" line="1188" />
-        <location filename="../dialogs/stackedit.ui" line="1238" />
-        <source>0.00</source>
-        <translation type="unfinished" />
     </message>
     <message>
         <location filename="../dialogs/stackedit.ui" line="191" />

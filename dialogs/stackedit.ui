@@ -166,7 +166,7 @@
      </size>
     </property>
     <property name="text">
-     <string>0.00</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="labIntervalDis">
@@ -319,7 +319,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -338,7 +338,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -357,7 +357,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -376,7 +376,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -443,7 +443,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -462,7 +462,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -481,7 +481,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -500,7 +500,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -519,7 +519,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -538,7 +538,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -557,7 +557,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -576,7 +576,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -595,7 +595,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -614,7 +614,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -883,7 +883,7 @@
           </size>
          </property>
          <property name="text">
-          <string>0.00</string>
+          <string/>
          </property>
         </widget>
        </item>
@@ -1116,7 +1116,7 @@
        </size>
       </property>
       <property name="text">
-       <string>0</string>
+       <string/>
       </property>
      </widget>
      <widget class="NumberEdit" name="editStackSpeedRotateBin">
@@ -1141,7 +1141,7 @@
        </size>
       </property>
       <property name="text">
-       <string>0</string>
+       <string/>
       </property>
      </widget>
      <widget class="NumberEdit" name="editIntervalDisRotateBin">
@@ -1166,7 +1166,7 @@
        </size>
       </property>
       <property name="text">
-       <string>0.00</string>
+       <string/>
       </property>
      </widget>
      <widget class="NumberEdit" name="editStartRotateBin">
@@ -1191,7 +1191,7 @@
        </size>
       </property>
       <property name="text">
-       <string>0.00</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="labIntervalDis_8">
@@ -1241,7 +1241,7 @@
        </size>
       </property>
       <property name="text">
-       <string>0.00</string>
+       <string/>
       </property>
      </widget>
      <widget class="QLabel" name="labOffsetDistance_2">

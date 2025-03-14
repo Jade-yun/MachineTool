@@ -550,7 +550,7 @@ void getSystemSet()
 
     settings.endGroup();
 }
-void setSystemSet(D_SystemSetStruct value)
+void setSystemSet(const D_SystemSetStruct& value)
 {
     QSettings settings(SysSetConfigPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));

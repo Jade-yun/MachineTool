@@ -141,7 +141,7 @@ extern void getInternet(uint8_t defaultV = 0);
 extern void setInternet(D_InternetStruct value);
 //系统参数
 extern void getSystemSet();
-extern void setSystemSet(D_SystemSetStruct value);
+extern void setSystemSet(const D_SystemSetStruct& value);
 //轴运动参数
 extern void getAxisPar(uint8_t defaultV = 0);
 extern void setAxisPar(D_AxisParStruct value, uint8_t index);
