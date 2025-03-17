@@ -81,7 +81,12 @@ public slots:
 
     void Stack_Dialog_show();
 private slots:
+    void updateCoboxReturnLabe_box();
+
+    bool CheckLabelOrderLegal();
+
     void OrderSaveHandel();
+
     void LogicVar_SufferOperUpdata(P_LogicVarStruct* LogicVarStruct);
 
     void IfOrderSufferOperUpdata(P_LogicIfStruct* LogicIfStruct,uint8_t index);

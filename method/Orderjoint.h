@@ -3,6 +3,8 @@
 #include "stdint.h"
 #include "./method/cmd.h"
 
+extern uint16_t CheckJumpLabelLedal(uint16_t index);
+extern void ClearListLabel();
 extern void getOrderjoinIni();  //获取命令的内容拼接文件信息，用来拼接显示指令内容
 extern uint16_t getLabelOrderIndex();
 extern uint16_t ReturnLableListIndex(uint16_t lableNum);

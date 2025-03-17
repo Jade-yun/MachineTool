@@ -3753,31 +3753,31 @@ void Setting::ParNeedSaveCheckConnectHandle()
 
     for (int i=0;i<static_cast<int>(onlineSafeWidgets.size());i++)
     {//联机安全1～联机安全4
-        connect(onlineSafeWidgets[i].mainSunMode,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(onlineSafeWidgets[i].mainSunMode,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].onlineSelect,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(onlineSafeWidgets[i].onlineSelect,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].axisNum,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(onlineSafeWidgets[i].axisNum,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].pluseTime,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].pluseTime,&QLineEdit::editingFinished,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].areaInNum,&QLineEdit::editingFinished,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].requestInNum,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].requestInNum,&QLineEdit::editingFinished,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].requestOutNum,&QLineEdit::editingFinished,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].a1A2MainPos,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].a1A2MainPos,&QLineEdit::editingFinished,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
-        connect(onlineSafeWidgets[i].a1A2SunPos,&QLineEdit::textChanged,[=](){
+        connect(onlineSafeWidgets[i].a1A2SunPos,&QLineEdit::editingFinished,[=](){
             M_SaveSetPar.OnlineSafe[i] = true;
         });
     }
@@ -3788,7 +3788,7 @@ void Setting::ParNeedSaveCheckConnectHandle()
     });
     for(int i=0;i<8;i++)
     {//伺服参数
-        connect(servoPara.at(i),QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(servoPara.at(i),QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveServoPara = true;
         });
     }
@@ -3809,7 +3809,7 @@ void Setting::ParNeedSaveCheckConnectHandle()
         connect(machineParaWidgets.at(i).maxSpeed,&NumberEdit::returnPressed,[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
-        connect(machineParaWidgets.at(i).coordDir,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).coordDir,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveAxisPara = true;
         });
     }
@@ -3820,19 +3820,19 @@ void Setting::ParNeedSaveCheckConnectHandle()
     });
     for(int i=0;i<static_cast<int>(servoPointSafeArea.size());i++)
     {
-        connect(servoPointSafeArea.at(i).safeAreaSwt,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(servoPointSafeArea.at(i).safeAreaSwt,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).processFinishNum,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(servoPointSafeArea.at(i).processFinishNum,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).axisSelect[0],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(servoPointSafeArea.at(i).axisSelect[0],QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).axisSelect[1],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(servoPointSafeArea.at(i).axisSelect[1],QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
-        connect(servoPointSafeArea.at(i).axisSelect[2],QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(servoPointSafeArea.at(i).axisSelect[2],QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SafeArea[i] = true;
         });
         connect(servoPointSafeArea.at(i).machineA1Pos[0],&NumberEdit::returnPressed,[=](){
@@ -3908,20 +3908,20 @@ void Setting::ParNeedSaveCheckConnectHandle()
     });
     for(int i=0;i<AXIS_TOTAL_NUM;i++)
     {
-        connect(machineParaWidgets.at(i).limitPosSwt,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).limitPosSwt,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveMachineParaLimit = true;
         });
-        connect(machineParaWidgets.at(i).limitNegSwt,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).limitNegSwt,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveMachineParaLimit = true;
         });
-        connect(machineParaWidgets.at(i).axisType,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).axisType,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveMachineParaStruct = true;
         });
-        connect(machineParaWidgets.at(i).axisMoveMade,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).axisMoveMade,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveMachineParaStruct = true;
         });
 
-        connect(machineParaWidgets.at(i).originType,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).originType,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
@@ -3937,11 +3937,11 @@ void Setting::ParNeedSaveCheckConnectHandle()
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).originDir,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).originDir,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
 
-        connect(machineParaWidgets.at(i).backOriginOrder,QOverload<int>::of(&QComboBox::currentIndexChanged),[=](){
+        connect(machineParaWidgets.at(i).backOriginOrder,QOverload<int>::of(&QComboBox::activated),[=](){
             M_SaveSetPar.SaveMachineParaOrigin = true;
         });
     }

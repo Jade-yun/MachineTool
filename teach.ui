@@ -623,7 +623,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>17</number>
+      <number>7</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">
@@ -12099,7 +12099,7 @@ QGroupBox::title { subcontrol-origin: margin;
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">
@@ -12523,7 +12523,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">
@@ -14570,7 +14570,7 @@ font: 20pt ;</string>
         </widget>
        </widget>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>0</x>

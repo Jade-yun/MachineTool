@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>8</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -30229,7 +30229,7 @@ font-weight: bold;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -33682,16 +33682,6 @@ font-weight: bold;
    <header>customedit.h</header>
   </customwidget>
   <customwidget>
-   <class>IOOnlineInEdit</class>
-   <extends>QLineEdit</extends>
-   <header>ioportdialog.h</header>
-  </customwidget>
-  <customwidget>
-   <class>IOOnlineOutEdit</class>
-   <extends>QLineEdit</extends>
-   <header>ioportdialog.h</header>
-  </customwidget>
-  <customwidget>
    <class>KeyEdit</class>
    <extends>QLineEdit</extends>
    <header>keydefinedialog.h</header>
@@ -33700,6 +33690,16 @@ font-weight: bold;
    <class>SaveButton</class>
    <extends>QPushButton</extends>
    <header location="global">savebutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>IOOnlineInEdit</class>
+   <extends>QLineEdit</extends>
+   <header>ioportdialog.h</header>
+  </customwidget>
+  <customwidget>
+   <class>IOOnlineOutEdit</class>
+   <extends>QLineEdit</extends>
+   <header>ioportdialog.h</header>
   </customwidget>
   <customwidget>
    <class>SigLEDEdit</class>

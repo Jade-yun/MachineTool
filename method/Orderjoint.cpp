@@ -1742,6 +1742,7 @@ QString LabelJoint(P_ProOrderStruct OIS)
 //获取下一个标签索引值,如果标签号不连续，则返回第一个不连续的标签号，如果连续，则返回最大值
 uint16_t getLabelOrderIndex()
 {
+    uint16_t ReturnDate = 0;
     QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
     QRegularExpressionMatch match;
     QList<uint16_t> LableIndex; // 存储匹配到的标签索引
@@ -1762,12 +1763,26 @@ uint16_t getLabelOrderIndex()
     for (int i = 0; i < LableIndex.size(); ++i) {
         // 检查是否从 1 开始，并且是否是连续的
         if (LableIndex[i] != i + 1) {
-            return i + 1; // 直接返回第一个不连续的值
+            ReturnDate = i + 1; // 直接返回第一个不连续的值
+            break;
         }
     }
-
     // 如果所有值都是连续的，则返回最大连续值加 1
-    return LableIndex.isEmpty() ? 1 : LableIndex.back() + 1;
+    if(ReturnDate == 0)
+    {
+        LableIndex.isEmpty() ? ReturnDate = 1 : ReturnDate = LableIndex.back() + 1;
+    }
+    uint16_t Temp=0;
+    for(int i=0; i<CurrentLableNameList.count();i++)
+    {
+        Temp= CheckJumpLabelLedal(i);
+        if(Temp>0)
+        {
+            ReturnDate = Temp;
+            break;
+        }
+    }
+    return ReturnDate;
 }
 
 //根据标签号返回标签所在索引
@@ -1791,6 +1806,116 @@ uint16_t ReturnLableListIndex(uint16_t lableNum)
     }
     return 0;
 }
+
+//删除列表中程序指令中不存在的标签
+void ClearListLabel()
+{
+    QString Itemtext = "";
+    QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+    QRegularExpressionMatch match;
+    uint16_t LabelIndex = 0;
+    for(int i=0;i<CurrentLableNameList.count();i++)
+    {
+        Itemtext = CurrentLableNameList[i];
+        match = re.match(Itemtext);
+        if (match.hasMatch()) {
+            LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
+        }
+        if(LabelIndex > 0)
+        {
+            bool tempstate = false;
+            for(int j=0;j<m_OperateProOrderListNum;j++)
+            {
+                if(m_OperateProOrder[j].cmd == C_LABEL)
+                {
+                    P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[j].pData;
+                    uint16_t temp_labelNum = LabelStruct1->labelNum;
+                    if(temp_labelNum==LabelIndex)
+                    {//如果
+                        tempstate = true;
+                        break;
+                    }
+                }
+                if(m_OperateProOrder[j].cmd == C_WAIT_IN_CLAW)
+                {
+                    P_WaitInClawStruct* WaitInClaw =(P_WaitInClawStruct*)m_OperateProOrder[j].pData;
+                    if(WaitInClaw->type == 1)
+                    {
+                        uint16_t temp_labelNum = WaitInClaw->label;
+                        if(temp_labelNum==LabelIndex)
+                        {//如果
+                            tempstate = true;
+                            break;
+                        }
+                    }
+                }
+                if(m_OperateProOrder[j].cmd == C_WAIT_IN_RESERVE)
+                {
+                    P_WaitInReserveStruct* ReserveStruct =(P_WaitInReserveStruct*)m_OperateProOrder[j].pData;
+                    if(ReserveStruct->type == 1)
+                    {
+                        uint16_t temp_labelNum = ReserveStruct->label;
+                        if(temp_labelNum==LabelIndex)
+                        {//如果
+                            tempstate = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(tempstate == false)
+            {
+                CurrentLableNameList.removeAt(i);
+            }
+        }
+    }
+}
+
+//检测指令中应用到的标签是否存在 0-合法 >0不合法的标签在标签列号
+uint16_t CheckJumpLabelLedal(uint16_t index)
+{
+    bool tempstate = false;
+    uint16_t returndate = 0;
+    QString Itemtext = "";
+    QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+    QRegularExpressionMatch match;
+    uint16_t LabelIndex = 0;
+//    for(int i=0;i<CurrentLableNameList.count();i++)
+    {
+        Itemtext = CurrentLableNameList[index];
+        match = re.match(Itemtext);
+        if (match.hasMatch()) {
+            LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
+        }
+        if(LabelIndex > 0)
+        {
+            for(int j=0;j<m_OperateProOrderListNum;j++)
+            {
+                if(m_OperateProOrder[j].cmd == C_LABEL)
+                {
+                    P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[j].pData;
+                    uint16_t temp_labelNum = LabelStruct1->labelNum;
+                    if(temp_labelNum==LabelIndex && LabelStruct1->type == 0)
+                    {//如果
+                        tempstate = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if(tempstate == true)
+    {
+        returndate = 0;
+    }
+    else
+    {
+        if(LabelIndex > 0)
+            returndate = LabelIndex;
+    }
+    return returndate;
+}
+
 //根据标签名称返回标签号
 uint16_t ReturnLabelnum(QString LabelText)
 {

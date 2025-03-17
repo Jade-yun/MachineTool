@@ -243,7 +243,10 @@ Teach::Teach(QWidget* parent) :
         ui->editConstantVarPostOp->setDecimalPlaces(m_VariableType[ui->coboxVarSelectVarPreOp->currentIndex()]);
     }
     pageInit();
-    connect(ui->btnSave,&QPushButton::clicked,this,&Teach::OrderSaveHandel);//保存按钮
+    connect(ui->btnSave,&QPushButton::clicked,[=](){
+        widgetSwitchOrderSaveHandel(true);
+    });//保存按钮
+
 }
 
 Teach::~Teach()
@@ -603,6 +606,7 @@ void Teach::Wait_Signal_Init(void)
     if(ui->tabWgtSigWait->currentIndex() == 0){//等待机床界面参数初始化
         ui->Wait_machine_signal_box->setChecked(false);
         ui->Wait_machine_signal_port->setCurrentIndex(0);
+        ui->grboxReturn->setVisible(false);
         memset(&Temp_WaitInMachineStruct,0,sizeof(Temp_WaitInMachineStruct));
     }
     else if(ui->tabWgtSigWait->currentIndex() == 1){//等待卡爪界面参数初始化
@@ -616,17 +620,7 @@ void Teach::Wait_Signal_Init(void)
         ui->Wait_release_on_comboBox->setCurrentIndex(0);
         ui->Wait_release_off_comboBox->setCurrentIndex(0);
         ui->Wait_pos_cor_comboBox->setCurrentIndex(0);
-        QStringList labelText;
-        ui->coboxReturnLabe_box->clear();
-        ui->coboxReturnLabe_box->addItem("无标签");
-        for(int i=0;i<CurrentLableNameList.count();i++)
-        {
-            labelText = CurrentLableNameList[i].split(signalSpace);
-            if(labelText.length()>1)
-            {
-                ui->coboxReturnLabe_box->addItem(labelText[0]);
-            }
-        }
+        updateCoboxReturnLabe_box();
         memset(&Temp_WaitInClawStruct,0,sizeof(Temp_WaitInClawStruct));
     }
     else if(ui->tabWgtSigWait->currentIndex() == 2)
@@ -641,17 +635,7 @@ void Teach::Wait_Signal_Init(void)
         ui->lineEdit_Wait_ReserveUp->setText("");
         ui->lineEdit_Wait_ReserveDown->setText("");
         ui->lineEdit_Wait_ReserveJump->setText("");
-        QStringList labelText;
-        ui->coboxReturnLabe_box->clear();
-        ui->coboxReturnLabe_box->addItem("无标签");
-        for(int i=0;i<CurrentLableNameList.count();i++)
-        {
-            labelText = CurrentLableNameList[i].split(signalSpace);
-            if(labelText.length()>1)
-            {
-                ui->coboxReturnLabe_box->addItem(labelText[0]);
-            }
-        }
+        updateCoboxReturnLabe_box();
         memset(&Temp_WaitInReserveStruct,0,sizeof(Temp_WaitInReserveStruct));
     }
     ui->chboxReturnLabel->setChecked(true);
@@ -668,6 +652,24 @@ void Teach::Wait_Signal_Init(void)
     Temp_WaitInClawStruct.label = 0;//标签号
     Temp_WaitInReserveStruct.label = 0;//标签号
     WidgetNameRefresh();
+}
+//更新信号等待界面标签选择框选项
+void Teach::updateCoboxReturnLabe_box()
+{
+    QStringList labelText;
+    ui->coboxReturnLabe_box->clear();
+    ui->coboxReturnLabe_box->addItem("无标签");
+    for(int i=0;i<CurrentLableNameList.count();i++)
+    {
+        if(CheckJumpLabelLedal(i)==0)
+        {
+            labelText = CurrentLableNameList[i].split(signalSpace);
+            if(labelText.length()>1)
+            {
+                ui->coboxReturnLabe_box->addItem(labelText[0]);
+            }
+        }
+    }
 }
 //子程序指令界面参数初始化
 void Teach::SunPro_Init(void)
@@ -801,17 +803,20 @@ void Teach::Refresh_listWgtJumpto()
         ui->listWgtJumpto->clear();
         for(int i=0; i<CurrentLableNameList.count();i++)
         {
-            QListWidgetItem *item = new QListWidgetItem();
-            QCheckBox *checkbox = new QCheckBox();
-            checkbox->setChecked(false);
-            checkbox->setAutoExclusive(true);//check为互斥
-            checkbox->setText(CurrentLableNameList[i]);
-            checkbox->setFixedSize(ui->listWgtJumpto->width(),37);
-            ui->listWgtJumpto->addItem(item);
-            ui->listWgtJumpto->setItemWidget(item,checkbox);
-            connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
-                onCheckBoxToggled(checkbox, checked);
-                });
+            if(CheckJumpLabelLedal(i)==0)
+            {
+                QListWidgetItem *item = new QListWidgetItem();
+                QCheckBox *checkbox = new QCheckBox();
+                checkbox->setChecked(false);
+                checkbox->setAutoExclusive(true);//check为互斥
+                checkbox->setText(CurrentLableNameList[i]);
+                checkbox->setFixedSize(ui->listWgtJumpto->width(),37);
+                ui->listWgtJumpto->addItem(item);
+                ui->listWgtJumpto->setItemWidget(item,checkbox);
+                connect(checkbox, &QCheckBox::clicked, this, [this, checkbox](bool checked){
+                    onCheckBoxToggled(checkbox, checked);
+                    });
+            }
         }
     }
 
@@ -820,17 +825,21 @@ void Teach::Refresh_listWgtJumpto()
         ui->listWidget_LabelEdit->clear();
         for(int i=0; i<CurrentLableNameList.count();i++)
         {
-            QListWidgetItem *item = new QListWidgetItem();
-            QCheckBox *checkbox = new QCheckBox();
-            checkbox->setChecked(false);
-            checkbox->setAutoExclusive(true);//check为互斥
-            checkbox->setText(CurrentLableNameList[i]);
-            checkbox->setFixedSize(ui->listWidget_LabelEdit->width(),37);
-            ui->listWidget_LabelEdit->addItem(item);
-            ui->listWidget_LabelEdit->setItemWidget(item,checkbox);
-            connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
-                onCheckBoxToggled(checkbox, checked);
-                });
+            if(CheckJumpLabelLedal(i)==0)
+            {
+                QListWidgetItem *item = new QListWidgetItem();
+                QCheckBox *checkbox = new QCheckBox();
+                checkbox->setChecked(false);
+                checkbox->setAutoExclusive(true);//check为互斥
+                checkbox->setText(CurrentLableNameList[i]);
+                checkbox->setFixedSize(ui->listWidget_LabelEdit->width(),37);
+                ui->listWidget_LabelEdit->addItem(item);
+                ui->listWidget_LabelEdit->setItemWidget(item,checkbox);
+                connect(checkbox, &QCheckBox::clicked, this, [this, checkbox](bool checked){
+                    onCheckBoxToggled(checkbox, checked);
+                    });
+            }
+
         }
         if(ui->btnModify->isChecked())
         {//如果编辑按钮按下
@@ -843,6 +852,7 @@ void Teach::Refresh_listWgtJumpto()
     }
 
 }
+
 void Teach::on_btn_Logic_clicked()
 {
     ui->stackedWidget_Senior->setCurrentIndex(2);
@@ -1185,6 +1195,7 @@ void Teach::on_btnDelete_clicked()
         int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除所选动作？"));
         if (reply == QDialog::Accepted)
         {
+#if 0
             if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_LABEL)
             {
                 P_LabelStruct* LabelStruct = (P_LabelStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
@@ -1274,6 +1285,14 @@ void Teach::on_btnDelete_clicked()
                     MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
                 }
             }
+#endif
+            if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
+            {
+                MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
+            }
+            ClearListLabel();//处理一下标签列表
+            Refresh_listWgtJumpto();
+            updateCoboxReturnLabe_box();
             g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_DELET,m_OperateProNum,1,0);
             Teach_File_List_Refresh();//刷新程序列表
             OrderNeedSaveFlag = true;
@@ -2434,7 +2453,14 @@ void Teach::on_btnInset_clicked()
                             chboxCommentName = "子"+QString::number(m_OperateProNum)+"标签"+QString::number(LableIndex);
                             ui->chboxComment->setText(chboxCommentName);
                         }
+
                         Lable_Name = chboxCommentName+" "+ui->txt_label->text();
+                        uint16_t tempListIndex = ReturnLableListIndex(LableIndex);
+                        if(tempListIndex>0)
+                        {//如果标签号返回的索引大于0,则说明已经存在该标签，需要删除
+
+                            CurrentLableNameList.removeAt(tempListIndex-1);
+                        }
                         CurrentLableNameList.append(QString(Lable_Name));
 
                         QListWidgetItem *item = new QListWidgetItem();
@@ -2446,7 +2472,7 @@ void Teach::on_btnInset_clicked()
                         ui->listWgtJumpto->addItem(item);
                         ui->listWgtJumpto->setItemWidget(item,checkbox);
 
-                        connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
+                        connect(checkbox, &QCheckBox::clicked, this, [this, checkbox](bool checked){
                                         onCheckBoxToggled(checkbox, checked);
                                     });
 
@@ -2478,26 +2504,36 @@ void Teach::on_btnInset_clicked()
 //主界面切换指令提示保存处理
 void Teach::widgetSwitchOrderSaveHandel(bool SaveFlag)
 {
-    if(SaveFlag == true)
-    {
-        OrderSaveHandel();
+    if(CheckLabelOrderLegal() == true)
+    {//标签指令无异常
+        if(SaveFlag == true)
+        {
+            OrderSaveHandel();
+        }
+        else
+        {
+            m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
+            g_TotalProCopy(m_OperateProOrder,m_ProOrder[m_OperateProNum]);
+            CurrentLableNameList = LableNameList[m_OperateProNum];
+            saveProgram(m_CurrentProgramNameAndPath);
+            if(SufferOperNeedRefreash == true)
+            {//变量类型发生改变时，下发更新变量类型
+                std::copy(std::begin(m_VariableTypeLod),std::end(m_VariableTypeLod),std::begin(m_VariableType));//将老的变量类型赋值给新的
+                SufferOperNeedRefreash = false;
+            }
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,1);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,1);
+            Teach_File_List_Refresh();//刷新程序列表
+            OrderNeedSaveFlag = false;
+        }
     }
     else
     {
-        m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
-        g_TotalProCopy(m_OperateProOrder,m_ProOrder[m_OperateProNum]);
-        CurrentLableNameList = LableNameList[m_OperateProNum];
-        saveProgram(m_CurrentProgramNameAndPath);
-        if(SufferOperNeedRefreash == true)
-        {//变量类型发生改变时，下发更新变量类型
-            std::copy(std::begin(m_VariableTypeLod),std::end(m_VariableTypeLod),std::begin(m_VariableType));//将老的变量类型赋值给新的
-            SufferOperNeedRefreash = false;
-        }
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,1);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,m_OperateProNum,1);
-        Teach_File_List_Refresh();//刷新程序列表
-        OrderNeedSaveFlag = false;
+        ClearListLabel();//处理一下标签列表
+        Refresh_listWgtJumpto();
+        updateCoboxReturnLabe_box();
+        MainWindow::pMainWindow->showErrorTip(tr("标签指令异常，请检查程序指令！"));
     }
 }
 //指令保存处理函数
@@ -2511,9 +2547,7 @@ void Teach::OrderSaveHandel()
     {
         if (ui->stkWgtProgram->currentWidget() == ui->pageAxisAction)
         {
-
             Edit_AxisMove_Save_handle();
-
         }
         else if(ui->stkWgtProgram->currentWidget() == ui->pageClawAction)
         {
@@ -2545,7 +2579,7 @@ void Teach::OrderSaveHandel()
                 else if(ui->checkBox_Edit_Wait_label->isChecked())
                 {
                     WaitInMachine->type = 1;
-                    WaitInMachine->label = ui->comboBox_Edit_Wait_label->currentIndex();
+                    WaitInMachine->label = ReturnLabelnum(ui->comboBox_Edit_Wait_label->currentText());
                 }
             }
             else if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_WAIT_IN_CLAW)
@@ -2560,7 +2594,7 @@ void Teach::OrderSaveHandel()
                 else if(ui->checkBox_Edit_Wait_label->isChecked())
                 {
                     WaitInClaw->type = 1;
-                    WaitInClaw->label = ui->comboBox_Edit_Wait_label->currentIndex();
+                    WaitInClaw->label = ReturnLabelnum(ui->comboBox_Edit_Wait_label->currentText());
                 }
             }
         }
@@ -2578,7 +2612,7 @@ void Teach::OrderSaveHandel()
                 else if(ui->checkBox_Edit_Wait_label_2->isChecked())
                 {
                     WaitInReserve->type = 1;
-                    WaitInReserve->label = ui->comboBox_Edit_Wait_label_2->currentIndex();
+                    WaitInReserve->label = ReturnLabelnum(ui->comboBox_Edit_Wait_label_2->currentText());
                 }
             }
 
@@ -2827,7 +2861,10 @@ void Teach::OrderSaveHandel()
                 }
                 else if(LabelStruct->type == 1)
                 {//跳转到指令
-                    LabelStruct->labelNum = listWgtJumptoLabelIndex;
+                    if(listWgtJumptoLabelIndex > 0)
+                    {
+                        LabelStruct->labelNum = listWgtJumptoLabelIndex;
+                    }
                 }
             }
 
@@ -2933,6 +2970,99 @@ void Teach::OrderSaveHandel()
     OrderNeedSaveFlag = false;
 }
 
+//检测程序中标签指令是否有异常指令
+bool Teach::CheckLabelOrderLegal()
+{
+    bool Returnstate = true;
+
+    for(int i=0;i<m_OperateProOrderListNum;i++)
+    {
+        if(m_OperateProOrder[i].cmd == C_LABEL)
+        {
+            P_LabelStruct* LabelStruct = (P_LabelStruct*)m_OperateProOrder[i].pData;
+            if(LabelStruct->labelNum>0)
+            {
+                bool JumpLabelExistFlag = false;//跳转指令对应的标签是否存在
+                uint16_t temp_labelNum1 = LabelStruct->labelNum;
+                if(LabelStruct->type == 1)
+                {//如果跳转标签指令
+                    for(int i=0;i<m_OperateProOrderListNum;i++)
+                    {
+                        if(m_OperateProOrder[i].cmd == C_LABEL)
+                        {
+                            P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[i].pData;
+                            if(LabelStruct1->labelNum == temp_labelNum1 && LabelStruct1->type == 0)
+                            {//保存前先检测跳转的标签是否存在
+                                JumpLabelExistFlag = true;
+                                break;
+                            }
+                        }
+                    }
+                    if(JumpLabelExistFlag == false)
+                    {
+                        Returnstate = false;
+                        break;
+                    }
+                }
+            }
+        }
+        else if(m_OperateProOrder[i].cmd == C_WAIT_IN_CLAW)
+        {
+            bool TempState = false;
+            P_WaitInClawStruct* ClawStruct = (P_WaitInClawStruct*)m_OperateProOrder[i].pData;
+            if(ClawStruct->type == 1 && ClawStruct->label>0)
+            {//如果返回类型是标签，检测该标签是否存在
+                for(int i=0;i<m_OperateProOrderListNum;i++)
+                {
+                    if(m_OperateProOrder[i].cmd == C_LABEL)
+                    {
+                        P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[i].pData;
+                        if(LabelStruct1->labelNum == ClawStruct->label)
+                        {//保存前先检测跳转的标签是否存在
+                            TempState = true;
+                            break;
+                        }
+                    }
+                }
+                if(TempState == false)
+                {
+                    Returnstate = false;
+                    break;
+                }
+            }
+        }
+        else if(m_OperateProOrder[i].cmd == C_WAIT_IN_RESERVE)
+        {
+            bool TempState = false;
+            P_WaitInReserveStruct* ReserveStruct = (P_WaitInReserveStruct*)m_OperateProOrder[i].pData;
+            if(ReserveStruct->type == 1 && ReserveStruct->label>0)
+            {//如果返回类型是标签，检测该标签是否存在
+                for(int i=0;i<m_OperateProOrderListNum;i++)
+                {
+                    if(m_OperateProOrder[i].cmd == C_LABEL)
+                    {
+                        P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[i].pData;
+                        if(LabelStruct1->labelNum == ReserveStruct->label)
+                        {//保存前先检测跳转的标签是否存在
+                            TempState = true;
+                            break;
+                        }
+                    }
+                }
+                if(TempState == false)
+                {
+                    Returnstate = false;
+                    break;
+                }
+            }
+        }
+    }
+    if(Returnstate == true)
+    {
+        ClearListLabel();//处理一下标签列表
+    }
+    return Returnstate;
+}
 //变量类型更新函数
 void Teach::SufferOperUpdata_Handel()
 {
@@ -4291,6 +4421,7 @@ void Teach::pageInit()
     connect(ui->chboxReturnLabel, &QCheckBox::stateChanged, [=](int state){
         if (state == Qt::Checked)
         {
+            updateCoboxReturnLabe_box();
             ui->coboxReturnLabe_box->show();
             ui->editReturnStepNum->hide();
         }
@@ -4939,7 +5070,7 @@ void Teach::OrderEdit_Handle()
         else if(WaitInClaw->type == 1)
         {
             ui->checkBox_Edit_Wait_label->setChecked(true);
-            ui->comboBox_Edit_Wait_label->setCurrentIndex(WaitInClaw->label);
+            ui->comboBox_Edit_Wait_label->setCurrentIndex(ReturnLableListIndex(WaitInClaw->label));
         }
         break;
     }
@@ -4970,7 +5101,7 @@ void Teach::OrderEdit_Handle()
         else if(WaitInReserve->type == 1)
         {
             ui->checkBox_Edit_Wait_label_2->setChecked(true);
-            ui->comboBox_Edit_Wait_label_2->setCurrentIndex(WaitInReserve->label);
+            ui->comboBox_Edit_Wait_label_2->setCurrentIndex(ReturnLableListIndex(WaitInReserve->label));
         }
         ui->checkBox_Edit_Wait_001s->setChecked(true);
         ui->lineEdit_Edit_Wait_time_2->setDecimalPlaces(2);
@@ -5057,7 +5188,7 @@ void Teach::OrderEdit_Handle()
                 checkbox->setFixedSize(ui->listWidget_LabelEdit->width(),37);
                 ui->listWidget_LabelEdit->addItem(item);
                 ui->listWidget_LabelEdit->setItemWidget(item,checkbox);
-                connect(checkbox, &QCheckBox::toggled, this, [this, checkbox](bool checked){
+                connect(checkbox, &QCheckBox::clicked, this, [this, checkbox](bool checked){
                     onCheckBoxToggled(checkbox, checked);
                     });
                 if(LabelStruct->labelNum == i+1)
