@@ -57,40 +57,56 @@ QStringList ProEndJointList;                             //结束命令
 **************************************************************************/
 void getOrderjoinIni()
 {
-    axisMoveOrderjointList=getIniValues(2,"P_AxisMoveCmd");                       //轴动作命令
-    clawActionOrderjointList=getIniValues(2,"P_ClawActionCmd");                       //卡爪动作命令
-    clawCheckOrderjointList=getIniValues(2,"P_ClawCheckCmd");                       //信号检测-卡爪检测命令
-    reserveCheckOrderjointList=getIniValues(2,"P_ReserveCheckCmd");                        //信号检测-预留检测命令
-    machineOutOrderjointList=getIniValues(2,"P_MachineOutCmd");                       //机床-输出动作命令
-    stackResetZeroOrderjointList=getIniValues(2,"P_StackResetZeroCmd");                        //堆叠-堆叠清零命令
-    stackMoveOrderjointList=getIniValues(2,"P_StackMoveCmd");                        //堆叠-堆叠组运动命令
-    stackFollowOrderjointList=getIniValues(2,"P_StackFollowCmd");                         //堆叠-放料跟随运动命令
-    reserveOutOrderjointList=getIniValues(2,"P_ReserveOutCmd");                         //预留输出动作命令
+    if(CheckFileComplete(m_configOrderjinitPath))
+    {
+        axisMoveOrderjointList=getIniValues(2,"P_AxisMoveCmd");                       //轴动作命令
+        clawActionOrderjointList=getIniValues(2,"P_ClawActionCmd");                       //卡爪动作命令
+        clawCheckOrderjointList=getIniValues(2,"P_ClawCheckCmd");                       //信号检测-卡爪检测命令
+        reserveCheckOrderjointList=getIniValues(2,"P_ReserveCheckCmd");                        //信号检测-预留检测命令
+        machineOutOrderjointList=getIniValues(2,"P_MachineOutCmd");                       //机床-输出动作命令
+        stackResetZeroOrderjointList=getIniValues(2,"P_StackResetZeroCmd");                        //堆叠-堆叠清零命令
+        stackMoveOrderjointList=getIniValues(2,"P_StackMoveCmd");                        //堆叠-堆叠组运动命令
+        stackFollowOrderjointList=getIniValues(2,"P_StackFollowCmd");                         //堆叠-放料跟随运动命令
+        reserveOutOrderjointList=getIniValues(2,"P_ReserveOutCmd");                         //预留输出动作命令
 
-    waitInMachineOrderjointList=getIniValues(2,"P_WaitInMachineCmd");                         //信号等待-等待机床命令
-    waitInClawOrderjointList=getIniValues(2,"P_WaitInClawCmd");                        //信号等待-等待卡爪命令
-    waitInReserveOrderjointList=getIniValues(2,"P_WaitInReserveCmd");                        //信号等待-等待预留命令
-    otherAlarmCustOrderjointList=getIniValues(2,"P_OtherAlarmCustCmd");                        //其他-报警自定义命令
-    otherCycStopOrderjointList=getIniValues(2,"P_OtherCycStopCmd");                        //其他-周期停止命令
-    otherDelayOrderjointList=getIniValues(2,"P_OtherDelayCmd");                        //其他-延时命令
-    OtherAlarmLampOrderjointList=getIniValues(2,"P_OtherAlarmLampCmd");                        //其他-报警灯命令
-    OtherAlarmSoundOrderjointList=getIniValues(2,"P_OtherAlarmSoundCmd");                        //其他-报警声命令
-    labelOrderjointList=getIniValues(2,"P_LabelCmd");                        //标签命令
+        waitInMachineOrderjointList=getIniValues(2,"P_WaitInMachineCmd");                         //信号等待-等待机床命令
+        waitInClawOrderjointList=getIniValues(2,"P_WaitInClawCmd");                        //信号等待-等待卡爪命令
+        waitInReserveOrderjointList=getIniValues(2,"P_WaitInReserveCmd");                        //信号等待-等待预留命令
+        otherAlarmCustOrderjointList=getIniValues(2,"P_OtherAlarmCustCmd");                        //其他-报警自定义命令
+        otherCycStopOrderjointList=getIniValues(2,"P_OtherCycStopCmd");                        //其他-周期停止命令
+        otherDelayOrderjointList=getIniValues(2,"P_OtherDelayCmd");                        //其他-延时命令
+        OtherAlarmLampOrderjointList=getIniValues(2,"P_OtherAlarmLampCmd");                        //其他-报警灯命令
+        OtherAlarmSoundOrderjointList=getIniValues(2,"P_OtherAlarmSoundCmd");                        //其他-报警声命令
+        labelOrderjointList=getIniValues(2,"P_LabelCmd");                        //标签命令
 
-    logicIfOrderjointList=getIniValues(2,"P_LogicIfCmd");                         //逻辑&变量-如果-如果命令
-    logicWhileStartOrderjointList=getIniValues(2,"P_LogicWhileStartCmd");                        //逻辑&变量-循环开始命令
-    logicVarOrderjointList=getIniValues(2,"P_LogicVarCmd");                         //逻辑&变量-变量-变量命令
-    logicAxisOrderjointList=getIniValues(2,"P_LogicAxisCmd");                         //逻辑&变量-变量-轴命令
-    logicStackOrderjointList=getIniValues(2,"P_LogicStackCmd");                         //逻辑&变量-变量-堆叠命令
-    logicCurProductNumOrderjointList=getIniValues(2,"P_LogicCurProductNumCmd");                         //逻辑&变量-变量-实际产量命令结构体
-    logicTimeOrderjointList=getIniValues(2,"P_LogicTimeCmd");                        //逻辑&变量-定时器命令
-    searchAxisMoveOrderjointList=getIniValues(2,"P_SearchAxisMoveCmd");                        //搜索-轴搜索运动命令
+        logicIfOrderjointList=getIniValues(2,"P_LogicIfCmd");                         //逻辑&变量-如果-如果命令
+        logicWhileStartOrderjointList=getIniValues(2,"P_LogicWhileStartCmd");                        //逻辑&变量-循环开始命令
+        logicVarOrderjointList=getIniValues(2,"P_LogicVarCmd");                         //逻辑&变量-变量-变量命令
+        logicAxisOrderjointList=getIniValues(2,"P_LogicAxisCmd");                         //逻辑&变量-变量-轴命令
+        logicStackOrderjointList=getIniValues(2,"P_LogicStackCmd");                         //逻辑&变量-变量-堆叠命令
+        logicCurProductNumOrderjointList=getIniValues(2,"P_LogicCurProductNumCmd");                         //逻辑&变量-变量-实际产量命令结构体
+        logicTimeOrderjointList=getIniValues(2,"P_LogicTimeCmd");                        //逻辑&变量-定时器命令
+        searchAxisMoveOrderjointList=getIniValues(2,"P_SearchAxisMoveCmd");                        //搜索-轴搜索运动命令
 
-    offsetAxisOrderjointList=getIniValues(2,"P_OffsetAxisCmd");                         //偏移-轴偏移运动命令
-    torqueGardOrderjointList=getIniValues(2,"P_TorqueGardCmd");                         //扭矩保护命令
-    axisStopOrderjointList=getIniValues(2,"P_AxisStopCmd");                         //伺服停止命令
-    sunProOrderjointList=getIniValues(2,"P_SunProCmd");                         //子程序命令
-    ProEndJointList=getIniValues(2,"P_EndProCmd");                         //结束命令
+        offsetAxisOrderjointList=getIniValues(2,"P_OffsetAxisCmd");                         //偏移-轴偏移运动命令
+        torqueGardOrderjointList=getIniValues(2,"P_TorqueGardCmd");                         //扭矩保护命令
+        axisStopOrderjointList=getIniValues(2,"P_AxisStopCmd");                         //伺服停止命令
+        sunProOrderjointList=getIniValues(2,"P_SunProCmd");                         //子程序命令
+        ProEndJointList=getIniValues(2,"P_EndProCmd");                         //结束命令
+    }
+    else
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(m_configOrderjinitPath);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configOrderjinitPath);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(m_configOrderjinitPath);
+        }
+    }
 }
 
 /*************************************************************************
@@ -106,7 +122,10 @@ QString JointRunOrderNum(P_ProOrderStruct OIS)
     QString RunOrderNum = "";
     if(OIS.cmd == C_PRO_END)
     {
-        RunOrderNum = QString(ProEndJointList.at(1));//如果是结束指令，编号显示结束
+        if(ProEndJointList.count()>0)
+        {
+            RunOrderNum = QString(ProEndJointList.at(1));//如果是结束指令，编号显示结束
+        }
     }
     else
     {
@@ -253,26 +272,24 @@ QString AxisActJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
     P_AxisMoveStruct* pAxisAct = (P_AxisMoveStruct*)OIS.pData;
-#if USE_REFATOR_NAMEDEFINE
     QString axisStr;
     if (pAxisAct->axis < AXIS_TOTAL_NUM)
     {
         axisStr = m_NameDefine[1].axisName[pAxisAct->axis];
     }
-#else
-    uint8_t axisStrNum = 10+pAxisAct->axis;//配置文件中x轴从第十个元素开始存
-    QString axisStr = m_NameDefine[axisStrNum].modifyName;//当前行运行操作轴显示
-#endif
     double axispos = pAxisAct->pos;
     double advCSpeedDis = pAxisAct->advCSpeedDis;
     double AxisMovedelay = OIS.delay;
-    if(pAxisAct->referPointNum == 0)
-    {        
-        contStr = QString(axisMoveOrderjointList.at(0)).arg(" ").arg(axisStr).arg(QString::number(axispos/100,'f',2)).arg(pAxisAct->speed).arg(QString::number(advCSpeedDis/100,'f',2)).arg(QString::number(AxisMovedelay/100,'f',2));
-    }
-    else
+    if(axisMoveOrderjointList.count()>0)
     {
-        contStr = QString(axisMoveOrderjointList.at(0)).arg(" ").arg(axisStr).arg(QString::number(axispos/100,'f',2)).arg(pAxisAct->speed).arg(QString::number(advCSpeedDis/100,'f',2)).arg(QString::number(AxisMovedelay/100,'f',2));//获取参考点信息
+        if(pAxisAct->referPointNum == 0)
+        {
+            contStr = QString(axisMoveOrderjointList.at(0)).arg(" ").arg(axisStr).arg(QString::number(axispos/100,'f',2)).arg(pAxisAct->speed).arg(QString::number(advCSpeedDis/100,'f',2)).arg(QString::number(AxisMovedelay/100,'f',2));
+        }
+        else
+        {
+            contStr = QString(axisMoveOrderjointList.at(0)).arg(" ").arg(axisStr).arg(QString::number(axispos/100,'f',2)).arg(pAxisAct->speed).arg(QString::number(advCSpeedDis/100,'f',2)).arg(QString::number(AxisMovedelay/100,'f',2));//获取参考点信息
+        }
     }
     return contStr;
 }
@@ -289,7 +306,10 @@ QString ClawActionJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     double ClawActionDelay = OIS.delay;
     QString modifyName =Get_XYPort_Name(OIS);
-    contStr =QString(clawActionOrderjointList.at(0)).arg(modifyName).arg(QString::number(ClawActionDelay/100,'f',2));
+    if(clawActionOrderjointList.count()>0)
+    {
+        contStr =QString(clawActionOrderjointList.at(0)).arg(modifyName).arg(QString::number(ClawActionDelay/100,'f',2));
+    }
     return contStr;
 }
 
@@ -300,16 +320,6 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
     case C_CLAW_ACTION:
     {
         P_ClawActionStruct* ClawAction = (P_ClawActionStruct*) OIS.pData;
-#if 0
-        for(uint16_t i=0;i<OUTPUT_TOTAL_NUM;i++)
-        {
-            if(m_Port_Y[i].portNum == ClawAction->outportNum)
-            {
-                NameStr = m_Port_Y[i].modifyName;
-                break;
-            }
-        }
-#else
         if(ClawAction->outportNum == m_Port_Y[CLAW_METERIAL_1_CLAMP].portNum)
         {
             if(ClawAction->type == 1)
@@ -343,7 +353,6 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
                 NameStr = m_Port_Y[CLAW_CLAW_1_LOOSENED].modifyName;
             }
         }
-#endif
         break;
     }
     case C_CLAW_CHECK:
@@ -362,47 +371,14 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
     case C_RESERVE_CHECK:
     {
         P_ReserveCheckStruct* ReserveCheck = (P_ReserveCheckStruct*) OIS.pData;
-        #if 0
-        if(ReserveCheck->inportNum>=1 && ReserveCheck->inportNum<=36)
-        {
-            NameStr = "X"+QString::number(ReserveCheck->inportNum);
-        }
-        else if(ReserveCheck->inportNum>36 && ReserveCheck->inportNum<=60)
-        {
-            NameStr = "EX"+QString::number(ReserveCheck->inportNum-36);
-        }
-        #else
         if(ReserveCheck->inportNum>=1 && ReserveCheck->inportNum<=60)
         {
             NameStr = m_Port_X[ReserveCheck->inportNum-1].ResModifyName;
         }
-        #endif
         break;
     }
     case C_MACHINE_OUT:
     {
-#if 0
-        P_MachineOutStruct* MachineOut = (P_MachineOutStruct*) OIS.pData;
-        for(uint16_t i=0;i<OUTPUT_TOTAL_NUM;i++)
-        {
-            if(m_Port_Y[i].portNum == MachineOut->outportNum)
-            {
-                NameStr = m_Port_Y[i].modifyName;
-                if(i!=MACHINE_AUTO_DOOR_1_OPEN && i!=MACHINE_AUTO_DOOR_1_CLOSE && i!=MACHINE_CHUCK_1_CLAMP && i!=MACHINE_CHUCK_1_LOOSENED)
-                {
-                    if(MachineOut->type == 1)
-                    {
-                        NameStr = NameStr+"通";
-                    }
-                    else if(MachineOut->type == 0)
-                    {
-                        NameStr = NameStr+"断";
-                    }
-                }
-                break;
-            }
-        }
-#else
         P_MachineOutStruct* MachineOut = (P_MachineOutStruct*) OIS.pData;
         if(MachineOut->outportNum == m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum)
         {
@@ -445,28 +421,15 @@ QString Get_XYPort_Name(P_ProOrderStruct OIS)
                 }
             }
         }
-#endif
         break;
     }
     case C_RESERVE_OUT:
     {
         P_ReserveOutStruct* ReserveOut = (P_ReserveOutStruct*) OIS.pData;
-
-        #if 0
-        if(ReserveOut->outportNum>=1 && ReserveOut->outportNum<=24)
-        {
-            NameStr = "Y"+QString::number(ReserveOut->outportNum);
-        }
-        else if(ReserveOut->outportNum>24 && ReserveOut->outportNum<=44)
-        {
-            NameStr = "EY"+QString::number(ReserveOut->outportNum-24);
-        }
-        #else
         if(ReserveOut->outportNum>=1 && ReserveOut->outportNum<=44)
         {
             NameStr = m_Port_Y[ReserveOut->outportNum-1].ResModifyName;
         }
-        #endif
         break;
     }
     case C_WAIT_IN_MACHINE:
@@ -564,19 +527,22 @@ QString ClawCheckJoint(P_ProOrderStruct OIS)
     P_ClawCheckStruct* pClawCheck = (P_ClawCheckStruct*)OIS.pData;
     double ClawCheckDelay = OIS.delay;
     QString modifyName =Get_XYPort_Name(OIS);
-    switch(pClawCheck->type)
-    {//0-夹紧检测结束，1-夹紧检测开始，2-松开检测开始
-    case 0:
-        contStr = QString(clawCheckOrderjointList.at(1)).arg(modifyName).arg(QString::number(ClawCheckDelay/100,'f',2));
-        break;
-    case 1:
-         contStr = QString(clawCheckOrderjointList.at(0)).arg(modifyName).arg(QString::number(ClawCheckDelay/100,'f',2));
-        break;
-    case 2:
-         contStr = QString(clawCheckOrderjointList.at(0)).arg(modifyName).arg(QString::number(ClawCheckDelay/100,'f',2));
-        break;
-    default:
-        break;
+    if(clawCheckOrderjointList.count()>=2)
+    {
+        switch(pClawCheck->type)
+        {//0-夹紧检测结束，1-夹紧检测开始，2-松开检测开始
+        case 0:
+            contStr = QString(clawCheckOrderjointList.at(1)).arg(modifyName).arg(QString::number(ClawCheckDelay/100,'f',2));
+            break;
+        case 1:
+            contStr = QString(clawCheckOrderjointList.at(0)).arg(modifyName).arg(QString::number(ClawCheckDelay/100,'f',2));
+            break;
+        case 2:
+            contStr = QString(clawCheckOrderjointList.at(0)).arg(modifyName).arg(QString::number(ClawCheckDelay/100,'f',2));
+            break;
+        default:
+            break;
+        }
     }
     return contStr;
 }
@@ -594,19 +560,22 @@ QString ReserveCheckJoint(P_ProOrderStruct OIS)
     P_ClawCheckStruct* pClawCheck = (P_ClawCheckStruct*)OIS.pData;
     double ReserveDelay = OIS.delay;
     QString modifyName =Get_XYPort_Name(OIS);
-    switch(pClawCheck->type)
+    if(reserveCheckOrderjointList.count()>=3)
     {
-    case 1://通检测开始
-        contStr = QString(reserveCheckOrderjointList.at(0)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
-        break;
-    case 2://断检测开始
-         contStr = QString(reserveCheckOrderjointList.at(1)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
-        break;
-    case 0://检测结束
-         contStr = QString(reserveCheckOrderjointList.at(2)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
-        break;
-    default:
-        break;
+        switch(pClawCheck->type)
+        {
+        case 1://通检测开始
+            contStr = QString(reserveCheckOrderjointList.at(0)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
+            break;
+        case 2://断检测开始
+            contStr = QString(reserveCheckOrderjointList.at(1)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
+            break;
+        case 0://检测结束
+            contStr = QString(reserveCheckOrderjointList.at(2)).arg(modifyName).arg(QString::number(ReserveDelay/100,'f',2));
+            break;
+        default:
+            break;
+        }
     }
     return contStr;
 }
@@ -623,7 +592,10 @@ QString MachineOutJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     double MachineDelay = OIS.delay;
     QString modifyName =Get_XYPort_Name(OIS);
-    contStr = QString(machineOutOrderjointList.at(0)).arg(modifyName).arg(QString::number(MachineDelay/100,'f',2));
+    if(machineOutOrderjointList.count()>0)
+    {
+        contStr = QString(machineOutOrderjointList.at(0)).arg(modifyName).arg(QString::number(MachineDelay/100,'f',2));
+    }
     return contStr;
 }
 
@@ -643,13 +615,12 @@ QString StackResetZeroJoint(P_ProOrderStruct OIS)
     QString stacknumStr = "";
     if(StackResetZero->stackNum>0)
     {
-#if USE_REFATOR_NAMEDEFINE
         stacknumStr = m_NameDefine[1].stackName[StackResetZero->stackNum - 1];
-#else
-        stacknumStr = m_NameDefine[StackResetZero->stackNum-1+35].modifyName;
-#endif
     }
-    contStr = QString(stackResetZeroOrderjointList.at(0)).arg(QString::number(StackDelay/100,'f',2)).arg(stacknumStr);
+    if(stackResetZeroOrderjointList.count()>0)
+    {
+        contStr = QString(stackResetZeroOrderjointList.at(0)).arg(QString::number(StackDelay/100,'f',2)).arg(stacknumStr);
+    }
     return contStr;
 }
 
@@ -669,14 +640,12 @@ QString StackMoveJoint(P_ProOrderStruct OIS)
     QString stacknumStr = "";
     if(StackMove->stackNum>0)
     {
-#if USE_REFATOR_NAMEDEFINE
         stacknumStr = m_NameDefine[1].stackName[StackMove->stackNum - 1];
-#else
-        stacknumStr = m_NameDefine[StackMove->stackNum-1+35].modifyName;
-#endif
-
     }
-    contStr = QString(stackMoveOrderjointList.at(0)).arg(QString::number(StackMoveDelay/100,'f',2)).arg(stacknumStr);
+    if(stackMoveOrderjointList.count()>0)
+    {
+        contStr = QString(stackMoveOrderjointList.at(0)).arg(QString::number(StackMoveDelay/100,'f',2)).arg(stacknumStr);
+    }
     return contStr;
 }
 
@@ -696,13 +665,12 @@ QString StackFollowJoint(P_ProOrderStruct OIS)
     QString stacknumStr = "";
     if(StackFollow->stackNum>0)
     {
-#if USE_REFATOR_NAMEDEFINE
         stacknumStr = m_NameDefine[1].stackName[StackFollow->stackNum - 1];
-#else
-        stacknumStr = m_NameDefine[StackFollow->stackNum-1+46].modifyName;
-#endif
     }
-    contStr = QString(stackFollowOrderjointList.at(0)).arg(stacknumStr).arg(QString::number(StackFollowDelay/100,'f',2));
+    if(stackFollowOrderjointList.count()>0)
+    {
+        contStr = QString(stackFollowOrderjointList.at(0)).arg(stacknumStr).arg(QString::number(StackFollowDelay/100,'f',2));
+    }
     return contStr;
 }
 
@@ -717,7 +685,10 @@ QString StackFollowJoint(P_ProOrderStruct OIS)
 QString ProEndJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
-    contStr = QString(ProEndJointList.at(0));
+    if(ProEndJointList.count()>0)
+    {
+        contStr = QString(ProEndJointList.at(0));
+    }
     return contStr;
 }
 
@@ -735,21 +706,24 @@ QString ReserveOutJoint(P_ProOrderStruct OIS)
     P_ReserveOutStruct* ReserveOut = (P_ReserveOutStruct*)OIS.pData;
     double ReserveDelay = OIS.delay;
     QString OutName =Get_XYPort_Name(OIS);
-    if(ReserveOut->function == 0 && ReserveOut->type == 1)
+    if(reserveOutOrderjointList.count()>=4)
     {
-        contStr = QString(reserveOutOrderjointList.at(0)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
-    }
-    else if(ReserveOut->function == 0 && ReserveOut->type == 0)
-    {
-        contStr = QString(reserveOutOrderjointList.at(1)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
-    }
-    else if(ReserveOut->function == 1)
-    {
-        contStr = QString(reserveOutOrderjointList.at(2)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
-    }
-    else if(ReserveOut->function == 2)
-    {
-        contStr = QString(reserveOutOrderjointList.at(3)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
+        if(ReserveOut->function == 0 && ReserveOut->type == 1)
+        {
+            contStr = QString(reserveOutOrderjointList.at(0)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
+        }
+        else if(ReserveOut->function == 0 && ReserveOut->type == 0)
+        {
+            contStr = QString(reserveOutOrderjointList.at(1)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
+        }
+        else if(ReserveOut->function == 1)
+        {
+            contStr = QString(reserveOutOrderjointList.at(2)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
+        }
+        else if(ReserveOut->function == 2)
+        {
+            contStr = QString(reserveOutOrderjointList.at(3)).arg(OutName).arg(QString::number(ReserveDelay/100,'f',2)).arg(ReserveOut->interval);
+        }
     }
     return contStr;
 }
@@ -767,7 +741,10 @@ QString WaitInMachineJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     double WaitDelay = OIS.delay;
     QString WaitInName =Get_XYPort_Name(OIS);
-    contStr = QString(waitInMachineOrderjointList.at(0)).arg(WaitInName).arg(QString::number(WaitDelay/100,'f',2));
+    if(waitInMachineOrderjointList.count()>0)
+    {
+        contStr = QString(waitInMachineOrderjointList.at(0)).arg(WaitInName).arg(QString::number(WaitDelay/100,'f',2));
+    }
     return contStr;
 }
 /*************************************************************************
@@ -784,18 +761,22 @@ QString WaitInClawJoint(P_ProOrderStruct OIS)
     P_WaitInClawStruct* WaitInClaw = (P_WaitInClawStruct*)OIS.pData;
     double WaitDelay = OIS.delay;
     QString WaitInClawName =Get_XYPort_Name(OIS);
-    if(WaitInClaw->inportSta == 0)
-    {//0-off
-        contStr = QString(waitInClawOrderjointList.at(1)).arg(WaitInClawName).arg(QString::number(WaitDelay/100,'f',2));
+    if(waitInClawOrderjointList.count()>=3)
+    {
+        if(WaitInClaw->inportSta == 0)
+        {//0-off
+            contStr = QString(waitInClawOrderjointList.at(1)).arg(WaitInClawName).arg(QString::number(WaitDelay/100,'f',2));
+        }
+        else if(WaitInClaw->inportSta == 1)
+        {//1-on
+            contStr = QString(waitInClawOrderjointList.at(0)).arg(WaitInClawName).arg(QString::number(WaitDelay/100,'f',2));
+        }
+        else if(WaitInClaw->inportSta == 2)
+        {//2-位置修正
+            contStr = QString(waitInClawOrderjointList.at(2)).arg(WaitInClawName).arg(QString::number(WaitDelay/100,'f',2));
+        }
     }
-    else if(WaitInClaw->inportSta == 1)
-    {//1-on
-        contStr = QString(waitInClawOrderjointList.at(0)).arg(WaitInClawName).arg(QString::number(WaitDelay/100,'f',2));
-    }
-    else if(WaitInClaw->inportSta == 2)
-    {//2-位置修正
-        contStr = QString(waitInClawOrderjointList.at(2)).arg(WaitInClawName).arg(QString::number(WaitDelay/100,'f',2));
-    }
+
     if(WaitInClaw->type == 0)
     {
         contStr = contStr + " 返回步号 "+QString::number(WaitInClaw->backListNum);
@@ -847,26 +828,30 @@ QString WaitInReserveJoint(P_ProOrderStruct OIS)
     P_WaitInReserveStruct* WaitInReserve = (P_WaitInReserveStruct*)OIS.pData;
     double WaitDelay = OIS.delay;
     QString WaitInReserveName =Get_XYPort_Name(OIS);
-    if(WaitInReserve->inportSta == 0)
-    {//0-off
-        contStr = QString(waitInReserveOrderjointList.at(1)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
+    if(waitInReserveOrderjointList.count()>=5)
+    {
+        if(WaitInReserve->inportSta == 0)
+        {//0-off
+            contStr = QString(waitInReserveOrderjointList.at(1)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
+        }
+        else if(WaitInReserve->inportSta == 1)
+        {//1-on
+            contStr = QString(waitInReserveOrderjointList.at(0)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
+        }
+        else if(WaitInReserve->inportSta == 2)
+        {//2-up
+            contStr = QString(waitInReserveOrderjointList.at(2)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
+        }
+        else if(WaitInReserve->inportSta == 3)
+        {//2-down
+            contStr = QString(waitInReserveOrderjointList.at(3)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
+        }
+        else if(WaitInReserve->inportSta == 4)
+        {//2-jump
+            contStr = QString(waitInReserveOrderjointList.at(4)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
+        }
     }
-    else if(WaitInReserve->inportSta == 1)
-    {//1-on
-        contStr = QString(waitInReserveOrderjointList.at(0)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
-    }
-    else if(WaitInReserve->inportSta == 2)
-    {//2-up
-        contStr = QString(waitInReserveOrderjointList.at(2)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
-    }
-    else if(WaitInReserve->inportSta == 3)
-    {//2-down
-        contStr = QString(waitInReserveOrderjointList.at(2)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
-    }
-    else if(WaitInReserve->inportSta == 4)
-    {//2-jump
-        contStr = QString(waitInReserveOrderjointList.at(2)).arg(WaitInReserveName).arg(QString::number(WaitDelay/100,'f',2));
-    }
+
     if(WaitInReserve->type == 0)
     {
         contStr = contStr + " 返回步号 "+QString::number(WaitInReserve->backListNum);
@@ -917,7 +902,10 @@ QString OtherDelayJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
     double OtherDelay = OIS.delay;
-    contStr = QString(otherDelayOrderjointList.at(0)).arg(QString::number(OtherDelay/100,'f',2));
+    if(otherDelayOrderjointList.count()>0)
+    {
+        contStr = QString(otherDelayOrderjointList.at(0)).arg(QString::number(OtherDelay/100,'f',2));
+    }
     return contStr;
 }
 
@@ -933,7 +921,10 @@ QString OtherAlarmCustJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
     P_OtherAlarmCustStruct* OtherAlarmCust = (P_OtherAlarmCustStruct*)OIS.pData;
-    contStr = QString(otherAlarmCustOrderjointList.at(0)).arg(OtherAlarmCust->alarmNum);
+    if(otherAlarmCustOrderjointList.count()>0)
+    {
+        contStr = QString(otherAlarmCustOrderjointList.at(0)).arg(OtherAlarmCust->alarmNum);
+    }
     return contStr;
 }
 
@@ -948,7 +939,10 @@ QString OtherAlarmCustJoint(P_ProOrderStruct OIS)
 QString OtherCycStopJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
-    contStr = QString(otherCycStopOrderjointList.at(0));
+    if(otherCycStopOrderjointList.count()>0)
+    {
+        contStr = QString(otherCycStopOrderjointList.at(0));
+    }
     return contStr;
 }
 
@@ -965,13 +959,16 @@ QString OtherAlarmLampJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     P_OtherAlarmLampStruct* OtherAlarmLamp = (P_OtherAlarmLampStruct*)OIS.pData;
     double Delay = OIS.delay;
-    if(OtherAlarmLamp->type == 0)
-    {//关
-        contStr = QString(OtherAlarmLampOrderjointList.at(1)).arg(QString::number(Delay/100,'f',2));
-    }
-    else if(OtherAlarmLamp->type == 1)
-    {//开
-        contStr = QString(OtherAlarmLampOrderjointList.at(0)).arg(QString::number(Delay/100,'f',2));
+    if(OtherAlarmLampOrderjointList.count()>=2)
+    {
+        if(OtherAlarmLamp->type == 0)
+        {//关
+            contStr = QString(OtherAlarmLampOrderjointList.at(1)).arg(QString::number(Delay/100,'f',2));
+        }
+        else if(OtherAlarmLamp->type == 1)
+        {//开
+            contStr = QString(OtherAlarmLampOrderjointList.at(0)).arg(QString::number(Delay/100,'f',2));
+        }
     }
     return contStr;
 }
@@ -989,13 +986,16 @@ QString OtherAlarmSoundJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     P_OtherAlarmSoundStruct* OtherAlarmSound = (P_OtherAlarmSoundStruct*)OIS.pData;
     double Delay = OIS.delay;
-    if(OtherAlarmSound->type == 0)
-    {//关
-        contStr = QString(OtherAlarmSoundOrderjointList.at(1)).arg(QString::number(Delay/100,'f',2));
-    }
-    else if(OtherAlarmSound->type == 1)
-    {//开
-        contStr = QString(OtherAlarmSoundOrderjointList.at(0)).arg(QString::number(Delay/100,'f',2));
+    if(OtherAlarmSoundOrderjointList.count()>=2)
+    {
+        if(OtherAlarmSound->type == 0)
+        {//关
+            contStr = QString(OtherAlarmSoundOrderjointList.at(1)).arg(QString::number(Delay/100,'f',2));
+        }
+        else if(OtherAlarmSound->type == 1)
+        {//开
+            contStr = QString(OtherAlarmSoundOrderjointList.at(0)).arg(QString::number(Delay/100,'f',2));
+        }
     }
     return contStr;
 }
@@ -1013,27 +1013,25 @@ QString SunProJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     P_SunProStruct* SunPro = (P_SunProStruct*)OIS.pData;
     double delay = OIS.delay;
-#if USE_REFATOR_NAMEDEFINE
     QString SunNumStr = m_NameDefine[1].subProgName[SunPro->sunProNum - 1];
-#else
-    QString SunNumStr = m_NameDefine[1+SunPro->sunProNum].modifyName;//子程序名称
-
-#endif
-    if(SunPro->oprMode == 0)
-    {//标准
-        contStr = QString(sunProOrderjointList.at(0)).arg(SunNumStr);
-    }
-    else if(SunPro->oprMode == 1)
-    {//自动
-        contStr = QString(sunProOrderjointList.at(1)).arg(SunNumStr);
-    }
-    else if(SunPro->oprMode == 2)
-    {//并行一次
-        contStr = QString(sunProOrderjointList.at(2)).arg(SunNumStr);
-    }
-    else if(SunPro->oprMode == 3)
-    {//等待子程序完成
-        contStr = QString(sunProOrderjointList.at(3)).arg(SunNumStr).arg(QString::number(delay/100,'f',2));
+    if(sunProOrderjointList.count()>=4)
+    {
+        if(SunPro->oprMode == 0)
+        {//标准
+            contStr = QString(sunProOrderjointList.at(0)).arg(SunNumStr);
+        }
+        else if(SunPro->oprMode == 1)
+        {//自动
+            contStr = QString(sunProOrderjointList.at(1)).arg(SunNumStr);
+        }
+        else if(SunPro->oprMode == 2)
+        {//并行一次
+            contStr = QString(sunProOrderjointList.at(2)).arg(SunNumStr);
+        }
+        else if(SunPro->oprMode == 3)
+        {//等待子程序完成
+            contStr = QString(sunProOrderjointList.at(3)).arg(SunNumStr).arg(QString::number(delay/100,'f',2));
+        }
     }
     return contStr;
 }
@@ -1051,12 +1049,11 @@ QString AxisStopJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     P_AxisStopStruct* AxisStop = (P_AxisStopStruct*)OIS.pData;
     double delay = OIS.delay;
-#if USE_REFATOR_NAMEDEFINE
     QString AxisStopStr = m_NameDefine[1].axisName[AxisStop->axis];
-#else
-    QString AxisStopStr = m_NameDefine[10+AxisStop->axis].modifyName;
-#endif
-    contStr = QString(axisStopOrderjointList.at(0)).arg(AxisStopStr).arg(QString::number(delay/100,'f',2));
+    if(axisStopOrderjointList.count()>0)
+    {
+        contStr = QString(axisStopOrderjointList.at(0)).arg(AxisStopStr).arg(QString::number(delay/100,'f',2));
+    }
     return contStr;
 }
 
@@ -1072,12 +1069,11 @@ QString TorqueGardJoint(P_ProOrderStruct OIS)
 {
     QString contStr= "";
     P_TorqueGardStruct* TorqueGard = (P_TorqueGardStruct*)OIS.pData;
-#if USE_REFATOR_NAMEDEFINE
     QString TorqueGardStr = m_NameDefine[1].axisName[TorqueGard->axis];
-#else
-    QString TorqueGardStr = m_NameDefine[10+TorqueGard->axis].modifyName;
-#endif
-    contStr = QString(torqueGardOrderjointList.at(0)).arg(TorqueGardStr).arg(TorqueGard->torqueValue);
+    if(torqueGardOrderjointList.count()>0)
+    {
+        contStr = QString(torqueGardOrderjointList.at(0)).arg(TorqueGardStr).arg(TorqueGard->torqueValue);
+    }
     return contStr;
 }
 
@@ -1096,13 +1092,12 @@ QString OffsetAxisJoint(P_ProOrderStruct OIS)
     double delay = OIS.delay;
     double OffsetPos = OffsetAxis->offsetPos;
     double AdvEndPos = OffsetAxis->advEndDis;
-#if USE_REFATOR_NAMEDEFINE
     QString OffsetAxisStr = m_NameDefine[1].axisName[OffsetAxis->axis];
-#else
-    QString OffsetAxisStr = m_NameDefine[10+OffsetAxis->axis].modifyName;
-#endif
-    contStr = QString(offsetAxisOrderjointList.at(0)).arg(OffsetAxisStr).arg(QString::number(OffsetPos/100,'f',2)).arg(OffsetAxis->speed).arg(QString::number(AdvEndPos/100,'f',2)).arg(QString::number(delay/100,'f',2));
-    return contStr;
+    if(offsetAxisOrderjointList.count()>0)
+    {
+        contStr = QString(offsetAxisOrderjointList.at(0)).arg(OffsetAxisStr).arg(QString::number(OffsetPos/100,'f',2)).arg(OffsetAxis->speed).arg(QString::number(AdvEndPos/100,'f',2)).arg(QString::number(delay/100,'f',2));
+    }
+        return contStr;
 }
 /*************************************************************************
 **  函数名：  SearchAxisJoint()
@@ -1117,23 +1112,21 @@ QString SearchAxisJoint(P_ProOrderStruct OIS)
     QString contStr= "";
 
     double delay = OIS.delay;
-
-    if(OIS.cmd ==C_SEARCH_AXIS_MOVE)
+    if(searchAxisMoveOrderjointList.count()>=2)
     {
-        P_SearchAxisMoveStruct* SearchAxis = (P_SearchAxisMoveStruct*)OIS.pData;
-        QString SearchinportNum =Get_XYPort_Name(OIS);
-        double maxPos = SearchAxis->maxPos;
-        double advCDis = SearchAxis->advCDis;//提前位置
-#if USE_REFATOR_NAMEDEFINE
-        QString SearchAxisStr = m_NameDefine[1].axisName[SearchAxis->axis];
-#else
-        QString SearchAxisStr = m_NameDefine[10+SearchAxis->axis].modifyName;
-#endif
-        contStr = QString(searchAxisMoveOrderjointList.at(0)).arg("搜索"+QString::number(SearchAxis->searchNum)).arg(SearchAxisStr).arg(QString::number(maxPos/100,'f',2)).arg(SearchAxis->runSpeed).arg(QString::number(advCDis/100,'f',2)).arg(QString::number(delay/100,'f',2)).arg(SearchinportNum);
-    }
-    else
-    {
-        contStr = QString(searchAxisMoveOrderjointList.at(1)).arg(QString::number(delay/100,'f',2));
+        if(OIS.cmd ==C_SEARCH_AXIS_MOVE)
+        {
+            P_SearchAxisMoveStruct* SearchAxis = (P_SearchAxisMoveStruct*)OIS.pData;
+            QString SearchinportNum =Get_XYPort_Name(OIS);
+            double maxPos = SearchAxis->maxPos;
+            double advCDis = SearchAxis->advCDis;//提前位置
+            QString SearchAxisStr = m_NameDefine[1].axisName[SearchAxis->axis];
+            contStr = QString(searchAxisMoveOrderjointList.at(0)).arg("搜索"+QString::number(SearchAxis->searchNum)).arg(SearchAxisStr).arg(QString::number(maxPos/100,'f',2)).arg(SearchAxis->runSpeed).arg(QString::number(advCDis/100,'f',2)).arg(QString::number(delay/100,'f',2)).arg(SearchinportNum);
+        }
+        else
+        {
+            contStr = QString(searchAxisMoveOrderjointList.at(1)).arg(QString::number(delay/100,'f',2));
+        }
     }
 
     return contStr;
@@ -1151,17 +1144,20 @@ QString LogicIfJoint(P_ProOrderStruct OIS)
     QString contStr= "";
     P_LogicIfStruct* LogicIf = (P_LogicIfStruct*)OIS.pData;
     QString LogicIfStr = "";
-    if(LogicIf->reqSelectFlag[0] == 0)
-    {//只有一个条件
-        contStr = QString(logicIfOrderjointList.at(0)).arg(GetLogicIfStr(0,LogicIf));
-    }
-    if(LogicIf->reqSelectFlag[0] == 1 || LogicIf->reqSelectFlag[0] == 2)
-    {//并且
-        if(LogicIf->reqSelectFlag[0] == 1){
-            contStr = QString(logicIfOrderjointList.at(1)).arg(GetLogicIfStr(0,LogicIf)).arg(GetLogicIfStr(1,LogicIf));
+    if(logicIfOrderjointList.count()>=3)
+    {
+        if(LogicIf->reqSelectFlag[0] == 0)
+        {//只有一个条件
+            contStr = QString(logicIfOrderjointList.at(0)).arg(GetLogicIfStr(0,LogicIf));
         }
-        else {
-            contStr = QString(logicIfOrderjointList.at(2)).arg(GetLogicIfStr(0,LogicIf)).arg(GetLogicIfStr(1,LogicIf));
+        if(LogicIf->reqSelectFlag[0] == 1 || LogicIf->reqSelectFlag[0] == 2)
+        {//并且
+            if(LogicIf->reqSelectFlag[0] == 1){
+                contStr = QString(logicIfOrderjointList.at(1)).arg(GetLogicIfStr(0,LogicIf)).arg(GetLogicIfStr(1,LogicIf));
+            }
+            else {
+                contStr = QString(logicIfOrderjointList.at(2)).arg(GetLogicIfStr(0,LogicIf)).arg(GetLogicIfStr(1,LogicIf));
+            }
         }
     }
 
@@ -1258,11 +1254,7 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
     }
     else if(LogicIf->cmpType[IfIndex]>=1 && LogicIf->cmpType[IfIndex]<=20)
     {//比较类型是变量
-#if USE_REFATOR_NAMEDEFINE
         LogicIfStr = m_NameDefine[1].varName[LogicIf->cmpType[IfIndex] - 1];
-#else
-        LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] + 17].modifyName;
-#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
         if(LogicIf->sufferCmpType[IfIndex] == 0)
         {//被比较对象类型-常量
@@ -1281,11 +1273,7 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
         {//被比较对象类型-变量#if USE_REFATOR_NAMEDEFINE
-#if USE_REFATOR_NAMEDEFINE
             LogicIfStr = LogicIfStr+m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
-#else
-            LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
-#endif
         }
         else if(LogicIf->sufferCmpType[IfIndex] == 102)
         {//被比较对象类型-实际产量
@@ -1302,21 +1290,12 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
         {//被比较对象类型-变量
-#if USE_REFATOR_NAMEDEFINE
             LogicIfStr = LogicIfStr+m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
-#else
-            LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
-#endif
         }
     }
     else if(LogicIf->cmpType[IfIndex]>=21 && LogicIf->cmpType[IfIndex]<=40)
     {//堆叠组方式1
-#if USE_REFATOR_NAMEDEFINE
-            LogicIfStr = m_NameDefine[1].stackName[LogicIf->cmpType[IfIndex] - 21];
-#else
-            LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] + 14].modifyName;
-#endif
-
+        LogicIfStr = m_NameDefine[1].stackName[LogicIf->cmpType[IfIndex] - 21];
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
         if(LogicIf->sufferCmpType[IfIndex] == 0)
         {//被比较对象类型-常量
@@ -1324,30 +1303,18 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 21 && LogicIf->sufferCmpType[IfIndex] <= 40)
         {//被比较对象类型-堆叠
-#if USE_REFATOR_NAMEDEFINE
             LogicIfStr = LogicIfStr+m_NameDefine[1].stackName[LogicIf->sufferCmpType[IfIndex] - 21];
-#else
-            LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 14].modifyName;
-#endif
         }
     }
     else if(LogicIf->cmpType[IfIndex]>=41 && LogicIf->cmpType[IfIndex]<=60)
     {//堆叠组方式2
-#if USE_REFATOR_NAMEDEFINE
         LogicIfStr = m_NameDefine[1].stackName[LogicIf->cmpType[IfIndex] - 41];
-#else
-        LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] + 5].modifyName;
-#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
         LogicIfStr = LogicIfStr+"堆叠完成";
     }
     else if(LogicIf->cmpType[IfIndex]>=61 && LogicIf->cmpType[IfIndex]<=80)
     {//轴-位置
-#if USE_REFATOR_NAMEDEFINE
         LogicIfStr = m_NameDefine[1].axisName[LogicIf->cmpType[IfIndex] - 61];
-#else
-        LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex] - 51].modifyName;
-#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
 
         if(LogicIf->sufferCmpType[IfIndex] == 101)
@@ -1356,28 +1323,16 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 1 && LogicIf->sufferCmpType[IfIndex] <= 20)
         {//被比较对象类型-变量
-#if USE_REFATOR_NAMEDEFINE
             LogicIfStr = LogicIfStr + m_NameDefine[1].varName[LogicIf->sufferCmpType[IfIndex] - 1];
-#else
-            LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] + 17].modifyName;
-#endif
         }
         else if(LogicIf->sufferCmpType[IfIndex] >= 61 && LogicIf->sufferCmpType[IfIndex] <= 80)
         {//被比较对象类型-轴
-#if USE_REFATOR_NAMEDEFINE
             LogicIfStr = LogicIfStr + m_NameDefine[1].axisName[LogicIf->sufferCmpType[IfIndex] - 61];
-#else
-            LogicIfStr = LogicIfStr+m_NameDefine[LogicIf->sufferCmpType[IfIndex] - 51].modifyName;
-#endif
         }
     }
     else if(LogicIf->cmpType[IfIndex]>=81 && LogicIf->cmpType[IfIndex]<=100)
     {//定时器
-#if USE_REFATOR_NAMEDEFINE
         LogicIfStr = m_NameDefine[1].timerName[LogicIf->cmpType[IfIndex] - 81];
-#else
-        LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex]-31].modifyName;
-#endif
         LogicIfStr += cmpModeTar(LogicIf->cmpMode[IfIndex]);
 
         if(LogicIf->sufferCmpType[IfIndex] == 0)
@@ -1386,11 +1341,7 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
         }
         else if(LogicIf->cmpType[IfIndex]>=81 && LogicIf->cmpType[IfIndex]<=100)
         {//被比较对象类型-定时器
-#if USE_REFATOR_NAMEDEFINE
         LogicIfStr = m_NameDefine[1].timerName[LogicIf->cmpType[IfIndex] - 81];
-#else
-        LogicIfStr = m_NameDefine[LogicIf->cmpType[IfIndex]-31].modifyName;
-#endif
         }
     }
     return LogicIfStr;
@@ -1407,7 +1358,10 @@ QString GetLogicIfStr(uint16_t IfIndex,P_LogicIfStruct* LogicIf)
 QString LogicElseJoint(void)
 {
     QString contStr= "";
-    contStr = QString(logicIfOrderjointList.at(3));
+    if(logicIfOrderjointList.count()>0)
+    {
+        contStr = QString(logicIfOrderjointList.at(3));
+    }
     return contStr;
 }
 
@@ -1422,7 +1376,10 @@ QString LogicElseJoint(void)
 QString LogicEndJoint(void)
 {
     QString contStr= "";
-    contStr = QString(logicIfOrderjointList.at(4));
+    if(logicIfOrderjointList.count()>0)
+    {
+        contStr = QString(logicIfOrderjointList.at(4));
+    }
     return contStr;
 }
 
@@ -1438,7 +1395,10 @@ QString LogicWhileStartJoint(P_ProOrderStruct OIS)
 {
     P_LogicWhileStartStruct* LogicWhileStart = (P_LogicWhileStartStruct*) OIS.pData;
     QString contStr= "";
-    contStr = QString(logicWhileStartOrderjointList.at(0)).arg(LogicWhileStart->cycNum);
+    if(logicWhileStartOrderjointList.count()>0)
+    {
+        contStr = QString(logicWhileStartOrderjointList.at(0)).arg(LogicWhileStart->cycNum);
+    }
     return contStr;
 }
 
@@ -1453,7 +1413,10 @@ QString LogicWhileStartJoint(P_ProOrderStruct OIS)
 QString LogicWhileEndJoint(void)
 {
     QString contStr= "";
-    contStr = QString(logicWhileStartOrderjointList.at(1));
+    if(logicWhileStartOrderjointList.count()>0)
+    {
+        contStr = QString(logicWhileStartOrderjointList.at(1));
+    }
     return contStr;
 }
 
@@ -1470,11 +1433,10 @@ QString LogicVarStructJoint(P_ProOrderStruct OIS)
     P_LogicVarStruct* LogicVarStart = (P_LogicVarStruct*) OIS.pData;
     QString contStr= "";
     QString OperStr = GetLogicVarStr(OIS);
-#if USE_REFATOR_NAMEDEFINE
-    contStr = QString(logicVarOrderjointList.at(LogicVarStart->operMode)).arg(m_NameDefine[1].varName[LogicVarStart->varNum - 1]).arg(OperStr);
-#else
-    contStr = QString(logicVarOrderjointList.at(LogicVarStart->operMode)).arg(m_NameDefine[17+LogicVarStart->varNum].modifyName).arg(OperStr);
-#endif
+    if(logicVarOrderjointList.count()>0)
+    {
+        contStr = QString(logicVarOrderjointList.at(LogicVarStart->operMode)).arg(m_NameDefine[1].varName[LogicVarStart->varNum - 1]).arg(OperStr);
+    }
     return contStr;
 }
 
@@ -1492,11 +1454,10 @@ QString LogicAxisJoint(P_ProOrderStruct OIS)
     P_LogicAxisStruct* LogicAxis = (P_LogicAxisStruct*) OIS.pData;
     QString contStr= "";
     QString OperStr = GetLogicVarStr(OIS);
-#if USE_REFATOR_NAMEDEFINE
-    contStr = QString(logicAxisOrderjointList.at(LogicAxis->operMode)).arg(m_NameDefine[1].axisName[LogicAxis->axisNum - 1]).arg(OperStr);
-#else
-    contStr = QString(logicAxisOrderjointList.at(LogicAxis->operMode)).arg(m_NameDefine[9+LogicAxis->axisNum].modifyName).arg(OperStr);
-#endif
+    if(logicAxisOrderjointList.count()>0)
+    {
+        contStr = QString(logicAxisOrderjointList.at(LogicAxis->operMode)).arg(m_NameDefine[1].axisName[LogicAxis->axisNum - 1]).arg(OperStr);
+    }
     return contStr;
 }
 /*************************************************************************
@@ -1512,11 +1473,10 @@ QString LogicStackJoint(P_ProOrderStruct OIS)
     P_LogicStackStruct* LogicStack = (P_LogicStackStruct*) OIS.pData;
     QString contStr= "";
     QString OperStr = GetLogicVarStr(OIS);
-#if USE_REFATOR_NAMEDEFINE
-    contStr = QString(logicAxisOrderjointList.at(LogicStack->operMode)).arg(m_NameDefine[1].stackName[LogicStack->stackNum - 1]).arg(OperStr);
-#else
-    contStr = QString(logicStackOrderjointList.at(LogicStack->operMode)).arg(m_NameDefine[34+LogicStack->stackNum].modifyName).arg(OperStr);
-#endif
+    if(logicAxisOrderjointList.count()>0)
+    {
+        contStr = QString(logicAxisOrderjointList.at(LogicStack->operMode)).arg(m_NameDefine[1].stackName[LogicStack->stackNum - 1]).arg(OperStr);
+    }
     return contStr;
 }
 
@@ -1533,7 +1493,10 @@ QString LogicCurProductNumJoint(P_ProOrderStruct OIS)
     P_LogicCurProductNumStruct* LogicCurProductNum = (P_LogicCurProductNumStruct*) OIS.pData;
     QString contStr= "";
     QString OperStr = GetLogicVarStr(OIS);
-    contStr = QString(logicCurProductNumOrderjointList.at(LogicCurProductNum->operMode)).arg("实际产量").arg(OperStr);
+    if(logicCurProductNumOrderjointList.count()>0)
+    {
+        contStr = QString(logicCurProductNumOrderjointList.at(LogicCurProductNum->operMode)).arg("实际产量").arg(OperStr);
+    }
     return contStr;
 }
 
@@ -1549,12 +1512,10 @@ QString LogicTimeJoint(P_ProOrderStruct OIS)
 {
     P_LogicTimeStruct* LogicTime = (P_LogicTimeStruct*) OIS.pData;
     QString contStr= "";
-#if USE_REFATOR_NAMEDEFINE
-    contStr = QString(logicTimeOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[1].timerName[LogicTime->timeNum - 1]);
-#else
-
-    contStr = QString(logicTimeOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[49+LogicTime->timeNum].modifyName);
-#endif
+    if(logicTimeOrderjointList.count()>0)
+    {
+        contStr = QString(logicTimeOrderjointList.at(LogicTime->operMode)).arg(m_NameDefine[1].timerName[LogicTime->timeNum - 1]);
+    }
     return contStr;
 }
 /*************************************************************************
@@ -1591,20 +1552,11 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicVarStart->sufferOperType>=1 && LogicVarStart->sufferOperType<=20)
         {//1-20变量
-#if USE_REFATOR_NAMEDEFINE
             returnstr = m_NameDefine[1].varName[LogicVarStart->sufferOperType - 1];
-#else
-            returnstr = m_NameDefine[17+LogicVarStart->sufferOperType].modifyName;
-#endif
         }
         else if(LogicVarStart->sufferOperType>=21 && LogicVarStart->sufferOperType<=40)
         {//21-40轴
-#if USE_REFATOR_NAMEDEFINE
             returnstr = m_NameDefine[1].axisName[LogicVarStart->sufferOperType - 21];
-#else
-
-            returnstr = m_NameDefine[LogicVarStart->sufferOperType-11].modifyName;
-#endif
         }
         else if(LogicVarStart->sufferOperType == 101)
         {//101实际产量
@@ -1622,12 +1574,7 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicAxisStart->sufferOperType>=1 && LogicAxisStart->sufferOperType<=20)
         {//1-20变量
-#if USE_REFATOR_NAMEDEFINE
             returnstr = m_NameDefine[1].varName[LogicAxisStart->sufferOperType - 1];
-#else
-
-            returnstr = m_NameDefine[17+LogicAxisStart->sufferOperType].modifyName;
-#endif
         }
         break;
     }
@@ -1640,11 +1587,7 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicStackStart->sufferOperType>=1 && LogicStackStart->sufferOperType<=20)
         {//1-20堆叠计数
-#if USE_REFATOR_NAMEDEFINE
             returnstr = m_NameDefine[1].stackName[LogicStackStart->sufferOperType - 1];
-#else
-            returnstr = m_NameDefine[34+LogicStackStart->sufferOperType].modifyName;
-#endif
         }
         break;
     }
@@ -1657,12 +1600,7 @@ QString GetLogicVarStr(P_ProOrderStruct OIS)
         }
         else if(LogicCurProductNumStruct->sufferOperType>=1 && LogicCurProductNumStruct->sufferOperType<=20)
         {//1-20变量
-#if USE_REFATOR_NAMEDEFINE
             returnstr = m_NameDefine[1].varName[LogicCurProductNumStruct->sufferOperType - 1];
-#else
-
-            returnstr = m_NameDefine[17+LogicCurProductNumStruct->sufferOperType].modifyName;
-#endif
         }
         break;
     }
@@ -1689,20 +1627,26 @@ QString LabelJoint(P_ProOrderStruct OIS)
     {
         if(Preview_LableNameList[m_OperateProNum].count()>0)
         {
-            QString Itemtext = Preview_LableNameList[m_OperateProNum][LabelStruct->labelNum-1];
-            QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
-            QRegularExpressionMatch match = re.match(Itemtext);
-            if (match.hasMatch()) {
-                LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
-            }
-            QStringList labeltext = Preview_LableNameList[m_OperateProNum][LabelIndex-1].split(signalSpace);
-            if(labeltext.length()>1)
+            if(LabelStruct->labelNum>0)
             {
-                contStr= "[" + labeltext[0] +"] "+labeltext[1];
-            }
-            if(LabelStruct->type == 1)
-            {
-                contStr = "跳转到 "+contStr;
+                QString Itemtext = Preview_LableNameList[m_OperateProNum][LabelStruct->labelNum-1];
+                QRegularExpression re("标签(\\d+)"); // 匹配“标签”后面的数字
+                QRegularExpressionMatch match = re.match(Itemtext);
+                if (match.hasMatch()) {
+                    LabelIndex = match.captured(1).toUInt(); // 提取匹配到的数字
+                }
+                if(LabelIndex>0)
+                {
+                    QStringList labeltext = Preview_LableNameList[m_OperateProNum][LabelIndex-1].split(signalSpace);
+                    if(labeltext.length()>1)
+                    {
+                        contStr= "[" + labeltext[0] +"] "+labeltext[1];
+                    }
+                    if(LabelStruct->type == 1)
+                    {
+                        contStr = "跳转到 "+contStr;
+                    }
+                }
             }
         }
     }

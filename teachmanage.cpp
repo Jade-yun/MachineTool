@@ -179,6 +179,9 @@ void TeachManage::on_btn_Copy_clicked()
 
         // fresh table dispaly
         addNewRowToTable(targeProgName, curTime, P_NamePathTemp.filePermission);
+        g_SafeFileHandler->rotateBackups(m_ProgramPath + "/" + P_NamePathTemp.fileName + SUFFIX_PROGRAM);//复制文件后备份一次复制后的新文件
+        g_SafeFileHandler->rotateBackups(m_ProgramPath + "/" + P_NamePathTemp.fileName + SUFFIX_REFER);//复制文件后备份一次复制后的新文件对应参考点文件
+
     }
     else
     {
@@ -236,7 +239,6 @@ void TeachManage::on_btn_Preview_clicked()
     if(filePreview->exec() == QDialog::Accepted)
     {//不做任何处理
     }
-
 }
 
 void TeachManage::on_btn_Del_clicked()
@@ -279,6 +281,8 @@ void TeachManage::on_btn_Del_clicked()
         if(m_CurrentProgramNameAndPath.fileName != m_ProgramNameAndPath[selectedProgramIndex].fileName)
         {
             // update program struct
+            g_SafeFileHandler->ClearBackups(m_ProgramPath + "/" + m_ProgramNameAndPath[selectedProgramIndex].fileName + SUFFIX_PROGRAM);//删除备份文件
+            g_SafeFileHandler->ClearBackups(m_ProgramPath + "/" + m_ProgramNameAndPath[selectedProgramIndex].fileName + SUFFIX_REFER);//删除备份文件对应的参考点文件
             m_ProgramNameAndPath.removeAt(selectedProgramIndex);
             m_FileNameNum--;
 
@@ -410,7 +414,6 @@ void TeachManage::on_btn_Import_clicked()
     QFileInfo progFileInfo(filePath);
     QString programName = progFileInfo.baseName();
     QString progModifiedTime = progFileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
-    g_SafeFileHandler->rotateBackups(filePath);
     // 检查是否存在相同名称的程序
     auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
                            [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });
@@ -435,7 +438,6 @@ void TeachManage::on_btn_Import_clicked()
         it->filePath = m_ProgramPath + "/" + programName + SUFFIX_PROGRAM;
         it->filePermission = ::getProgramPermission(programName);
         it->changeTime = progModifiedTime;
-
         // 更新表格中的显示
         for (int i = 0; i < ui->tableTeachManage->rowCount(); ++i)
         {
@@ -480,7 +482,8 @@ void TeachManage::on_btn_Import_clicked()
     }
 
     setProgramNameAndPath(m_ProgramNameAndPath);
-
+    g_SafeFileHandler->rotateBackups(m_ProgramPath + "/" + programName + SUFFIX_PROGRAM);//备份文件
+    g_SafeFileHandler->rotateBackups(m_ProgramPath + "/" + programName + SUFFIX_REFER);//备份文件对应的参考点文件
     ErrorTipDialog tip(tr("文件导入成功！"), TipMode::ONLY_OK);
     tip.exec();
 }

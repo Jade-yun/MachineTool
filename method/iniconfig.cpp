@@ -573,23 +573,39 @@ void setInternet(D_InternetStruct value)
 //系统参数
 void getSystemSet()
 {
-    D_SystemSetStruct defaultV{0, 0, 0, 0, 0, 0, "", 0};
+    if(CheckFileComplete(SysSetConfigPath))
+    {
+        D_SystemSetStruct defaultV{0, 0, 0, 0, 0, 0, "", 0};
 
-    QSettings settings(SysSetConfigPath, QSettings::IniFormat);
-    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+        QSettings settings(SysSetConfigPath, QSettings::IniFormat);
+        settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
-    settings.beginGroup("SystemSet");
+        settings.beginGroup("SystemSet");
 
-    m_SystemSet.lan = settings.value("lan",defaultV.lan).toUInt();
-    m_SystemSet.typeFace = settings.value("typeFace", defaultV.typeFace).toUInt();
-    m_SystemSet.wordSize = settings.value("wordSize", defaultV.wordSize).toUInt();
-    m_SystemSet.keyListen = settings.value("keyListen", defaultV.keyListen).toUInt();
-    m_SystemSet.backlightTime = settings.value("backlightTime", defaultV.backlightTime).toUInt();
-    m_SystemSet.backlightBrightness = settings.value("backlightBrightness", defaultV.backlightBrightness).toUInt();
-    m_SystemSet.sysName = settings.value("sysName", defaultV.sysName).toString();
-    m_SystemSet.sysColor = settings.value("sysColor", defaultV.sysColor).toUInt();
+        m_SystemSet.lan = settings.value("lan",defaultV.lan).toUInt();
+        m_SystemSet.typeFace = settings.value("typeFace", defaultV.typeFace).toUInt();
+        m_SystemSet.wordSize = settings.value("wordSize", defaultV.wordSize).toUInt();
+        m_SystemSet.keyListen = settings.value("keyListen", defaultV.keyListen).toUInt();
+        m_SystemSet.backlightTime = settings.value("backlightTime", defaultV.backlightTime).toUInt();
+        m_SystemSet.backlightBrightness = settings.value("backlightBrightness", defaultV.backlightBrightness).toUInt();
+        m_SystemSet.sysName = settings.value("sysName", defaultV.sysName).toString();
+        m_SystemSet.sysColor = settings.value("sysColor", defaultV.sysColor).toUInt();
 
-    settings.endGroup();
+        settings.endGroup();
+    }
+    else
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(SysSetConfigPath);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(SysSetConfigPath);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(SysSetConfigPath);
+        }
+    }
 }
 void setSystemSet(const D_SystemSetStruct& value)
 {
@@ -988,33 +1004,12 @@ void setManualAxis(D_ManualAxis value)
 //读取所有文件程序信息
 void getProgramNameAndPath()
 {
-#if 0
-    D_ProgramNameAndPathStruct P_NamePathTemp;
-    QStringList str_name=getValue("File","name","").split(";");
-    QStringList str_path=getValue("File","path","").split(";");
-    QStringList str_index=getValue("File","index","").split(";");
-    QStringList str_Permission=getValue("File","Permission","").split(";");
-    QStringList str_time=getValue("File","time","").split(";");
-    if(str_name.count()==1&&str_name[0]=="")
-        return;
-    if(str_name.count() == str_path.count() && str_name.count() == str_index.count()  && str_name.count() == str_Permission.count()  && str_name.count() == str_time.count())
+    if(CheckFileComplete(AllExistingProgramInfoPath))
     {
-        for(int i=0;i<str_name.count();i++)
-        {
-            P_NamePathTemp.fileName=str_name[i];
-            P_NamePathTemp.filePath=str_path[i];
-            P_NamePathTemp.index=str_index[i].toUInt();
-            P_NamePathTemp.filePermission=str_Permission[i].toUInt();
-            P_NamePathTemp.changeTime=str_time[i];
-            m_ProgramNameAndPath.append(P_NamePathTemp);
-        }
-    }
-#endif
+        m_ProgramNameAndPath.clear();
 
-    m_ProgramNameAndPath.clear();
-
-    QSettings settings(AllExistingProgramInfoPath, QSettings::IniFormat);
-    QStringList groups = settings.childGroups();
+        QSettings settings(AllExistingProgramInfoPath, QSettings::IniFormat);
+        QStringList groups = settings.childGroups();
         for (const QString& group : qAsConst(groups))
         {
             settings.beginGroup(group);
@@ -1037,42 +1032,24 @@ void getProgramNameAndPath()
 
             m_ProgramNameAndPath.append(prog);
         }
+    }
+    else
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(AllExistingProgramInfoPath);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(AllExistingProgramInfoPath);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(AllExistingProgramInfoPath);
+        }
+    }
 }
 //保存所有文件程序信息
 void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
 {
-#if 0
-    QString str_name;
-    QString str_path;
-    QString str_index;
-    QString str_Permission;
-    QString str_time;
-    for(int i=0;i<programsInfo.count();i++)
-    {
-        if(i==0)
-        {
-            str_name+=programsInfo[i].fileName;
-            str_path+=programsInfo[i].filePath;
-            str_index+=QString::number(programsInfo[i].index);
-            str_Permission+=QString::number(programsInfo[i].filePermission);
-            str_time+=programsInfo[i].changeTime;
-        }
-        else
-        {
-            str_name=str_name+";"+programsInfo[i].fileName;
-            str_path=str_path+";"+programsInfo[i].filePath;
-            str_index=str_index+";"+QString::number(programsInfo[i].index);
-            str_Permission=str_Permission+";"+QString::number(programsInfo[i].filePermission);
-            str_time=str_time+";"+programsInfo[i].changeTime;
-        }
-    }
-    setValue("File","name",str_name);
-    setValue("File","path",str_path);
-    setValue("File","index",str_index);
-    setValue("File","Permission",str_Permission);
-    setValue("File","time",str_time);
-#endif
-
     g_SafeFileHandler->rotateBackups(AllExistingProgramInfoPath);
     QSettings settings(AllExistingProgramInfoPath, QSettings::IniFormat);
     settings.clear();
@@ -1198,14 +1175,31 @@ void savePasswdToConfig(int authority, uint32_t value)
 
 void readPasswdFromConfig()
 {
-    QSettings settings(PasswdConfigPath, QSettings::IniFormat);
-    settings.beginGroup("Passwd");
-    for (int i = 0; i < 3; i++)
+    if(CheckFileComplete(PasswdConfigPath))
     {
-        passwd[i] = settings.value(QString("Authority_%1").arg(i), 12345).toUInt();
+        QSettings settings(PasswdConfigPath, QSettings::IniFormat);
+        settings.beginGroup("Passwd");
+        for (int i = 0; i < 3; i++)
+        {
+            passwd[i] = settings.value(QString("Authority_%1").arg(i), 12345).toUInt();
+        }
+        passwd[3] = settings.value(QString("Restore_Passwd"), 12345).toUInt();
+        settings.endGroup();
     }
-    passwd[3] = settings.value(QString("Restore_Passwd"), 12345).toUInt();
-    settings.endGroup();
+    else
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(PasswdConfigPath);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(PasswdConfigPath);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(PasswdConfigPath);
+        }
+    }
+
 }
 
 void writeKeySetStrToConfig(int index, const QString &text)
@@ -1386,37 +1380,54 @@ void readGuideInfo()
 
 void readNameDefine()
 {
-    QSettings settings(CustomizeNameDefPath, QSettings::IniFormat);
-    settings.setIniCodec(QTextCodec::codecForName("utf-8"));
-    const QStringList groups = {"Default", "Modify"};
+    if(CheckFileComplete(CustomizeNameDefPath))
+    {
+        QSettings settings(CustomizeNameDefPath, QSettings::IniFormat);
+        settings.setIniCodec(QTextCodec::codecForName("utf-8"));
+        const QStringList groups = {"Default", "Modify"};
 
-    for (int groupIndex = 0; groupIndex < groups.size(); ++groupIndex) {
-        settings.beginGroup(groups[groupIndex]);
+        for (int groupIndex = 0; groupIndex < groups.size(); ++groupIndex) {
+            settings.beginGroup(groups[groupIndex]);
 
-        m_NameDefine[groupIndex].adminName = settings.value("MGR").toString();
-        m_NameDefine[groupIndex].operatorName = settings.value("OPR").toString();
+            m_NameDefine[groupIndex].adminName = settings.value("MGR").toString();
+            m_NameDefine[groupIndex].operatorName = settings.value("OPR").toString();
 
-        for (int i = 0; i < 8; i++) {
-            m_NameDefine[groupIndex].subProgName[i] = settings.value(QString("SQ%1").arg(i+1)).toString();
-        }
-        for (int i = 0; i < AXIS_TOTAL_NUM; i++) {
-            m_NameDefine[groupIndex].axisName[i] = settings.value(QString("AXIS%1").arg(i+1)).toString();
-        }
-        for (int i = 0; i < VAR_TOTAL_NUM; i++) {
-            m_NameDefine[groupIndex].varName[i] = settings.value(QString("VAR%1").arg(i+1)).toString();
-        }
-        for (int i = 0; i < STACK_TOTAL_NUM; i++) {
-            m_NameDefine[groupIndex].stackName[i] = settings.value(QString("STACK%1").arg(i+1)).toString();
-        }
-        for (int i = 0; i < FOLLOW_STACK_NUM; i++) {
-            m_NameDefine[groupIndex].followStackName[i] = settings.value(QString("FOLLOW%1").arg(i+1)).toString();
-        }
-        for (int i = 0; i < TIME_TOTAL_NUM; i++) {
-            m_NameDefine[groupIndex].timerName[i] = settings.value(QString("TIMER%1").arg(i+1)).toString();
-        }
+            for (int i = 0; i < 8; i++) {
+                m_NameDefine[groupIndex].subProgName[i] = settings.value(QString("SQ%1").arg(i+1)).toString();
+            }
+            for (int i = 0; i < AXIS_TOTAL_NUM; i++) {
+                m_NameDefine[groupIndex].axisName[i] = settings.value(QString("AXIS%1").arg(i+1)).toString();
+            }
+            for (int i = 0; i < VAR_TOTAL_NUM; i++) {
+                m_NameDefine[groupIndex].varName[i] = settings.value(QString("VAR%1").arg(i+1)).toString();
+            }
+            for (int i = 0; i < STACK_TOTAL_NUM; i++) {
+                m_NameDefine[groupIndex].stackName[i] = settings.value(QString("STACK%1").arg(i+1)).toString();
+            }
+            for (int i = 0; i < FOLLOW_STACK_NUM; i++) {
+                m_NameDefine[groupIndex].followStackName[i] = settings.value(QString("FOLLOW%1").arg(i+1)).toString();
+            }
+            for (int i = 0; i < TIME_TOTAL_NUM; i++) {
+                m_NameDefine[groupIndex].timerName[i] = settings.value(QString("TIMER%1").arg(i+1)).toString();
+            }
 
-        settings.endGroup();
+            settings.endGroup();
+        }
     }
+    else
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(CustomizeNameDefPath);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(CustomizeNameDefPath);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(CustomizeNameDefPath);
+        }
+    }
+
 }
 
 void writeNameDefine()
@@ -1558,41 +1569,57 @@ void writePortDefInfo()
 
 void readPortDefInfo()
 {
-    QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
-    settings.setIniCodec("UTF-8");
-
-    for (int i = 0; i < INPUT_TOTAL_NUM; ++i)
+    if(CheckFileComplete(CustomizePortInfoPath))
     {
-        settings.beginGroup(QString("X%1").arg(i + 1));
-        {
-            m_Port_X[i].defineName = settings.value("defaultName").toString();
-            m_Port_X[i].definePort = settings.value("defaultPortName").toString();
-            m_Port_X[i].ResDefineName = settings.value("defaultPortName_Res").toString();
-            m_Port_X[i].portNum = settings.value("defaultPortNum").toUInt();
+        QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
+        settings.setIniCodec("UTF-8");
 
-            m_Port_X[i].modifyName = settings.value("modifyName").toString();
-            m_Port_X[i].modifyPort = settings.value("modifyPortName").toString();
-            m_Port_X[i].ResModifyName = settings.value("modifyPortName_Res").toString();
-            m_Port_X[i].actualPortNum = settings.value("modifyPortNum").toUInt();
+        for (int i = 0; i < INPUT_TOTAL_NUM; ++i)
+        {
+            settings.beginGroup(QString("X%1").arg(i + 1));
+            {
+                m_Port_X[i].defineName = settings.value("defaultName").toString();
+                m_Port_X[i].definePort = settings.value("defaultPortName").toString();
+                m_Port_X[i].ResDefineName = settings.value("defaultPortName_Res").toString();
+                m_Port_X[i].portNum = settings.value("defaultPortNum").toUInt();
+
+                m_Port_X[i].modifyName = settings.value("modifyName").toString();
+                m_Port_X[i].modifyPort = settings.value("modifyPortName").toString();
+                m_Port_X[i].ResModifyName = settings.value("modifyPortName_Res").toString();
+                m_Port_X[i].actualPortNum = settings.value("modifyPortNum").toUInt();
+            }
+            settings.endGroup();
         }
-        settings.endGroup();
+
+        for (int i = 0; i < OUTPUT_TOTAL_NUM; ++i)
+        {
+            settings.beginGroup(QString("Y%1").arg(i + 1));
+            {
+                m_Port_Y[i].defineName = settings.value("defaultName").toString();
+                m_Port_Y[i].definePort = settings.value("defaultPortName").toString();
+                m_Port_Y[i].ResDefineName = settings.value("defaultPortName_Res").toString();
+                m_Port_Y[i].portNum = settings.value("defaultPortNum").toUInt();
+
+                m_Port_Y[i].modifyName = settings.value("modifyName").toString();
+                m_Port_Y[i].modifyPort = settings.value("modifyPortName").toString();
+                m_Port_Y[i].ResModifyName = settings.value("modifyPortName_Res").toString();
+                m_Port_Y[i].actualPortNum = settings.value("modifyPortNum").toUInt();
+            }
+            settings.endGroup();
+        }
     }
-
-    for (int i = 0; i < OUTPUT_TOTAL_NUM; ++i)
+    else
     {
-        settings.beginGroup(QString("Y%1").arg(i + 1));
+        bool temp = g_SafeFileHandler->attemptRecovery(CustomizePortInfoPath);
+        if(temp)
         {
-            m_Port_Y[i].defineName = settings.value("defaultName").toString();
-            m_Port_Y[i].definePort = settings.value("defaultPortName").toString();
-            m_Port_Y[i].ResDefineName = settings.value("defaultPortName_Res").toString();
-            m_Port_Y[i].portNum = settings.value("defaultPortNum").toUInt();
-
-            m_Port_Y[i].modifyName = settings.value("modifyName").toString();
-            m_Port_Y[i].modifyPort = settings.value("modifyPortName").toString();
-            m_Port_Y[i].ResModifyName = settings.value("modifyPortName_Res").toString();
-            m_Port_Y[i].actualPortNum = settings.value("modifyPortNum").toUInt();
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(CustomizePortInfoPath);
+            readIniPara();
         }
-        settings.endGroup();
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(CustomizePortInfoPath);
+        }
     }
 }
 
@@ -1650,3 +1677,25 @@ void getAutoPagePar()
     }
 }
 
+//校验文件正确性
+bool CheckFileComplete(QString FilePath)
+{
+    bool status = true;
+    QFile configFile(FilePath);
+    if(!configFile.exists())
+    {
+        qDebug()<<QString("配置文件%1不存在").arg(FilePath);
+        status = false;
+    }
+    if (!configFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << QString("配置文件%1无法打开，错误信息：%2").arg(FilePath).arg(configFile.errorString());
+        status = false;
+    }
+    if((configFile.size()<10))
+    {//正常文件不可能这么少，如果小于10个字节，说明文件异常
+        qDebug()<<QString("配置文件%1大小异常").arg(FilePath);
+        status = false;
+    }
+    return status;
+}

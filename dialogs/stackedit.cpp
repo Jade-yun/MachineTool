@@ -431,7 +431,7 @@ void StackEdit::StackAxisSelectQcomboboxRefresh()
     else
     {
         axisSelect[1]->setCurrentIndex(0);
-        saveStackBasicInfo();
+//        saveStackBasicInfo();
     }
 
     if (axisZIndex == 3 && m_AxisPar[Z1_AXIS].axisType == 1)
@@ -451,7 +451,7 @@ void StackEdit::StackAxisSelectQcomboboxRefresh()
     else
     {
         axisSelect[2]->setCurrentIndex(0);
-        saveStackBasicInfo();
+//        saveStackBasicInfo();
     }
 
 }

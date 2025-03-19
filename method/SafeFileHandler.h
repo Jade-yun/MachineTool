@@ -18,12 +18,13 @@ public:
     bool writeData(QString m_filePath,const QByteArray &data);
     void rotateBackups(QString filePath);//备份文件
     bool attemptRecovery(QString filePath);//从备份文件恢复
+    bool ClearBackups(QString filePath);//删除备份文件
     QByteArray readData(QString m_filePath,bool verify = true);
 private:
     QString m_filePath;
     QString m_backupDir;
     QByteArray m_lastChecksum;
-
+    QString sysfiledir = "/opt/MachineTool/configs/";//用来存储系统配置文件存储目录，系统第一次启动时自动备份一次所有文件
 
 
     static int fsync(int fd) {

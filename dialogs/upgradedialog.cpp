@@ -214,7 +214,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
     case SYSTEM_DATA_COPY:
     {
         ui->upgradeWidget->setCurrentWidget(ui->upgradepage1);
-        ui->upgrade_label->setText(tr("是否备份设置文件U盘？"));
+        ui->upgrade_label->setText(tr("是否备份设置文件到U盘？"));
         ui->Data_select->show();
         ui->All_checkbox->setChecked(true);//默认选中全部参数
         ui->upgrade_SearchName->setText("/HMI/");
@@ -663,7 +663,7 @@ void upgradedialog::on_ok_button_clicked()
             }
             else if(ui->Cust_checkbox->isChecked())
             {
-
+                copyPath("/opt/MachineTool/configs/NameDef_Customize_*.ini",currentPath);
             }
             else if(ui->All_checkbox->isChecked())
             {

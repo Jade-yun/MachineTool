@@ -74,44 +74,61 @@ QStringList sunProCmdList;                         //子程序命令
 **************************************************************************/
 void readIniProgramStruct()
 {
-    fileSectionList=getIniValues(0,"Section");                        //程序保存节点
-    programInfoList=getIniValues(0,"ProgramInfo");                       //程序信息
-    LablePartList=getIniValues(0,"LabelPart");
-    referencePointList=getIniValues(0,"ReferencePoint");                    //每个参考点表示
-    programBasicCmdList=getIniValues(0,"ProgramBasicCmd");                   //基本命令
+    if(CheckFileComplete(m_configCmdPath))
+    {
+        fileSectionList=getIniValues(0,"Section");                        //程序保存节点
+        programInfoList=getIniValues(0,"ProgramInfo");                       //程序信息
+        LablePartList=getIniValues(0,"LabelPart");
+        referencePointList=getIniValues(0,"ReferencePoint");                    //每个参考点表示
+        programBasicCmdList=getIniValues(0,"ProgramBasicCmd");                   //基本命令
 
-    axisMoveCmdList=getIniValues(0,"P_AxisMoveCmd");                       //轴动作命令
-    clawActionCmdList=getIniValues(0,"P_ClawActionCmd");                       //卡爪动作命令
-    clawCheckCmdList=getIniValues(0,"P_ClawCheckCmd");                       //信号检测-卡爪检测命令
-    reserveCheckCmdList=getIniValues(0,"P_ReserveCheckCmd");                        //信号检测-预留检测命令
-    machineOutCmdList=getIniValues(0,"P_MachineOutCmd");                       //机床-输出动作命令
-    stackResetZeroCmdList=getIniValues(0,"P_StackResetZeroCmd");                        //堆叠-堆叠清零命令
-    stackMoveCmdList=getIniValues(0,"P_StackMoveCmd");                        //堆叠-堆叠组运动命令
-    stackFollowCmdList=getIniValues(0,"P_StackFollowCmd");                         //堆叠-放料跟随运动命令
-    reserveOutCmdList=getIniValues(0,"P_ReserveOutCmd");                         //预留输出动作命令
+        axisMoveCmdList=getIniValues(0,"P_AxisMoveCmd");                       //轴动作命令
+        clawActionCmdList=getIniValues(0,"P_ClawActionCmd");                       //卡爪动作命令
+        clawCheckCmdList=getIniValues(0,"P_ClawCheckCmd");                       //信号检测-卡爪检测命令
+        reserveCheckCmdList=getIniValues(0,"P_ReserveCheckCmd");                        //信号检测-预留检测命令
+        machineOutCmdList=getIniValues(0,"P_MachineOutCmd");                       //机床-输出动作命令
+        stackResetZeroCmdList=getIniValues(0,"P_StackResetZeroCmd");                        //堆叠-堆叠清零命令
+        stackMoveCmdList=getIniValues(0,"P_StackMoveCmd");                        //堆叠-堆叠组运动命令
+        stackFollowCmdList=getIniValues(0,"P_StackFollowCmd");                         //堆叠-放料跟随运动命令
+        reserveOutCmdList=getIniValues(0,"P_ReserveOutCmd");                         //预留输出动作命令
 
-    waitInMachineCmdList=getIniValues(0,"P_WaitInMachineCmd");                         //信号等待-等待机床命令
-    waitInClawCmdList=getIniValues(0,"P_WaitInClawCmd");                        //信号等待-等待卡爪命令
-    waitInReserveCmdList=getIniValues(0,"P_WaitInReserveCmd");                        //信号等待-等待预留命令
-    otherAlarmCustCmdList=getIniValues(0,"P_OtherAlarmCustCmd");                        //其他-报警自定义命令
-    other_alarm_lamp=getIniValues(0,"P_OtherAlarmLampCmd");                        //其他-报警灯命令
-    other_alarm_sound=getIniValues(0,"P_OtherAlarmSoundCmd");                        //其他-报警声命令
-    otherCycStopCmdList=getIniValues(0,"P_OtherCycStopCmd");                        //其他-周期停止命令
-    labelCmdList=getIniValues(0,"P_LabelCmd");                        //标签命令
+        waitInMachineCmdList=getIniValues(0,"P_WaitInMachineCmd");                         //信号等待-等待机床命令
+        waitInClawCmdList=getIniValues(0,"P_WaitInClawCmd");                        //信号等待-等待卡爪命令
+        waitInReserveCmdList=getIniValues(0,"P_WaitInReserveCmd");                        //信号等待-等待预留命令
+        otherAlarmCustCmdList=getIniValues(0,"P_OtherAlarmCustCmd");                        //其他-报警自定义命令
+        other_alarm_lamp=getIniValues(0,"P_OtherAlarmLampCmd");                        //其他-报警灯命令
+        other_alarm_sound=getIniValues(0,"P_OtherAlarmSoundCmd");                        //其他-报警声命令
+        otherCycStopCmdList=getIniValues(0,"P_OtherCycStopCmd");                        //其他-周期停止命令
+        labelCmdList=getIniValues(0,"P_LabelCmd");                        //标签命令
 
-    logicIfCmdList=getIniValues(0,"P_LogicIfCmd");                         //逻辑&变量-如果-如果命令
-    logicWhileStartCmdList=getIniValues(0,"P_LogicWhileStartCmd");                        //逻辑&变量-循环开始命令
-    logicVarCmdList=getIniValues(0,"P_LogicVarCmd");                         //逻辑&变量-变量-变量命令
-    logicAxisCmdList=getIniValues(0,"P_LogicAxisCmd");                         //逻辑&变量-变量-轴命令
-    logicStackCmdList=getIniValues(0,"P_LogicStackCmd");                         //逻辑&变量-变量-堆叠命令
-    logicCurProductNumCmdList=getIniValues(0,"P_LogicCurProductNumCmd");                         //逻辑&变量-变量-实际产量命令结构体
-    logicTimeCmdList=getIniValues(0,"P_LogicTimeCmd");                        //逻辑&变量-定时器命令
-    searchAxisMoveCmdList=getIniValues(0,"P_SearchAxisMoveCmd");                        //搜索-轴搜索运动命令
+        logicIfCmdList=getIniValues(0,"P_LogicIfCmd");                         //逻辑&变量-如果-如果命令
+        logicWhileStartCmdList=getIniValues(0,"P_LogicWhileStartCmd");                        //逻辑&变量-循环开始命令
+        logicVarCmdList=getIniValues(0,"P_LogicVarCmd");                         //逻辑&变量-变量-变量命令
+        logicAxisCmdList=getIniValues(0,"P_LogicAxisCmd");                         //逻辑&变量-变量-轴命令
+        logicStackCmdList=getIniValues(0,"P_LogicStackCmd");                         //逻辑&变量-变量-堆叠命令
+        logicCurProductNumCmdList=getIniValues(0,"P_LogicCurProductNumCmd");                         //逻辑&变量-变量-实际产量命令结构体
+        logicTimeCmdList=getIniValues(0,"P_LogicTimeCmd");                        //逻辑&变量-定时器命令
+        searchAxisMoveCmdList=getIniValues(0,"P_SearchAxisMoveCmd");                        //搜索-轴搜索运动命令
 
-    offsetAxisCmdList=getIniValues(0,"P_OffsetAxisCmd");                         //偏移-轴偏移运动命令
-    torqueGardCmdList=getIniValues(0,"P_TorqueGardCmd");                         //扭矩保护命令
-    axisStopCmdList=getIniValues(0,"P_AxisStopCmd");                         //伺服停止命令
-    sunProCmdList=getIniValues(0,"P_SunProCmd");                         //子程序命令
+        offsetAxisCmdList=getIniValues(0,"P_OffsetAxisCmd");                         //偏移-轴偏移运动命令
+        torqueGardCmdList=getIniValues(0,"P_TorqueGardCmd");                         //扭矩保护命令
+        axisStopCmdList=getIniValues(0,"P_AxisStopCmd");                         //伺服停止命令
+        sunProCmdList=getIniValues(0,"P_SunProCmd");                         //子程序命令
+    }
+    else
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(m_configCmdPath);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configCmdPath);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(m_configCmdPath);
+        }
+    }
+
 }
 
 /*************************************************************************
@@ -176,6 +193,8 @@ uint8_t newBuildProgram(const QString& fileName)
         }
         // 文件现在已经创建（并且是空的），可以关闭它了
         file.close();
+        g_SafeFileHandler->rotateBackups(P_NamePathTemp.filePath);
+        g_SafeFileHandler->rotateBackups(filePath);
     }
     return 0;
 }
@@ -230,7 +249,6 @@ bool writeBasicProgram(D_ProgramNameAndPathStruct pro_temp)
         dir.mkdir(m_ProgramPath);
     }
 
-    g_SafeFileHandler->rotateBackups(pro_temp.filePath);
     QFile file(pro_temp.filePath);
     if(!file.open(QIODevice::WriteOnly|QIODevice::Text|QIODevice::Truncate))
         return false;
@@ -637,18 +655,17 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
 **************************************************************************/
 bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 {
-    QFileInfo fileinfo(pro_temp.filePath);
-    if(!(fileinfo.size()>0))
-    {//如果文件为空，说明文件异常
-        return false;
-    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
        // 处理文件打开失败的情况
        return false;
     }
-
+    if(!(file.size()>0))
+    {
+        qDebug()<<pro_temp.fileName<<"空文件";
+        return false;
+    }
     uint8_t intFlag = 0;
     QStringList LableNameList_Temp[PRO_NUM];
     QTextStream in(&file);
@@ -766,18 +783,17 @@ bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 #if 1
 bool readProgram(D_ProgramNameAndPathStruct pro_temp)
 {
-    QFileInfo fileinfo(pro_temp.filePath);
-    if(!(fileinfo.size()>0))
-    {//如果文件为空，说明文件异常
-        return false;
-    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
        // 处理文件打开失败的情况
        return false;
     }
-
+    if(!(file.size()>0))
+    {
+        qDebug()<<pro_temp.fileName<<"空文件";
+        return false;
+    }
     QTextStream in(&file);
     QStringList programInfoList;
     QStringList refList;
@@ -1572,6 +1588,11 @@ bool readPreviewLableOrderName(D_ProgramNameAndPathStruct pro_temp)
        // 处理文件打开失败的情况
        return false;
     }
+    if(!(file.size()>0))
+    {
+        qDebug()<<"文件大小异常："<<pro_temp.fileName;
+        return false;
+    }
     uint8_t intFlag = 0;
     QStringList LableNameList_Temp[PRO_NUM];
     QTextStream in(&file);
@@ -1690,6 +1711,11 @@ int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_P
     {
        // 处理文件打开失败的情况
        return false;
+    }
+    if(!(file.size()>0))
+    {
+        qDebug()<<pro_temp.fileName<<"空文件";
+        return false;
     }
     QTextStream in(&file);
     QStringList programInfoList;

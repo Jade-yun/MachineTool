@@ -88,7 +88,6 @@ void AlarmForm::saveAlarmQueueToConfig()
 
 void AlarmForm::loadAlarmQueueFromConfig()
 {
-    g_SafeFileHandler->rotateBackups(alarmInfoDataPath);
     QSettings settings(alarmInfoDataPath, QSettings::IniFormat);
 
     int size = settings.beginReadArray("AlarmInfoQueue");
@@ -100,8 +99,6 @@ void AlarmForm::loadAlarmQueueFromConfig()
         alarmInfoQueue.enqueue({alarmNum, alarmTime});
     }
     settings.endArray();
-    settings.sync();
-    REFRESH_KERNEL_BUFFER(alarmInfoDataPath.toLocal8Bit().data());
 }
 
 void AlarmForm::setupAlarmInfo()

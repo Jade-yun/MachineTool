@@ -819,18 +819,33 @@ void MainWindow::posflashhandle(AxisCurPos data)
 }
 void MainWindow::setStyleFromFile(const QString &styleSheet)
 {
-    QFile file(styleSheet);
-    file.open(QIODevice::ReadOnly);
-    if(file.isOpen())
+    if(CheckFileComplete(styleSheet))
     {
-        QString strFile = QLatin1String(file.readAll());
-        qApp->setStyleSheet(strFile);
+        QFile file(styleSheet);
+        file.open(QIODevice::ReadOnly);
+        if(file.isOpen())
+        {
+            QString strFile = QLatin1String(file.readAll());
+            qApp->setStyleSheet(strFile);
 
-        file.close();
+            file.close();
+        }
+        else
+            qDebug() << "Fail to open stylesheet file: " << styleSheet;
     }
     else
-        qDebug() << "Fail to open stylesheet file: " << styleSheet;
-
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(styleSheet);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(styleSheet);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(styleSheet);
+        }
+    }
 }
 
 // ultimize the event mechanism in Qt to call virtual keyboard

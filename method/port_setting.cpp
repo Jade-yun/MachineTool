@@ -56,148 +56,165 @@ uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM]={0};                    //预
 **************************************************************************/
 void readSigSetPara()
 {
-    for(int i = 0;i < INPUT_TOTAL_NUM;i++)
+    if(CheckFileComplete(m_configPortSettingPath))
     {
-        m_Port_X[i].isReserve = !(i < INPUT_NUM);
-    }
-
-    //Y
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
-    {
-        m_Port_X[i].isReserve = !(i < OUTPUT_NUM);
-    }
-
-
-    uint8_t tempIndex=0;
-    //输出类型
-    auto tempList11=getIniValues(1,"OutPortType");
-    for(int i=0;i<OUT_PORT_TYPE_NUM;i++)
-    {
-        tempIndex=tempList11[i].toUInt();
-        if(tempIndex==0)
+        for(int i = 0;i < INPUT_TOTAL_NUM;i++)
         {
-            outputTypeIndex[i]=99;
-            m_OutPortType[i][0]=0;
-        }
-        else
-        {
-            outputTypeIndex[i]=tempIndex-1;
-            m_OutPortType[i][0]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+            m_Port_X[i].isReserve = !(i < INPUT_NUM);
         }
 
-    }
-    //互锁设置
-    tempList11=getIniValues(1,"OutportInterlock");
-    for(int i=0;i<OUT_INTERLOCK_NUM;i++)
-    {
-        for(int j=0;j<4;j++)
+        //Y
+        for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
         {
-            tempIndex=tempList11[4*i+j].toUInt();
+            m_Port_X[i].isReserve = !(i < OUTPUT_NUM);
+        }
+
+
+        uint8_t tempIndex=0;
+        //输出类型
+        auto tempList11=getIniValues(1,"OutPortType");
+        for(int i=0;i<OUT_PORT_TYPE_NUM;i++)
+        {
+            tempIndex=tempList11[i].toUInt();
             if(tempIndex==0)
             {
-                outportInterlockIndex[i][j]=99;
-                m_OutportInterlock[i][j]=0;
+                outputTypeIndex[i]=99;
+                m_OutPortType[i][0]=0;
             }
             else
             {
-                outportInterlockIndex[i][j]=tempIndex;//该变量用来记录互锁设置对应的端口号，后面只做被调用作用
-                m_OutportInterlock[i][j]=tempIndex;//使用了互锁设置时，代表端口号，不使用时为0
+                outputTypeIndex[i]=tempIndex-1;
+                m_OutPortType[i][0]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+            }
+
+        }
+        //互锁设置
+        tempList11=getIniValues(1,"OutportInterlock");
+        for(int i=0;i<OUT_INTERLOCK_NUM;i++)
+        {
+            for(int j=0;j<4;j++)
+            {
+                tempIndex=tempList11[4*i+j].toUInt();
+                if(tempIndex==0)
+                {
+                    outportInterlockIndex[i][j]=99;
+                    m_OutportInterlock[i][j]=0;
+                }
+                else
+                {
+                    outportInterlockIndex[i][j]=tempIndex;//该变量用来记录互锁设置对应的端口号，后面只做被调用作用
+                    m_OutportInterlock[i][j]=tempIndex;//使用了互锁设置时，代表端口号，不使用时为0
+                }
             }
         }
-    }
-    //预留关联
-    tempList11=getIniValues(1,"OutputRelevancy");
-    for(int i=0;i<OUT_PORT_RELEVANCY_NUM;i++)
-    {
-        for(int j=0;j<2;j++)
+        //预留关联
+        tempList11=getIniValues(1,"OutputRelevancy");
+        for(int i=0;i<OUT_PORT_RELEVANCY_NUM;i++)
         {
-            tempIndex=tempList11[2*i+j].toUInt();
+            for(int j=0;j<2;j++)
+            {
+                tempIndex=tempList11[2*i+j].toUInt();
+                if(tempIndex==0)
+                {
+                    outputRelevancyIndex[i][j]=99;
+                    m_OutportRelevancy[i][j]=0;
+                }
+                else
+                {
+                    outputRelevancyIndex[i][j]=tempIndex;
+                    m_OutportRelevancy[i][j]=tempIndex;
+                }
+            }
+        }
+        //预留出类型
+        tempList11=getIniValues(1,"OutputReleteOut");
+        for(int i=0;i<OUT_PORT_RELEOUT_NUM;i++)
+        {
+            tempIndex=tempList11[i].toUInt();
             if(tempIndex==0)
             {
-                outputRelevancyIndex[i][j]=99;
-                m_OutportRelevancy[i][j]=0;
+                outputReleteOutIndex[i]=99;
+                m_OutportReleteOut[i][0]=0;
             }
             else
             {
-                outputRelevancyIndex[i][j]=tempIndex;
-                m_OutportRelevancy[i][j]=tempIndex;
+                outputReleteOutIndex[i]=tempIndex;
+                m_OutportReleteOut[i][0]=tempIndex;
             }
         }
+
+        //高级功能对应的端口号的定义
+        tempList11=getIniValues(1,"SeniorFunc");
+
+        uint8_t index=0;
+        m_SeniorFuncPort.knifeOrigin1CheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.knifeOrigin2CheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.chuckOriginCheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.stackSaveIn1CheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.stackSaveIn2CheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.stackSaveOutCheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.alarmIn1CheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.alarmIn2CheckPort=tempList11[index++].toUInt();
+
+        m_SeniorFuncPort.emergencyStopCheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.pauseStopCheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.pressureCheckPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.remoteAutoPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.remoteStopPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.bottomOilLimitPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.oilerSwtPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.lubPumpPort=tempList11[index++].toUInt();
+
+        m_SeniorFuncPort.processSave1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.processSave2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.emergencySnapMotorEnablePort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.emergencyStopOutPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.autoLightPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.alarmLightPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.alarmBuzzerPort=tempList11[index++].toUInt();
+        m_SeniorFuncPort.pauseLightPort=tempList11[index++].toUInt();
+
+        m_SeniorFuncPort.processFinish1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.processFinish2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.locateFinish1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.locateFinish2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.startProduct1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.startProduct2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res1[0]=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res1[1]=tempList11[index++].toUInt();
+
+        m_SeniorFuncPort.mainAxisRotate1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.mainAxisRotate2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.mainAxisLocate1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.mainAxisLocate2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.biowAir1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.biowAir2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res2[0]=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res2[1]=tempList11[index++].toUInt();
+
+        m_SeniorFuncPort.manualChuckIn1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.manualChuckIn2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.autoDoorCot1Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.autoDoorCot2Port=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res3[0]=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res3[1]=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res3[2]=tempList11[index++].toUInt();
+        m_SeniorFuncPort.res3[3]=tempList11[index++].toUInt();
     }
-    //预留出类型
-    tempList11=getIniValues(1,"OutputReleteOut");
-    for(int i=0;i<OUT_PORT_RELEOUT_NUM;i++)
+    else
     {
-        tempIndex=tempList11[i].toUInt();
-        if(tempIndex==0)
+        bool temp = g_SafeFileHandler->attemptRecovery(m_configPortSettingPath);
+        if(temp)
         {
-            outputReleteOutIndex[i]=99;
-            m_OutportReleteOut[i][0]=0;
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configPortSettingPath);
+            readIniPara();
         }
         else
         {
-            outputReleteOutIndex[i]=tempIndex;
-            m_OutportReleteOut[i][0]=tempIndex;
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(m_configPortSettingPath);
         }
     }
 
-    //高级功能对应的端口号的定义
-    tempList11=getIniValues(1,"SeniorFunc");
-
-    uint8_t index=0;
-    m_SeniorFuncPort.knifeOrigin1CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.knifeOrigin2CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.chuckOriginCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.stackSaveIn1CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.stackSaveIn2CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.stackSaveOutCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmIn1CheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmIn2CheckPort=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.emergencyStopCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.pauseStopCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.pressureCheckPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.remoteAutoPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.remoteStopPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.bottomOilLimitPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.oilerSwtPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.lubPumpPort=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.processSave1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.processSave2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.emergencySnapMotorEnablePort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.emergencyStopOutPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.autoLightPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmLightPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.alarmBuzzerPort=tempList11[index++].toUInt();
-    m_SeniorFuncPort.pauseLightPort=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.processFinish1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.processFinish2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.locateFinish1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.locateFinish2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.startProduct1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.startProduct2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res1[0]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res1[1]=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.mainAxisRotate1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.mainAxisRotate2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.mainAxisLocate1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.mainAxisLocate2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.biowAir1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.biowAir2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res2[0]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res2[1]=tempList11[index++].toUInt();
-
-    m_SeniorFuncPort.manualChuckIn1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.manualChuckIn2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.autoDoorCot1Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.autoDoorCot2Port=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[0]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[1]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[2]=tempList11[index++].toUInt();
-    m_SeniorFuncPort.res3[3]=tempList11[index++].toUInt();
 }
 
 /*************************************************************************
@@ -210,46 +227,61 @@ void readSigSetPara()
 **************************************************************************/
 void readIniPara()
 {
-    getOutPortType();
-    getOutportInterlock();
-    getOutportRelevancy();
-    getReleteOut();
-    getKeyFunc();
-    getLedFunc();
-    getSeniorFunc();
+    if(CheckFileComplete(m_configFileNamePath))
+    {
+        getOutPortType();
+        getOutportInterlock();
+        getOutportRelevancy();
+        getReleteOut();
+        getKeyFunc();
+        getLedFunc();
+        getSeniorFunc();
 
-    // 端口自定义
-    ::readPortDefInfo();
-    //名称自定义
-    ::readNameDefine();
+        // 端口自定义
+        ::readPortDefInfo();
+        //名称自定义
+        ::readNameDefine();
 
-    getMachineSave();
-    getStackSave();
-    getClawSave();
-    getOnlineSafe();
-    getProductSet();
-    getProductSenior();
-    getInternet();
-    getAxisPar();
-    getHandwheelPar();
-    getServoPar();
-    getDegreeParS();
-    getSaveArea();
-    getServoCommPar();
-    getStackInfo();
-    getStackFunc();
-    getManualAxis();
-    getProgramNameAndPath();//读取所有程序文件信息
-    getSystemSet();
-    ::readPasswdFromConfig();
+        getMachineSave();
+        getStackSave();
+        getClawSave();
+        getOnlineSafe();
+        getProductSet();
+        getProductSenior();
+        getInternet();
+        getAxisPar();
+        getHandwheelPar();
+        getServoPar();
+        getDegreeParS();
+        getSaveArea();
+        getServoCommPar();
+        getStackInfo();
+        getStackFunc();
+        getManualAxis();
+        getAutoPagePar();//读取自动界面需要存储的参数
 
-    // 读取完所有参数后根据参数更新参数对应 X 端口 或者 Y 端口的标志位
-    updateAdvancedFuncPortFlag();
-    updateInterLockPortFlag();
-    updateAxidParameterPortFlag();
+        getProgramNameAndPath();//读取所有程序文件信息
+        getSystemSet();
+        ::readPasswdFromConfig();
 
-    //读取自动界面需要存储的参数
-    getAutoPagePar();
+        // 读取完所有参数后根据参数更新参数对应 X 端口 或者 Y 端口的标志位
+        updateAdvancedFuncPortFlag();
+        updateInterLockPortFlag();
+        updateAxidParameterPortFlag();
+    }
+    else
+    {
+        bool temp = g_SafeFileHandler->attemptRecovery(m_configFileNamePath);
+        if(temp)
+        {
+            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configFileNamePath);
+            readIniPara();
+        }
+        else
+        {
+            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(m_configFileNamePath);
+        }
+    }
 }
 
 void updateInterLockPortFlag()
