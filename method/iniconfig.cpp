@@ -160,10 +160,13 @@ void getOutPortType(uint8_t defaultV)
 **************************************************************************/
 void setOutPortType(uint8_t value[OUT_PORT_TYPE_NUM][2])
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     for(int i=0;i<OUT_PORT_TYPE_NUM;i++)
     {
         setValue("OutPortType",QString("V%1").arg(i),value[i][1]);
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //互锁设置
 void getOutportInterlock(uint8_t defaultV)
@@ -186,30 +189,35 @@ void getOutportInterlock(uint8_t defaultV)
 
 void setOutportInterlock(uint8_t value[OUT_INTERLOCK_NUM][4])
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     for(int i=0;i<OUT_INTERLOCK_NUM;i++)
     {
         for(int j=0;j<4;j++)
         {
             setValue("OutportInterlock",QString("V%1_%2").arg(i).arg(j),value[i][j]==0?0:1);
         }
-
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //预留关联
 void getOutportRelevancy(uint8_t defaultV)
 {
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
+    for(int i=0;i<OUT_PORT_RELEVANCY_NUM;i++)
     {
         m_OutportRelevancy[i][2]=getValue("OutportRelevancy",QString("V%1").arg(i),defaultV);
     }
 }
 
-void setOutportRelevancy(uint8_t value[OUTPUT_TOTAL_NUM][3])
+void setOutportRelevancy(uint8_t value[OUT_PORT_RELEVANCY_NUM][3])
 {
-    for(int i=0;i<OUTPUT_TOTAL_NUM;i++)
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
+    for(int i=0;i<OUT_PORT_RELEVANCY_NUM;i++)
     {
         setValue("OutportRelevancy",QString("V%1").arg(i),value[i][2]);
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //预留出类型
 void getReleteOut(uint8_t defaultV)
@@ -222,10 +230,13 @@ void getReleteOut(uint8_t defaultV)
 
 void setReleteOut(uint8_t value[OUT_PORT_RELEOUT_NUM][2])
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     for(int i=0;i<OUT_PORT_RELEOUT_NUM;i++)
     {
         setValue("ReleteOut",QString("V%1").arg(i),value[i][1]);
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //按键功能
 void getKeyFunc(uint8_t defaultV)
@@ -239,12 +250,15 @@ void getKeyFunc(uint8_t defaultV)
 }
 void setKeyFunc(D_KeyFuncStruct* value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     for(int i=0;i<OPR_KEY_NUM;i++)
     {
         setValue("KeyFunc",QString("V%1_keyType").arg(i),value[i].keyType);
         setValue("KeyFunc",QString("V%1_funcNum").arg(i),value[i].funcNum);
         setValue("KeyFunc",QString("V%1_oprMode").arg(i),value[i].oprMode);
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //LED功能
 void getLedFunc(uint8_t defaultV)
@@ -257,11 +271,14 @@ void getLedFunc(uint8_t defaultV)
 }
 void setLedFunc(D_LedFuncStruct* value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     for(int i=0;i<OPR_LED_NUM;i++)
     {
         setValue("LedFunc",QString("V%1_ledType").arg(i),value[i].ledType);
         setValue("LedFunc",QString("V%1_funcNum").arg(i),value[i].funcNum);
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //信号设置高级功能
 void getSeniorFunc(uint8_t defaultV)
@@ -326,6 +343,7 @@ void getSeniorFunc(uint8_t defaultV)
 }
 void setSeniorFunc(D_SeniorFuncStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("SeniorFunc","knifeOrigin1Check",value.knifeOrigin1Check);
     setValue("SeniorFunc","knifeOrigin2Check",value.knifeOrigin2Check);
     setValue("SeniorFunc","chuckOriginCheck",value.chuckOriginCheck);
@@ -383,6 +401,8 @@ void setSeniorFunc(D_SeniorFuncStruct value)
     {
         setValue("SeniorFunc",QString("res3_%1").arg(i),value.res3[i]);
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //机床安全
 void getMachineSave(uint8_t defaultV)
@@ -394,10 +414,13 @@ void getMachineSave(uint8_t defaultV)
 }
 void setMachineSave(D_MachineSaveStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("MachineSave","armFallAutoDoor1Swt",value.armFallAutoDoor1Swt);
     setValue("MachineSave","armFallAutoDoor1SwtSta",value.armFallAutoDoor1SwtSta);
     setValue("MachineSave","armFallAutoDoor2Swt",value.armFallAutoDoor2Swt);
     setValue("MachineSave","armFallAutoDoor2SwtSta",value.armFallAutoDoor2SwtSta);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
 //料仓安全
@@ -408,8 +431,11 @@ void getStackSave(uint8_t defaultV)
 }
 void setStackSave(D_StackSaveStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("StackSave","stackSaveIn1Roatore",value.stackSaveIn1Roatore);
     setValue("StackSave","stackSaveIn2Roatore",value.stackSaveIn2Roatore);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //卡爪安全
 void getClawSave(uint8_t defaultV)
@@ -433,6 +459,7 @@ void getClawSave(uint8_t defaultV)
 }
 void setClawSave(D_ClawSaveStruct value,uint8_t index)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("ClawSave",QString("clawKeepoutSta_%1").arg(index),value.clawKeepoutSta);
     setValue("ClawSave",QString("axisSelect_X_%1").arg(index),value.axisSelect_X);
     setValue("ClawSave",QString("axisSelect_Z_%1").arg(index),value.axisSelect_Z);
@@ -446,6 +473,8 @@ void setClawSave(D_ClawSaveStruct value,uint8_t index)
     setValue("ClawSave",QString("cKeepoutPosMaxC_%1").arg(index),value.cKeepoutPosMaxC);
     setValue("ClawSave",QString("cKeepoutNegMinC_%1").arg(index),value.cKeepoutNegMinC);
     setValue("ClawSave",QString("cKeepoutNegMaxC_%1").arg(index),value.cKeepoutNegMaxC);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //联机安全
 void getOnlineSafe(uint8_t defaultV)
@@ -466,6 +495,7 @@ void getOnlineSafe(uint8_t defaultV)
 }
 void setOnlineSafe(D_OnlineSaveStruct value,uint8_t index)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("OnlineSave",QString("mainSunMode_%1").arg(index),value.mainSunMode);
     setValue("OnlineSave",QString("pluseTime_%1").arg(index),value.pluseTime);
     setValue("OnlineSave",QString("onlineSelect_%1").arg(index),value.onlineSelect);
@@ -476,6 +506,8 @@ void setOnlineSafe(D_OnlineSaveStruct value,uint8_t index)
     setValue("OnlineSave",QString("requestOutNum_%1").arg(index),value.requestOutNum);
     setValue("OnlineSave",QString("a1A2MainPos_%1").arg(index),value.a1A2MainPos);
     setValue("OnlineSave",QString("a1A2SunPos_%1").arg(index),value.a1A2SunPos);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //产品设置
 void getProductSet(uint16_t defaultV)
@@ -490,6 +522,7 @@ void getProductSet(uint16_t defaultV)
 }
 void setProductSet(D_ProductSetStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("ProductSet","waitProcessFinTime",value.waitProcessFinTime);
     setValue("ProductSet","pluseOutTime",value.pluseOutTime);
     setValue("ProductSet","airVlaveLimitTime",value.airVlaveLimitTime);
@@ -497,6 +530,8 @@ void setProductSet(D_ProductSetStruct value)
     setValue("ProductSet","alarmBuzzerTime",value.alarmBuzzerTime);
     setValue("ProductSet","chainReachDelay",value.chainReachDelay);
     setValue("ProductSet","clampCheckFilterTime",value.clampCheckFilterTime);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
 //产品设置高级功能
@@ -510,11 +545,14 @@ void getProductSenior(uint8_t defaultV)
 }
 void setProductSenior(D_ProductSeniorStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("ProductSenior","lubricOpenTime",value.lubricOpenTime);
     setValue("ProductSenior","lubricCloseTime",value.lubricCloseTime);
     setValue("ProductSenior","lubricDelay",value.lubricDelay);
     setValue("ProductSenior","lubricGapCyc",value.lubricGapCyc);
     setValue("ProductSenior","productMemoryFlag",value.productMemoryFlag);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //物联网
 void getInternet(uint8_t defaultV)
@@ -525,9 +563,12 @@ void getInternet(uint8_t defaultV)
 }
 void setInternet(D_InternetStruct value)
 {
+    g_SafeFileHandler->rotateBackups(SysSetConfigPath);
     setValue("Internet","netCommType",value.netCommType);
     setValue("Internet","parityMode",value.parityMode);
     setValue("Internet","baudMode",value.baudMode);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(SysSetConfigPath.toLocal8Bit().data());
 }
 //系统参数
 void getSystemSet()
@@ -552,6 +593,7 @@ void getSystemSet()
 }
 void setSystemSet(const D_SystemSetStruct& value)
 {
+    g_SafeFileHandler->rotateBackups(SysSetConfigPath);
     QSettings settings(SysSetConfigPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
@@ -567,6 +609,8 @@ void setSystemSet(const D_SystemSetStruct& value)
     settings.setValue("sysColor", value.sysColor);
 
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(SysSetConfigPath.toLocal8Bit().data());
 }
 //轴运动参数
 void getAxisPar(uint8_t defaultV)
@@ -609,6 +653,7 @@ void setAxisPar(D_AxisParStruct value, uint8_t index)
 {
 //    for(int i=0;i<AXIS_TOTAL_NUM;i++)
     {
+        g_SafeFileHandler->rotateBackups(m_configFileNamePath);
         setValue("AxisPar",QString("axisType_%1").arg(index),value.axisType);
         setValue("AxisPar",QString("axisMoveMade_%1").arg(index),value.axisMoveMade);
 
@@ -639,6 +684,8 @@ void setAxisPar(D_AxisParStruct value, uint8_t index)
         setValue("AxisPar",QString("limitPosSwt_%1").arg(index),value.limitPosSwt);
         setValue("AxisPar",QString("limitNegSwt_%1").arg(index),value.limitNegSwt);
         setValue("AxisPar",QString("coordDir_%1").arg(index),value.coordDir);
+        Ini_Parasettings.sync();
+        REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
     }
 }
 //首轮运动参数
@@ -672,6 +719,7 @@ void getHandwheelPar(uint8_t defaultV)
 }
 void setHandwheelPar(D_AxisParStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("HandwheelPar","axisType",value.axisType);
     setValue("HandwheelPar","axisMoveMade",value.axisMoveMade);
 
@@ -697,6 +745,8 @@ void setHandwheelPar(D_AxisParStruct value)
     setValue("HandwheelPar","limitPosSwt",value.limitPosSwt);
     setValue("HandwheelPar","limitNegSwt",value.limitNegSwt);
     setValue("HandwheelPar","coordDir",value.coordDir);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //伺服结构参数
 void getServoPar(uint8_t defaultV)
@@ -712,6 +762,7 @@ void getServoPar(uint8_t defaultV)
 }
 void setServoPar(D_ServoParStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("ServoPar","encoderType",value.encoderType);
     setValue("ServoPar","encoderBitNum",value.encoderBitNum);
     setValue("ServoPar","servoBrand",value.servoBrand);
@@ -720,6 +771,8 @@ void setServoPar(D_ServoParStruct value)
     setValue("ServoPar","rotateAxisUnit",value.rotateAxisUnit);
     setValue("ServoPar","resetSunProFlag",value.resetSunProFlag);
     setValue("ServoPar","torqueLimitFlag",value.torqueLimitFlag);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //伺服安全及控制精度参数
 void getDegreeParS(uint8_t defaultV)
@@ -734,6 +787,7 @@ void getDegreeParS(uint8_t defaultV)
 }
 void setDegreeParS(D_DegreeParStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("DegreeParS","tolerance",value.tolerance);
     setValue("DegreeParS","originDegree",value.originDegree);
     setValue("DegreeParS","actionFinDegree",value.actionFinDegree);
@@ -741,6 +795,8 @@ void setDegreeParS(D_DegreeParStruct value)
     setValue("DegreeParS","saveRampageHige_Z2",value.saveRampageHige_Z2);
     setValue("DegreeParS","saveRotatePos_Y1",value.saveRotatePos_Y1);
     setValue("DegreeParS","saveRotatePos_Y2",value.saveRotatePos_Y2);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //安全区参数
 void getSaveArea(uint8_t defaultV)
@@ -766,6 +822,7 @@ void getSaveArea(uint8_t defaultV)
 }
 void setSaveArea(D_SaveAreaStruct value, uint8_t index)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("SaveArea",QString("saveAreaSwt_%1").arg(index),value.saveAreaSwt);
     for(int j=0;j<SAVE_AXIS_NUM;j++)
     {
@@ -780,6 +837,8 @@ void setSaveArea(D_SaveAreaStruct value, uint8_t index)
     setValue("SaveArea",QString("machine_Z_InsideHigh_%1").arg(index),value.machine_Z_InsideHigh);
     setValue("SaveArea",QString("stack_Z_StartMaxPos_%1").arg(index),value.stack_Z_StartMaxPos);
     setValue("SaveArea",QString("stack_Z_FallMaxPos_%1").arg(index),value.stack_Z_FallMaxPos);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //伺服通信协议参数
 void getServoCommPar(uint8_t defaultV)
@@ -797,6 +856,7 @@ void getServoCommPar(uint8_t defaultV)
 }
 void setServoCommPar(D_ServoCommParSetStruct* value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     for(int i=0;i<SERVE_COMM_PAR_NUM;i++)
     {
         setValue("ServoCommPar",QString("saveFlag_%1").arg(i),value[i].saveFlag);
@@ -807,7 +867,8 @@ void setServoCommPar(D_ServoCommParSetStruct* value)
         setValue("ServoCommPar",QString("parLen_%1").arg(i),value[i].parLen);
         setValue("ServoCommPar",QString("parValue_%1").arg(i),value[i].parValue);
     }
-
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //堆叠信息参数
 void getStackInfo(uint8_t defaultV)
@@ -840,6 +901,7 @@ void getStackInfo(uint8_t defaultV)
 }
 void setStackInfo(D_StackInfoStruct value, uint8_t index)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("StackInfo",QString("stackOrder_%1").arg(index),value.stackOrder);
     setValue("StackInfo",QString("countMode_%1").arg(index),value.countMode);
     setValue("StackInfo",QString("stackFinStopFlag_%1").arg(index),value.stackFinStopFlag);
@@ -862,6 +924,8 @@ void setStackInfo(D_StackInfoStruct value, uint8_t index)
         setValue("StackInfo",QString("intevalDis_%1_%2").arg(index).arg(j),value.intevalDis[j]);
         setValue("StackInfo",QString("offsetDis_%1_%2").arg(index).arg(j),value.offsetDis[j]);
     }
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //堆叠功能参数
 void getStackFunc(uint8_t defaultV)
@@ -878,6 +942,7 @@ void getStackFunc(uint8_t defaultV)
 }
 void setStackFunc(D_StackFuncStruct value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("StackFunc","stackType",value.stackType);
     setValue("StackFunc","groupStack",value.groupStack);
     setValue("StackFunc","rowStack",value.rowStack);
@@ -887,6 +952,8 @@ void setStackFunc(D_StackFuncStruct value)
     setValue("StackFunc","siloType",value.siloType);
     setValue("StackFunc","rotateSiloFinHint",value.rotateSiloFinHint);
     setValue("StackFunc","rotateSiloPlaceNum",value.rotateSiloPlaceNum);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 void getManualAxis(uint8_t defaultV)
 {
@@ -901,6 +968,7 @@ void getManualAxis(uint8_t defaultV)
 }
 void setManualAxis(D_ManualAxis value)
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("ManualAxis","axis",value.axis);
     setValue("ManualAxis","speed",value.speed);
     setValue("ManualAxis","pos_pos",value.pos_pos);
@@ -909,6 +977,8 @@ void setManualAxis(D_ManualAxis value)
 //    setValue("ManualAxis","handwheelMode",value.handwheelMode);//手轮模式是否使用不存
     setValue("ManualAxis","multiply",value.multiply);
     setValue("ManualAxis","handwheelAxis",value.handwheelAxis);
+    Ini_Parasettings.sync();
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
 /**********************************
@@ -1003,6 +1073,7 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
     setValue("File","time",str_time);
 #endif
 
+    g_SafeFileHandler->rotateBackups(AllExistingProgramInfoPath);
     QSettings settings(AllExistingProgramInfoPath, QSettings::IniFormat);
     settings.clear();
 
@@ -1024,6 +1095,7 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
 //保存开机加载程序信息
 void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
 {
+    g_SafeFileHandler->rotateBackups(PowerOnReadOneProPath);
     QSettings settings(PowerOnReadOneProPath, QSettings::IniFormat);
     settings.beginGroup("PowerOnFileInfo");
     settings.setValue("name",value.fileName);
@@ -1032,6 +1104,8 @@ void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
     settings.setValue("Permission",value.filePermission);
     settings.setValue("time",value.changeTime);
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(PowerOnReadOneProPath.toLocal8Bit().data());
 }
 //读取开机加载程序信息
 D_ProgramNameAndPathStruct readPowerOnReadOneProInfo()
@@ -1113,10 +1187,13 @@ QStringList getIniValues(uint8_t type, QString node)
 
 void savePasswdToConfig(int authority, uint32_t value)
 {
+    g_SafeFileHandler->rotateBackups(PasswdConfigPath);
     QSettings settings(PasswdConfigPath, QSettings::IniFormat);
     settings.beginGroup("Passwd");
     settings.setValue(QString("Authority_%1").arg(authority), value);
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(PasswdConfigPath.toLocal8Bit().data());
 }
 
 void readPasswdFromConfig()
@@ -1133,12 +1210,15 @@ void readPasswdFromConfig()
 
 void writeKeySetStrToConfig(int index, const QString &text)
 {
+    g_SafeFileHandler->rotateBackups(KeyAndSignalDescriptionPath);
     QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
     settings.beginGroup("KeyFuncDescription");
     settings.setValue(QString("Key_%1").arg(index), text);
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(KeyAndSignalDescriptionPath.toLocal8Bit().data());
 }
 
 void readKeySetStrFromConfig(std::vector<QString> &keyStrs)
@@ -1159,12 +1239,15 @@ void readKeySetStrFromConfig(std::vector<QString> &keyStrs)
 
 void writeSigSetStrToConfig(int index, const QString &text)
 {
+    g_SafeFileHandler->rotateBackups(KeyAndSignalDescriptionPath);
     QSettings settings(KeyAndSignalDescriptionPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
     settings.beginGroup("SignalDescription");
     settings.setValue(QString("Sig_%1").arg(index), text);
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(KeyAndSignalDescriptionPath.toLocal8Bit().data());
 }
 
 void readSigSetStrFromConfig(std::vector<QString> &sigStrs)
@@ -1184,6 +1267,7 @@ void readSigSetStrFromConfig(std::vector<QString> &sigStrs)
 
 void writeOnlineSafeInOutDescription(int group, const std::vector<QString> &describeStrs)
 {
+    g_SafeFileHandler->rotateBackups(IOPortDescriptionPath);
     QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
@@ -1194,6 +1278,8 @@ void writeOnlineSafeInOutDescription(int group, const std::vector<QString> &desc
         settings.setValue(QString("Sig_%1").arg(i), describeStrs[i]);
     }
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(IOPortDescriptionPath.toLocal8Bit().data());
 }
 
 void readOnlineSafeInOutDescription(int group, std::vector<QString> &describeStrs)
@@ -1214,6 +1300,7 @@ void readOnlineSafeInOutDescription(int group, std::vector<QString> &describeStr
 
 void writeLimitSigDescription(int index, const std::vector<QString> &describeStrs)
 {
+    g_SafeFileHandler->rotateBackups(IOPortDescriptionPath);
     QSettings settings(IOPortDescriptionPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
@@ -1224,6 +1311,8 @@ void writeLimitSigDescription(int index, const std::vector<QString> &describeStr
         settings.setValue(QString("Axis_%1").arg(i), describeStrs[i]);
     }
     settings.endGroup();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(IOPortDescriptionPath.toLocal8Bit().data());
 }
 
 void readLimitSigDescription(int index, std::vector<QString> &describeStrs)
@@ -1243,6 +1332,7 @@ void readLimitSigDescription(int index, std::vector<QString> &describeStrs)
 
 void writeGuideInfo()
 {
+    g_SafeFileHandler->rotateBackups(GuideInfoPath);
     QSettings settings(GuideInfoPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
@@ -1265,6 +1355,7 @@ void writeGuideInfo()
         // End the group
         settings.endGroup();
     }
+    REFRESH_KERNEL_BUFFER(GuideInfoPath.toLocal8Bit().data());
 }
 
 void readGuideInfo()
@@ -1330,6 +1421,7 @@ void readNameDefine()
 
 void writeNameDefine()
 {
+    g_SafeFileHandler->rotateBackups(CustomizeNameDefPath);
     QSettings settings(CustomizeNameDefPath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
     settings.beginGroup("Modify");
@@ -1364,6 +1456,7 @@ void writeNameDefine()
 void writeReferenceInfo()
 {
     const QString filePath = m_CurrentProgramNameAndPath.filePath.split(".").first() + SUFFIX_REFER;
+    g_SafeFileHandler->rotateBackups(filePath);
     QSettings settings(filePath, QSettings::IniFormat);
     settings.setIniCodec(QTextCodec::codecForName("utf-8"));
 
@@ -1418,6 +1511,7 @@ void readReferenceInfo()
 void setProgramPermission(const QString &programName, int permission)
 {
     const QString filePath = m_ProgramPath + "/" + programName + ".progperm";
+    g_SafeFileHandler->rotateBackups(filePath);
     QSettings settings(filePath, QSettings::IniFormat);
 
     settings.setValue("permission", permission);
@@ -1435,6 +1529,7 @@ int getProgramPermission(const QString &programName)
 
 void writePortDefInfo()
 {
+    g_SafeFileHandler->rotateBackups(CustomizePortInfoPath);
     QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
     settings.setIniCodec("UTF-8");
     for (int i = 0; i < INPUT_TOTAL_NUM; ++i)
@@ -1529,6 +1624,7 @@ void reloadTranslatePortDefInfo()
 
 void setAutoPagePar()
 {
+    g_SafeFileHandler->rotateBackups(m_configFileNamePath);
     setValue("AutoPagePar","Silo_Type",m_AutoPageRotat_Silo_Set.type);
     setValue("AutoPagePar","Silo_Number",m_AutoPageRotat_Silo_Set.Silo_Number);
     setValue("AutoPagePar","Stack_Group1",m_AutoPageRotat_Silo_Set.Stack_Group1);
@@ -1538,6 +1634,7 @@ void setAutoPagePar()
         setValue("AutoPagePar",QString("StartReset_%1").arg(i),m_AutoPageVar.StartReset[i]);
         setValue("AutoPagePar",QString("PowerOffMemory_%1").arg(i),m_AutoPageVar.PowerOffMemory[i]);
     }
+    REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
 void getAutoPagePar()

@@ -1,5 +1,6 @@
 ﻿#include "maintaininfomodel.h"
-
+#include "cmd.h"
+#include "RefreshKernelBuffer.h"
 #include <QDebug>
 
 // 构造函数
@@ -133,6 +134,7 @@ void MaintainInfoModel::setHorizontalHeader(int section, const QVariant &value)
 
 // 保存数据
 void MaintainInfoModel::saveToConfigFile(const QString& fileName){
+    g_SafeFileHandler->rotateBackups(fileName);
     QSettings settings(fileName, QSettings::IniFormat);
     settings.setIniCodec("utf-8");
 
@@ -149,6 +151,8 @@ void MaintainInfoModel::saveToConfigFile(const QString& fileName){
         settings.setValue("nextMaintenance", info.nextMaintenance.toString("yyyy-MM-dd HH:mm:ss"));
     }
     settings.endArray();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(fileName.toLocal8Bit().data());
 }
 
 // 加载数据

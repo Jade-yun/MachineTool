@@ -21,7 +21,7 @@
 #include "ifprogramdialog.h"
 #include <QStyleFactory>
 #include <QEasingCurve>
-
+//#include "SafeFileHandler.h"
 #include "beeper.h"
 #include "ledcontroller.h"
 
@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     MainWindow_SetControl_Stake(false);//先禁用按钮，待初始化成功后才能点击
 
     ui->wgtHelp->setVisible(false);
+    g_SafeFileHandler = new SafeFileHandler();//创建文件安全读写线程
     //开机读取配置文件信息，暂时做测试用，后续整理
     getOrderjoinIni();
     readIniProgramStruct();
@@ -318,7 +319,7 @@ MainWindow::~MainWindow()
 //    delete dlgErrorTip;
 //    delete backgroundProcess;
     delete g_Usart;
-
+    delete g_SafeFileHandler;
     delete scanner;
 }
 

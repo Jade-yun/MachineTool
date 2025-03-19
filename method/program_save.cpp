@@ -1,5 +1,5 @@
 #include "program_save.h"
-
+#include "RefreshKernelBuffer.h"
 QString m_ProgramPath="/Program";
 
 const QString SUFFIX_PROGRAM = ".ZHpro";
@@ -230,6 +230,7 @@ bool writeBasicProgram(D_ProgramNameAndPathStruct pro_temp)
         dir.mkdir(m_ProgramPath);
     }
 
+    g_SafeFileHandler->rotateBackups(pro_temp.filePath);
     QFile file(pro_temp.filePath);
     if(!file.open(QIODevice::WriteOnly|QIODevice::Text|QIODevice::Truncate))
         return false;
@@ -277,6 +278,7 @@ bool writeBasicProgram(D_ProgramNameAndPathStruct pro_temp)
         out << LablePartList[i] << lineFeed;
     }
     file.close();
+    REFRESH_KERNEL_BUFFER(pro_temp.filePath.toLocal8Bit().data());
     return true;
 }
 /*************************************************************************
@@ -289,6 +291,7 @@ bool writeBasicProgram(D_ProgramNameAndPathStruct pro_temp)
 **************************************************************************/
 bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
 {
+    g_SafeFileHandler->rotateBackups(pro_temp.filePath);
     QFile file(pro_temp.filePath);
     if(!file.open(QIODevice::WriteOnly|QIODevice::Text|QIODevice::Truncate))
         return false;
@@ -621,7 +624,7 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
     }
     out << lineFeed;
     file.close();
-
+    REFRESH_KERNEL_BUFFER(pro_temp.filePath.toLocal8Bit().data());
     return true;
 }
 /*************************************************************************
@@ -634,12 +637,18 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
 **************************************************************************/
 bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 {
+    QFileInfo fileinfo(pro_temp.filePath);
+    if(!(fileinfo.size()>0))
+    {//如果文件为空，说明文件异常
+        return false;
+    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
        // 处理文件打开失败的情况
        return false;
     }
+
     uint8_t intFlag = 0;
     QStringList LableNameList_Temp[PRO_NUM];
     QTextStream in(&file);
@@ -757,12 +766,18 @@ bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 #if 1
 bool readProgram(D_ProgramNameAndPathStruct pro_temp)
 {
+    QFileInfo fileinfo(pro_temp.filePath);
+    if(!(fileinfo.size()>0))
+    {//如果文件为空，说明文件异常
+        return false;
+    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
        // 处理文件打开失败的情况
        return false;
     }
+
     QTextStream in(&file);
     QStringList programInfoList;
     QStringList refList;
@@ -887,6 +902,14 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
     }
     file.close();
 
+    if(programInfoList.count()<PRO_NUM)
+    {//程序内容错误，直接返回
+        return false;
+    }
+    else if(refList.count()<REFERENCE_TOTAL_NUM)
+    {//程序内容错误，直接返回
+        return false;
+    }
     //开始解析
     for(int i=0;i<PRO_NUM;i++)                          //行号
     {
@@ -903,6 +926,10 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
     }
     for(int i=0;i<9;i++)
     {
+        if(P_List[i].count()==0)
+        {
+            return false;
+        }
         for(int j=0;j<P_List[i].count();j++)
         {
             QStringList tempList=P_List[i][j].split(signalSpace);
@@ -1517,10 +1544,13 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
     {
         for(int i=0;i<VAR_TOTAL_NUM;i++)
         {
-
             m_VariableType[i] = (uint8_t)(Var_List[i].mid(Var_List[i].indexOf("=")+1).toUInt());
         }
         std::copy(std::begin(m_VariableType),std::end(m_VariableType),std::begin(m_VariableTypeLod));
+    }
+    else
+    {
+        return false;
     }
     return true;
 }
@@ -2354,15 +2384,45 @@ bool Load_Program_Handle(QString fileName)
                 g_FreeProOrder(&m_ProOrder[i][j]);//释放程序命令的数据指针
             }
         }
-        memset(&m_CurrentProgramNameAndPath,0,sizeof(D_ProgramNameAndPathStruct));//清除当前程序信息
-        memcpy(&m_CurrentProgramNameAndPath,&m_ProgramNameAndPath[curProgramIndex],sizeof(D_ProgramNameAndPathStruct));//改变当前程序信息
-        readProgram(m_CurrentProgramNameAndPath);//读取当前程序指令
-        readLableOrderName(m_CurrentProgramNameAndPath);//读取当前程序中标签名称列表
-        m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
+        bool state = readProgram(m_ProgramNameAndPath[curProgramIndex]);
+        if(state)
+        {//读取当前程序指令
+            bool state = readLableOrderName(m_ProgramNameAndPath[curProgramIndex]);
+            if(state)
+            {//读取当前程序中标签名称列表
+                m_OperateProOrderListNum = m_ProInfo.proNum[m_OperateProNum];
 
-        g_TotalProCopy(m_OperateProOrder,m_ProOrder[m_OperateProNum]);//将读取的程序赋给当前操作程序
-        CurrentLableNameList = LableNameList[m_OperateProNum];
-        savePowerOnReadOneProInfo(m_CurrentProgramNameAndPath);
+                g_TotalProCopy(m_OperateProOrder,m_ProOrder[m_OperateProNum]);//将读取的程序赋给当前操作程序
+                CurrentLableNameList = LableNameList[m_OperateProNum];
+                memset(&m_CurrentProgramNameAndPath,0,sizeof(D_ProgramNameAndPathStruct));//清除当前程序信息
+                memcpy(&m_CurrentProgramNameAndPath,&m_ProgramNameAndPath[curProgramIndex],sizeof(D_ProgramNameAndPathStruct));//改变当前程序信息
+                savePowerOnReadOneProInfo(m_CurrentProgramNameAndPath);
+            }
+            else
+            {
+                if(g_SafeFileHandler->attemptRecovery(m_ProgramNameAndPath[curProgramIndex].filePath))
+                {//尝试恢复历史版本，如果都失败，则返回加载失败
+                    Load_Program_Handle(fileName);
+                }
+                else
+                {
+                    qDebug()<<"文件异常，且加载备份文件失败！";
+                    return false;
+                }
+            }
+        }
+        else
+        {
+            if(g_SafeFileHandler->attemptRecovery(m_ProgramNameAndPath[curProgramIndex].filePath))
+            {//尝试恢复历史版本，如果都失败，则返回加载失败
+                Load_Program_Handle(fileName);
+            }
+            else
+            {
+                qDebug()<<"文件异常，且加载备份文件失败！";
+                return false;
+            }
+        }
     }
     m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
     //发送程序

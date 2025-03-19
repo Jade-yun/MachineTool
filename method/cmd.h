@@ -3,6 +3,7 @@
 #include "qstring.h"
 #include <QList>
 #include "usart.h"
+#include "SafeFileHandler.h"
 #include <QPoint>
 #include <QQueue>
 #include <QElapsedTimer>
@@ -571,7 +572,7 @@ extern uint8_t m_OutportFuncDefine[OUTPUT_TOTAL_NUM];                           
 
 extern uint8_t m_OutportRelevancy[OUT_PORT_RELEVANCY_NUM][3];								//预留关联
                                                                                     //字节1预留关联输出口1：0不使用 1-40输出口编号
-                                                                                    //字节2预留关联输出口2：0不使用 1-40输出口编号
+                                                                                    //字节1预留关联输入口1：0不使用 1-60输入口编号
                                                                                     //字节3预留关联方式：0不使用 1正关联 2反关联
 
 extern uint8_t m_OutportReleteOut[OUT_PORT_RELEOUT_NUM][2];									//预留出类型
@@ -1324,4 +1325,6 @@ extern D_ManualAdjust m_manualAdjust;      //手动调机
 
 extern std::vector<QString> keyFunDesription;//按键/信号显示内容
 extern std::vector<QString> sigSetDesription;//信号灯显示内容
+//文件安全处理
+extern SafeFileHandler *g_SafeFileHandler;
 #endif // CMD_H

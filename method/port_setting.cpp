@@ -119,8 +119,8 @@ void readSigSetPara()
             }
             else
             {
-                outputRelevancyIndex[i][j]=tempIndex-1;
-                m_OutportRelevancy[i][j]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+                outputRelevancyIndex[i][j]=tempIndex;
+                m_OutportRelevancy[i][j]=tempIndex;
             }
         }
     }
@@ -136,8 +136,8 @@ void readSigSetPara()
         }
         else
         {
-            outputReleteOutIndex[i]=tempIndex-1;
-            m_OutportReleteOut[i][0]=tempIndex/*m_Port_Y[tempIndex-1].portNum*/;
+            outputReleteOutIndex[i]=tempIndex;
+            m_OutportReleteOut[i][0]=tempIndex;
         }
     }
 

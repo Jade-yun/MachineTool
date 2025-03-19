@@ -357,8 +357,6 @@ void StackEdit::saveStackPointPosInfo()
         m_StackInfo[groupIndex].intevalDis[i] = intervalDis[i]->text().toDouble()*100;
         m_StackInfo[groupIndex].offsetDis[i] = offset[i]->text().toDouble()*100;
     }
-
-    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,groupIndex+1);
     setStackInfo(m_StackInfo[groupIndex],groupIndex);
 }
 
@@ -537,6 +535,10 @@ StackEdit::StackEdit(int groupIndex, QWidget *parent) :
     connect(ui->btnOK, &QPushButton::clicked, [=](){
         saveStackBasicInfo();//保存参数
         saveStackPointPosInfo();
+        for(int i=0;i<STACK_AXIS_NUM;i++)
+        {
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
+        }
         this->close();
         emit closeStackEditDialogSignal();
         emit stackParRefreshSignal();
@@ -740,7 +742,7 @@ void StackEdit::saveInfoConnections()
         auto value = ui->editIntervalDis->getValue().toFloat();
         m_StackInfo[groupIndex].intevalDis[2] = static_cast<int32_t>(value * 100);
 
-        g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,groupIndex+1);
+        g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,3);
         setStackInfo(m_StackInfo[groupIndex],groupIndex);
     });
 
@@ -760,9 +762,11 @@ void StackEdit::saveInfoConnections()
         });
         connect(startPosA[i],&NumberEdit::returnPressed, [=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
         connect(startPosANormal[i],&NumberEdit::returnPressed, [=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
         connect(pointNum[i],&NumberEdit::returnPressed,[=](){
             saveStackBasicInfo();
@@ -790,21 +794,27 @@ void StackEdit::saveInfoConnections()
         });
         connect(endPosB_X[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
         connect(endPosC_Y[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
         connect(posD[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
         connect(startPosDischage[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
         connect(intervalDis[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
         connect(offset[i],&NumberEdit::returnPressed,[=](){
             saveStackPointPosInfo();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,i+1);
         });
     }
 }

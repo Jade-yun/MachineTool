@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>8</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -575,7 +575,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>5</number>
      </property>
      <property name="iconSize">
       <size>
@@ -3898,6 +3898,27 @@ QPushButton::released{
            <property name="verticalSpacing">
             <number>20</number>
            </property>
+           <item row="6" column="0">
+            <widget class="QLabel" name="labOutPortRelevancy6">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y7</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="1">
             <widget class="QComboBox" name="coboxOutPortRelevancy0">
              <property name="minimumSize">
@@ -3931,44 +3952,47 @@ QPushButton::released{
              </item>
             </widget>
            </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="labOutPortRelevancy4">
+           <item row="6" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelevancy6">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>40</height>
+              </size>
+             </property>
              <property name="font">
               <font>
                <family>SimSun</family>
               </font>
              </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
              </property>
-             <property name="text">
-              <string>预留Y5</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QLabel" name="labOutPortRelevancy7">
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="text">
-              <string>预留Y8</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
+             <item>
+              <property name="text">
+               <string>不使用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>正关联</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>反关联</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item row="7" column="1">
             <widget class="QComboBox" name="coboxOutPortRelevancy7">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -4033,8 +4057,8 @@ QPushButton::released{
              </item>
             </widget>
            </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="labOutPortRelevancy6">
+           <item row="2" column="0">
+            <widget class="QLabel" name="labOutPortRelevancy2">
              <property name="font">
               <font>
                <family>SimSun</family>
@@ -4044,15 +4068,48 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y7</string>
+              <string>预留Y10</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="labOutPortRelevancy3">
+           <item row="4" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelevancy4">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <item>
+              <property name="text">
+               <string>不使用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>正关联</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>反关联</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labOutPortRelevancy4">
              <property name="font">
               <font>
                <family>SimSun</family>
@@ -4062,7 +4119,7 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y4</string>
+              <string>预留Y13</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4179,7 +4236,46 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y2</string>
+              <string>预留Y4</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="labOutPortRelevancy7">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y8</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labOutPortRelevancy3">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y12</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4197,7 +4293,7 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y6</string>
+              <string>预留Y14</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4215,96 +4311,25 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y1</string>
+              <string>预留Y2</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelevancy4">
-             <property name="minimumSize">
+           <item row="8" column="0">
+            <spacer name="verticalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
               <size>
-               <width>150</width>
+               <width>20</width>
                <height>40</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>不使用</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>正关联</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>反关联</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="labOutPortRelevancy2">
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="text">
-              <string>预留Y3</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelevancy6">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>不使用</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>正关联</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>反关联</string>
-              </property>
-             </item>
-            </widget>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -4342,7 +4367,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY1</string>
+                <string>预留EY2</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4393,7 +4418,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY2</string>
+                <string>预留EY4</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4444,7 +4469,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY3</string>
+                <string>预留EY10</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4495,7 +4520,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY4</string>
+                <string>预留EY12</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4546,7 +4571,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY5</string>
+                <string>预留EY16</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4588,6 +4613,9 @@ QPushButton::released{
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="labOutPortRelevancy13">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="font">
                 <font>
                  <family>SimSun</family>
@@ -4606,6 +4634,9 @@ QPushButton::released{
              </item>
              <item row="5" column="1">
               <widget class="QComboBox" name="coboxOutPortRelevancy13">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>150</width>
@@ -4683,136 +4714,6 @@ QPushButton::released{
            <property name="verticalSpacing">
             <number>20</number>
            </property>
-           <item row="0" column="0">
-            <widget class="QLabel" name="labOutPortReleteOut0">
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="text">
-              <string>预留Y1</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelateOut0">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>不使用</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>停止断开</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>链条料道</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>转盘模式</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="labOutPortReleteOut1">
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="text">
-              <string>预留Y2</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelateOut1">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>不使用</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>停止断开</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>链条料道</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>转盘模式</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="labOutPortReleteOut2">
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="text">
-              <string>预留Y3</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
            <item row="2" column="1">
             <widget class="QComboBox" name="coboxOutPortRelateOut2">
              <property name="minimumSize">
@@ -4862,7 +4763,28 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y4</string>
+              <string>预留Y12</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="labOutPortReleteOut7">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y8</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4871,6 +4793,277 @@ QPushButton::released{
            </item>
            <item row="3" column="1">
             <widget class="QComboBox" name="coboxOutPortRelateOut3">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <item>
+              <property name="text">
+               <string>不使用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停止断开</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>链条料道</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>转盘模式</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelateOut7">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <item>
+              <property name="text">
+               <string>不使用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停止断开</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>链条料道</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>转盘模式</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="labOutPortReleteOut0">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y2</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="labOutPortReleteOut5">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y14</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelateOut5">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <item>
+              <property name="text">
+               <string>不使用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停止断开</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>链条料道</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>转盘模式</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="labOutPortReleteOut6">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y7</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labOutPortReleteOut2">
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Plain</enum>
+             </property>
+             <property name="text">
+              <string>预留Y10</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelateOut4">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <item>
+              <property name="text">
+               <string>不使用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停止断开</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>链条料道</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>转盘模式</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="6" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelateOut6">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>40</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>SimSun</family>
+              </font>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <item>
+              <property name="text">
+               <string>不使用</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>停止断开</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>链条料道</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>转盘模式</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelateOut0">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -4918,15 +5111,15 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y5</string>
+              <string>预留Y13</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelateOut4">
+           <item row="1" column="1">
+            <widget class="QComboBox" name="coboxOutPortRelateOut1">
              <property name="minimumSize">
               <size>
                <width>150</width>
@@ -4963,8 +5156,8 @@ QPushButton::released{
              </item>
             </widget>
            </item>
-           <item row="5" column="0">
-            <widget class="QLabel" name="labOutPortReleteOut5">
+           <item row="1" column="0">
+            <widget class="QLabel" name="labOutPortReleteOut1">
              <property name="font">
               <font>
                <family>SimSun</family>
@@ -4974,162 +5167,25 @@ QPushButton::released{
               <enum>QFrame::Plain</enum>
              </property>
              <property name="text">
-              <string>预留Y6</string>
+              <string>预留Y4</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelateOut5">
-             <property name="minimumSize">
+           <item row="8" column="1">
+            <spacer name="verticalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
               <size>
-               <width>150</width>
+               <width>20</width>
                <height>40</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>不使用</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>停止断开</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>链条料道</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>转盘模式</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="labOutPortReleteOut6">
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="text">
-              <string>预留Y7</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelateOut6">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>不使用</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>停止断开</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>链条料道</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>转盘模式</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QLabel" name="labOutPortReleteOut7">
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Plain</enum>
-             </property>
-             <property name="text">
-              <string>预留Y8</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="1">
-            <widget class="QComboBox" name="coboxOutPortRelateOut7">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>SimSun</family>
-              </font>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>不使用</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>停止断开</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>链条料道</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>转盘模式</string>
-              </property>
-             </item>
-            </widget>
+            </spacer>
            </item>
           </layout>
          </item>
@@ -5167,7 +5223,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY1</string>
+                <string>预留EY2</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -5223,7 +5279,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY2</string>
+                <string>预留EY4</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -5279,7 +5335,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY3</string>
+                <string>预留EY10</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -5335,7 +5391,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY4</string>
+                <string>预留EY12</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -5391,7 +5447,7 @@ QPushButton::released{
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>预留EY5</string>
+                <string>预留EY16</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -5438,6 +5494,9 @@ QPushButton::released{
              </item>
              <item row="5" column="0">
               <widget class="QLabel" name="labOutPortReleteOut13">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="font">
                 <font>
                  <family>SimSun</family>
@@ -5456,6 +5515,9 @@ QPushButton::released{
              </item>
              <item row="5" column="1">
               <widget class="QComboBox" name="coboxOutPortRelateOut13">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
                <property name="minimumSize">
                 <size>
                  <width>150</width>

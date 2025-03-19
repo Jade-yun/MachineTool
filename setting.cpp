@@ -418,6 +418,20 @@ void Setting::init()
     ui->labClawSafePic->setPixmap(QPixmap(":/images/settingPageImages/claw_safe.png"));
     ui->labOnlineSafePic->setPixmap(QPixmap(":/images/settingPageImages/online_safe.png"));
 
+    //预留关联，预留出类型界面部分控件隐藏
+    ui->labOutPortRelevancy6->hide();
+    ui->labOutPortRelevancy7->hide();
+    ui->labOutPortRelevancy13->hide();
+    ui->coboxOutPortRelevancy6->hide();
+    ui->coboxOutPortRelevancy7->hide();
+    ui->coboxOutPortRelevancy13->hide();
+
+    ui->labOutPortReleteOut6->hide();
+    ui->labOutPortReleteOut7->hide();
+    ui->labOutPortReleteOut13->hide();
+    ui->coboxOutPortRelateOut6->hide();
+    ui->coboxOutPortRelateOut7->hide();
+    ui->coboxOutPortRelateOut13->hide();
 
     servoPointSafeArea[0] = SafeAreaWidget{
             ui->coboxSafeArea1, ui->coboxProcessFinishNum1,

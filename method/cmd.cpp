@@ -146,7 +146,7 @@ D_PortDefineStruct m_ResPort_Y[OUTPUT_TOTAL_NUM];                               
 Usart *g_Usart = NULL;
 QSerialPort *m_serialPort = NULL;
 QQueue<QByteArray> m_sendCmdQueue;
-
+SafeFileHandler *g_SafeFileHandler = NULL;
 CircularBuffer m_cb = {0};
 
 D_ManualAxis m_manualAxis = {0};

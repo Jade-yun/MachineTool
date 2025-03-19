@@ -197,7 +197,10 @@ void TeachManage::on_btn_Load_clicked()
         return;
     }
     QString fileName = ui->tableTeachManage->item(curRow, 2)->text();
-    Load_Program_Handle(fileName);
+    if(!Load_Program_Handle(fileName))
+    {//如果加载失败，加载回之前的程序
+        Load_Program_Handle(m_CurrentProgramNameAndPath.fileName);
+    }
     emit labProgramNameChangeSignal();
     emit programLoaded();
 }
@@ -407,7 +410,7 @@ void TeachManage::on_btn_Import_clicked()
     QFileInfo progFileInfo(filePath);
     QString programName = progFileInfo.baseName();
     QString progModifiedTime = progFileInfo.lastModified().toString("yyyy-MM-dd hh:mm:ss");
-
+    g_SafeFileHandler->rotateBackups(filePath);
     // 检查是否存在相同名称的程序
     auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
                            [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });

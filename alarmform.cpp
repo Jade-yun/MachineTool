@@ -1,6 +1,6 @@
 ﻿#include "alarmform.h"
 #include "ui_alarmform.h"
-
+#include "RefreshKernelBuffer.h"
 #include <QSettings>
 #include <QDate>
 
@@ -70,6 +70,7 @@ void AlarmForm::handleAlarm(uint16_t alarmNum)
 
 void AlarmForm::saveAlarmQueueToConfig()
 {
+    g_SafeFileHandler->rotateBackups(alarmInfoDataPath);
     QSettings settings(alarmInfoDataPath, QSettings::IniFormat);
     settings.remove("");
 
@@ -81,10 +82,13 @@ void AlarmForm::saveAlarmQueueToConfig()
         settings.setValue("AlarmTime", alarmInfoQueue.at(i).alarmTime);
     }
     settings.endArray();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(alarmInfoDataPath.toLocal8Bit().data());
 }
 
 void AlarmForm::loadAlarmQueueFromConfig()
 {
+    g_SafeFileHandler->rotateBackups(alarmInfoDataPath);
     QSettings settings(alarmInfoDataPath, QSettings::IniFormat);
 
     int size = settings.beginReadArray("AlarmInfoQueue");
@@ -96,6 +100,8 @@ void AlarmForm::loadAlarmQueueFromConfig()
         alarmInfoQueue.enqueue({alarmNum, alarmTime});
     }
     settings.endArray();
+    settings.sync();
+    REFRESH_KERNEL_BUFFER(alarmInfoDataPath.toLocal8Bit().data());
 }
 
 void AlarmForm::setupAlarmInfo()
