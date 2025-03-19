@@ -17,7 +17,6 @@ NumberEdit::NumberEdit(QWidget *parent)
     connect(this, &NumberEdit::showRangeError, [=](const QString& message){
         ErrorTipDialog tip(message, TipMode::ONLY_OK);
         tip.exec();
-//        MainWindow::pMainWindow->showErrorTip(message);
     });
 }
 

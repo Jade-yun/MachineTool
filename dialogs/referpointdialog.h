@@ -20,7 +20,8 @@ public:
     ~ReferPointDialog();
 
 public:
-    void updateUI(const QList<ReferPointPara>& referPoints);
+//    void updateUI(const QList<ReferPointPara>& referPoints);
+    void updateUI();
     QString getSelectedRefPoint() const;
     int getRefPointIndex() const;
 private:

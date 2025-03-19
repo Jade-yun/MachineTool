@@ -30,38 +30,29 @@ QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZ
 /************************************************/
 QPushButton
 {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
+    border: 1px solid #6c6c6c;
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
+	border-radius:5px; /*边框倒角*/
 }
 QPushButton:pressed
 {
-    border-style:outset; /*边框风格*/
+    border-style:solid; /*边框风格*/
     background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgb(115, 66, 18),   stop:0.68099 rgb(115, 66, 18),    stop:0.816406 rgb(115, 66, 18),   stop:0.976562 rgb(255, 255, 255)); /*背景色*/
     border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
     border-radius:5px; /*边框倒角*/
 }
 QPushButton:checked
 {
-    border-style:outset; /*边框风格*/
+    border-style:solid; /*边框风格*/
     background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgb(115, 66, 18),   stop:0.68099 rgb(115, 66, 18),    stop:0.816406 rgb(115, 66, 18),   stop:0.976562 rgb(255, 255, 255)); /*背景色*/
     border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
     border-radius:5px; /*边框倒角*/
 }
 QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
     background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgb(115, 66, 18),   stop:0.68099 rgb(115, 66, 18),    stop:0.816406 rgb(115, 66, 18),   stop:0.976562 rgb(255, 255, 255)); /*背景色*/
-    border-color:#0055ff; /*边框颜色*/
-	border-style:outset; /*边框风格*/
-    border-width:1px;/*边框宽度*/
 
     border-style:solid; /*边框风格*/
     border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
     border-radius:5px; /*边框倒角*/
 }
 QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:checked#Btn_TeachHome,QPushButton:checked#Btn_AlarmHome,QPushButton::checked#Btn_ManualHome
@@ -69,14 +60,12 @@ QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:
     background-color:#E7E8EB;
     border-style:solid; 
     border-width:1px;
-    border-color:#0A7C25; 
 }
 QPushButton:pressed#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:checked#Btn_TeachHome,QPushButton:checked#Btn_AlarmHome,QPushButton::checked#Btn_ManualHome
 {
     background-color:#E7E8EB;
     border-style:solid; 
     border-width:1px;
-    border-color:#0A7C25; 
 }
 /**********************************************/
 QTabBar::tab {
@@ -200,7 +189,7 @@ QScrollBar:horizontal {
     background: rgba(214,212,210,100%);
     height: 30px;
     min-width: 30px;
-    margin: 2px 0px 1px 0px;
+    margin: 0px 2px 0px 1px;
     padding-left:33px;
     padding-right:33px;
 }
@@ -221,4 +210,37 @@ QScrollBar:vertical {
 QProgressBar#progressBar_start::chunk{
      border-radius: 15px;
 }
+QFileDialog QPushButton {
+    /* 设置打开和取消按钮的大小 */
+    min-width: 90px;
+    min-height: 40px;
+    max-width: 90px;
+    max-height: 40px;
+}
+
+QFileDialog QLineEdit,
+QFileDialog QComboBox {
+    /* 设置编辑框和过滤器下拉框的高度 */
+    min-height: 40px;
+    max-height: 40px;
+}
+
+QFileDialog QToolButton {
+    /* 设置按钮的固定大小 */
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+QFileDialog QListView, QFileDialog QTreeView {
+    /* 设置文件列表视图项的高度 */
+    show-decoration-selected: 1;  /* 让选中的项更明显 */
+}
+
+QFileDialog QListView::item, QFileDialog QTreeView::item {
+    /* 设置每个 item 的高度 */
+    min-height: 35px;
+}
+
 

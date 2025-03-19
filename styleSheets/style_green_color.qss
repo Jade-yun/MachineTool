@@ -33,7 +33,7 @@ QPushButton
 
     border-style:solid; /*边框风格*/
     border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
+    border-color:#0055ff; /*边框颜色*/
     border-radius:5px; /*边框倒角*/
 }
 QPushButton:pressed
@@ -49,18 +49,12 @@ QPushButton:checked
     border-style:outset; /*边框风格*/
     background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(53,246,38, 255), stop:0.68099 rgba(53,246,38, 255), stop:0.816406 rgba(53,246,38, 255), stop:0.976562 rgba(255, 255, 255, 255));/*背景色*/
     border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
     border-radius:5px; /*边框倒角*/
 }
 QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
-    background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(53,246,38, 255), stop:0.68099 rgba(53,246,38, 255), stop:0.816406 rgba(53,246,38, 255), stop:0.976562 rgba(255, 255, 255, 255));/*背景色*/
-    border-color:#0055ff; /*边框颜色*/
-	border-style:outset; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-
+    background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(53,246,38, 255), stop:0.68099 rgba(53,246,38, 255), stop:0.816406 rgba(53,246,38, 255), stop:0.976562 rgba(255, 255, 255, 255));/*背景色*//
     border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
+    border-width:1px;/*边框宽度*/   
     border-radius:5px; /*边框倒角*/
 }
 QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:checked#Btn_TeachHome,QPushButton:checked#Btn_AlarmHome,QPushButton::checked#Btn_ManualHome
@@ -219,4 +213,36 @@ QScrollBar:vertical {
  }
 QProgressBar#progressBar_start::chunk{
      border-radius: 15px;
+}
+QFileDialog QPushButton {
+    /* 设置打开和取消按钮的大小 */
+    min-width: 90px;
+    min-height: 40px;
+    max-width: 90px;
+    max-height: 40px;
+}
+
+QFileDialog QLineEdit,
+QFileDialog QComboBox {
+    /* 设置编辑框和过滤器下拉框的高度 */
+    min-height: 40px;
+    max-height: 40px;
+}
+
+QFileDialog QToolButton {
+    /* 设置按钮的固定大小 */
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+QFileDialog QListView, QFileDialog QTreeView {
+    /* 设置文件列表视图项的高度 */
+    show-decoration-selected: 1;  /* 让选中的项更明显 */
+}
+
+QFileDialog QListView::item, QFileDialog QTreeView::item {
+    /* 设置每个 item 的高度 */
+    min-height: 35px;
 }

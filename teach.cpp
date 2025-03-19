@@ -3367,6 +3367,15 @@ void Teach::Edit_AxisMove_Save_handle(void)
         }
         AxisMove->referPointNum = (uint8_t)ui->editReferPoint->getRefPointIndex();
         m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_AxisMove_delay->text().toDouble()*100;
+
+        int refIndex = ui->editReferPoint->getRefPointIndex();
+        if (refIndex > 0 && refIndex < REFERENCE_TOTAL_NUM)
+        {
+            auto axisIndex = AxisMove->axis;
+            m_RefPoint[refIndex - 1].pos[axisIndex] = AxisMove->pos;
+
+            ::writeReferenceInfo();
+        }
     }
 }
 /*************************************************************************
@@ -4848,14 +4857,32 @@ void Teach::OrderEdit_Handle()
         }
         ui->lineEdit_Edit_AxisMove_early_speed->setText(QString::number(AxisMove->advCSpeedSpeed,'f',0));
         ui->lineEdit_Edit_AxisMove_early_pos->setText(QString::number(advEndDis/100,'f',2));
-        if(ui->editReferPoint->getRefPointIndex() == 0)
-        {
+
+//        if(ui->editReferPoint->getRefPointIndex() == 0)
+//        {
+//            ui->editReferPoint->setText("");
+//        }
+//        else
+//        {
+//            ui->editReferPoint->setText(tr("参考点")+QString::number(AxisMove->referPointNum));
+//        }
+        int refIndex = AxisMove->referPointNum;
+        if (refIndex) {
+            int arrayIndex = refIndex - 1;
+            if (m_RefPoint[arrayIndex].refFlag) {
+                ui->editReferPoint->setText(m_RefPoint[arrayIndex].refName);
+                ui->editReferPoint->setRefPointIndex(refIndex);
+            }
+            else {
+                ui->editReferPoint->setText("");
+                ui->editReferPoint->setRefPointIndex(0);
+            }
+        }
+        else {
             ui->editReferPoint->setText("");
+            ui->editReferPoint->setRefPointIndex(0);
         }
-        else
-        {
-            ui->editReferPoint->setText(tr("参考点")+QString::number(AxisMove->referPointNum));
-        }
+
         break;
     }
     case C_CLAW_ACTION:

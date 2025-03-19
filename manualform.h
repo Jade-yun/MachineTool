@@ -89,11 +89,15 @@ private:
     void updateGuidePoints();
     void setupGuidePointConnections(DraggableButton* btn);
     void updateReferPointsList();
-
+    void setupReferPointConnections(DraggableButton* btn);
+    void onReferPointButtonPressed(DraggableButton* btn);
+    void updateReferPointsAxisPos();
     void refreshPosTable();
 
     void setupReserveWidgets();
-    void updateGroupBoxVisibility(const std::vector<std::pair<std::vector<QPushButton *>, QGroupBox *> > &buttonGroups);
+    void setupClawAndMachineConnections();
+//    void updateGroupBoxVisibility(const std::vector<std::pair<std::vector<QPushButton *>, QGroupBox *> > &buttonGroups);
+    void checkAndUpdatePortButtonState(); // 监测 卡爪/机床的 状态并更新
 
     void initControls();            //pxc 初始化控件并对控件进行赋值
 
@@ -116,6 +120,8 @@ private:
     QHash<DraggableButton*, GuidePara> guidePoints;
 
     std::vector<QPushButton*> reserveButtons;
+
+    QTimer* checkTimer;
 private:
     Ui::ManualForm *ui;
 
