@@ -1026,7 +1026,7 @@ void getProgramNameAndPath()
             prog.fileName = settings.value("name").toString();
             prog.filePath = settings.value("path").toString();
             prog.index = settings.value("index").toUInt();
-            prog.filePermission = settings.value("permission").toUInt();
+            prog.filePermission = getProgramPermission(prog.fileName);
             prog.changeTime = settings.value("time").toString();
             settings.endGroup();
 
@@ -1061,7 +1061,7 @@ void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
         settings.setValue("name", prog.fileName);
         settings.setValue("path", prog.filePath);
         settings.setValue("index", prog.index);
-        settings.setValue("permission", prog.filePermission);
+//        settings.setValue("permission", prog.filePermission);
         settings.setValue("time", prog.changeTime);
         settings.endGroup();
     }

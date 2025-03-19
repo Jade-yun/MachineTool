@@ -10,6 +10,8 @@
 #include <QMainWindow>
 #include <QComboBox>
 #include <QDir>
+#include <QTreeView>
+#include <QFileIconProvider>
 
 #include "RefreshKernelBuffer.h"
 
@@ -482,8 +484,11 @@ void TeachManage::on_btn_Import_clicked()
     }
 
     setProgramNameAndPath(m_ProgramNameAndPath);
+    ::sync();
+    
     g_SafeFileHandler->rotateBackups(m_ProgramPath + "/" + programName + SUFFIX_PROGRAM);//备份文件
     g_SafeFileHandler->rotateBackups(m_ProgramPath + "/" + programName + SUFFIX_REFER);//备份文件对应的参考点文件
+
     ErrorTipDialog tip(tr("文件导入成功！"), TipMode::ONLY_OK);
     tip.exec();
 }
@@ -755,8 +760,30 @@ void TeachManage::initWidgets()
     fileDialog->setAcceptDrops(false);
     fileDialog->setOptions(QFileDialog::ReadOnly | QFileDialog::DontUseNativeDialog);
 
+    for (auto* widget : fileDialog->findChildren<QWidget*>()) {
+        if (auto* btn = qobject_cast<QAbstractButton*>(widget)) {
+            btn->setIconSize(QSize(32, 32));  // 所有带 icon 的按钮
+        }
+        else if (auto* comboBox = qobject_cast<QComboBox*>(widget)) {
+            comboBox->setIconSize(QSize(32, 32));  // "Look in" 的 QComboBox
+        }
+//        else if (auto* listView = qobject_cast<QListView*>(widget)) {
+//            listView->setIconSize(QSize(32, 32));  // 文件列表 (ListView)
+//            listView->setDragEnabled(false);
+//        }
+//        else if (auto* treeView = qobject_cast<QTreeView*>(widget)) {
+//            treeView->setIconSize(QSize(32, 32));  // 文件树 (TreeView)
+//            treeView->setDragEnabled(false);
+//        }
+        else if (auto* itemView = qobject_cast<QAbstractItemView*>(widget)) {
+            itemView->setIconSize(QSize(32, 32));  // 文件列表 (ListView)
+            itemView->setDragEnabled(false);
+        }
+    }
+
     for (auto& comboBox : fileDialog->findChildren<QComboBox*>())
     {
         comboBox->setFocusPolicy(Qt::NoFocus);
+        comboBox->setEnabled(false);
     }
 }

@@ -30,8 +30,8 @@ class ReferenceWidget : public QDialog
 public:
     explicit ReferenceWidget(QWidget *parent = nullptr);
 
-    void addReferencePoint();
-    void removeReferencePoint();
+//    void addReferencePoint();
+//    void removeReferencePoint();
     // other public methods
 
 private:
@@ -39,6 +39,9 @@ private:
     void init();
     void updateReferPointsTable();
     void updateReferPoints();
+
+    void updateReferPointsAxisPos();
+    void refreshPosTable();
 
 private:
     QList<ReferPointPara> referencePoints;
@@ -48,6 +51,7 @@ private:
     QLabel* labReferPointPic;
     QFrame* frameRerencePoint;
     QTextBrowser* textReferPointName;
+    QTableWidget* tableWgtAxisPos;
 
     QPushButton *btnOK;
     QPushButton *btnCancel;

@@ -143,7 +143,6 @@ void ReferenceWidget::init()
     textReferPointName->setGeometry(QRect(820, 80, 170, 70)); // 原始 y 坐标 +60
 
     tableReference = new QTableWidget(frameRerencePoint);
-    tableReference->setGeometry(5, 0, 760, 40);
     tableReference->setEditTriggers(QAbstractItemView::NoEditTriggers);
     tableReference->setVisible(referencePoints.size());
     tableReference->setFrameShape(QFrame::NoFrame);
@@ -160,6 +159,18 @@ void ReferenceWidget::init()
     for (int i = 0; i < tableReference->columnCount(); ++i) {
         tableReference->setColumnWidth(i, (i % 2 == 0) ? 40 : 140);
     }
+
+    tableWgtAxisPos = new QTableWidget(this);
+    if (tableWgtAxisPos->columnCount() < 1)
+        tableWgtAxisPos->setColumnCount(1);
+    tableWgtAxisPos->setObjectName(QString::fromUtf8("tableWgtAxisPos"));
+    tableWgtAxisPos->setGeometry(QRect(760, 101 + 60, 241, 361)); // 原始 y 坐标 +60
+    tableWgtAxisPos->setMidLineWidth(1);
+    tableWgtAxisPos->setRowCount(0);
+    tableWgtAxisPos->setColumnCount(1);
+    tableWgtAxisPos->horizontalHeader()->setDefaultSectionSize(240);
+    tableWgtAxisPos->verticalHeader()->setMinimumSectionSize(30);
+    tableWgtAxisPos->verticalHeader()->setDefaultSectionSize(40);
 
     // 调整按钮位置
     const QSize buttonSize(100, 45);
@@ -191,6 +202,13 @@ void ReferenceWidget::updateReferPointsTable()
 {
     tableReference->clearContents();
     tableReference->setRowCount(referencePoints.count() / 4 + 1);
+
+    int rowH = tableReference->rowCount();
+    if (rowH > 3)
+    {
+        rowH = 3;
+    }
+    tableReference->setGeometry(5, 0, 760, 40 * rowH);
 
     QList<ReferPointPara> sortedPoints = referencePoints;
     std::sort(sortedPoints.begin(), sortedPoints.end(), [](const ReferPointPara &a, const ReferPointPara &b) {
@@ -270,6 +288,7 @@ void ReferenceWidget::updateReferPoints()
             connect(btn, &DraggableButton::pressed, this, [=]() {
                 selectedReferPoint = btn;
 
+
                 int index = 0;
                 auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& p) {
                     return p.button == selectedReferPoint;
@@ -277,6 +296,7 @@ void ReferenceWidget::updateReferPoints()
                 if (it != referencePoints.end()) {
                     textReferPointName->setText(it->name);
                     index = it->index;
+                    refreshPosTable();
                 }
                 for (int row = 0; row < tableReference->rowCount(); ++row) {
                     for (int col = 0; col < tableReference->columnCount(); ++col) {
@@ -302,12 +322,56 @@ void ReferenceWidget::updateReferPoints()
     }
 }
 
+void ReferenceWidget::updateReferPointsAxisPos()
+{
+    for (auto& point : referencePoints)
+    {
+        int arrayIndex = point.index - 1;
+        for (int i = 0; i < AXIS_TOTAL_NUM; i++)
+        {
+            point.axisPos[i] =  m_RefPoint[arrayIndex].pos[i];
+        }
+    }
+}
+
+void ReferenceWidget::refreshPosTable()
+{
+    static const QStringList axisNames = {
+        "X1", "Y1", "Z1", "X2", "Y2", "Z2"
+    };
+    tableWgtAxisPos->setRowCount(AXIS_TOTAL_NUM);
+    tableWgtAxisPos->setVerticalHeaderLabels(axisNames);
+    tableWgtAxisPos->setHorizontalHeaderLabels({tr("轴位置")});
+
+    tableWgtAxisPos->clearContents();  // 清除旧数据
+
+    auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+        return point.button == selectedReferPoint;
+    });
+    if (it != referencePoints.end())
+    {
+        for (size_t i = 0; i < AXIS_TOTAL_NUM; i++)
+        {
+            if (m_AxisPar[i].axisType == 1)
+            {
+                auto item = new QTableWidgetItem(QString::number(it->axisPos[i] / 100.0, 'f', 2));
+                tableWgtAxisPos->setItem(i, 0, item);
+            }
+            else
+            {
+                tableWgtAxisPos->hideRow(i);
+            }
+        }
+    }
+}
+
 void ReferenceWidget::showEvent(QShowEvent *event)
 {
-    QWidget::showEvent(event);
     updateReferPoints();
     updateUI(referencePoints);
-    this->update();
+    updateReferPointsAxisPos();
+
+    QWidget::showEvent(event);
 }
 
 void ReferenceWidget::changeEvent(QEvent *e)

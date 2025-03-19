@@ -1,6 +1,7 @@
 #include "program_save.h"
 #include "RefreshKernelBuffer.h"
-QString m_ProgramPath="/Program";
+
+QString m_ProgramPath="/opt/MachineTool/program";
 
 const QString SUFFIX_PROGRAM = ".ZHpro";
 const QString SUFFIX_REFER = ".ref";

@@ -220,4 +220,37 @@ QScrollBar:vertical {
 QProgressBar#progressBar_start::chunk{
      border-radius: 15px;
 }
+QFileDialog QPushButton {
+    /* 设置打开和取消按钮的大小 */
+    min-width: 90px;
+    min-height: 40px;
+    max-width: 90px;
+    max-height: 40px;
+}
+
+QFileDialog QLineEdit,
+QFileDialog QComboBox {
+    /* 设置编辑框和过滤器下拉框的高度 */
+    min-height: 40px;
+    max-height: 40px;
+}
+
+QFileDialog QToolButton {
+    /* 设置按钮的固定大小 */
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+QFileDialog QListView, QFileDialog QTreeView {
+    /* 设置文件列表视图项的高度 */
+    show-decoration-selected: 1;  /* 让选中的项更明显 */
+}
+
+QFileDialog QListView::item, QFileDialog QTreeView::item {
+    /* 设置每个 item 的高度 */
+    min-height: 35px;
+}
+
 

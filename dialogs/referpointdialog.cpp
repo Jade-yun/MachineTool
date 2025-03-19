@@ -25,21 +25,60 @@ ReferPointDialog::~ReferPointDialog()
     delete ui;
 }
 
-void ReferPointDialog::updateUI(const QList<ReferPointPara> &referPoints)
-{
-//    QLayout *oldLayout = ui->scrollWgt->layout();
-//    if (oldLayout) {
-//        QLayoutItem *item;
-//        while ((item = oldLayout->takeAt(0)) != nullptr) {
-//            delete item->widget(); // 删除子控件
-//            delete item; // 删除布局项
+//void ReferPointDialog::updateUI(const QList<ReferPointPara> &referPoints)
+//{
+////    QLayout *oldLayout = ui->scrollWgt->layout();
+////    if (oldLayout) {
+////        QLayoutItem *item;
+////        while ((item = oldLayout->takeAt(0)) != nullptr) {
+////            delete item->widget(); // 删除子控件
+////            delete item; // 删除布局项
+////        }
+////        delete oldLayout; // 删除旧的布局
+////    }
+
+////    QGroupBox *groupBox = new QGroupBox(tr("参考点指定"), this);
+
+//       QVBoxLayout *mainLayout = new QVBoxLayout(ui->scrollWgt);
+
+//    QGridLayout *gridLayout = new QGridLayout();
+//    gridLayout->setVerticalSpacing(20);
+
+//    chboxGroup = new QButtonGroup(this);
+//    chboxGroup->setExclusive(true);
+
+//    const int itemsPerRow = 3;
+//    int row = 0;
+//    int column = 0;
+
+//    int id = 0;
+//    QCheckBox* chbox = new QCheckBox(tr("不指定"), this);
+//    chbox->setChecked(true);
+//    chbox->setCheckable(true);
+//    gridLayout->addWidget(chbox, row, column++);
+//    chboxGroup->addButton(chbox, id++);
+
+//    for (const auto& refPoint : referPoints) {
+//        QCheckBox *checkBox = new QCheckBox(refPoint.name, this);
+//        gridLayout->addWidget(checkBox, row, column);
+//        chboxGroup->addButton(checkBox, id++);
+
+//        column++;
+//        if (column >= itemsPerRow) {
+//            column = 0;
+//            row++;
 //        }
-//        delete oldLayout; // 删除旧的布局
 //    }
 
-//    QGroupBox *groupBox = new QGroupBox(tr("参考点指定"), this);
+//    mainLayout->addLayout(gridLayout);
+//    mainLayout->addStretch();
 
-       QVBoxLayout *mainLayout = new QVBoxLayout(ui->scrollWgt);
+//    ui->scrollWgt->setLayout(mainLayout);
+//}
+
+void ReferPointDialog::updateUI()
+{
+    QVBoxLayout *mainLayout = new QVBoxLayout(ui->scrollWgt);
 
     QGridLayout *gridLayout = new QGridLayout();
     gridLayout->setVerticalSpacing(20);
@@ -58,15 +97,18 @@ void ReferPointDialog::updateUI(const QList<ReferPointPara> &referPoints)
     gridLayout->addWidget(chbox, row, column++);
     chboxGroup->addButton(chbox, id++);
 
-    for (const auto& refPoint : referPoints) {
-        QCheckBox *checkBox = new QCheckBox(refPoint.name, this);
-        gridLayout->addWidget(checkBox, row, column);
-        chboxGroup->addButton(checkBox, id++);
+    for (int i = 0; i < REFERENCE_TOTAL_NUM; i++) {
+        if (m_RefPoint[i].refFlag) {
 
-        column++;
-        if (column >= itemsPerRow) {
-            column = 0;
-            row++;
+            QCheckBox *checkBox = new QCheckBox(m_RefPoint[i].refName, this);
+            gridLayout->addWidget(checkBox, row, column);
+            chboxGroup->addButton(checkBox, id++);
+
+            column++;
+            if (column >= itemsPerRow) {
+                column = 0;
+                row++;
+            }
         }
     }
 
@@ -88,15 +130,36 @@ QString ReferPointDialog::getSelectedRefPoint() const
 
 int ReferPointDialog::getRefPointIndex() const
 {
-    auto manualWidget = qobject_cast<ManualForm*>(MainWindow::pMainWindow->findChild<ManualForm*>());
-    const QList<ReferPointPara>& referPoints = manualWidget->getRerferPoints();
+//    auto manualWidget = qobject_cast<ManualForm*>(MainWindow::pMainWindow->findChild<ManualForm*>());
+//    const QList<ReferPointPara>& referPoints = manualWidget->getRerferPoints();
+
+//    int chboxId = chboxGroup->checkedId();
+//    // 未指定参考点
+//    if (!chboxId){
+//        return 0;
+//    }
+//    int index = referPoints.isEmpty() ? 0 : referPoints.at(chboxId-1).index;
 
     int chboxId = chboxGroup->checkedId();
     // 未指定参考点
     if (!chboxId){
         return 0;
     }
-    int index = referPoints.isEmpty() ? 0 : referPoints.at(chboxId-1).index;
+
+    int index = 0;
+    QString selectName = chboxGroup->checkedButton()->text();
+    for (int i = 0; i < REFERENCE_TOTAL_NUM; i++)
+    {
+       if (m_RefPoint[i].refFlag)
+       {
+            if (selectName == m_RefPoint[i].refName)
+            {
+                index = i + 1;
+                break;
+            }
+       }
+    }
+
     return index;
 }
 

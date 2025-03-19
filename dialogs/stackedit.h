@@ -96,7 +96,7 @@ private:
     Ui::StackEdit *ui;
     QMovie *movie;
 private:
-    int groupIndex;
+    int groupIndex; // 堆叠组号 0-7
 signals:
     void closeStackEditDialogSignal(); // 定义关闭对话框的信号
     void stackParRefreshSignal();

@@ -911,15 +911,16 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
         RefPointEdit* editIf = qobject_cast<RefPointEdit*>(watched);
         if (editIf && editIf->isEnabled() && event->type() == QEvent::MouseButtonRelease) {
             ReferPointDialog dlg(this);
-            auto manualWidget = qobject_cast<ManualForm*>(MainWindow::pMainWindow->findChild<ManualForm*>());
-                dlg.updateUI(manualWidget->getRerferPoints());
-                if (dlg.exec() == QDialog::Accepted)
-                {
-                    QString refPointName =  dlg.getSelectedRefPoint();
-                    editIf->refPointIndex = dlg.getRefPointIndex();
-                    editIf->setText(refPointName);
+//            auto manualWidget = qobject_cast<ManualForm*>(MainWindow::pMainWindow->findChild<ManualForm*>());
+//                dlg.updateUI(manualWidget->getRerferPoints());
+            dlg.updateUI();
+            if (dlg.exec() == QDialog::Accepted)
+            {
+                QString refPointName =  dlg.getSelectedRefPoint();
+                editIf->refPointIndex = dlg.getRefPointIndex();
+                editIf->setText(refPointName);
 
-                }
+            }
         }
         return false;
     }
