@@ -3,7 +3,7 @@
 SafeFileHandler::SafeFileHandler(QObject *parent)
     : QObject(parent)
 {
-    m_backupDir = "/opt/backups/";
+    m_backupDir = "/opt/MachineTool/backups/";
     QDir backupDir(m_backupDir);
     if (!backupDir.exists()) {
         // 尝试创建目录（包含父目录）
@@ -21,6 +21,7 @@ SafeFileHandler::SafeFileHandler(QObject *parent)
                 foreach (const QString& fileName, files) {
                     rotateBackups(sysfiledir+fileName);
                 }
+                qDebug() << "第一次备份系统参数文件完成，备份目录：" << m_backupDir;
             }
             qDebug() << "成功创建备份目录:" << m_backupDir;
         }

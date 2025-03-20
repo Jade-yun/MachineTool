@@ -63,6 +63,8 @@ void upgradedialog::upgreadok_handle()
             }
         }
     }
+    bool SameNameFileFlag = false;//是否存在同名文件
+    QString tempPath = "/opt/MachineTool/configs/";
     switch (sure_handle_type) {
     case HANDHELD:
     {
@@ -96,24 +98,50 @@ void upgradedialog::upgreadok_handle()
         {
             this->hide();
             emit updataWidgetShowSignal();
-            Upgrade_Progress_send(10);
-            if(ui->teach_checkbox->isChecked())
-            {//如果选择的是示教文件
-
-                copyPath(m_ProgramPath,TargetPath);
-            }
-            else if(ui->SysDate_checkbox->isChecked())
+            Upgrade_Progress_send(0);
+            QDir FirstDir(tempPath);
+            if(!FirstDir.exists())
             {
-                copyPath("/root",TargetPath);
+                qDebug() << QString("文件夹%1不存在").arg(tempPath);
             }
-            else if(ui->Cust_checkbox->isChecked())
+            else
             {
-
-            }
-            else if(ui->All_checkbox->isChecked())
-            {
-                copyPath(m_ProgramPath,TargetPath);
-                copyPath("/root",TargetPath);
+                if(ui->teach_checkbox->isChecked())
+                {//如果选择的是示教文件
+                    copyPath(m_ProgramPath,TargetPath);
+                }
+                else if(ui->SysDate_checkbox->isChecked())
+                {//系统文件
+                    Upgrade_Progress_send(30);
+                    QStringList files = FirstDir.entryList(QDir::Files);
+                    QFileInfoList fileList = FirstDir.entryInfoList(QStringList() << "Ini_Para.ini",
+                                                               QDir::Files | QDir::NoDotAndDotDot);
+                    for (const QFileInfo& fileInfo : fileList)
+                    {
+                        UsbDisk::instance()->copyToUsb(fileInfo.absoluteFilePath(), TargetPath);
+                    }
+                    Upgrade_Progress_send(100);
+                    ::sync();
+                }
+                else if(ui->Cust_checkbox->isChecked())
+                {
+                    Upgrade_Progress_send(50);
+                    QStringList files = FirstDir.entryList(QDir::Files);
+                    QFileInfoList fileList = FirstDir.entryInfoList(QStringList() << "NameDef_Customize_*.ini",
+                                                               QDir::Files | QDir::NoDotAndDotDot);
+                    for (const QFileInfo& fileInfo : fileList)
+                    {
+                        UsbDisk::instance()->copyToUsb(fileInfo.absoluteFilePath(), TargetPath);
+                    }
+                    Upgrade_Progress_send(100);
+                    ::sync();
+                }
+                else if(ui->All_checkbox->isChecked())
+                {//全部参数
+                    copyPath(m_ProgramPath,TargetPath);
+                    copyPath("/opt/MachineTool/configs",TargetPath);
+                    ::sync();
+                }
             }
             emit ImplementFinishSignal();
         }
@@ -121,39 +149,286 @@ void upgradedialog::upgreadok_handle()
     }
     case COPY_DATA_REST:
     {
+        emit updataWidgetShowSignal();
+        Upgrade_Progress_send(0);
         int reply = showTip(tr("请确认: [U盘]---->[手持器]"));
+
         if(reply == QDialog::Accepted)
         {
             if(hasDuplicateFileNames(TargetPath,m_ProgramPath))
             {//if存在同名文件
-                int reply = showTip(tr("文件已存在，请确认是否覆盖？"));
-                if(reply == QDialog::Accepted)
+                if(ui->teach_checkbox->isChecked() || ui->All_checkbox->isChecked())
                 {
-                    Cover_SameNameFile = true;
-                }
-                else if(reply == QDialog::Rejected)
-                {
-                    Cover_SameNameFile = false;
+                    SameNameFileFlag = true;
+                    int reply = showTip(tr("教导中存在相同文件，请确认是否覆盖？确认(覆盖同名文件)；取消(不恢复同名文件)"));
+                    if(reply == QDialog::Accepted)
+                    {
+                        Cover_SameNameFile = true;
+                    }
+                    else if(reply == QDialog::Rejected)
+                    {
+                        Cover_SameNameFile = false;
+                    }
                 }
             }
             this->hide();
             Upgrade_Progress_send(20);
             if(ui->teach_checkbox->isChecked())
             {//如果选择的是示教文件
-                copyPath(TargetPath,m_ProgramPath);
+                QDir ProgramDir(TargetPath);
+                if(!ProgramDir.exists())
+                {
+                    qDebug() << QString("文件夹%1不存在").arg(TargetPath);
+                }
+                else
+                {
+                    QStringList filters = {"*.ZHpro","*.ref"};
+                    const QFileInfoList files = ProgramDir.entryInfoList(filters,
+                            QDir::Files | QDir::NoDotAndDotDot | QDir::Readable);
+                    QString programName;
+                    QString progModifiedTime;
+                    uint8_t permission;
+                    for (const auto& matchingFile : files)
+                    {
+                        programName = matchingFile.baseName();
+                        progModifiedTime = matchingFile.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+                        if(SameNameFileFlag == false)
+                        {//如果不存在同名文件
+                            UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+                            if(matchingFile.suffix() == "ZHpro")
+                            {
+                                // 添加新程序信息
+                                permission = ::getProgramPermission(programName);
+                                D_ProgramNameAndPathStruct P_NamePathTemp = {
+                                    programName,
+                                    m_ProgramPath + "/" + programName + SUFFIX_PROGRAM,
+                                    ++m_FileNameNum,
+                                    permission,
+                                    progModifiedTime
+                                };
+                                m_ProgramNameAndPath.append(P_NamePathTemp);
+                                SetProgramIndex();
+                                setProgramNameAndPath(m_ProgramNameAndPath);
+                            }
+                        }
+                        else
+                        {
+                            if(Cover_SameNameFile == true)
+                            {//如果存在同名文件，且覆盖
+                                auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
+                                                       [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });
+                                UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+                                if (it == m_ProgramNameAndPath.end())
+                                {//不是同名文件
+                                    if(matchingFile.suffix() == "ZHpro")
+                                    {
+                                        // 添加新程序信息
+                                        permission = ::getProgramPermission(programName);
+                                        D_ProgramNameAndPathStruct P_NamePathTemp = {
+                                            programName,
+                                            m_ProgramPath + "/" + programName + SUFFIX_PROGRAM,
+                                            ++m_FileNameNum,
+                                            permission,
+                                            progModifiedTime
+                                        };
+                                        m_ProgramNameAndPath.append(P_NamePathTemp);
+                                        SetProgramIndex();
+                                        setProgramNameAndPath(m_ProgramNameAndPath);
+                                    }
+                                }
+                                else
+                                {//覆盖同名文件
+                                    // 更新现有程序信息
+                                    if(matchingFile.suffix() == "ZHpro")
+                                    {
+                                        it->filePath = m_ProgramPath + "/" + programName + SUFFIX_PROGRAM;
+                                        it->filePermission = ::getProgramPermission(programName);
+                                        it->changeTime = progModifiedTime;
+                                    }
+                                }
+                            }
+                            else
+                            {//如果不覆盖
+                                auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
+                                                       [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });
+                                if (it == m_ProgramNameAndPath.end())
+                                {//不是同名文件
+                                    UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+                                    if(matchingFile.suffix() == "ZHpro")
+                                    {
+                                        // 添加新程序信息
+                                        permission = ::getProgramPermission(programName);
+                                        D_ProgramNameAndPathStruct P_NamePathTemp = {
+                                            programName,
+                                            m_ProgramPath + "/" + programName + SUFFIX_PROGRAM,
+                                            ++m_FileNameNum,
+                                            permission,
+                                            progModifiedTime
+                                        };
+                                        m_ProgramNameAndPath.append(P_NamePathTemp);
+                                        SetProgramIndex();
+                                        setProgramNameAndPath(m_ProgramNameAndPath);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    Upgrade_Progress_send(100);
+                    ::sync();
+                }
             }
             else if(ui->SysDate_checkbox->isChecked())
-            {
-                copyPath(TargetPath,"/root");
+            {//系统参数
+                QDir ProgramDir(TargetPath);
+                if(!ProgramDir.exists())
+                {
+                    qDebug() << QString("文件夹%1不存在").arg(TargetPath);
+                    return;
+                }
+                Upgrade_Progress_send(30);
+                QStringList files = ProgramDir.entryList(QDir::Files);
+                QFileInfoList fileList = ProgramDir.entryInfoList(QStringList() << "Ini_Para.ini",
+                                                           QDir::Files | QDir::NoDotAndDotDot);
+                for (const QFileInfo& fileInfo : fileList)
+                {
+                    UsbDisk::instance()->copy(fileInfo.absoluteFilePath(), tempPath);
+                }
+                Upgrade_Progress_send(100);
+                ::sync();
             }
             else if(ui->Cust_checkbox->isChecked())
-            {
-
+            {//名称自定义
+                QDir ProgramDir(TargetPath);
+                if(!ProgramDir.exists())
+                {
+                    qDebug() << QString("文件夹%1不存在").arg(TargetPath);
+                    return;
+                }
+                Upgrade_Progress_send(50);
+                QStringList files = ProgramDir.entryList(QDir::Files);
+                QFileInfoList fileList = ProgramDir.entryInfoList(QStringList() << "NameDef_Customize_*.ini",
+                                                           QDir::Files | QDir::NoDotAndDotDot);
+                for (const QFileInfo& fileInfo : fileList)
+                {
+                    UsbDisk::instance()->copy(fileInfo.absoluteFilePath(), tempPath);
+                }
+                Upgrade_Progress_send(100);
+                ::sync();
             }
             else if(ui->All_checkbox->isChecked())
-            {
-                copyPath(TargetPath,m_ProgramPath);
-                copyPath(TargetPath,"/root");
+            {//所有参数
+                Upgrade_Progress_send(20);
+                QDir ProgramDir(TargetPath);
+                if(!ProgramDir.exists())
+                {
+                    qDebug() << QString("文件夹%1不存在").arg(TargetPath);
+                    return;
+                }
+                Upgrade_Progress_send(40);
+                QStringList files = ProgramDir.entryList(QDir::Files);
+                QFileInfoList fileList = ProgramDir.entryInfoList(QStringList() << "*.ini",
+                                                           QDir::Files | QDir::NoDotAndDotDot);
+                for (const QFileInfo& fileInfo : fileList)
+                {
+                    if(fileInfo.baseName() != "AlarmInfoData" || fileInfo.baseName() == "PowerOnReadOneProInfo" || fileInfo.baseName() == "ProgramNameAndPathInfo")
+                    {
+                        UsbDisk::instance()->copy(fileInfo.absoluteFilePath(), tempPath);
+                    }
+                }
+                Upgrade_Progress_send(60);
+                QStringList filters1 = {"*.ZHpro","*.ref"};
+                const QFileInfoList files1 = ProgramDir.entryInfoList(filters1,
+                        QDir::Files | QDir::NoDotAndDotDot | QDir::Readable);
+                QString programName;
+                QString progModifiedTime;
+                uint8_t permission;
+                for (const auto& matchingFile : files1)
+                {
+                    programName = matchingFile.baseName();
+                    progModifiedTime = matchingFile.lastModified().toString("yyyy-MM-dd hh:mm:ss");
+                    if(SameNameFileFlag == false)
+                    {//如果不存在同名文件
+                        UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+                        if(matchingFile.suffix() == "ZHpro")
+                        {
+                            // 添加新程序信息
+                            permission = ::getProgramPermission(programName);
+                            D_ProgramNameAndPathStruct P_NamePathTemp = {
+                                programName,
+                                m_ProgramPath + "/" + programName + SUFFIX_PROGRAM,
+                                ++m_FileNameNum,
+                                permission,
+                                progModifiedTime
+                            };
+                            m_ProgramNameAndPath.append(P_NamePathTemp);
+                            SetProgramIndex();
+                            setProgramNameAndPath(m_ProgramNameAndPath);
+                        }
+                    }
+                    else
+                    {
+                        if(Cover_SameNameFile == true)
+                        {//如果存在同名文件，且覆盖
+                            auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
+                                                   [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });
+                            UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+                            if (it == m_ProgramNameAndPath.end())
+                            {//不是同名文件
+                                if(matchingFile.suffix() == "ZHpro")
+                                {
+                                    // 添加新程序信息
+                                    permission = ::getProgramPermission(programName);
+                                    D_ProgramNameAndPathStruct P_NamePathTemp = {
+                                        programName,
+                                        m_ProgramPath + "/" + programName + SUFFIX_PROGRAM,
+                                        ++m_FileNameNum,
+                                        permission,
+                                        progModifiedTime
+                                    };
+                                    m_ProgramNameAndPath.append(P_NamePathTemp);
+                                    SetProgramIndex();
+                                    setProgramNameAndPath(m_ProgramNameAndPath);
+                                }
+                            }
+                            else
+                            {//覆盖同名文件
+                                // 更新现有程序信息
+                                if(matchingFile.suffix() == "ZHpro")
+                                {
+                                    it->filePath = m_ProgramPath + "/" + programName + SUFFIX_PROGRAM;
+                                    it->filePermission = ::getProgramPermission(programName);
+                                    it->changeTime = progModifiedTime;
+                                }
+                            }
+                        }
+                        else
+                        {//如果不覆盖
+                            auto it = std::find_if(m_ProgramNameAndPath.begin(), m_ProgramNameAndPath.end(),
+                                                   [&](const D_ProgramNameAndPathStruct& item) { return item.fileName == programName; });
+                            if (it == m_ProgramNameAndPath.end())
+                            {//不是同名文件
+                                UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+                                if(matchingFile.suffix() == "ZHpro")
+                                {
+                                    // 添加新程序信息
+                                    permission = ::getProgramPermission(programName);
+                                    D_ProgramNameAndPathStruct P_NamePathTemp = {
+                                        programName,
+                                        m_ProgramPath + "/" + programName + SUFFIX_PROGRAM,
+                                        ++m_FileNameNum,
+                                        permission,
+                                        progModifiedTime
+                                    };
+                                    m_ProgramNameAndPath.append(P_NamePathTemp);
+                                    SetProgramIndex();
+                                    setProgramNameAndPath(m_ProgramNameAndPath);
+                                }
+                            }
+                        }
+                    }
+                }
+                ::sync();
+                Upgrade_Progress_send(100);
             }
             emit ImplementFinishSignal();
         }
@@ -229,6 +504,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
         ui->All_checkbox->setChecked(true);//默认选中全部参数
         ui->upgrade_SearchName->setText("/HMI/");
         sure_handle_type = COPY_DATA_REST;
+        break;
     }
     case RESTSETTING:
     {
@@ -239,6 +515,7 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
         ui->ResSettInput_password->setDecimalPlaces(0);
         ui->ResSettInput_password->setText("");
         sure_handle_type = RESTSETTING;
+        break;
     }
     default:
         break;
@@ -647,36 +924,6 @@ void upgradedialog::on_ok_button_clicked()
     {
         break;
     }
-    case SYSTEM_DATA_COPY:
-    {
-        if (currentIndex.isValid() && FileSystemModel->isDir(currentIndex))
-        { // 检查索引是否有效并且当前选中是否为目录
-            Upgrade_Progress_send(20);
-            QString currentPath = FileSystemModel->filePath(currentIndex);
-            if(ui->teach_checkbox->isChecked())
-            {//如果选择的是示教文件
-                copyPath(m_ProgramPath,currentPath);
-            }
-            else if(ui->SysDate_checkbox->isChecked())
-            {
-                copyPath("/root",currentPath);
-            }
-            else if(ui->Cust_checkbox->isChecked())
-            {
-                copyPath("/opt/MachineTool/configs/NameDef_Customize_*.ini",currentPath);
-            }
-            else if(ui->All_checkbox->isChecked())
-            {
-                copyPath(m_ProgramPath,currentPath);
-                copyPath("/root",currentPath);
-            }
-        }
-        break;
-    }
-    case COPY_DATA_REST:
-    {
-        break;
-    }
     default:
         break;
     }
@@ -772,26 +1019,16 @@ void upgradedialog::Updata_handle() {
             Upgrade_Progress_send(80);
             if(QFile::copy(destFilePath+fileName,backupPash))
             {//升级成功，重新启动程序
+                g_Usart->m_serialPort->clear(QSerialPort::AllDirections);// 清空缓冲区
+                // 2. 关闭串口连接
+                if (g_Usart->m_serialPort->isOpen()) {
+                    g_Usart->m_serialPort->close();
+                }
+                // 3. 断开所有相关信号槽
+                disconnect(g_Usart->m_serialPort, nullptr, nullptr, nullptr);
+                ::sync();
                 Upgrade_Progress_send(100);
                 system("reboot");
-//                QString pid = "";
-//                QProcess  pgrepProcess;
-//                pgrepProcess.start("/bin/sh", QStringList() << "-c" << "ps aux | grep '/opt/MachineTool/bin/MachineTool'");
-//                pgrepProcess.waitForFinished();
-
-//                QString output = pgrepProcess.readAllStandardOutput();
-//                QStringList lines = output.split('\n');
-//                foreach (const QString &line, lines) {
-//                    QStringList fields = line.split(' ');
-//                    if(fields.size()>=6)
-//                    {
-//                        pid = fields.at(0);
-//                        if(fields.at(6).contains("/opt/MachineTool/bin/MachineTool"))
-//                        {//如果获取到的ID的进程名与预期一致，运行升级后的app并杀掉老进程
-//                            QProcess_execute("/opt/MachineTool/bin/MachineTool",QStringList());
-//                        }
-//                    }
-//                }
             }
             else
             {
@@ -997,6 +1234,9 @@ void upgradedialog::on_ResSettOK_clicked()
 #else
             QString defaultConfigDir = "/opt/MachineTool/default_configs";  // 默认配置文件目录
             QString targetDir = "/opt/MachineTool/configs";  // app运行配置文件目录
+            QString programDir = "/opt/MachineTool/program/";  //教导程序存储目录
+            QString ProgramNameAndPathInfoDir = "/opt/MachineTool/configs/ProgramNameAndPathInfo.ini";  //教导程序信息文件
+            QString PowerOnReadOneProInfoDir = "/opt/MachineTool/configs/PowerOnReadOneProInfo.ini";  //教导程序断电保存文件
             QDir dir(defaultConfigDir);
 
             if (!dir.exists()) {
@@ -1014,19 +1254,24 @@ void upgradedialog::on_ResSettOK_clicked()
             if (result != 0) {
                 qDebug() << "Failed to copy configuration files!";
             }
-
-            ::sync();
-            system("reboot");
-#endif
             if(!ui->Reserve_teach_checkbox->isChecked())
-            {//保存教导程序未选中，清除所有程序
+            {//保留教导程序未选中，清除所有程序
+                QString command = QString("rm -r %1/* %2 %3").arg(programDir,ProgramNameAndPathInfoDir,PowerOnReadOneProInfoDir);
+                int result = system(command.toStdString().c_str());
 
+                if (result != 0) {
+                    qDebug() << "Failed to copy configuration files!";
+                }
             }
 
             if(!ui->Reserve_Other_checkbox->isChecked())
             {//保留每转距离等数据不选择时处理
 
             }
+            ::sync();
+            system("reboot");
+#endif
+
         }
         emit ImplementFinishSignal();
     }

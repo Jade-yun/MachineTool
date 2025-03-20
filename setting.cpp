@@ -6,7 +6,7 @@
 #include <QPropertyAnimation>
 #include <QDebug>
 #include <QElapsedTimer>
-
+#include "RefreshKernelBuffer.h"
 #include <QSignalMapper>
 #include <QThread>
 #include <QRadioButton>
@@ -988,7 +988,8 @@ void Setting::setupPortDefine()
         });
 
         loadingTip.exec();
-
+        g_SafeFileHandler->rotateBackups(CustomizePortInfoPath);
+        REFRESH_KERNEL_BUFFER(CustomizePortInfoPath.toLocal8Bit().data());
     });
     connect(ui->btnExportPortDef, &QPushButton::clicked, [=](){
         if (!UsbDisk::instance()->isInserted())
@@ -1167,6 +1168,8 @@ void Setting::setupNameDefine()
        }
        M_SaveSetPar.SaveNameDef = true;
        emit coboxVarSelectVarPreOpItemSet_signal();
+       g_SafeFileHandler->rotateBackups(CustomizeNameDefPath);
+       REFRESH_KERNEL_BUFFER(CustomizeNameDefPath.toLocal8Bit().data());
     });
     connect(ui->btnRestoreNameOneNameDef, &QPushButton::clicked, this, [=](){
         int curRow = ui->tableWgtNameDef->currentRow();
@@ -5123,7 +5126,7 @@ void Setting::on_btnLogoUpdate_clicked()
             }
             else
             {
-                QProcess_execute("cp",QStringList() << result1 <<"/root/");
+                QProcess_execute("cp",QStringList() << result1 <<"/opt/MachineTool/resources/pics/");
                 QProcess_execute("sync",QStringList());
                 emit LOGO_Refresh();
             }
@@ -5195,7 +5198,12 @@ void Setting::UpgradeHandle(int click_type)
             }
             case COPY_DATA_REST:
             {
-                MainWindow::pMainWindow->showErrorTip(tr("数据还原成功!"),TipMode::ONLY_OK);
+                int reply =   MainWindow::pMainWindow->showErrorTip(tr("数据还原成功!按确认按钮重启机器！"),TipMode::ONLY_OK);
+                if (reply == QDialog::Accepted)
+                {
+                    ::sync();
+                    system("reboot");
+                }
                 break;
             }
             default:
@@ -5276,6 +5284,13 @@ void Setting::Upgrade_Main_State_handle(uint8_t state)
         int reply = MainWindow::pMainWindow->showErrorTip(tr("升级成功！等待重启"));
         if(reply ==  QDialog::Accepted)
         {
+            g_Usart->m_serialPort->clear(QSerialPort::AllDirections);// 清空缓冲区
+            // 2. 关闭串口连接
+            if (g_Usart->m_serialPort->isOpen()) {
+                g_Usart->m_serialPort->close();
+            }
+            // 3. 断开所有相关信号槽
+            disconnect(g_Usart->m_serialPort, nullptr, nullptr, nullptr);
             system("reboot");
         }
     }

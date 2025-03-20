@@ -12,10 +12,10 @@ extern QString m_ProgramPath;
 const QString AllExistingProgramInfoPath = "/opt/MachineTool/configs/ProgramNameAndPathInfo.ini";
 
 /*****************命令相关参数保存*****************/
-QString m_configCmdPath = "/root/Cmd_Description.txt";
+QString m_configCmdPath = "/opt/MachineTool/cmd_joint/Cmd_Description.txt";
 //QString m_configPortSettingPath = "/root/Port_Setting.txt";
 QString m_configPortSettingPath = "/opt/MachineTool/configs/Port_Setting.ini";
-QString m_configOrderjinitPath = "/root/Pro_Teach.txt";
+QString m_configOrderjinitPath = "/opt/MachineTool/cmd_joint/Pro_Teach.txt";
 
 //QString m_configPortXYNamePath="/root/Port_XY_Name_CHS.txt";                //输入输出、名称定义（3）
 
@@ -1018,7 +1018,7 @@ void getProgramNameAndPath()
             prog.fileName = settings.value("name").toString();
             prog.filePath = settings.value("path").toString();
             prog.index = settings.value("index").toUInt();
-            prog.filePermission = getProgramPermission(prog.fileName);
+            prog.filePermission = settings.value("permission").toUInt();
             prog.changeTime = settings.value("time").toString();
             settings.endGroup();
 
@@ -1053,7 +1053,7 @@ void setProgramNameAndPath(const QList<D_ProgramNameAndPathStruct>& programsInfo
         settings.setValue("name", prog.fileName);
         settings.setValue("path", prog.filePath);
         settings.setValue("index", prog.index);
-//        settings.setValue("permission", prog.filePermission);
+        settings.setValue("permission", prog.filePermission);
         settings.setValue("time", prog.changeTime);
         settings.endGroup();
     }

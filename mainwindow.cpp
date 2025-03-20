@@ -654,7 +654,7 @@ void MainWindow::connectAllSignalsAndSlots()
     /*各界面间互动信号槽连接*/
     connect(this,&MainWindow::signal_refresh_TeachList,teachWidget,&Teach::Teach_File_List_Refresh);//刷新教导管理程序显示列表信号
     connect(this,&MainWindow::EditOperatorVarPreOp_Refresh,teachWidget,&Teach::EditOperatorVarPreOp_handle);
-    connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");});
+    connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/opt/MachineTool/resources/pics/stop.jpg); }");});
     connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
     connect(setWidget,&Setting::RefreshPortDefineSignals,setWidget,&Setting::RefreshPortDefine);
     connect(setWidget,&Setting::updateManualformButtonName_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
@@ -913,15 +913,14 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
         if (editIf && editIf->isEnabled() && event->type() == QEvent::MouseButtonRelease) {
             ReferPointDialog dlg(this);
 //            auto manualWidget = qobject_cast<ManualForm*>(MainWindow::pMainWindow->findChild<ManualForm*>());
-//                dlg.updateUI(manualWidget->getRerferPoints());
-            dlg.updateUI();
-            if (dlg.exec() == QDialog::Accepted)
-            {
-                QString refPointName =  dlg.getSelectedRefPoint();
-                editIf->refPointIndex = dlg.getRefPointIndex();
-                editIf->setText(refPointName);
+//                dlg.updateUI(manualWidget.getRerferPoints());
+                if (dlg.exec() == QDialog::Accepted)
+                {
+                    QString refPointName =  dlg.getSelectedRefPoint();
+                    editIf->refPointIndex = dlg.getRefPointIndex();
+                    editIf->setText(refPointName);
 
-            }
+                }
         }
         return false;
     }
