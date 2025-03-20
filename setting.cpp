@@ -5008,8 +5008,14 @@ bool Setting::modifyPort(int row, int column)
 //                ui->tableWgtPortDef->item(row, column)->setText(text);
                 QString portName = dialog.getIOOnlineIn();
                 auto portNum = static_cast<uint8_t>(dialog.get_IOInEdit_InPort());
+
                 auto item = ui->tableWgtPortDef->item(row, column);
-                if (portName != item->text())
+                if (portNum == 0)
+                {
+                    portName = "0";
+                    portNum = m_Port_X[row].portNum;
+                }
+                if (portNum != m_Port_X[row].actualPortNum)
                 {
                     item->setText(portName);
                     item->setData(Qt::UserRole, portNum);
@@ -5029,7 +5035,13 @@ bool Setting::modifyPort(int row, int column)
                 QString portName = dialog.getIOOnlineOut();
                 auto portNum = static_cast<uint8_t>(dialog.get_IOInEdit_OutPort());
                 auto item = ui->tableWgtPortDef->item(row, column);
-                if (portName != item->text())
+                int index = row - INPUT_TOTAL_NUM;
+                if (portNum == 0)
+                {
+                    portName = "0";
+                    portNum = m_Port_Y[index].portNum;
+                }
+                if (portNum != m_Port_X[index].actualPortNum)
                 {
                     item->setText(portName);
                     item->setData(Qt::UserRole, portNum);
