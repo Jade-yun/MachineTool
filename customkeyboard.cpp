@@ -225,7 +225,7 @@ void NumKeyboard::keyPressEvent(QKeyEvent *event)
         if (numberEdit)
         {
             inputText = numberEdit->formatInput(inputText);
-            numberEdit->setValue(QVariant(inputText));
+            numberEdit->setValue(inputText.toDouble());
         }
         else
         {

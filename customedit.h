@@ -8,30 +8,32 @@ class NumberEdit : public QLineEdit
     Q_OBJECT
 
 public:
-    NumberEdit(QWidget* parent = nullptr);
+    explicit NumberEdit(QWidget* parent = nullptr);
 
     void setDecimalPlaces(int places);
-    void setInputRange(const QVariant& min = INT_MIN, const QVariant& max = INT_MAX);
-
-    // be careful not to exceed the exact range that a double can represent
-    // when inputing an integer.
-    void setValue(const QVariant &newValue);
+    void setInputRange(double min, double max);
+    void setValue(double newValue);
 
     int getDecimalPlaces() const;
-    QVariant getMinValue() const;
-    QVariant getMaxValue() const;
-    QVariant getValue() const;
+    double getMinValue() const;
+    double getMaxValue() const;
+    double getValue() const;
 
     QString formatInput(const QString& inputText) const;
+
 private slots:
     void validateInput();
+
 signals:
     void showRangeError(const QString& message);
     void finishedInput();
 
 private:
-    QVariant previousValue;
-    QVariant value;
+    double minValue;
+    double maxValue;
+    double value;
+    double previousValue;
+    int decimalPlaces;
 
 protected:
     void mouseReleaseEvent(QMouseEvent *event) override;

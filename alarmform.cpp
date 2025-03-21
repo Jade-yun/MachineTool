@@ -170,7 +170,7 @@ void AlarmForm::setupAlarmInfo()
             settings.sync();
 
             // fresh display
-            ui->tableAlarmInfo->clear();
+            ui->tableAlarmInfo->clearContents();
             ui->tableAlarmInfo->setRowCount(alarmInfoQueue.size());
         }
     });

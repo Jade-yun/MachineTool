@@ -53,7 +53,8 @@ Teach::Teach(QWidget* parent) :
     connect(this,&Teach::StackEditBaseInit_signal,stack_Dialog,&BaseWindow::StackEditBaseInit);
     connect(stack_Temp, &StackEdit::closeStackEditDialogSignal, stack_Dialog, &QDialog::close);// 连接StackEdit的关闭信号到QDialog的close槽
     connect(stack_Temp,&StackEdit::stackParRefreshSignal,this,[=](){Stack_Edit_Handle(STACK_X_AXIS);});//刷新堆叠指令参数
-    connect(ui->coboxVarSelectVarPreOp,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&Teach::EditOperatorVarPreOp_handle);
+//    connect(ui->coboxVarSelectVarPreOp,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&Teach::EditOperatorVarPreOp_handle);
+    connect(ui->coboxVarSelectVarPreOp,QOverload<int>::of(&QComboBox::activated),this,&Teach::EditOperatorVarPreOp_handle);
 
     ui->listWgtJumpto->setSelectionMode(QAbstractItemView::NoSelection);//禁用选择
     ui->listWidget_LabelEdit->setSelectionMode(QAbstractItemView::NoSelection);//禁用选择
@@ -1150,25 +1151,25 @@ void Teach::showEvent(QShowEvent *event)
         widget->setEnabled(otherEnable);
     }
 
-    if (perm == 1 || perm == 2)
+    // 时间允许 位置不允许
+    bool posDisable = ((perm == 2) || (perm == 3));
+
+    ui->lineEdit_Edit_offsetpos->setEnabled(!posDisable);
+    ui->lineEdit_Edit_AxisMove_pos->setEnabled(!posDisable);
+    ui->Edit_AxisMove_Refresh->setEnabled(!posDisable);
+    ui->Stack_Edit_Pos->setEnabled(!posDisable);
+    ui->AxisEditRefreshx1->setEnabled(!posDisable);
+    ui->Stack_Edit_Pos_2->setEnabled(!posDisable);
+    ui->AxisEditRefreshy1->setEnabled(!posDisable);
+    ui->Stack_Edit_Pos_2->setEnabled(!posDisable);
+    ui->StackAxisEditRefreshz1->setEnabled(!posDisable);
+
+    if (perm == 1 || perm == 2 || perm == 3)
     {
         ui->btnDelete->setEnabled(false);
         ui->btnCombine->setEnabled(false);
         ui->btnDevide->setEnabled(false);
         ui->btnInset->setEnabled(false);
-
-        // 时间允许 位置不允许
-        bool posDisable = (perm == 2);
-
-        ui->lineEdit_Edit_offsetpos->setEnabled(!posDisable);
-        ui->lineEdit_Edit_AxisMove_pos->setEnabled(!posDisable);
-        ui->Edit_AxisMove_Refresh->setEnabled(!posDisable);
-        ui->Stack_Edit_Pos->setEnabled(!posDisable);
-        ui->AxisEditRefreshx1->setEnabled(!posDisable);
-        ui->Stack_Edit_Pos_2->setEnabled(!posDisable);
-        ui->AxisEditRefreshy1->setEnabled(!posDisable);
-        ui->Stack_Edit_Pos_2->setEnabled(!posDisable);
-        ui->StackAxisEditRefreshz1->setEnabled(!posDisable);
 
     }
     else

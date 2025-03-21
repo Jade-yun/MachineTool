@@ -362,7 +362,29 @@ void StackEdit::saveStackPointPosInfo()
 
 void StackEdit::saveRotateBinStackInfo()
 {
+//    m_StackInfo[groupIndex].stackOrder = ui->coboxStackOrder->currentIndex();
+    m_StackInfo[groupIndex].countMode = ui->coboxCountWay->currentIndex();
+    m_StackInfo[groupIndex].stackFinStopFlag = ui->coboxStopAfterStack->currentIndex();
+    m_StackInfo[groupIndex].groupLeaveBlank = ui->coboxLeaveBlank->currentIndex();
+//    m_StackInfo[groupIndex].stackMoveMode = ui->checkBoxTriAxisUnion->isChecked() ? 1 : 0;
 
+    for (int i = 0; i < STACK_AXIS_NUM; i++)
+    {
+        m_StackInfo[groupIndex].axisSelect[i] = ui->coboxAxisSelectRotateBin->currentIndex();
+        m_StackInfo[groupIndex].stackStartPos[i] = ui->editStartRotateBin->text().toFloat()*100;
+        m_StackInfo[groupIndex].intevalDis[i] = ui->editIntervalDisRotateBin->text().toFloat()*100;
+        m_StackInfo[groupIndex].axisSpeed[i] = ui->editStackSpeedRotateBin->text().toUInt();
+        m_StackInfo[groupIndex].stackPointNum[i] = ui->editStackNumRotateBin->text().toInt();
+        m_StackInfo[groupIndex].offsetDis[i] = ui->editOffsetRotateBin->text().toFloat()*100;;
+        m_StackInfo[groupIndex].stackDir[i] = ui->coboxStackDirectRotateBin->currentIndex();
+    }
+    setStackInfo(m_StackInfo[groupIndex],groupIndex);
+
+    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK, CMD_SUN_STACK_PAR, groupIndex+1);
+    QThread::msleep(10);
+    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK, CMD_SUN_STACK_SET);
+    int axisIndex = ui->coboxAxisSelectRotateBin->currentIndex();
+    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK, CMD_SUN_STACK_POINT, groupIndex+1, axisIndex + 3);
 }
 
 // 这样写不行，后面写不通。需要换个方式来实现
@@ -661,6 +683,22 @@ void StackEdit::logicSigsSlots()
             ui->tableStack->horizontalHeaderItem(i)->setText(axisSelect[i]->currentText());
         });
     }
+
+    // 旋转料仓模式下
+    connect(ui->editStackNumRotateBin, &NumberEdit::textChanged, [=]() {
+        bool disable = ui->editStackNum1->text().toInt() == 0;
+
+        ui->btnFreshRotateBin->setEnabled(!disable);
+        ui->coboxAxisSelectRotateBin->setEnabled(!disable);
+        ui->editStartRotateBin->setEnabled(!disable);
+        ui->editIntervalDisRotateBin->setEnabled(!disable);
+        ui->editStackSpeedRotateBin->setEnabled(!disable);
+        ui->editOffsetRotateBin->setEnabled(!disable);
+        ui->coboxStackDirectRotateBin->setEnabled(!disable);
+    });
+    connect(ui->coboxAxisSelectRotateBin, QOverload<int>::of(&QComboBox::currentIndexChanged), [=]() {
+        ui->labAxisRotateBin->setText(ui->coboxAxisSelectRotateBin->currentText());
+    });
 }
 
 void StackEdit::changeEvent(QEvent *e)
@@ -739,7 +777,7 @@ void StackEdit::saveInfoConnections()
         setStackInfo(m_StackInfo[groupIndex],groupIndex);
     });
     connect(ui->editIntervalDis, &NumberEdit::returnPressed,[=](){
-        auto value = ui->editIntervalDis->getValue().toFloat();
+        auto value = ui->editIntervalDis->text().toFloat();
         m_StackInfo[groupIndex].intevalDis[2] = static_cast<int32_t>(value * 100);
 
         g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_POINT,groupIndex+1,3);

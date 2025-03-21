@@ -10,10 +10,6 @@
 #include "program_save.h"
 #include "errortipdialog.h"
 #include "mainwindow.h"
-// 文件权限图标路径
-const QStringList autoIconPath = {
-    ":/images/autoPageImages/Here_run.png",
-};
 
 AutoForm::AutoForm(QWidget *parent) :
     QWidget(parent),
@@ -109,6 +105,14 @@ AutoForm::AutoForm(QWidget *parent) :
 
     operateActions = {
         action1, action2, action3, action4, action5, action6
+    };
+    actionStrs = {
+        "堆叠指定",
+        "从此运行",
+        "断点设置",
+        "断点清除",
+        "参考点编辑",
+        "自动修正位置"
     };
 
     menu->addAction(action1);
@@ -1334,10 +1338,10 @@ void AutoForm::retranslate()
 {
     ui->retranslateUi(this);
 
-    for (auto action : operateActions)
+    for (int i = 0; i < operateActions.size(); i++)
     {
-        const char* sourceText = action->text().toStdString().c_str();
-        action->setText(QCoreApplication::translate("AutoForm", sourceText, nullptr));
+        const char* sourceText = actionStrs.at(i).c_str();
+        operateActions.at(i)->setText(QCoreApplication::translate("AutoForm", sourceText, nullptr));
     }
     ui->tableWgtVarState->setHorizontalHeaderLabels({tr("变量"), tr("堆叠状态")});
 

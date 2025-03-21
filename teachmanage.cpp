@@ -620,6 +620,7 @@ void TeachManage::changeEvent(QEvent *e)
     if (e->type() == QEvent::LanguageChange)
     {
         ui->retranslateUi(this);
+        ui->tableTeachManage->setHorizontalHeaderLabels({"", "", tr("文件名"), tr("最后修改时间")});
     }
     QWidget::changeEvent(e);
 }

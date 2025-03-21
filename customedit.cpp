@@ -4,64 +4,69 @@
 
 #include <QMessageBox>
 #include <QTimer>
+#include <QRegularExpression>
+
+#include <limits>
 
 NumberEdit::NumberEdit(QWidget *parent)
-    : QLineEdit(parent)
+    : QLineEdit(parent),
+      minValue(std::numeric_limits<double>::lowest()),
+      maxValue(std::numeric_limits<double>::max()),
+      value(0.0),
+      previousValue(0.0),
+      decimalPlaces(2)
 {
     this->setText("0");
-    this->setDecimalPlaces(2);
-    this->setInputRange(INT_MIN, INT_MAX);
-
-    previousValue = this->text();
-
     connect(this, &NumberEdit::showRangeError, [=](const QString& message){
         ErrorTipDialog tip(message, TipMode::ONLY_OK);
         tip.exec();
     });
 }
 
+
 void NumberEdit::setDecimalPlaces(int places)
 {
-    this->setProperty("decimalPlaces", places);
+    decimalPlaces = qMax(0, places);
     if (!this->text().isEmpty())
         this->setText(formatInput(this->text()));
 }
 
-void NumberEdit::setInputRange(const QVariant& min, const QVariant& max)
+void NumberEdit::setInputRange(double min, double max)
 {
-    this->setProperty("minValue", min);
-    this->setProperty("maxValue", max);
+    minValue = min;
+    maxValue = max;
 }
 
-void NumberEdit::setValue(const QVariant &newValue)
+void NumberEdit::setValue(double newValue)
 {
-    this->value = newValue;
+    value = newValue;
+    this->setText(QString::number(value, 'f', decimalPlaces));
 }
 
 int NumberEdit::getDecimalPlaces() const
 {
-    return this->property("decimalPlaces").toInt();
+    return decimalPlaces;
 }
 
-QVariant NumberEdit::getMinValue() const
+double NumberEdit::getMinValue() const
 {
-    return this->property("minValue");
+    return minValue;
 }
 
-QVariant NumberEdit::getMaxValue() const
+double NumberEdit::getMaxValue() const
 {
-    return this->property("maxValue");
+    return maxValue;
 }
 
-QVariant NumberEdit::getValue() const
+double NumberEdit::getValue() const
 {
-    return this->value;
+    return value;
 }
 
 QString NumberEdit::formatInput(const QString& inputText) const
 {
     QString formattedText = inputText.trimmed();
-    int decimalPlaces = getDecimalPlaces();
+//    int decimalPlaces = getDecimalPlaces();
     bool isNegative = formattedText.startsWith('-');
     bool hasDecimalPoint = formattedText.contains('.');
 
@@ -128,25 +133,22 @@ QString NumberEdit::formatInput(const QString& inputText) const
 
 void NumberEdit::validateInput()
 {
-    QVariant minValue = getMinValue();
-    QVariant maxValue = getMaxValue();
-
-    if ((minValue.isValid() && value.toDouble() < minValue.toDouble()) ||
-        (maxValue.isValid() && value.toDouble() > maxValue.toDouble()))
-    {
-        value = previousValue;
-        emit showRangeError(QString("输入的值范围不能超过 %1 ~ %2, 请重新输入。")
-                            .arg(minValue.toString())
-                            .arg(maxValue.toString()));
+    if (value < minValue || value > maxValue) {
+        QTimer::singleShot(200, [=](){
+            emit showRangeError(QString("输入的值范围不能超过 %1 ~ %2，请重新输入。")
+                                .arg(minValue).arg(maxValue));
+        });
+        value = previousValue;  // 还原值
     }
-    this->setText(value.toString());
+
+    this->setText(formatInput(QString::number(value, 'f', decimalPlaces)));
 }
 
 void NumberEdit::mouseReleaseEvent(QMouseEvent *event)
 {
     Q_UNUSED(event);
-    previousValue = value;
 
+    previousValue = this->text().toDouble();
     NumKeyboard temp;
     NumKeyboard *keyboard = &temp;
     if (keyboard) {
@@ -154,7 +156,6 @@ void NumberEdit::mouseReleaseEvent(QMouseEvent *event)
         keyboard->setCurrentEditObj(this);
         if (keyboard->exec() == QDialog::Accepted){
             validateInput();
-
             emit returnPressed();
             emit finishedInput();
         }

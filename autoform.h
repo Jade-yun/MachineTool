@@ -65,6 +65,7 @@ private:
     ClearDialog* clearDialog;
 
     std::vector<QAction*> operateActions;
+    std::vector<std::string> actionStrs;
 private:
     void callNumKeyBoard(QObject* obj);
 

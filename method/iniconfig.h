@@ -172,7 +172,7 @@ extern void setManualAxis(D_ManualAxis value);
 
 //程序文件存储
 extern void getProgramNameAndPath();
-extern void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programInfo);
+extern void setProgramNameAndPath(const QList<D_ProgramNameAndPathStruct>& programInfo);
 extern void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value);
 extern D_ProgramNameAndPathStruct readPowerOnReadOneProInfo();
 

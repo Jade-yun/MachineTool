@@ -1014,14 +1014,6 @@ void getProgramNameAndPath()
         {
             settings.beginGroup(group);
 
-            // 检查是否所有必要的键都存在
-            if (!settings.contains("name") || !settings.contains("path") ||
-                !settings.contains("index") || !settings.contains("permission") ||
-                !settings.contains("time")) {
-                settings.endGroup();
-                continue;
-            }
-
             D_ProgramNameAndPathStruct prog;
             prog.fileName = settings.value("name").toString();
             prog.filePath = settings.value("path").toString();
@@ -1048,7 +1040,7 @@ void getProgramNameAndPath()
     }
 }
 //保存所有文件程序信息
-void setProgramNameAndPath(QList<D_ProgramNameAndPathStruct> programsInfo)
+void setProgramNameAndPath(const QList<D_ProgramNameAndPathStruct>& programsInfo)
 {
     g_SafeFileHandler->rotateBackups(AllExistingProgramInfoPath);
     QSettings settings(AllExistingProgramInfoPath, QSettings::IniFormat);

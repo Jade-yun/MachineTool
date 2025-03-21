@@ -27,9 +27,6 @@
      <family>SimSun</family>
     </font>
    </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
    <property name="lineWidth">
     <number>1</number>
    </property>
@@ -594,9 +591,7 @@
    </property>
    <widget class="QWidget" name="tabMainPro">
     <property name="styleSheet">
-     <string notr="true">QPushButton {
-	font-size:20px;
-}</string>
+     <string notr="true"/>
     </property>
     <attribute name="title">
      <string>主程序</string>
@@ -623,7 +618,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>5</number>
      </property>
      <widget class="QWidget" name="pageSubProgram">
       <widget class="QGroupBox" name="groupBox">
@@ -634,9 +629,6 @@
          <width>400</width>
          <height>451</height>
         </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
        </property>
        <property name="title">
         <string>子程序选择</string>
@@ -674,11 +666,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序3</string>
@@ -718,11 +706,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序5</string>
@@ -762,11 +746,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序2</string>
@@ -806,11 +786,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序6</string>
@@ -850,11 +826,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序1</string>
@@ -894,11 +866,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序4</string>
@@ -938,11 +906,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序7</string>
@@ -982,11 +946,7 @@
            <property name="font">
             <font>
              <family>SimSun</family>
-             <pointsize>-1</pointsize>
             </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
            </property>
            <property name="text">
             <string>子程序8</string>
@@ -1811,7 +1771,7 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="Stack_Edit_pageX1">
         <widget class="QGroupBox" name="groupBox_5">
@@ -16049,7 +16009,7 @@ font: 20pt ;</string>
         </font>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <property name="iconSize">
         <size>

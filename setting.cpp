@@ -3529,14 +3529,14 @@ void Setting::setupCommunicationConnections()
 
     //产品设置
     for (int i=0;i<7;i++) {
-        connect(productSet[i],&NumberEdit::textChanged,[=](const QString &){
+        connect(productSet[i],&NumberEdit::returnPressed,[=](){
             saveProductSetPara();
         });
     }
 
     //高级
     for (int i=0;i<4;i++) {
-        connect(productSeniorEdit[i],&NumberEdit::textChanged,[=](const QString &){
+        connect(productSeniorEdit[i],&NumberEdit::returnPressed,[=](){
             saveProductSetSeniorPara();
         });
     }
@@ -3561,16 +3561,16 @@ void Setting::setupCommunicationConnections()
     {
         accAccList[i]->setDecimalPlaces(0);
         decDecList[i]->setDecimalPlaces(0);
-        connect(accTimeList[i],&NumberEdit::textChanged,[=](const QString &){
+        connect(accTimeList[i],&NumberEdit::returnPressed,[=](){
             saveAccDecTimeSpeed(i);
         });
-        connect(decTimeList[i],&NumberEdit::textChanged,[=](const QString &){
+        connect(decTimeList[i],&NumberEdit::returnPressed,[=](){
             saveAccDecTimeSpeed(i);
         });
-        connect(accAccList[i],&NumberEdit::textChanged,[=](const QString &){
+        connect(accAccList[i],&NumberEdit::returnPressed,[=](){
             saveAccDecTimeSpeed(i);
         });
-        connect(decDecList[i],&NumberEdit::textChanged,[=](const QString &){
+        connect(decDecList[i],&NumberEdit::returnPressed,[=](){
             saveAccDecTimeSpeed(i);
         });
     }
@@ -3583,14 +3583,14 @@ void Setting::setupCommunicationConnections()
     //伺服安全点
     //容差
 //    for (int i=0;i<3;i++) {
-//        connect(toleranceList[i],&NumberEdit::textChanged,[=](const QString &){
+//        connect(toleranceList[i],&NumberEdit::returnPressed,[=](){
 //            saveTolerancePara();
 //        });
 //    }
 
 //    //横行位置限定
 //    for (int i=0;i<4;i++) {
-//        connect(horizontalPosList[i],&NumberEdit::textChanged,[=](const QString &){
+//        connect(horizontalPosList[i],&NumberEdit::returnPressed,[=](){
 //            saveDegreePara();
 //        });
 //    }
@@ -3613,7 +3613,7 @@ void Setting::setupCommunicationConnections()
             saveStackFunc();
         });
     }
-    connect(ui->editRotateSiloPlaceNum,&NumberEdit::textChanged,[=](const QString &){
+    connect(ui->editRotateSiloPlaceNum,&NumberEdit::returnPressed,[=](){
         saveStackFunc();
     });
 //    QSignalMapper *outputTypeMapper = new QSignalMapper(this);

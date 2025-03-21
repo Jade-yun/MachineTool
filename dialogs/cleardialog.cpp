@@ -48,15 +48,18 @@ ClearDialog::ClearDialog(QWidget *parent) :
             }
         });
     }
-    connect(ui->EditSilo_Number,&NumberEdit::textChanged,[=](const QString text){
-        m_AutoPageRotat_Silo_Set.Silo_Number = (uint16_t)text.toUInt();
+    connect(ui->EditSilo_Number,&NumberEdit::returnPressed,[=](){
+        auto value = (uint16_t)ui->EditSilo_Number->text().toUInt();
+        m_AutoPageRotat_Silo_Set.Silo_Number = value;
     });
-    connect(ui->EditStackGroup1,&NumberEdit::textChanged,[=](const QString text){
-        m_AutoPageRotat_Silo_Set.Stack_Group1 = (uint16_t)text.toUInt();
+    connect(ui->EditStackGroup1,&NumberEdit::returnPressed,[=](){
+        auto value = (uint16_t)ui->EditStackGroup1->text().toUInt();
+        m_AutoPageRotat_Silo_Set.Stack_Group1 = value;
 
     });
-    connect(ui->EditStackGroup2,&NumberEdit::textChanged,[=](const QString text){
-        m_AutoPageRotat_Silo_Set.Stack_Group2 = (uint16_t)text.toUInt();
+    connect(ui->EditStackGroup2,&NumberEdit::returnPressed,[=](){
+        auto value = (uint16_t)ui->EditStackGroup2->text().toUInt();
+        m_AutoPageRotat_Silo_Set.Stack_Group2 = value;
     });
     connect(ui->chboxSilo_Num,&QCheckBox::stateChanged,[this](int state){
         if(state){

@@ -46,7 +46,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -140,7 +140,7 @@
          <string>导入图片</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="images.qrc">
           <normaloff>:/images/import.png</normaloff>:/images/import.png</iconset>
         </property>
         <property name="iconSize">
@@ -176,7 +176,7 @@
          <string>新增</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="images.qrc">
           <normaloff>:/images/new_add.png</normaloff>:/images/new_add.png</iconset>
         </property>
         <property name="iconSize">
@@ -212,7 +212,7 @@
          <string>删除</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="images.qrc">
           <normaloff>:/images/delete_btn.png</normaloff>:/images/delete_btn.png</iconset>
         </property>
         <property name="iconSize">
@@ -248,7 +248,7 @@
          <string>编辑</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="images.qrc">
           <normaloff>:/images/autoPageImages/edit.png</normaloff>:/images/autoPageImages/edit.png</iconset>
         </property>
         <property name="iconSize">
@@ -303,7 +303,7 @@
          <string>保存</string>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="images.qrc">
           <normaloff>:/images/teachpage_images/save.png</normaloff>:/images/teachpage_images/save.png</iconset>
         </property>
         <property name="iconSize">
@@ -339,7 +339,7 @@
          <string/>
         </property>
         <property name="icon">
-         <iconset>
+         <iconset resource="images.qrc">
           <normaloff>:/images/switch_left.png</normaloff>
           <normalon>:/images/switch_right.png</normalon>:/images/switch_left.png</iconset>
         </property>
@@ -364,9 +364,6 @@
        <width>1001</width>
        <height>451</height>
       </rect>
-     </property>
-     <property name="text">
-      <string>guide.png</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -3098,7 +3095,7 @@
        <string>刷新</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/refresh.png</normaloff>:/images/refresh.png</iconset>
       </property>
       <property name="iconSize">
@@ -3143,7 +3140,7 @@
        <string>编辑</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/autoPageImages/edit.png</normaloff>:/images/autoPageImages/edit.png</iconset>
       </property>
       <property name="iconSize">
@@ -3188,7 +3185,7 @@
        <string>新增</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/new_add.png</normaloff>:/images/new_add.png</iconset>
       </property>
       <property name="iconSize">
@@ -3233,7 +3230,7 @@
        <string>保存</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/teachpage_images/save.png</normaloff>:/images/teachpage_images/save.png</iconset>
       </property>
       <property name="iconSize">
@@ -3278,7 +3275,7 @@
        <string>删除</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/delete_btn.png</normaloff>:/images/delete_btn.png</iconset>
       </property>
       <property name="iconSize">
@@ -3320,7 +3317,7 @@
        <string/>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/switch_left.png</normaloff>
         <normalon>:/images/switch_right.png</normalon>:/images/switch_left.png</iconset>
       </property>
@@ -3374,9 +3371,6 @@
         <height>400</height>
        </rect>
       </property>
-      <property name="text">
-       <string>referPoint.png</string>
-      </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
       </property>
@@ -3413,7 +3407,7 @@
        <string>导入图片</string>
       </property>
       <property name="icon">
-       <iconset>
+       <iconset resource="images.qrc">
         <normaloff>:/images/import.png</normaloff>:/images/import.png</iconset>
       </property>
       <property name="iconSize">
@@ -3541,7 +3535,7 @@
       <string>移至参考点</string>
      </property>
      <property name="icon">
-      <iconset>
+      <iconset resource="images.qrc">
        <normaloff>:/images/moveto.png</normaloff>:/images/moveto.png</iconset>
      </property>
      <property name="iconSize">
@@ -3585,7 +3579,7 @@
     <string>进入堆叠</string>
    </property>
    <property name="icon">
-    <iconset>
+    <iconset resource="images.qrc">
      <normaloff>:/images/moveto.png</normaloff>:/images/moveto.png</iconset>
    </property>
    <property name="iconSize">
@@ -3613,6 +3607,8 @@
    <header location="global">savebutton.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
