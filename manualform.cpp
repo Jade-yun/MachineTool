@@ -1146,7 +1146,8 @@ void ManualForm::setupClawAndMachineConnections()
             setbuttonIcon(ui->btnChuck1Loosen,m_Port_Y[MACHINE_CHUCK_1_CLAMP].modifyName,1);
             g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_CHUCK_1_CLAMP].portNum,1);
             if (m_OutPortType[0][1]) {
-                int msec = m_ProductSet.pluseOutTime * 100 * m_OutPortType[0][1] + 10;
+                int pulse_times = 2*(m_OutPortType[0][1] - 1) + 1;
+                int msec = m_ProductSet.pluseOutTime * 100 * pulse_times + 10;
                 QTimer::singleShot(msec, this, [=](){
                     setbuttonIcon(ui->btnChuck1Loosen,m_Port_Y[MACHINE_CHUCK_1_LOOSENED].modifyName,0);
                 });
@@ -1164,7 +1165,8 @@ void ManualForm::setupClawAndMachineConnections()
             setbuttonIcon(ui->btnAutoGate1Close,m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].modifyName,1);
             g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT,m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].portNum,1);
             if (m_OutPortType[1][1]) {
-                int msec = m_ProductSet.pluseOutTime * 100 * m_OutPortType[1][1] + 10;
+                int pulse_times = 2*(m_OutPortType[1][1] - 1) + 1;
+                int msec = m_ProductSet.pluseOutTime * 100 * pulse_times + 10;
                 QTimer::singleShot(msec, this, [=](){
                     setbuttonIcon(ui->btnAutoGate1Close,m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].modifyName,0);
                 });

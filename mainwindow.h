@@ -32,13 +32,6 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-enum class TriMode : unsigned char {
-
-    STOP = 0,
-    MANUAL,
-    AUTO
-};
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -79,7 +72,7 @@ public slots:
     void MainWindow_SetControl_Stake(bool state);
 
 signals:
-    void sigSettingHome();
+    void sigSettingHome(TriMode mode);
     void signal_refresh_TeachList();//刷新教导界面列表信号
     void EditOperatorVarPreOp_Refresh();//教导界面变量指令-变量类型刷新信号
     void signal_sync_data();       //同步数据到主控板

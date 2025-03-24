@@ -46,8 +46,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->Progress_bar,SIGNAL(valueChanged(int)),ui->Progress_num,SLOT(setValue(int)));//进度条当前值与显示数字关联
     ui->stkWidget->setCurrentWidget(ui->Init_page);
     ui->Progress_bar->setWindowModality(Qt::WindowModality::WindowModal);
+    ui->Progress_bar->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 
-    ui->Init_page->setStyleSheet("QWidget { background-image: url(/root/stop.jpg); }");
+    ui->Init_page->setStyleSheet("QWidget#Init_page { background-image: url(/opt/MachineTool/resources/pics/stop.jpg); }");
 
     MainWindow_SetControl_Stake(false);//先禁用按钮，待初始化成功后才能点击
 
@@ -574,7 +575,7 @@ void MainWindow::on_Btn_ManualHome_clicked()
 
 void MainWindow::on_Btn_SetHome_clicked()
 {
-    emit sigSettingHome();
+    emit sigSettingHome(curMode);
 //    qDebug()<< "emit sigSettingHome";
     ui->stkWidget->setCurrentWidget(setWidget);
     Widget_jump_Order_Need_Save_Handel();

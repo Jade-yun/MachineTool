@@ -60,7 +60,7 @@ private:
     void setupCommunicationConnections();
 
 public slots:
-    void slotSettingHome();
+    void slotSettingHome(TriMode mode);
     void ShowStackPage();
     void handleLoginModeChanged(LoginMode mode);
     void AxisParRefresh(uint8_t index);//轴参数界面参数刷新

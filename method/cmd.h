@@ -32,6 +32,14 @@ enum HandControlKeyCode{
     RIGHT_KEY11 = 160,//X2-
     RIGHT_KEY12 = 164,//X2+
 };
+
+// 三档开关的三种模式
+enum class TriMode : unsigned char {
+
+    STOP = 0,
+    MANUAL,
+    AUTO
+};
 #define AXIS_MIN_POSITION     				-9000000    //轴运动的最小坐标
 #define AXIS_MAX_POSITION     				9000000    	//轴运动的最大坐标
 

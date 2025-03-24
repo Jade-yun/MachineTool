@@ -726,7 +726,7 @@
       </size>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page1AutoState">
       <widget class="QPushButton" name="btnMergeExpand">
@@ -1226,6 +1226,9 @@ QPushButton:pressed
        <property name="columnCount">
         <number>2</number>
        </property>
+       <attribute name="horizontalHeaderVisible">
+        <bool>true</bool>
+       </attribute>
        <attribute name="horizontalHeaderMinimumSectionSize">
         <number>120</number>
        </attribute>

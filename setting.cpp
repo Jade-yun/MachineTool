@@ -275,11 +275,42 @@ Setting::~Setting()
     delete ui;
 }
 
-void Setting::slotSettingHome()
+void Setting::slotSettingHome(TriMode mode)
 {
-    ui->stackedWidget->setCurrentIndex(0);
-//    ui->stackedWidget->setCurrentWidget(ui->pageSettingHome);
-    //    qDebug() << "slotSettingHome";
+//    std::map<int, QWidget*> sysTabMap = {
+//        {41, ui->tabLangurageSet},
+//        {42, ui->tabUserSet},
+//        {43, ui->tabUpdateAndBackup},
+//        {44, ui->tabNotepad},
+//        {45, ui->tabPasswdSet},
+//        {46, ui->tabIot},
+//        {47, ui->tabSignUp}
+//    };
+
+    if (mode == TriMode::AUTO)
+    {
+        ui->tabWidgetSystem->clear();
+        ui->tabWidgetSystem->addTab(ui->tabUpdateAndBackup, tr("升级与备份"));
+        ui->tabWidgetSystem->addTab(ui->tabSystemInfo, tr("系统信息"));
+
+        ui->stackedWidget->setCurrentWidget(ui->pageSystem);
+    }
+    else
+    {
+//        auto tabState = menuStateMap.at(id)
+//        bool shouldShow = ((tabState != MenuState::Invisible) && (currentLoginState >= tabState));
+        updateTabVisibility();
+
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+
+    bool enabled = mode != TriMode::AUTO;
+    ui->btnBackupDataRestore->setEnabled(enabled);
+    ui->btnFactoryDataReset->setEnabled(enabled);
+    ui->btnUpdateHandcontroller->setEnabled(enabled);
+    ui->btnUpdateMainboard->setEnabled(enabled);
+    ui->btnUpdateIOBoard->setEnabled(enabled);
+    ui->btnUpdateServo->setEnabled(enabled);
 }
 
 void Setting::ShowStackPage()

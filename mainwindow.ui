@@ -447,6 +447,11 @@ border: 1px solid black;
         <height>51</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+	background-color: rgb(255, 255, 255);
+}</string>
+      </property>
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
       </property>
