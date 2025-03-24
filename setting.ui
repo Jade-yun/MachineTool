@@ -575,7 +575,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -9094,7 +9094,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -12842,7 +12842,7 @@ QPushButton::released{
         </rect>
        </property>
        <property name="currentIndex">
-        <number>3</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab_7">
         <attribute name="title">
@@ -21785,7 +21785,7 @@ font-weight: bold;
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>

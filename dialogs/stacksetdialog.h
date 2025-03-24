@@ -10,7 +10,8 @@ class StackSetDialog;
 class StackSetDialog : public BaseWindow
 {
     Q_OBJECT
-
+protected:
+    void showEvent(QShowEvent *event) override;//重写显示事件
 public:
     explicit StackSetDialog(QWidget *parent = nullptr);
     ~StackSetDialog();
@@ -26,6 +27,10 @@ private:
 
 private:
     Ui::StackSetDialog *ui;
+    QString editXName;
+    QString editYName;
+    QString editZName;
+    QString chboxName;
 };
 
 #endif // STACKSETDIALOG_H

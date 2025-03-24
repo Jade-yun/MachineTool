@@ -463,6 +463,15 @@ void Setting::init()
     ui->coboxOutPortRelateOut6->hide();
     ui->coboxOutPortRelateOut7->hide();
     ui->coboxOutPortRelateOut13->hide();
+    //安全区部分控件隐藏
+    ui->labProcessFinishNum->hide();
+    ui->coboxProcessFinishNum1->hide();
+    ui->labProcessFinishNum_2->hide();
+    ui->coboxProcessFinishNum1_2->hide();
+    ui->labProcessFinishNum_3->hide();
+    ui->coboxProcessFinishNum1_3->hide();
+    ui->labProcessFinishNum_4->hide();
+    ui->coboxProcessFinishNum1_4->hide();
 
     servoPointSafeArea[0] = SafeAreaWidget{
             ui->coboxSafeArea1, ui->coboxProcessFinishNum1,
@@ -3274,13 +3283,18 @@ void Setting::pageSwitchInit()
     /******************************Servo Safe Point************************************************************/
     // 是否使用安全区
     auto connectComboBoxToGroupBoxes = [&](QComboBox* comboBox, QGroupBox* grbox1, QGroupBox* grbox2,
-            QGroupBox* grbox3, QGroupBox* grbox4, bool enabled)
+            QGroupBox* grbox3, QGroupBox* grbox4, QComboBox* comboBoxz)
     {
-        connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
 
+        connect(comboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), [=](int index){
+            bool enabled = false;
             grbox1->setEnabled(index);
             grbox2->setEnabled(index);
 
+            if(comboBoxz->currentIndex()!=0)
+            {
+                enabled = true;
+            }
             grbox3->setEnabled(index & enabled);
             grbox4->setEnabled(index & enabled);
         });
@@ -3339,7 +3353,7 @@ void Setting::pageSwitchInit()
     // 安全区1
     connectComboBoxToGroupBoxes(ui->coboxSafeArea1, ui->grboxAxisCombineSA1Arm2, ui->grboxXYParaSA1,
                                 ui->grboxZAxisMachineParaSA1, ui->grboxZAxisStockBinParaSA1,
-                                ui->coboxAxisZSA1->currentIndex() != 0);
+                                ui->coboxAxisZSA1);
     connectAxisX(ui->coboxAxisXSA1, ui->labAxisXSelectSA1, ui->labAxisCSelectSA1,
                  ui->editMachineA1AxisXSA1, ui->editMachineA2AxisXSA1,
                  ui->editStockBinB1AxisXSA1, ui->editStockBinB2AxisXSA1,
@@ -3354,7 +3368,7 @@ void Setting::pageSwitchInit()
     // 安全区2
     connectComboBoxToGroupBoxes(ui->coboxSafeArea1_2, ui->grboxAxisCombineSA1Arm2_2, ui->grboxXYParaSA1_2,
                                 ui->grboxZAxisMachineParaSA1_2, ui->grboxZAxisStockBinParaSA1_2,
-                                ui->coboxAxisZSA1_2->currentIndex() != 0);
+                                ui->coboxAxisZSA1_2);
     connectAxisX(ui->coboxAxisXSA1_2, ui->labAxisXSelectSA1_2, ui->labAxisCSelectSA1_2,
                  ui->editMachineA1AxisXSA1_2, ui->editMachineA2AxisXSA1_2,
                  ui->editStockBinB1AxisXSA1_2, ui->editStockBinB2AxisXSA1_2,
@@ -3369,7 +3383,7 @@ void Setting::pageSwitchInit()
     // 安全区3
     connectComboBoxToGroupBoxes(ui->coboxSafeArea1_3, ui->grboxAxisCombineSA1Arm2_3, ui->grboxXYParaSA1_3,
                                 ui->grboxZAxisMachineParaSA1_3, ui->grboxZAxisStockBinParaSA1_3,
-                                ui->coboxAxisZSA1_3->currentIndex() != 0);
+                                ui->coboxAxisZSA1_3);
     connectAxisX(ui->coboxAxisXSA1_3, ui->labAxisXSelectSA1_3, ui->labAxisCSelectSA1_3,
                  ui->editMachineA1AxisXSA1_3, ui->editMachineA2AxisXSA1_3,
                  ui->editStockBinB1AxisXSA1_3, ui->editStockBinB2AxisXSA1_3,
@@ -3384,7 +3398,7 @@ void Setting::pageSwitchInit()
     // 安全区4
     connectComboBoxToGroupBoxes(ui->coboxSafeArea1_4, ui->grboxAxisCombineSA1Arm2_4, ui->grboxXYParaSA1_4,
                                 ui->grboxZAxisMachineParaSA1_4, ui->grboxZAxisStockBinParaSA1_4,
-                                ui->coboxAxisZSA1_4->currentIndex() != 0);
+                                ui->coboxAxisZSA1_4);
     connectAxisX(ui->coboxAxisXSA1_4, ui->labAxisXSelectSA1_4, ui->labAxisCSelectSA1_4,
                  ui->editMachineA1AxisXSA1_4, ui->editMachineA2AxisXSA1_4,
                  ui->editStockBinB1AxisXSA1_4, ui->editStockBinB2AxisXSA1_4,

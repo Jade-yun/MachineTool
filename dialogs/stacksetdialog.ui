@@ -371,7 +371,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -399,7 +399,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -427,7 +427,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -455,7 +455,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -483,7 +483,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -511,7 +511,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -539,7 +539,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -567,7 +567,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -595,7 +595,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -623,7 +623,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -682,7 +682,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -710,7 +710,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -738,7 +738,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -766,7 +766,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -825,7 +825,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -853,7 +853,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -943,7 +943,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -971,7 +971,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -999,7 +999,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -1027,7 +1027,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -1055,7 +1055,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -1097,7 +1097,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -1225,7 +1225,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>
@@ -1253,7 +1253,7 @@
        <string extracomment="0~2"/>
       </property>
       <property name="placeholderText">
-       <string>0~2</string>
+       <string>0</string>
       </property>
      </widget>
     </item>

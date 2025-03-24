@@ -140,7 +140,11 @@ extern AxisCurPos m_AxisCurPos;
 #define CMD_SUN_STA_VAR											0x07      	//变量值读写
 #define CMD_SUN_STA_TIME										0x08      	//定时器读写
 #define CMD_SUN_STA_CLEAR_ALARM                                 0x09        //清除报警
+#define CMD_SUN_STA_ALL_STACK_NUM                               0x10        //所有堆叠位置读取
+#define CMD_SUN_STA_STACK_NUM_POS                               0x0B        //堆叠点数，坐标读写
+#define CMD_SUN_STA_STACK_FOLLOW_NUM_POS                        0x0C        //堆叠跟随点点数，坐标读写
 #define CMD_SUN_STA_UPGRADE_STATE                               0x0D        //控制器升级状态读取
+#define CMD_SUN_STA_STACK_NUM_SET                               0x0F        //堆叠与跟随堆叠位置设置(自动界面悬浮弹窗设置堆叠点数)
 
 //手动操作
 #define CMD_MAIN_MANUAL											0x11      	//手动操作
@@ -207,6 +211,7 @@ signals:
     void SysNextDataSignal();
     void posflashsignal(AxisCurPos data);
     void robotstaRefreshsignal();//机器状态参数更新
+    void Stack_Axis_Pos_Refresh();//移至跟随点，移至堆叠点坐标刷新信号
 public slots:
     void onReadyRead();
     void onHandleError(QSerialPort::SerialPortError error);
@@ -221,6 +226,8 @@ public:
    void ExtendReadStaDeal(uint8_t mainCmd, uint8_t sunCmd, uint8_t *recDataBuf);     //读取状态处理函数
 
    void ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum = 0, uint16_t parNum2 = 0, uint16_t parNum3 = 0);     //下发程序编辑处理函数
+
+   void ExtendSendReadPar(uint8_t mainCmd,uint8_t sunCmd, uint16_t parNum, uint16_t parNum2);//发送读取指令
 
    uint8_t  DataSyc();
    void sync_data_handle(void);

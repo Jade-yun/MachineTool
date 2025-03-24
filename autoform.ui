@@ -1220,8 +1220,11 @@ QPushButton:pressed
          <height>381</height>
         </rect>
        </property>
+       <property name="autoScrollMargin">
+        <number>16</number>
+       </property>
        <property name="rowCount">
-        <number>8</number>
+        <number>16</number>
        </property>
        <property name="columnCount">
         <number>2</number>
@@ -1249,195 +1252,85 @@ QPushButton:pressed
        <row/>
        <row/>
        <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
        <column/>
        <column/>
-      </widget>
-      <widget class="NumberEdit" name="editVar3">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>111</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="NumberEdit" name="editVar5">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>191</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="NumberEdit" name="editVar7">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>271</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="NumberEdit" name="editVar2">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>71</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="NumberEdit" name="editVar6">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>231</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="NumberEdit" name="editVar4">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>151</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="NumberEdit" name="editVar8">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>311</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="NumberEdit" name="editVar1">
-       <property name="geometry">
-        <rect>
-         <x>51</x>
-         <y>31</y>
-         <width>110</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
+       <item row="8" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
+       <item row="9" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
+       <item row="10" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
+       <item row="11" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
+       <item row="12" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
+       <item row="13" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
+       <item row="14" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
+       <item row="15" column="1">
+        <property name="flags">
+         <set>NoItemFlags</set>
+        </property>
+       </item>
       </widget>
      </widget>
      <widget class="QWidget" name="page3StackState">
-      <widget class="QTableView" name="tableView">
+      <widget class="QTableView" name="AutoStatetableView">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>10</y>
-         <width>371</width>
-         <height>371</height>
+         <width>370</width>
+         <height>370</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>370</width>
+         <height>370</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>370</width>
+         <height>370</height>
+        </size>
+       </property>
+       <property name="lineWidth">
+        <number>1</number>
+       </property>
+       <property name="midLineWidth">
+        <number>0</number>
        </property>
       </widget>
      </widget>

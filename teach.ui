@@ -12054,12 +12054,12 @@ QGroupBox::title { subcontrol-origin: margin;
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>454</width>
+       <width>421</width>
        <height>481</height>
       </rect>
      </property>
      <property name="currentIndex">
-      <number>5</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">
@@ -12483,7 +12483,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">

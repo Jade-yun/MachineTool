@@ -108,6 +108,7 @@ P_ProInfoStruct m_ProRunInfo = {0};																//运行信息--当前行号
 D_RunInfoStruct m_RunInfo = {0};																	//运行信息
 D_RunParStruct m_RunPar = {0};																		//运行参数
 uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM] = {0};													//当前每个堆叠组的堆叠计数
+uint16_t m_StackAxisCnt[STACK_TOTAL_NUM][STACK_AXIS_NUM];                //当前每个堆叠组的每个轴个数
 uint8_t m_VariableTypeLod[VAR_TOTAL_NUM] = {0};                //上一次变量的小数类型 0-整数 1-一位小数 2-两位小数
 uint8_t m_VariableType[VAR_TOTAL_NUM] = {0};             //当前变量的小数类型 0-整数 1-一位小数 2-两位小数
 uint32_t m_VariableCurValue[VAR_TOTAL_NUM] = {0};											//当前每个变量的变量值

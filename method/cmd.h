@@ -536,9 +536,10 @@ typedef struct
 /*移动至堆叠点/跟随点结构体*/
 typedef struct
 {
-    uint8_t Stack_Index;
-    uint8_t Stack_Type;
-    uint8_t Stack_Point[3];
+    uint8_t Stack_Index;      //堆叠组号
+    uint8_t Stack_Type;       //类型，0-移至堆叠点 1-移至跟随点
+    uint8_t Stack_Point[3];   //个数
+    int32_t Stack_Axis_Pos[3];//目标位置
 }MoveStackStruct;
 
 extern MoveStackStruct MoveStackFollowPoint;
@@ -1155,6 +1156,7 @@ extern P_ProInfoStruct m_ProRunInfo;									//运行信息--当前行号
 extern D_RunInfoStruct m_RunInfo;											//运行信息
 extern D_RunParStruct m_RunPar;												//运行参数
 extern uint32_t m_StackCurPileCnt[STACK_TOTAL_NUM];				//当前每个堆叠组的堆叠计数
+extern uint16_t m_StackAxisCnt[STACK_TOTAL_NUM][STACK_AXIS_NUM];                //当前每个堆叠组的每个轴个数
 extern uint8_t m_VariableTypeLod[VAR_TOTAL_NUM];                //上一次变量的小数类型 0-整数 1-一位小数 2-两位小数
 extern uint8_t m_VariableType[VAR_TOTAL_NUM];                   //当前变量的小数类型 0-整数 1-一位小数 2-两位小数
 extern uint32_t m_VariableCurValue[VAR_TOTAL_NUM];                       //当前每个变量的变量值

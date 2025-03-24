@@ -6459,7 +6459,7 @@ void Teach::WidgetNameRefresh()
         ui->lineEdit_Blow_Air->setEnabled(false);
         ui->Blow_Air_button->setEnabled(false);
     }
-    if(m_OutportInterlock[4][1] != 0)
+    if(m_OutportInterlock[4][0] != 0)
     {//互锁设置-卡盘1夹紧使用
         ui->Chuck_chbox->setEnabled(true);
         ui->Chuck_button->setEnabled(true);

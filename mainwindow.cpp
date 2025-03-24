@@ -914,6 +914,7 @@ bool MainWindow::eventFilter(QObject *watched, QEvent *event)
             ReferPointDialog dlg(this);
 //            auto manualWidget = qobject_cast<ManualForm*>(MainWindow::pMainWindow->findChild<ManualForm*>());
 //                dlg.updateUI(manualWidget.getRerferPoints());
+            dlg.updateUI();
                 if (dlg.exec() == QDialog::Accepted)
                 {
                     QString refPointName =  dlg.getSelectedRefPoint();
@@ -1027,7 +1028,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
                             emit SetAutoRunIcon_Signal();
                         }
                     }
-                    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,1,m_RunPar.globalSpeed);
+                    g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,1,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
                 }
             }
             else
@@ -1085,7 +1086,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
                     int reply =  MainWindow::pMainWindow->showErrorTip(tr("是否现在复归？"));
                     if (reply == QDialog::Accepted)
                     {
-                        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,m_RunPar.startRunLineNum,m_RunPar.globalSpeed);
+                        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_START,4,1,m_RunPar.globalSpeed);
                         RobotResetPromptFlag = true;
                     }
                 }

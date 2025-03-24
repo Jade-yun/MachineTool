@@ -899,7 +899,7 @@ StackFollow::StackFollow(QWidget *parent)
         nums[i]->setDecimalPlaces(0);
 
         table->setCellWidget(i, 0, nums[i]);
-        objPos[i] = new QTableWidgetItem("");
+        objPos[i] = new QTableWidgetItem("0.00");
         table->setItem(i, 1, objPos[i]);
         connect(nums[i],&NumberEdit::returnPressed, this,[=](){
             if(MoveStackFollowPoint.Stack_Index>0)
@@ -917,15 +917,28 @@ StackFollow::StackFollow(QWidget *parent)
                 else
                 {
                     MoveStackFollowPoint.Stack_Point[i] = (uint8_t)nums[i]->text().toUInt();
+                    if(MoveStackFollowPoint.Stack_Type == 1)
+                    {//堆叠坐标读取
+                        g_Usart->ExtendSendReadPar(CMD_MAIN_STA,CMD_SUN_STA_STACK_NUM_POS,MoveStackFollowPoint.Stack_Index,0);//发送设置的点数，读取坐标
+                    }
+                    else if(MoveStackFollowPoint.Stack_Type == 2)
+                    {//跟随堆叠坐标读取
+                        g_Usart->ExtendSendReadPar(CMD_MAIN_STA,CMD_SUN_STA_STACK_FOLLOW_NUM_POS,MoveStackFollowPoint.Stack_Index,0);//发送设置的点数，读取坐标
+                    }
                 }
             }
         });
     }
+    connect(g_Usart,&Usart::Stack_Axis_Pos_Refresh,this,[=](){
+        objPos[0]->setText(QString::number(((double)MoveStackFollowPoint.Stack_Axis_Pos[0])/100,'f',2));
+        objPos[1]->setText(QString::number(((double)MoveStackFollowPoint.Stack_Axis_Pos[1])/100,'f',2));
+        objPos[2]->setText(QString::number(((double)MoveStackFollowPoint.Stack_Axis_Pos[2])/100,'f',2));
+    });
     StackFollowInit();//初始化参数
     moveButton = new QPushButton(tr("移动"), this);
     moveButton->setFixedHeight(45);
     moveButton->setFixedWidth(110);
-    connect(moveButton,&QPushButton::clicked,this,[=](){//点击移动按钮时，下发移动至堆叠点数据
+    connect(moveButton,&QPushButton::pressed,this,[=](){//按下移动按钮时，下发移动至堆叠点数据
         if(MoveStackFollowPoint.Stack_Index>0)
         {
             if(m_StackInfo[MoveStackFollowPoint.Stack_Index-1].stackPointNum[0]>0 && m_AxisPar[X1_AXIS].axisType != 1)
@@ -945,10 +958,13 @@ StackFollow::StackFollow(QWidget *parent)
             }
             else
             {
-                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_STACK);
+                g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_STACK,0,0);//parNum=0,发送移动到目标位置 parNum=1,停止
             }
         }
 
+    });
+    connect(moveButton,&QPushButton::released,this,[=](){
+        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_STACK,1,0);//parNum=0,发送移动到目标位置 parNum=1,停止
     });
     closeButton = new QPushButton(tr("关闭"), this);
     closeButton->setFixedHeight(45);

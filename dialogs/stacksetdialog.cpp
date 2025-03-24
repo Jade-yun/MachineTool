@@ -30,16 +30,21 @@ void StackSetDialog::changeEnable()
 {
     for (int i = 1; i <= 8; ++i)
     {
-        QString editXName = QString("editX%1").arg(i);
-        QString editYName = QString("editY%1").arg(i);
-        QString editZName = QString("editZ%1").arg(i);
-        QString chboxName = QString("chbox%1").arg(i);
+        editXName = QString("editX%1").arg(i);
+        editYName = QString("editY%1").arg(i);
+        editZName = QString("editZ%1").arg(i);
+        chboxName = QString("chbox%1").arg(i);
 
-        QLineEdit* editX = findChild<QLineEdit*>(editXName);
-        QLineEdit* editY = findChild<QLineEdit*>(editYName);
-        QLineEdit* editZ = findChild<QLineEdit*>(editZName);
+        NumberEdit* editX = findChild<NumberEdit*>(editXName);
+        NumberEdit* editY = findChild<NumberEdit*>(editYName);
+        NumberEdit* editZ = findChild<NumberEdit*>(editZName);
         QCheckBox* chbox = findChild<QCheckBox*>(chboxName);
-
+        editX->setDecimalPlaces(0);
+        editY->setDecimalPlaces(0);
+        editZ->setDecimalPlaces(0);
+        editX->setInputRange(0, m_StackInfo[i-1].stackPointNum[STACK_X_AXIS]);
+        editY->setInputRange(0, m_StackInfo[i-1].stackPointNum[STACK_Y_AXIS]);
+        editZ->setInputRange(0, m_StackInfo[i-1].stackPointNum[STACK_Z_AXIS]);
         if (editX && editY && editZ && chbox)
         {
             editX->setEnabled(chbox->isChecked());
@@ -60,11 +65,46 @@ void StackSetDialog::changeEnable()
 
 void StackSetDialog::on_btnOK_clicked()
 {
+    for(int i=1;i<=8;i++)
+    {
+        editXName = QString("editX%1").arg(i);
+        editYName = QString("editY%1").arg(i);
+        editZName = QString("editZ%1").arg(i);
+        chboxName = QString("chbox%1").arg(i);
+        QCheckBox* chbox = findChild<QCheckBox*>(chboxName);
+        if(chbox->isChecked())
+        {
+            NumberEdit* editX = findChild<NumberEdit*>(editXName);
+            NumberEdit* editY = findChild<NumberEdit*>(editYName);
+            NumberEdit* editZ = findChild<NumberEdit*>(editZName);
+            m_StackAxisCnt[i-1][0] = (uint16_t)editX->text().toUInt();
+            m_StackAxisCnt[i-1][1] = (uint16_t)editY->text().toUInt();
+            m_StackAxisCnt[i-1][2] = (uint16_t)editZ->text().toUInt();
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_STACK_NUM_SET,i,0);
+        }
+    }
     this->accept();
-    // to save the parameters...
 }
 
 void StackSetDialog::on_btnCancel_clicked()
 {
     this->reject();
+}
+
+void StackSetDialog::showEvent(QShowEvent *event)
+{
+    QDialog::showEvent(event);
+    for(int i=1;i<=8;i++)
+    {
+        editXName = QString("editX%1").arg(i);
+        editYName = QString("editY%1").arg(i);
+        editZName = QString("editZ%1").arg(i);
+        chboxName = QString("chbox%1").arg(i);
+        NumberEdit* editX = findChild<NumberEdit*>(editXName);
+        NumberEdit* editY = findChild<NumberEdit*>(editYName);
+        NumberEdit* editZ = findChild<NumberEdit*>(editZName);
+        editX->setText("0");
+        editY->setText("0");
+        editZ->setText("0");
+    }
 }

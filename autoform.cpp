@@ -40,59 +40,149 @@ AutoForm::AutoForm(QWidget *parent) :
     stackSet = new StackSetDialog(this);
     clearDialog = new ClearDialog(this->parentWidget());
     clearDialog->hide();
-
     // 初始化关闭 framGlobalSpeed
     ui->frameGlobalSpeed->close();
 
     // 代码完善 framGlobalSpeed 弹窗小界面
-    QTableWidget* table = new QTableWidget(ui->frameGlobalSpeed);
-    table->setGeometry(5, 5, 110 * 5 + 50, 40 *2);
-    table->setColumnCount(5);
-    table->setRowCount(1);
-    for (int i = 0; i < table->columnCount(); i++)
-        table->setColumnWidth(i, 110);
-    table->setRowHeight(0, 40);
-    table->verticalHeader()->setVisible(false); // Hide vertical header
-//    table->horizontalHeader()->setVisible(false); // Hide horizontal header
-    table->setHorizontalHeaderLabels({tr("堆叠组号"), tr("X1轴个数"), tr("Y1轴个数"), tr("Z1轴个数"),tr("堆叠完停止")});
-//    table->verticalScrollBar()->setDisabled(true); // 禁用滚动
-    table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);//隐藏滚动条
-    table->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-//    QTableWidgetItem* item = new QTableWidgetItem("x111");
-//    table->setHorizontalHeaderItem(0, item);
+    StackSpeedFloatPoP= new QTableWidget(ui->frameGlobalSpeed);
+    StackSpeedFloatPoP->setGeometry(5, 5, 110 * 5 + 50, 40 *2);
+    StackSpeedFloatPoP->setColumnCount(5);
+    StackSpeedFloatPoP->setRowCount(1);
+    for (int i = 0; i < StackSpeedFloatPoP->columnCount(); i++)
+        StackSpeedFloatPoP->setColumnWidth(i, 110);
+    StackSpeedFloatPoP->setRowHeight(0, 40);
+    StackSpeedFloatPoP->verticalHeader()->setVisible(false); // Hide vertical header
+    StackSpeedFloatPoP->setHorizontalHeaderLabels({tr("堆叠组号"), tr("X1轴个数"), tr("Y1轴个数"), tr("Z1轴个数"),tr("堆叠完停止")});
+    StackSpeedFloatPoP->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);//隐藏滚动条
+    StackSpeedFloatPoP->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    StackSpeedFloatPoP->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
   /*************************变量状态******************************************/
     ui->tableWgtVarState->setHorizontalHeaderLabels({tr("变量"), tr("堆叠状态")});
-//    ui->tableWgtVarState->horizontalHeader()->setDefaultSectionSize(120);
-    int i = 0;
-    for (NumberEdit* edit : ui->page2VariableState->findChildren<NumberEdit*>())
+    ui->tableWgtVarState->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    for (int i=0;i<ui->tableWgtVarState->rowCount();i++)
     {
-        edit->setText("0");
-        edit->setDecimalPlaces(0);
-        ui->tableWgtVarState->setCellWidget(i++, 0, edit);
+        VarStateEdit[i] = new NumberEdit(this);
+        VarStateEdit.at(i)->setDecimalPlaces(m_VariableType[i]);//根据每个变量的小数类型进行设置小数点
+        ui->tableWgtVarState->setCellWidget(i,0,VarStateEdit.at(i));
+        connect(VarStateEdit.at(i),&NumberEdit::returnPressed,[=](){
+            if(m_VariableType[i] == 0)
+            {
+                m_VariableCurValue[i] = (uint32_t)VarStateEdit.at(i)->text().toUInt();
+            }
+            else if(m_VariableType[i] == 1)
+            {
+                m_VariableCurValue[i] = (uint32_t)VarStateEdit.at(i)->text().toDouble()*10;
+            }
+            else if(m_VariableType[i] == 2)
+            {
+                m_VariableCurValue[i] = (uint32_t)VarStateEdit.at(i)->text().toDouble()*100;
+            }
+            g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_VAR,0,0);//发送变量值
+        });
     }
+    for(int i=0;i<STACK_TOTAL_NUM;i++)
+    {
+        AtackStateEdit[i] = new QTableWidgetItem();
+        AtackStateEdit[i]->setFlags(AtackStateEdit[i]->flags() & ~Qt::ItemIsSelectable & ~Qt::ItemIsEnabled);
+        ui->tableWgtVarState->setItem(i,1,AtackStateEdit[i]);
+    }
+    //自动状态界面初始化
+    AutoStateMode = new QStandardItemModel(0, 4, this);  // 0行4列
+    AutoStateMode->setHorizontalHeaderLabels({tr("个数"), "X", "Y", "Z"});
+    ui->AutoStatetableView->setModel(AutoStateMode);
+    //设置根据最大宽度平分大小
+    ui->AutoStatetableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    //设置根据最大高度平分大小
+    ui->AutoStatetableView->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->AutoStatetableView->verticalHeader()->setVisible(false);//隐藏垂直表头
+    ui->AutoStatetableView->setShowGrid(false);//隐藏所有网洛
+    //设置不能选择
+    ui->AutoStatetableView->setSelectionMode(QAbstractItemView::NoSelection);
+    ui->AutoStatetableView->setSelectionBehavior(QAbstractItemView::SelectItems);
+    // 禁用编辑功能
+    ui->AutoStatetableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    // 移除焦点框
+    ui->AutoStatetableView->setFocusPolicy(Qt::NoFocus);
 
-    QComboBox* coboxStkGroupNum = new QComboBox(this);
-    NumberEdit* editX1Num = new NumberEdit(this);
-    NumberEdit* editY1Num = new NumberEdit(this);
-    NumberEdit* editZ1Num = new NumberEdit(this);
-    QComboBox* coboxStkFinishStop = new QComboBox(this);
+    //悬浮小弹窗初始化
+    FloatPoP_coboxStkGroupNum = new QComboBox(this);
+    FloatPoP_editX1Num = new NumberEdit(this);
+    FloatPoP_editY1Num = new NumberEdit(this);
+    FloatPoP_editZ1Num = new NumberEdit(this);
+    FloatPoP_coboxStkFinishStop = new QComboBox(this);
 
-    coboxStkGroupNum->addItem("1");
-    coboxStkFinishStop->addItems({tr("不使用"), tr("使用")});
-    editX1Num->setDecimalPlaces(0);
-    editX1Num->setInputRange(0, 2);
-    editY1Num->setDecimalPlaces(0);
-    editY1Num->setInputRange(0, 2);
-    editZ1Num->setDecimalPlaces(0);
-    editZ1Num->setInputRange(0, 2);
+    FloatPoP_coboxStkGroupNum->clear();
+    FloatPoP_coboxStkFinishStop->clear();
+    FloatPoP_editX1Num->setDecimalPlaces(0);
+    FloatPoP_editY1Num->setDecimalPlaces(0);
+    FloatPoP_editZ1Num->setDecimalPlaces(0);
 
-    table->setCellWidget(0, 0, coboxStkGroupNum);
-    table->setCellWidget(0, 1, editX1Num);
-    table->setCellWidget(0, 2, editY1Num);
-    table->setCellWidget(0, 3, editZ1Num);
-    table->setCellWidget(0, 4, coboxStkFinishStop);
-
+    StackSpeedFloatPoP->setCellWidget(0, 0, FloatPoP_coboxStkGroupNum);
+    StackSpeedFloatPoP->setCellWidget(0, 1, FloatPoP_editX1Num);
+    StackSpeedFloatPoP->setCellWidget(0, 2, FloatPoP_editY1Num);
+    StackSpeedFloatPoP->setCellWidget(0, 3, FloatPoP_editZ1Num);
+    StackSpeedFloatPoP->setCellWidget(0, 4, FloatPoP_coboxStkFinishStop);
+    connect(FloatPoP_coboxStkGroupNum,&QComboBox::currentTextChanged,[=](){
+        uint8_t num = FloatPoP_coboxStkGroupNum->currentText().toUInt();
+        if(num>0 && num <= 8)
+        {
+            FloatPoP_editX1Num->setInputRange(0, m_StackInfo[num-1].stackPointNum[STACK_X_AXIS]);
+            FloatPoP_editY1Num->setInputRange(0, m_StackInfo[num-1].stackPointNum[STACK_Y_AXIS]);
+            FloatPoP_editZ1Num->setInputRange(0, m_StackInfo[num-1].stackPointNum[STACK_Z_AXIS]);
+            if(FloatPoP_coboxStkFinishStop->count() == 2)
+            {
+                FloatPoP_coboxStkFinishStop->setCurrentIndex(m_StackInfo[num].stackFinStopFlag);
+            }
+        }
+    });
+    connect(FloatPoP_coboxStkFinishStop,&QComboBox::currentTextChanged,[=](){
+        uint8_t num = FloatPoP_coboxStkGroupNum->currentText().toUInt();
+        if(FloatPoP_coboxStkFinishStop->count()==2)
+        {
+            m_StackInfo[num-1].stackFinStopFlag = FloatPoP_coboxStkFinishStop->currentIndex();
+        }
+    });
+    connect(FloatPoP_coboxStkFinishStop,QOverload<int>::of(&QComboBox::activated),[=](int index){
+            if(FloatPoP_coboxStkFinishStop->count()==2)
+            {
+                m_StackInfo[index].stackFinStopFlag = FloatPoP_coboxStkFinishStop->currentIndex();
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_SET);
+            }
+        });
+    connect(FloatPoP_editX1Num,&NumberEdit::returnPressed,[=](){
+        if(FloatPoP_coboxStkGroupNum->count()>0)
+        {
+            uint8_t stackgroupnum = FloatPoP_coboxStkGroupNum->currentText().toUInt();
+            if(stackgroupnum>0 && stackgroupnum<=8)
+            {
+                m_StackAxisCnt[stackgroupnum-1][0] = (uint16_t)FloatPoP_editX1Num->text().toUInt();
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_STACK_NUM_SET,stackgroupnum,0);
+            }
+        }
+    });
+    connect(FloatPoP_editY1Num,&NumberEdit::returnPressed,[=](){
+        if(FloatPoP_coboxStkGroupNum->count()>0)
+        {
+            uint8_t stackgroupnum = FloatPoP_coboxStkGroupNum->currentText().toUInt();
+            if(stackgroupnum>0 && stackgroupnum<=8)
+            {
+                m_StackAxisCnt[stackgroupnum-1][1] = (uint16_t)FloatPoP_editY1Num->text().toUInt();
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_STACK_NUM_SET,stackgroupnum,0);
+            }
+        }
+    });
+    connect(FloatPoP_editZ1Num,&NumberEdit::returnPressed,[=](){
+        if(FloatPoP_coboxStkGroupNum->count()>0)
+        {
+            uint8_t stackgroupnum = FloatPoP_coboxStkGroupNum->currentText().toUInt();
+            if(stackgroupnum>0 && stackgroupnum<=8)
+            {
+                m_StackAxisCnt[stackgroupnum-1][2] = (uint16_t)FloatPoP_editZ1Num->text().toUInt();
+                g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_STACK_NUM_SET,stackgroupnum,0);
+            }
+        }
+    });
     // 创建菜单并添加菜单项
     QMenu* menu = new QMenu(this);
 
@@ -338,6 +428,84 @@ AutoForm::~AutoForm()
     delete ui;
 }
 
+//更新速度堆叠弹窗界面显示
+void AutoForm::UpdateFloatPoPShow()
+{
+    if(ui->frameGlobalSpeed->isVisible())
+    {
+        if(FloatPoPStackOrderNumList != processInstructions(0))
+        {
+            FloatPoP_coboxStkGroupNum->clear();
+            FloatPoP_coboxStkFinishStop->clear();
+            FloatPoPStackOrderNumList = processInstructions(0);
+            FloatPoP_coboxStkGroupNum->clear();
+            for(int i=0;i<FloatPoPStackOrderNumList.count();i++)
+            {
+                FloatPoP_coboxStkGroupNum->addItem(FloatPoPStackOrderNumList.at(i));
+            }
+            FloatPoP_coboxStkFinishStop->addItems({tr("不使用"), tr("使用")});
+        }
+        if(FloatPoP_coboxStkGroupNum->count()>0)
+        {
+            uint8_t stackIndex = FloatPoP_coboxStkGroupNum->currentIndex();
+            if(ui->stkWgtState->currentWidget() != ui->page3StackState)
+            {
+                g_Usart->ExtendSendReadPar(CMD_MAIN_STA,CMD_SUN_STA_ALL_STACK_NUM,1,0);//发送读取所有堆叠位置点数指令
+            }
+            FloatPoP_editX1Num->setValue(m_StackAxisCnt[stackIndex][0]);
+            FloatPoP_editY1Num->setValue(m_StackAxisCnt[stackIndex][1]);
+            FloatPoP_editZ1Num->setValue(m_StackAxisCnt[stackIndex][2]);
+            FloatPoP_editX1Num->setText(QString::number(m_StackAxisCnt[stackIndex][0]));
+            FloatPoP_editY1Num->setText(QString::number(m_StackAxisCnt[stackIndex][1]));
+            FloatPoP_editZ1Num->setText(QString::number(m_StackAxisCnt[stackIndex][2]));
+            if(FloatPoP_coboxStkFinishStop->count() == 2)
+            {
+                FloatPoP_coboxStkFinishStop->setCurrentIndex(m_StackInfo[stackIndex].stackFinStopFlag);
+            }
+        }
+        else
+        {
+            FloatPoP_coboxStkFinishStop->clear();
+        }
+        if(m_RobotRunSta == MAC_STA_RUN)
+        {
+            if(StackSpeedFloatPoP->isEnabled() == true)
+            {
+                StackSpeedFloatPoP->setEnabled(false);
+            }
+            uint16_t tempProNum = m_ProRunInfo.proNum[m_OperateProNum];
+            if(m_OperateProOrder[tempProNum].cmd == C_STACK_MOVE)
+            {
+                P_StackMoveStruct* StackMove = (P_StackMoveStruct*)m_OperateProOrder[tempProNum].pData;
+                uint8_t stackIndex = StackMove->stackNum-1;
+                if(stackIndex>=0)
+                {
+                    for (int i = 0; i < FloatPoP_coboxStkGroupNum->count(); i++) {
+                        QString itemText = FloatPoP_coboxStkGroupNum->itemText(i);  // 获取第i项的文本
+                        if (itemText == StackMove->stackNum) {
+                            FloatPoP_coboxStkGroupNum->setCurrentIndex(i);  // 匹配则选中该项
+                            break;  // 找到后退出循环
+                        }
+                    }
+                    FloatPoP_coboxStkFinishStop->setCurrentIndex(m_StackInfo[stackIndex].stackFinStopFlag);
+                    FloatPoP_editX1Num->setValue(m_StackAxisCnt[stackIndex][0]);
+                    FloatPoP_editY1Num->setValue(m_StackAxisCnt[stackIndex][1]);
+                    FloatPoP_editZ1Num->setValue(m_StackAxisCnt[stackIndex][2]);
+                    FloatPoP_editX1Num->setText(QString::number(m_StackAxisCnt[stackIndex][0]));
+                    FloatPoP_editY1Num->setText(QString::number(m_StackAxisCnt[stackIndex][1]));
+                    FloatPoP_editZ1Num->setText(QString::number(m_StackAxisCnt[stackIndex][2]));
+                }
+            }
+        }
+        else
+        {
+            if(StackSpeedFloatPoP->isEnabled() == false)
+            {
+                StackSpeedFloatPoP->setEnabled(true);
+            }
+        }
+    }
+}
 //刷新速度显示相关控件
 void AutoForm::Refresh_globalSpeedShowHandel()
 {
@@ -1109,9 +1277,12 @@ void AutoForm::AutoForm_Refresh()
     Program_Follow_Refresh();//跟随刷新
     Auto_State_Refresh();
     Auto_CurStep_Refresh();
+    Var_State_Refresh();//变量状态刷新
+    Stack_State_Refresh();//堆叠状态刷新
+    UpdateFloatPoPShow();//堆叠/速度悬浮弹窗刷新显示
 }
 /*************************************************************************
-**  函数名：  AutoForm_Refresh()
+**  函数名：  Auto_State_Refresh()
 **	输入参数：
 **	输出参数：
 **	函数功能：自动运行界面自动状态参数刷新
@@ -1126,6 +1297,142 @@ void AutoForm::Auto_State_Refresh()
     ui->labFetchTime->setText(QString::number(((double)m_RunInfo.fetchTime),'f',2)+"s"); //取物时间
     ui->labActualProd->setText(QString::number(m_RunInfo.actualProductNum));             //实际产品
     ui->labCurrentStepNumber->setText(QString::number(m_ProRunInfo.proNum[m_OperateProNum]+1));//当前步号
+}
+/*************************************************************************
+**  函数名：  Var_State_Refresh()
+**	输入参数：
+**	输出参数：
+**	函数功能：自动运行界面变量状态参数刷新
+**  作者：    wukui
+**  开发日期：2025/3/21
+**************************************************************************/
+void AutoForm::Var_State_Refresh()
+{
+    if(ui->stkWgtState->currentWidget() == ui->page2VariableState)
+    {
+        if(m_RobotRunSta == MAC_STA_RUN)
+        {
+            if(ui->tableWgtVarState->isEnabled() == true)
+            {
+                ui->tableWgtVarState->setEnabled(false);
+            }
+        }
+        else
+        {
+            if(ui->tableWgtVarState->isEnabled() == false)
+            {
+                ui->tableWgtVarState->setEnabled(true);
+            }
+        }
+        for(int i=0;i<VAR_TOTAL_NUM;i++)
+        {
+            VarStateEdit.at(i)->setDecimalPlaces(m_VariableType[i]);
+            if(m_VariableType[i] == 0)
+            {
+                VarStateEdit.at(i)->setValue(QString::number(m_VariableCurValue[i],'f',0));
+            }
+            else if(m_VariableType[i] == 1)
+            {
+                VarStateEdit.at(i)->setValue(QString::number((double)(m_VariableCurValue[i]/10),'f',1));
+            }
+            else if(m_VariableType[i] == 2)
+            {
+                VarStateEdit.at(i)->setValue(QString::number((double)(m_VariableCurValue[i]/100),'f',2));
+            }
+            VarStateEdit.at(i)->setText(VarStateEdit.at(i)->getValue().toString());
+        }
+        for(int i=0;i<STACK_TOTAL_NUM;i++)
+        {
+            AtackStateEdit.at(i)->setText(QString::number(m_StackCurPileCnt[i],'f',0));
+        }
+        g_Usart->ExtendSendReadPar(CMD_MAIN_STA,CMD_SUN_STA_STACK,1,0);//发送读取堆叠实时参数指令
+        g_Usart->ExtendSendReadPar(CMD_MAIN_STA,CMD_SUN_STA_VAR,0,0);//发送读取变量值
+    }
+}
+
+/*************************************************************************
+**  函数名：  Stack_State_Refresh()
+**	输入参数：
+**	输出参数：
+**	函数功能：自动运行界面堆叠状态参数刷新
+**  作者：    wukui
+**  开发日期：2025/3/22
+**************************************************************************/
+void AutoForm::Stack_State_Refresh()
+{
+    if(ui->stkWgtState->currentWidget() == ui->page3StackState)
+    {
+        if(StackOrderNumList != processInstructions(1))
+        {
+            StackOrderNumList = processInstructions(1);
+            AutoStateMode->removeRows(0,AutoStateMode->rowCount());//删除所有行并释放内存
+            for(int i=0;i<StackOrderNumList.count();i++)
+            {
+                AutoStateMode->insertRow(AutoStateMode->rowCount());
+                // 获取当前行索引
+                int row = AutoStateMode->rowCount() - 1;
+
+                // 设置第一列数据
+                QStandardItem *item = new QStandardItem(QString(tr("堆叠%1组:")).arg(StackOrderNumList.at(i)));
+                AutoStateMode->setItem(row, 0, item);
+                for(int j=0;j<STACK_AXIS_NUM;j++)
+                {
+                    QStandardItem *item = new QStandardItem(QString("%1").arg(m_StackAxisCnt[i][j]));
+                    item->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);//水平+垂直居中
+                    AutoStateMode->setItem(row, j+1, item);
+                }
+            }
+        }
+        if(StackOrderNumList.count()>0)
+        {
+            for (int i=0;i<StackOrderNumList.count();i++) {
+                for(int j=0;j<STACK_AXIS_NUM;j++)
+                {
+                    QModelIndex index = AutoStateMode->index(i, j+1);
+                    AutoStateMode->setData(index,m_StackAxisCnt[i][j],Qt::DisplayRole);
+                }
+            }
+            g_Usart->ExtendSendReadPar(CMD_MAIN_STA,CMD_SUN_STA_ALL_STACK_NUM,1,0);//发送读取所有堆叠位置点数指令
+        }
+    }
+}
+
+//用来获取所有堆叠指令或跟随堆叠指令的堆叠组号 type=0：不需要获取跟随堆叠点组号，type=1:都需要获取
+QStringList AutoForm::processInstructions(uint8_t type)
+{
+    QSet<int> uniqueStackNum;//用与去重的临时集合
+    QStringList resultList;//结果列表
+    for(int i=0;i<m_OperateProOrderListNum;i++)
+    {
+        if(m_OperateProOrder[i].cmd == C_STACK_MOVE)
+        {//堆叠指令
+            P_StackMoveStruct* StackMove = (P_StackMoveStruct*)m_OperateProOrder[i].pData;
+            if(!uniqueStackNum.contains(StackMove->stackNum))
+            {
+                uniqueStackNum.insert(StackMove->stackNum);
+                resultList.append(QString::number(StackMove->stackNum));
+            }
+        }
+        if(type == 1)
+        {
+            if(m_OperateProOrder[i].cmd == C_STACK_FOLLOW)
+            {//跟随堆叠指令
+                P_StackFollowStruct* StackFollow = (P_StackFollowStruct*)m_OperateProOrder[i].pData;
+                if(!uniqueStackNum.contains(StackFollow->stackNum))
+                {
+                    uniqueStackNum.insert(StackFollow->stackNum);
+                    resultList.append(QString::number(StackFollow->stackNum));
+                }
+            }
+        }
+
+    }
+    //排序
+    std::sort(resultList.begin(), resultList.end(),
+            [](const QString& a, const QString& b) {
+                return a.toInt() < b.toInt();
+            });
+    return resultList;
 }
 /*************************************************************************
 **  函数名：  Auto_CurStep_Refresh()
@@ -1173,7 +1480,7 @@ void AutoForm::Program_Follow_Refresh()
             m_AutoInforRefresh.Program_Follow_Flog = 1;
         }
 
-        if (m_ProRunInfo.proNum[m_OperateProNum] <= ui->Auto_file_List->rowCount() && m_AutoInforRefresh.Old_Follow_ProNum != m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum)
+        if (m_ProRunInfo.proNum[m_OperateProNum] <= ui->Auto_file_List->rowCount() )//&& m_AutoInforRefresh.Old_Follow_ProNum != m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum)
         {
             qDebug()<<"当前运行序号："<<m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum;
             for(int row = 0;row<ui->Auto_file_List->rowCount();row++)
@@ -1201,7 +1508,7 @@ void AutoForm::Program_Follow_Refresh()
                     }
                 }
             }
-            m_AutoInforRefresh.Old_Follow_ProNum = m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum;//上一次运行行号
+            //m_AutoInforRefresh.Old_Follow_ProNum = m_OperateProOrder[m_ProRunInfo.proNum[m_OperateProNum]].runOrderNum;//上一次运行行号
         }
     }
     else
@@ -1280,8 +1587,10 @@ void AutoForm::Auto_File_List_Refresh(uint8_t ProNum)
         ui->Auto_file_List->selectRow(m_CurrentSelectProOrderList);
     }
     //界面初始化
+
     ui->stkWgtOuter->setCurrentWidget(ui->pageState);//界面切到自动状态界面
-    ui->stkWgtState->setCurrentWidget(ui->page1AutoState);
+    ui->stkWgtState->setCurrentIndex(0);
+    updateLabelState(0);
     ui->btnEdit->setChecked(false);//编辑按钮默认关闭
     if(ProNum == 0)
     {//如果在主程序，刷新从此运行行号标志
