@@ -11,9 +11,7 @@
 
 #include <unistd.h>
 
-#define COPYS "-副本"
 #define DECOLLATOR '/'
-#define ARROWS ">"
 #define DOT '.'
 #define HINTMESSAGE(Test) \
     QMessageBox::information(&QWidget(), "", Test)

@@ -372,7 +372,6 @@ AutoForm::AutoForm(QWidget *parent) :
             if(clearDialog->exec() == QDialog::Accepted)
             {
                 g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_VAR_AUTO_RESET,0,0);
-                QThread::msleep(5);
                 g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_VAR_POWER_OFF_MEMORY,0,0);
             }
             setAutoPagePar();
@@ -1329,17 +1328,17 @@ void AutoForm::Var_State_Refresh()
             VarStateEdit.at(i)->setDecimalPlaces(m_VariableType[i]);
             if(m_VariableType[i] == 0)
             {
-                VarStateEdit.at(i)->setValue(QString::number(m_VariableCurValue[i],'f',0));
+                VarStateEdit.at(i)->setText(QString::number(m_VariableCurValue[i],'f',0));
             }
             else if(m_VariableType[i] == 1)
             {
-                VarStateEdit.at(i)->setValue(QString::number((double)(m_VariableCurValue[i]/10),'f',1));
+                VarStateEdit.at(i)->setText(QString::number((double)(m_VariableCurValue[i]/10),'f',1));
             }
             else if(m_VariableType[i] == 2)
             {
-                VarStateEdit.at(i)->setValue(QString::number((double)(m_VariableCurValue[i]/100),'f',2));
+                VarStateEdit.at(i)->setText(QString::number((double)(m_VariableCurValue[i]/100),'f',2));
             }
-            VarStateEdit.at(i)->setText(VarStateEdit.at(i)->getValue().toString());
+            VarStateEdit.at(i)->setText(VarStateEdit.at(i)->text());
         }
         for(int i=0;i<STACK_TOTAL_NUM;i++)
         {
@@ -1618,6 +1617,16 @@ void AutoForm::updateLabelState(int index)
     {
         ui->labelState->setText(states.at(index));
         ui->btnClear->setText(btnTexts.at(index));
+        if(index >1)
+        {
+            if(ui->btnClear->isEnabled() == true)
+                ui->btnClear->setEnabled(false);
+        }
+        else
+        {
+            if(ui->btnClear->isEnabled() == false)
+                ui->btnClear->setEnabled(true);
+        }
     }
 }
 
