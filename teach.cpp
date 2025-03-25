@@ -641,7 +641,7 @@ void Teach::Wait_Signal_Init(void)
     }
     ui->chboxReturnLabel->setChecked(true);
     ui->chboxReturnStepNum->setChecked(true);
-    ui->editReturnStepNum->setText("6");
+    ui->editReturnStepNum->setText("0");
     ui->coboxReturnLabe_box->setCurrentIndex(0);
     Temp_WaitInMachineStruct.type = 0;//跳转类型 返回步号
     Temp_WaitInClawStruct.type = 0;//跳转类型 返回步号
@@ -1196,97 +1196,7 @@ void Teach::on_btnDelete_clicked()
         int reply =  MainWindow::pMainWindow->showErrorTip(tr("确认删除所选动作？"));
         if (reply == QDialog::Accepted)
         {
-#if 0
-            if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_LABEL)
-            {
-                P_LabelStruct* LabelStruct = (P_LabelStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
-                if(LabelStruct->labelNum>0)
-                {
-                    bool JumpLabelFlag = false;//该标签是否存在对应的跳转指令
-                    uint16_t temp_labelNum1 = LabelStruct->labelNum;
-                    uint16_t temp_labelNum = ReturnLableListIndex(temp_labelNum1);
-                    if(temp_labelNum>0)
-                    {
-                        if(LabelStruct->type == 0)
-                        {//如果删除的是标签指令
-                            for(int i=0;i<m_OperateProOrderListNum;i++)
-                            {
-                                if(m_OperateProOrder[i].cmd == C_LABEL)
-                                {
-                                    P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[i].pData;
-                                    if(LabelStruct1->labelNum == temp_labelNum1 && LabelStruct1->type == 1)
-                                    {//删除标签指令之前，先判断该标签是否有跳转标签指令
-                                        JumpLabelFlag = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if(JumpLabelFlag == true)
-                            {
-                                int reply =  MainWindow::pMainWindow->showErrorTip(tr("该标签指令存在跳转标签指令，如果确认删除，对应的跳转标签指令也会删除！"));
-                                if (reply == QDialog::Accepted)
-                                {
-                                    JumpLabelFlag = false;
-                                    if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
-                                    {
-                                        MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                                        return;
-                                    }
-                                    for(int i=0;i<m_OperateProOrderListNum;i++)
-                                    {
-                                        if(m_OperateProOrder[i].cmd == C_LABEL)
-                                        {
-                                            P_LabelStruct* LabelStruct1 = (P_LabelStruct*)m_OperateProOrder[i].pData;
-                                            if(LabelStruct1->labelNum == temp_labelNum1 && LabelStruct1->type == 1)
-                                            {//删除标签指令之前，先判断该标签是否有跳转标签指令
-                                                CurrentLableNameList.removeAt(temp_labelNum-1);
-                                                if(g_ProOrderOperate(m_OperateProNum,i,1,0) != 0)
-                                                {
-                                                    MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                                                    break;
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                CurrentLableNameList.removeAt(temp_labelNum-1);
-                                if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
-                                {
-                                    MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                                    return;
-                                }
-                            }
-                        }
-                        else if(LabelStruct->type == 1)
-                        {
-                            if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
-                            {
-                                MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                                return;
-                            }
-                        }
-
-                        Refresh_listWgtJumpto();
-                        listWgtJumptoLabelIndex = 0;
-                    }
-                    else
-                    {
-                        MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                        return;
-                    }
-                }
-            }
-            else
-            {
-                if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
-                {
-                    MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
-                }
-            }
-#endif
+            ClearAxisOrderReferHandle();
             if(g_ProOrderOperate(m_OperateProNum,m_CurrentSelectProOrderList,1,0) != 0)
             {
                 MainWindow::pMainWindow->showErrorTip(tr("删除失败"),TipMode::ONLY_OK);
@@ -1298,6 +1208,34 @@ void Teach::on_btnDelete_clicked()
             Teach_File_List_Refresh();//刷新程序列表
             OrderNeedSaveFlag = true;
             Teach_timer->start();
+        }
+    }
+}
+//删除轴指令时参考点参数处理函数
+void Teach::ClearAxisOrderReferHandle()
+{
+    bool temp = false;
+    if(m_OperateProOrder[m_CurrentSelectProOrderList].cmd == C_AXIS_MOVE)
+    {
+        P_AxisMoveStruct *AxisMove = (P_AxisMoveStruct*)m_OperateProOrder[m_CurrentSelectProOrderList].pData;
+        for(int i=0;i<m_OperateProOrderListNum;i++)
+        {
+            if(m_OperateProOrder[i].cmd == C_AXIS_MOVE && m_CurrentSelectProOrderList != i)
+            {
+                P_AxisMoveStruct *AxisMove1 = (P_AxisMoveStruct*)m_OperateProOrder[i].pData;
+                if(AxisMove1->referPointNum == AxisMove->referPointNum && AxisMove->axis == AxisMove1->axis)
+                {
+                    temp = true;
+                    break;
+                }
+            }
+        }
+        if(temp == false)
+        {
+            auto axisIndex = AxisMove->axis;
+            m_RefPoint[AxisMove->referPointNum-1].pos[axisIndex] = 0;
+            ::writeReferenceInfo();
+            emit refreshPosTableSignal();
         }
     }
 }
@@ -3496,17 +3434,79 @@ void Teach::Edit_AxisMove_Save_handle(void)
         {
             AxisMove->advCSpeedFlag = 0;
         }
-        AxisMove->referPointNum = (uint8_t)ui->editReferPoint->getRefPointIndex();
+        int refIndex = ui->editReferPoint->getRefPointIndex();
+        if(AxisMove->referPointNum>=0 && AxisMove->referPointNum != refIndex)
+        {
+            if(refIndex == 0)
+            {//如果轴指令之前指定了参考点，现在不指定参考点，则清空该参考点标
+                auto axisIndex = AxisMove->axis;
+                bool temp = false;
+                if(AxisMove->referPointNum>0)
+                {
+                    for(int i=0;i<m_OperateProOrderListNum;i++)
+                    {
+                        if(m_OperateProOrder[i].cmd == C_AXIS_MOVE && m_CurrentSelectProOrderList != i)
+                        {
+                            P_AxisMoveStruct *AxisMove1 = (P_AxisMoveStruct*)m_OperateProOrder[i].pData;
+                            if(AxisMove1->referPointNum == AxisMove->referPointNum && AxisMove->axis == AxisMove1->axis)
+                            {
+                                temp = true;
+                                break;
+                            }
+                        }
+                    }
+                    if(temp == false)
+                    {
+                        m_RefPoint[AxisMove->referPointNum-1].pos[axisIndex] = 0;
+                    }
+                }
+            }
+            else if (refIndex > 0 && refIndex < REFERENCE_TOTAL_NUM)
+            {
+                auto axisIndex = AxisMove->axis;
+                bool temp1 = false;
+                if(AxisMove->referPointNum>0)
+                {
+                    for(int i=0;i<m_OperateProOrderListNum;i++)
+                    {
+                        if(m_OperateProOrder[i].cmd == C_AXIS_MOVE && m_CurrentSelectProOrderList != i)
+                        {
+                            P_AxisMoveStruct *AxisMove2 = (P_AxisMoveStruct*)m_OperateProOrder[i].pData;
+                            if(AxisMove2->referPointNum == AxisMove->referPointNum && AxisMove->axis == AxisMove2->axis)
+                            {
+                                temp1 = true;
+                                break;
+                            }
+                        }
+                    }
+                    if(temp1 == false)
+                    {
+                        m_RefPoint[AxisMove->referPointNum-1].pos[axisIndex] = 0;//切换参考点时，上一次指定参考点坐标清零
+                    }
+                }
+                if(m_RefPoint[refIndex-1].pos[axisIndex] != 0)
+                {
+                    AxisMove->pos = m_RefPoint[refIndex-1].pos[axisIndex];
+                }
+                else
+                {
+                    m_RefPoint[refIndex-1].pos[axisIndex] = AxisMove->pos;//赋值给新指定参考点坐标
+                }
+            }
+            ::writeReferenceInfo();
+            emit refreshPosTableSignal();
+        }
+        AxisMove->referPointNum = refIndex;
         m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_AxisMove_delay->text().toDouble()*100;
 
-        int refIndex = ui->editReferPoint->getRefPointIndex();
-        if (refIndex > 0 && refIndex < REFERENCE_TOTAL_NUM)
-        {
-            auto axisIndex = AxisMove->axis;
-            m_RefPoint[refIndex - 1].pos[axisIndex] = AxisMove->pos;
+//        int refIndex = ui->editReferPoint->getRefPointIndex();
+//        if (refIndex > 0 && refIndex < REFERENCE_TOTAL_NUM)
+//        {
+//            auto axisIndex = AxisMove->axis;
+//            m_RefPoint[refIndex - 1].pos[axisIndex] = AxisMove->pos;
 
-            ::writeReferenceInfo();
-        }
+//            ::writeReferenceInfo();
+//        }
     }
 }
 /*************************************************************************
@@ -5006,12 +5006,12 @@ void Teach::OrderEdit_Handle()
                 ui->editReferPoint->setRefPointIndex(refIndex);
             }
             else {
-                ui->editReferPoint->setText("");
+                ui->editReferPoint->setText(tr("不指定"));
                 ui->editReferPoint->setRefPointIndex(0);
             }
         }
         else {
-            ui->editReferPoint->setText("");
+            ui->editReferPoint->setText(tr("不指定"));
             ui->editReferPoint->setRefPointIndex(0);
         }
 

@@ -81,6 +81,8 @@ public slots:
 
     void Stack_Dialog_show();
 private slots:
+    void ClearAxisOrderReferHandle();
+
     void updateCoboxReturnLabe_box();
 
     bool CheckLabelOrderLegal();
@@ -341,6 +343,7 @@ private:
     QPoint dragPosition;
 signals:
     void StackEditBaseInit_signal();
+    void refreshPosTableSignal();//刷新参考点界面显示信号
 private:
     QTableWidget *table;
     std::array<NumberEdit*, 3> nums; // 个数

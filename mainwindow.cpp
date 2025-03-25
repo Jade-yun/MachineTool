@@ -696,6 +696,7 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget,&Setting::AxisTypeChange_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
     connect(this,&MainWindow::SwitchPageParSaveSignal,setWidget,&Setting::SwitchPageParSaveHandle);//切换界面时有参数需要保存处理
     connect(this,&MainWindow::SetAutoRunIcon_Signal,autoWidget,&AutoForm::SetAutoRunIcon);//自动界面断点图标需刷新
+    connect(teachWidget,&Teach::refreshPosTableSignal,manualWidget,&ManualForm::refreshPosTable);//教导界面触发刷新参考点界面信号
     //显示时间和刷新实时参数
     QTimer* timer = new QTimer(this);
     connect(timer, &QTimer::timeout, [&]() {

@@ -76,6 +76,7 @@ private slots:
 
 public slots:
     void InitAdjustMachine(uint8_t AxisIndex);//初始化调机界面参数
+    void refreshPosTable();
 private:
     void initVar();
     void updateReferPointsTable();
@@ -92,7 +93,6 @@ private:
     void setupReferPointConnections(DraggableButton* btn);
     void onReferPointButtonPressed(DraggableButton* btn);
     void updateReferPointsAxisPos();
-    void refreshPosTable();
 
     void setupReserveWidgets();
     void setupClawAndMachineConnections();
