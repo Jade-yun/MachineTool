@@ -34,6 +34,49 @@ extern const QString alarmInfoMappingPath;
 MainWindow* MainWindow::pMainWindow = nullptr;
 QTranslator translator;
 
+//#define USE_SCEENSHOT
+
+#ifdef USE_SCEENSHOT
+void screenCapture(QWidget *rootView)
+{
+    if (!rootView) {
+        qDebug() << "Error: rootView is null!";
+        return;
+    }
+
+    if (!UsbDisk::instance()->isInserted())
+    {
+        qDebug() << "usb is not inserted!";
+        return;
+    }
+
+    QString savePath = UsbDisk::instance()->getUsbMountPoint() + "/screenshots";
+    QDir dir(savePath);
+    if (!dir.exists()) {
+        if (!dir.mkpath(savePath)) {
+            qDebug() << "Error: Failed to create directory" << savePath;
+            return;
+        }
+    }
+
+    // 生成文件名，格式：screenshot_yyyyMMdd_HHmmss.png
+    QString fileName = QString("screenshot_%1.png")
+                           .arg(QDateTime::currentDateTime().toString("yyyyMMdd_HHmmss"));
+
+    QString fullPath = savePath + "/" + fileName;
+
+    // 截取窗口内容
+    QPixmap pixmap = rootView->grab();
+
+    // 保存图片
+    if (pixmap.save(fullPath, "PNG")) {
+        qDebug() << "Screenshot saved successfully:" << fullPath;
+    } else {
+        qDebug() << "Failed to save screenshot!";
+    }
+}
+#endif
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -1117,6 +1160,12 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
                 AdjustSpeedHandel(1);
             }
         }
+#ifdef USE_SCEENSHOT
+        if (value == 1)
+        {
+            screenCapture(this);
+        }
+#endif
         break;
     }
     case HandControlKeyCode::DOWN://EXIT

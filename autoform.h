@@ -9,6 +9,7 @@
 #include "autocorrectposdialog.h"
 #include "referencewidget.h"
 #include "cleardialog.h"
+#include "producthistorydialog.h"
 
 namespace Ui {
 class AutoForm;
@@ -67,9 +68,11 @@ private:
     ReferenceWidget* referEditDialog;
     StackSetDialog* stackSet; // 堆叠指定
     ClearDialog* clearDialog;
+    ProductHistoryDialog* productHisDlg;
+
     QTableWidget* StackSpeedFloatPoP;//悬浮小弹窗
-    std::vector<QAction*> operateActions;
-    std::vector<std::string> actionStrs;
+    std::vector<QAction*> operateActions; // 操作菜单
+    std::vector<std::string> actionStrs;    // 操作菜单源文本（用于多语言）
     QComboBox* FloatPoP_coboxStkGroupNum;
     NumberEdit* FloatPoP_editX1Num;
     NumberEdit* FloatPoP_editY1Num;

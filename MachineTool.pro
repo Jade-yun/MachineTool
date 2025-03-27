@@ -51,12 +51,14 @@ SOURCES += \
     Driver/usbdisk.cpp \
     MyTitleBarDialog/basewindow.cpp \
     MyTitleBarDialog/mytitlebar.cpp \
+    ProductHistoryModel.cpp \
     alarmbar.cpp \
     alarmform.cpp \
     autoform.cpp \
     dialogs/alarminfodialog.cpp \
     dialogs/backgroundprocessform.cpp \
     dialogs/file_preview.cpp \
+    dialogs/producthistorydialog.cpp \
     dialogs/softkeywidget.cpp \
     dialogs/tippasswddialog.cpp \
     dialogs/upgradedialog.cpp \
@@ -96,6 +98,7 @@ HEADERS += \
     Driver/usbdisk.h \
     MyTitleBarDialog/basewindow.h \
     MyTitleBarDialog/mytitlebar.h \
+    ProductHistoryModel.h \
     RefreshKernelBuffer.h \
     alarmbar.h \
     alarmform.h \
@@ -103,6 +106,7 @@ HEADERS += \
     dialogs/alarminfodialog.h \
     dialogs/backgroundprocessform.h \
     dialogs/file_preview.h \
+    dialogs/producthistorydialog.h \
     dialogs/softkeywidget.h \
     dialogs/tippasswddialog.h \
     dialogs/upgradedialog.h \
@@ -138,6 +142,7 @@ FORMS += \
     dialogs/alarminfodialog.ui \
     dialogs/backgroundprocessform.ui \
     dialogs/file_preview.ui \
+    dialogs/producthistorydialog.ui \
     dialogs/softkeywidget.ui \
     dialogs/tippasswddialog.ui \
     dialogs/upgradedialog.ui \

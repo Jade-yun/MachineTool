@@ -110,19 +110,19 @@ ClearDialog::ClearDialog(QWidget *parent) :
     }
 }
 
-ClearDialog::ClearDialog(ClearDialog::ClearMode mode, QWidget *parent) :
-    BaseWindow(parent),
-    ui(new Ui::ClearDialog)
-{
-    ui->setupUi(this);
-    setModal(true);
+//ClearDialog::ClearDialog(ClearDialog::ClearMode mode, QWidget *parent) :
+//    BaseWindow(parent),
+//    ui(new Ui::ClearDialog)
+//{
+//    ui->setupUi(this);
+//    setModal(true);
 
-//    FramelessWidget2* frameBase = new FramelessWidget2(this);
-//    frameBase->setWidget(this);
+////    FramelessWidget2* frameBase = new FramelessWidget2(this);
+////    frameBase->setWidget(this);
 
-    ui->stkWidget->setCurrentIndex(mode);
-    connect(ui->btnOK, &QPushButton::clicked, this, &QDialog::accept);
-}
+//    ui->stkWidget->setCurrentIndex(mode);
+//    connect(ui->btnOK, &QPushButton::clicked, this, &QDialog::accept);
+//}
 
 ClearDialog::~ClearDialog()
 {
