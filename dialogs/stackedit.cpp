@@ -138,6 +138,11 @@ void StackEdit::initWidgets()
 //        cobox->setView(new QListView(cobox));
         cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     }
+    ui->btnFresh->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    ui->btnFresh0->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    ui->btnFresh1->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    ui->btnFresh2->setFocusPolicy(Qt::FocusPolicy::NoFocus);
+    ui->btnFreshRotateBin->setFocusPolicy(Qt::FocusPolicy::NoFocus);
 
     // 初始化时 ui 界面
     ui->btnOK->setVisible(false);
@@ -548,7 +553,7 @@ StackEdit::StackEdit(int groupIndex, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StackEdit),
     movie(nullptr),
-    groupIndex(groupIndex)
+    groupIndex(groupIndex), pressedRow(-1)
 {
     ui->setupUi(this);
 
@@ -592,6 +597,8 @@ StackEdit::StackEdit(int groupIndex, QWidget *parent) :
 
     logicSigsSlots();
     saveInfoConnections();
+    setupRefreshConnections();
+
 }
 
 StackEdit::~StackEdit()
@@ -686,7 +693,7 @@ void StackEdit::logicSigsSlots()
 
     // 旋转料仓模式下
     connect(ui->editStackNumRotateBin, &NumberEdit::textChanged, [=]() {
-        bool disable = ui->editStackNum1->text().toInt() == 0;
+        bool disable = ui->editStackNumRotateBin->text() == "0";
 
         ui->btnFreshRotateBin->setEnabled(!disable);
         ui->coboxAxisSelectRotateBin->setEnabled(!disable);
@@ -857,6 +864,31 @@ void StackEdit::saveInfoConnections()
     }
 }
 
+void StackEdit::setupRefreshConnections()
+{
+    connect(ui->btnFresh, &QPushButton::clicked, this, &StackEdit::onRefreshClicked);
+    connect(ui->tableStack->verticalHeader(), &QHeaderView::sectionPressed, this, [this](int logicalIndex){
+//        qDebug() << "Pressed row: " << logicalIndex;
+        pressedRow = logicalIndex;
+
+        QWidget *focusedWidget = ui->tableStack->focusWidget();
+        if (focusedWidget)
+        {
+            focusedWidget->clearFocus();
+        }
+    });
+
+    std::vector<QPushButton*> refreshBtns = {
+        ui->btnFresh0, ui->btnFresh1, ui->btnFresh2
+    };
+    for (int i = 0; i < 3; i++)
+    {
+        connect(refreshBtns[i], &QPushButton::clicked, this, [this, i](){
+            onRefreshNormalStackClicked(i);
+        });
+    }
+}
+
 void StackEdit::on_coboxStackOrder_currentIndexChanged(int index)
 {
     switch (index) {
@@ -878,6 +910,107 @@ void StackEdit::on_coboxStackOrder_currentIndexChanged(int index)
         break;
     default:
         break;
+    }
+}
+
+void StackEdit::onRefreshClicked()
+{
+    const QSet<int> positionRows = {
+       3, 4, 5, 6, 8
+    };
+
+    auto updateCellEdit = [this](int row, int col){
+        auto curWidget = ui->tableStack->cellWidget(row, col);
+            if (!curWidget) return;
+
+            auto edit = qobject_cast<NumberEdit *>(curWidget);
+            if (!edit) return;
+
+            const std::vector<int> axisPos = {
+                m_AxisCurPos.Pos_x, m_AxisCurPos.Pos_y, m_AxisCurPos.Pos_z,
+                m_AxisCurPos.Pos_c, m_AxisCurPos.Pos_y2, m_AxisCurPos.Pos_z2
+            };
+
+            int axisIndex = m_StackInfo[groupIndex].axisSelect[col] - 1;
+            if (axisIndex < 0 || axisIndex > 5) {
+                qDebug() << "onRefreshClicked, Invalid axisIndex: " << axisIndex;
+                return;
+            }
+
+            QString newValue = QString::number(axisPos.at(axisIndex) / 100.0, 'f', 2);
+            QString oldValue = edit->text();
+
+            if (newValue == oldValue) return;
+
+            edit->setText(newValue);
+
+            // 触发对应保存参数的槽
+            emit edit->returnPressed();
+    };
+
+
+    int curRow = ui->tableStack->currentRow();
+    int curCol = ui->tableStack->currentColumn();
+
+    if (curRow < 0 || curCol < 0) return;
+
+    // 选中的不是和位置相关的控件所在行
+    if (!positionRows.contains(curRow)) return;
+
+    // 按下表头选中整行
+    QWidget *focusedWidget = QApplication::focusWidget();
+    auto curWidget = ui->tableStack->cellWidget(curRow, curCol);
+    if (pressedRow != -1 && pressedRow == curRow && focusedWidget != curWidget)
+    {
+        const int columnCount = 3;
+        for (int col = 0; col < columnCount; ++col)
+        {
+            updateCellEdit(curRow, col);
+        }
+    }
+    else
+    {
+        updateCellEdit(curRow, curCol);
+    }
+
+
+//    QWidget *focusedWidget = QApplication::focusWidget();
+
+//    if (focusedWidget) {
+//        auto *focusedEdit = qobject_cast<NumberEdit *>(focusedWidget);
+//        if (focusedEdit) {
+
+////            focusedEdit->setFocus();
+//        }
+    //    }
+}
+
+void StackEdit::onRefreshNormalStackClicked(int colIndex)
+{
+    if (colIndex < 0 || colIndex > 2)
+    {
+        qDebug() << "onRefreshNormalStackClicked, Invalid index: " << colIndex;
+        return;
+    }
+
+    int axisIndex = m_StackInfo[groupIndex].axisSelect[colIndex] - 1;
+    if (axisIndex < 0 || axisIndex > 5)
+    {
+        qDebug() << "onRefreshNormalStackClicked, Invalid axisIndex: " << axisIndex;
+        return;
+    }
+    const std::vector<int> axisPos = {
+        m_AxisCurPos.Pos_x, m_AxisCurPos.Pos_y, m_AxisCurPos.Pos_z,
+        m_AxisCurPos.Pos_c, m_AxisCurPos.Pos_y2, m_AxisCurPos.Pos_z2
+    };
+
+    QString newText = QString::number(axisPos.at(axisIndex) / 100.0, 'f', 2);
+    QString oldText = startPosANormal[colIndex]->text();
+    if (oldText != newText)
+    {
+        startPosANormal[colIndex]->setText(newText);
+
+        emit startPosANormal[colIndex]->returnPressed();
     }
 }
 

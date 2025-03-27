@@ -22,7 +22,7 @@ public:
 
 public:
     explicit ClearDialog(QWidget *parent = nullptr);
-    explicit ClearDialog(ClearMode mode, QWidget *parent = nullptr);
+//    explicit ClearDialog(ClearMode mode, QWidget *parent = nullptr);
     ~ClearDialog();
 
     void setMode(ClearMode mode);

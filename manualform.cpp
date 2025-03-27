@@ -883,7 +883,7 @@ void ManualForm::updateReferPointsAxisPos()
 void ManualForm::refreshPosTable()
 {
     static const QStringList axisNames = {
-        "X1", "Y1", "Z1", "X2", "Y2", "Z2"
+        "X1", "Y1", "Z1", "C", "Y2", "Z2"
     };
     ui->tableWgtAxisPos->setRowCount(AXIS_TOTAL_NUM);
     ui->tableWgtAxisPos->setVerticalHeaderLabels(axisNames);

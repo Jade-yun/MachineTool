@@ -64,8 +64,6 @@ private:
     StackFollow* moveStack;
     StackFollow* moveFollow;
 
-    void initWidgets();
-
 public:
     void switchStackWay(StackMode mode);
     void showOKandCancelButton(bool isVisible);
@@ -83,9 +81,11 @@ public:
     ~StackEdit();
 
 private:
+    void initWidgets();
     void loadAndPlayGif(const QString& path);
     void logicSigsSlots();
     void saveInfoConnections();
+    void setupRefreshConnections();
 
 protected:
     void changeEvent(QEvent *e) override;
@@ -97,12 +97,19 @@ private:
     QMovie *movie;
 private:
     int groupIndex; // 堆叠组号 0-7
+    int pressedRow; // 堆叠 table header 被按下的行
 signals:
     void closeStackEditDialogSignal(); // 定义关闭对话框的信号
     void stackParRefreshSignal();
     void StackFollowRefreshSignal(); //移至堆叠点/跟随点界面参数刷新信号
 private slots:
     void on_coboxStackOrder_currentIndexChanged(int index);
+    void onRefreshClicked(); // 三点/四点式下的刷新位置槽函数
+    /**
+     * @brief 普通模式下刷新光标所在输入控件的位置
+     * @param colIndex 指定的列编号（范围：0-2），用于标识普通模式下的三列之一
+     */
+    void onRefreshNormalStackClicked(int colIndex);
 };
 
 class StackFollow : public QDialog {

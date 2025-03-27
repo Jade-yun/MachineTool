@@ -38,10 +38,13 @@ AutoForm::AutoForm(QWidget *parent) :
 
     // init some members;
     stackSet = new StackSetDialog(this);
-    clearDialog = new ClearDialog(this->parentWidget());
+    clearDialog = new ClearDialog;
     clearDialog->hide();
+    productHisDlg = new ProductHistoryDialog(this);
+
     // 初始化关闭 framGlobalSpeed
     ui->frameGlobalSpeed->close();
+
 
     // 代码完善 framGlobalSpeed 弹窗小界面
     StackSpeedFloatPoP= new QTableWidget(ui->frameGlobalSpeed);
@@ -274,15 +277,16 @@ AutoForm::AutoForm(QWidget *parent) :
         SetAutoRunParIcon(2);
     });
 
+    // 参考点编辑
     connect(action5, &QAction::triggered, this, &AutoForm::showReferPointDialog);
 
     connect(action6, &QAction::triggered, this, [=]() {
 //        qDebug() << "自动修正位置 ";
-        AutoCorrectPosDialog dialog(this) ;
-        if (dialog.exec() == QDialog::Accepted)
-        {
+//        AutoCorrectPosDialog dialog(this) ;
+//        if (dialog.exec() == QDialog::Accepted)
+//        {
 
-        }
+//        }
     });
 
 /**********************************************************************/
@@ -349,7 +353,10 @@ AutoForm::AutoForm(QWidget *parent) :
         }
     });
 /**********************************************************************/
+    // 历史信息
+    connect(ui->btnHistoryInfo, &QPushButton::clicked, productHisDlg, &ProductHistoryDialog::show);
 
+    // 清零
     connect(ui->btnClear, &QPushButton::clicked, [=](){
         int index = ui->stkWgtState->currentIndex();
 
@@ -425,6 +432,8 @@ AutoForm::AutoForm(QWidget *parent) :
 AutoForm::~AutoForm()
 {
     delete ui;
+
+    delete clearDialog;
 }
 
 //更新速度堆叠弹窗界面显示

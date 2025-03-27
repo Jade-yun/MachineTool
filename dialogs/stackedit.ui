@@ -226,8 +226,11 @@
      <height>410</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page3Or4PointMode">
     <widget class="QTableWidget" name="tableStack">

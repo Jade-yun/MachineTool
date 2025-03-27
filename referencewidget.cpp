@@ -148,7 +148,7 @@ void ReferenceWidget::init()
     tableReference->setFrameShape(QFrame::NoFrame);
     tableReference->setFrameShadow(QFrame::Raised);
     tableReference->setMaximumHeight(40 * 3);
-    tableReference->setMinimumWidth(760);
+    tableReference->setMinimumWidth(750);
     tableReference->setColumnCount(8);
     tableReference->verticalHeader()->setVisible(false);
     tableReference->horizontalHeader()->setVisible(false);
