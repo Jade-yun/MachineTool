@@ -10,8 +10,8 @@
 
 NumberEdit::NumberEdit(QWidget *parent)
     : QLineEdit(parent),
-      minValue(std::numeric_limits<double>::lowest()),
-      maxValue(std::numeric_limits<double>::max()),
+      minValue(std::numeric_limits<int>::lowest()),
+      maxValue(std::numeric_limits<int>::max()),
       value(0.0),
       previousValue(0.0),
       decimalPlaces(2)
@@ -58,10 +58,10 @@ double NumberEdit::getMaxValue() const
     return maxValue;
 }
 
-double NumberEdit::getValue() const
-{
-    return value;
-}
+//double NumberEdit::getValue() const
+//{
+//    return value;
+//}
 
 QString NumberEdit::formatInput(const QString& inputText) const
 {

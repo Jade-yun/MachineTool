@@ -17,7 +17,7 @@ public:
     int getDecimalPlaces() const;
     double getMinValue() const;
     double getMaxValue() const;
-    double getValue() const;
+//    double getValue() const;
 
     QString formatInput(const QString& inputText) const;
 

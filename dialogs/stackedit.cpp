@@ -44,18 +44,6 @@ void StackEdit::initWidgets()
         speedDischage[i] = new NumberEdit(this);
         startPosDischage[i] = new NumberEdit(this);
 
-        speed[i]->setDecimalPlaces(0);
-        pointNum[i]->setDecimalPlaces(0);
-        startPosA[i]->setDecimalPlaces(2);
-        endPosB_X[i]->setDecimalPlaces(2);
-        endPosC_Y[i]->setDecimalPlaces(2);
-        posD[i]->setDecimalPlaces(2);
-        speedDischage[i]->setDecimalPlaces(0);
-        startPosDischage[i]->setDecimalPlaces(2);
-
-        speed[i]->setInputRange(0, 100);
-        speedDischage[i]->setInputRange(0, 100);
-
         tableWidget->setCellWidget(0, i, axisSelect[i]);
         tableWidget->setCellWidget(1, i, speed[i]);
         tableWidget->setCellWidget(2, i, pointNum[i]);
@@ -113,25 +101,58 @@ void StackEdit::initWidgets()
     };
     tableWidget->setHorizontalHeaderLabels(horizontalHeaderLabels);
 
-    auto setEditPrecision_0 = [&](const QVector<NumberEdit*>& edits){
-        for (NumberEdit* edit : edits)
-        {
-            edit->setDecimalPlaces(0);
-        }
-    };
-    auto setEditPrecision_2 = [&](const QVector<NumberEdit*>& edits){
-        for (NumberEdit* edit : edits)
-        {
-            edit->setDecimalPlaces(2);
-        }
-    };
 
-    setEditPrecision_0({ui->editStackNum0, ui->editStackNum1, ui->editStackNum2,
-                        ui->editStackSpeed0, ui->editStackSpeed1, ui->editStackSpeed2,
-                        ui->editStackSpeedRotateBin, ui->editStackNumRotateBin});
-    setEditPrecision_2({ui->editStart0, ui->editStart1, ui->editStart2,
-                        ui->editIntervalDis0, ui->editIntervalDis1, ui->editIntervalDis2, ui->editIntervalDis,
-                        ui->editOffset0, ui->editOffset1, ui->editOffset2});
+    /*****************************************************************/
+    // 设置编辑输入框的精度和范围
+    for (int i = 0; i < 3; i++)
+    {
+        speed[i]->setDecimalPlaces(0);
+        pointNum[i]->setDecimalPlaces(0);
+        startPosA[i]->setDecimalPlaces(2);
+        endPosB_X[i]->setDecimalPlaces(2);
+        endPosC_Y[i]->setDecimalPlaces(2);
+        posD[i]->setDecimalPlaces(2);
+        speedDischage[i]->setDecimalPlaces(0);
+        startPosDischage[i]->setDecimalPlaces(2);
+
+        speed[i]->setInputRange(1, 100);
+        pointNum[i]->setInputRange(0, 100);
+        speedDischage[i]->setInputRange(1, 100);
+
+        startPosA[i]->setInputRange(-10000.00, 10000.00);
+        endPosB_X[i]->setInputRange(-10000.00, 10000.00);
+        endPosC_Y[i]->setInputRange(-10000.00, 10000.00);
+        posD[i]->setInputRange(-10000.00, 10000.00);
+        startPosDischage[i]->setInputRange(-10000.00, 10000.00);
+
+        startPosANormal[i]->setDecimalPlaces(2);
+        intervalDis[i]->setDecimalPlaces(2);
+        speedNormal[i]->setDecimalPlaces(0);
+        pointNumNormal[i]->setDecimalPlaces(0);
+        offset[i]->setDecimalPlaces(2);
+
+        startPosANormal[i]->setInputRange(-10000.00, 10000.00);
+        intervalDis[i]->setInputRange(-10000.00, 10000.00);
+        speedNormal[i]->setInputRange(1, 100);
+        pointNumNormal[i]->setInputRange(0, 100);
+        offset[i]->setInputRange(-10000.00, 10000.00);
+    }
+    // 三点/四点式 Z轴间距
+    ui->editIntervalDis->setDecimalPlaces(2);
+    ui->editIntervalDis->setInputRange(-10000.00, 10000.00);
+
+    // 旋转料仓编辑输入框
+    ui->editStartRotateBin->setInputRange(-10000.00, 10000.00);
+    ui->editIntervalDisRotateBin->setDecimalPlaces(2);
+    ui->editIntervalDisRotateBin->setInputRange(-10000.00, 10000.00);
+    ui->editStackSpeedRotateBin->setDecimalPlaces(0);
+    ui->editStackSpeedRotateBin->setInputRange(1, 100);
+    ui->editStackNumRotateBin->setDecimalPlaces(0);
+    ui->editStackNumRotateBin->setInputRange(0, 100);
+    ui->editOffsetRotateBin->setDecimalPlaces(2);
+    ui->editOffsetRotateBin->setInputRange(-10000.00, 10000.00);
+
+    /****************************************************************/
 
     for (auto cobox : findChildren<QComboBox*>())
     {

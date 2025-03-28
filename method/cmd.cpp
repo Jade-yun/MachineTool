@@ -6,6 +6,7 @@ cmd::cmd()
 
 }
 
+TriMode curMode = TriMode::STOP; // 三档开关当前模式
 NeedSaveSettingPar M_SaveSetPar;
 
 std::vector<QString> keyFunDesription;

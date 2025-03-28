@@ -35,14 +35,14 @@ class StackEdit : public QWidget
 private:
     // 三点式/四点式 模式界面对应的控件
     QComboBox* axisSelect[3];
-    NumberEdit* speed[3];
-    NumberEdit* pointNum[3]; // 和个数等价
-    NumberEdit* startPosA[3]; // 和起始(mm)等价
-    NumberEdit* endPosB_X[3];
-    NumberEdit* endPosC_Y[3];
-    NumberEdit* posD[3];
-    NumberEdit* speedDischage[3];
-    NumberEdit* startPosDischage[3];
+    NumberEdit* speed[3]; // 速度
+    NumberEdit* pointNum[3]; // 点数 和个数等价
+    NumberEdit* startPosA[3]; // 起点（A） 和起始(mm)等价
+    NumberEdit* endPosB_X[3]; // B-X方向终点
+    NumberEdit* endPosC_Y[3]; // C-Y方向终点
+    NumberEdit* posD[3]; // D点坐标
+    NumberEdit* speedDischage[3]; // 放料速度
+    NumberEdit* startPosDischage[3]; // 放料起始点
 
     // 0. 轴选择  共用
     // 1. startPosA 起始  共用

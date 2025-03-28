@@ -30,6 +30,8 @@ ReferenceWidget::ReferenceWidget(QWidget *parent)
             selectedReferPoint = btn;
             QString name = it->name;
             textReferPointName->setText(name);
+
+            refreshPosTable();
         }
     });
 

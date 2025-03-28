@@ -10,9 +10,6 @@
     <height>581</height>
    </rect>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <widget class="QTableWidget" name="tableWgtTeach">
    <property name="geometry">
     <rect>
@@ -575,7 +572,7 @@
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -590,9 +587,6 @@
     <bool>false</bool>
    </property>
    <widget class="QWidget" name="tabMainPro">
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
     <attribute name="title">
      <string>主程序</string>
     </attribute>
@@ -1771,7 +1765,7 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="Stack_Edit_pageX1">
         <widget class="QGroupBox" name="groupBox_5">
@@ -6756,7 +6750,7 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="Var_Var_page">
         <widget class="QGroupBox" name="groupBox_3">
@@ -9700,7 +9694,7 @@
         </font>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <property name="iconSize">
         <size>
@@ -12059,7 +12053,7 @@ QGroupBox::title { subcontrol-origin: margin;
       </rect>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">
@@ -12483,7 +12477,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>4</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">

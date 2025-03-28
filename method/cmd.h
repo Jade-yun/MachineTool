@@ -40,6 +40,8 @@ enum class TriMode : unsigned char {
     MANUAL,
     AUTO
 };
+extern TriMode curMode;
+
 #define AXIS_MIN_POSITION     				-9000000    //轴运动的最小坐标
 #define AXIS_MAX_POSITION     				9000000    	//轴运动的最大坐标
 

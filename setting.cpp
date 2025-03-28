@@ -337,7 +337,11 @@ void Setting::handleLoginModeChanged(LoginMode mode)
     }
 
     currentLoginState = (int)mode;
-    updateTabVisibility();
+
+    if (curMode != TriMode::AUTO)
+    {
+        updateTabVisibility();
+    }
 
 }
 
@@ -345,18 +349,68 @@ void Setting::handleLoginModeChanged(LoginMode mode)
 // to initial all variables in this function
 void Setting::init()
 {
-    for (NumberEdit* edit : ui->tabWidgetProduct->findChildren<NumberEdit*>())
+    // 卡爪安全
+    for (NumberEdit* edit : ui->tabWgtClawSafety->findChildren<NumberEdit*>())
+    {
+        edit->setDecimalPlaces(2);
+        edit->setInputRange(-10000.00, 10000.00);
+    }
+    // 联机安全
+    {
+        std::vector<NumberEdit*> edits_0 = {
+            ui->editPulseTime, ui->editPulseTime_2, ui->editPulseTime_3, ui->editPulseTime_4
+        };
+
+        for (auto edit : edits_0)
+        {
+            edit->setDecimalPlaces(2);
+            edit->setInputRange(0.00, 655.35);
+        }
+        std::vector<NumberEdit*> edits_2 = {
+            ui->editA1A2MinPos, ui->editA1A2MinPos_2, ui->editA1A2MinPos_3, ui->editA1A2MinPos_4,
+            ui->editA1A2MaxPos, ui->editA1A2MaxPos_2, ui->editA1A2MaxPos_3, ui->editA1A2MaxPos_4
+        };
+        for (auto edit : edits_2)
+        {
+            edit->setDecimalPlaces(2);
+            edit->setInputRange(-10000.00, 10000.00);
+        }
+    }
+
+    // 产品设置
+    for (NumberEdit* edit : ui->tabProduct->findChildren<NumberEdit*>())
     {
         edit->setDecimalPlaces(1); // 精度0.1
+        edit->setInputRange(0.0, 6553.5);
     }
-//    ui->editAutoCycleTime->setDecimalPlaces(0);
+    ui->editPulseOutputTime->setDecimalPlaces(2);
+    ui->editPulseOutputTime->setInputRange(0.00, 655.35);
+    // 高级
+    ui->editLubricationOpenTime->setDecimalPlaces(1);
+    ui->editLubricationOpenTime->setInputRange(0.0, 6553.5);
+    ui->editLubricationCloseTime->setDecimalPlaces(1);
+    ui->editLubricationCloseTime->setInputRange(0.0, 6553.5);
+    ui->editLubricationDelay->setDecimalPlaces(1);
+    ui->editLubricationDelay->setInputRange(0.0, 6553.5);
     ui->editLubricationIntervalCycle->setDecimalPlaces(0);
+    ui->editLubricationIntervalCycle->setInputRange(0, 65535);
 
+    /***********************************************************************/
     // 系统设置 所有需要调用小键盘的都为整数
     for (NumberEdit* edit : ui->tabWidgetSystem->findChildren<NumberEdit*>())
     {
         edit->setDecimalPlaces(0);
     }
+
+    // 用户设置
+    ui->editBrightTime->setInputRange(30, 65535);
+    // set time input range
+    ui->editYear->setInputRange(1970, 2038);
+    ui->editMonth->setInputRange(1, 12);
+    ui->editDay->setInputRange(1, 31);
+    ui->editHour->setInputRange(0, 23);
+    ui->editMinute->setInputRange(0, 59);
+    ui->editSecond->setInputRange(0, 59);
     // 密码设置
     for (NumberEdit* edit : ui->tabPasswdSet->findChildren<NumberEdit*>())
     {
@@ -368,50 +422,142 @@ void Setting::init()
         edit->setInputRange(0, 255);
     }
 
-    // 伺服安全点所有编辑框精度0.01
+    /*****************************************************************/
+    // 轴参数
+
+    /*******************************************************************/
+    // 轴参数
+    {
+        // 每转脉冲数
+        const std::vector<NumberEdit*> editsCirclePulseNum = {
+            ui->editCirclePulseNumX1, ui->editCirclePulseNumY1, ui->editCirclePulseNumZ1,
+            ui->editCirclePulseNumC, ui->editCirclePulseNumY2, ui->editCirclePulseNumZ2
+        };
+        for (auto edit : editsCirclePulseNum)
+        {
+            edit->setDecimalPlaces(0);
+            edit->setInputRange(1, 100000);
+        }
+        // 最大坐标 最小坐标
+        // 每转距离
+        {
+            const std::vector<NumberEdit*> edits = {
+                ui->editAxisMinPosX1, ui->editAxisMinPosY1, ui->editAxisMinPosZ1,
+                ui->editAxisMinPosC, ui->editAxisMinPosY2, ui->editAxisMinPosZ2,
+
+                ui->editAxisMaxPosX1, ui->editAxisMaxPosY1, ui->editAxisMaxPosZ1,
+                ui->editAxisMaxPosC, ui->editAxisMaxPosY2, ui->editAxisMaxPosZ2,
+
+                ui->editCircleDistanceX1, ui->editCircleDistanceY1, ui->editCircleDistanceZ1,
+                ui->editCircleDistanceC, ui->editCircleDistanceY2, ui->editCircleDistanceZ2
+            };
+            for (auto edit : edits)
+            {
+                edit->setDecimalPlaces(2);
+                edit->setInputRange(-10000.00, 10000.00);
+            }
+        }
+
+
+        // 最大速度
+        const std::vector<NumberEdit*> editsMaxSpeed = {
+
+            ui->editMaxSpeedX1, ui->editMaxSpeedY1, ui->editMaxSpeedZ1,
+            ui->editMaxSpeedC, ui->editMaxSpeedY2, ui->editMaxSpeedZ2,
+
+        };
+        for (auto edit : editsMaxSpeed)
+        {
+            edit->setDecimalPlaces(0);
+            edit->setInputRange(1, 10000);
+        }
+
+
+    }
+
+    // 轴速度
+    {
+        // 加速时间 减速时间
+        {
+           const std::vector<NumberEdit*> edits = {
+                ui->editAccTimeX1, ui->editAccTimeY1, ui->editAccTimeZ1,
+                ui->editAccTimeC, ui->editAccTimeY2, ui->editAccTimeZ2,
+
+                ui->editDecTimeX1, ui->editDecTimeY1, ui->editDecTimeZ1,
+                ui->editDecTimeC, ui->editDecTimeY2, ui->editDecTimeZ2
+            };
+            for (auto edit : edits)
+            {
+                edit->setDecimalPlaces(2);
+                edit->setInputRange(0.01, 10);
+            }
+        }
+        // 加加速 减减速
+        {
+            const std::vector<NumberEdit*> edits = {
+                ui->editAccAccX1, ui->editAccAccY1, ui->editAccAccZ1, ui->editAccAccC, ui->editAccAccY2, ui->editAccAccZ2,
+                ui->editDecDecX1, ui->editDecDecY1, ui->editDecDecZ1, ui->editDecDecC, ui->editDecDecY2, ui->editDecDecZ2
+            };
+            for (auto edit : edits)
+            {
+                edit->setDecimalPlaces(0);
+                edit->setInputRange(1, 2000);
+            }
+        }
+
+    }
+
+    /*****************************************************************/
+    // 伺服安全点 所有编辑框精度0.01
     for (auto edit : ui->tabWgtServoSafePoint->findChildren<NumberEdit*>())
     {
         edit->setDecimalPlaces(2);
+        edit->setInputRange(-10000.00, 10000.00);
     }
-    // 旋转料仓工位数字 1-255
-    ui->editRotateSiloPlaceNum->setDecimalPlaces(0);
-    ui->editRotateSiloPlaceNum->setInputRange(1, 255);
-    // 机器参数 轴参数 单圈脉冲数
-    ui->editCirclePulseNumX1->setDecimalPlaces(0);
-    ui->editCirclePulseNumY1->setDecimalPlaces(0);
-    ui->editCirclePulseNumZ1->setDecimalPlaces(0);
-    ui->editCirclePulseNumY2->setDecimalPlaces(0);
-    ui->editCirclePulseNumZ2->setDecimalPlaces(0);
-    const std::vector<NumberEdit*> editsInteger = {
-        ui->editCirclePulseNumX1,ui->editCirclePulseNumY1,ui->editCirclePulseNumZ1,
-        ui->editCirclePulseNumC, ui->editCirclePulseNumY2,ui->editCirclePulseNumZ2,
-        ui->editAccAccX1, ui->editAccAccY1, ui->editAccAccZ1, ui->editAccAccC, ui->editAccAccY2, ui->editAccAccZ2,
-        ui->editDecDecX1, ui->editDecDecY1, ui->editDecDecZ1, ui->editDecDecC, ui->editDecDecY2, ui->editDecDecZ2,
-        ui->editMaxSpeedX1, ui->editMaxSpeedY1, ui->editMaxSpeedZ1, ui->editMaxSpeedC, ui->editMaxSpeedY2, ui->editMaxSpeedZ2,
-        ui->editFindOriginSpeedX1, ui->editFindOriginSpeedY1, ui->editFindOriginSpeedZ1, ui->editFindOriginSpeedC,
-        ui->editFindOriginSpeedY2, ui->editFindOriginSpeedZ2,
-        ui->editLeaveOriginSpeedX1, ui->editLeaveOriginSpeedY1, ui->editLeaveOriginSpeedZ1, ui->editLeaveOriginSpeedC,
-        ui->editLeaveOriginSpeedY2, ui->editLeaveOriginSpeedZ2
-    };
-    for (const auto& edit : editsInteger)
+
+    /*******************************************************************/
+    // 机器参数 原点
     {
-        edit->setDecimalPlaces(0);
+        // 找原点速度 离开原点速度
+        const std::vector<NumberEdit*> edits_0 = {
+            ui->editFindOriginSpeedX1, ui->editFindOriginSpeedY1, ui->editFindOriginSpeedZ1,
+            ui->editFindOriginSpeedC, ui->editFindOriginSpeedY2, ui->editFindOriginSpeedZ2,
+
+            ui->editLeaveOriginSpeedX1, ui->editLeaveOriginSpeedY1, ui->editLeaveOriginSpeedZ1,
+            ui->editLeaveOriginSpeedC, ui->editLeaveOriginSpeedY2, ui->editLeaveOriginSpeedZ2,
+        };
+        for (auto edit : edits_0)
+        {
+            edit->setDecimalPlaces(0);
+            edit->setInputRange(1, 1000);
+        }
+
+        // 原点偏移
+        const std::vector<NumberEdit*> edits_2 = {
+            ui->editOriginOffsetX1, ui->editOriginOffsetY1, ui->editOriginOffsetZ1,
+            ui->editOriginOffsetC, ui->editOriginOffsetY2, ui->editOriginOffsetZ2
+        };
+        for(auto edit : edits_2)
+        {
+            edit->setDecimalPlaces(2);
+            edit->setInputRange(-10000.00, 10000.00);
+        }
     }
 
     // 机器参数 通信： 存放组号-参数索引-参数子索引-参数数值
     ui->editStorageGroup->setDecimalPlaces(0);
-    ui->editStorageGroup->setInputRange(0, 100);
+    ui->editStorageGroup->setInputRange(1, 100);
     ui->editParaIndex->setDecimalPlaces(0);
+    ui->editParaIndex->setInputRange(0, 65535);
     ui->editParaSunIndex->setDecimalPlaces(0);
+    ui->editParaSunIndex->setInputRange(0, 255);
     ui->editParaValue->setDecimalPlaces(0);
+    ui->editParaValue->setInputRange(-100000000, 100000000);
 
-    // set time input range
-    ui->editYear->setInputRange(1970, 2038);
-    ui->editMonth->setInputRange(1, 12);
-    ui->editDay->setInputRange(1, 31);
-    ui->editHour->setInputRange(0, 23);
-    ui->editMinute->setInputRange(0, 59);
-    ui->editSecond->setInputRange(0, 59);
+    /*******************************************************************/
+    // 堆叠设置 旋转料仓工位数字 1-255
+    ui->editRotateSiloPlaceNum->setDecimalPlaces(0);
+    ui->editRotateSiloPlaceNum->setInputRange(1, 255);
 
     // font
     ui->coboxFonts->setCurrentIndex(m_SystemSet.typeFace);
@@ -1701,7 +1847,6 @@ void Setting::setupSystemSetting()
     });
 
     // User Settings
-    ui->editBrightTime->setInputRange(30, 65535);
     connect(ui->editBrightTime, &NumberEdit::returnPressed, [=](){
         int second = ui->editBrightTime->text().toUInt();
         BackLighter::instance()->setScreenOffTime(second);

@@ -177,20 +177,18 @@ void NumKeyboard::setCurrentEditObj(QObject *edit)
             validator = nullptr;
         }
 
-        QVariant minValue = INT_MIN;
-        QVariant maxValue = INT_MAX;
         NumberEdit* numberEdit = qobject_cast<NumberEdit*>(editObj);
         if (numberEdit)
         {
 
             int decimalPlaces = numberEdit->getDecimalPlaces();
-            minValue = numberEdit->getMinValue();
-            maxValue = numberEdit->getMaxValue();
+            auto minValue = numberEdit->getMinValue();
+            auto maxValue = numberEdit->getMaxValue();
 
             if (decimalPlaces == 0)
             {
                 validator = new QIntValidator(this);
-                validator = new QIntValidator(minValue.toInt(), maxValue.toInt(), this);
+                validator = new QIntValidator(minValue, maxValue, this);
             }
             else
             {

@@ -1235,7 +1235,7 @@ void Teach::ClearAxisOrderReferHandle()
             auto axisIndex = AxisMove->axis;
             m_RefPoint[AxisMove->referPointNum-1].pos[axisIndex] = 0;
             ::writeReferenceInfo();
-            emit refreshPosTableSignal();
+//            emit refreshPosTableSignal();
         }
     }
 }
@@ -3494,7 +3494,7 @@ void Teach::Edit_AxisMove_Save_handle(void)
                 }
             }
             ::writeReferenceInfo();
-            emit refreshPosTableSignal();
+//            emit refreshPosTableSignal();
         }
         AxisMove->referPointNum = refIndex;
         m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_AxisMove_delay->text().toDouble()*100;
@@ -4842,11 +4842,6 @@ void Teach::Stack_Dialog_show()
         stack_Dialog->show();
         emit StackEditBaseInit_signal();
     }
-    ui->Stack_Edit_btnAxisX1->setStyleSheet("border-style:outset;\
-                                            background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/\
-                                            border-width:1px;\
-                                            border-color:#0055ff;\
-                                            border-radius:5px;");
 }
 /*************************************************************************
 **  函数名：  Stack_Edit_Handle(uint8_t AxisIndex)
@@ -5990,73 +5985,16 @@ void Teach::onCheckBoxToggled(QCheckBox *checkbox, bool checked)
 void Teach::on_Stack_Edit_btnAxisX1_clicked()
 {
     Stack_Edit_Handle(STACK_X_AXIS);
-    ui->Stack_Edit_btnAxisX1->setStyleSheet("border-style:outset; /*边框风格*/\
-                                            background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#0055ff; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
-    ui->Stack_Edit_btnAxisY1->setStyleSheet("font-family: 'SimSun';\
-                                            font-size: 22px; \
-                                            background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);\
-                                            border-style:solid; /*边框风格*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#7A77AC; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
-    ui->Stack_Edit_btnAxisZ1->setStyleSheet("font-family: 'SimSun';\
-                                            font-size: 22px; \
-                                            background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);\
-                                            border-style:solid; /*边框风格*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#7A77AC; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
 }
 
 void Teach::on_Stack_Edit_btnAxisZ1_clicked()
 {
     Stack_Edit_Handle(STACK_Z_AXIS);
-    ui->Stack_Edit_btnAxisZ1->setStyleSheet("border-style:outset; /*边框风格*/\
-                                            background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#0055ff; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
-    ui->Stack_Edit_btnAxisY1->setStyleSheet("font-family: 'SimSun';\
-                                            font-size: 22px; \
-                                            background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);\
-                                            border-style:solid; /*边框风格*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#7A77AC; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
-    ui->Stack_Edit_btnAxisX1->setStyleSheet("font-family: 'SimSun';\
-                                            font-size: 22px; \
-                                            background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);\
-                                            border-style:solid; /*边框风格*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#7A77AC; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
 }
 
 void Teach::on_Stack_Edit_btnAxisY1_clicked()
 {
     Stack_Edit_Handle(STACK_Y_AXIS);
-    ui->Stack_Edit_btnAxisY1->setStyleSheet("border-style:outset;\
-                                            background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);/*背景色*/\
-                                            border-width:1px;\
-                                            border-color:#0055ff;\
-                                            border-radius:5px;");
-    ui->Stack_Edit_btnAxisX1->setStyleSheet("font-family: 'SimSun';\
-                                            font-size: 22px; \
-                                            background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);\
-                                            border-style:solid; /*边框风格*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#7A77AC; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
-    ui->Stack_Edit_btnAxisZ1->setStyleSheet("font-family: 'SimSun';\
-                                            font-size: 22px; \
-                                            background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);\
-                                            border-style:solid; /*边框风格*/\
-                                            border-width:1px;/*边框宽度*/\
-                                            border-color:#7A77AC; /*边框颜色*/\
-                                            border-radius:5px; /*边框倒角*/");
 }
 //轴插入指令坐标刷新按钮处理
 void Teach::on_btn_General_Refresh_clicked()

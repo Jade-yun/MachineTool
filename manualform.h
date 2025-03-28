@@ -67,8 +67,6 @@ private slots:
     void on_btnImportPictureReference_clicked();
     void on_btnSaveReference_clicked();
 
-    void on_cb_axisActionAxis_currentIndexChanged(int index);
-    void onTabChanged(int index);
     void onSaveKeyDef();
     void onCheckSavedGuide();
     void onCheckSavedReferPointPara();   
@@ -76,7 +74,7 @@ private slots:
 
 public slots:
     void InitAdjustMachine(uint8_t AxisIndex);//初始化调机界面参数
-    void refreshPosTable();
+
 private:
     void initVar();
     void updateReferPointsTable();
@@ -92,17 +90,23 @@ private:
     void updateReferPointsList();
     void setupReferPointConnections(DraggableButton* btn);
     void onReferPointButtonPressed(DraggableButton* btn);
+    /**
+     * @brief 根据参考点全局变量的轴位置更新局部变量 referencePoints 中轴位置
+     */
     void updateReferPointsAxisPos();
+    /**
+     * @brief 刷新参考点轴位置表格显示
+     */
+    void refreshPosTable();
+    void saveManualAxisActionPara();
 
     void setupReserveWidgets();
     void setupClawAndMachineConnections();
-//    void updateGroupBoxVisibility(const std::vector<std::pair<std::vector<QPushButton *>, QGroupBox *> > &buttonGroups);
-    void checkAndUpdatePortButtonState(); // 监测 卡爪/机床的 状态并更新
+    void setupAxisActionConnections();
 
     void initControls();            //pxc 初始化控件并对控件进行赋值
 
 public:
-    const QList<ReferPointPara>& getRerferPoints() const;
     void handleLoginModeChanged(LoginMode mode);
     void reloadReferPoint();
 

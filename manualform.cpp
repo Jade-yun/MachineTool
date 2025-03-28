@@ -44,91 +44,15 @@ ManualForm::ManualForm(QWidget *parent) :
     }
 
     ui->AdjustMachineInternalPulse->setDecimalPlaces(0);
-    ui->editAxisActionSpeed->setDecimalPlaces(0);
+    ui->editAxisActionSpeed->setDecimalPlaces(1);
+    ui->editAxisActionSpeed->setInputRange(0.1, 100.0);
     ui->editPositionAdd->setDecimalPlaces(2);
+    ui->editPositionAdd->setInputRange(0.01, 1000.00);
     ui->editPositionSub->setDecimalPlaces(2);
+    ui->editPositionSub->setInputRange(0.01, 1000.00);
 
-    connect(ui->editAxisActionSpeed,&NumberEdit::returnPressed,[=](){
-        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
-        if(ui->cb_axisActionAxis->count()>1)
-        {
-            for(int i=0;i<AXIS_TOTAL_NUM;i++)
-            {
-                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
-                {
-                    AxisIndex = i;
-                }
-            }
-        }
-        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
-        m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
-        m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
-        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
-        setManualAxis(m_manualAxis);
-    });
-    connect(ui->editPositionAdd,&NumberEdit::returnPressed,[=](){
-        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
-        if(ui->cb_axisActionAxis->count()>1)
-        {
-            for(int i=0;i<AXIS_TOTAL_NUM;i++)
-            {
-                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
-                {
-                    AxisIndex = i;
-                }
-            }
-        }
-        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
-        m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
-        m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
-        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
-        setManualAxis(m_manualAxis);
-    });
-    connect(ui->editPositionSub,&NumberEdit::returnPressed,[=](){
-        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
-        if(ui->cb_axisActionAxis->count()>1)
-        {
-            for(int i=0;i<AXIS_TOTAL_NUM;i++)
-            {
-                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
-                {
-                    AxisIndex = i;
-                }
-            }
-        }
-        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
-        m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
-        m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
-        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
-    });
-    connect(ui->chbZAxisDesend, QOverload<int>::of(&QCheckBox::stateChanged), [=](int){
-        int AxisIndex = ui->cb_axisActionAxis->currentIndex();
-        if(ui->cb_axisActionAxis->count()>1)
-        {
-            for(int i=0;i<AXIS_TOTAL_NUM;i++)
-            {
-                if(ui->cb_axisActionAxis->currentText() == m_NameDefine[1].axisName[i])
-                {
-                    AxisIndex = i;
-                }
-            }
-        }
-        m_manualAxis.axis=AxisIndex;//ui->cb_axisActionAxis->currentIndex();
-        m_manualAxis.speed=(uint16_t)ui->editAxisActionSpeed->text().toUInt();
-        m_manualAxis.pos_pos=(uint32_t)ui->editPositionAdd->text().toDouble() * 100;
-        m_manualAxis.sub_pos=(uint32_t)ui->editPositionSub->text().toDouble() * 100;
-        m_manualAxis.ZDrop=ui->chbZAxisDesend->isChecked();
-    });
+    this->setupAxisActionConnections();
 
-    connect(ui->handPosAdd,&QPushButton::clicked,this,[=](){
-        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,2);
-    });
-    connect(ui->HandPosDown,&QPushButton::clicked,this,[=](){
-        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
-    });
     connect(ui->btnIntoStack, &QPushButton::clicked, this , [=](){
         emit sigShowStackPage();
     });
@@ -156,83 +80,6 @@ ManualForm::ManualForm(QWidget *parent) :
         ui->btnDeleteButtonReference->setVisible(checked);
     });
     /*********************************轴动作********************************************/
-    connect(ui->btnAdjustFunc, &QPushButton::clicked, this, [=](){
-        if(m_RobotOriginState == 0)
-        {//如果未回零点
-            ErrorTipDialog tip(tr("当前未找原点"),nullptr);
-            tip.exec();
-        }
-        else
-        {
-            TipPasswdDialog tip(tr("请输入高级管理员密码"), nullptr);
-            int reply = tip.exec();
-            if (reply == QDialog::Rejected)
-            {
-                return;
-            }
-            else if (reply == QDialog::Accepted)
-            {
-                uint advancePasswd = tip.getPasswd();
-
-                if (advancePasswd == passwd[1])
-                {
-                    ui->stkWgtAdjustMachine->setCurrentIndex(1);
-                    ui->coboxAdjustMachineAxis->clear();
-                    for(int i=0;i<AXIS_TOTAL_NUM;i++)
-                    {
-                        if(m_AxisPar[i].axisType == 1)
-                        {
-                           ui->coboxAdjustMachineAxis->addItem(m_NameDefine[1].axisName[i]);
-                        }
-                    }
-                    InitAdjustMachine(0);
-                }
-            }
-        }
-    });
-    connect(ui->chboxUseAdjustMachine, &QCheckBox::clicked, this, [=](int state){
-        if (!state)
-        {
-            ui->stkWgtAdjustMachine->setCurrentIndex(0);
-            ui->chboxUseAdjustMachine->setChecked(true);
-        }
-    });
-    connect(ui->AdjustMachineSpace,&NumberEdit::returnPressed, this,[=](){//每转距离
-        for(int i=0;i<AXIS_TOTAL_NUM;i++)
-        {
-            if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
-            {
-                m_AxisPar[i].circleDis = (int32_t)(ui->AdjustMachineSpace->text().toDouble()*100);
-                setAxisPar(m_AxisPar[i],i);
-                emit AxisParRefreshSignal(i);
-            }
-        }
-    });
-    connect(ui->AdjustMachineInternalPulse,&NumberEdit::returnPressed, this,[=](){//内部脉冲
-        for(int i=0;i<AXIS_TOTAL_NUM;i++)
-        {
-            if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
-            {
-                m_AxisPar[i].circlePluseNum = (int32_t)(ui->AdjustMachineInternalPulse->text().toInt());
-                setAxisPar(m_AxisPar[i],i);
-                emit AxisParRefreshSignal(i);
-            }
-        }
-    });
-    connect(ui->AdjustMachineForward,&QPushButton::clicked,this,[=](){//电机正转1圈
-        uint16_t AdjustMachineAxisIndex = ui->coboxAdjustMachineAxis->currentIndex();
-        if(AdjustMachineAxisIndex<AXIS_TOTAL_NUM)
-        {
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,AdjustMachineAxisIndex+1,4);
-        }
-    });
-    connect(ui->AdjustMachineReversal,&QPushButton::clicked,this,[=](){//电机反转1圈
-        uint16_t AdjustMachineAxisIndex = ui->coboxAdjustMachineAxis->currentIndex();
-        if(AdjustMachineAxisIndex<AXIS_TOTAL_NUM)
-        {
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,AdjustMachineAxisIndex+1,5);
-        }
-    });
     update_Button_Name_Handel();
 }
 
@@ -283,7 +130,7 @@ void ManualForm::initControls()
     {
         ui->cb_axisActionAxis->setCurrentIndex(m_manualAxis.axis);
     }
-    ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed));
+    ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed/10.0));
     ui->editPositionAdd->setText(QString::number(m_manualAxis.pos_pos/100.0));
     ui->editPositionSub->setText(QString::number(m_manualAxis.sub_pos/100.0));
     ui->chbZAxisDesend->setChecked(m_manualAxis.ZDrop);
@@ -911,6 +758,28 @@ void ManualForm::refreshPosTable()
     }
 }
 
+void ManualForm::saveManualAxisActionPara()
+{
+    int AxisIndex = 0;
+    if(ui->cb_axisActionAxis->count() > 1)
+    {
+        QString selectAxis = ui->cb_axisActionAxis->currentText();
+        for(int i = 0; i < AXIS_TOTAL_NUM; i++)
+        {
+            if(selectAxis == m_NameDefine[1].axisName[i])
+            {
+                AxisIndex = i + 1;
+                break;
+            }
+        }
+    }
+    m_manualAxis.axis = AxisIndex;//ui->cb_axisActionAxis->currentIndex();
+    m_manualAxis.speed = ui->editAxisActionSpeed->text().toDouble() * 10;
+    m_manualAxis.pos_pos = ui->editPositionAdd->text().toFloat() * 100;
+    m_manualAxis.sub_pos = ui->editPositionSub->text().toDouble() * 100;
+    m_manualAxis.ZDrop = ui->chbZAxisDesend->isChecked();
+}
+
 void ManualForm::setupReserveWidgets()
 {
     for (auto vlayout : ui->tabReserve->findChildren<QVBoxLayout*>())
@@ -1246,84 +1115,115 @@ void ManualForm::setupClawAndMachineConnections()
     });
 }
 
-void ManualForm::checkAndUpdatePortButtonState()
+void ManualForm::setupAxisActionConnections()
 {
+    connect(ui->cb_axisActionAxis, QOverload<int>::of(&QComboBox::activated),[=](int){
+        saveManualAxisActionPara();
+        setManualAxis(m_manualAxis);
+    });
+    connect(ui->editAxisActionSpeed,&NumberEdit::returnPressed,[=](){
+        saveManualAxisActionPara();
+        setManualAxis(m_manualAxis);
+    });
+    connect(ui->editPositionAdd,&NumberEdit::returnPressed,[=](){
+        saveManualAxisActionPara();
+        setManualAxis(m_manualAxis);
+    });
+    connect(ui->editPositionSub,&NumberEdit::returnPressed,[=](){
+        saveManualAxisActionPara();
+        setManualAxis(m_manualAxis);
+    });
+    connect(ui->chbZAxisDesend, QOverload<int>::of(&QCheckBox::stateChanged), [=](int){
+        saveManualAxisActionPara();
+        setManualAxis(m_manualAxis);
+    });
 
-    // 卡盘1夹紧
-    if(m_OutPortSta[MACHINE_CHUCK_1_LOOSENED])
-    {
-        setbuttonIcon(ui->btnChuck1Loosen,m_Port_Y[MACHINE_CHUCK_1_CLAMP].modifyName,1);
-    }
-    else
-    {
-        setbuttonIcon(ui->btnChuck1Loosen,m_Port_Y[MACHINE_CHUCK_1_LOOSENED].modifyName,0);
-    }
-    // 自动门1开
-    if(m_OutPortSta[MACHINE_AUTO_DOOR_1_CLOSE])
-    {
-        setbuttonIcon(ui->btnAutoGate1Close,m_Port_Y[MACHINE_AUTO_DOOR_1_OPEN].modifyName,1);
-    }
-    else
-    {
-        setbuttonIcon(ui->btnAutoGate1Close,m_Port_Y[MACHINE_AUTO_DOOR_1_CLOSE].modifyName,0);
-    }
-    // 启动加工1
-    if(m_OutPortSta[MACHINE_START_PROCESS_1])
-    {
-        setbuttonIcon(ui->btnStartProcess1Break,m_Port_Y[MACHINE_START_PROCESS_1].modifyName+tr("通"),1);
-    }
-    else
-    {
-        setbuttonIcon(ui->btnStartProcess1Break,m_Port_Y[MACHINE_START_PROCESS_1].modifyName+tr("断"),0);
-    }
-    // 加工完成1
-    if(m_OutPortSta[MACHINE_SPINDLE_FIXED_POS_1])
-    {
-        setbuttonIcon(ui->btnMainAxisLocate1Break,m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].modifyName+tr("通"),1);
-    }
-    else
-    {
-        setbuttonIcon(ui->btnMainAxisLocate1Break,m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].modifyName+tr("断"),0);
-    }
-    // 主轴旋转1
-    if(m_OutPortSta[MACHINE_SPINDLE_ROTATE_1])
-    {
-        setbuttonIcon(ui->btnControlRotate1Break,m_Port_Y[MACHINE_SPINDLE_ROTATE_1].modifyName+tr("通"),1);
-    }
-    else
-    {
-        setbuttonIcon(ui->btnControlRotate1Break,m_Port_Y[MACHINE_SPINDLE_ROTATE_1].modifyName+tr("断"),0);
-    }
-    // 主轴定位1
-    if(m_OutPortSta[MACHINE_SPINDLE_FIXED_POS_1])
-    {
-        setbuttonIcon(ui->btnMainAxisLocate1Break,m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].modifyName+tr("通"),1);
-    }
-    else
-    {
-        setbuttonIcon(ui->btnMainAxisLocate1Break,m_Port_Y[MACHINE_SPINDLE_FIXED_POS_1].modifyName+tr("断"),0);
-    }
-}
+    connect(ui->handPosAdd,&QPushButton::clicked,this,[=](){
+        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,2);
+    });
+    connect(ui->HandPosDown,&QPushButton::clicked,this,[=](){
+        g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
+    });
 
-//void ManualForm::updateGroupBoxVisibility(const std::vector<std::pair<std::vector<QPushButton *>, QGroupBox *> > &buttonGroups)
-//{
-//    for (const auto& group : buttonGroups) {
-//        bool anyButtonVisible = false;
+    /**********************************************************/
+    // 调机
+    connect(ui->btnAdjustFunc, &QPushButton::clicked, this, [=](){
+        if(m_RobotOriginState == 0)
+        {//如果未回零点
+            ErrorTipDialog tip(tr("当前未找原点"),nullptr);
+            tip.exec();
+        }
+        else
+        {
+            TipPasswdDialog tip(tr("请输入高级管理员密码"), nullptr);
+            int reply = tip.exec();
+            if (reply == QDialog::Rejected)
+            {
+                return;
+            }
+            else if (reply == QDialog::Accepted)
+            {
+                uint advancePasswd = tip.getPasswd();
 
-//        for (auto btn : group.first) {
-//            if (btn->isVisible()) {
-//                anyButtonVisible = true;
-//                break;
-//            }
-//        }
-
-//        group.second->setVisible(anyButtonVisible);
-//    }
-//}
-
-const QList<ReferPointPara> &ManualForm::getRerferPoints() const
-{
-    return referencePoints;
+                if (advancePasswd == passwd[1])
+                {
+                    ui->stkWgtAdjustMachine->setCurrentIndex(1);
+                    ui->coboxAdjustMachineAxis->clear();
+                    for(int i=0;i<AXIS_TOTAL_NUM;i++)
+                    {
+                        if(m_AxisPar[i].axisType == 1)
+                        {
+                           ui->coboxAdjustMachineAxis->addItem(m_NameDefine[1].axisName[i]);
+                        }
+                    }
+                    InitAdjustMachine(0);
+                }
+            }
+        }
+    });
+    connect(ui->chboxUseAdjustMachine, &QCheckBox::clicked, this, [=](int state){
+        if (!state)
+        {
+            ui->stkWgtAdjustMachine->setCurrentIndex(0);
+            ui->chboxUseAdjustMachine->setChecked(true);
+        }
+    });
+    connect(ui->AdjustMachineSpace,&NumberEdit::returnPressed, this,[=](){//每转距离
+        for(int i=0;i<AXIS_TOTAL_NUM;i++)
+        {
+            if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
+            {
+                m_AxisPar[i].circleDis = (int32_t)(ui->AdjustMachineSpace->text().toDouble()*100);
+                setAxisPar(m_AxisPar[i],i);
+                emit AxisParRefreshSignal(i);
+            }
+        }
+    });
+    connect(ui->AdjustMachineInternalPulse,&NumberEdit::returnPressed, this,[=](){//内部脉冲
+        for(int i=0;i<AXIS_TOTAL_NUM;i++)
+        {
+            if(ui->coboxAdjustMachineAxis->currentText() == m_NameDefine[1].axisName[i])
+            {
+                m_AxisPar[i].circlePluseNum = (int32_t)(ui->AdjustMachineInternalPulse->text().toInt());
+                setAxisPar(m_AxisPar[i],i);
+                emit AxisParRefreshSignal(i);
+            }
+        }
+    });
+    connect(ui->AdjustMachineForward,&QPushButton::clicked,this,[=](){//电机正转1圈
+        uint16_t AdjustMachineAxisIndex = ui->coboxAdjustMachineAxis->currentIndex();
+        if(AdjustMachineAxisIndex<AXIS_TOTAL_NUM)
+        {
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,AdjustMachineAxisIndex+1,4);
+        }
+    });
+    connect(ui->AdjustMachineReversal,&QPushButton::clicked,this,[=](){//电机反转1圈
+        uint16_t AdjustMachineAxisIndex = ui->coboxAdjustMachineAxis->currentIndex();
+        if(AdjustMachineAxisIndex<AXIS_TOTAL_NUM)
+        {
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS,AdjustMachineAxisIndex+1,5);
+        }
+    });
 }
 
 void ManualForm::handleLoginModeChanged(LoginMode mode)
@@ -1496,6 +1396,8 @@ bool ManualForm::eventFilter(QObject *watched, QEvent *event)
     {
         if (watched == ui->tabReference) {
 
+            updateReferPointsAxisPos();
+
             if (!referencePoints.isEmpty())
             {
                 const auto& point = referencePoints.at(0);
@@ -1504,8 +1406,6 @@ bool ManualForm::eventFilter(QObject *watched, QEvent *event)
                 selectedButton[1] = point.button;
                 refreshPosTable();
             }
-
-            updateReferPointsAxisPos();
         }
         return true;
     }
@@ -1732,21 +1632,21 @@ void ManualForm::on_btnSaveReference_clicked()
     ui->btnSaveReference->setParaChangedFlag(false);
 }
 
-void ManualForm::onTabChanged(int index)
-{
+//void ManualForm::onTabChanged(int index)
+//{
 
-    static int lastTabIndex = 4;
-    if (lastTabIndex == 0)
-    {
-        onCheckSavedGuide();
-    }
-    else if (lastTabIndex == 4)
-    {
-//        qDebug() << "check if referPoint has been saved";
-        onCheckSavedReferPointPara();
-    }
-    lastTabIndex = index;
-}
+//    static int lastTabIndex = 4;
+//    if (lastTabIndex == 0)
+//    {
+//        onCheckSavedGuide();
+//    }
+//    else if (lastTabIndex == 4)
+//    {
+////        qDebug() << "check if referPoint has been saved";
+//        onCheckSavedReferPointPara();
+//    }
+//    lastTabIndex = index;
+//}
 
 void ManualForm::on_btnImportPictureGuide_clicked()
 {
@@ -1826,10 +1726,6 @@ void ManualForm::on_btnImportPictureReference_clicked()
     }
 }
 
-void ManualForm::on_cb_axisActionAxis_currentIndexChanged(int index)
-{
-    m_manualAxis.axis=index;
-}
 //待状态灯的按钮设置状态灯状态
 void ManualForm::setbuttonIcon(QPushButton *button,const QString &ButtonText, uint8_t state)
 {

@@ -511,7 +511,8 @@ void upgradedialog::upgradelabel_handle(uint8_t Up_type)
         ui->Reserve_teach_checkbox->setChecked(true);
         ui->Reserve_Other_checkbox->setChecked(true);
         ui->ResSettInput_password->setDecimalPlaces(0);
-        ui->ResSettInput_password->setText("");
+        ui->ResSettInput_password->setInputRange(0, 99999);
+        ui->ResSettInput_password->clear();
         sure_handle_type = RESTSETTING;
         break;
     }

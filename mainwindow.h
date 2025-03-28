@@ -108,7 +108,7 @@ private:
     AlarmBar* alarmBar;
 
 private:
-    TriMode curMode;
+//    TriMode curMode;
     EventScanner* scanner; // customize input event monitoring
     QTimer* checkParaTimer;
     bool RobotResetPromptFlag=0;//复位弹窗标志 0-未弹窗 1-弹窗
