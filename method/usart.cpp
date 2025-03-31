@@ -1661,14 +1661,14 @@ void Usart::ExtendSendProDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             len = index;
             break;
         case CMD_SUN_PRO_REF://参考点读写
-            sendDataBuf[index++]=(uint8_t)(parNum+1);
-            sendDataBuf[index++]=m_RefPoint[parNum].refFlag;
+            sendDataBuf[index++]=(uint8_t)(parNum);
+            sendDataBuf[index++]=m_RefPoint[parNum-1].refFlag;
             for(int i=0; i<AXIS_TOTAL_NUM; i++)
             {
-                sendDataBuf[index++] = (uint8_t)m_RefPoint[parNum].pos[i];
-                sendDataBuf[index++] = (uint8_t)(m_RefPoint[parNum].pos[i]>>8);
-                sendDataBuf[index++] = (uint8_t)(m_RefPoint[parNum].pos[i]>>16);
-                sendDataBuf[index++] = (uint8_t)(m_RefPoint[parNum].pos[i]>>24);
+                sendDataBuf[index++] = (uint8_t)m_RefPoint[parNum-1].pos[i];
+                sendDataBuf[index++] = (uint8_t)(m_RefPoint[parNum-1].pos[i]>>8);
+                sendDataBuf[index++] = (uint8_t)(m_RefPoint[parNum-1].pos[i]>>16);
+                sendDataBuf[index++] = (uint8_t)(m_RefPoint[parNum-1].pos[i]>>24);
             }
             len = index;
             break;

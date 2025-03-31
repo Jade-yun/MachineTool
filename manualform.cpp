@@ -1625,6 +1625,7 @@ void ManualForm::on_btnSaveReference_clicked()
         {
             m_RefPoint[arrayIndex].pos[j] = referencePoints.at(i).axisPos[j];
         }
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,i+1);//发送参考点信息
     }
 
     ::writeReferenceInfo();

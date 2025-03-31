@@ -1234,6 +1234,10 @@ void Teach::ClearAxisOrderReferHandle()
         {
             auto axisIndex = AxisMove->axis;
             m_RefPoint[AxisMove->referPointNum-1].pos[axisIndex] = 0;
+            if(AxisMove->referPointNum>0)
+            {
+                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,AxisMove->referPointNum);//发送参考点信息
+            }
             ::writeReferenceInfo();
 //            emit refreshPosTableSignal();
         }
@@ -3492,6 +3496,10 @@ void Teach::Edit_AxisMove_Save_handle(void)
                 {
                     m_RefPoint[refIndex-1].pos[axisIndex] = AxisMove->pos;//赋值给新指定参考点坐标
                 }
+            }
+            if(AxisMove->referPointNum>0)
+            {
+                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,AxisMove->referPointNum);//发送参考点信息
             }
             ::writeReferenceInfo();
 //            emit refreshPosTableSignal();

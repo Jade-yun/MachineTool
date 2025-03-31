@@ -1506,7 +1506,7 @@ void readReferenceInfo()
         m_RefPoint[i].refName = settings.value("refName").toString();
         m_RefPoint[i].xPos = settings.value("xPos").toInt();
         m_RefPoint[i].yPos = settings.value("yPos").toInt();
-
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,i+1);//发送参考点信息
         settings.endGroup();
     }
 }

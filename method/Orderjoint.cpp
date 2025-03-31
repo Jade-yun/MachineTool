@@ -288,7 +288,7 @@ QString AxisActJoint(P_ProOrderStruct OIS)
         }
         else
         {
-            contStr = QString(axisMoveOrderjointList.at(0)).arg(" ").arg(axisStr).arg(QString::number(axispos/100,'f',2)).arg(pAxisAct->speed).arg(QString::number(advCSpeedDis/100,'f',2)).arg(QString::number(AxisMovedelay/100,'f',2));//获取参考点信息
+            contStr = QString(axisMoveOrderjointList.at(0)).arg(m_RefPoint[pAxisAct->referPointNum-1].refName+"：").arg(axisStr).arg(QString::number(axispos/100,'f',2)).arg(pAxisAct->speed).arg(QString::number(advCSpeedDis/100,'f',2)).arg(QString::number(AxisMovedelay/100,'f',2));//获取参考点信息
         }
     }
     return contStr;

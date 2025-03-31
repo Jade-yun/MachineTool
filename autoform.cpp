@@ -62,6 +62,7 @@ AutoForm::AutoForm(QWidget *parent) :
 
   /*************************变量状态******************************************/
     ui->tableWgtVarState->setHorizontalHeaderLabels({tr("变量"), tr("堆叠状态")});
+    ui->tableWgtVarState->horizontalHeader()->setVisible(true);
     ui->tableWgtVarState->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     for (int i=0;i<ui->tableWgtVarState->rowCount();i++)
     {
