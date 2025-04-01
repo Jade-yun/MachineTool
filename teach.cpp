@@ -5058,6 +5058,7 @@ void Teach::OrderEdit_Handle()
     }
     case C_STACK_MOVE:
     {
+        ui->Stack_Edit_btnAxisX1->setChecked(true);
         Stack_Edit_Handle(STACK_X_AXIS);
         break;
     }
