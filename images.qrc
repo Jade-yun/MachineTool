@@ -170,5 +170,7 @@
         <file>images/autoPageImages/continue.png</file>
         <file>images/autoPageImages/clear.png</file>
         <file>images/autoPageImages/Here_run.png</file>
+        <file>images/autoPageImages/scroll_right.png</file>
+        <file>images/autoPageImages/scroll_left.png</file>
     </qresource>
 </RCC>

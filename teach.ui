@@ -3200,6 +3200,7 @@
            <string>X1轴</string>
           </property>
           <property name="checkable">
+<<<<<<< Updated upstream
            <bool>false</bool>
           </property>
           <property name="checked">
@@ -3212,6 +3213,43 @@
            <bool>false</bool>
           </property>
           <property name="flat">
+           <bool>false</bool>
+=======
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+>>>>>>> Stashed changes
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="Stack_Edit_btnAxisY1">
+          <property name="minimumSize">
+           <size>
+            <width>110</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>110</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Y1轴</string>
+          </property>
+          <property name="checkable">
+           <bool>true</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>true</bool>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
            <bool>false</bool>
           </property>
          </widget>
@@ -3234,29 +3272,10 @@
            <string>Z1轴</string>
           </property>
           <property name="checkable">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
-          <property name="autoRepeat">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="Stack_Edit_btnAxisY1">
-          <property name="minimumSize">
-           <size>
-            <width>110</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>110</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Y1轴</string>
+          <property name="autoExclusive">
+           <bool>true</bool>
           </property>
           <property name="checkable">
            <bool>false</bool>

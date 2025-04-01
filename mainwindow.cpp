@@ -7,8 +7,8 @@
 #include <QTextEdit>
 #include <QPixmap>
 #include <QPalette>
-#include <QMessageBox>
 #include <QTranslator>
+#include <QScreen>
 
 #include "stackedit.h"
 #include "keydefinedialog.h"
@@ -39,11 +39,6 @@ QTranslator translator;
 #ifdef USE_SCEENSHOT
 void screenCapture(QWidget *rootView)
 {
-    if (!rootView) {
-        qDebug() << "Error: rootView is null!";
-        return;
-    }
-
     if (!UsbDisk::instance()->isInserted())
     {
         qDebug() << "usb is not inserted!";
@@ -65,8 +60,21 @@ void screenCapture(QWidget *rootView)
 
     QString fullPath = savePath + "/" + fileName;
 
-    // 截取窗口内容
-    QPixmap pixmap = rootView->grab();
+    QPixmap pixmap;
+    if (rootView) {
+        // 截取窗口内容
+        pixmap = rootView->grab();
+    }
+    else {
+        // 获取主屏幕并截取整个屏幕的内容
+        QScreen *screen = QGuiApplication::primaryScreen();
+        if (!screen) {
+            qDebug() << "Error: No screen found!";
+            return;
+        }
+        // 截取整个屏幕的内容
+        pixmap = screen->grabWindow(0);
+    }
 
     // 保存图片
     if (pixmap.save(fullPath, "PNG")) {
@@ -163,12 +171,6 @@ MainWindow::MainWindow(QWidget *parent)
     {
         setStyleFromFile(styles[0]);
     }
-
-
-//    setWindowTitle(QString());
-//    setWindowFlags(Qt::Dialog | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
-//    setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::WindowSystemMenuHint | Qt::WindowCloseButtonHint);
-
 
     softKey = new SoftKeyWidget(this);
     connect(ui->btnSoftKey, &QPushButton::clicked, [=](){
@@ -696,7 +698,7 @@ void MainWindow::connectAllSignalsAndSlots()
     /*各界面间互动信号槽连接*/
     connect(this,&MainWindow::signal_refresh_TeachList,teachWidget,&Teach::Teach_File_List_Refresh);//刷新教导管理程序显示列表信号
     connect(this,&MainWindow::EditOperatorVarPreOp_Refresh,teachWidget,&Teach::EditOperatorVarPreOp_handle);
-    connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget { background-image: url(/opt/MachineTool/resources/pics/stop.jpg); }");});
+    connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget#Init_page { background-image: url(/opt/MachineTool/resources/pics/stop.jpg); }");});
     connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
     connect(setWidget,&Setting::RefreshPortDefineSignals,setWidget,&Setting::RefreshPortDefine);
     connect(setWidget,&Setting::updateManualformButtonName_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
@@ -1166,7 +1168,7 @@ void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
 #ifdef USE_SCEENSHOT
         if (value == 1)
         {
-            screenCapture(this);
+            screenCapture(nullptr);
         }
 #endif
         break;

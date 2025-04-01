@@ -1172,9 +1172,11 @@ void ManualForm::setupAxisActionConnections()
     });
 
     connect(ui->handPosAdd,&QPushButton::clicked,this,[=](){
+        if (ui->cb_axisActionAxis->currentIndex() == 0) return;
         g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,2);
     });
     connect(ui->HandPosDown,&QPushButton::clicked,this,[=](){
+//        if (ui->cb_axisActionAxis->currentIndex() == 0) return;
         g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
     });
 

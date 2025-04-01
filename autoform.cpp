@@ -3,7 +3,8 @@
 #include <QMenu>
 #include <QAction>
 #include <QDebug>
-#include <QMessageBox>
+#include <QScrollBar>
+
 #include "Orderjoint.h"
 #include "manualform.h"
 #include "customedit.h"
@@ -16,6 +17,8 @@ AutoForm::AutoForm(QWidget *parent) :
     ui(new Ui::AutoForm)
 {
     ui->setupUi(this);
+
+    ui->btnIntelTorque->setEnabled(false);
 
 
     ui->AutoEditAxisSpeed->setDecimalPlaces(0);
@@ -253,6 +256,19 @@ AutoForm::AutoForm(QWidget *parent) :
     {
         cobox->setFocusPolicy(Qt::NoFocus);
     }
+
+    /***************************************************************/
+    // 按钮移动显示
+    connect(ui->btnScrollLeft, &QPushButton::clicked, this, [this]() {
+        ui->scrollArea->horizontalScrollBar()->setValue(
+                    ui->scrollArea->horizontalScrollBar()->value() - 50);
+    });
+
+    connect(ui->btnScrollRight, &QPushButton::clicked, this, [this]() {
+        ui->scrollArea->horizontalScrollBar()->setValue(
+                    ui->scrollArea->horizontalScrollBar()->value() + 50);
+    });
+
 /**********************************************************************/
     // 连接菜单项的点击事件
     connect(action1, &QAction::triggered, this, [=]() {

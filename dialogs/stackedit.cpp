@@ -394,9 +394,22 @@ void StackEdit::saveRotateBinStackInfo()
     m_StackInfo[groupIndex].groupLeaveBlank = ui->coboxLeaveBlank->currentIndex();
 //    m_StackInfo[groupIndex].stackMoveMode = ui->checkBoxTriAxisUnion->isChecked() ? 1 : 0;
 
+    int axisIndex = 0;
     for (int i = 0; i < STACK_AXIS_NUM; i++)
     {
-        m_StackInfo[groupIndex].axisSelect[i] = ui->coboxAxisSelectRotateBin->currentIndex();
+        int index = ui->coboxAxisSelectRotateBin->currentIndex();
+        // C 轴
+        if (index == 0) {
+            axisIndex = 4;
+        }
+        // A 轴
+        else if (index == 1) {
+            axisIndex = 5;
+        }
+        else if (index == 2) {
+            axisIndex = 6;
+        }
+        m_StackInfo[groupIndex].axisSelect[i] = axisIndex;
         m_StackInfo[groupIndex].stackStartPos[i] = ui->editStartRotateBin->text().toFloat()*100;
         m_StackInfo[groupIndex].intevalDis[i] = ui->editIntervalDisRotateBin->text().toFloat()*100;
         m_StackInfo[groupIndex].axisSpeed[i] = ui->editStackSpeedRotateBin->text().toUInt();
@@ -404,13 +417,13 @@ void StackEdit::saveRotateBinStackInfo()
         m_StackInfo[groupIndex].offsetDis[i] = ui->editOffsetRotateBin->text().toFloat()*100;;
         m_StackInfo[groupIndex].stackDir[i] = ui->coboxStackDirectRotateBin->currentIndex();
     }
-    setStackInfo(m_StackInfo[groupIndex],groupIndex);
+    setStackInfo(m_StackInfo[groupIndex], groupIndex);
 
     g_Usart->ExtendSendParDeal(CMD_MAIN_STACK, CMD_SUN_STACK_PAR, groupIndex+1);
     QThread::msleep(10);
     g_Usart->ExtendSendParDeal(CMD_MAIN_STACK, CMD_SUN_STACK_SET);
-    int axisIndex = ui->coboxAxisSelectRotateBin->currentIndex();
-    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK, CMD_SUN_STACK_POINT, groupIndex+1, axisIndex + 3);
+    // TO DO... 这里的堆叠轴编号应该传多少？？？
+//    g_Usart->ExtendSendParDeal(CMD_MAIN_STACK, CMD_SUN_STACK_POINT, groupIndex+1, axisIndex);
 }
 
 // 这样写不行，后面写不通。需要换个方式来实现
@@ -538,19 +551,6 @@ void StackEdit::syncParaToUI()
 
     for (int i = 0; i < STACK_AXIS_NUM; i++)
     {
-//        switch (m_StackInfo[groupIndex].axisSelect[i])
-//        {
-//        case 1:
-//        case 2:
-//        case 3:
-//            axisSelect[i]->setCurrentIndex(0);
-//            break;
-//        case 5:
-//        case 6:
-//            axisSelect[i]->setCurrentIndex(1);
-//            break;
-//        }
-
         speed[i]->setText(QString::number(m_StackInfo[groupIndex].axisSpeed[i]));
         speedNormal[i]->setText(QString::number(m_StackInfo[groupIndex].axisSpeed[i]));
         pointNum[i]->setText(QString::number(m_StackInfo[groupIndex].stackPointNum[i]));
@@ -568,6 +568,21 @@ void StackEdit::syncParaToUI()
     }
     ui->editIntervalDis->setText(QString::number((double)m_StackInfo[groupIndex].intevalDis[2] / 100, 'f', 2));
     ui->coboxStackDirect->setCurrentIndex(m_StackInfo[groupIndex].stackDir[2]);
+
+    // 旋转式料仓
+    if (m_StackFunc.siloType == 1)
+    {
+        int index = m_StackInfo[groupIndex].axisSelect[0] - 4;
+        ui->coboxAxisSelectRotateBin->setCurrentIndex(index);
+
+        ui->editStartRotateBin->setValue(m_StackInfo[groupIndex].stackStartPos[0] / 100.0);
+        ui->editIntervalDisRotateBin->setValue(m_StackInfo[groupIndex].intevalDis[0] / 100.0);
+        ui->editStackSpeedRotateBin->setValue(m_StackInfo[groupIndex].axisSpeed[0]);
+        ui->editStackNumRotateBin->setValue(m_StackInfo[groupIndex].stackPointNum[0]);
+        ui->editOffsetRotateBin->setValue(m_StackInfo[groupIndex].offsetDis[0] / 100.0);
+
+        ui->coboxStackDirectRotateBin->setCurrentIndex(m_StackInfo[groupIndex].stackDir[0]);
+    }
 }
 
 StackEdit::StackEdit(int groupIndex, QWidget *parent) :
