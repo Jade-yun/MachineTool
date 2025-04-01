@@ -83,7 +83,7 @@ uint8_t  m_AxisMoveFlag[AXIS_TOTAL_NUM] = {0};													//轴运动标志 0�
 uint8_t  m_AxisMovePauseReq[AXIS_TOTAL_NUM] = {0};											//轴运动暂停请求
 uint16_t m_AxisCurSpeed = 0;                                                                //当前转速（上传的是最大转速的电机的转速）
 uint16_t m_AxisCurTorque = 0;                                                               //当前扭矩（上传的是最大转速的电机的扭矩）
-
+int32_t MoveReferencePos = 0;                                             //移至参考点目标位置
 uint8_t m_RobotRunSta = 0;																							//机器运行状态
 uint8_t m_RobotWorkMode = 0;																						//机器工作模式
 uint8_t m_RobotResetState = 0;                                                              //复位状态 0-未复位 1-复位中 2-复位完成

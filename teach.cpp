@@ -52,8 +52,18 @@ Teach::Teach(QWidget* parent) :
     stack_Dialog->setModal(true);
     connect(this,&Teach::StackEditBaseInit_signal,stack_Dialog,&BaseWindow::StackEditBaseInit);
     connect(stack_Temp, &StackEdit::closeStackEditDialogSignal, stack_Dialog, &QDialog::close);// 连接StackEdit的关闭信号到QDialog的close槽
-    connect(stack_Temp,&StackEdit::stackParRefreshSignal,this,[=](){Stack_Edit_Handle(STACK_X_AXIS);});//刷新堆叠指令参数
-//    connect(ui->coboxVarSelectVarPreOp,QOverload<int>::of(&QComboBox::currentIndexChanged),this,&Teach::EditOperatorVarPreOp_handle);
+    connect(stack_Temp,&StackEdit::stackParRefreshSignal,this,[=](){
+        for(int i=0;i<STACK_AXIS_NUM;i++){Stack_Edit_Handle(i);}
+        });//刷新堆叠指令参数
+    connect(ui->AxisEditRefreshx1,&QPushButton::clicked,this,[=](){
+        ui->Stack_Edit_Pos->setText(QString::number(((double)m_AxisCurPos.Pos_x)/100,'f',2));
+    });
+    connect(ui->AxisEditRefreshy1,&QPushButton::clicked,this,[=](){
+        ui->Stack_Edit_Pos_3->setText(QString::number(((double)m_AxisCurPos.Pos_y)/100,'f',2));
+    });
+    connect(ui->StackAxisEditRefreshz1,&QPushButton::clicked,this,[=](){
+        ui->Stack_Edit_Pos_2->setText(QString::number(((double)m_AxisCurPos.Pos_z)/100,'f',2));
+    });
     connect(ui->coboxVarSelectVarPreOp,QOverload<int>::of(&QComboBox::activated),this,&Teach::EditOperatorVarPreOp_handle);
 
     ui->listWgtJumpto->setSelectionMode(QAbstractItemView::NoSelection);//禁用选择
@@ -3504,6 +3514,16 @@ void Teach::Edit_AxisMove_Save_handle(void)
             ::writeReferenceInfo();
 //            emit refreshPosTableSignal();
         }
+        else if(AxisMove->referPointNum>0 && AxisMove->referPointNum == refIndex)
+        {//如果没有修改参考点，只是修改了轴坐标参数，需要把轴坐标赋值给参考点坐标
+            m_RefPoint[refIndex-1].pos[AxisMove->axis] = AxisMove->pos;//赋值给新指定参考点坐标
+            if(AxisMove->referPointNum>0)
+            {
+                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,AxisMove->referPointNum);//发送参考点信息
+            }
+            ::writeReferenceInfo();
+        }
+
         AxisMove->referPointNum = refIndex;
         m_OperateProOrder[m_CurrentSelectProOrderList].delay = ui->lineEdit_Edit_AxisMove_delay->text().toDouble()*100;
 
@@ -5992,16 +6012,19 @@ void Teach::onCheckBoxToggled(QCheckBox *checkbox, bool checked)
 
 void Teach::on_Stack_Edit_btnAxisX1_clicked()
 {
+    ui->stkWgtStack->setCurrentWidget(ui->Stack_Edit_pageX1);
     Stack_Edit_Handle(STACK_X_AXIS);
 }
 
 void Teach::on_Stack_Edit_btnAxisZ1_clicked()
 {
+    ui->stkWgtStack->setCurrentWidget(ui->Stack_Edit_pageZ1);
     Stack_Edit_Handle(STACK_Z_AXIS);
 }
 
 void Teach::on_Stack_Edit_btnAxisY1_clicked()
 {
+    ui->stkWgtStack->setCurrentWidget(ui->Stack_Edit_pageY1);
     Stack_Edit_Handle(STACK_Y_AXIS);
 }
 //轴插入指令坐标刷新按钮处理
@@ -6381,7 +6404,7 @@ void Teach::WidgetNameRefresh()
         ui->Main_Axis_locat_button->setEnabled(false);
         ui->lineEdit_Main_Axis_locat->setEnabled(false);
     }
-    if(m_SeniorFunc.autoDoorCot1 == 1)
+    if(m_OutportInterlock[3][0] != 0)
     {//自动门1使用
         ui->Auto_Door_chbox->setEnabled(true);
         ui->Auto_Door_button->setEnabled(true);

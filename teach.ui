@@ -1765,7 +1765,7 @@
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Stack_Edit_pageX1">
         <widget class="QGroupBox" name="groupBox_5">
@@ -3199,6 +3199,21 @@
           <property name="text">
            <string>X1轴</string>
           </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>false</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -3218,6 +3233,12 @@
           <property name="text">
            <string>Z1轴</string>
           </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
         <item>
@@ -3236,6 +3257,12 @@
           </property>
           <property name="text">
            <string>Y1轴</string>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -12053,7 +12080,7 @@ QGroupBox::title { subcontrol-origin: margin;
       </rect>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="General_main_page">
       <widget class="QWidget" name="gridLayoutWidget_3">

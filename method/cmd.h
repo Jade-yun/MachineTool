@@ -1102,7 +1102,7 @@ extern uint8_t  m_AxisMoveFlag[AXIS_TOTAL_NUM];						//轴运动标志 0结束�
 extern uint8_t  m_AxisMovePauseReq[AXIS_TOTAL_NUM];				//轴运动暂停请求 0无请求 1暂停请求
 extern uint16_t m_AxisCurSpeed;                                 //当前转速（上传的是最大转速的电机的转速）
 extern uint16_t m_AxisCurTorque;                                //当前扭矩（上传的是最大转速的电机的扭矩）
-
+extern int32_t MoveReferencePos;                //移至参考点目标位置
 //机器运行状态宏定义
 #define MAC_STA_STOP_INVALID									0				//停止-无效状态(未回原)
 #define MAC_STA_STOP_STANDBY									1				//停止-待机中(回原完成)

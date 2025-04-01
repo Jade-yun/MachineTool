@@ -169,10 +169,19 @@ void Usart::ExtendSendManualOperationDeal(uint8_t mainCmd, uint8_t sunCmd, uint1
             sendDataBuf[len+2] = (uint8_t)m_manualAxis.speed;
             sendDataBuf[len+3] = (uint8_t)(m_manualAxis.speed>>8);
             len += 4;
-            sendDataBuf[len] = 0;
-            sendDataBuf[len+1] = 0;
-            sendDataBuf[len+2] = 0;
-            sendDataBuf[len+3] = 0;
+            if(parNum2 == 3)
+            {//运行到目标位置，暂时只有移动至参考点用到
+                sendDataBuf[len] = (uint8_t)(MoveReferencePos);
+                sendDataBuf[len+1] = (uint8_t)(MoveReferencePos>>8);
+                sendDataBuf[len+2] = (uint8_t)(MoveReferencePos>>16);
+                sendDataBuf[len+3] = (uint8_t)(MoveReferencePos>>24);
+            }
+            else {
+                sendDataBuf[len] = 0;
+                sendDataBuf[len+1] = 0;
+                sendDataBuf[len+2] = 0;
+                sendDataBuf[len+3] = 0;
+            }
             len += 4;
             sendDataBuf[len] = m_manualAxis.ZDrop;
             len += 1;

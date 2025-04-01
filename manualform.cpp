@@ -44,8 +44,8 @@ ManualForm::ManualForm(QWidget *parent) :
     }
 
     ui->AdjustMachineInternalPulse->setDecimalPlaces(0);
-    ui->editAxisActionSpeed->setDecimalPlaces(1);
-    ui->editAxisActionSpeed->setInputRange(0.1, 100.0);
+    ui->editAxisActionSpeed->setDecimalPlaces(0);
+    ui->editAxisActionSpeed->setInputRange(1, 100);
     ui->editPositionAdd->setDecimalPlaces(2);
     ui->editPositionAdd->setInputRange(0.01, 1000.00);
     ui->editPositionSub->setDecimalPlaces(2);
@@ -78,6 +78,39 @@ ManualForm::ManualForm(QWidget *parent) :
         ui->btnImportPictureReference->setVisible(checked);
         ui->btnNewButtonReference->setVisible(checked);
         ui->btnDeleteButtonReference->setVisible(checked);
+    });
+    connect(ui->btnMovetoReference,&QPushButton::pressed,this,[=](){
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+        if (it != referencePoints.end())
+        {
+            uint8_t AxisIndex = ui->tableWgtAxisPos->currentRow();
+            if(AxisIndex>=0 && AxisIndex<AXIS_TOTAL_NUM)
+            {
+                if(m_AxisPar[AxisIndex].axisType == 1)
+                {
+                    MoveReferencePos = it->axisPos[AxisIndex];
+                    g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, AxisIndex+1,3);//运动到目标位置
+                }
+            }
+        }
+    });
+    connect(ui->btnMovetoReference,&QPushButton::released,this,[=](){
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedButton[1];
+        });
+        if (it != referencePoints.end())
+        {
+            uint8_t AxisIndex = ui->tableWgtAxisPos->currentRow();
+            if(AxisIndex>=0 && AxisIndex<AXIS_TOTAL_NUM)
+            {
+                if(m_AxisPar[AxisIndex].axisType == 1)
+                {
+                    g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, AxisIndex+1,0);//抬起的时候停止发送移动指令
+                }
+            }
+        }
     });
     /*********************************轴动作********************************************/
     update_Button_Name_Handel();
@@ -130,7 +163,7 @@ void ManualForm::initControls()
     {
         ui->cb_axisActionAxis->setCurrentIndex(m_manualAxis.axis);
     }
-    ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed/10.0));
+    ui->editAxisActionSpeed->setText(QString::number(m_manualAxis.speed));
     ui->editPositionAdd->setText(QString::number(m_manualAxis.pos_pos/100.0));
     ui->editPositionSub->setText(QString::number(m_manualAxis.sub_pos/100.0));
     ui->chbZAxisDesend->setChecked(m_manualAxis.ZDrop);
@@ -774,7 +807,7 @@ void ManualForm::saveManualAxisActionPara()
         }
     }
     m_manualAxis.axis = AxisIndex;//ui->cb_axisActionAxis->currentIndex();
-    m_manualAxis.speed = ui->editAxisActionSpeed->text().toDouble() * 10;
+    m_manualAxis.speed = ui->editAxisActionSpeed->text().toInt();
     m_manualAxis.pos_pos = ui->editPositionAdd->text().toFloat() * 100;
     m_manualAxis.sub_pos = ui->editPositionSub->text().toDouble() * 100;
     m_manualAxis.ZDrop = ui->chbZAxisDesend->isChecked();

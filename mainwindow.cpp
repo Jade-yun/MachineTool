@@ -1537,6 +1537,14 @@ void MainWindow::m_RobotStateRefreash()
             MainWindow::pMainWindow->showErrorTip(tr("回原点中..."),TipMode::NULL_BUTTON);
         }
     }
+    else if((m_RobotRunSta == MAC_STA_STOP_INVALID || m_RobotRunSta == MAC_STA_MANUAL_INVALID || m_RobotRunSta == MAC_STA_AUTO_INVALID) && (m_RobotOriginState == 1))
+    {
+        if(dlgErrorTip->isVisible())
+        {
+            dlgErrorTip->reject();
+            m_RobotOriginState = 0;
+        }
+    }
     if((m_RobotRunSta == MAC_STA_STOP_STANDBY || m_RobotRunSta == MAC_STA_MANUAL_STANDBY || m_RobotRunSta == MAC_STA_AUTO_STANDBY) && m_RobotOriginState == 1)
     {
         if(dlgErrorTip->isVisible())
