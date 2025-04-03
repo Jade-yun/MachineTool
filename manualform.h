@@ -49,7 +49,6 @@ signals:
     void sigShowStackPage();
     void AxisParRefreshSignal(uint8_t Index);
 private slots:
-    void StateButtonInit();
     void setbuttonIcon(QPushButton *button, const QString &ButtonText, uint8_t state);
     void on_checkBoxEditPosGuide_stateChanged(int arg1);
     void on_btnImportPictureGuide_clicked();
@@ -104,15 +103,17 @@ private:
     void setupClawAndMachineConnections();
     void setupAxisActionConnections();
 
-    void initControls();            //pxc 初始化控件并对控件进行赋值
+    /**
+     * @brief 该函数在每次 show 事件时调用
+     */
+    void refreshAxisActionPage();
+    void refreshClawAndMachinePage();
+    void refreshReservePage();
 
 public:
     void handleLoginModeChanged(LoginMode mode);
     void reloadReferPoint();
 
-public slots:
-    void updateReserveButtonState(); // 更新端口对应按钮的可见性和文本
-    void update_Button_Name_Handel();
 private:
     DraggableButton* selectedButton[2];
     bool draggable[2];

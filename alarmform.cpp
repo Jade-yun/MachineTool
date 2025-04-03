@@ -117,6 +117,7 @@ void AlarmForm::setupAlarmInfo()
     ui->tableAlarmInfo->setColumnWidth(0, 100); // 第一列固定宽度
     ui->tableAlarmInfo->setColumnWidth(2, 300); // 第三列固定宽度
     ui->tableAlarmInfo->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
+    ui->tableAlarmInfo->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
 
     ui->tableAlarmInfo->setHorizontalHeaderLabels({tr("报警编号"), tr("报警内容"), tr("报警时间")});
 

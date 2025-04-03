@@ -909,6 +909,8 @@ void Setting::initWidgets()
 
     ui->tableWgtPortDef->horizontalHeader()->setVisible(true);
     ui->tableWgtPortDef->verticalHeader()->setVisible(true);
+    //    ui->tableWgtPortDef->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableWgtPortDef->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->tableWgtPortDef->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWgtPortDef->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableWgtPortDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -918,6 +920,8 @@ void Setting::initWidgets()
 
     ui->tableWgtNameDef->horizontalHeader()->setVisible(true);
     ui->tableWgtNameDef->verticalHeader()->setVisible(true);
+//    ui->tableWgtNameDef->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+    ui->tableWgtNameDef->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->tableWgtNameDef->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableWgtNameDef->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableWgtNameDef->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -4387,7 +4391,6 @@ void Setting::outportInterlockSlots()
     ::updateInterLockPortFlag();
 
     emit RefreshPortDefineSignals();
-    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
 }
 
@@ -4478,11 +4481,7 @@ void Setting::seniorFuncSlots()
     SeniorFuncPortSet();
 
     emit RefreshPortDefineSignals();
-    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
-
-    emit refreshManualReserve();
-    emit WidgetNameRefresh_signal();
 }
 //根据高级功能中功能使用情况，设置端口是否做预留端口使用
 void Setting::SeniorFuncPortSet()
@@ -4840,7 +4839,6 @@ void Setting::saveMachinePara()
     writeLimitSigDescription(1, tempStr[1]);    // 最小限位
     writeLimitSigDescription(2, tempStr[2]);    // 原点信号
     emit RefreshPortDefineSignals();//端口自定义界面刷新
-    emit refreshManualReserve(); // 更新手动预留界面的按钮可用性
     emit WidgetNameRefresh_signal();//更新教导界面控件相关内容
     emit ManualDebugMachineRefresh_Signal(0);
     emit AxisTypeChange_Signal();

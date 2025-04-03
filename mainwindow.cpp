@@ -699,13 +699,15 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(setWidget,&Setting::LOGO_Refresh,this,[=](){ui->Init_page->setStyleSheet("QWidget#Init_page { background-image: url(/opt/MachineTool/resources/pics/stop.jpg); }");});
     connect(setWidget,&Setting::monitor_port_refreash,monitorWidget,&MonitorForm::InitAllLedName);//设置里修改端口名称后刷新监视界面端口名称
     connect(setWidget,&Setting::RefreshPortDefineSignals,setWidget,&Setting::RefreshPortDefine);
-    connect(setWidget,&Setting::updateManualformButtonName_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
+    /**
+     * 利用 Qt 的相应机制，每次界面显示时自动刷新
+     */
+//    connect(setWidget,&Setting::updateManualformButtonName_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
     connect(g_Usart,&Usart::DataSycStateSignal,this,&MainWindow::DataSycStateHandel);//开机参数同步失败处理
     connect(this,&MainWindow::signal_sync_data,g_Usart,&Usart::sync_data_handle);//同步参数下发信号
     connect(autoWidget,&AutoForm::Send_planProductNum_Signal,this,[=](){//计划产品个数下发
         g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
     });
-    connect(setWidget, &Setting::refreshManualReserve, manualWidget, &ManualForm::updateReserveButtonState);
     connect(setWidget, &Setting::sysNameChanged, this,&MainWindow::updatelabProgramName);//设置中修改了系统名称触发
     connect(teachManageWidget,&TeachManage::labProgramNameChangeSignal,this,&MainWindow::updatelabProgramName);//加载新的程序时触发
     connect(teachManageWidget, &TeachManage::programLoaded, manualWidget, &ManualForm::reloadReferPoint);
@@ -735,7 +737,10 @@ void MainWindow::connectAllSignalsAndSlots()
     connect(this,&MainWindow::Refresh_globalSpeedShow_Signal,autoWidget,&AutoForm::Refresh_globalSpeedShowHandel);
     connect(setWidget,&Setting::AxisTypeChange_Signal,this,&MainWindow::AxisTypeChange_Handle);//轴类型切换后更新主界面轴坐标显示
     connect(setWidget,&Setting::AxisTypeChange_Signal,teachWidget,&Teach::AxisTypeChangeTeachHandle);//教导界面轴编号选择需要刷新
-    connect(setWidget,&Setting::AxisTypeChange_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
+    /**
+     * 利用 Qt 的相应机制，每次界面显示时自动刷新
+     */
+//    connect(setWidget,&Setting::AxisTypeChange_Signal,manualWidget,&ManualForm::update_Button_Name_Handel);
     connect(this,&MainWindow::SwitchPageParSaveSignal,setWidget,&Setting::SwitchPageParSaveHandle);//切换界面时有参数需要保存处理
     connect(this,&MainWindow::SetAutoRunIcon_Signal,autoWidget,&AutoForm::SetAutoRunIcon);//自动界面断点图标需刷新
     /**
@@ -1313,10 +1318,7 @@ void MainWindow::keyAxisCommandSend(uint16_t code, int32_t value)
         // 按下或者长按
         else if (value == 1 || value == 2)
         {
-            if (keyIndex >= 0 && keyIndex < 12)
-            {
-                dirction = (keyIndex % 2) + 1;
-            }
+            dirction = (m_KeyFunc[keyIndex].oprMode ? 1 : 2);
         }
         if(m_AxisPar[m_KeyFunc[keyIndex].funcNum-1].axisType == 1)
         {

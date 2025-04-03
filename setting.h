@@ -118,7 +118,6 @@ signals:
     void LOGO_Refresh();
     void monitor_port_refreash();
     void RefreshPortDefineSignals();//端口自定义界面刷新
-    void refreshManualReserve();
     void sysNameChanged(const QString& name);
     void updatemonitorhandcontrol();//更新监视界面手控器界面内容
     void WidgetNameRefresh_signal();//教导界面控件名称需要刷新信号

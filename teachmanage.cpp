@@ -365,6 +365,13 @@ void TeachManage::on_btn_Export_clicked()
         }
     }
 
+    if (selectedFiles.isEmpty())
+    {
+        ErrorTipDialog tip(tr("请选择需要导出文件！"));
+        tip.exec();
+        return;
+    }
+
 //    qDebug() << selectedFiles;
 
     for (const auto &programName : selectedFiles)
