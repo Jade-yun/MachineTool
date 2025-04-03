@@ -5,7 +5,7 @@
 #include "cmd.h"
 #include "port_setting.h"
 
-
+extern const QString CheckFileString;//用来校验文件是否完整
 extern QString m_configFileNamePath;
 //extern QString m_configPortXYNamePath;
 //extern QString m_defaultConfigFileNamePath;
@@ -179,7 +179,8 @@ extern D_ProgramNameAndPathStruct readPowerOnReadOneProInfo();
 void setProgramPermission(const QString& programName, int permission);
 int getProgramPermission(const QString& programName);
 
-extern bool CheckFileComplete(QString FilePath);
+extern bool CheckFileComplete(QString FilePath,uint8_t type);
+extern QString readFromFileEnd(const QString &filePath, qint64 bytesToRead);
 //自动界面清零，变量参数存储
 extern void setAutoPagePar();
 extern void getAutoPagePar();
@@ -224,5 +225,5 @@ extern QString m_configCmdPath;                             //命令的配置文
 extern QString m_configPortSettingPath;                     //端口号设置的配置文件路径
 extern QString m_configOrderjinitPath;                      //程序指令内容拼接文件路径
 extern QStringList getIniValues(uint8_t type, QString node);                  //获取某个节点下所有键对应的值（键进行排序后的值）
-
+extern bool writeWithFooter(const QString& filePath, const QString footer);
 #endif // INICONFIG_H

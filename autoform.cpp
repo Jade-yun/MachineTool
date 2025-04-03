@@ -443,7 +443,44 @@ AutoForm::AutoForm(QWidget *parent) :
         Auto_File_List_Refresh(index);//刷新自动界面列表
     });
     connect(ui->AutoEditSavebtn, &QPushButton::clicked,this,&AutoForm::OrderEditSaveHandel);//指令编辑保存
-
+    connect(ui->btnCycleStop,&QPushButton::clicked,this,[=](bool state){//周期停止指令
+        if(m_RobotRunSta == MAC_STA_RUN)
+        {
+            if(state == true)
+            {
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("是否周期停止？"),TipMode::NORMAL);
+                if(reply == QDialog::Accepted)
+                {
+                    m_RunPar.cycle_stop = 1;
+                    g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+                }
+                else if(reply == QDialog::Rejected)
+                {
+                    ui->btnCycleStop->setChecked(false);
+                }
+            }
+            else if(state == false)
+            {
+                int reply = MainWindow::pMainWindow->showErrorTip(tr("是否取消周期停止？"),TipMode::NORMAL);
+                if(reply == QDialog::Accepted)
+                {
+                    m_RunPar.cycle_stop = 0;
+                    g_Usart->ExtendSendParDeal(CMD_MAIN_STA,CMD_SUN_STA_PAR,0,0);
+                }
+                else if(reply == QDialog::Rejected)
+                {
+                    ui->btnCycleStop->setChecked(true);
+                }
+            }
+        }
+        else
+        {
+            if(state)
+            {
+                ui->btnCycleStop->setChecked(false);
+            }
+        }
+    });
 }
 
 AutoForm::~AutoForm()
@@ -1496,7 +1533,7 @@ void AutoForm::Auto_CurStep_Refresh()
 **************************************************************************/
 void AutoForm::Program_Follow_Refresh()
 { 
-    if(ui->btnFollow->isChecked() == true)
+    if(ui->btnFollow->isChecked() == true && m_RobotRunSta == MAC_STA_RUN)
     {//如果开启了跟随功能
         if(m_AutoInforRefresh.Program_Follow_Flog == 0)
         {
@@ -1564,6 +1601,14 @@ void AutoForm::Program_Follow_Refresh()
                     }
                 }
             }
+        }
+    }
+    //周期停止刷新
+    if(m_RunPar.cycle_stop == 0 && m_RobotRunSta != MAC_STA_RUN)
+    {
+        if(ui->btnCycleStop->isChecked() == true)
+        {
+            ui->btnCycleStop->setChecked(false);
         }
     }
 }

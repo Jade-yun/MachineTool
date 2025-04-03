@@ -436,7 +436,7 @@ void Setting::init()
         for (auto edit : editsCirclePulseNum)
         {
             edit->setDecimalPlaces(0);
-            edit->setInputRange(1, 100000);
+            edit->setInputRange(-99999999, 99999999);
         }
         // 最大坐标 最小坐标
         // 每转距离
@@ -454,7 +454,7 @@ void Setting::init()
             for (auto edit : edits)
             {
                 edit->setDecimalPlaces(2);
-                edit->setInputRange(-10000.00, 10000.00);
+                edit->setInputRange(-99999999.00, 99999999.00);
             }
         }
 
@@ -471,8 +471,6 @@ void Setting::init()
             edit->setDecimalPlaces(0);
             edit->setInputRange(1, 10000);
         }
-
-
     }
 
     // 轴速度

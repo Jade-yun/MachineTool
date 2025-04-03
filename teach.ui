@@ -572,7 +572,7 @@
     <enum>QTabWidget::South</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <property name="iconSize">
     <size>
@@ -12510,7 +12510,7 @@ QGroupBox::title { subcontrol-origin: margin;
         </rect>
        </property>
        <property name="currentIndex">
-        <number>4</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="Axis_Move_main_page">
         <widget class="QGroupBox" name="gb_label_2">

@@ -939,6 +939,7 @@ typedef struct
     uint8_t     startRunLineProNum;     //从此行运行所在程序，0-主程序 1-8子程序
     uint16_t    startRunLineNum;        //从此行运行程序行号
     uint8_t     allow_globalSpeed;      //是否允许调速标志0-不允许调速 1-允许调速
+    uint8_t     cycle_stop;             //周期停止
 }D_RunParStruct;
 
 /*主控板升级结构体*/
@@ -1006,6 +1007,7 @@ typedef struct
     int OutTimenum;
     uint8_t sendDataNum;//发送次数，同一参数下发5次未收到反馈，说明通信异常，返回同步失败
     int SyncStep;//用来记录到那一步了
+    uint8_t OrderSendRetrun;
 }Sync_Data;
 
 //设置中所有需要点击保存按钮才能保存的参数是否需要保存结构体

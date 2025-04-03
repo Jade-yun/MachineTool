@@ -56,7 +56,7 @@ uint8_t outputReleteOutIndex[OUT_PORT_RELEOUT_NUM]={0};                    //预
 **************************************************************************/
 void readSigSetPara()
 {
-    if(CheckFileComplete(m_configPortSettingPath))
+    if(CheckFileComplete(m_configPortSettingPath,1))
     {
         for(int i = 0;i < INPUT_TOTAL_NUM;i++)
         {
@@ -206,7 +206,14 @@ void readSigSetPara()
         bool temp = g_SafeFileHandler->attemptRecovery(m_configPortSettingPath);
         if(temp)
         {
+            static uint8_t tempNum = 0;
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configPortSettingPath);
+
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else
@@ -227,7 +234,7 @@ void readSigSetPara()
 **************************************************************************/
 void readIniPara()
 {
-    if(CheckFileComplete(m_configFileNamePath))
+    if(CheckFileComplete(m_configFileNamePath,1))
     {
         getOutPortType();
         getOutportInterlock();
@@ -274,6 +281,12 @@ void readIniPara()
         bool temp = g_SafeFileHandler->attemptRecovery(m_configFileNamePath);
         if(temp)
         {
+            static uint8_t tempNum = 0;
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configFileNamePath);
             readIniPara();
         }

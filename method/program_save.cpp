@@ -75,7 +75,7 @@ QStringList sunProCmdList;                         //子程序命令
 **************************************************************************/
 void readIniProgramStruct()
 {
-    if(CheckFileComplete(m_configCmdPath))
+    if(CheckFileComplete(m_configCmdPath,1))
     {
         fileSectionList=getIniValues(0,"Section");                        //程序保存节点
         programInfoList=getIniValues(0,"ProgramInfo");                       //程序信息
@@ -122,6 +122,13 @@ void readIniProgramStruct()
         if(temp)
         {
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configCmdPath);
+
+            static uint8_t tempNum = 0;
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else
@@ -187,13 +194,17 @@ uint8_t newBuildProgram(const QString& fileName)
     {
         setProgramNameAndPath(m_ProgramNameAndPath);//新建文件成功，存储所有文件信息
         const QString filePath = m_ProgramPath+"/"+fileName + SUFFIX_REFER;
-        QFile file(filePath);
-        // 尝试以写模式打开文件（这将创建文件，如果它不存在的话）
-        if (!file.open(QIODevice::WriteOnly)) {
-            return -1; // 或者其他错误处理
+//        QFile file(filePath);
+//        // 尝试以写模式打开文件（这将创建文件，如果它不存在的话）
+//        if (!file.open(QIODevice::Append)) {
+//            return -1; // 或者其他错误处理
+//        }
+//        // 文件现在已经创建（并且是空的），可以关闭它了
+//        file.close();
+        if(!writeWithFooter(filePath,CheckFileString))
+        {
+            return -1;
         }
-        // 文件现在已经创建（并且是空的），可以关闭它了
-        file.close();
         g_SafeFileHandler->rotateBackups(P_NamePathTemp.filePath);
         g_SafeFileHandler->rotateBackups(filePath);
     }
@@ -296,6 +307,8 @@ bool writeBasicProgram(D_ProgramNameAndPathStruct pro_temp)
     {
         out << LablePartList[i] << lineFeed;
     }
+    out << lineFeed;
+    out << CheckFileString;//文件末尾添加校验字符
     file.close();
     REFRESH_KERNEL_BUFFER(pro_temp.filePath.toLocal8Bit().data());
     return true;
@@ -642,6 +655,7 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
         }
     }
     out << lineFeed;
+    out << CheckFileString;//文件末尾添加校验字符
     file.close();
     REFRESH_KERNEL_BUFFER(pro_temp.filePath.toLocal8Bit().data());
     return true;
@@ -656,16 +670,14 @@ bool saveProgram(D_ProgramNameAndPathStruct pro_temp)
 **************************************************************************/
 bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 {
+    if(CheckFileComplete(pro_temp.filePath,1) == false)
+    {
+        return false;
+    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-       // 处理文件打开失败的情况
+    {// 处理文件打开失败的情况
        return false;
-    }
-    if(!(file.size()>0))
-    {
-        qDebug()<<pro_temp.fileName<<"空文件";
-        return false;
     }
     uint8_t intFlag = 0;
     QStringList LableNameList_Temp[PRO_NUM];
@@ -722,7 +734,7 @@ bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
             intFlag = 9;
             continue;
         }
-        else if(line==""||line==NULL)
+        else if(line==""||line==NULL || line == CheckFileString)
         {
             continue;
         }
@@ -772,6 +784,7 @@ bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
     }
     CurrentLableNameList.clear();
     CurrentLableNameList = LableNameList[m_OperateProNum];
+    return true;
 }
 /*************************************************************************
 **  函数名：  readProgram()
@@ -784,16 +797,14 @@ bool readLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 #if 1
 bool readProgram(D_ProgramNameAndPathStruct pro_temp)
 {
+    if(CheckFileComplete(pro_temp.filePath,1) == false)
+    {
+        return false;
+    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-       // 处理文件打开失败的情况
+    {// 处理文件打开失败的情况
        return false;
-    }
-    if(!(file.size()>0))
-    {
-        qDebug()<<pro_temp.fileName<<"空文件";
-        return false;
     }
     QTextStream in(&file);
     QStringList programInfoList;
@@ -1583,16 +1594,14 @@ bool readProgram(D_ProgramNameAndPathStruct pro_temp)
 **************************************************************************/
 bool readPreviewLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 {
+    if(CheckFileComplete(pro_temp.filePath,1) == false)
+    {
+        return false;
+    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-       // 处理文件打开失败的情况
+    {// 处理文件打开失败的情况
        return false;
-    }
-    if(!(file.size()>0))
-    {
-        qDebug()<<"文件大小异常："<<pro_temp.fileName;
-        return false;
     }
     uint8_t intFlag = 0;
     QStringList LableNameList_Temp[PRO_NUM];
@@ -1707,16 +1716,14 @@ bool readPreviewLableOrderName(D_ProgramNameAndPathStruct pro_temp)
 **************************************************************************/
 int readPreviewProgram(D_ProgramNameAndPathStruct pro_temp,P_ProOrderStruct *m_ProOrder)
 {
+    if(CheckFileComplete(pro_temp.filePath,1) == false)
+    {
+        return false;
+    }
     QFile file(pro_temp.filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-       // 处理文件打开失败的情况
+    {// 处理文件打开失败的情况
        return false;
-    }
-    if(!(file.size()>0))
-    {
-        qDebug()<<pro_temp.fileName<<"空文件";
-        return false;
     }
     QTextStream in(&file);
     QStringList programInfoList;
@@ -2454,11 +2461,16 @@ bool Load_Program_Handle(QString fileName)
     m_RunPar.startRunLineNum =1;//加载程序时起始行号设置为1
     //发送程序
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INFO);
+    MySync_Data.OrderSendRetrun = 1;
     for(int i=0;i<PRO_NUM;i++)
     {
         for(int j=0;j<m_ProInfo.proNum[i];j++)
         {
-            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_ORDER,i,j,0);
+            if(MySync_Data.OrderSendRetrun == 1)
+            {
+                g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_ORDER,i,j,0);
+                while(MySync_Data.OrderSendRetrun == 0);
+            }
         }
     }
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_SAVE,0,2);
@@ -2469,6 +2481,7 @@ bool Load_Program_Handle(QString fileName)
     m_RunPar.breakPointFlag = false;
     m_RunPar.breakPointProNum = 0;
     m_RunPar.breakPointList = 1;
+    m_RunPar.cycle_stop = 0;
     return true;
 }
 

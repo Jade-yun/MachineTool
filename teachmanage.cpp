@@ -440,6 +440,7 @@ void TeachManage::on_btn_Import_clicked()
         for (const auto& matchingFile : fileList)
         {
             UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+            writeWithFooter(matchingFile.absoluteFilePath(),CheckFileString);//导入程序后写入校验字符
         }
         ::sync();
 
@@ -471,6 +472,7 @@ void TeachManage::on_btn_Import_clicked()
         for (const auto& matchingFile : fileList)
         {
             UsbDisk::instance()->copy(matchingFile.absoluteFilePath(), m_ProgramPath + "/");
+            writeWithFooter(matchingFile.absoluteFilePath(),CheckFileString);//导入程序后写入校验字符
         }
         ::sync();
 

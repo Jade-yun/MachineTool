@@ -57,7 +57,7 @@ QStringList ProEndJointList;                             //结束命令
 **************************************************************************/
 void getOrderjoinIni()
 {
-    if(CheckFileComplete(m_configOrderjinitPath))
+    if(CheckFileComplete(m_configOrderjinitPath,1))
     {
         axisMoveOrderjointList=getIniValues(2,"P_AxisMoveCmd");                       //轴动作命令
         clawActionOrderjointList=getIniValues(2,"P_ClawActionCmd");                       //卡爪动作命令
@@ -99,7 +99,15 @@ void getOrderjoinIni()
         bool temp = g_SafeFileHandler->attemptRecovery(m_configOrderjinitPath);
         if(temp)
         {
+
+            static uint8_t tempNum = 0;
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(m_configOrderjinitPath);
+
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else

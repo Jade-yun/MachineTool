@@ -10,7 +10,7 @@
 extern QString m_ProgramPath;
 
 const QString AllExistingProgramInfoPath = "/opt/MachineTool/configs/ProgramNameAndPathInfo.ini";
-
+const QString CheckFileString = "/*zhkj*/";//用来校验文件是否完整
 /*****************命令相关参数保存*****************/
 QString m_configCmdPath = "/opt/MachineTool/cmd_joint/Cmd_Description.txt";
 //QString m_configPortSettingPath = "/root/Port_Setting.txt";
@@ -166,6 +166,7 @@ void setOutPortType(uint8_t value[OUT_PORT_TYPE_NUM][2])
         setValue("OutPortType",QString("V%1").arg(i),value[i][1]);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //互锁设置
@@ -198,6 +199,7 @@ void setOutportInterlock(uint8_t value[OUT_INTERLOCK_NUM][4])
         }
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //预留关联
@@ -217,6 +219,7 @@ void setOutportRelevancy(uint8_t value[OUT_PORT_RELEVANCY_NUM][3])
         setValue("OutportRelevancy",QString("V%1").arg(i),value[i][2]);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //预留出类型
@@ -236,6 +239,7 @@ void setReleteOut(uint8_t value[OUT_PORT_RELEOUT_NUM][2])
         setValue("ReleteOut",QString("V%1").arg(i),value[i][1]);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //按键功能
@@ -258,6 +262,7 @@ void setKeyFunc(D_KeyFuncStruct* value)
         setValue("KeyFunc",QString("V%1_oprMode").arg(i),value[i].oprMode);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //LED功能
@@ -278,6 +283,7 @@ void setLedFunc(D_LedFuncStruct* value)
         setValue("LedFunc",QString("V%1_funcNum").arg(i),value[i].funcNum);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //信号设置高级功能
@@ -402,6 +408,7 @@ void setSeniorFunc(D_SeniorFuncStruct value)
         setValue("SeniorFunc",QString("res3_%1").arg(i),value.res3[i]);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //机床安全
@@ -420,6 +427,7 @@ void setMachineSave(D_MachineSaveStruct value)
     setValue("MachineSave","armFallAutoDoor2Swt",value.armFallAutoDoor2Swt);
     setValue("MachineSave","armFallAutoDoor2SwtSta",value.armFallAutoDoor2SwtSta);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
@@ -435,6 +443,7 @@ void setStackSave(D_StackSaveStruct value)
     setValue("StackSave","stackSaveIn1Roatore",value.stackSaveIn1Roatore);
     setValue("StackSave","stackSaveIn2Roatore",value.stackSaveIn2Roatore);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //卡爪安全
@@ -474,6 +483,7 @@ void setClawSave(D_ClawSaveStruct value,uint8_t index)
     setValue("ClawSave",QString("cKeepoutNegMinC_%1").arg(index),value.cKeepoutNegMinC);
     setValue("ClawSave",QString("cKeepoutNegMaxC_%1").arg(index),value.cKeepoutNegMaxC);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //联机安全
@@ -507,6 +517,7 @@ void setOnlineSafe(D_OnlineSaveStruct value,uint8_t index)
     setValue("OnlineSave",QString("a1A2MainPos_%1").arg(index),value.a1A2MainPos);
     setValue("OnlineSave",QString("a1A2SunPos_%1").arg(index),value.a1A2SunPos);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //产品设置
@@ -531,6 +542,7 @@ void setProductSet(D_ProductSetStruct value)
     setValue("ProductSet","chainReachDelay",value.chainReachDelay);
     setValue("ProductSet","clampCheckFilterTime",value.clampCheckFilterTime);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
@@ -552,6 +564,7 @@ void setProductSenior(D_ProductSeniorStruct value)
     setValue("ProductSenior","lubricGapCyc",value.lubricGapCyc);
     setValue("ProductSenior","productMemoryFlag",value.productMemoryFlag);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //物联网
@@ -568,12 +581,13 @@ void setInternet(D_InternetStruct value)
     setValue("Internet","parityMode",value.parityMode);
     setValue("Internet","baudMode",value.baudMode);
     Ini_Parasettings.sync();
+    writeWithFooter(SysSetConfigPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(SysSetConfigPath.toLocal8Bit().data());
 }
 //系统参数
 void getSystemSet()
 {
-    if(CheckFileComplete(SysSetConfigPath))
+    if(CheckFileComplete(SysSetConfigPath,1))
     {
         D_SystemSetStruct defaultV{0, 0, 0, 0, 0, 0, "", 0};
 
@@ -598,7 +612,14 @@ void getSystemSet()
         bool temp = g_SafeFileHandler->attemptRecovery(SysSetConfigPath);
         if(temp)
         {
+            static uint8_t tempNum = 0;
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(SysSetConfigPath);
+
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else
@@ -626,6 +647,7 @@ void setSystemSet(const D_SystemSetStruct& value)
 
     settings.endGroup();
     settings.sync();
+    writeWithFooter(SysSetConfigPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(SysSetConfigPath.toLocal8Bit().data());
 }
 //轴运动参数
@@ -701,6 +723,7 @@ void setAxisPar(D_AxisParStruct value, uint8_t index)
         setValue("AxisPar",QString("limitNegSwt_%1").arg(index),value.limitNegSwt);
         setValue("AxisPar",QString("coordDir_%1").arg(index),value.coordDir);
         Ini_Parasettings.sync();
+        writeWithFooter(m_configFileNamePath,CheckFileString);
         REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
     }
 }
@@ -762,6 +785,7 @@ void setHandwheelPar(D_AxisParStruct value)
     setValue("HandwheelPar","limitNegSwt",value.limitNegSwt);
     setValue("HandwheelPar","coordDir",value.coordDir);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //伺服结构参数
@@ -788,6 +812,7 @@ void setServoPar(D_ServoParStruct value)
     setValue("ServoPar","resetSunProFlag",value.resetSunProFlag);
     setValue("ServoPar","torqueLimitFlag",value.torqueLimitFlag);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //伺服安全及控制精度参数
@@ -812,6 +837,7 @@ void setDegreeParS(D_DegreeParStruct value)
     setValue("DegreeParS","saveRotatePos_Y1",value.saveRotatePos_Y1);
     setValue("DegreeParS","saveRotatePos_Y2",value.saveRotatePos_Y2);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //安全区参数
@@ -854,6 +880,7 @@ void setSaveArea(D_SaveAreaStruct value, uint8_t index)
     setValue("SaveArea",QString("stack_Z_StartMaxPos_%1").arg(index),value.stack_Z_StartMaxPos);
     setValue("SaveArea",QString("stack_Z_FallMaxPos_%1").arg(index),value.stack_Z_FallMaxPos);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //伺服通信协议参数
@@ -884,6 +911,7 @@ void setServoCommPar(D_ServoCommParSetStruct* value)
         setValue("ServoCommPar",QString("parValue_%1").arg(i),value[i].parValue);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //堆叠信息参数
@@ -941,6 +969,7 @@ void setStackInfo(D_StackInfoStruct value, uint8_t index)
         setValue("StackInfo",QString("offsetDis_%1_%2").arg(index).arg(j),value.offsetDis[j]);
     }
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 //堆叠功能参数
@@ -969,6 +998,7 @@ void setStackFunc(D_StackFuncStruct value)
     setValue("StackFunc","rotateSiloFinHint",value.rotateSiloFinHint);
     setValue("StackFunc","rotateSiloPlaceNum",value.rotateSiloPlaceNum);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 void getManualAxis(uint8_t defaultV)
@@ -994,6 +1024,7 @@ void setManualAxis(D_ManualAxis value)
     setValue("ManualAxis","multiply",value.multiply);
     setValue("ManualAxis","handwheelAxis",value.handwheelAxis);
     Ini_Parasettings.sync();
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
@@ -1004,7 +1035,7 @@ void setManualAxis(D_ManualAxis value)
 //读取所有文件程序信息
 void getProgramNameAndPath()
 {
-    if(CheckFileComplete(AllExistingProgramInfoPath))
+    if(CheckFileComplete(AllExistingProgramInfoPath,1))
     {
         m_ProgramNameAndPath.clear();
 
@@ -1030,7 +1061,14 @@ void getProgramNameAndPath()
         bool temp = g_SafeFileHandler->attemptRecovery(AllExistingProgramInfoPath);
         if(temp)
         {
+            static uint8_t tempNum = 0;
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(AllExistingProgramInfoPath);
+
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else
@@ -1058,7 +1096,7 @@ void setProgramNameAndPath(const QList<D_ProgramNameAndPathStruct>& programsInfo
         settings.endGroup();
     }
     settings.sync();
-
+    writeWithFooter(AllExistingProgramInfoPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(AllExistingProgramInfoPath.toLocal8Bit().data());
 }
 //保存开机加载程序信息
@@ -1074,6 +1112,7 @@ void savePowerOnReadOneProInfo(D_ProgramNameAndPathStruct value)
     settings.setValue("time",value.changeTime);
     settings.endGroup();
     settings.sync();
+    writeWithFooter(PowerOnReadOneProPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(PowerOnReadOneProPath.toLocal8Bit().data());
 }
 //读取开机加载程序信息
@@ -1162,12 +1201,13 @@ void savePasswdToConfig(int authority, uint32_t value)
     settings.setValue(QString("Authority_%1").arg(authority), value);
     settings.endGroup();
     settings.sync();
+    writeWithFooter(PasswdConfigPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(PasswdConfigPath.toLocal8Bit().data());
 }
 
 void readPasswdFromConfig()
 {
-    if(CheckFileComplete(PasswdConfigPath))
+    if(CheckFileComplete(PasswdConfigPath,1))
     {
         QSettings settings(PasswdConfigPath, QSettings::IniFormat);
         settings.beginGroup("Passwd");
@@ -1183,7 +1223,15 @@ void readPasswdFromConfig()
         bool temp = g_SafeFileHandler->attemptRecovery(PasswdConfigPath);
         if(temp)
         {
+
+            static uint8_t tempNum = 0;
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(PasswdConfigPath);
+
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else
@@ -1204,6 +1252,7 @@ void writeKeySetStrToConfig(int index, const QString &text)
     settings.setValue(QString("Key_%1").arg(index), text);
     settings.endGroup();
     settings.sync();
+    writeWithFooter(KeyAndSignalDescriptionPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(KeyAndSignalDescriptionPath.toLocal8Bit().data());
 }
 
@@ -1233,6 +1282,7 @@ void writeSigSetStrToConfig(int index, const QString &text)
     settings.setValue(QString("Sig_%1").arg(index), text);
     settings.endGroup();
     settings.sync();
+    writeWithFooter(KeyAndSignalDescriptionPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(KeyAndSignalDescriptionPath.toLocal8Bit().data());
 }
 
@@ -1265,6 +1315,7 @@ void writeOnlineSafeInOutDescription(int group, const std::vector<QString> &desc
     }
     settings.endGroup();
     settings.sync();
+    writeWithFooter(IOPortDescriptionPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(IOPortDescriptionPath.toLocal8Bit().data());
 }
 
@@ -1298,6 +1349,7 @@ void writeLimitSigDescription(int index, const std::vector<QString> &describeStr
     }
     settings.endGroup();
     settings.sync();
+    writeWithFooter(IOPortDescriptionPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(IOPortDescriptionPath.toLocal8Bit().data());
 }
 
@@ -1341,6 +1393,7 @@ void writeGuideInfo()
         // End the group
         settings.endGroup();
     }
+    writeWithFooter(GuideInfoPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(GuideInfoPath.toLocal8Bit().data());
 }
 
@@ -1372,7 +1425,7 @@ void readGuideInfo()
 
 void readNameDefine()
 {
-    if(CheckFileComplete(CustomizeNameDefPath))
+    if(CheckFileComplete(CustomizeNameDefPath,1))
     {
         QSettings settings(CustomizeNameDefPath, QSettings::IniFormat);
         settings.setIniCodec(QTextCodec::codecForName("utf-8"));
@@ -1411,7 +1464,15 @@ void readNameDefine()
         bool temp = g_SafeFileHandler->attemptRecovery(CustomizeNameDefPath);
         if(temp)
         {
+
+            static uint8_t tempNum = 0;
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(CustomizeNameDefPath);
+
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else
@@ -1453,6 +1514,7 @@ void writeNameDefine()
 
     settings.endGroup();
     settings.sync();
+    writeWithFooter(CustomizeNameDefPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(CustomizeNameDefPath.toLocal8Bit().data());
 }
 
@@ -1483,6 +1545,7 @@ void writeReferenceInfo()
 
     // Refresh user buffer
     settings.sync();
+    writeWithFooter(filePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(filePath.toLocal8Bit().data());
 }
 
@@ -1509,6 +1572,7 @@ void readReferenceInfo()
         g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,i+1);//发送参考点信息
         settings.endGroup();
     }
+
 }
 
 void setProgramPermission(const QString &programName, int permission)
@@ -1519,6 +1583,7 @@ void setProgramPermission(const QString &programName, int permission)
 
     settings.setValue("permission", permission);
     settings.sync();
+    writeWithFooter(filePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(filePath.toLocal8Bit().data());
 }
 
@@ -1556,12 +1621,13 @@ void writePortDefInfo()
         settings.endGroup();
     }
     settings.sync();
+    writeWithFooter(CustomizePortInfoPath,CheckFileString);
     REFRESH_KERNEL_BUFFER(CustomizePortInfoPath.toLocal8Bit().data());
 }
 
 void readPortDefInfo()
 {
-    if(CheckFileComplete(CustomizePortInfoPath))
+    if(CheckFileComplete(CustomizePortInfoPath,1))
     {
         QSettings settings(CustomizePortInfoPath, QSettings::IniFormat);
         settings.setIniCodec("UTF-8");
@@ -1606,6 +1672,13 @@ void readPortDefInfo()
         if(temp)
         {
             qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(CustomizePortInfoPath);
+
+            static uint8_t tempNum = 0;
+            tempNum++;
+            if(tempNum >=2)
+            {
+                return;
+            }
             readIniPara();
         }
         else
@@ -1653,6 +1726,7 @@ void setAutoPagePar()
         setValue("AutoPagePar",QString("StartReset_%1").arg(i),m_AutoPageVar.StartReset[i]);
         setValue("AutoPagePar",QString("PowerOffMemory_%1").arg(i),m_AutoPageVar.PowerOffMemory[i]);
     }
+    writeWithFooter(m_configFileNamePath,CheckFileString);
     REFRESH_KERNEL_BUFFER(m_configFileNamePath.toLocal8Bit().data());
 }
 
@@ -1669,8 +1743,8 @@ void getAutoPagePar()
     }
 }
 
-//校验文件正确性
-bool CheckFileComplete(QString FilePath)
+//校验文件正确性  type = 0 不需要校验文件末尾内容  type = 1需要校验文件末尾字符
+bool CheckFileComplete(QString FilePath,uint8_t type)
 {
     bool status = true;
     QFile configFile(FilePath);
@@ -1684,10 +1758,84 @@ bool CheckFileComplete(QString FilePath)
         qDebug() << QString("配置文件%1无法打开，错误信息：%2").arg(FilePath).arg(configFile.errorString());
         status = false;
     }
-    if((configFile.size()<10))
+    if((configFile.size()<1))
     {//正常文件不可能这么少，如果小于10个字节，说明文件异常
         qDebug()<<QString("配置文件%1大小异常").arg(FilePath);
         status = false;
     }
+    if(type == 1)
+    {
+        QString checkDate = readFromFileEnd(FilePath,CheckFileString.size());
+        if(checkDate != CheckFileString)
+        {//校验文件末尾字符是否是正确的
+            status = false;
+        }
+    }
     return status;
+}
+//读取文件末尾指定大小数据 filePath:文件名称 bytesToRead：要读取的字节数
+QString readFromFileEnd(const QString &filePath, qint64 bytesToRead)
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qWarning() << "无法打开文件：" << file.errorString();
+        return "";
+    }
+
+    // 计算实际可读取的字节数（避免文件过小）
+    qint64 fileSize = file.size();
+    if (bytesToRead > fileSize) {
+        bytesToRead = fileSize;
+        qWarning() << "请求读取的字节数超过文件大小，将读取整个文件";
+    }
+
+    // 定位到文件末尾前 N 字节的位置
+    if (!file.seek(fileSize - bytesToRead)) {
+        qWarning() << "定位文件指针失败：" << file.errorString();
+        file.close();
+        return "";
+    }
+
+    // 读取数据
+    QString data = file.read(bytesToRead);
+    if (data.size() != bytesToRead) {
+        qWarning() << "读取数据不完整，实际读取字节数：" << data.size();
+    }
+    file.seek(0);
+    file.close();
+    return data;
+}
+
+/*************************************************************************
+**  函数名：writeWithFooter()
+**	输入参数：filePath 文件路径  newData 要写入的新数据 footer 标记内容 CheckFileString
+**	输出参数：无
+**	函数功能：向文件写入标记
+**  作者：    wk
+**  开发日期：2025/4/2
+**************************************************************************/
+bool writeWithFooter(const QString& filePath,const QString footer) {
+    QString lastLine;
+    QFile file(filePath);
+    lastLine = readFromFileEnd(filePath,CheckFileString.size());
+    if (lastLine == footer)
+    {
+        return true; // 最后一行已经是目标内容，无需写入
+    }
+    // 以追加模式打开文件（如果文件不存在则自动创建）
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
+        return false; // 文件无法打开
+    }
+    QTextStream out(&file);
+
+    // 如果文件非空且最后一行不匹配，添加换行符
+    if (file.size() > 0) {
+        out << lineFeed; // 确保 footer 在新行
+    }
+
+    // 写入新的 footer
+    out << footer;
+    file.close();
+    qDebug() << QString("文件%1添加校验字符%2成功").arg(filePath).arg(footer);
+    return true;
 }

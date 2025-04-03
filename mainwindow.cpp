@@ -872,33 +872,17 @@ void MainWindow::posflashhandle(AxisCurPos data)
 }
 void MainWindow::setStyleFromFile(const QString &styleSheet)
 {
-    if(CheckFileComplete(styleSheet))
+    QFile file(styleSheet);
+    file.open(QIODevice::ReadOnly);
+    if(file.isOpen())
     {
-        QFile file(styleSheet);
-        file.open(QIODevice::ReadOnly);
-        if(file.isOpen())
-        {
-            QString strFile = QLatin1String(file.readAll());
-            qApp->setStyleSheet(strFile);
+        QString strFile = QLatin1String(file.readAll());
+        qApp->setStyleSheet(strFile);
 
-            file.close();
-        }
-        else
-            qDebug() << "Fail to open stylesheet file: " << styleSheet;
+        file.close();
     }
     else
-    {
-        bool temp = g_SafeFileHandler->attemptRecovery(styleSheet);
-        if(temp)
-        {
-            qDebug()<<QString("文件%1异常，尝试恢复备份文件成功").arg(styleSheet);
-            readIniPara();
-        }
-        else
-        {
-            qDebug()<<QString("文件%1异常，且尝试恢复备份文件失败").arg(styleSheet);
-        }
-    }
+        qDebug() << "Fail to open stylesheet file: " << styleSheet;
 }
 
 // ultimize the event mechanism in Qt to call virtual keyboard
@@ -1436,6 +1420,7 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
 //            showErrorTip(SysText,TipMode::NORMAL);
 //        }
         ui->Progress_bar->setValue((100/30)*SysIndex);
+        qDebug() << QString("同步到第%1步").arg(MySync_Data.SyncStep);
     }
     else if(SysIndex==SysSendIndex::CMD_SENDERROR)
     {
@@ -1564,8 +1549,8 @@ void MainWindow::m_RobotStateRefreash()
         if(dlgErrorTip->isVisible())
         {
             dlgErrorTip->reject();
+            m_RobotOriginState = 2;
         }
-        m_RobotOriginState = 2;
     }
     //复位状态处理
     if((m_RobotRunSta == MAC_STA_RESET || m_RobotRunSta == MAC_STA_RESET_ORDER) && m_RobotResetState != 2 && m_RobotOriginState == 2 && RobotResetPromptFlag == true)

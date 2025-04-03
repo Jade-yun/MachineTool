@@ -719,6 +719,11 @@ uint8_t g_InsertProOrder(uint8_t* data)
     g_FreeProOrder(&proOrder);				//释放临时变量中的命令指针
     OrderNeedSaveFlag = true;
     g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_INSERT,m_OperateProNum,m_CurrentSelectProOrderList,0);
+    m_CurrentSelectProOrderList++;
+    if(m_CurrentSelectProOrderList>m_OperateProOrderListNum)
+    {
+        m_CurrentSelectProOrderList = m_OperateProOrderListNum;
+    }
     return 0;   
 }
 

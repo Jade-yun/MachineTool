@@ -788,6 +788,7 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             len += 2;
             break;
         case CMD_SUN_SP_RAMPAGE_LIMIT://横行位置限定
+            len = 0;
             sendDataBuf[len] = (uint8_t)m_DegreeParS.saveRampageHige_Z1;
             sendDataBuf[len+1] = (uint8_t)(m_DegreeParS.saveRampageHige_Z1>>8);
             sendDataBuf[len+2] = (uint8_t)(m_DegreeParS.saveRampageHige_Z1>>16);
@@ -808,6 +809,7 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             sendDataBuf[len+2] = (uint8_t)(m_DegreeParS.saveRotatePos_Y2>>16);
             sendDataBuf[len+3] = (uint8_t)(m_DegreeParS.saveRotatePos_Y2>>24);
             len += 4;
+            qDebug()<<"横行位置限定参数发送完成";
             break;
         default:
             break;
@@ -1060,6 +1062,8 @@ void Usart::ExtendSendParDeal(uint8_t mainCmd, uint8_t sunCmd, uint16_t parNum, 
             sendDataBuf[len] = (uint8_t)m_RunPar.breakPointList;
             sendDataBuf[len+1] = (uint8_t)(m_RunPar.breakPointList>>8);
             len+=2;
+            sendDataBuf[len] = m_RunPar.cycle_stop;
+            len+=1;
         }
         else if(sunCmd == CMD_SUN_STA_CLEAR_ALARM)
         {
@@ -1234,6 +1238,14 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                     MoveStackFollowPoint.Stack_Axis_Pos[2] = (uint32_t)recDataBuf[19] + ((uint32_t)recDataBuf[20]<<8) + ((uint32_t)recDataBuf[21]<<16) + ((uint32_t)recDataBuf[22]<<24);
                     emit Stack_Axis_Pos_Refresh();
                     break;
+                case CMD_SUN_STA_PAR:
+                    m_RunPar.planProductNum = (uint32_t)recDataBuf[4] + ((uint32_t)recDataBuf[5]<<8) + ((uint32_t)recDataBuf[6]<<16) + ((uint32_t)recDataBuf[7]<<24);
+                    m_RunPar.globalSpeed = recDataBuf[8];
+                    m_RunPar.breakPointFlag = recDataBuf[9];
+                    m_RunPar.breakPointProNum = recDataBuf[10];
+                    m_RunPar.breakPointList = (uint16_t)recDataBuf[11] + ((uint16_t)recDataBuf[12]<<8);
+                    m_RunPar.cycle_stop = recDataBuf[13];
+                    break;
                 default :
                     break;
                 }
@@ -1401,6 +1413,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                     }
                     break;
                 case CMD_SUN_SP_RAMPAGE_LIMIT:
+                    qDebug()<<"接收到横行位置限定参数反馈";
                     if(MySync_Data.SysDataFlag == 1)
                     {
                         MySync_Data.sp_rampage_limit = true;
@@ -1476,6 +1489,14 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                     {
                         MySync_Data.sysdatafinish = true;
                     }
+                }
+                break;
+            case CMD_MAIN_PRO:
+                switch (recDataBuf[1])
+                {
+                case CMD_SUN_PRO_ORDER:
+                    MySync_Data.OrderSendRetrun = 1;
+                    break;
                 }
                 break;
             default:
@@ -3652,7 +3673,7 @@ uint8_t Usart::DataSyc()
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,6);
         }
-        else if(MySync_Data.sp_axis_limit == 6)
+        else if(MySync_Data.sp_axis_limit >= 6)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
