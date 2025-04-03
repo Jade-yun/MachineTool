@@ -808,7 +808,7 @@ void ManualForm::saveManualAxisActionPara()
     }
     m_manualAxis.axis = AxisIndex;//ui->cb_axisActionAxis->currentIndex();
     m_manualAxis.speed = ui->editAxisActionSpeed->text().toInt();
-    m_manualAxis.pos_pos = ui->editPositionAdd->text().toFloat() * 100;
+    m_manualAxis.pos_pos = ui->editPositionAdd->text().toDouble() * 100;
     m_manualAxis.sub_pos = ui->editPositionSub->text().toDouble() * 100;
     m_manualAxis.ZDrop = ui->chbZAxisDesend->isChecked();
 }
@@ -1176,7 +1176,7 @@ void ManualForm::setupAxisActionConnections()
         g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,2);
     });
     connect(ui->HandPosDown,&QPushButton::clicked,this,[=](){
-//        if (ui->cb_axisActionAxis->currentIndex() == 0) return;
+        if (ui->cb_axisActionAxis->currentIndex() == 0) return;
         g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_INCREMENT,m_manualAxis.axis,1);
     });
 
@@ -1660,7 +1660,7 @@ void ManualForm::on_btnSaveReference_clicked()
         {
             m_RefPoint[arrayIndex].pos[j] = referencePoints.at(i).axisPos[j];
         }
-        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,i+1);//发送参考点信息
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_REF,arrayIndex + 1);//发送参考点信息
     }
 
     ::writeReferenceInfo();

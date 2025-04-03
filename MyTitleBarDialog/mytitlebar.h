@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QTimer>
+#include <QElapsedTimer>
 #include <QPainterPath>
 enum ButtonType
 {
@@ -98,6 +99,8 @@ public:
         bool m_isTransparent;
         // 窗口边框宽度;
         int m_windowBorderWidth;
+
+        static QElapsedTimer timer;
 };
 
 #endif // MYTITLEBAR_H

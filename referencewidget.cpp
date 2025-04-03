@@ -1,12 +1,13 @@
 #include "referencewidget.h"
 
 #include <QHeaderView>
-#include "mainwindow.h"
+#include <QThread>
 
 extern QString REFERPOINT_PIC;
 
 ReferenceWidget::ReferenceWidget(QWidget *parent)
-    : QDialog(parent), selectedReferPoint(nullptr)
+    : QDialog(parent),
+      paramChangedFlag(false), selectedReferPoint(nullptr)
 {
     init();
 
@@ -36,16 +37,16 @@ ReferenceWidget::ReferenceWidget(QWidget *parent)
     });
 
     connect(btnOK, &QPushButton::clicked, this, [=](){
+        if (paramChangedFlag) {
+            this->saveReferPointsInfo();
+        }
         this->hide();
     });
     connect(btnCancel, &QPushButton::clicked, this, [=](){
         this->hide();
     });
 
-    connect(btnFresh, &QPushButton::clicked, this, [=]()
-    {
-
-    });
+    connect(btnFresh, &QPushButton::clicked, this, &ReferenceWidget::refreshReferPointAxisPos);
 
     connect(btnEditRefName, &QPushButton::clicked, this, [=]()
     {
@@ -59,28 +60,21 @@ ReferenceWidget::ReferenceWidget(QWidget *parent)
             {
                 auto keyboard = FullKeyboard::instance();
 
-//                keyboard.setText(it->name);
-//                keyboard.setCurrentEditObj(textReferPointName);
-//                keyboard.exec(); // must use exec here, using open cannot ensure to save the name.
-
-//                QString text = keyboard.getInputText();
-
-//                static FullKeyboard* keyboard = nullptr;
-//                if (!keyboard)
-//                {
-//                    keyboard = new FullKeyboard(this);
-//                }
-
                 keyboard->setText(it->name);
-                keyboard->setCurrentEditObj(textReferPointName);
+                keyboard->setCurrentEditObj(nullptr);
+
                 keyboard->exec(); // must use exec here, using open cannot ensure to save the name.
 
+                QApplication::processEvents();
+
                 QString text = keyboard->getInputText();
+                textReferPointName->setText(text);
 
 
                 if (it->name != text )
                 {
-                    it->name = text;;
+                    it->name = text;
+                    paramChangedFlag = true;
                 }
             }
         }
@@ -196,7 +190,6 @@ void ReferenceWidget::init()
     fremeBase->setWidget(this);
 
 //    keyboard = new FullKeyboard(this);
-//    keyboard->hide();
 }
 
 
@@ -365,6 +358,68 @@ void ReferenceWidget::refreshPosTable()
             }
         }
     }
+}
+
+void ReferenceWidget::refreshReferPointAxisPos()
+{
+    if (selectedReferPoint)
+    {
+        auto it = std::find_if(referencePoints.begin(), referencePoints.end(), [=](const ReferPointPara& point) {
+            return point.button == selectedReferPoint;
+        });
+
+        if (it != referencePoints.end())
+        {
+            const std::array<int, AXIS_TOTAL_NUM> curAxisPos = {
+                m_AxisCurPos.Pos_x, m_AxisCurPos.Pos_y, m_AxisCurPos.Pos_z,
+                m_AxisCurPos.Pos_c, m_AxisCurPos.Pos_y2, m_AxisCurPos.Pos_z2
+            };
+
+            bool axisPosChangedFlag = false;
+            for (int i = 0; i < AXIS_TOTAL_NUM; i++)
+            {
+                if (it->axisPos[i] != curAxisPos[i])
+                {
+                    it->axisPos[i] = curAxisPos[i];
+                    axisPosChangedFlag = true;
+                }
+            }
+            if (axisPosChangedFlag)
+            {
+                refreshPosTable();
+                paramChangedFlag = true;
+            }
+        }
+
+    }
+}
+
+void ReferenceWidget::saveReferPointsInfo()
+{
+    // 重置结构体信息
+    P_RefStruct defaultRefPoint = {0, {0}, {0}, "", 0, 0};
+    std::fill(std::begin(m_RefPoint), std::end(m_RefPoint), defaultRefPoint);
+
+   // 更新结构体信息
+    for (int i = 0; i < referencePoints.size(); i++)
+    {
+        int arrayIndex = referencePoints.at(i).index - 1;
+        m_RefPoint[arrayIndex].refFlag = true;
+        //            m_RefPoint[arrayIndex].index = referencePoints.at(i).index;
+        m_RefPoint[arrayIndex].refName = referencePoints.at(i).name;
+        m_RefPoint[arrayIndex].xPos = referencePoints.at(i).pointPos.x();
+        m_RefPoint[arrayIndex].yPos = referencePoints.at(i).pointPos.y();
+//     need to save axis position to corresponding program file.
+//     TO DO...
+
+        for (int j = 0; j < AXIS_TOTAL_NUM; j++)
+        {
+            m_RefPoint[arrayIndex].pos[j] = referencePoints.at(i).axisPos[j];
+        }
+        g_Usart->ExtendSendProDeal(CMD_MAIN_PRO, CMD_SUN_PRO_REF, arrayIndex + 1);//发送参考点信息
+    }
+
+    ::writeReferenceInfo();
 }
 
 void ReferenceWidget::showEvent(QShowEvent *event)

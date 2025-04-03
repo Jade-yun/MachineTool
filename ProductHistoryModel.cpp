@@ -123,6 +123,5 @@ void ProductHistoryModel::loadFromSettings()
         m_data.prepend(info);
     }
 
-    settings.endGroup();
     endResetModel();
 }

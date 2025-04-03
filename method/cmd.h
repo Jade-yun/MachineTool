@@ -19,18 +19,22 @@ enum HandControlKeyCode{
     RETURN  = 152,   //复归
     UP      = 155,
     DOWN    = 154,
-    RIGHT_KEY1 = 158,//默认用作Y-
-    RIGHT_KEY2 = 170,//Y+
-    RIGHT_KEY3 = 162,//x-
-    RIGHT_KEY4 = 166,//x+
-    RIGHT_KEY5 = 157,//Z-
-    RIGHT_KEY6 = 161,//Z+
-    RIGHT_KEY7 = 165,//A-
-    RIGHT_KEY8 = 169,//A+
-    RIGHT_KEY9 = 156,//Y2-
-    RIGHT_KEY10 = 168,//Y2+
-    RIGHT_KEY11 = 160,//X2-
-    RIGHT_KEY12 = 164,//X2+
+    RIGHT_KEY1  = 156,   // X-
+    RIGHT_KEY2  = 157,   // X+
+    RIGHT_KEY3  = 160,   // Y-
+    RIGHT_KEY4  = 161,   // Y+
+    RIGHT_KEY5  = 164,   // Z-
+    RIGHT_KEY6  = 165,   // Z+
+    RIGHT_KEY7  = 168,   // C-
+    RIGHT_KEY8  = 169,   // C+
+    RIGHT_KEY9  = 171,   // Y2-
+    RIGHT_KEY10 = 170,    // Y2+
+    RIGHT_KEY11 = 167,    // Z2-
+    RIGHT_KEY12 = 166,    // Z2+
+    RIGHT_KEY13 = 163,    // F1+
+    RIGHT_KEY14 = 152,    // F2+
+    RIGHT_KEY15 = 159,    // F3+
+    RIGHT_KEY16 = 158     // F4+
 };
 
 // 三档开关的三种模式

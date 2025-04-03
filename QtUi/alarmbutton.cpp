@@ -2,15 +2,18 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 
+static const int AlarmIconWidth = 60;
+static const int AlarmIconHeight = 60;
+
 // === 报警按钮实现 ===
 AlarmButton::AlarmButton(QWidget *parent) : QPushButton(parent),
     alarmActive(false), currentIconVisible(true) {
 
-    alarmPixmap = QPixmap(":/images/alarm_red.png").scaled(70, 70, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    alarmPixmap = QPixmap(":/images/alarm_red.png").scaled(AlarmIconWidth, AlarmIconHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     // 创建 QLabel 作为图标显示
     iconLabel = new QLabel(this);
-    iconLabel->setFixedSize(70, 70); // 设置图标大小
+    iconLabel->setFixedSize(AlarmIconWidth, AlarmIconHeight); // 设置图标大小
     iconLabel->setScaledContents(true);
     iconLabel->setPixmap(alarmPixmap); // 默认黄色图标
 

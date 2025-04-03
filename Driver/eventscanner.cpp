@@ -227,5 +227,6 @@ void EventScanner::parseEvent(struct input_event in_ev, const QString& deviceNam
         if(in_ev.value == 2)
             return;
         emit eventRightKey(in_ev.code, in_ev.value);
+//        qDebug() << "code: " << in_ev.code << ", value: " << in_ev.value;
     }
 }

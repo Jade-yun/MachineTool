@@ -9,6 +9,8 @@
 #define BUTTON_WIDTH 40			// 按钮宽度;
 #define TITLE_HEIGHT 50			// 标题栏高度;
 
+QElapsedTimer MyTitleBar::timer;
+
 MyTitleBar::MyTitleBar(QWidget *parent)
     : QDialog(parent)
     , m_colorR(153)
@@ -254,10 +256,17 @@ void MyTitleBar::mouseMoveEvent(QMouseEvent *event)
 {
     if (m_isPressed)
     {
-        QPoint movePoint = event->globalPos() - m_startMovePos;
-        QPoint widgetPos = this->parentWidget()->pos();
-        m_startMovePos = event->globalPos();
-        this->parentWidget()->move(widgetPos.x() + movePoint.x(), widgetPos.y() + movePoint.y());
+        if (!timer.isValid()) timer.start();
+
+        if (timer.elapsed() > 40) // 40ms -> 25FPS
+        {
+            timer.restart();
+
+            QPoint movePoint = event->globalPos() - m_startMovePos;
+            QPoint widgetPos = this->parentWidget()->pos();
+            m_startMovePos = event->globalPos();
+            this->parentWidget()->move(widgetPos.x() + movePoint.x(), widgetPos.y() + movePoint.y());
+        }
     }
     return QWidget::mouseMoveEvent(event);
 }

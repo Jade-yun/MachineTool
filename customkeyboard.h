@@ -25,8 +25,8 @@ protected:
     }
 public:
     static FullKeyboard* instance();
-private:
     FullKeyboard(QWidget* parent = nullptr);
+private:
 #else
 public:
     FullKeyboard(QWidget* parent = nullptr);

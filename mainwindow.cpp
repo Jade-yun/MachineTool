@@ -351,10 +351,8 @@ MainWindow::MainWindow(QWidget *parent)
             alarmBar->showAlarm(newAlarmNum);
         }
     });
-    connect(ui->btnHandBook, &QPushButton::clicked, this, [=](){
-
-        ui->btnAlarm->startAlarm();
-    });
+//    connect(ui->btnHandBook, &QPushButton::clicked, this, [=](){
+//    });
 
 }
 
@@ -1240,77 +1238,89 @@ void MainWindow::AdjustSpeedHandel(uint8_t AdjustType)
 //按键膜按键按下并发送按下指令，
 void MainWindow::keyAxisCommandSend(uint16_t code, int32_t value)
 {
-    uint8_t KeyIndex = 0;//对应按键/信号界面的名称
+    uint8_t keyIndex = 0;//对应按键/信号界面的名称
+    // 0->停止 1->反向 2->正向
     uint8_t dirction = 0;//如果按键功能是轴移动，用来控制正转，反转或停止
     switch (code)
     {
     case HandControlKeyCode::RIGHT_KEY1:
-        KeyIndex = 2;
-        dirction = 1;
+        keyIndex = 0;
         break;
     case HandControlKeyCode::RIGHT_KEY2:
-        KeyIndex = 3;
-        dirction = 2;
+        keyIndex = 1;
         break;
     case HandControlKeyCode::RIGHT_KEY3:
-        KeyIndex = 0;
-        dirction = 1;
+        keyIndex = 2;
         break;
     case HandControlKeyCode::RIGHT_KEY4:
-        KeyIndex = 1;
-        dirction = 2;
+        keyIndex = 3;
         break;
     case HandControlKeyCode::RIGHT_KEY5:
-        KeyIndex = 4;
-        dirction = 1;
+        keyIndex = 4;
         break;
     case HandControlKeyCode::RIGHT_KEY6:
-        KeyIndex = 5;
-        dirction = 2;
+        keyIndex = 5;
         break;
     case HandControlKeyCode::RIGHT_KEY7:
-        KeyIndex = 6;
-        dirction = 1;
+        keyIndex = 6;
         break;
     case HandControlKeyCode::RIGHT_KEY8:
-        KeyIndex = 7;
-        dirction = 2;
+        keyIndex = 7;
         break;
     case HandControlKeyCode::RIGHT_KEY9:
-        KeyIndex = 10;
-        dirction = 1;
+        keyIndex = 8;
         break;
     case HandControlKeyCode::RIGHT_KEY10:
-        KeyIndex = 11;
-        dirction = 2;
+        keyIndex = 9;
         break;
     case HandControlKeyCode::RIGHT_KEY11:
-        KeyIndex = 8;
-        dirction = 1;
+        keyIndex = 10;
         break;
     case HandControlKeyCode::RIGHT_KEY12:
-        KeyIndex = 9;
-        dirction = 2;
+        keyIndex = 11;
+        break;
+    case HandControlKeyCode::RIGHT_KEY13:
+        keyIndex = 12;
+        break;
+    case HandControlKeyCode::RIGHT_KEY14:
+        keyIndex = 13;
+        break;
+    case HandControlKeyCode::RIGHT_KEY15:
+        keyIndex = 14;
+        break;
+    case HandControlKeyCode::RIGHT_KEY16:
+        keyIndex = 15;
         break;
     default:
         break;
     }
-    if(value == 0)
-    {
-        dirction = 0;
-    }
-    if(m_KeyFunc[KeyIndex].keyType == 0)
+    if(m_KeyFunc[keyIndex].keyType == 0)
     {//输出
-        if(value)
+        // 按下
+        if(value == 1)
         {
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT, m_KeyFunc[KeyIndex].funcNum, m_KeyFunc[KeyIndex].oprMode);
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_OUT, m_KeyFunc[keyIndex].funcNum, m_KeyFunc[keyIndex].oprMode);
         }
     }
-    else if(m_KeyFunc[KeyIndex].keyType == 2)
+    else if(m_KeyFunc[keyIndex].keyType == 2)
     {//轴
-        if(m_AxisPar[m_KeyFunc[KeyIndex].funcNum-1].axisType == 1)
+
+        // 松开
+        if(value == 0)
         {
-            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, m_KeyFunc[KeyIndex].funcNum, dirction);
+            dirction = 0;
+        }
+        // 按下或者长按
+        else if (value == 1 || value == 2)
+        {
+            if (keyIndex >= 0 && keyIndex < 12)
+            {
+                dirction = (keyIndex % 2) + 1;
+            }
+        }
+        if(m_AxisPar[m_KeyFunc[keyIndex].funcNum-1].axisType == 1)
+        {
+            g_Usart->ExtendSendManualOperationDeal(CMD_MAIN_MANUAL,CMD_SUN_MANUAL_AXIS, m_KeyFunc[keyIndex].funcNum, dirction);
         }
     }
 }

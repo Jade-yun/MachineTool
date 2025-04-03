@@ -55,6 +55,8 @@ QString FullKeyboard::getInputText() const
 FullKeyboard::FullKeyboard(QWidget* parent)
     : BaseWindow(parent)
 {
+    setWindowModality(Qt::ApplicationModal);
+
     editObj = nullptr;
 
     keyboard = new AeaQt::Keyboard(this);
@@ -91,7 +93,7 @@ void FullKeyboard::keyReleaseEvent(QKeyEvent *event)
         if (editObj)
         {
             if (editObj->setProperty("text", inputText)){
-                hide();
+                this->accept();
             }
         }
 
@@ -120,7 +122,7 @@ void FullKeyboard::keyReleaseEvent(QKeyEvent *event)
         {
             label->setText(textInput->text());
         }
-        hide();
+        this->accept();
     }
     emit enterPressed(textInput->text());
 //    QWidget::keyReleaseEvent(event);

@@ -42,11 +42,18 @@ private:
 
     void updateReferPointsAxisPos();
     void refreshPosTable();
+    void refreshReferPointAxisPos();
+    /**
+     * @brief 保存参考点界面上信息到参考点结构体
+     */
+    void saveReferPointsInfo();
 
+private:
+    bool paramChangedFlag; // 参考点信息改变标志
+    DraggableButton* selectedReferPoint; // 当前选中参考点
 private:
     QList<ReferPointPara> referencePoints;
     QTableWidget* tableReference;
-    DraggableButton* selectedReferPoint;
 
     QLabel* labReferPointPic;
     QFrame* frameRerencePoint;

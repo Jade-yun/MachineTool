@@ -242,7 +242,7 @@ AutoForm::AutoForm(QWidget *parent) :
 
     referEditDialog = new ReferenceWidget(this);
     referEditDialog->setWindowTitle(tr("参考点编辑"));
-    referEditDialog->setWindowModality(Qt::ApplicationModal);
+//    referEditDialog->setWindowModality(Qt::ApplicationModal);
 
     QWidget* parentWidget = this->parentWidget();
     QRect parentGeometry;
@@ -1761,7 +1761,7 @@ void AutoForm::showReferPointDialog()
     cancelButton->raise();
 
 #endif
-
+    referEditDialog->setWindowModality(Qt::WindowModal);
     referEditDialog->show();
 
 }
