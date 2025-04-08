@@ -18,7 +18,8 @@ public:
 
 public:
     void handleAlarm(uint16_t alarmNum);
-
+public slots:
+    void SaveParLogHandle(uint16_t MainIndex,uint16_t SunIndex,int32_t oldData,int32_t newData);
 private:
     void setupAlarmInfo();
     void addNewAlarmInfo();

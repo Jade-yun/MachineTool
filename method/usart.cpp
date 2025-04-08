@@ -49,7 +49,7 @@ uint16_t Usart::openSerialPort()
 void Usart::APP_Uart_SendData(const QByteArray &data)
 {
     m_serialPort->write(data);
-//    m_serialPort->waitForBytesWritten(1000);//确保
+//    qDebug()<<"data:"<<data;
 }
 
 
@@ -1428,7 +1428,7 @@ void Usart::ExtendReadParDeal(char mainCmd, char sunCmd, const QByteArray &recDa
                 case CMD_SUN_MAC_AXIS:
                     if(MySync_Data.SysDataFlag == 1)
                     {
-                        MySync_Data.mac_aixs = MySync_Data.SendData_flag;
+                        MySync_Data.mac_aixs++;
                     }
                     break;
                 case CMD_SUN_MAC_LIMIT_SWT:
@@ -2830,6 +2830,7 @@ uint8_t Usart::DataSyc()
             MySync_Data.out_type_State = false;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SIGNAL,CMD_SUN_SIGNAL_OUT_TYPE);
             MySync_Data.SendData_flag = 1;
+            UsartElapsedtimer.restart();
         }
         if(MySync_Data.out_type_State == true)
         {
@@ -2852,6 +2853,7 @@ uint8_t Usart::DataSyc()
                     MySync_Data.SendData_flag = 0;
                 }
                 MySync_Data.sendDataOutTime=0;
+                qDebug() << "重发周期" << UsartElapsedtimer.elapsed() << "毫秒";
             }
         }
         MySync_Data.SyncStep =1;
@@ -3229,25 +3231,28 @@ uint8_t Usart::DataSyc()
             MySync_Data.SendData_flag = 1;
         }
 
-        if(MySync_Data.save_calw == 1)
+        if(MySync_Data.save_calw == 1 && MySync_Data.SendData_flag == 1)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 2;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,2);//一共四组先发第2组
         }
-        else if(MySync_Data.save_calw == 2)
+        else if(MySync_Data.save_calw == 2 && MySync_Data.SendData_flag == 2)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 3;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,3);//一共四组先发第3组
         }
-        else if(MySync_Data.save_calw == 3)
+        else if(MySync_Data.save_calw == 3 && MySync_Data.SendData_flag == 3)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 4;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_CALW,4);//一共四组先发第4组
         }
-        else if(MySync_Data.save_calw == 4)
+        else if(MySync_Data.save_calw == 4 && MySync_Data.SendData_flag == 4)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
@@ -3265,7 +3270,7 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    MySync_Data.SendData_flag = MySync_Data.save_calw;
                 }
                 MySync_Data.sendDataOutTime=0;
             }
@@ -3283,25 +3288,28 @@ uint8_t Usart::DataSyc()
             MySync_Data.SendData_flag = 1;
         }
 
-        if(MySync_Data.save_online == 1)
+        if(MySync_Data.save_online == 1 && MySync_Data.SendData_flag == 1)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 2;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,2);
         }
-        if(MySync_Data.save_online == 2)
+        if(MySync_Data.save_online == 2 && MySync_Data.SendData_flag == 2)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 3;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,3);
         }
-        if(MySync_Data.save_online == 3)
+        if(MySync_Data.save_online == 3 && MySync_Data.SendData_flag == 3)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 4;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SAVE,CMD_SUN_SAVE_ONLINE,4);
         }
-        else if(MySync_Data.save_online == 4)
+        else if(MySync_Data.save_online == 4 && MySync_Data.SendData_flag == 4)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
@@ -3319,7 +3327,7 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    MySync_Data.SendData_flag = MySync_Data.save_online;
                 }
                 MySync_Data.sendDataOutTime=0;
             }
@@ -3445,43 +3453,49 @@ uint8_t Usart::DataSyc()
             MySync_Data.SendData_flag = 1;
         }
 
-        if(MySync_Data.servo_acc_dec == 1)
+        if(MySync_Data.servo_acc_dec == 1 && MySync_Data.SendData_flag == 1)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 2;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,2);
         }
-        else if(MySync_Data.servo_acc_dec == 2)
+        else if(MySync_Data.servo_acc_dec == 2 && MySync_Data.SendData_flag == 2)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 3;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,3);
         }
-        else if(MySync_Data.servo_acc_dec == 3)
+        else if(MySync_Data.servo_acc_dec == 3  && MySync_Data.SendData_flag == 3)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 4;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,4);
         }
-        else if(MySync_Data.servo_acc_dec == 4)
+        else if(MySync_Data.servo_acc_dec == 4 && MySync_Data.SendData_flag == 4)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 5;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,5);
         }
-        else if(MySync_Data.servo_acc_dec == 5)
+        else if(MySync_Data.servo_acc_dec == 5 && MySync_Data.SendData_flag == 5)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 6;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,6);
         }
-        else if(MySync_Data.servo_acc_dec == 6)
+        else if(MySync_Data.servo_acc_dec == 6 && MySync_Data.SendData_flag == 6)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 7;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SERVO,CMD_SUN_SERVO_ACC_DEC,7);
         }
-        else if(MySync_Data.servo_acc_dec == 7)
+        else if(MySync_Data.servo_acc_dec == 7 && MySync_Data.SendData_flag == 7)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
@@ -3499,7 +3513,7 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    MySync_Data.SendData_flag = MySync_Data.servo_acc_dec;
                 }
                 MySync_Data.sendDataOutTime=0;
             }
@@ -3589,25 +3603,28 @@ uint8_t Usart::DataSyc()
             MySync_Data.SendData_flag = 1;
         }
 
-        if(MySync_Data.sp_area == 1)
+        if(MySync_Data.sp_area == 1 && MySync_Data.SendData_flag == 1)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 2;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,2);
         }
-        else if(MySync_Data.sp_area == 2)
+        else if(MySync_Data.sp_area == 2 && MySync_Data.SendData_flag == 2)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag = 3;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,3);
         }
-        else if(MySync_Data.sp_area == 3)
+        else if(MySync_Data.sp_area == 3 && MySync_Data.SendData_flag == 3)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag  = 4;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AREA,4);
         }
-        else if(MySync_Data.sp_area == 4)
+        else if(MySync_Data.sp_area == 4 && MySync_Data.SendData_flag == 4)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
@@ -3625,7 +3642,7 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    MySync_Data.SendData_flag = MySync_Data.sp_area;
                 }
                 MySync_Data.sendDataOutTime=0;
             }
@@ -3643,37 +3660,42 @@ uint8_t Usart::DataSyc()
             MySync_Data.SendData_flag = 1;
         }
 
-        if(MySync_Data.sp_axis_limit == 1)
+        if(MySync_Data.sp_axis_limit == 1 && MySync_Data.SendData_flag == 1)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag=2;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,2);
         }
-        else if(MySync_Data.sp_axis_limit == 2)
+        else if(MySync_Data.sp_axis_limit == 2 && MySync_Data.SendData_flag == 2)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag=3;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,3);
         }
-        else if(MySync_Data.sp_axis_limit == 3)
+        else if(MySync_Data.sp_axis_limit == 3 && MySync_Data.SendData_flag == 3)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag=4;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,4);
         }
-        else if(MySync_Data.sp_axis_limit == 4)
+        else if(MySync_Data.sp_axis_limit == 4 && MySync_Data.SendData_flag == 4)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag=5;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,5);
         }
-        else if(MySync_Data.sp_axis_limit == 5)
+        else if(MySync_Data.sp_axis_limit == 5 && MySync_Data.SendData_flag == 5)
         {
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
+            MySync_Data.SendData_flag=6;
             g_Usart->ExtendSendParDeal(CMD_MAIN_SP,CMD_SUN_SP_AXIS_LIMIT,6);
         }
-        else if(MySync_Data.sp_axis_limit >= 6)
+        else if(MySync_Data.sp_axis_limit == 6 && MySync_Data.SendData_flag == 6)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
@@ -3691,7 +3713,7 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    MySync_Data.SendData_flag = MySync_Data.sp_axis_limit;
                 }
             }
             MySync_Data.sendDataOutTime=0;
@@ -3744,6 +3766,7 @@ uint8_t Usart::DataSyc()
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,1);
             MySync_Data.SendData_flag = 1;
             qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
+            UsartElapsedtimer.restart();
         }
 
         if(MySync_Data.mac_aixs == 1 && MySync_Data.SendData_flag == 1)
@@ -3751,8 +3774,9 @@ uint8_t Usart::DataSyc()
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,2);
-            MySync_Data.SendData_flag= 2;
+            MySync_Data.SendData_flag = 2;
             qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
+            UsartElapsedtimer.restart();
         }
         else if(MySync_Data.mac_aixs == 2 && MySync_Data.SendData_flag == 2)
         {
@@ -3761,6 +3785,7 @@ uint8_t Usart::DataSyc()
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,3);
             MySync_Data.SendData_flag =3;
             qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
+            UsartElapsedtimer.restart();
         }
         else if(MySync_Data.mac_aixs == 3 && MySync_Data.SendData_flag == 3)
         {
@@ -3769,6 +3794,7 @@ uint8_t Usart::DataSyc()
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,4);
             MySync_Data.SendData_flag = 4;
             qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
+            UsartElapsedtimer.restart();
         }
         else if(MySync_Data.mac_aixs == 4 && MySync_Data.SendData_flag == 4)
         {
@@ -3777,6 +3803,7 @@ uint8_t Usart::DataSyc()
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,5);
             MySync_Data.SendData_flag = 5;
             qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
+            UsartElapsedtimer.restart();
         }
         else if(MySync_Data.mac_aixs == 5 && MySync_Data.SendData_flag == 5)
         {
@@ -3785,12 +3812,14 @@ uint8_t Usart::DataSyc()
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_AXIS,6);
             MySync_Data.SendData_flag = 6;
             qDebug()<<"同步轴："<<MySync_Data.mac_aixs;
+            UsartElapsedtimer.restart();
         }
         else if(MySync_Data.mac_aixs == 6 && MySync_Data.SendData_flag == 6)
         {
             MySync_Data.SendData_flag = 0;
             MySync_Data.SendDataStep++;
             MySync_Data.sendDataNum=0;
+            UsartElapsedtimer.restart();
         }
         else
         {
@@ -3807,6 +3836,8 @@ uint8_t Usart::DataSyc()
                     if(MySync_Data.SendData_flag > 0)
                     {
                         MySync_Data.SendData_flag = MySync_Data.mac_aixs;
+                        qDebug() << QString("轴编号%1同步超时").arg(MySync_Data.mac_aixs);
+                        qDebug() << "重发周期" << UsartElapsedtimer.elapsed() << "毫秒";
                     }
                 }
                 MySync_Data.sendDataOutTime=0;
@@ -3889,7 +3920,6 @@ uint8_t Usart::DataSyc()
     }
     case SysSendIndex::CMD_MAC_SERVO:
     {
-        static uint8_t SendOldIndex = 0;
         if(MySync_Data.SendData_flag == 0)
         {
             MySync_Data.sendDataOutTime = 0;
@@ -3898,9 +3928,9 @@ uint8_t Usart::DataSyc()
             MySync_Data.SendData_flag = 1;
         }
 
-        if((MySync_Data.mac_servo>0) && (MySync_Data.mac_servo < 100) && SendOldIndex != MySync_Data.mac_servo)
+        if((MySync_Data.mac_servo>0) && (MySync_Data.mac_servo < 100) && MySync_Data.SendData_flag == MySync_Data.mac_servo)
         {
-            SendOldIndex = MySync_Data.mac_servo;
+            MySync_Data.SendData_flag+=1;
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_MAC,CMD_SUN_MAC_SERVO,MySync_Data.mac_servo);
@@ -3923,7 +3953,14 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    if(MySync_Data.mac_servo>0)
+                    {
+                        MySync_Data.SendData_flag = MySync_Data.mac_servo;
+                    }
+                    else
+                    {
+                        MySync_Data.SendData_flag = 0;
+                    }
                 }
                 MySync_Data.sendDataOutTime=0;
             }
@@ -3969,7 +4006,6 @@ uint8_t Usart::DataSyc()
     }
     case SysSendIndex::CMD_STACK_PAR:
     {
-        static uint8_t SendOldIndex = 0;
         if(MySync_Data.SendData_flag == 0)
         {
             MySync_Data.sendDataOutTime = 0;
@@ -3979,9 +4015,9 @@ uint8_t Usart::DataSyc()
             qDebug()<<"MySync_Data.stack_par:"<<MySync_Data.stack_par;
         }
 
-        if((MySync_Data.stack_par>0) && (MySync_Data.stack_par < 8) && SendOldIndex != MySync_Data.stack_par)
+        if((MySync_Data.stack_par>0) && (MySync_Data.stack_par < 8) && MySync_Data.SendData_flag == MySync_Data.stack_par)
         {
-            SendOldIndex = MySync_Data.stack_par;
+            MySync_Data.SendData_flag += 1;
             MySync_Data.sendDataOutTime = 0;
             MySync_Data.sendDataNum=0;
             g_Usart->ExtendSendParDeal(CMD_MAIN_STACK,CMD_SUN_STACK_PAR,MySync_Data.stack_par+1);
@@ -4005,7 +4041,14 @@ uint8_t Usart::DataSyc()
                 }
                 else
                 {
-                    MySync_Data.SendData_flag = 0;
+                    if(MySync_Data.stack_par>0)
+                    {
+                        MySync_Data.SendData_flag = MySync_Data.stack_par;
+                    }
+                    else
+                    {
+                        MySync_Data.SendData_flag = 0;
+                    }
                 }
                 MySync_Data.sendDataOutTime=0;
             }
@@ -4179,12 +4222,13 @@ uint8_t Usart::DataSyc()
 //参数同步处理函数
 void Usart::sync_data_handle(void)
 {
-    UsartTimer->start(40);
+    UsartTimer->start(20);
     MySync_Data.SendDataStep = 0;
     MySync_Data.SendData_flag = 0;
     MySync_Data.sendDataOutTime = 0;
     MySync_Data.SysDataFlag = 1;
     MySync_Data.sendDataNum=0;
-    MySync_Data.OutTimenum=3;
+    MySync_Data.OutTimenum=50;
+    UsartElapsedtimer.start();
     DataSyc();
 }

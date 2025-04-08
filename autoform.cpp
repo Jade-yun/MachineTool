@@ -1533,7 +1533,7 @@ void AutoForm::Auto_CurStep_Refresh()
 **************************************************************************/
 void AutoForm::Program_Follow_Refresh()
 { 
-    if(ui->btnFollow->isChecked() == true && m_RobotRunSta == MAC_STA_RUN)
+    if(ui->btnFollow->isChecked() == true)
     {//如果开启了跟随功能
         if(m_AutoInforRefresh.Program_Follow_Flog == 0)
         {

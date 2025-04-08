@@ -204,7 +204,7 @@ public:
     void closeSerialPort();
     QSerialPort *m_serialPort;
     QTimer *UsartTimer;
-
+    QElapsedTimer UsartElapsedtimer;
 signals:
     void receivedData(const QByteArray &data);
     void DataSycStateSignal(uint8_t SysSend_Index);

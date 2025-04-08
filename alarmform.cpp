@@ -3,10 +3,9 @@
 #include "RefreshKernelBuffer.h"
 #include <QSettings>
 #include <QDate>
-
 #include "cmd.h"
 #include "alarminfodialog.h"
-
+#include "iniconfig.h"
 #include "customkeyboard.h"
 #include "errortipdialog.h"
 
@@ -269,6 +268,48 @@ void AlarmForm::retranslate()
     }
     ui->tableAlarmInfo->setHorizontalHeaderLabels({tr("报警编号"), tr("报警内容"), tr("报警时间")});
 }
+/*************************************************************************
+**  函数名：  ParLogSaveHandle()
+**	输入参数：MainIndex：参数日志主编号  SunIndex：子编号，用来记录不同参数设置界面的控件编号，oldData：旧数据  newData：新数据
+**	输出参数：
+**	函数功能：参数日志信息存储处理
+**  作者：    wukui
+**  开发日期：2025/4/7
+**************************************************************************/
+void AlarmForm::SaveParLogHandle(uint16_t MainIndex,uint16_t SunIndex,int32_t oldData,int32_t newData)
+{
+    int count  = ParLogInfoSettings.value("ParLogCount",0).toUInt()+1;
+    if(count>MaxParLogCount)
+    {//最多存储2000条日志
+        return;
+    }
+    QString ParLogTime = QDateTime::currentDateTime().toString("yyyy-MM-dd HH:mm:ss");
+    ParLogInfoSettings.setValue("ParLogCount", count);
+    ParLogInfoSettings.setValue(QString("MainIndex%1").arg(count), MainIndex);
+    ParLogInfoSettings.setValue(QString("SunIndex%1").arg(count), SunIndex);
+    ParLogInfoSettings.setValue(QString("oldData%1").arg(count), oldData);
+    ParLogInfoSettings.setValue(QString("newData%1").arg(count), newData);
+    ParLogInfoSettings.setValue(QString("ParLogTime%1").arg(count), ParLogTime);
+    ParLogInfoSettings.sync();
+    REFRESH_KERNEL_BUFFER(ParLogInfoDataPath.toLocal8Bit().data());
+}
+/*************************************************************************
+**  函数名：  ParLogSaveHandle()
+**	输入参数：MainIndex：参数日志主编号  SunIndex：子编号，用来记录不同参数设置界面的控件编号，oldData：旧数据  newData：新数据
+**	输出参数：
+**	函数功能：参数日志信息存储处理
+**  作者：    wukui
+**  开发日期：2025/4/7
+**************************************************************************/
+//void AlarmForm::GetParLogHandle()
+//{
+
+//    alarmInfoSettings.beginGroup(QString::number(MainIndex));
+//    alarmInfoSettings.setValue("SunIndex", SunIndex);
+//    alarmInfoSettings.setValue("oldData", oldData);
+//    alarmInfoSettings.setValue("newData", newData);
+//    alarmInfoSettings.sync();
+//}
 
 void AlarmForm::changeEvent(QEvent *e)
 {

@@ -15,11 +15,9 @@ class SafeFileHandler : public QObject {
 public:
     explicit SafeFileHandler(QObject *parent = nullptr);
 
-    bool writeData(QString m_filePath,const QByteArray &data);
     void rotateBackups(QString filePath);//备份文件
     bool attemptRecovery(QString filePath);//从备份文件恢复
     bool ClearBackups(QString filePath);//删除备份文件
-    QByteArray readData(QString m_filePath,bool verify = true);
 private:
     QString m_filePath;
     QString m_backupDir;

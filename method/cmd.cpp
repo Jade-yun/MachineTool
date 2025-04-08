@@ -6,6 +6,7 @@ cmd::cmd()
 
 }
 
+uint16_t MaxParLogCount = 2000;  //最大参数日志数量
 TriMode curMode = TriMode::STOP; // 三档开关当前模式
 NeedSaveSettingPar M_SaveSetPar;
 

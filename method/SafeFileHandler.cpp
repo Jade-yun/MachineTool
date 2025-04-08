@@ -30,62 +30,6 @@ SafeFileHandler::SafeFileHandler(QObject *parent)
     }
 }
 
-bool SafeFileHandler::writeData(QString filePath,const QByteArray &data) {
-    // 步骤1：原子写入临时文件
-    m_filePath = filePath;
-    QString tmpPath = m_filePath + ".tmp";
-    QSaveFile tmpFile(tmpPath);
-
-    if (!tmpFile.open(QIODevice::WriteOnly)) {
-        qDebug() << "无法打开临时文件:" << tmpFile.errorString();
-        return false;
-    }
-
-    // 写入数据并计算校验和
-    tmpFile.write(data);
-    m_lastChecksum = QCryptographicHash::hash(data, QCryptographicHash::Sha256);
-
-    // 强制数据落盘
-    if (!tmpFile.flush() || !fsync(tmpFile.handle())) {
-        qDebug() << "数据写入失败:" << tmpFile.errorString();
-        tmpFile.cancelWriting();
-        return false;
-    }
-
-    // 原子提交
-    if (!tmpFile.commit()) {
-        qDebug() << "文件提交失败:" << tmpFile.errorString();
-        return false;
-    }
-
-    // 步骤2：创建版本化备份
-    rotateBackups(m_filePath);
-
-    // 步骤3：清理临时文件
-    QFile::remove(tmpPath);
-    return true;
-}
-
-QByteArray SafeFileHandler::readData(QString filePath,bool verify) {
-    // 优先读取主文件
-//    m_filePath = filePath;
-//    QFile file(m_filePath);
-//    if (!file.open(QIODevice::ReadOnly)) {
-//        qDebug() << "无法打开文件:" << file.errorString();
-//        return attemptRecovery(m_filePath);
-//    }
-
-//    QByteArray data = file.readAll();
-//    file.close();
-
-//    // 校验数据完整性
-//    if (verify && QCryptographicHash::hash(data, QCryptographicHash::Sha256) != m_lastChecksum) {
-//        qDebug() << "校验失败，尝试恢复...";
-//        return attemptRecovery(m_filePath);
-//    }
-
-    return 0;
-}
 //备份文件
 void SafeFileHandler::rotateBackups(QString filePath) {
     const int maxBackups = 1;//方便后面备份多个文件时使用，暂时每次只备份一个文件

@@ -30,6 +30,8 @@ QString CustomizePortInfoPath = "/opt/MachineTool/configs/PortInfo_Customize_CN.
 const QString alarmInfoMappingPath = "/opt/MachineTool/configs/AlarmInfoMapping.ini";    // 报警查询映射文件
 const QString alarmInfoDataPath = "/opt/MachineTool/configs/AlarmInfoData.ini";          // 报警数据记录文件
 const QString maintainInfoDataPath = "/opt/MachineTool/configs/MaintainInfoData.ini";    // 保养信息记录文件
+const QString ParLogInfoMappingPath = "/opt/MachineTool/configs/ParLogInfoMapping.ini";    // 参数日志查询映射文件
+const QString ParLogInfoDataPath = "/opt/MachineTool/configs/ParLogInfoData.ini";    // 参数日志记录文件
 
 //配置文件相对路径
 QString m_configFileNamePath= "/opt/MachineTool/configs/Ini_Para.ini";
@@ -45,6 +47,7 @@ const QString GuideInfoPath = "/opt/MachineTool/configs/guide_info.ini"; // 操�
 const QString PowerOnReadOneProPath = "/opt/MachineTool/configs/PowerOnReadOneProInfo.ini";
 
 QSettings Ini_Parasettings(m_configFileNamePath,QSettings::IniFormat);
+QSettings ParLogInfoSettings(ParLogInfoDataPath, QSettings::IniFormat);
 /*************************************************************************
 **	输入参数：prefix:节点 key:键 defaultV:默认值
 **	输出参数：值

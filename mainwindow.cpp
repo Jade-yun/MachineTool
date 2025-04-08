@@ -1424,11 +1424,11 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
     }
     else if(SysIndex==SysSendIndex::CMD_SENDERROR)
     {
-        QString errorText = tr("参数同步失败!失败编号：")+QString::number(MySync_Data.SyncStep);
+        QString errorText = QString(tr("参数同步失败!失败编号：%1")).arg(MySync_Data.SyncStep);
         dlgErrorTip->setMessage(errorText);
         if(!dlgErrorTip->isVisible())
         {
-            showErrorTip(errorText,TipMode::NORMAL);
+            showErrorTip(errorText,TipMode::ONLY_OK);
         }
         MainWindow_SetControl_Stake(true);
         ui->label_plan->hide();

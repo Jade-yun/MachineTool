@@ -1184,7 +1184,7 @@ extern uint8_t  m_ManualMultiplySpeed;											//手动运动-手轮倍率
 extern uint32_t m_ManualIncrementDis;											//手动运动-增量距离
 extern uint8_t  m_ManualStackNum;													//手动运动-堆叠组号
 extern uint8_t  m_ManualStackPointNum[STACK_AXIS_NUM];			//手动运动-移植堆叠点
-
+extern uint16_t MaxParLogCount;  //最大参数日志数量
 
 //释放程序命令的数据指针
 extern void g_FreeProOrder(P_ProOrderStruct *proOrder);
@@ -1281,7 +1281,7 @@ extern Usart *g_Usart;
 extern QSerialPort *m_serialPort;
 //发送数据队列
 extern QQueue<QByteArray> m_sendCmdQueue;
-#define BUFFER_SIZE  (1024*50)                //环形缓冲区大小
+#define BUFFER_SIZE  (512)//(1024*50)                //环形缓冲区大小
 typedef struct
 {
     uint8_t buffer[BUFFER_SIZE];

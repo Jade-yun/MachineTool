@@ -21,7 +21,9 @@ extern QString CustomizePortInfoPath;
 extern const QString alarmInfoMappingPath;
 extern const QString alarmInfoDataPath;
 extern const QString maintainInfoDataPath;
-
+extern const QString ParLogInfoMappingPath;    // 参数日志查询映射文件
+extern const QString ParLogInfoDataPath;    // 参数日志记录文件
+extern QSettings ParLogInfoSettings;
 QString getValue(QString prefix, QString key, QString defaultV);
 void   setValue(QString prefix, QString key, QString value);
 
