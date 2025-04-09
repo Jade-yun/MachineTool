@@ -529,36 +529,30 @@ border: 1px solid black;
     <property name="title">
      <string/>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>0</y>
-       <width>1031</width>
-       <height>41</height>
+       <x>13</x>
+       <y>1</y>
+       <width>1046</width>
+       <height>44</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <property name="spacing">
-       <number>4</number>
-      </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="spacing">
-         <number>10</number>
-        </property>
         <item>
          <widget class="QLabel" name="label_X1">
           <property name="minimumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="font">
@@ -576,19 +570,16 @@ border: 1px solid black;
         </item>
         <item>
          <widget class="QLabel" name="X1_speed">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
           <property name="minimumSize">
            <size>
             <width>120</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>30</height>
+            <width>16777215</width>
+            <height>120</height>
            </size>
           </property>
           <property name="font">
@@ -605,21 +596,18 @@ border: 1px solid black;
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <property name="spacing">
-         <number>10</number>
-        </property>
         <item>
          <widget class="QLabel" name="label_Y1">
           <property name="minimumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="font">
@@ -640,13 +628,13 @@ border: 1px solid black;
           <property name="minimumSize">
            <size>
             <width>120</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>30</height>
+            <width>16777215</width>
+            <height>120</height>
            </size>
           </property>
           <property name="font">
@@ -663,21 +651,18 @@ border: 1px solid black;
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <property name="spacing">
-         <number>10</number>
-        </property>
         <item>
          <widget class="QLabel" name="label_Z1">
           <property name="minimumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="font">
@@ -698,13 +683,13 @@ border: 1px solid black;
           <property name="minimumSize">
            <size>
             <width>120</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>30</height>
+            <width>16777215</width>
+            <height>120</height>
            </size>
           </property>
           <property name="font">
@@ -720,22 +705,19 @@ border: 1px solid black;
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
-        <property name="spacing">
-         <number>10</number>
-        </property>
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QLabel" name="label_C">
           <property name="minimumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="font">
@@ -756,13 +738,13 @@ border: 1px solid black;
           <property name="minimumSize">
            <size>
             <width>120</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>30</height>
+            <width>16777215</width>
+            <height>120</height>
            </size>
           </property>
           <property name="font">
@@ -778,22 +760,19 @@ border: 1px solid black;
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <property name="spacing">
-         <number>10</number>
-        </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <widget class="QLabel" name="label_Y2">
           <property name="minimumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="font">
@@ -814,13 +793,13 @@ border: 1px solid black;
           <property name="minimumSize">
            <size>
             <width>120</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>30</height>
+            <width>16777215</width>
+            <height>120</height>
            </size>
           </property>
           <property name="font">
@@ -836,22 +815,19 @@ border: 1px solid black;
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <property name="spacing">
-         <number>10</number>
-        </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
          <widget class="QLabel" name="label_Z2">
           <property name="minimumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
             <width>30</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="font">
@@ -878,13 +854,13 @@ border: 1px solid black;
           <property name="minimumSize">
            <size>
             <width>120</width>
-            <height>30</height>
+            <height>40</height>
            </size>
           </property>
           <property name="maximumSize">
            <size>
-            <width>120</width>
-            <height>30</height>
+            <width>16777215</width>
+            <height>120</height>
            </size>
           </property>
           <property name="font">
@@ -896,21 +872,6 @@ border: 1px solid black;
            <string>555</string>
           </property>
          </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
         </item>
         <item>
          <spacer name="horizontalSpacer">

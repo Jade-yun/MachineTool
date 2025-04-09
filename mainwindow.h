@@ -10,7 +10,7 @@
 #include "monitorform.h"
 #include "manualform.h"
 #include "teachmanage.h"
-
+#include "ioread.h"
 #include "customkeyboard.h"
 #include "handwheeldialog.h"
 #include "errortipdialog.h"
@@ -111,6 +111,7 @@ private:
 //    TriMode curMode;
     EventScanner* scanner; // customize input event monitoring
     QTimer* checkParaTimer;
+    IoRead* My_IoRead;
     bool RobotResetPromptFlag=0;//复位弹窗标志 0-未弹窗 1-弹窗
 private:
     void initUI();

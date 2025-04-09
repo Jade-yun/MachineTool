@@ -192,19 +192,19 @@ void EventScanner::parseEvent(struct input_event in_ev, const QString& deviceNam
     {
         return;
     }
-    if (deviceName == "/dev/input/event4" || deviceName == "/dev/input/event9")
+    if (deviceName == "/dev/input/event4" || deviceName == "/dev/input/event8")
     {
         //4表示首轮事件，9代表使能按键
         emit eventRotaryEncoder(in_ev.code, in_ev.value);
     }
-    else if (deviceName == "/dev/input/event8")
-    {
-        // 屏蔽不在该档位动作0， 只保留进入动作1
-        if (in_ev.value == 1)
-        {
-            emit eventTrimodeSwitch(in_ev.code, in_ev.value);
-        }
-    }
+//    else if (deviceName == "/dev/input/event8")
+//    {
+//        // 屏蔽不在该档位动作0， 只保留进入动作1
+//        if (in_ev.value == 1)
+//        {
+//            emit eventTrimodeSwitch(in_ev.code, in_ev.value);
+//        }
+//    }
 
     else if (deviceName == "/dev/input/event1")
     {

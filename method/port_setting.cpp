@@ -323,9 +323,21 @@ void updateAdvancedFuncPortFlag()
     m_Port_X[6].functionSet = static_cast<bool>(m_SeniorFunc.stackSaveIn1Check);
     m_Port_X[7].functionSet = static_cast<bool>(m_SeniorFunc.emergencyStopCheck);
     m_Port_X[12].functionSet = static_cast<bool>(m_SeniorFunc.pressureCheck);
-//    m_Port_X[14].functionSet = static_cast<bool>(m_SeniorFunc.remoteStop);//这几个IO与轴限位功能相冲突，暂时不明确需求
-//    m_Port_X[15].functionSet = static_cast<bool>(m_SeniorFunc.remoteAuto);
-//    m_Port_X[17].functionSet = static_cast<bool>(m_SeniorFunc.manualChuckIn1);
+    if(m_AxisPar[Y1_AXIS].limitPosSwt>0 || m_SeniorFunc.remoteStop == 1 || m_Port_Y[13].functionSet){//Y1正限位/远程停止/压力限
+        m_Port_X[14].functionSet = 1;
+    }else{
+        m_Port_X[14].functionSet = 0;
+    }
+    if(m_AxisPar[Z1_AXIS].limitPosSwt>0 || m_SeniorFunc.remoteAuto == 1 || m_SeniorFunc.bottomOilLimit == 1){//Z1正限位/远程自动/低油限
+        m_Port_X[15].functionSet = 1;
+    }else{
+        m_Port_X[15].functionSet = 0;
+    }
+    if(m_AxisPar[Y2_AXIS].limitPosSwt>0 || m_SeniorFunc.manualChuckIn1 == 1){//Y2正限位/手动卡盘1入
+        m_Port_X[17].functionSet = 1;
+    }else{
+        m_Port_X[17].functionSet = 0;
+    }
     m_Port_X[31].functionSet = static_cast<bool>(m_SeniorFunc.processFinish1);
     m_Port_X[32].functionSet = static_cast<bool>(m_SeniorFunc.locateFinish1);
     m_Port_X[33].functionSet = static_cast<bool>(m_SeniorFunc.knifeOrigin1Check);
@@ -378,7 +390,12 @@ void updateAdvancedFuncPortFlag()
     m_Port_Y[9].functionSet = static_cast<bool>(m_SeniorFunc.autoDoorCot1);
     m_Port_Y[10].functionSet = static_cast<bool>(m_SeniorFunc.biowAir1);
     m_Port_Y[12].functionSet = static_cast<bool>(m_SeniorFunc.emergencyStopOut);
-    m_Port_Y[13].functionSet = static_cast<bool>(m_SeniorFunc.lubPump);
+    if(static_cast<bool>(m_SeniorFunc.oilerSwt) == 1 || static_cast<bool>(m_SeniorFunc.lubPump) == 1){//注油器或着润滑泵使用就设置为1
+        m_Port_Y[13].functionSet = 1;
+    }else{
+        m_Port_Y[13].functionSet = 0;
+    }
+//    m_Port_Y[13].functionSet = static_cast<bool>(m_SeniorFunc.lubPump);
     m_Port_Y[14].functionSet = static_cast<bool>(m_SeniorFunc.alarmBuzzer);
     m_Port_Y[15].functionSet = static_cast<bool>(m_SeniorFunc.pauseLight);
     m_Port_Y[16].functionSet = static_cast<bool>(m_SeniorFunc.startProduct1);
@@ -418,7 +435,7 @@ void updateAxidParameterPortFlag()
         int index2 = axisParaPortMaping[i].axisLimitNegtive;
         int index3 = axisParaPortMaping[i].axisOriginType;
 
-        m_Port_X[index1].functionSet = m_AxisPar[i].limitPosSwt ? 1 : 0;
+        m_Port_X[index1].functionSet = m_AxisPar[i].limitPosSwt ? 1 : m_Port_X[index1].functionSet;//此处如果正限位未使用，保持之前的状态，因为前面可能有复用功能使用
         m_Port_X[index2].functionSet = m_AxisPar[i].limitNegSwt ? 1 : 0;
         m_Port_X[index3].functionSet = m_AxisPar[i].originType ? 1 : 0;
     }

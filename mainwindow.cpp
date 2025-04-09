@@ -247,7 +247,7 @@ MainWindow::MainWindow(QWidget *parent)
         "/dev/input/event8",
         "/dev/input/event1",
         "/dev/input/event2",
-        "/dev/input/event9"
+        "/dev/input/event9",
     };
     scanner = new EventScanner(devices);
     connect(scanner, &EventScanner::eventRotaryEncoder, [=](uint16_t code, int32_t value) {
@@ -286,6 +286,7 @@ MainWindow::MainWindow(QWidget *parent)
             emit HandWheelButtonClick_Signal();
         }
     });
+    #if 0
     connect(scanner, &EventScanner::eventTrimodeSwitch, [this](uint16_t code, int32_t value) {
         qDebug() << "Trimode Switch event:" << code << value;
         if (code == 142 && value == 1)
@@ -319,7 +320,42 @@ MainWindow::MainWindow(QWidget *parent)
         emit ui->Btn_ManualHome->clicked();
         ui->Btn_ManualHome->setChecked(true);
     });
-
+    #else
+    My_IoRead = new IoRead();
+    connect(My_IoRead, &IoRead::IoTrimodeSwitch, [this](uint16_t IoIndex, int32_t value) {
+        qDebug() << "Trimode Switch io:" << IoIndex << value;
+        if (IoIndex == 106 && value == 1)
+        {
+            // stop mode
+            curMode = TriMode::STOP;
+            bool enabled = LoginDialog::getLoginMode() != LoginMode::Operator;
+            ui->Btn_TeachHome->setEnabled(enabled);
+            ui->Btn_TeachHome->setText(tr("教导管理"));
+            ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, true);
+            TrimodeSwitchCommandSend(IoIndex,value);
+            SettingParNeedSaveHandle();
+        }
+        else if (IoIndex == 107 && value == 1)
+        {
+            // switch to manual mode
+            curMode = TriMode::MANUAL;
+            ui->Btn_TeachHome->setText(tr("教导"));
+            ui->btnHandWheel->setAttribute(Qt::WA_TransparentForMouseEvents, false);
+            TrimodeSwitchCommandSend(IoIndex,value);
+            SettingParNeedSaveHandle();
+        }
+        else if (IoIndex == 109 && value == 1)
+        {
+            // switch to automatic mode
+            curMode = TriMode::AUTO;
+            ui->Btn_TeachHome->setEnabled(false);
+            TrimodeSwitchCommandSend(IoIndex,value);
+            SettingParNeedSaveHandle();
+        }
+        emit ui->Btn_ManualHome->clicked();
+        ui->Btn_ManualHome->setChecked(true);
+    });
+    #endif
     connect(scanner, &EventScanner::eventLeftKey, this,[this](uint16_t code, int32_t value) {
         qDebug() << "Left Key event:" << code << value;
         Beeper::instance()->beep();
@@ -364,6 +400,7 @@ MainWindow::~MainWindow()
     delete g_Usart;
     delete g_SafeFileHandler;
     delete scanner;
+    delete My_IoRead;
 }
 
 void MainWindow::Refresh_Progress_bar(uint8_t data)
@@ -560,7 +597,6 @@ void MainWindow::slotShowSubWindow()
         cobox->setFocusPolicy(Qt::FocusPolicy::NoFocus);
     }
     Refresh_Progress_bar(100);
-    scanner->start();
     PowerOnStateHandle();//开机默认进入停止界面
     ui->label_plan->setText(tr("参数同步中:"));
     Refresh_Progress_bar(0);
@@ -1001,6 +1037,7 @@ void MainWindow::callFullKeyboard(QObject *watched)
 //三档开关处理函数
 void MainWindow::TrimodeSwitchCommandSend(uint16_t code, int32_t value)
 {
+#if 0
     switch (code) {
     case 142://手动
     {
@@ -1029,6 +1066,36 @@ void MainWindow::TrimodeSwitchCommandSend(uint16_t code, int32_t value)
     default:
         break;
     }
+#else
+    switch (code) {
+    case 106://手动
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_MODE,1,0,0);
+        }
+        break;
+    }
+    case 107://停止
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_MODE,2,0,0);
+        }
+        break;
+    }
+    case 109://自动
+    {
+        if(value == 1)
+        {
+            g_Usart->ExtendSendProDeal(CMD_MAIN_PRO,CMD_SUN_PRO_MODE,3,0,0);
+        }
+        break;
+    }
+    default:
+        break;
+    }
+#endif
 }
 //左侧按键功能处理函数
 void MainWindow::keyFunctCommandSend(uint16_t code, int32_t value)
@@ -1437,6 +1504,8 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
         manualWidget->reloadReferPoint();
         updatelabProgramName();
+        scanner->start();
+        My_IoRead->start();
     }
     else
     {
@@ -1452,6 +1521,8 @@ void MainWindow::DataSycStateHandel(uint8_t SysIndex)
         Load_Program_Handle(readPowerOnReadOneProInfo().fileName);//加载上次程序信息
         manualWidget->reloadReferPoint();
         updatelabProgramName();
+        scanner->start();
+        My_IoRead->start();
     }
 
 }

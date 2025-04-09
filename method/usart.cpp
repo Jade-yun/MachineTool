@@ -3715,8 +3715,8 @@ uint8_t Usart::DataSyc()
                 {
                     MySync_Data.SendData_flag = MySync_Data.sp_axis_limit;
                 }
+                MySync_Data.sendDataOutTime=0;
             }
-            MySync_Data.sendDataOutTime=0;
         }
         MySync_Data.SyncStep =21;
         break;

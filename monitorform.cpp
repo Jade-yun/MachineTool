@@ -1053,6 +1053,41 @@ void MonitorForm::refeshPortLableName()
         const auto& port = m_Port_X[i];
 
         QString portName = port.functionSet ? port.definePort+tr(" ")+port.modifyName : port.definePort+tr(" ")+port.ResModifyName;
+        if(i==14 && port.functionSet == 1)
+        {//Y1正限位/远程停止/压力限
+            if(m_AxisPar[Y1_AXIS].limitPosSwt>0)
+            {
+                portName = portName = port.definePort+tr(" ")+port.modifyName.section('/',0,0);
+            }
+            else if(m_Port_Y[13].functionSet == 1)
+            {
+                portName = portName = port.definePort+tr(" ")+port.modifyName.section('/',2,2);
+            }
+            else
+            {
+                portName = portName = port.definePort+tr(" ")+port.modifyName.section('/',1,1);
+            }
+//            m_AxisPar[Y1_AXIS].limitPosSwt>0 ? portName = port.definePort+tr(" ")+port.modifyName.split("/").first() : portName = port.definePort+tr(" ")+port.modifyName.split("/").last();
+        }
+        else if(i==15 && port.functionSet == 1)
+        {//Z1正限位/远程自动/低油限
+            if(m_AxisPar[Z1_AXIS].limitPosSwt>0)
+            {
+                portName = portName = port.definePort+tr(" ")+port.modifyName.section('/',0,0);
+            }
+            else if(m_SeniorFunc.bottomOilLimit == 1)
+            {
+                portName = portName = port.definePort+tr(" ")+port.modifyName.section('/',2,2);
+            }
+            else
+            {
+                portName = portName = port.definePort+tr(" ")+port.modifyName.section('/',1,1);
+            }
+        }
+        else if(i==17 && port.functionSet == 1)
+        {//Y2正限位/手动卡盘1入
+            m_AxisPar[Y2_AXIS].limitPosSwt>0 ? portName = portName = port.definePort+tr(" ")+port.modifyName.split("/").first() : portName = portName = port.definePort+tr(" ")+port.modifyName.split("/").last();
+        }
         for (int j = 0; j < 3; j++)
         {
             labsInputPort.at(j).at(i)->setText(portName);

@@ -144,7 +144,7 @@ Setting::Setting(QWidget *parent) :
         }
     });
     connect(ui->coboxLimitPosY1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-        if (index == 0)
+        if ((index == 0) && (m_SeniorFunc.remoteStop == 0))
         {
             m_Port_X[14].functionSet = 0;
         }
@@ -164,7 +164,7 @@ Setting::Setting(QWidget *parent) :
         }
     });
     connect(ui->coboxLimitPosZ1, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-        if (index == 0)
+        if ((index == 0) && (m_SeniorFunc.remoteAuto == 0) && (m_SeniorFunc.bottomOilLimit == 0))
         {
             m_Port_X[15].functionSet = 0;
         }
@@ -204,7 +204,7 @@ Setting::Setting(QWidget *parent) :
         }
     });
     connect(ui->coboxLimitPosY2, QOverload<int>::of(&QComboBox::activated), [=](int index) {
-        if (index == 0)
+        if ((index == 0) && (m_SeniorFunc.manualChuckIn1 == 0))
         {
             m_Port_X[17].functionSet = 0;
         }
@@ -2311,6 +2311,11 @@ void Setting::syncParaToUI()
     /****************************高级********************************************/
     {
         int index = 0;
+        if (m_SeniorFunc.oilerSwt == 1) {
+            m_SeniorFunc.lubPump = 0;
+        } else if (m_SeniorFunc.lubPump == 1) {
+            m_SeniorFunc.oilerSwt = 0;
+        }
         seniorFuncList[index++]->setCurrentIndex(m_SeniorFunc.knifeOrigin1Check);
         seniorFuncList[index++]->setCurrentIndex(m_SeniorFunc.knifeOrigin2Check);
         seniorFuncList[index++]->setCurrentIndex(m_SeniorFunc.chuckOriginCheck);
@@ -3651,6 +3656,22 @@ void Setting::setupCommunicationConnections()
     for (int i=0;i<seniorFuncList.count();i++)
     {
         connect(seniorFuncList[i], QOverload<int>::of(&QComboBox::activated), [=](int){
+            if(i==14 && seniorFuncList[14]->currentIndex() == 1)
+            {//注油器
+                seniorFuncList[15]->setCurrentIndex(0);
+            }
+            if(i==15 && seniorFuncList[15]->currentIndex() == 1)
+            {//润滑泵
+                seniorFuncList[14]->setCurrentIndex(0);
+            }
+//            if(seniorFuncList[14]->currentIndex() == 1)
+//            {
+//                seniorFuncList[15]->setCurrentIndex(0);
+//            }
+//            else if(seniorFuncList[15]->currentIndex() == 1)
+//            {
+//                seniorFuncList[14]->setCurrentIndex(0);
+//            }
             seniorFuncSlots();
         } );
     }
@@ -4488,9 +4509,21 @@ void Setting::SeniorFuncPortSet()
     m_Port_X[6].functionSet = m_SeniorFunc.stackSaveIn1Check;
     m_Port_X[7].functionSet = m_SeniorFunc.emergencyStopCheck;
     m_Port_X[12].functionSet = m_SeniorFunc.pressureCheck;
-//    m_Port_X[14].functionSet = m_SeniorFunc.remoteStop;//这几个IO与轴限位功能相冲突，暂时不明确需求
-//    m_Port_X[15].functionSet = m_SeniorFunc.remoteAuto;
-//    m_Port_X[17].functionSet = m_SeniorFunc.manualChuckIn1;
+    if(m_AxisPar[Y1_AXIS].limitPosSwt>0 || m_SeniorFunc.remoteStop == 1 || m_Port_Y[13].functionSet){//Y1正限位/远程停止/压力限
+        m_Port_X[14].functionSet = 1;
+    }else{
+        m_Port_X[14].functionSet = 0;
+    }
+    if(m_AxisPar[Z1_AXIS].limitPosSwt>0 || m_SeniorFunc.remoteAuto == 1 || m_SeniorFunc.bottomOilLimit == 1){//Z1正限位/远程自动/低油限
+        m_Port_X[15].functionSet = 1;
+    }else{
+        m_Port_X[15].functionSet = 0;
+    }
+    if(m_AxisPar[Y2_AXIS].limitPosSwt>0 || m_SeniorFunc.manualChuckIn1 == 1){//Y2正限位/手动卡盘1入
+        m_Port_X[17].functionSet = 1;
+    }else{
+        m_Port_X[17].functionSet = 0;
+    }
     m_Port_X[31].functionSet = m_SeniorFunc.processFinish1;
     m_Port_X[32].functionSet = m_SeniorFunc.locateFinish1;
     m_Port_X[33].functionSet = m_SeniorFunc.knifeOrigin1Check;
@@ -4516,7 +4549,11 @@ void Setting::SeniorFuncPortSet()
     m_Port_Y[9].functionSet = m_SeniorFunc.autoDoorCot1;
     m_Port_Y[10].functionSet = m_SeniorFunc.biowAir1;
     m_Port_Y[12].functionSet = m_SeniorFunc.emergencyStopOut;
-    m_Port_Y[13].functionSet = m_SeniorFunc.lubPump;
+    if(m_SeniorFunc.oilerSwt == 1 || m_SeniorFunc.lubPump == 1){//注油器或着润滑泵使用就设置为1
+        m_Port_Y[13].functionSet = 1;
+    }else{
+        m_Port_Y[13].functionSet = 0;
+    }
     m_Port_Y[14].functionSet = m_SeniorFunc.alarmBuzzer;
     m_Port_Y[15].functionSet = m_SeniorFunc.pauseLight;
     m_Port_Y[16].functionSet = m_SeniorFunc.startProduct1;
