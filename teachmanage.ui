@@ -6,21 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
+    <width>1014</width>
     <height>581</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>1024</width>
-    <height>581</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1024</width>
-    <height>581</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -31,7 +19,7 @@
   <widget class="QPushButton" name="btn_USB">
    <property name="geometry">
     <rect>
-     <x>880</x>
+     <x>860</x>
      <y>5</y>
      <width>120</width>
      <height>50</height>
@@ -69,9 +57,9 @@
   <widget class="QStackedWidget" name="stackedWidget_TeachManage">
    <property name="geometry">
     <rect>
-     <x>870</x>
+     <x>850</x>
      <y>60</y>
-     <width>141</width>
+     <width>151</width>
      <height>461</height>
     </rect>
    </property>
@@ -79,292 +67,322 @@
     <number>0</number>
    </property>
    <widget class="QWidget" name="page">
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QPushButton" name="btn_New">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>124</width>
-       <height>441</height>
+       <y>38</y>
+       <width>120</width>
+       <height>50</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QPushButton" name="btn_New">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>新建</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/new_file.png</normaloff>:/images/new_file.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_Copy">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>复制</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/copy_file.png</normaloff>:/images/copy_file.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_Load">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>加载</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/load_program.png</normaloff>:/images/load_program.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_Preview">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>预览</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/preview_file.png</normaloff>:/images/preview_file.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_Del">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>删除</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/delete_file.png</normaloff>:/images/delete_file.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>新建</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/new_file.png</normaloff>:/images/new_file.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_Copy">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>121</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>复制</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/copy_file.png</normaloff>:/images/copy_file.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_Load">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>204</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>加载</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/load_program.png</normaloff>:/images/load_program.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_Preview">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>287</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>预览</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/preview_file.png</normaloff>:/images/preview_file.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_Del">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>370</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>删除</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/delete_file.png</normaloff>:/images/delete_file.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="page_2">
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QPushButton" name="btn_SelectAll">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>10</y>
-       <width>122</width>
-       <height>441</height>
+       <y>55</y>
+       <width>120</width>
+       <height>50</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QPushButton" name="btn_SelectAll">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>全选</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/select_all_files.png</normaloff>:/images/select_all_files.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_SelectNotAll">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>全不选</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/select_none_files.png</normaloff>:/images/select_none_files.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_Export">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>导出</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/export.png</normaloff>:/images/export.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="btn_Import">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>120</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>导入</string>
-        </property>
-        <property name="icon">
-         <iconset resource="images.qrc">
-          <normaloff>:/images/import.png</normaloff>:/images/import.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>30</width>
-          <height>30</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>全选</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/select_all_files.png</normaloff>:/images/select_all_files.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_SelectNotAll">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>155</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>全不选</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/select_none_files.png</normaloff>:/images/select_none_files.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_Export">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>255</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>导出</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/export.png</normaloff>:/images/export.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="btn_Import">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>355</y>
+       <width>120</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>120</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>导入</string>
+     </property>
+     <property name="icon">
+      <iconset resource="images.qrc">
+       <normaloff>:/images/import.png</normaloff>:/images/import.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>30</width>
+       <height>30</height>
+      </size>
+     </property>
     </widget>
    </widget>
   </widget>
@@ -373,7 +391,7 @@
     <rect>
      <x>10</x>
      <y>70</y>
-     <width>860</width>
+     <width>821</width>
      <height>450</height>
     </rect>
    </property>
@@ -536,7 +554,7 @@ height: 35px;
     <rect>
      <x>10</x>
      <y>530</y>
-     <width>991</width>
+     <width>971</width>
      <height>42</height>
     </rect>
    </property>
@@ -579,13 +597,13 @@ height: 35px;
       </property>
       <property name="minimumSize">
        <size>
-        <width>350</width>
+        <width>0</width>
         <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>350</width>
+        <width>16777215</width>
         <height>40</height>
        </size>
       </property>
@@ -641,13 +659,13 @@ height: 35px;
       </property>
       <property name="minimumSize">
        <size>
-        <width>350</width>
+        <width>0</width>
         <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>350</width>
+        <width>16777215</width>
         <height>40</height>
        </size>
       </property>

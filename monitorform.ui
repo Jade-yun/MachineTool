@@ -19,7 +19,7 @@
   <widget class="QPushButton" name="btnMerge_Expand">
    <property name="geometry">
     <rect>
-     <x>940</x>
+     <x>930</x>
      <y>500</y>
      <width>60</width>
      <height>60</height>
@@ -102,7 +102,7 @@ QPushButton:pressed
     <widget class="QTabWidget" name="left_tabWidget">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
        <width>505</width>
        <height>581</height>
@@ -129,7 +129,7 @@ QPushButton:pressed
       <string notr="true"/>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
@@ -7287,7 +7287,7 @@ font: 20pt ;</string>
     <widget class="QTabWidget" name="right_tabWidget">
      <property name="geometry">
       <rect>
-       <x>514</x>
+       <x>510</x>
        <y>0</y>
        <width>505</width>
        <height>581</height>
@@ -14448,23 +14448,11 @@ font: 20pt ;</string>
     <widget class="QTabWidget" name="single_tabWidget">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1015</width>
-       <height>581</height>
+       <width>1001</width>
+       <height>571</height>
       </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>1015</width>
-       <height>581</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>1015</width>
-       <height>581</height>
-      </size>
      </property>
      <property name="font">
       <font>
@@ -14499,7 +14487,7 @@ font: 20pt ;</string>
       <widget class="QPushButton" name="btnInWIdget_add">
        <property name="geometry">
         <rect>
-         <x>930</x>
+         <x>880</x>
          <y>5</y>
          <width>75</width>
          <height>40</height>
@@ -14516,9 +14504,6 @@ font: 20pt ;</string>
          <width>75</width>
          <height>40</height>
         </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton { width: 100px; height: 45px; font-size: 16pt;font-weight:bold;font-family: 'SimSun';background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #fafafa, stop: 0.4 #f4f4f4,stop: 0.5 #e7e7e7, stop: 1.0 #fafafa)}</string>
        </property>
        <property name="text">
         <string/>
@@ -14537,7 +14522,7 @@ font: 20pt ;</string>
       <widget class="QPushButton" name="btnInWIdget_cut">
        <property name="geometry">
         <rect>
-         <x>850</x>
+         <x>800</x>
          <y>5</y>
          <width>75</width>
          <height>40</height>
@@ -14554,9 +14539,6 @@ font: 20pt ;</string>
          <width>75</width>
          <height>40</height>
         </size>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton { width: 100px; height: 45px; font-size: 16pt;font-weight:bold;font-family: 'SimSun';background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #fafafa, stop: 0.4 #f4f4f4,stop: 0.5 #e7e7e7, stop: 1.0 #fafafa)}</string>
        </property>
        <property name="text">
         <string/>
@@ -14577,7 +14559,7 @@ font: 20pt ;</string>
         <rect>
          <x>0</x>
          <y>50</y>
-         <width>1011</width>
+         <width>1001</width>
          <height>481</height>
         </rect>
        </property>

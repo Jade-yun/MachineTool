@@ -1,6 +1,116 @@
 /*去除所有控件的虚线框*/
 *{outline:none;}
 
+/*主界面样式*/
+QWidget#centralwidget
+{
+background-color:qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5,        
+stop: 0 rgb(14, 76, 187), stop: 1 rgb(15, 77, 188));
+}
+
+QStackedWidget
+{
+background-color:white;
+border-radius:10px;
+/*margin:6px;*/
+margin-right:6px;
+margin-left:6px;
+}
+
+QWidget#widgetHomeTopLeft,#widgetHomeTopRight
+{
+background-color: qradialgradient(cx: 0, cy: 0,radius:0.5,fx: 0, fy: 1,        
+stop: 0 rgb(4, 62, 170),stop: 1 rgb(0, 63, 157));
+border:none;/*1px solid rgb(0, 166, 255);*/
+border-radius:3px;
+box-shadow: 3px 3px 5px white;
+
+margin:6px;
+}
+QWidget#widgetHomeTopMid
+{
+background-color:rgb(255, 90, 7);
+border:1px solid rgb(0, 166, 255);
+border-radius:3px;
+margin:6px;
+}
+QLabel#labProgramName
+{
+color:white;
+font-size: 25px;
+}
+/*
+QPushButton#btnHelp,#btnAlarm,#btnHandWheel
+{
+background-color:transparent;
+border:none;
+ border-right:1px solid  qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 1, fy: 0.5,        
+stop:0 rgb(4, 62, 170),
+stop:0.3 rgb(4, 62, 170),
+stop:0.38 rgb(0, 166, 255),
+stop:0.68 rgb(0, 166, 255),
+stop:0.7 rgb(4, 62, 170),
+stop:1  rgb(4, 62, 170));
+margin:1px;
+}
+QPushButton#btnAdmin
+{
+background-color:transparent;
+border:none;
+margin:1px;
+
+}
+*/
+QGroupBox#groupBoxXYZOUV
+{
+border:none;
+}
+
+QLabel#label,#label_16,#label_X1,#label_Y1,#label_Z1,#label_C,#label_Y2,#label_Z2
+{
+font-weight:bold;
+color:white;
+}
+QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed,#X1_speed,#Y1_speed,#Z1_speed,#C_speed,#Y2_speed,#Z2_speed
+{
+font-weight:bold;
+color:rgb(222,215,95);
+}
+
+QPushButton#Btn_AlarmHome,#Btn_ManualHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_SetHome{    
+color: white;    
+background-color:qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5,        
+stop: 0 rgb(77, 132, 235), stop: 1 rgb(78, 131, 235));
+border:none;
+border-bottom-right-radius:8px;
+border-bottom-left-radius:8px;
+padding: 5px 10px;
+font-weight: bold;
+margin-right:1px;
+margin-top:3px;
+margin-bottom:3px;
+}
+
+QPushButton#Btn_AlarmHome:checked,#Btn_ManualHome:checked,#Btn_MonitorHome:checked,#Btn_TeachHome:checked,#Btn_SetHome:checked{    
+color: black;    
+background-color: white;    
+border: none;
+border-bottom-right-radius:8px;
+border-bottom-left-radius:8px;
+margin-right:1px;
+margin-top:3px;
+margin-bottom:3px;
+} 
+/*
+QPushButton#btn_switch
+{
+background-color:rgb(255, 201, 14);
+border:none;
+border-radius:7px;
+
+}
+*/
+/*******************************************************/
 QMainWindow{
  background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgb(115, 66, 18),   stop:0.68099 rgb(115, 66, 18),    stop:0.816406 rgb(115, 66, 18),   stop:0.976562 rgb(255, 255, 255)); 
 }
@@ -17,9 +127,7 @@ QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed{
 	color:yellow;
 }
 /******************************************************/
-QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
-
-    background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgb(115, 66, 18),   stop:0.68099 rgb(115, 66, 18),    stop:0.816406 rgb(115, 66, 18),   stop:0.976562 rgb(255, 255, 255)); 
+QWidget#groupBoxHomeTopLeft, #groupBoxHomeBottom, #groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
 	background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgb(115, 66, 18),   stop:0.68099 rgb(115, 66, 18),    stop:0.816406 rgb(115, 66, 18),   stop:0.976562 rgb(255, 255, 255)); 
 	border-radius:0px;
 	margin-top:0px; 

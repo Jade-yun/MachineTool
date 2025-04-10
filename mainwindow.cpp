@@ -9,6 +9,7 @@
 #include <QPalette>
 #include <QTranslator>
 #include <QScreen>
+#include <QGraphicsDropShadowEffect>
 
 #include "stackedit.h"
 #include "keydefinedialog.h"
@@ -98,8 +99,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Progress_bar->setWindowModality(Qt::WindowModality::WindowModal);
     ui->Progress_bar->setAttribute(Qt::WA_TransparentForMouseEvents, true);
 
-    ui->Init_page->setStyleSheet("QWidget#Init_page { background-image: url(/opt/MachineTool/resources/pics/stop.jpg); }");
-
     MainWindow_SetControl_Stake(false);//先禁用按钮，待初始化成功后才能点击
 
     ui->wgtHelp->setVisible(false);
@@ -171,6 +170,11 @@ MainWindow::MainWindow(QWidget *parent)
     {
         setStyleFromFile(styles[0]);
     }
+    // 创建光效
+    applyGlowEffect(ui->widgetHomeTopLeft);
+    applyGlowEffect(ui->widgetHomeTopRight);
+    applyGlowEffect(ui->widgetHomeTopMid);
+
 
     softKey = new SoftKeyWidget(this);
     connect(ui->btnSoftKey, &QPushButton::clicked, [=](){
@@ -321,14 +325,20 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     connect(scanner, &EventScanner::eventLeftKey, this,[this](uint16_t code, int32_t value) {
-        qDebug() << "Left Key event:" << code << value;
-        Beeper::instance()->beep();
+//        qDebug() << "Left Key event:" << code << value;
+        if (value == 1)
+        {
+            Beeper::instance()->beep();
+        }
         emit monitor_hand_contril(code,value);
         keyFunctCommandSend(code,value);
     });
     connect(scanner, &EventScanner::eventRightKey, this,[this](uint16_t code, int32_t value) {
-        qDebug() << "Right Key event:" << code << value;
-        Beeper::instance()->beep();
+//        qDebug() << "Right Key event:" << code << value;
+        if (value == 1)
+        {
+            Beeper::instance()->beep();
+        }
         emit monitor_hand_contril(code,value);
         keyAxisCommandSend(code,value);
     });
@@ -411,7 +421,17 @@ void MainWindow::initUI()
     AxisTypeChange_Handle();//刷新坐标轴显示
 //    const QString& programName = m_CurrentProgramNameAndPath.fileName;
 //    QString name = m_SystemSet.sysName + "  "  + tr("程式：") + programName;
-//   ui->labProgramName->setText(name);
+    //   ui->labProgramName->setText(name);
+}
+
+void MainWindow::applyGlowEffect(QWidget *widget)
+{
+    QGraphicsDropShadowEffect *shadowEffect = new QGraphicsDropShadowEffect();
+//    shadowEffect->setColor(QColor(173, 216, 230)); // 蓝白色
+    shadowEffect->setColor(QColor(255, 255, 255, 220));
+    shadowEffect->setBlurRadius(25); // 模糊半径，控制发光范围
+    shadowEffect->setOffset(0, 0); // 阴影偏移量，设为0让阴影居中
+    widget->setGraphicsEffect(shadowEffect);
 }
 
 void MainWindow::handleLoginModeChanged(LoginMode mode)

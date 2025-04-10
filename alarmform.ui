@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
+    <width>1010</width>
     <height>581</height>
    </rect>
   </property>
@@ -21,8 +21,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1024</width>
-     <height>581</height>
+     <width>1001</width>
+     <height>571</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -42,11 +42,8 @@
      <family>SimSun</family>
     </font>
    </property>
-   <property name="styleSheet">
-    <string notr="true"/>
-   </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <property name="iconSize">
     <size>
@@ -64,10 +61,10 @@
     <widget class="QTableWidget" name="tableAlarmInfo">
      <property name="geometry">
       <rect>
-       <x>1</x>
-       <y>1</y>
-       <width>1018</width>
-       <height>471</height>
+       <x>0</x>
+       <y>0</y>
+       <width>971</width>
+       <height>441</height>
       </rect>
      </property>
      <property name="lineWidth">
@@ -150,7 +147,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>480</y>
+       <y>460</y>
        <width>151</width>
        <height>48</height>
       </rect>
@@ -203,8 +200,8 @@
       <rect>
        <x>1</x>
        <y>1</y>
-       <width>1018</width>
-       <height>531</height>
+       <width>981</width>
+       <height>501</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -212,18 +209,6 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>1018</width>
-       <height>531</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>1018</width>
-       <height>531</height>
-      </size>
      </property>
      <property name="lineWidth">
       <number>1</number>
@@ -376,8 +361,8 @@
       <rect>
        <x>1</x>
        <y>1</y>
-       <width>1018</width>
-       <height>536</height>
+       <width>981</width>
+       <height>501</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -540,8 +525,8 @@
       <rect>
        <x>1</x>
        <y>1</y>
-       <width>1018</width>
-       <height>461</height>
+       <width>981</width>
+       <height>431</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -590,8 +575,8 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>470</x>
-       <y>470</y>
+       <x>440</x>
+       <y>450</y>
        <width>542</width>
        <height>54</height>
       </rect>
@@ -679,8 +664,8 @@
       <rect>
        <x>1</x>
        <y>1</y>
-       <width>1018</width>
-       <height>538</height>
+       <width>981</width>
+       <height>501</height>
       </rect>
      </property>
      <property name="sizePolicy">

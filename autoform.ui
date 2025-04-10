@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
+    <width>1014</width>
     <height>581</height>
    </rect>
   </property>
@@ -32,7 +32,7 @@
     <widget class="QPushButton" name="btnClear">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>220</x>
        <y>473</y>
        <width>130</width>
        <height>45</height>
@@ -79,9 +79,9 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>381</width>
+       <x>10</x>
+       <y>1</y>
+       <width>351</width>
        <height>42</height>
       </rect>
      </property>
@@ -120,18 +120,6 @@
       </item>
       <item>
        <widget class="QLabel" name="labelState">
-        <property name="minimumSize">
-         <size>
-          <width>150</width>
-          <height>40</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>150</width>
-          <height>40</height>
-         </size>
-        </property>
         <property name="text">
          <string>1自动状态</string>
         </property>
@@ -177,7 +165,7 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>0</x>
        <y>430</y>
        <width>365</width>
        <height>42</height>
@@ -343,32 +331,20 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>40</y>
+       <y>49</y>
        <width>380</width>
-       <height>390</height>
+       <height>381</height>
       </rect>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>380</width>
-       <height>390</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>380</width>
-       <height>390</height>
-      </size>
-     </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page1AutoState">
       <widget class="QPushButton" name="btnMergeExpand">
        <property name="geometry">
         <rect>
-         <x>330</x>
-         <y>340</y>
+         <x>310</x>
+         <y>330</y>
          <width>50</width>
          <height>50</height>
         </rect>
@@ -446,7 +422,7 @@ QPushButton:pressed
         <rect>
          <x>20</x>
          <y>11</y>
-         <width>361</width>
+         <width>351</width>
          <height>385</height>
         </rect>
        </property>
@@ -849,10 +825,10 @@ QPushButton:pressed
       <widget class="QTableWidget" name="tableWgtVarState">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>10</x>
          <y>10</y>
-         <width>361</width>
-         <height>381</height>
+         <width>321</width>
+         <height>321</height>
         </rect>
        </property>
        <property name="verticalScrollBarPolicy">
@@ -960,21 +936,9 @@ QPushButton:pressed
         <rect>
          <x>10</x>
          <y>10</y>
-         <width>370</width>
-         <height>370</height>
+         <width>341</width>
+         <height>351</height>
         </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>370</width>
-         <height>370</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>370</width>
-         <height>370</height>
-        </size>
        </property>
        <property name="lineWidth">
         <number>1</number>
@@ -2315,7 +2279,7 @@ QPushButton:pressed
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>0</x>
      <y>0</y>
      <width>643</width>
      <height>531</height>
@@ -2678,7 +2642,7 @@ QPushButton:pressed
     <rect>
      <x>0</x>
      <y>525</y>
-     <width>1024</width>
+     <width>1005</width>
      <height>55</height>
     </rect>
    </property>
@@ -2690,13 +2654,13 @@ QPushButton:pressed
    </property>
    <property name="minimumSize">
     <size>
-     <width>1024</width>
+     <width>1005</width>
      <height>55</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>1024</width>
+     <width>1005</width>
      <height>55</height>
     </size>
    </property>

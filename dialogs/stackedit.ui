@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1014</width>
+    <width>1001</width>
     <height>507</height>
    </rect>
   </property>
@@ -220,9 +220,9 @@
   <widget class="QStackedWidget" name="stkWgtStackWay">
    <property name="geometry">
     <rect>
-     <x>305</x>
+     <x>290</x>
      <y>50</y>
-     <width>710</width>
+     <width>711</width>
      <height>410</height>
     </rect>
    </property>
@@ -230,7 +230,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page3Or4PointMode">
     <widget class="QTableWidget" name="tableStack">
@@ -242,11 +242,8 @@
        <height>400</height>
       </rect>
      </property>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>180</number>
-     </attribute>
      <attribute name="horizontalHeaderDefaultSectionSize">
-      <number>180</number>
+      <number>170</number>
      </attribute>
      <attribute name="verticalHeaderDefaultSectionSize">
       <number>40</number>
@@ -1504,7 +1501,7 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>150</x>
      <y>450</y>
      <width>831</width>
      <height>57</height>
@@ -1719,7 +1716,7 @@
     <rect>
      <x>0</x>
      <y>5</y>
-     <width>1011</width>
+     <width>991</width>
      <height>42</height>
     </rect>
    </property>

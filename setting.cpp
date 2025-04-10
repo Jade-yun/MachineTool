@@ -3257,6 +3257,9 @@ void Setting::updateAppFont()
     qApp->setFont(font);
     for (auto widget : MainWindow::pMainWindow->findChildren<QWidget*>())
     {
+        if (widget->objectName() == "labProgramName") {
+            continue;
+        }
         widget->setFont(font);
 //        widget->update();
     }

@@ -744,9 +744,9 @@ void TeachManage::initWidgets()
 
     ui->tableTeachManage->setRowCount(0);
     ui->tableTeachManage->setColumnCount(4);
-    ui->tableTeachManage->setFixedWidth(860);
-    ui->tableTeachManage->setMaximumWidth(860);
-    ui->tableTeachManage->setMaximumHeight(450);
+//    ui->tableTeachManage->setFixedWidth(860);
+//    ui->tableTeachManage->setMaximumWidth(860);
+//    ui->tableTeachManage->setMaximumHeight(450);
     ui->tableTeachManage->horizontalHeader()->setVisible(true);
     ui->tableTeachManage->verticalHeader()->setVisible(true);
 

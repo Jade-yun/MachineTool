@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
+    <width>1010</width>
     <height>581</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1024</width>
+     <width>1010</width>
      <height>581</height>
     </rect>
    </property>
@@ -31,7 +31,7 @@
     </font>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="pageSettingHome">
     <property name="styleSheet">
@@ -563,9 +563,9 @@ QPushButton::released{
     <widget class="QTabWidget" name="tabWidgetSig">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1011</width>
+       <width>1001</width>
        <height>571</height>
       </rect>
      </property>
@@ -575,7 +575,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>7</number>
      </property>
      <property name="iconSize">
       <size>
@@ -2612,7 +2612,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnLastInterLock">
        <property name="geometry">
         <rect>
-         <x>850</x>
+         <x>830</x>
          <y>470</y>
          <width>75</width>
          <height>40</height>
@@ -2635,7 +2635,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnNextInterLock">
        <property name="geometry">
         <rect>
-         <x>930</x>
+         <x>910</x>
          <y>470</y>
          <width>75</width>
          <height>40</height>
@@ -2665,7 +2665,7 @@ QPushButton::released{
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>731</width>
+         <width>721</width>
          <height>501</height>
         </rect>
        </property>
@@ -2909,7 +2909,7 @@ QPushButton::released{
       <widget class="QGroupBox" name="groupBox_6">
        <property name="geometry">
         <rect>
-         <x>740</x>
+         <x>730</x>
          <y>60</y>
          <width>261</width>
          <height>111</height>
@@ -3023,7 +3023,7 @@ QPushButton::released{
       <widget class="QGroupBox" name="groupBox_7">
        <property name="geometry">
         <rect>
-         <x>740</x>
+         <x>730</x>
          <y>180</y>
          <width>261</width>
          <height>111</height>
@@ -3137,7 +3137,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnExportPortDef">
        <property name="geometry">
         <rect>
-         <x>880</x>
+         <x>870</x>
          <y>300</y>
          <width>115</width>
          <height>48</height>
@@ -3186,7 +3186,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnImportPortDef">
        <property name="geometry">
         <rect>
-         <x>750</x>
+         <x>740</x>
          <y>300</y>
          <width>115</width>
          <height>48</height>
@@ -3235,7 +3235,7 @@ QPushButton::released{
       <widget class="SaveButton" name="btnSavePort">
        <property name="geometry">
         <rect>
-         <x>750</x>
+         <x>740</x>
          <y>370</y>
          <width>115</width>
          <height>48</height>
@@ -3284,7 +3284,7 @@ QPushButton::released{
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>730</x>
+         <x>720</x>
          <y>10</y>
          <width>261</width>
          <height>42</height>
@@ -3358,7 +3358,7 @@ QPushButton::released{
       <widget class="QGroupBox" name="groupBox_8">
        <property name="geometry">
         <rect>
-         <x>740</x>
+         <x>730</x>
          <y>60</y>
          <width>261</width>
          <height>111</height>
@@ -3472,7 +3472,7 @@ QPushButton::released{
       <widget class="SaveButton" name="btnSaveNameDef">
        <property name="geometry">
         <rect>
-         <x>750</x>
+         <x>740</x>
          <y>250</y>
          <width>115</width>
          <height>48</height>
@@ -3518,7 +3518,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnImportNameDef">
        <property name="geometry">
         <rect>
-         <x>750</x>
+         <x>740</x>
          <y>180</y>
          <width>115</width>
          <height>48</height>
@@ -3567,7 +3567,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnExportNameDef">
        <property name="geometry">
         <rect>
-         <x>880</x>
+         <x>870</x>
          <y>180</y>
          <width>115</width>
          <height>48</height>
@@ -3618,7 +3618,7 @@ QPushButton::released{
         <rect>
          <x>1</x>
          <y>1</y>
-         <width>731</width>
+         <width>721</width>
          <height>501</height>
         </rect>
        </property>
@@ -3795,7 +3795,7 @@ QPushButton::released{
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>730</x>
+         <x>720</x>
          <y>10</y>
          <width>261</width>
          <height>42</height>
@@ -6437,7 +6437,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnLastAdvance">
        <property name="geometry">
         <rect>
-         <x>850</x>
+         <x>830</x>
          <y>470</y>
          <width>75</width>
          <height>40</height>
@@ -6460,7 +6460,7 @@ QPushButton::released{
       <widget class="QPushButton" name="btnNextAdvance">
        <property name="geometry">
         <rect>
-         <x>930</x>
+         <x>910</x>
          <y>470</y>
          <width>75</width>
          <height>40</height>
@@ -9084,7 +9084,7 @@ QPushButton::released{
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>1024</width>
+       <width>1001</width>
        <height>576</height>
       </rect>
      </property>
@@ -9094,7 +9094,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>3</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -9556,14 +9556,14 @@ QPushButton::released{
       <widget class="QTabWidget" name="tabWgtClawSafety">
        <property name="geometry">
         <rect>
-         <x>320</x>
+         <x>290</x>
          <y>5</y>
-         <width>691</width>
+         <width>701</width>
          <height>515</height>
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="tabClawSafe1">
         <attribute name="title">
@@ -12819,7 +12819,7 @@ QPushButton::released{
         <rect>
          <x>0</x>
          <y>60</y>
-         <width>321</width>
+         <width>291</width>
          <height>451</height>
         </rect>
        </property>
@@ -12835,14 +12835,14 @@ QPushButton::released{
       <widget class="QTabWidget" name="tabWgtOnlineSafe">
        <property name="geometry">
         <rect>
-         <x>320</x>
+         <x>310</x>
          <y>5</y>
-         <width>671</width>
+         <width>681</width>
          <height>481</height>
         </rect>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab_7">
         <attribute name="title">
@@ -15548,7 +15548,7 @@ QPushButton::released{
         <rect>
          <x>10</x>
          <y>50</y>
-         <width>321</width>
+         <width>301</width>
          <height>451</height>
         </rect>
        </property>
@@ -15566,9 +15566,9 @@ QPushButton::released{
     <widget class="QTabWidget" name="tabWidgetProduct">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1014</width>
+       <width>1001</width>
        <height>576</height>
       </rect>
      </property>
@@ -15578,7 +15578,7 @@ QPushButton::released{
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -16118,7 +16118,7 @@ QPushButton::released{
         <rect>
          <x>10</x>
          <y>50</y>
-         <width>991</width>
+         <width>981</width>
          <height>210</height>
         </rect>
        </property>
@@ -16520,9 +16520,9 @@ QPushButton::released{
     <widget class="QTabWidget" name="tabWidgetSystem">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1014</width>
+       <width>1001</width>
        <height>576</height>
       </rect>
      </property>
@@ -16532,25 +16532,13 @@ QPushButton::released{
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="minimumSize">
-      <size>
-       <width>1014</width>
-       <height>576</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>1014</width>
-       <height>576</height>
-      </size>
-     </property>
      <property name="font">
       <font>
        <family>SimSun</family>
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>8</number>
      </property>
      <property name="iconSize">
       <size>
@@ -17347,7 +17335,7 @@ QPushButton::released{
           <property name="styleSheet">
            <string notr="true">QCheckBox
 {
-    background-color: rgb(85, 170, 255);
+    background-color: rgb(14, 76, 187);
     color: white;
 }
 </string>
@@ -17542,7 +17530,7 @@ QPushButton::released{
         <rect>
          <x>180</x>
          <y>400</y>
-         <width>831</width>
+         <width>821</width>
          <height>43</height>
         </rect>
        </property>
@@ -18575,7 +18563,7 @@ border: 1px solid black;
        <property name="geometry">
         <rect>
          <x>400</x>
-         <y>460</y>
+         <y>450</y>
          <width>100</width>
          <height>45</height>
         </rect>
@@ -18618,7 +18606,7 @@ border: 1px solid black;
        <property name="geometry">
         <rect>
          <x>280</x>
-         <y>460</y>
+         <y>450</y>
          <width>100</width>
          <height>45</height>
         </rect>
@@ -18660,9 +18648,9 @@ border: 1px solid black;
       <widget class="QFrame" name="frame">
        <property name="geometry">
         <rect>
-         <x>530</x>
+         <x>520</x>
          <y>10</y>
-         <width>470</width>
+         <width>461</width>
          <height>501</height>
         </rect>
        </property>
@@ -18868,7 +18856,7 @@ border: 1px solid black;
          <rect>
           <x>10</x>
           <y>60</y>
-          <width>451</width>
+          <width>441</width>
           <height>371</height>
          </rect>
         </property>
@@ -18884,7 +18872,7 @@ border: 1px solid black;
         <rect>
          <x>10</x>
          <y>30</y>
-         <width>331</width>
+         <width>321</width>
          <height>461</height>
         </rect>
        </property>
@@ -18932,7 +18920,7 @@ border: 1px solid black;
          <rect>
           <x>11</x>
           <y>42</y>
-          <width>311</width>
+          <width>301</width>
           <height>301</height>
          </rect>
         </property>
@@ -19087,9 +19075,9 @@ border: 1px solid black;
       <widget class="QGroupBox" name="groupBoxSuperAdmin">
        <property name="geometry">
         <rect>
-         <x>351</x>
+         <x>340</x>
          <y>30</y>
-         <width>320</width>
+         <width>311</width>
          <height>461</height>
         </rect>
        </property>
@@ -19107,7 +19095,7 @@ border: 1px solid black;
        <widget class="QPushButton" name="btnSavePasswdSuperAdmin">
         <property name="geometry">
          <rect>
-          <x>100</x>
+          <x>90</x>
           <y>360</y>
           <width>140</width>
           <height>50</height>
@@ -19137,7 +19125,7 @@ border: 1px solid black;
          <rect>
           <x>10</x>
           <y>40</y>
-          <width>301</width>
+          <width>291</width>
           <height>301</height>
          </rect>
         </property>
@@ -19295,9 +19283,9 @@ border: 1px solid black;
       <widget class="QGroupBox" name="groupBoxMenuAuthority">
        <property name="geometry">
         <rect>
-         <x>681</x>
+         <x>660</x>
          <y>30</y>
-         <width>320</width>
+         <width>311</width>
          <height>461</height>
         </rect>
        </property>
@@ -19315,7 +19303,7 @@ border: 1px solid black;
        <widget class="QPushButton" name="btnSavePasswdMenu">
         <property name="geometry">
          <rect>
-          <x>100</x>
+          <x>90</x>
           <y>360</y>
           <width>140</width>
           <height>50</height>
@@ -19345,7 +19333,7 @@ border: 1px solid black;
          <rect>
           <x>10</x>
           <y>40</y>
-          <width>301</width>
+          <width>291</width>
           <height>301</height>
          </rect>
         </property>
@@ -20337,7 +20325,7 @@ border: 1px solid black;
       <widget class="QWidget" name="widgetIotDebug" native="true">
        <property name="geometry">
         <rect>
-         <x>550</x>
+         <x>500</x>
          <y>20</y>
          <width>461</width>
          <height>489</height>
@@ -20416,9 +20404,9 @@ border: 1px solid black;
       <widget class="QWidget" name="layoutWidget_3">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>0</x>
          <y>460</y>
-         <width>1011</width>
+         <width>991</width>
          <height>49</height>
         </rect>
        </property>
@@ -20728,9 +20716,9 @@ border: 1px solid black;
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>0</x>
          <y>390</y>
-         <width>1011</width>
+         <width>991</width>
          <height>49</height>
         </rect>
        </property>
@@ -21761,9 +21749,9 @@ font-weight: bold;
      </property>
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1014</width>
+       <width>1001</width>
        <height>571</height>
       </rect>
      </property>
@@ -21785,7 +21773,7 @@ font-weight: bold;
       </font>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
@@ -21806,7 +21794,7 @@ font-weight: bold;
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>50</x>
+         <x>20</x>
          <y>30</y>
          <width>941</width>
          <height>364</height>
@@ -22340,7 +22328,7 @@ font-weight: bold;
       <widget class="QPushButton" name="btnSaveServoPara">
        <property name="geometry">
         <rect>
-         <x>870</x>
+         <x>860</x>
          <y>460</y>
          <width>100</width>
          <height>41</height>
@@ -22373,7 +22361,7 @@ font-weight: bold;
       <widget class="QWidget" name="layoutWidget_2">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>10</x>
          <y>10</y>
          <width>981</width>
          <height>371</height>
@@ -23151,7 +23139,7 @@ font-weight: bold;
       <widget class="QPushButton" name="btnSaveAxisPara">
        <property name="geometry">
         <rect>
-         <x>870</x>
+         <x>860</x>
          <y>460</y>
          <width>100</width>
          <height>41</height>
@@ -23184,7 +23172,7 @@ font-weight: bold;
       <widget class="QWidget" name="layoutWidget_7">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>10</x>
          <y>10</y>
          <width>971</width>
          <height>381</height>
@@ -23780,9 +23768,9 @@ font-weight: bold;
     <widget class="QTabWidget" name="tabWgtServoSafePoint">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1011</width>
+       <width>1001</width>
        <height>531</height>
       </rect>
      </property>
@@ -23798,7 +23786,7 @@ font-weight: bold;
       </font>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -23829,9 +23817,9 @@ font-weight: bold;
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>300</x>
          <y>0</y>
-         <width>691</width>
+         <width>671</width>
          <height>488</height>
         </rect>
        </property>
@@ -24523,7 +24511,7 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_31">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>100</x>
              <y>30</y>
              <width>501</width>
              <height>27</height>
@@ -24614,7 +24602,7 @@ font-weight: bold;
           <widget class="QPushButton" name="btnFreshSA1">
            <property name="geometry">
             <rect>
-             <x>630</x>
+             <x>610</x>
              <y>70</y>
              <width>50</width>
              <height>40</height>
@@ -24642,9 +24630,9 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_32">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>20</x>
              <y>60</y>
-             <width>571</width>
+             <width>581</width>
              <height>111</height>
             </rect>
            </property>
@@ -25225,9 +25213,9 @@ font-weight: bold;
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>300</x>
          <y>0</y>
-         <width>691</width>
+         <width>671</width>
          <height>482</height>
         </rect>
        </property>
@@ -25907,7 +25895,7 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_36">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>100</x>
              <y>30</y>
              <width>501</width>
              <height>27</height>
@@ -25998,7 +25986,7 @@ font-weight: bold;
           <widget class="QPushButton" name="btnFreshSA1_2">
            <property name="geometry">
             <rect>
-             <x>630</x>
+             <x>610</x>
              <y>70</y>
              <width>50</width>
              <height>40</height>
@@ -26026,9 +26014,9 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_37">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>20</x>
              <y>60</y>
-             <width>571</width>
+             <width>581</width>
              <height>111</height>
             </rect>
            </property>
@@ -26631,9 +26619,9 @@ font-weight: bold;
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>300</x>
          <y>0</y>
-         <width>691</width>
+         <width>671</width>
          <height>482</height>
         </rect>
        </property>
@@ -27313,7 +27301,7 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_43">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>100</x>
              <y>30</y>
              <width>501</width>
              <height>27</height>
@@ -27404,7 +27392,7 @@ font-weight: bold;
           <widget class="QPushButton" name="btnFreshSA1_3">
            <property name="geometry">
             <rect>
-             <x>630</x>
+             <x>610</x>
              <y>70</y>
              <width>50</width>
              <height>40</height>
@@ -27432,9 +27420,9 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_44">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>20</x>
              <y>60</y>
-             <width>571</width>
+             <width>581</width>
              <height>111</height>
             </rect>
            </property>
@@ -28009,9 +27997,9 @@ font-weight: bold;
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>300</x>
          <y>0</y>
-         <width>691</width>
+         <width>671</width>
          <height>482</height>
         </rect>
        </property>
@@ -28699,7 +28687,7 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_50">
            <property name="geometry">
             <rect>
-             <x>120</x>
+             <x>100</x>
              <y>30</y>
              <width>501</width>
              <height>27</height>
@@ -28790,7 +28778,7 @@ font-weight: bold;
           <widget class="QPushButton" name="btnFreshSA1_4">
            <property name="geometry">
             <rect>
-             <x>630</x>
+             <x>610</x>
              <y>70</y>
              <width>50</width>
              <height>40</height>
@@ -28818,9 +28806,9 @@ font-weight: bold;
           <widget class="QWidget" name="layoutWidget_51">
            <property name="geometry">
             <rect>
-             <x>50</x>
+             <x>20</x>
              <y>60</y>
-             <width>571</width>
+             <width>581</width>
              <height>111</height>
             </rect>
            </property>
@@ -29648,7 +29636,7 @@ font-weight: bold;
     <widget class="QPushButton" name="btnSaveServoSafePoint">
      <property name="geometry">
       <rect>
-       <x>910</x>
+       <x>890</x>
        <y>535</y>
        <width>100</width>
        <height>41</height>
@@ -29678,9 +29666,9 @@ font-weight: bold;
     <widget class="QTabWidget" name="tabWidgetStack">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1014</width>
+       <width>1001</width>
        <height>576</height>
       </rect>
      </property>
@@ -29689,18 +29677,6 @@ font-weight: bold;
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>1014</width>
-       <height>576</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>1014</width>
-       <height>576</height>
-      </size>
      </property>
      <property name="font">
       <font>
@@ -29711,7 +29687,7 @@ font-weight: bold;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>8</number>
+      <number>7</number>
      </property>
      <property name="iconSize">
       <size>
@@ -29774,7 +29750,7 @@ font-weight: bold;
         <rect>
          <x>7</x>
          <y>12</y>
-         <width>991</width>
+         <width>971</width>
          <height>511</height>
         </rect>
        </property>
@@ -30253,17 +30229,11 @@ font-weight: bold;
     <widget class="QTabWidget" name="tabWidgetMachinePara">
      <property name="geometry">
       <rect>
-       <x>5</x>
+       <x>0</x>
        <y>0</y>
-       <width>1014</width>
+       <width>1001</width>
        <height>576</height>
       </rect>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>1014</width>
-       <height>576</height>
-      </size>
      </property>
      <property name="font">
       <font>
@@ -30274,7 +30244,7 @@ font-weight: bold;
       <enum>Qt::NoFocus</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>

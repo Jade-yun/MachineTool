@@ -19,7 +19,6 @@ public:
     void setEnable(bool isUse);
 
 private:
-    QTimer timer;
     int fd;
     bool useBeeper;
 };
