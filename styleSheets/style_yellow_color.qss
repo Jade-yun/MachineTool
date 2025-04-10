@@ -1,115 +1,187 @@
 /*去除所有控件的虚线框*/
 *{outline:none;}
 
-QMainWindow{
- background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(248,226,17, 255), stop:0.68099 rgba(248,226,17, 255), stop:0.816406 rgba(248,226,17, 255), stop:0.976562 rgba(255, 255, 255, 255));
+/*主界面样式*/
+QWidget#centralwidget
+{
+background-color:qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5,        
+stop: 0 rgba(248,226,17, 255), stop: 1 rgba(248,226,17, 255));
 }
 
-QStackedWidget#stkWidget{
-	background-color: rgb(255, 255, 255);
+QWidget#centralwidget QStackedWidget#stkWidget
+{
+background-color:white;
+border-radius:10px;
+/*margin:6px;*/
+margin-right:6px;
+margin-left:6px;
 }
 
-QLabel#labProgramName { 
-	font:bold;
+QWidget#widgetHomeTopLeft,#widgetHomeTopRight, #widgetHomeTopMid
+{
+background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgba(248,226,17, 255),   stop:0.68099 rgba(248,226,17, 255),    stop:0.816406 rgba(248,226,17, 255),   stop:0.976562 rgb(255, 255, 255));
+border:1px solid rgb(200, 180, 0);
+border-radius:5px;
+/*box-shadow: 3px 3px 5px white;*/
+
+/*margin:6px;*/
 }
-QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed{ 
-
-	color:yellow;
+QWidget#widgetXYZOUV
+{
+border:none;
 }
-/******************************************************/
-QGroupBox#groupBoxHomeTopLeft,QGroupBox#groupBoxHomeBottom,QGroupBox#groupBoxXYZOUV, #groupBoxHomeTopMid, #groupBoxHomeTopRight{
 
-    background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(248,226,17, 255), stop:0.68099 rgba(248,226,17, 255), stop:0.816406 rgba(248,226,17, 255), stop:0.976562 rgba(255, 255, 255, 255));
-	border-radius:0px;
-	margin-top:0px; 
-	border:none;
+QLabel#labProgramName
+{
+border-radius:5px;
+color:white;
+font-size: 25px;
+}
+/*
+QPushButton#btnHelp,#btnAlarm,#btnHandWheel
+{
+background-color:transparent;
+border:none;
+ border-right:1px solid  qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 1, fy: 0.5,        
+stop:0 rgb(4, 62, 170),
+stop:0.3 rgb(4, 62, 170),
+stop:0.38 rgb(0, 166, 255),
+stop:0.68 rgb(0, 166, 255),
+stop:0.7 rgb(4, 62, 170),
+stop:1  rgb(4, 62, 170));
+margin:1px;
+}
+QPushButton#btnAdmin
+{
+background-color:transparent;
+border:none;
+margin:1px;
 
+}
+*/
+
+QLabel#labSpeedText,#labRotateSpeedText,#label_X1,#label_Y1,#label_Z1,#label_C,#label_Y2,#label_Z2
+{
+color:white;
+}
+QLabel#labDateTime,#labDateTime_2,#labSpeed,#labRotateSpeed,#X1_speed,#Y1_speed,#Z1_speed,#C_speed,#Y2_speed,#Z2_speed
+{
+color:black;
+}
+
+QPushButton#Btn_AlarmHome,#Btn_ManualHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_SetHome{    
+color: white;    
+background-color: qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1,stop:0.33724 rgba(248,226,17, 255),   stop:0.68099 rgba(248,226,17, 255),    stop:0.816406 rgba(248,226,17, 255),   stop:0.976562 rgb(255, 255, 255));
+border:2px solid rgb(200, 180, 0);
+border-top-right-radius:0px;
+border-top-left-radius:0px;
+border-bottom-right-radius:10px;
+border-bottom-left-radius:10px;
+padding: 5px 10px;
+margin-right:1px;
+margin-top:3px;
+margin-bottom:3px;
+}
+
+QPushButton#Btn_AlarmHome:checked,#Btn_ManualHome:checked,#Btn_MonitorHome:checked,#Btn_TeachHome:checked,#Btn_SetHome:checked{    
+color: black;    
+background-color: white;    
+border: none;
+border-top-right-radius:0px;
+border-top-left-radius:0px;
+border-bottom-right-radius:10px;
+border-bottom-left-radius:10px;
+margin-right:1px;
+margin-top:3px;
+margin-bottom:3px;
+} 
+QPushButton#Btn_AlarmHome:disabled,#Btn_ManualHome:disabled,#Btn_MonitorHome:disabled,#Btn_TeachHome:disabled,#Btn_SetHome:disabled{    
+color: gray;    
+background-color:qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5,        
+stop: 0 rgb(192, 192, 192), stop: 1 rgb(220, 220, 220));
+border:2px solid rgb(200, 180, 0);
+border-top-right-radius:0px;
+border-top-left-radius:0px;
+border-bottom-right-radius:10px;
+border-bottom-left-radius:10px;
+margin-right:1px;
+margin-top:3px;
+margin-bottom:3px;
+} 
+
+/*初始化界面*/
+QWidget#Init_page { 
+background-image: url(/opt/MachineTool/resources/pics/stop.jpg);
+border-radius:10px;
 }
 
 /************************************************/
 QPushButton
 {
-	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
-
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton:pressed
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(248,226,17, 255), stop:0.68099 rgba(248,226,17, 255), stop:0.816406 rgba(248,226,17, 255), stop:0.976562 rgba(255, 255, 255, 255));/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton:checked
-{
-    border-style:outset; /*边框风格*/
-    background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(248,226,17, 255), stop:0.68099 rgba(248,226,17, 255), stop:0.816406 rgba(248,226,17, 255), stop:0.976562 rgba(255, 255, 255, 255));/*背景色*/
-    border-width:1px;/*边框宽度*/
-    border-color:#0055ff; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton#Btn_SetHome,#Btn_MonitorHome,#Btn_TeachHome,#Btn_ManualHome,#Btn_AlarmHome,#Btn_ManualHome,#btnAdmin,#btnAlarm,#btnHelp, #btnRoller{
-    background-color:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(248,226,17, 255), stop:0.68099 rgba(248,226,17, 255), stop:0.816406 rgba(248,226,17, 255), stop:0.976562 rgba(255, 255, 255, 255));/*背景色*/
-    border-color:#0055ff; /*边框颜色*/
-	border-style:outset; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-
-    border-style:solid; /*边框风格*/
-    border-width:1px;/*边框宽度*/
-    border-color:#7A77AC; /*边框颜色*/
-    border-radius:5px; /*边框倒角*/
-}
-QPushButton:checked#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:checked#Btn_TeachHome,QPushButton:checked#Btn_AlarmHome,QPushButton::checked#Btn_ManualHome
-{
-    background-color:#E7E8EB;
-    border-style:solid; 
+color: black; 
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #FFFAFA, stop: 0.4 #EEE9E9,stop: 0.5 #EEE9E9, stop: 1.0 #CDC9C9);
+    border-style:outset; 
     border-width:1px;
-    border-color:#0A7C25; 
+    border-color:#7A77AC; 
+    border-radius:5px;
 }
-QPushButton:pressed#Btn_SetHome,QPushButton:checked#Btn_MonitorHome,QPushButton:checked#Btn_TeachHome,QPushButton:checked#Btn_AlarmHome,QPushButton::checked#Btn_ManualHome
+QPushButton:checked, QPushButton:pressed
 {
-    background-color:#E7E8EB;
-    border-style:solid; 
+color: white; 
+    border-style:outset;
+    /*background-color:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop:0 #00befa, stop: 1 #0160ea);*/
+    background-color:qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5, stop: 0 rgba(248,226,17, 255), stop: 1 rgba(248,226,17, 255));
     border-width:1px;
-    border-color:#0A7C25; 
+    border-color:#0055ff; 
+    border-radius:5px;
 }
 /**********************************************/
-QTabBar::tab {
-    background:qlineargradient(spread:reflect, x1:0.462, y1:0.477, x2:0.453, y2:1, stop:0.33724 rgba(248,226,17, 255), stop:0.68099 rgba(248,226,17, 255), stop:0.816406 rgba(248,226,17, 255), stop:0.976562 rgba(255, 255, 255, 255));
-    border: 2px solid #C4C4C3;
-    border-bottom-color: #C2C7CB; /* Same as the pane color */
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    min-width: 110px;
-    height: 40px;
-    padding: 2px;
-}
-
-QTabBar::tab:selected {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fafafa, stop: 0.4 #f4f4f4, stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
-    border-color: #9B9B9B;
-}
-
-QTabBar::tab:hover {
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #fafafa, stop: 0.4 #f4f4f4, stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
-}
-
-QTabBar::tab:!selected {
-    margin-top: 2px; /* Make non-selected tabs look smaller */
-}
-
+/* 修改 QTabWidget::pane 的样式 */
 QTabWidget::pane {
+/*
     border: 1px solid #000000;
     border-top: 2px solid #C2C7CB;
+*/
+border: 2px solid #C4C4C3;
+border-top-right-radius:0px;
+border-top-left-radius:0px;
+border-bottom-right-radius:10px;
+border-bottom-left-radius:10px;
+    margin-left: 3px; 
+    margin-right: 3px; 
+ /*   padding: 5px;*/
 }
 
 QTabWidget::tab-bar {
     alignment: left;
     left: 5px; /* Move to the right by 5px */
+}
+
+QTabBar::tab {
+    color: white; 
+    background: qradialgradient(cx: 0.5, cy: 0.5, radius: 0.5, fx: 0.5, fy: 0.5, 
+                                stop: 0 rgba(248,226,17, 255), stop: 1 rgba(248,226,17, 255));
+    border: 2px solid #C4C4C3;
+    border-bottom-color: #C2C7CB; /* Same as the pane color */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius:10px;
+border-bottom-left-radius:10px;
+    min-width: 110px;
+    height: 40px;
+    padding: 2px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+    color: black; 
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, 
+                                stop: 0 #fafafa, stop: 0.4 #f4f4f4, 
+                                stop: 0.5 #e7e7e7, stop: 1.0 #fafafa);
+    border-color: #9B9B9B;
+}
+
+QTabBar::tab:!selected {
+    margin-top: 2px; /* Make non-selected tabs look smaller */
 }
 
 QTabBar::scroller {
@@ -121,8 +193,10 @@ QTabBar QToolButton {
     width: 60px;
     height: 35px;
     border-width: 2px;
-    color: rgb(248, 226,17);
+    color: rgba(248,226,17, 255);
 }
+
+
 
 /*******************************************************/
 QCheckBox::indicator{
@@ -190,16 +264,16 @@ QComboBox:!editable, QComboBox:editable:on {
 
 /*********************************************************/
 QLineEdit {
-
 	padding-left: 6px;
 }
-/********************************************************/
+
+/***************************************************/
 QScrollBar:horizontal {
     border: 2px solid #6c6c6c;
     background: rgba(214,212,210,100%);
     height: 30px;
     min-width: 30px;
-    margin: 2px 0px 1px 0px;
+    margin: 0px 2px 0px 1px;
     padding-left:33px;
     padding-right:33px;
 }
@@ -252,5 +326,3 @@ QFileDialog QListView::item, QFileDialog QTreeView::item {
     /* 设置每个 item 的高度 */
     min-height: 35px;
 }
-
-

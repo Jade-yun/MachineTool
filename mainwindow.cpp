@@ -156,10 +156,10 @@ MainWindow::MainWindow(QWidget *parent)
     // after reading all init parameters, set the style for whole app.
     const std::vector<QString> styles = {
         ":/styleSheets/style.qss",
-        "/opt/MachineTool/configs/style/style_orange_color.qss",
-        "/opt/MachineTool/configs/style/style_yellow_color.qss",
-        "/opt/MachineTool/configs/style/style_green_color.qss",
-        "/opt/MachineTool/configs/style/style_brown_color.qss"
+        ":/styleSheets/style_orange_color.qss",
+        ":/styleSheets/style/style_yellow_color.qss",
+        ":/styleSheets/style_green_color.qss",
+        ":/styleSheets/style_brown_color.qss"
     };
 
     if (m_SystemSet.sysColor < styles.size())
