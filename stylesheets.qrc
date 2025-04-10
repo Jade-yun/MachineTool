@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>styleSheets/style.qss</file>
+        <file>styleSheets/style_brown_color.qss</file>
+        <file>styleSheets/style_green_color.qss</file>
+        <file>styleSheets/style_orange_color.qss</file>
+        <file>styleSheets/style_yellow_color.qss</file>
     </qresource>
 </RCC>

@@ -32,7 +32,7 @@ enum HandControlKeyCode{
     RIGHT_KEY11 = 167,    // Z2-
     RIGHT_KEY12 = 166,    // Z2+
     RIGHT_KEY13 = 163,    // F1+
-    RIGHT_KEY14 = 152,    // F2+
+    RIGHT_KEY14 = 162,    // F2+
     RIGHT_KEY15 = 159,    // F3+
     RIGHT_KEY16 = 158     // F4+
 };

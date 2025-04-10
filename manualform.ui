@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>581</height>
+    <width>1014</width>
+    <height>580</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,23 +19,11 @@
   <widget class="QTabWidget" name="tabWidgetManualPage">
    <property name="geometry">
     <rect>
-     <x>5</x>
+     <x>0</x>
      <y>0</y>
-     <width>1011</width>
-     <height>576</height>
+     <width>1001</width>
+     <height>571</height>
     </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>1011</width>
-     <height>576</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>1011</width>
-     <height>576</height>
-    </size>
    </property>
    <property name="font">
     <font>
@@ -46,7 +34,7 @@
     <string notr="true"/>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>4</number>
    </property>
    <property name="iconSize">
     <size>
@@ -69,13 +57,13 @@
       <rect>
        <x>0</x>
        <y>470</y>
-       <width>1001</width>
+       <width>981</width>
        <height>47</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout1">
       <property name="spacing">
-       <number>1</number>
+       <number>6</number>
       </property>
       <item>
        <spacer name="horizontalSpacer">
@@ -92,18 +80,6 @@
       </item>
       <item>
        <widget class="QCheckBox" name="checkBoxEditPosGuide">
-        <property name="minimumSize">
-         <size>
-          <width>130</width>
-          <height>45</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>130</width>
-          <height>45</height>
-         </size>
-        </property>
         <property name="text">
          <string>编辑位置</string>
         </property>
@@ -263,14 +239,8 @@
        <widget class="KeyEdit" name="editGuideKeyDef">
         <property name="minimumSize">
          <size>
-          <width>230</width>
-          <height>45</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>230</width>
-          <height>45</height>
+          <width>0</width>
+          <height>40</height>
          </size>
         </property>
         <property name="text">
@@ -359,10 +329,10 @@
     <widget class="QLabel" name="labelGuideBackgroud">
      <property name="geometry">
       <rect>
-       <x>5</x>
-       <y>10</y>
-       <width>1001</width>
-       <height>451</height>
+       <x>0</x>
+       <y>20</y>
+       <width>1000</width>
+       <height>450</height>
       </rect>
      </property>
      <property name="alignment">
@@ -1238,7 +1208,7 @@
       <rect>
        <x>690</x>
        <y>20</y>
-       <width>311</width>
+       <width>291</width>
        <height>491</height>
       </rect>
      </property>
@@ -1273,9 +1243,9 @@
     <widget class="QGroupBox" name="groupBox_4">
      <property name="geometry">
       <rect>
-       <x>630</x>
+       <x>610</x>
        <y>10</y>
-       <width>370</width>
+       <width>371</width>
        <height>491</height>
       </rect>
      </property>
@@ -1505,7 +1475,7 @@
       <rect>
        <x>400</x>
        <y>10</y>
-       <width>211</width>
+       <width>191</width>
        <height>491</height>
       </rect>
      </property>
@@ -1518,7 +1488,7 @@
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>20</x>
+        <x>10</x>
         <y>40</y>
         <width>172</width>
         <height>98</height>
@@ -1803,7 +1773,7 @@
       <rect>
        <x>10</x>
        <y>0</y>
-       <width>991</width>
+       <width>891</width>
        <height>511</height>
       </rect>
      </property>
@@ -1821,7 +1791,7 @@
        <property name="geometry">
         <rect>
          <x>22</x>
-         <y>10</y>
+         <y>0</y>
          <width>814</width>
          <height>450</height>
         </rect>
@@ -3457,7 +3427,7 @@
       <rect>
        <x>765</x>
        <y>101</y>
-       <width>241</width>
+       <width>221</width>
        <height>361</height>
       </rect>
      </property>
@@ -3486,7 +3456,7 @@
       <rect>
        <x>820</x>
        <y>20</y>
-       <width>170</width>
+       <width>161</width>
        <height>70</height>
       </rect>
      </property>
@@ -3506,7 +3476,7 @@
     <widget class="QPushButton" name="btnMovetoReference">
      <property name="geometry">
       <rect>
-       <x>850</x>
+       <x>830</x>
        <y>470</y>
        <width>150</width>
        <height>45</height>
@@ -3550,7 +3520,7 @@
   <widget class="QPushButton" name="btnIntoStack">
    <property name="geometry">
     <rect>
-     <x>860</x>
+     <x>840</x>
      <y>5</y>
      <width>150</width>
      <height>45</height>

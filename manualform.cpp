@@ -433,7 +433,9 @@ void ManualForm::pageInit()
     picReferPoint.scaled(ui->labReferPointBackGround->size());
     ui->labReferPointBackGround->setPixmap(picReferPoint);
 
-    ui->labelGuideBackgroud->setPixmap(QPixmap(GuidePicPath));
+    QPixmap picGuide(GuidePicPath);
+    picGuide.scaled(ui->labelGuideBackgroud->size());
+    ui->labelGuideBackgroud->setPixmap(picGuide);
 
     ui->btnAutoGate1Close->setEnabled(true);
     ui->btnStartProcess1Break->setEnabled(false);
@@ -1619,9 +1621,14 @@ void ManualForm::on_btnImportPictureGuide_clicked()
 
     auto filePath = UsbDisk::instance()->findFile("guide.png");
 
+    QSize picSize = ui->labelGuideBackgroud->size();
     if (filePath.isNull())
     {
-        ErrorTipDialog tip((tr("未找到图片：guide.png，图片像素: 1001×450px。是否使用默认图片？"), nullptr));
+        QString picName = "guide.png";
+        QString picSizeStr = QStringLiteral("%1×%2").arg(picSize.width()).arg(picSize.height());
+        auto tipStr = tr("未找到图片：%1，图片像素：%2px。是否使用默认图片？")
+                .arg(picName).arg(picSizeStr);
+        ErrorTipDialog tip(tipStr, nullptr);
         int res = tip.exec();
         useDefultPic = res == QDialog::Accepted;
 
@@ -1643,11 +1650,8 @@ void ManualForm::on_btnImportPictureGuide_clicked()
 
     QPixmap pic(filePath);
     if (!pic.isNull()) {
-        QPixmap scaledPic = pic.scaled(QSize(1001, 450), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QPixmap scaledPic = pic.scaled(picSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         ui->labelGuideBackgroud->setPixmap(scaledPic);
-    }
-    else {
-        ui->labelGuideBackgroud->setPixmap(pic);
     }
 }
 
@@ -1657,10 +1661,15 @@ void ManualForm::on_btnImportPictureReference_clicked()
 
     auto filePath = UsbDisk::instance()->findFile("referPoint.png");
 
+    QSize picSize = ui->labReferPointBackGround->size();
     if (filePath.isNull())
     {
-        ErrorTipDialog tip(
-                    tr("未找到图片: referPoint.png，图片像素: 760×480px。是否使用默认图片？"), nullptr);
+        QString picName = "referPoint.png";
+        QString picSizeStr = QStringLiteral("%1×%2").arg(picSize.width()).arg(picSize.height());
+        auto tipStr = tr("未找到图片：%1，图片像素：%2px。是否使用默认图片？")
+                .arg(picName).arg(picSizeStr);
+        ErrorTipDialog tip(tipStr, nullptr);
+
         int res = tip.exec();
         useDefultPic = res == QDialog::Accepted;
 
@@ -1683,7 +1692,7 @@ void ManualForm::on_btnImportPictureReference_clicked()
 
     QPixmap pic(filePath);
     if (!pic.isNull()) {
-        QPixmap scaledPic = pic.scaled(QSize(760, 480), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QPixmap scaledPic = pic.scaled(picSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
         ui->labReferPointBackGround->setPixmap(scaledPic);
     }
     else {

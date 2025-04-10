@@ -115,6 +115,7 @@ private:
     bool RobotResetPromptFlag=0;//复位弹窗标志 0-未弹窗 1-弹窗
 private:
     void initUI();
+    void applyGlowEffect(QWidget* widget);
     void handleLoginModeChanged(LoginMode mode);
     void onCheckPara();
     void AdjustSpeedHandel(uint8_t AdjustType);
